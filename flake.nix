@@ -16,7 +16,7 @@
         };
         hpkgs = with pkgs; haskellPackages.override {
           overrides = _: old: rec {
-            Agda = haskell.lib.overrideSrc old.Agda {src = agdasrc;};
+            Agda = haskell.lib.doJailbreak (haskell.lib.overrideSrc old.Agda {src = agdasrc;});
           };
         };
         agda2lambox = hpkgs.callCabal2nix "agda2lambox" ./. {};
