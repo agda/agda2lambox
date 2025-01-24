@@ -14,22 +14,20 @@
       system:
       let
         pkgs = import nixpkgs { inherit system; };
-        agdasrc = pkgs.fetchFromGitHub {
+        agdasrc = pkgs.haskell.lib.sdistTarball (pkgs.fetchFromGitHub {
           owner = "agda";
           repo = "agda";
           rev = "5c29109f8212ef61b0091d62ef9c8bfdfa16cf36";
           hash = "sha256-qiV/tk+/b3xYPJcWVVd7x9jrQjBzl1TXHPNEQbKV2rA=";
-        };
+        });
         hpkgs =
           with pkgs;
           haskellPackages.override {
-            overrides = _: old: rec {
-              Agda = haskell.lib.doJailbreak (
-                haskell.lib.overrideSrc old.Agda {
+            overrides = _: old: {
+              Agda = haskell.lib.overrideSrc old.Agda {
                   src = agdasrc;
                   version = "2.8.0";
-                }
-              );
+                };
             };
           };
         agda2lambox = hpkgs.callCabal2nix "agda2lambox" ./. { };
