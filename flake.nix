@@ -24,10 +24,31 @@
           with pkgs;
           haskellPackages.override {
             overrides = _: old: {
-              Agda = haskell.lib.overrideSrc old.Agda {
-                  src = agdasrc;
-                  version = "2.8.0";
-                };
+              Agda =
+                let
+                  newsrc = haskell.lib.overrideSrc old.Agda {
+                    src = agdasrc;
+                    version = "2.8.0";
+                  };
+                  adddeps = haskell.lib.overrideCabal newsrc (drv: {
+                    libraryHaskellDepends =
+                      drv.libraryHaskellDepends
+                      ++ (with old; [
+                        enummapset
+                        filemanip
+                        generic-data
+                        nonempty-containers
+                        process-extras
+                        tasty
+                        tasty-hunit
+                        tasty-quickcheck
+                        tasty-silver
+                        temporary
+                        unix-compat
+                      ]);
+                  });
+                in
+                adddeps;
             };
           };
         agda2lambox = hpkgs.callCabal2nix "agda2lambox" ./. { };
