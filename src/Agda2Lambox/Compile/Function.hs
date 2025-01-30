@@ -31,23 +31,33 @@ import LambdaBox qualified as LBox
 import LambdaBox.Env
 import Agda.TypeChecking.Telescope (telViewUpTo)
 import Agda.TypeChecking.Substitute (TelV(theCore, theTel))
+import Agda.Utils.Treeless qualified as TT
 
 
 -- | Check whether a definition is a function.
 isFunction :: Definition -> Bool
-isFunction Defn{..} | Function{} <- theDef = True
+isFunction Defn{..} | Function{}  <- theDef = True
+isFunction Defn{..} | Primitive{} <- theDef = True
 isFunction _ = False
 
 
 -- | Convert a function body to a Lambdabox term.
 compileFunctionBody :: [QName] -> Definition -> CompileM LBox.Term
-compileFunctionBody ms Defn{defName, theDef} = do
-  Just t <- liftTCM $ treeless defName
+compileFunctionBody ms Defn{defName, theDef} 
+  | Function{} <- theDef = do
+    Just t <- liftTCM $ treeless defName
 
-  reportSDoc "agda2lambox.compile.function" 10 $
-    "treeless body:" <+> pretty t
+    reportSDoc "agda2lambox.compile.function" 10 $
+      "treeless body:" <+> pretty t
 
-  compileTerm ms t
+    compileTerm ms t
+  | Primitive{..} <- theDef = do
+      Just t <- liftTCM $ treeless defName
+
+      reportSDoc "agda2lambox.compile.function" 10 $
+        "treeless body:" <+> pretty t
+
+      compileTerm ms t
 
 
 -- | Whether to compile a function definition to λ□.
@@ -57,12 +67,17 @@ shouldCompileFunction def@Defn{theDef} | Function{..} <- theDef
     && isNothing funExtLam    -- not a pattern-lambda-generated function (inlined by the treeless translation)
     && isNothing funWith      -- not a with-generated function           (inlined by the treeless translation)
     && hasQuantityω def       -- non-erased
+  | Primitive{..} <- theDef = True -- let's try this for now
 
 -- | Convert a function definition to a λ□ declaration.
 compileFunction :: Target t -> Definition -> CompileM (Maybe (LBox.GlobalDecl t))
 compileFunction t defn | not (shouldCompileFunction defn) = pure Nothing
 compileFunction (t :: Target t) defn@Defn{defType} = do
-  let fundef@Function{funMutual = Just mutuals} = theDef defn
+  let funDef  = theDef defn
+      mutuals = case funDef of
+        Function{funMutual = Just mutuals} -> mutuals
+        -- for now, we make all primitives recursive
+        _                                  -> [defName defn]
 
   reportSDoc "agda2lambox.compile.function" 5 $
     "Function mutuals:" <+> prettyTCM mutuals
@@ -78,7 +93,7 @@ compileFunction (t :: Target t) defn@Defn{defType} = do
   let mnames = map defName mdefs
 
   -- (conditionally) compile type of function
-  typ <- whenTyped t $ case isRecordProjection fundef of
+  typ <- whenTyped t $ case isRecordProjection funDef of
     Nothing -> compileTopLevelType defType
 
     -- if it is a (real) projection, drop the parameters from the type

@@ -106,11 +106,21 @@ compileDefinition target defn@Defn{..} = setCurrentRange defName do
 
     d | isDataOrRecDef d -> compileInductive target defn
 
-    Primitive{..} -> do
+    prim@Primitive{..} -> do
       reportSDoc "agda2lambox.compile" 5 $
-        "Found primitive: " <> prettyTCM defName <> ". Compiling it as axiom."
+        "Found primitive: " <> prettyTCM defName <> "."
 
-      typ <- whenTyped target $ compileTopLevelType defType
-      pure $ Just $ ConstantDecl $ ConstantBody typ Nothing
+      getBuiltinThing (PrimitiveName primName) >>= \case
+
+        -- if it's a primitive, we try to compile it as a regular function
+        Just (Prim (PrimFun{})) -> do
+          reportSDoc "agda2lambox.compile" 5 $ "Trying to compile it as a function."
+          compileFunction target defn
+
+        -- otherwise, we create an axiom
+        Nothing -> do
+          reportSDoc "agda2lambox.compile" 5 $ "Compiling it as an axiom."
+          typ <- whenTyped target $ compileTopLevelType defType
+          pure $ Just $ ConstantDecl $ ConstantBody typ Nothing
 
     _ -> genericError $ "Cannot compile: " <> prettyShow defName

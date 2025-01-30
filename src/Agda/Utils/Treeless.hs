@@ -81,7 +81,10 @@ getCompiledClauses q = do
       translate | isProj    = CC.DontRunRecordPatternTranslation
                 | otherwise = CC.RunRecordPatternTranslation
   reportSDoc "treeless.convert" 40 $ "-- before clause compiler" $$ (pretty q <+> "=") <?> vcat (map pretty cs)
-  let mst = funSplitTree $ theDef def
+  let mst = case theDef def of
+        Function{funSplitTree} -> funSplitTree
+        _                      -> Nothing
+  reportSDoc "treeless.convert" 40 $ "hello"
   reportSDoc "treeless.convert" 70 $
     caseMaybe mst "-- not using split tree" $ \st ->
       "-- using split tree" $$ pretty st
@@ -143,11 +146,24 @@ toTreelessWith pl cfg q
 toTreeless :: EvaluationStrategy -> QName -> TCM (Maybe C.TTerm)
 toTreeless eval = toTreelessWith compilerPipeline (eval, EraseUnused)
 
+
+setTreeless' :: QName -> TTerm -> TCM ()
+setTreeless' q t =
+  theDef <$> getConstInfo q >>= \case 
+    Function{} -> setTreeless q t
+    _          -> pure ()
+
+setCompiledArgUse' :: QName -> [ArgUsage] -> TCM ()
+setCompiledArgUse' q aus =
+  theDef <$> getConstInfo q >>= \case 
+    Function{} -> setCompiledArgUse q aus
+    _          -> pure ()
+
 toTreelessWith' :: BuildPipeline -> CCConfig -> QName -> TCM C.TTerm
 toTreelessWith' pl cfg q =
   flip fromMaybeM (getTreeless q) $ verboseBracket "treeless.convert" 20 ("compiling " ++ prettyShow q) $ do
     cc <- getCompiledClauses q
-    unlessM (alwaysInline q) $ setTreeless q (C.TDef q)
+    unlessM (alwaysInline q) $ setTreeless' q (C.TDef q)
       -- so recursive inlining doesn't loop, but not for always inlined
       -- functions, since that would risk inlining to fail.
     ccToTreelessWith pl cfg q cc
@@ -164,14 +180,15 @@ ccToTreelessWith pl cfg@(eval, su) q cc = do
   body <- casetreeTop cfg cc
   reportSDoc "treeless.opt.converted" (30 + v) $ "-- converted" $$ pbody body
   body <- runPipeline eval q (pl v q) body
+  reportSDoc "treeless" (30 + v) $ "-- we're done"
   used <- usedArguments q body
   when (su == EraseUnused && ArgUnused `elem` used) $
     reportSDoc "treeless.opt.unused" (30 + v) $
       "-- used args:" <+> hsep [ if u == ArgUsed then text [x] else "_" | (x, u) <- zip ['a'..] used ] $$
       pbody' "[stripped]" (stripUnusedArguments used body)
   reportSDoc "treeless.opt.final" (20 + v) $ pbody body
-  setTreeless q body
-  setCompiledArgUse q used
+  setTreeless' q body
+  -- setCompiledArgUse' q used
   return body
 
 ccToTreeless :: EvaluationStrategy -> QName -> CC.CompiledClauses -> TCM C.TTerm
@@ -185,17 +202,17 @@ compilerPipeline v q =
   Sequential
 
     -- [ compilerPass "builtin" (30 + v) "builtin translation" $ const translateBuiltins
-    [ FixedPoint 5 $ Sequential
-      [ compilerPass "simpl"  (30 + v) "simplification"     $ const simplifyTTerm
-      , compilerPass "erase"  (30 + v) "erasure"            $ eraseTerms q
-      , compilerPass "uncase" (30 + v) "uncase"             $ const caseToSeq
-      , compilerPass "aspat"  (30 + v) "@-pattern recovery" $ const recoverAsPatterns
-      ]
+    -- [ FixedPoint 5 $ Sequential
+    --   [ compilerPass "simpl"  (30 + v) "simplification"     $ const simplifyTTerm
+    --   , compilerPass "erase"  (30 + v) "erasure"            $ eraseTerms q
+    --   , compilerPass "uncase" (30 + v) "uncase"             $ const caseToSeq
+    --   , compilerPass "aspat"  (30 + v) "@-pattern recovery" $ const recoverAsPatterns
+    --   ]
 
-    , compilerPass "id" (30 + v) "identity function detection" $ const (detectIdentityFunctions q)
+    -- , compilerPass "id" (30 + v) "identity function detection" $ const (detectIdentityFunctions q)
 
     -- NOTE(flupe): those are custom transformations required by the backend
-    , compilerPass "ctors"    (30 + v) "eta-expand constructors" $ const etaExpandConstructors
+    [ compilerPass "ctors"    (30 + v) "eta-expand constructors" $ const etaExpandConstructors
     , compilerPass "defaults" (30 + v) "remove default branches" $ const eliminateCaseDefaults
     , compilerPass "names"    (30 + v) "normalize names"         $ const normalizeNames
     ]
