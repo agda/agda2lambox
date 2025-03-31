@@ -1,6 +1,6 @@
 {-# LANGUAGE NamedFieldPuns, DataKinds, OverloadedStrings #-}
 -- | Convert Agda functions to λ□ constant declarations
-module Agda2Lambox.Compile.Function 
+module Agda2Lambox.Compile.Function
   ( compileFunction
   ) where
 
@@ -107,8 +107,17 @@ compileFunction (t :: Target t) defn@Defn{defType} = do
     builder . flip LBox.LFix k <$>
       forM mdefs \def@Defn{defName} -> do
         body <- compileFunctionBody mnames def
-        return LBox.Def
-          { dName = qnameToName defName
-          , dBody = body
-          , dArgs = 0
-          }
+        case body of
+          LBox.LLambda{} ->
+            return LBox.Def
+              { dName = qnameToName defName
+              , dBody = body
+              , dArgs = 0
+              }
+          LBox.LBox ->
+            return LBox.Def
+              { dName = qnameToName defName
+              , dBody = LBox.LLambda LBox.Anon body
+              , dArgs = 0
+              }
+          _ -> genericError "Fixpoint body must be Lambda."
