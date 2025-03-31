@@ -1,4 +1,4 @@
-data Bool : Set where true false : Bool
+data Bool : Set where false true : Bool
 
 not : Bool -> Bool
 not true  = false
