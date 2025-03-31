@@ -1,4 +1,4 @@
-data Bool : Set where true false : Bool
+data Bool : Set where false true : Bool
 
 record Pair (A B : Set) : Set where
   constructor _,_
