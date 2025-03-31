@@ -22,7 +22,7 @@ import Agda.Syntax.Common.Pretty ( prettyShow )
 import Agda.Utils.Monad (ifM)
 
 import qualified LambdaBox as LBox
-import Agda2Lambox.Compile.Utils ( qnameToKName, isLogical )
+import Agda2Lambox.Compile.Utils ( qnameToKName, isLogical, toInductive )
 import Agda2Lambox.Compile.Monad
 import Agda.Compiler.Backend (HasConstInfo(getConstInfo), Definition(Defn), AddContext (addContext))
 import Agda.Utils (isDataOrRecDef, getInductiveParams, isArity, maybeUnfoldCopy)
@@ -142,8 +142,9 @@ compileTypeTerm = \case
     if isLogicalDef then pure ([], LBox.TBox)
 
     -- if it's an inductive, we only apply the parameters
-    else if isDataOrRecDef def then
-      ([],) . foldl' LBox.TApp (LBox.TConst $ qnameToKName q) 
+    else if isDataOrRecDef def then do
+      ind <- liftTCM $ toInductive q
+      ([],) . foldl' LBox.TApp (LBox.TInd ind)
         <$> compileElims (take (getInductiveParams def) es)
 
     -- TODO: check if it is a type alias
