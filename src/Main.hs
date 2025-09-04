@@ -13,7 +13,7 @@ import Data.Text ( pack )
 import GHC.Generics ( Generic )
 import System.Console.GetOpt ( OptDescr(Option), ArgDescr(..) )
 import System.Directory ( createDirectoryIfMissing )
-import System.FilePath ( (</>) )
+import System.FilePath ( (</>), takeDirectory )
 import Data.Text.Lazy.IO qualified as LText
 
 import Paths_agda2lambox ( version )
@@ -127,10 +127,10 @@ writeModule Options{..} menv IsMain m defs = do
   env      <- runCompile (CompileEnv optNoBlocks) $ compile optTarget defs
   programs <- filterM hasPragma defs
 
-  liftIO $ createDirectoryIfMissing True outDir
-
   let fileName = (outDir </>) . moduleNameToFileName m
       coqMod   = CoqModule env (map qnameToKName programs)
+
+  liftIO $ createDirectoryIfMissing True $ takeDirectory $ fileName ""
 
   liftIO do
     putStrLn $ "Writing " <> fileName ".txt"
