@@ -1,4 +1,3 @@
 name: agda2lambox
-depend: standard-library
 include: test
 flags: --no-projection-like

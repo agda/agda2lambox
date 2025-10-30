@@ -1,5 +1,5 @@
-{-# LANGUAGE DeriveGeneric, DeriveAnyClass, NamedFieldPuns, OverloadedStrings #-}
-{-# LANGUAGE GADTs, BangPatterns #-}
+{-# LANGUAGE DeriveGeneric, DeriveAnyClass, OverloadedStrings #-}
+{-# LANGUAGE GADTs #-}
 -- | The agda2lambox Agda backend
 module Main (main) where
 
@@ -92,11 +92,11 @@ agda2lambox = Backend backend
       , commandLineFlags      =
           [ Option ['o'] ["out-dir"] (ReqArg outdirOpt "DIR")
             "Write output files to DIR. (default: project root)"
-          , Option ['t'] ["typed"] (NoArg typedOpt) 
+          , Option ['t'] ["typed"] (NoArg typedOpt)
             "Compile to typed λ□ environments."
-          , Option ['c'] ["rocq"] (NoArg rocqOpt) 
+          , Option ['c'] ["rocq"] (NoArg rocqOpt)
             "Output a Rocq file."
-          , Option [] ["no-blocks"] (NoArg noBlocksOpt) 
+          , Option [] ["no-blocks"] (NoArg noBlocksOpt)
             "Disable constructors as blocks."
           ]
       , isEnabled             = \ _ -> True

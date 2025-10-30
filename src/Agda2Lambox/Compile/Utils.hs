@@ -15,7 +15,7 @@ module Agda2Lambox.Compile.Utils
 import Control.Monad.State
 import Control.Monad.IO.Class ( liftIO )
 import Data.Char
-import Data.List ( elemIndex )
+import Data.List ( elemIndex, foldl' )
 import Data.Maybe ( fromMaybe, listToMaybe, isJust )
 
 import Agda.Compiler.Backend 
