@@ -25,6 +25,10 @@ Then you're good to go.
 agda2lambox [AGDAFLAGS] [--out-dir DIR] [--typed] FILE
 ```
 
+Then, use the [following tool][lbox] to further compile the generate `.ast` files to WASM, Rust and Elm.
+
+[lbox]: https://github.com/AU-COBRA/lambda-box-extraction
+
 ## Setup
 
 The backend generates `.v` and `.txt` files that contain the extracted λ□ environment.
