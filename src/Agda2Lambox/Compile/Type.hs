@@ -143,6 +143,7 @@ compileTypeTerm = \case
 
     -- if it's an inductive, we only apply the parameters
     else if isDataOrRecDef def then do
+      lift $ requireDef q
       ind <- liftTCM $ toInductive q
       ([],) . foldl' LBox.TApp (LBox.TInd ind)
         <$> compileElims (take (getInductiveParams def) es)
