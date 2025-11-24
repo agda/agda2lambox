@@ -23,6 +23,13 @@
         let
           hLib = prev.haskell.lib;
           lib = prev.lib;
+          src = lib.fileset.toSource {
+            root = ./.;
+            fileset = lib.fileset.unions [
+              ./src
+              ./agda2lambox.cabal
+            ];
+          };
         in
         {
           haskellPackages = prev.haskellPackages.extend (
