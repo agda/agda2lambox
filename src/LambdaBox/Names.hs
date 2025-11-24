@@ -40,7 +40,7 @@ data Name = Anon | Named Ident
 instance Pretty ModPath where
   pretty = \case
     MPFile  dp      -> cat $ punctuate "." (map pretty dp)
-    MPBound dp id i -> "MPBound??" -- don't know what this corresponds to
+    MPBound dp id i -> "MPBound??" -- NOTE: don't know what this corresponds to
     MPDot mp i      -> pretty mp <> "." <> pretty i
 
 instance Pretty KerName where
