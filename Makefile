@@ -1,3 +1,8 @@
+.PHONY: default
+
+default:
+	cabal install --overwrite-policy=always
+
 %.ast:
 	agda2lambox -o build test/$*.agda
 
