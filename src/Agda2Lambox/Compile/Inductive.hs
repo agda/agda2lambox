@@ -27,7 +27,7 @@ import Agda.Syntax.Common (Arg)
 import Agda.Syntax.Internal
 import Agda.Utils.Monad ( unlessM )
 
-import Agda.Utils ( isDataOrRecDef, isArity )
+import Agda.Utils
 import Agda2Lambox.Compile.Target
 import Agda2Lambox.Compile.Utils
 import Agda2Lambox.Compile.Monad
@@ -54,7 +54,7 @@ compileInductive t defn@Defn{defName} = do
   let items = fromMaybe (NEL.singleton defName) $ NEL.nonEmpty mutuals
 
   -- ensure that all mutuals get compiled, eventually
-  mapM requireDef items
+  mapM_ requireDef items
 
   {- also note that we assume the list of mutuals will be the same
      for every record/datatype in the list (especially the order),
@@ -123,9 +123,9 @@ actuallyConvertInductive t defn = do
       let domType = unDom pdom
       isParamLogical <- liftTCM $ isLogical pdom
       isParamArity   <- liftTCM $ isArity domType
-      let isParamSort = isJust  $ isSort $ unEl $ domType
+      let isParamSort = isJust  $ isSort $ unEl domType
       pure LBox.TypeVarInfo
-        { tvarName      = maybe LBox.Anon (LBox.Named . sanitize . prettyShow) $ domName pdom
+        { tvarName      = domToName pdom
         , tvarIsLogical = isParamLogical
         , tvarIsArity   = isParamArity
         , tvarIsSort    = isParamSort
@@ -138,18 +138,18 @@ actuallyConvertInductive t defn = do
           RecordCon _ _ arity _ -> arity
 
         conTypeInfo <- whenTyped t do
-          conType <- liftTCM $ (`piApplyM` pvars) =<< defType <$> getConstInfo cname
+          conType <- liftTCM $ (`piApplyM` pvars) . defType =<< getConstInfo cname
           conTel  <- toList . theTel <$> telView conType
           compileArgs indPars conTel
 
         pure LBox.Constructor
-          { cstrName  = sanitize $ prettyShow $ qnameName cname
+          { cstrName  = qnameToIdent cname
           , cstrArgs  = arity
           , cstrTypes = conTypeInfo
           }
 
     pure LBox.OneInductive
-      { indName          = sanitize $ prettyShow $ qnameName indName
+      { indName          = qnameToIdent indName
       , indPropositional = False        -- TODO(flupe)
       , indKElim         = LBox.IntoAny -- TODO(flupe)
       , indCtors         = ctors

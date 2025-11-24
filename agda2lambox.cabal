@@ -49,7 +49,8 @@ executable agda2lambox
                        directory,
                        filepath,
                        text,
-                       mtl
+                       mtl,
+		       unicode-data
   default-language:    Haskell2010
   default-extensions:
     LambdaCase RecordWildCards PatternSynonyms TupleSections

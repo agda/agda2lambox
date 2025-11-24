@@ -18,11 +18,10 @@ import Data.Function ( applyWhen )
 import Agda.Syntax.Common ( unArg, Arg (Arg) )
 import Agda.Syntax.Internal
 import Agda.TypeChecking.Monad.Base ( TCM, MonadTCM (liftTCM), Definition(..))
-import Agda.Syntax.Common.Pretty ( prettyShow )
 import Agda.Utils.Monad (ifM)
 
 import qualified LambdaBox as LBox
-import Agda2Lambox.Compile.Utils ( qnameToKName, isLogical, toInductive )
+import Agda2Lambox.Compile.Utils
 import Agda2Lambox.Compile.Monad
 import Agda.Compiler.Backend (HasConstInfo(getConstInfo), Definition(Defn), AddContext (addContext))
 import Agda.Utils (isDataOrRecDef, getInductiveParams, isArity, maybeUnfoldCopy)
@@ -91,7 +90,7 @@ compileArgs tvars = runC tvars . compileArgsC
   compileArgsC :: [Dom Type] -> C [(LBox.Name, LBox.Type)]
   compileArgsC [] = pure []
   compileArgsC (dom:args) = do
-    let name = maybe LBox.Anon (LBox.Named . prettyShow) $ domName dom
+    let name = domToName dom
     typ <- ifM (liftTCM $ isLogical dom) (pure LBox.TBox) (compileTypeC $ unDom dom)
     ((name, typ):) <$> underBinder dom (compileArgsC args)
 
@@ -172,7 +171,7 @@ compileTypeTerm = \case
 
     else do
       (vars, codomType') <- underTypeVar dom $ compileTopLevelTypeC codomType
-      let name = maybe LBox.Anon (LBox.Named . prettyShow) $ domName dom
+      let name = domToName dom
       pure (name : vars, LBox.TArr LBox.TBox codomType')
 
   _ -> pure ([], LBox.TAny)

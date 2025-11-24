@@ -4,6 +4,8 @@ module Agda2Lambox.Compile.Utils
   ( modNameToModPath
   , qnameToKName
   , qnameToName
+  , qnameToIdent
+  , domToName
   , dataOrRecDefMutuals
   , dataOrRecMutuals
   , toInductive
@@ -18,6 +20,7 @@ import Data.Char
 import Data.List ( elemIndex, foldl' )
 import Data.Maybe ( fromMaybe, listToMaybe, isJust )
 
+import Unicode.Char.Identifiers
 import Agda.Compiler.Backend 
 import Agda.Syntax.Internal
 import Agda.Syntax.Abstract.Name
@@ -34,22 +37,26 @@ import Agda.Utils.Monad (orM)
 import Agda2Lambox.Compile.Monad
 import LambdaBox qualified as LBox
 
-
 -- | Convert and Agda module name to its "equivalent" λ□ module path.
 modNameToModPath :: ModuleName -> LBox.ModPath
 modNameToModPath =
   LBox.MPFile . map (sanitize . prettyShow) . mnameToList
-
 
 -- | Convert and Agda definition name to a λ□ kernel name.
 qnameToKName :: QName -> LBox.KerName
 qnameToKName qn =
   LBox.KerName
     (modNameToModPath $ qnameModule qn)
-    (sanitize $ prettyShow $ qnameName qn)
+    (qnameToIdent qn)
+
+domToName :: Dom' a b -> LBox.Name
+domToName = maybe LBox.Anon (LBox.Named . sanitize . prettyShow) . domName
+
+qnameToIdent :: QName -> LBox.Ident
+qnameToIdent = sanitize . prettyShow . qnameName
 
 qnameToName :: QName -> LBox.Name
-qnameToName q = LBox.Named (sanitize $ prettyShow $ qnameName q)
+qnameToName = LBox.Named . qnameToIdent
 
 dataOrRecDefMutuals :: Definition -> TCM [QName]
 dataOrRecDefMutuals d = do
@@ -135,7 +142,21 @@ instance MayBeLogical a => MayBeLogical (Arg a) where
 -- Must be injective.
 -- We may require a smarter transformation later on for other targets.
 sanitize :: String -> String
-sanitize s = concatMap encode s
+sanitize xs | xs `elem` ["true", "false"] = "r#" ++ xs
+sanitize [] = []
+sanitize (x:xs) = toXIDStart x <> concatMap toXIDContinue xs
+  where
+    toXIDStart, toXIDContinue :: Char -> String
+    toXIDStart c
+      | isXIDStart c || c == '_' = [c]
+      | isXIDContinue c          = "_" <> [c]
+      | otherwise                = toXIDContinue c
+
+    toXIDContinue c
+      | isXIDContinue c = [c]
+      | otherwise       = "y" <> show (ord c) <> "y"
+{-
+sanitize q = "agda" ++ concatMap encode q
   where
   encode '$' = "$$"
   encode c
@@ -144,5 +165,21 @@ sanitize s = concatMap encode s
     || isUpper c
     || c == '_'
     || generalCategory c == DecimalNumber = [c]
-    | otherwise = "$" ++ show (fromEnum c)
+    | otherwise = "$" ++ show (fromEnum c) ++ "$"
 
+-- | Sanitize an agda name to something Rust-compliant.
+-- Must be injective.
+sanitize :: String -> String
+sanitize [] = []
+sanitize (c:cs) = toXIDStart c <> concatMap toXIDContinue cs
+  where
+    toXIDStart, toXIDContinue :: Char -> String
+    toXIDStart c
+      | isXIDStart c || c == '_' = [c]
+      | isXIDContinue c          = "_" <> [c]
+      | otherwise                = toXIDContinue c
+
+    toXIDContinue c
+      | isXIDContinue c = [c]
+      | otherwise        = "Ֆ" <> show (ord c) <> "Ֆ"
+      -}

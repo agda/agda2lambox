@@ -116,8 +116,7 @@ compileDefinition target defn@Defn{..} = setCurrentRange defName do
 
         -- otherwise, compiling it as an axiom
         _ -> do
-          reportSDoc "agda2lambox.compile" 5 $
-            "Compiling it to an axiom."
+          reportSDoc "agda2lambox.compile" 5 $ "Compiling it to an axiom."
           typ <- whenTyped target $ compileTopLevelType defType
           pure $ Just $ ConstantDecl $ ConstantBody typ Nothing
 
