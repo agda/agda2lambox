@@ -1,5 +1,13 @@
 name: "Nix CI"
-on: [ pull_request.master, push.master, workflow_dispatch ]
+on:
+  push:
+    branches:
+      - 'master'
+  pull_request:
+    branches:
+      - 'master'
+  workflow_dispatch
+
 jobs:
   nix-build:
     runs-on: ubuntu-latest
