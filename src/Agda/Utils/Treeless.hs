@@ -189,7 +189,9 @@ compilerPipeline v q =
       -- [ compilerPass "simpl"  (30 + v) "simplification"     $ const simplifyTTerm
       [ compilerPass "erase"  (30 + v) "erasure"            $ eraseTerms q
       , compilerPass "uncase" (30 + v) "uncase"             $ const caseToSeq
-      , compilerPass "aspat"  (30 + v) "@-pattern recovery" $ const recoverAsPatterns
+
+
+      --, compilerPass "aspat"  (30 + v) "@-pattern recovery" $ const recoverAsPatterns
       ]
 
     , compilerPass "id" (30 + v) "identity function detection" $ const (detectIdentityFunctions q)
