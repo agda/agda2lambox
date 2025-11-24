@@ -40,7 +40,6 @@
         pkgs = import nixpkgs {
           inherit system;
           overlays = [
-            inputs.agda.overlays.default
             overlay-agda2lambox
           ];
         };
@@ -57,7 +56,6 @@
             cabal-install
             cabal2nix
             haskell-language-server
-            pkgs.agda
           ];
         };
       }
