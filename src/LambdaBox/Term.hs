@@ -56,10 +56,10 @@ instance Pretty Term where
             getLams t = ([], t)
 
             (ns, t') = getLams t
-        in 
+        in
         mparens (p > 0) $
         hang ("λ" <+> sep (map pretty (n:ns)) <+> "→") 2 $ pretty t'
-        
+
 
       LLetIn n e t ->
         mparens (p > 0) $ sep
