@@ -4,6 +4,7 @@ module CoqGen (prettyCoq) where
 
 import Data.Bifunctor(bimap)
 import Data.List(intercalate)
+import Data.List.NonEmpty qualified as NEL
 
 import Agda.Syntax.Common.Pretty
 import LambdaBox
@@ -189,8 +190,8 @@ instance ToCoq t (GlobalEnv t) where
   pcoq ToUntyped (GlobalEnv env) = upcoq env
   pcoq ToTyped   (GlobalEnv env) = tpcoq $ flip map env \(kn, decl) -> ((kn, True), decl)
 
-instance ToCoq t (CoqModule t) where
-  pcoq ToUntyped CoqModule{..} = vsep
+instance ToCoq t (LBoxModule t) where
+  pcoq ToUntyped LBoxModule{..} = vsep
     [ vcat
         [ "From Coq             Require Import List."
         , "From MetaCoq.Common  Require Import BasicAst Kernames Universes."
@@ -201,11 +202,11 @@ instance ToCoq t (CoqModule t) where
         ]
 
     , hang "Definition env : global_declarations :=" 2 $
-        upcoq coqEnv <> "."
+        upcoq lboxEnv <> "."
 
     , "Compute @check_wf_glob eflags env."
 
-    , vsep $ flip map (zip [1..] $ reverse coqPrograms) \(i :: Int, kn) -> 
+    , vsep $ flip map (zip [1..] $ reverse $ NEL.toList $ getUntyped lboxMain) \(i :: Int, kn) -> 
         let progname = "prog" <> pretty i in vsep
         [ hang ("Definition " <> progname <> " : program :=") 2 $
             upcoq (text "env" :: Doc, LConst kn) 
@@ -214,7 +215,7 @@ instance ToCoq t (CoqModule t) where
         ]
     ]
 
-  pcoq ToTyped CoqModule{..} = vsep
+  pcoq ToTyped LBoxModule{..} = vsep
     [ vcat
         [ "From Coq             Require Import List."
         , "From MetaCoq.Common  Require Import BasicAst Kernames Universes."
@@ -224,5 +225,5 @@ instance ToCoq t (CoqModule t) where
         , "Import ListNotations."
         ]
 
-    , hang "Definition env : global_env :=" 2 $ tpcoq coqEnv <> "."
+    , hang "Definition env : global_env :=" 2 $ tpcoq lboxEnv <> "."
     ]

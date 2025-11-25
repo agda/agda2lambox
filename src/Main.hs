@@ -7,13 +7,15 @@ import Control.Monad ( unless, filterM )
 import Control.Monad.IO.Class ( liftIO )
 import Control.DeepSeq ( NFData(rnf) )
 import Data.Function ( (&) )
+import Data.List.NonEmpty ( NonEmpty )
+import Data.List.NonEmpty qualified as NEL
 import Data.Maybe ( fromMaybe )
 import Data.Version ( showVersion )
 import Data.Text ( pack )
 import GHC.Generics ( Generic )
 import System.Console.GetOpt ( OptDescr(Option), ArgDescr(..) )
 import System.Directory ( createDirectoryIfMissing )
-import System.FilePath ( (</>) )
+import System.FilePath ( (</>), (-<.>) )
 import Data.Text.Lazy.IO qualified as LText
 
 import Paths_agda2lambox ( version )
@@ -32,6 +34,7 @@ import Agda2Lambox.Compile       (compile)
 import CoqGen    ( prettyCoq  )
 import SExpr     ( prettySexp )
 import LambdaBox.Env
+import LambdaBox.Names (KerName)
 import Agda2Lambox.Compile.Monad (runCompile, CompileEnv(..))
 
 
@@ -124,25 +127,37 @@ writeModule
 writeModule opts menv NotMain _ _   = pure ()
 writeModule Options{..} menv IsMain m defs = do
   outDir   <- flip fromMaybe optOutDir <$> compileDir
-  env      <- runCompile (CompileEnv optNoBlocks) $ compile optTarget defs
   programs <- filterM hasPragma defs
+
+  -- get defs annotated with a COMPILE pragma
+  -- throw an error if none, when targetting untyped lbox
+  mains    <- getMain optTarget programs
+  env      <- runCompile (CompileEnv optNoBlocks) $ compile optTarget defs
 
   liftIO $ createDirectoryIfMissing True outDir
 
-  let fileName = (outDir </>) . moduleNameToFileName m
-      coqMod   = CoqModule env (map qnameToKName programs)
+  let fileName = outDir </> prettyShow m
+  let lboxMod  = LBoxModule env mains
 
   liftIO do
-    putStrLn $ "Writing " <> fileName ".txt"
-    pp coqMod <> "\n" & writeFile (fileName ".txt")
+    putStrLn $ "Writing " <> fileName -<.> ".txt"
+    pp lboxMod <> "\n" & writeFile (fileName -<.> ".txt")
 
   liftIO $ case optOutput of
     RocqOutput -> do
-      putStrLn $ "Writing " <> fileName ".v"
-      prettyCoq optTarget coqMod <> "\n"
-        & writeFile (fileName ".v")
+      putStrLn $ "Writing " <> fileName -<.> ".v"
+      prettyCoq optTarget lboxMod <> "\n"
+        & writeFile (fileName -<.> ".v")
 
     AstOutput -> do
-      putStrLn $ "Writing " <> fileName ".ast"
-      prettySexp optTarget coqMod <> "\n"
-        & LText.writeFile (fileName ".ast")
+      putStrLn $ "Writing " <> fileName -<.> ".ast"
+      prettySexp optTarget lboxMod <> "\n"
+        & LText.writeFile (fileName -<.> ".ast")
+
+  where
+    getMain :: Target t -> [QName] -> TCM (WhenUntyped t (NonEmpty KerName))
+    getMain ToTyped   _  = pure NoneU
+    getMain ToUntyped qs =
+      case NEL.nonEmpty qs of
+        Nothing -> genericError "No main program specified. Please use a COMPILE pragma."
+        Just ms -> pure $ SomeU (NEL.map qnameToKName ms)
