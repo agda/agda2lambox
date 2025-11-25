@@ -85,7 +85,7 @@ instance ToSexp t KerName where
 instance ToSexp t Inductive where
   toSexp t Inductive{..} = ctor t "inductive" [S indMInd, S indInd]
 
-instance ToSexp t d => ToSexp t (Def d) where
+instance ToSexp t Def where
   toSexp t Def{..} = ctor t "def" [S dName, S dBody, S dArgs]
 
 instance ToSexp t Term where

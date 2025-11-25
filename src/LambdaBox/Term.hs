@@ -8,14 +8,14 @@ import LambdaBox.Names
 
 
 -- | Definition component in a mutual fixpoint.
-data Def t = Def
+data Def = Def
   { dName :: Name
-  , dBody :: t
+  , dBody :: Term
   , dArgs :: Int
   }
 
 -- | Mutual components of a fixpoint.
-type MFixpoint = [Def Term]
+type MFixpoint = [Def]
 
 -- | λ□ terms
 data Term
@@ -39,7 +39,7 @@ data Term
       Int       -- ^ Index of the fixpoint we keep.
 
 
-instance Pretty t => Pretty (Def t) where
+instance Pretty Def where
   -- prettyPrec _ (Def s _ _) = pretty s
   prettyPrec _ (Def _ t _) = pretty t
 
