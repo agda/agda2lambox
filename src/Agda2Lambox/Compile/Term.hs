@@ -26,7 +26,7 @@ import Agda.TypeChecking.Monad.Base ( TCM , liftTCM, MonadTCEnv, MonadTCM )
 import Agda.TypeChecking.Monad.Builtin ( getBuiltinName_ )
 
 import LambdaBox.Names ( Name(..) )
-import LambdaBox ( Term(..) )
+import LambdaBox ( Term(..), emptyName )
 import LambdaBox qualified as LBox
 import Agda2Lambox.Compile.Utils
 import Agda2Lambox.Compile.Monad
@@ -144,7 +144,11 @@ compileTermC = \case
   TSort   -> return LBox
   TErased -> return LBox
 
-  TError terr -> return LBox -- unreachable clause
+  TError terr -> return $ LCase (LBox.Inductive emptyName 0) 0 LBox []
+    -- ^ Unreachable clause.
+    --   We explicitely match on the empty type (for which we do not construct a proof),
+    --   so that later passes recognize that this is unreachable.
+
   TCoerce tt  -> genericError "Coerces not supported."
 
 compileLit :: Literal -> C LBox.Term

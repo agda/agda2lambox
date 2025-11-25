@@ -4,11 +4,6 @@ Taken straight from Agda source.
 There are two important differences:
 - we also add branches for unreachable defaults (because we need all cases to be exhaustive)
 - we sort the case alts according to the order of constructors for the given inductive
-
-Currently, the default branch value is bound in a let binding,
-I don't know if this will be problematic for some targets that evaluate
-the binding before the case. Will they fail?
-
 -}
 
 -- | Eliminates case defaults by adding an alternative for all possible
@@ -37,14 +32,14 @@ eliminateCaseDefaults = tr
         def <- tr def
         newAlts <- forM missingCons $ \con -> do
           Constructor {conArity = ar} <- theDef <$> getConstInfo con
-          return $ TACon con ar (TVar ar)
+          return $ TACon con ar tUnreachable
 
-        alts' <- (++ newAlts) <$> mapM (trAlt . raise 1) alts
+        alts' <- (++ newAlts) <$> mapM trAlt alts
 
         -- sort the alts
         let alts'' = flip List.sortOn alts' \alt -> List.elemIndex (aCon alt) dtCons 
 
-        return $ TLet def $ TCase (sc + 1) ct tUnreachable alts''
+        return $ TCase sc ct tUnreachable alts''
 
       -- case on non-data are always exhaustive
       TCase sc ct def alts -> TCase sc ct <$> tr def <*> mapM trAlt alts
