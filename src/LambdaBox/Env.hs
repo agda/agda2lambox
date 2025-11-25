@@ -18,6 +18,7 @@ module LambdaBox.Env where
 
 
 import Data.Kind ( Type )
+import Data.List.NonEmpty ( NonEmpty )
 
 import Agda.Syntax.Common.Pretty
 
@@ -121,9 +122,9 @@ data GlobalDecl (t :: Typing) :: Type where
 newtype GlobalEnv t = GlobalEnv [(KerName, GlobalDecl t)]
 
 -- | Generated module
-data CoqModule t = CoqModule
-  { coqEnv      :: GlobalEnv t
-  , coqPrograms :: [KerName]
+data LBoxModule t = LBoxModule
+  { lboxEnv  :: GlobalEnv t
+  , lboxMain :: WhenUntyped t (NonEmpty KerName)
   }
 
 
@@ -171,5 +172,8 @@ instance Pretty (GlobalEnv t) where
     vsep $ flip map (reverse env) \(kn, d) ->
       hang (pretty kn <> ":") 2 (pretty d)
 
-instance Pretty (CoqModule t) where
-  pretty CoqModule{..} = pretty coqEnv
+instance Pretty (LBoxModule t) where
+  pretty LBoxModule{..} = vcat
+    [ pretty lboxEnv
+    , flip foldMap lboxMain \kn -> "main program:" <+> pretty kn
+    ]

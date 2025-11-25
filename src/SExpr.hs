@@ -5,6 +5,7 @@ module SExpr (ToSexp, prettySexp) where
 
 import Data.Bifunctor(bimap)
 import Data.List(intercalate)
+import Data.List.NonEmpty qualified as NEL (head)
 
 import Agda.Syntax.Common.Pretty
 import LambdaBox
@@ -184,8 +185,7 @@ instance ToSexp t (GlobalEnv t) where
   toSexp t@ToUntyped (GlobalEnv env) = toSexp t env
   toSexp t@ToTyped   (GlobalEnv env) = toSexp t $ flip map env \(kn, decl) -> ((kn, True), decl)
 
--- TODO(flupe): handle programs
-instance ToSexp t (CoqModule t) where
-  toSexp t@ToUntyped CoqModule{..} =
-    toSexp t (coqEnv, ctor t "tConst" [S $ head coqPrograms])
-  toSexp t@ToTyped   CoqModule{..} = toSexp t coqEnv
+instance ToSexp t (LBoxModule t) where
+  toSexp t@ToUntyped LBoxModule{..} =
+    toSexp t (lboxEnv, ctor t "tConst" [S $ NEL.head $ getUntyped lboxMain])
+  toSexp t@ToTyped LBoxModule{..} = toSexp t lboxEnv
