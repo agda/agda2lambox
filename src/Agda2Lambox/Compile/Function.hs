@@ -106,18 +106,12 @@ compileFunction (t :: Target t) defn@Defn{defType} = do
 
     builder . flip LBox.LFix k <$>
       forM mdefs \def@Defn{defName} -> do
-        body <- compileFunctionBody mnames def
-        case body of
-          LBox.LLambda{} ->
-            return LBox.Def
-              { dName = qnameToName defName
-              , dBody = body
-              , dArgs = 0
-              }
-          LBox.LBox ->
-            return LBox.Def
-              { dName = qnameToName defName
-              , dBody = LBox.LLambda LBox.Anon body
-              , dArgs = 0
-              }
-          _ -> genericError "Fixpoint body must be Lambda."
+        body <- compileFunctionBody mnames def >>= \case
+          l@LBox.LLambda{} -> pure l
+          LBox.LBox        -> pure $ LBox.LLambda LBox.Anon LBox.LBox
+          _                -> genericError "Fixpoint body must be Lambda."
+        return LBox.Def
+          { dName = qnameToName defName
+          , dBody = body
+          , dArgs = 0
+          }
