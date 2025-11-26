@@ -1,8 +1,2 @@
 packages: agda2lambox.cabal
-
-source-repository-package
-  type: git
-  location: https://github.com/agda/agda
-  tag: 5c29109f8212ef61b0091d62ef9c8bfdfa16cf36
-
 constraints: Agda +debug

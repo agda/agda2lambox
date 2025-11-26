@@ -13,7 +13,7 @@ import Data.Maybe ( fromMaybe )
 import Data.Version ( showVersion )
 import Data.Text ( pack )
 import GHC.Generics ( Generic )
-import System.Console.GetOpt ( OptDescr(Option), ArgDescr(..) )
+import Agda.Utils.GetOpt ( OptDescr(Option), ArgDescr(..) )
 import System.Directory ( createDirectoryIfMissing )
 import System.FilePath ( (</>), (-<.>) )
 import Data.Text.Lazy.IO qualified as LText

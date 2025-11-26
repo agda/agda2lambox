@@ -4,10 +4,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
-    agda = {
-      url = "github:agda/agda";
-      flake = false;
-    };
   };
 
   outputs =
@@ -35,7 +31,6 @@
           haskellPackages = prev.haskellPackages.extend (
             hfinal: hprev: {
               sexpresso = hLib.doJailbreak (hLib.markUnbroken hprev.sexpresso);
-              Agda = hLib.dontCheck (hLib.dontHaddock (hfinal.callCabal2nix "Agda" inputs.agda { }));
               agda2lambox = hLib.doJailbreak (hfinal.callCabal2nix "agda2lambox" ./. { });
             }
           );
