@@ -28,6 +28,7 @@ import Agda2Lambox.Compile.Inductive  ( compileInductive )
 import Agda2Lambox.Compile.TypeScheme ( compileTypeScheme )
 import Agda2Lambox.Compile.Type       ( compileTopLevelType )
 
+import LambdaBox ( emptyName, emptyDecl )
 import LambdaBox.Names
 import LambdaBox.Env (GlobalEnv(..), GlobalDecl(..), ConstantBody(..))
 import LambdaBox.Term (Term(LBox))
@@ -38,7 +39,7 @@ import LambdaBox.Term (Term(LBox))
 compile :: Target t -> [QName] -> CompileM (GlobalEnv t)
 compile t qs = do
   items <- compileLoop (compileDefinition t) qs
-  pure $ GlobalEnv $ map itemToEntry items
+  pure $ GlobalEnv $ map itemToEntry items ++ [(emptyName, emptyDecl t)]
   where
     itemToEntry :: CompiledItem (GlobalDecl t) -> (KerName, GlobalDecl t)
     itemToEntry CompiledItem{..} = (qnameToKName itemName, itemValue)
