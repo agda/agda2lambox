@@ -1,6 +1,6 @@
 {-# LANGUAGE DataKinds, GADTs, FlexibleInstances #-}
 -- | Compile targets for the backend
-module Agda2Lambox.Compile.Target 
+module Agda2Lambox.Compile.Target
   ( Typing(..)
   , Target(..)
   , WhenTyped(..)

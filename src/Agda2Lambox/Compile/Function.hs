@@ -40,7 +40,7 @@ isFunction _ = False
 
 
 -- | Convert a function body to a Lambdabox term.
-compileFunctionBody :: [QName] -> Definition -> CompileM LBox.Term
+compileFunctionBody :: [QName] -> Definition -> CompileM (LBox.Term t)
 compileFunctionBody ms Defn{defName, theDef} = do
   Just t <- liftTCM $ treeless defName
 
@@ -94,7 +94,7 @@ compileFunction (t :: Target t) defn@Defn{defType} = do
     --                they should be eta-expanded somehow,
     --                OR treated like projections
 
-  let builder :: LBox.Term -> Maybe (LBox.GlobalDecl t)
+  let builder :: LBox.Term t -> Maybe (LBox.GlobalDecl t)
       builder = Just . ConstantDecl . ConstantBody typ . Just
 
   -- if the function is not recursive, just compile the body

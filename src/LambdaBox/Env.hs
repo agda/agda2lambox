@@ -109,7 +109,7 @@ data MutualInductiveBody t = MutualInductive
 -- | Definition of a constant in the environment
 data ConstantBody t = ConstantBody
   { cstType :: WhenTyped t ([Name], LBox.Type)
-  , cstBody :: Maybe Term
+  , cstBody :: Maybe (Term t)
   }
 
 -- | Global declarations.
