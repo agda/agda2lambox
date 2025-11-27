@@ -13,7 +13,7 @@ import Agda2Lambox.Compile.Utils
 import Agda2Lambox.Compile.Type
 import LambdaBox.Env
 
-compileTypeScheme :: Definition -> CompileM (GlobalDecl Typed)
+compileTypeScheme :: Definition -> CompileM (GlobalTypeDecl Typed)
 compileTypeScheme Defn{..} = do
   TelV tyargs _ <- telView defType
   liftIO $ putStrLn "compiling type scheme"

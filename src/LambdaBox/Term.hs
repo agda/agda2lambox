@@ -1,65 +1,90 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GADTs #-}
+{-# LANGUAGE DataKinds #-}
 -- | Definition of λ□ terms.
 module LambdaBox.Term where
 
-import Data.Bifunctor (first)
+import Data.Bifunctor (first, second)
 import Agda.Syntax.Common.Pretty
+import Agda2Lambox.Compile.Target
 import LambdaBox.Names
-
+import LambdaBox.Type
 
 -- | Definition component in a mutual fixpoint.
-data Def t = Def
-  { dName :: Name
-  , dBody :: t
-  , dArgs :: Int
-  }
+data Def (t :: Typing) where
+  Def :: { dName :: Name , dBody :: Term t , dArgs :: Int } -> Def t
 
 -- | Mutual components of a fixpoint.
-type MFixpoint = [Def Term]
+type MFixpoint t = [Def t]
 
 -- | λ□ terms
-data Term
-  = LBox          -- ^ Proofs and erased terms
-  | LRel Int      -- ^ Bound variable, with de Bruijn index
-  | LLambda Name Term  -- ^ Lambda abstraction
-  | LLetIn Name Term Term
+data Term (t :: Typing) where
+  LBox :: Term t -- ^ Proofs and erased terms
+  LRel :: Int -> Term t -- ^ Bound variable, with de Bruijn index
+  LLambda :: Name -> WhenTyped t Type -> Term t -> Term t -- ^ Lambda abstraction
+  LLetIn :: Name -> Term t -> Term t -> Term t
       -- ^ Let bindings.
       --   Unused in the backend, since Agda itself no longer has let bindings
       --   in the concrete syntac.
-  | LApp Term Term                   -- ^ Term application
-  | LConst KerName                   -- ^ Named constant.
-  | LConstruct Inductive Int [Term]  -- ^ Inductive constructor.
-  | LCase              -- ^ Pattern-matching case construct.
-      Inductive        -- ^ Inductive type we cae on.
-      Int              -- ^ Number of parameters
-      Term             -- ^ Discriminee
-      [([Name], Term)] -- ^ Branches
-  | LFix        -- ^ Fixpoint combinator.
-      MFixpoint
-      Int       -- ^ Index of the fixpoint we keep.
+  LApp :: Term t -> Term t -> Term t -- ^ Term application
+  LConst :: KerName -> Term t -- ^ Named constant.
+  LConstruct
+    :: Inductive
+    -> Int
+    -> [Term t]
+    -> Term t  -- ^ Inductive constructor.
+  LCase -- ^ Pattern-matching case construct.
+    :: Inductive          -- ^ Inductive type we case on.
+    -> Int                -- ^ Number of parameters
+    -> Term t             -- ^ Discriminee
+    -> [([Name], Term t)] -- ^ Branches
+    -> Term t
+  LFix -- ^ Fixpoint combinator.
+    :: MFixpoint t
+    -> Int       -- ^ Index of the fixpoint we keep.
+    -> Term t
 
+instance TypeErasure Term where
+  erase = \case
+    LBox -> LBox
+    LRel n -> LRel n
+    LLambda n _ t -> LLambda n None (erase t)
+    LLetIn n t t' -> LLetIn n (erase t) (erase t')
+    LApp t t' -> LApp (erase t) (erase t')
+    LConst n -> LConst n
+    LConstruct ind i ts -> LConstruct ind i (map erase ts)
+    LCase ind i t bs -> LCase ind i (erase t) (map (second erase) bs)
+    LFix ds i -> LFix (map erase ds) i
 
-instance Pretty t => Pretty (Def t) where
+instance TypeErasure Def where
+  erase (Def {..}) = Def dName (erase dBody) dArgs
+
+instance Pretty (Def t) where
   -- prettyPrec _ (Def s _ _) = pretty s
   prettyPrec _ (Def _ t _) = pretty t
-
-instance Pretty Term where
+--
+instance Pretty (Term t) where
   prettyPrec p v =
     case v of
       LBox   -> "□"
 
       LRel k -> "@" <> pretty k
 
-      LLambda n t ->
-        let getLams :: Term -> ([Name], Term)
-            getLams (LLambda n t) = first (n:) $ getLams t
+      LLambda n ty t ->
+        let getLams :: Term t -> ([(Name , WhenTyped t Type)], Term t)
+            getLams (LLambda n ty t) = first ((n,ty):) $ getLams t
             getLams t = ([], t)
 
             (ns, t') = getLams t
-        in 
+
+            prettyWhenTyped :: Name -> WhenTyped t Type -> Doc
+            prettyWhenTyped n None     = pretty n
+            prettyWhenTyped n (Some t) = parens $ pretty n <+> ":" <+> pretty t
+        in
         mparens (p > 0) $
-        hang ("λ" <+> sep (map pretty (n:ns)) <+> "→") 2 $ pretty t'
-        
+        hang ("λ" <+> sep (map (uncurry prettyWhenTyped) ((n,ty):ns)) <+> "→") 2 $ pretty t'
+
 
       LLetIn n e t ->
         mparens (p > 0) $ sep
