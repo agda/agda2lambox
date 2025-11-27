@@ -1,10 +1,12 @@
+AGDA2LAMBOX_BIN ?= agda2lambox
+
 .PHONY: default
 
 default:
 	cabal install --overwrite-policy=always
 
 %.ast:
-	agda2lambox -o build test/$*.agda
+	$(AGDA2LAMBOX_BIN) -o build test/$*.agda
 
 %.wasm: %.ast
 	lbox wasm -o demo/$@ build/$*.ast
@@ -16,7 +18,7 @@ default:
 	lbox rust -o demo/$@ build/$*.ast
 
 %.v:
-	agda2lambox -o build --rocq test/$*.agda
+	$(AGDA2LAMBOX_BIN) -o build --rocq test/$*.agda
 
 %.typed:
-	agda2lambox -o build --typed --no-blocks test/$*.agda
+	$(AGDA2LAMBOX_BIN) -o build --typed --no-blocks test/$*.agda

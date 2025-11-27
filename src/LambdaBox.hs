@@ -6,7 +6,7 @@ module LambdaBox
   , module LambdaBox.Type
   , module LambdaBox.Env
   , emptyName
-  , emptyDecl
+  , emptyGlobalDecl
   ) where
 
 import Control.Monad.Identity
@@ -22,8 +22,8 @@ emptyName = KerName (MPFile ["LamBox"]) "Empty"
 
 -- | Backed-in definition for the empty type.
 --   Used to discard unreachable branches in typed targets.
-emptyDecl :: Target t -> GlobalDecl t
-emptyDecl t = InductiveDecl MutualInductive
+emptyDecl :: GlobalTermDecl Typed
+emptyDecl = InductiveDecl MutualInductive
   { indFinite = Finite
   , indPars   = 0
   , indBodies = [
@@ -31,9 +31,12 @@ emptyDecl t = InductiveDecl MutualInductive
         { indName          = "Empty"
         , indPropositional = False
         , indKElim         = IntoAny
-        , indTypeVars      = runIdentity $ whenTyped t $ pure []
+        , indTypeVars      = Some []
         , indCtors         = []
         , indProjs         = []
         }
     ]
   }
+
+emptyGlobalDecl :: GlobalDecl Typed
+emptyGlobalDecl = GlobalTermDecl (emptyName, emptyDecl)

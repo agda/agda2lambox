@@ -88,18 +88,18 @@ instance ToCoq t Inductive where
            , ("inductive_ind",  pcoq t indInd)
            ]
 
-instance ToCoq t d => ToCoq t (Def d) where
+instance ToCoq t (Def t') where
   pcoq t Def{..} =
     record [ ("dname", pcoq t dName)
            , ("dbody", pcoq t dBody)
            , ("rarg",  pcoq t dArgs)
            ]
 
-instance ToCoq t Term where
+instance ToCoq t (Term t') where
   pcoqP p t v = case v of
     LBox                -> ctorP p "tBox"       []
     LRel k              -> ctorP p "tRel"       [pretty k]
-    LLambda n u         -> ctorP p "tLambda"    [pcoq t n, pcoqP 10 t u]
+    LLambda n _ u       -> ctorP p "tLambda"    [pcoq t n, pcoqP 10 t u]
     LLetIn n u v        -> ctorP p "tLetIn"     [pcoq t n, pcoqP 10 t u, pcoqP 10 t v]
     LApp u v            -> ctorP p "tApp"       [pcoqP 10 t u, pcoqP 10 t v]
     LConst c            -> ctorP p "tConst"     [pcoqP 10 t c]
@@ -180,15 +180,25 @@ instance ToCoq t (ConstantBody t) where
         ToUntyped -> []
         ToTyped   -> [("cst_type", pcoq t $ getTyped cstType)]
 
-instance ToCoq t (GlobalDecl t) where
+instance ToCoq t (GlobalTermDecl t) where
   pcoqP p t decl = case decl of
     ConstantDecl  body  -> ctorP p "ConstantDecl"  [pcoqP 10 t body]
     InductiveDecl minds -> ctorP p "InductiveDecl" [pcoqP 10 t minds]
+
+instance ToCoq t (GlobalTypeDecl t) where
+  pcoqP p t decl = case decl of
     TypeAliasDecl typ   -> ctorP p "TypeAliasDecl" [pcoqP 10 t typ]
 
+instance ToCoq t (GlobalDecl t) where
+  pcoq ToTyped decl = case decl of
+    GlobalTermDecl (kn, d) -> tpcoq ((kn, True), d)
+    GlobalTypeDecl (Some (kn, d)) -> tpcoq ((kn, True), d)
+  pcoq ToUntyped decl = case decl of
+    GlobalTermDecl (kn, d) -> upcoq ((kn, True), d)
+    GlobalTypeDecl _ -> mempty
+
 instance ToCoq t (GlobalEnv t) where
-  pcoq ToUntyped (GlobalEnv env) = upcoq env
-  pcoq ToTyped   (GlobalEnv env) = tpcoq $ flip map env \(kn, decl) -> ((kn, True), decl)
+  pcoq p (GlobalEnv env) = pcoq p $ map (pcoq p) env
 
 instance ToCoq t (LBoxModule t) where
   pcoq ToUntyped LBoxModule{..} = vsep

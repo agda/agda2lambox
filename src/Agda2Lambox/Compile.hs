@@ -7,6 +7,7 @@ import Control.Monad.IO.Class ( liftIO )
 import Data.IORef
 
 import Control.Monad.State
+import Data.Bifunctor (bimap)
 
 import Agda.Compiler.Backend
 import Agda.Syntax.Internal ( QName )
@@ -28,56 +29,55 @@ import Agda2Lambox.Compile.Inductive  ( compileInductive )
 import Agda2Lambox.Compile.TypeScheme ( compileTypeScheme )
 import Agda2Lambox.Compile.Type       ( compileTopLevelType )
 
-import LambdaBox ( emptyName, emptyDecl )
+import LambdaBox ( emptyGlobalDecl )
 import LambdaBox.Names
-import LambdaBox.Env (GlobalEnv(..), GlobalDecl(..), ConstantBody(..))
+import LambdaBox.Env (GlobalEnv(..), GlobalDecl(..), GlobalTermDecl(..), GlobalTypeDecl(..), ConstantBody(..))
 import LambdaBox.Term (Term(LBox))
 
 
 
 -- | Compile the given names into to a λ□ environment.
-compile :: Target t -> [QName] -> CompileM (GlobalEnv t)
-compile t qs = do
-  items <- compileLoop (compileDefinition t) qs
-  pure $ GlobalEnv $ map itemToEntry items ++ [(emptyName, emptyDecl t)]
+compile :: [QName] -> CompileM (GlobalEnv Typed)
+compile qs = do
+  items <- compileLoop compileDefinition qs
+  pure $ GlobalEnv $ map itemToEntry items ++ [emptyGlobalDecl]
   where
-    itemToEntry :: CompiledItem (GlobalDecl t) -> (KerName, GlobalDecl t)
-    itemToEntry CompiledItem{..} = (qnameToKName itemName, itemValue)
+    itemToEntry :: CompiledItem (Either (GlobalTermDecl Typed) (GlobalTypeDecl Typed))
+                    -> GlobalDecl Typed
+    itemToEntry CompiledItem{..} = case itemValue of
+      Left d -> GlobalTermDecl (qnameToKName itemName, d)
+      Right d -> GlobalTypeDecl (Some (qnameToKName itemName, d))
 
-
-compileDefinition :: Target t -> Definition -> CompileM (Maybe (GlobalDecl t))
-compileDefinition target defn@Defn{..} = setCurrentRange defName do
+compileDefinition :: Definition -> CompileM (Maybe (Either (GlobalTermDecl Typed) (GlobalTypeDecl Typed)))
+compileDefinition defn@Defn{..} = setCurrentRange defName do
   reportSDoc "agda2lambox.compile" 1 $ "Compiling definition: " <+> prettyTCM defName
 
   -- we skip definitions introduced by module application
 
   if defCopy then pure Nothing else do
 
-  typ <- whenTyped target $ compileTopLevelType defType
+  typ <- Some <$> compileTopLevelType defType
 
   -- logical definitions are immediately compiled to □
   ifM (liftTCM $ isLogical $ Arg defArgInfo defType)
-     (pure $ Just $ ConstantDecl $ ConstantBody typ $ Just LBox) do
+     (pure $ Just . Left $ ConstantDecl $ ConstantBody typ $ Just LBox) do
 
   case theDef of
     PrimitiveSort{}    -> pure Nothing
     GeneralizableVar{} -> pure Nothing
 
     Axiom{} -> do
-      typ <- whenTyped target $ compileTopLevelType defType
-      pure $ Just $ ConstantDecl $ ConstantBody typ Nothing
+      typ <- Some <$> compileTopLevelType defType
+      pure $ Just . Left $ ConstantDecl $ ConstantBody typ Nothing
 
     Constructor{conData} -> Nothing <$ requireDef conData
 
     Function{} -> do
-      ifNotM (liftTCM $ isArity defType) (compileFunction target defn) do
-        -- it's a type scheme
-        case target of
-          ToUntyped -> pure Nothing
-          -- we only compile it with --typed
-          ToTyped   -> Just <$> compileTypeScheme defn
+      ifNotM (liftTCM $ isArity defType)
+        ((Left <$>) <$> compileFunction defn)
+        ((Right <$>) <$> Just <$> compileTypeScheme defn)
 
-    d | isDataOrRecDef d -> compileInductive target defn
+    d | isDataOrRecDef d -> (Left <$>) <$> compileInductive defn
 
     Primitive{..} -> do
       reportSDoc "agda2lambox.compile" 5 $
@@ -113,12 +113,12 @@ compileDefinition target defn@Defn{..} = setCurrentRange defName do
           liftTCM $ modifyGlobalDefinition defName $ const defn'
 
           -- and then we compile it as a regular function
-          compileFunction target defn'
+          (Left <$>) <$> compileFunction defn'
 
         -- otherwise, compiling it as an axiom
         _ -> do
           reportSDoc "agda2lambox.compile" 5 $ "Compiling it to an axiom."
-          typ <- whenTyped target $ compileTopLevelType defType
-          pure $ Just $ ConstantDecl $ ConstantBody typ Nothing
+          typ <- Some <$> compileTopLevelType defType
+          pure $ Just . Left $ ConstantDecl $ ConstantBody typ Nothing
 
     _ -> genericError $ "Cannot compile: " <> prettyShow defName

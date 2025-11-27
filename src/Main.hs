@@ -35,6 +35,7 @@ import CoqGen    ( prettyCoq  )
 import SExpr     ( prettySexp )
 import LambdaBox.Env
 import LambdaBox.Names (KerName)
+import LambdaBox.Typecheck (typecheck)
 import Agda2Lambox.Compile.Monad (runCompile, CompileEnv(..))
 
 
@@ -48,12 +49,13 @@ data Output = RocqOutput | AstOutput
 data Options = forall t. Options
   { optOutDir   :: Maybe FilePath
   , optTarget   :: Target t
+  , optWithTC   :: Bool
   , optOutput   :: Output
   , optNoBlocks :: Bool
   }
 
 instance NFData Options where
-  rnf (Options m t o nb) = rnf m `seq` rnf t `seq` rnf o `seq` rnf nb
+  rnf (Options m t tc o nb) = rnf m `seq` rnf t `seq` rnf tc `seq` rnf o `seq` rnf nb
 
 -- | Setter for output directory option.
 outdirOpt :: Monad m => FilePath -> Options -> m Options
@@ -68,11 +70,15 @@ rocqOpt opts = return opts { optOutput = RocqOutput }
 noBlocksOpt :: Monad m => Options -> m Options
 noBlocksOpt opts = return opts { optNoBlocks = True }
 
+withTC :: Monad m => Options -> m Options
+withTC opts = return opts { optWithTC = True }
+
 -- | Default backend options.
 defaultOptions :: Options
 defaultOptions  = Options
   { optOutDir   = Nothing
   , optTarget   = ToUntyped
+  , optWithTC   = False
   , optOutput   = AstOutput
   , optNoBlocks = False
   }
@@ -97,6 +103,8 @@ agda2lambox = Backend backend
             "Write output files to DIR. (default: project root)"
           , Option ['t'] ["typed"] (NoArg typedOpt)
             "Compile to typed λ□ environments."
+          , Option "tc" ["typecheck"] (NoArg typedOpt)
+            "Typecheck output λ□."
           , Option ['c'] ["rocq"] (NoArg rocqOpt)
             "Output a Rocq file."
           , Option [] ["no-blocks"] (NoArg noBlocksOpt)
@@ -132,12 +140,17 @@ writeModule Options{..} menv IsMain m defs = do
   -- get defs annotated with a COMPILE pragma
   -- throw an error if none, when targetting untyped lbox
   mains    <- getMain optTarget programs
-  env      <- runCompile (CompileEnv optNoBlocks) $ compile optTarget defs
+  env      <- runCompile (CompileEnv optNoBlocks) $ compile defs
+
+  liftIO $ putStrLn $ "Typechecking generated λ□."
+  if (typecheck env)
+    then genericError "Failure"
+    else liftIO $ putStrLn "Success"
 
   liftIO $ createDirectoryIfMissing True outDir
 
   let fileName = outDir </> prettyShow m
-  let lboxMod  = LBoxModule env mains
+  let lboxMod  = mkLBoxModule optTarget env mains
 
   liftIO do
     putStrLn $ "Writing " <> fileName -<.> ".txt"

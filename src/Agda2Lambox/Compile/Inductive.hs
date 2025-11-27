@@ -35,8 +35,8 @@ import Agda2Lambox.Compile.Type
 import LambdaBox qualified as LBox
 
 -- | Toplevel conversion from a datatype/record definition to a Lambdabox declaration.
-compileInductive :: Target t -> Definition -> CompileM (Maybe (LBox.GlobalDecl t))
-compileInductive t defn@Defn{defName} = do
+compileInductive :: Definition -> CompileM (Maybe (LBox.GlobalTermDecl Typed))
+compileInductive defn@Defn{defName} = do
   mutuals <- liftTCM $ dataOrRecDefMutuals defn
 
   reportSDoc "agda2lambox.compile.inductive" 5 $
@@ -70,7 +70,7 @@ compileInductive t defn@Defn{defName} = do
     unless (all (isDataOrRecDef . theDef) defs) $
       genericError "Mutually-defined datatypes/records *and* functions not supported."
 
-    bodies <- forM defs $ actuallyConvertInductive t
+    bodies <- forM defs $ actuallyConvertInductive
 
     return $ Just $ LBox.InductiveDecl $ LBox.MutualInductive
       { indFinite = LBox.Finite -- TODO(flupe)
@@ -106,8 +106,8 @@ getBundle defn@Defn{defName, defType, theDef} =
         }
 
 
-actuallyConvertInductive :: ∀ t. Target t -> Definition -> CompileM (LBox.OneInductiveBody t)
-actuallyConvertInductive t defn = do
+actuallyConvertInductive :: Definition -> CompileM (LBox.OneInductiveBody Typed)
+actuallyConvertInductive defn = do
   let Bundle{..} = getBundle defn
 
   params <- theTel <$> telViewUpTo indPars indType
@@ -119,7 +119,7 @@ actuallyConvertInductive t defn = do
 
   addContext params do
 
-    tyvars <- whenTyped t $ forM (flattenTel params) \pdom -> do
+    tyvars <- forM (flattenTel params) \pdom -> do
       let domType = unDom pdom
       isParamLogical <- liftTCM $ isLogical pdom
       isParamArity   <- liftTCM $ isArity domType
@@ -137,15 +137,15 @@ actuallyConvertInductive t defn = do
           DataCon arity         -> arity
           RecordCon _ _ arity _ -> arity
 
-        conTypeInfo <- whenTyped t do
-          conType <- liftTCM $ (`piApplyM` pvars) . defType =<< getConstInfo cname
+        conTypeInfo <- do
+          conType <- liftTCM $ (`piApplyM` pvars) =<< defType <$> (getConstInfo cname)
           conTel  <- toList . theTel <$> telView conType
           compileArgs indPars conTel
 
         pure LBox.Constructor
           { cstrName  = qnameToIdent cname
           , cstrArgs  = arity
-          , cstrTypes = conTypeInfo
+          , cstrTypes = Some conTypeInfo
           }
 
     pure LBox.OneInductive
@@ -154,5 +154,5 @@ actuallyConvertInductive t defn = do
       , indKElim         = LBox.IntoAny -- TODO(flupe)
       , indCtors         = ctors
       , indProjs         = []
-      , indTypeVars      = tyvars
+      , indTypeVars      = Some tyvars
       }
