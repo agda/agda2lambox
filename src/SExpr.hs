@@ -6,6 +6,7 @@ module SExpr (ToSexp, prettySexp) where
 import Data.Bifunctor(bimap)
 import Data.List(intercalate)
 import Data.List.NonEmpty qualified as NEL (head)
+import Data.Maybe
 
 import Agda.Syntax.Common.Pretty
 import LambdaBox
@@ -175,15 +176,23 @@ instance ToSexp t (ConstantBody t) where
         ToTyped   -> [S $ getTyped cstType]
       ++ [S cstBody]
 
-instance ToSexp t (GlobalDecl t) where
+instance ToSexp t (GlobalTermDecl t) where
   toSexp t = \case
     ConstantDecl  body  -> ctor t "ConstantDecl"  [S body]
     InductiveDecl minds -> ctor t "InductiveDecl" [S minds]
+
+instance ToSexp t (GlobalTypeDecl t) where
+  toSexp t = \case
     TypeAliasDecl typ   -> ctor t "TypeAliasDecl" [S typ]
 
 instance ToSexp t (GlobalEnv t) where
-  toSexp t@ToUntyped (GlobalEnv env) = toSexp t env
-  toSexp t@ToTyped   (GlobalEnv env) = toSexp t $ flip map env \(kn, decl) -> ((kn, True), decl)
+  toSexp t@ToUntyped (GlobalEnv env) =
+    toSexp t . catMaybes . flip map env $ \case
+      GlobalTermDecl (kn , d) -> Just (kn , d)
+      GlobalTypeDecl _ -> Nothing
+  toSexp t@ToTyped (GlobalEnv env) = toSexp t . flip map env $ \case
+    GlobalTermDecl (kn, d) -> toSexp t ((kn, True), d)
+    GlobalTypeDecl (Some (kn, d)) -> toSexp t ((kn, True), d)
 
 instance ToSexp t (LBoxModule t) where
   toSexp t@ToUntyped LBoxModule{..} =

@@ -1,4 +1,4 @@
-{-# LANGUAGE NamedFieldPuns, DerivingVia, OverloadedStrings #-}
+{-# LANGUAGE NamedFieldPuns, DerivingVia, OverloadedStrings, DataKinds #-}
 module Agda2Lambox.Compile.Term
   ( compileTerm
   ) where
@@ -30,6 +30,7 @@ import LambdaBox ( Term(..), emptyName )
 import LambdaBox qualified as LBox
 import Agda2Lambox.Compile.Utils
 import Agda2Lambox.Compile.Monad
+import Agda2Lambox.Compile.Target
 
 
 -- * Term compilation monad
@@ -78,11 +79,11 @@ compileTerm
   :: [QName]
      -- ^ Local fixpoints.
   -> TTerm
-  -> CompileM (LBox.Term t)
+  -> CompileM (LBox.Term Typed)
 compileTerm ms = runC . withMutuals ms . compileTermC
 
 -- | Convert a treeless term to its λ□ equivalent.
-compileTermC :: TTerm -> C (LBox.Term t)
+compileTermC :: TTerm -> C (LBox.Term Typed)
 compileTermC = \case
 
   TVar  n -> do
@@ -126,7 +127,7 @@ compileTermC = \case
     ces <- traverse compileTermC es
     pure $ foldl' LApp cu ces
 
-  TLam t -> underBinder $ LLambda Anon undefined <$> compileTermC t
+  TLam t -> underBinder $ LLambda Anon (Some LBox.TBox) <$> compileTermC t
 
   TLit l -> compileLit l
 
@@ -191,7 +192,7 @@ compileCaseType = \case
 --   perhaps there's already a treeless translation to prevent this
 --   to inverstigate...
 
-compileAlt :: TAlt -> C ([LBox.Name], (LBox.Term t))
+compileAlt :: TAlt -> C ([LBox.Name], (LBox.Term Typed))
 compileAlt = \case
   TACon{..}   -> let names = take aArity $ repeat LBox.Anon
                  in (names,) <$> underBinders aArity (compileTermC aBody)

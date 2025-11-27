@@ -1,15 +1,15 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GADTs #-}
+{-# LANGUAGE DataKinds #-}
 -- | Definition of λ□ terms.
 module LambdaBox.Term where
 
-import Data.Bifunctor (first)
+import Data.Bifunctor (first, second)
 import Agda.Syntax.Common.Pretty
 import Agda2Lambox.Compile.Target
 import LambdaBox.Names
 import LambdaBox.Type
-
 
 -- | Definition component in a mutual fixpoint.
 data Def (t :: Typing) where
@@ -45,6 +45,21 @@ data Term (t :: Typing) where
     -> Int       -- ^ Index of the fixpoint we keep.
     -> Term t
 
+instance TypeErasure Term where
+  erase = \case
+    LBox -> LBox
+    LRel n -> LRel n
+    LLambda n _ t -> LLambda n None (erase t)
+    LLetIn n t t' -> LLetIn n (erase t) (erase t')
+    LApp t t' -> LApp (erase t) (erase t')
+    LConst n -> LConst n
+    LConstruct ind i ts -> LConstruct ind i (map erase ts)
+    LCase ind i t bs -> LCase ind i (erase t) (map (second erase) bs)
+    LFix ds i -> LFix (map erase ds) i
+
+instance TypeErasure Def where
+  erase (Def {..}) = Def dName (erase dBody) dArgs
+
 instance Pretty (Def t) where
   -- prettyPrec _ (Def s _ _) = pretty s
   prettyPrec _ (Def _ t _) = pretty t
@@ -56,15 +71,19 @@ instance Pretty (Term t) where
 
       LRel k -> "@" <> pretty k
 
-      LLambda n _ t ->
-        let getLams :: Term t -> ([Name], Term t)
-            getLams (LLambda n _ t) = first (n:) $ getLams t
+      LLambda n ty t ->
+        let getLams :: Term t -> ([(Name , WhenTyped t Type)], Term t)
+            getLams (LLambda n ty t) = first ((n,ty):) $ getLams t
             getLams t = ([], t)
 
             (ns, t') = getLams t
+
+            prettyWhenTyped :: Name -> WhenTyped t Type -> Doc
+            prettyWhenTyped n None     = pretty n
+            prettyWhenTyped n (Some t) = parens $ pretty n <+> ":" <+> pretty t
         in
         mparens (p > 0) $
-        hang ("λ" <+> sep (map pretty (n:ns)) <+> "→") 2 $ pretty t'
+        hang ("λ" <+> sep (map (uncurry prettyWhenTyped) ((n,ty):ns)) <+> "→") 2 $ pretty t'
 
 
       LLetIn n e t ->

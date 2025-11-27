@@ -9,6 +9,7 @@ module Agda2Lambox.Compile.Target
   , getUntyped
   , whenTyped
   , whenUntyped
+  , TypeErasure(..)
   ) where
 
 import Data.Foldable (Foldable(foldMap))
@@ -43,7 +44,6 @@ instance Foldable (WhenTyped t) where
   foldMap f None     = mempty
   foldMap f (Some x) = f x
 
--- | Type wrapper that contains a value iff we're in the untyped setting.
 data WhenUntyped (t :: Typing) (a :: Type) :: Type where
   NoneU ::      WhenUntyped Typed a
   SomeU :: a -> WhenUntyped Untyped   a
@@ -85,3 +85,6 @@ whenUntyped ToUntyped x = SomeU <$> x
 instance NFData (Target t) where
   rnf ToTyped   = ()
   rnf ToUntyped = ()
+
+class TypeErasure t where
+  erase :: t Typed -> t Untyped

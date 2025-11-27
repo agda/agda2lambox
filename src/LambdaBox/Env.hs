@@ -19,6 +19,8 @@ module LambdaBox.Env where
 
 import Data.Kind ( Type )
 import Data.List.NonEmpty ( NonEmpty )
+import Data.Bifunctor ( first, second, bimap)
+import Data.Either
 
 import Agda.Syntax.Common.Pretty
 
@@ -113,13 +115,19 @@ data ConstantBody t = ConstantBody
   }
 
 -- | Global declarations.
+data GlobalTermDecl (t :: Typing) :: Type where
+  ConstantDecl  :: ConstantBody t        -> GlobalTermDecl t
+  InductiveDecl :: MutualInductiveBody t -> GlobalTermDecl t
+
+data GlobalTypeDecl (t :: Typing) :: Type where
+  TypeAliasDecl :: Maybe ([TypeVarInfo], LBox.Type) -> GlobalTypeDecl Typed
+
 data GlobalDecl (t :: Typing) :: Type where
-  ConstantDecl  :: ConstantBody t                   -> GlobalDecl t
-  InductiveDecl :: MutualInductiveBody t            -> GlobalDecl t
-  TypeAliasDecl :: Maybe ([TypeVarInfo], LBox.Type) -> GlobalDecl Typed
+  GlobalTypeDecl :: WhenTyped t (KerName, GlobalTypeDecl t) -> GlobalDecl t
+  GlobalTermDecl :: (KerName, GlobalTermDecl t) -> GlobalDecl t
 
 -- | Global environment.
-newtype GlobalEnv t = GlobalEnv [(KerName, GlobalDecl t)]
+newtype GlobalEnv t = GlobalEnv [GlobalDecl t]
 
 -- | Generated module
 data LBoxModule t = LBoxModule
@@ -127,6 +135,44 @@ data LBoxModule t = LBoxModule
   , lboxMain :: WhenUntyped t (NonEmpty KerName)
   }
 
+mkCoqMod :: Target t -> GlobalEnv Typed -> [KerName] -> CoqModule t
+mkCoqMod ToTyped env knames   = CoqModule env knames
+mkCoqMod ToUntyped env knames = erase (CoqModule env knames)
+
+-- Type Erasure
+----------------------------
+
+instance TypeErasure ConstructorBody where
+  erase Constructor {..} = Constructor cstrName cstrArgs None
+
+instance TypeErasure ProjectionBody where
+  erase Projection {..} = Projection projName None
+
+instance TypeErasure OneInductiveBody where
+  erase OneInductive {..} = OneInductive indName indPropositional indKElim None (map erase indCtors) (map erase indProjs)
+
+instance TypeErasure MutualInductiveBody where
+  erase MutualInductive {..} = MutualInductive indFinite indPars (map erase indBodies)
+
+instance TypeErasure ConstantBody where
+  erase ConstantBody {..} = ConstantBody None (erase <$> cstBody)
+
+instance TypeErasure GlobalTermDecl where
+  erase = \case
+    ConstantDecl  cbody -> ConstantDecl (erase cbody)
+    InductiveDecl mibody -> InductiveDecl (erase mibody)
+
+instance TypeErasure GlobalDecl where
+  erase = \case
+    GlobalTermDecl (kn , d) -> GlobalTermDecl (kn , erase d)
+    GlobalTypeDecl _  -> GlobalTypeDecl None
+
+instance TypeErasure GlobalEnv where
+  erase (GlobalEnv env) =
+    GlobalEnv (map erase env)
+
+instance TypeErasure CoqModule where
+  erase CoqModule {..} = CoqModule (erase coqEnv) coqPrograms
 
 -- pretty-printing
 ----------------------------
@@ -150,11 +196,11 @@ instance Pretty (OneInductiveBody t) where
     , nest 2 $ hang "constructors:" 2 $ vcat $ map pretty indCtors
     ]
 
-instance Pretty (GlobalDecl t) where
+instance Pretty (GlobalTermDecl t) where
   pretty = \case
     ConstantDecl ConstantBody{..} ->
       hang "constant declaration:" 2 $ vcat
-        [ flip foldMap cstType \(tvs, typ) -> 
+        [ flip foldMap cstType \(tvs, typ) ->
             vcat [ "type variables:" <+> pretty tvs
                  ,  "type:" <+> pretty typ
                   ]
@@ -165,12 +211,22 @@ instance Pretty (GlobalDecl t) where
       hang "mutual inductive(s):" 2 $
         vsep $ map pretty indBodies
 
+instance Pretty (GlobalTypeDecl t) where
+  pretty = \case
     TypeAliasDecl _ -> "type alias:"
+
+instance Pretty (GlobalDecl t) where
+  pretty = \case
+    GlobalTermDecl (kn , d) ->
+      hang (pretty kn <> ":") 2 (pretty d)
+    GlobalTypeDecl (Some (kn , d)) ->
+      hang (pretty kn <> ":") 2 (pretty d)
+    GlobalTypeDecl None ->
+      mempty
 
 instance Pretty (GlobalEnv t) where
   pretty (GlobalEnv env) =
-    vsep $ flip map (reverse env) \(kn, d) ->
-      hang (pretty kn <> ":") 2 (pretty d)
+    vsep $ map pretty (reverse env)
 
 instance Pretty (LBoxModule t) where
   pretty LBoxModule{..} = vcat

@@ -180,15 +180,25 @@ instance ToCoq t (ConstantBody t) where
         ToUntyped -> []
         ToTyped   -> [("cst_type", pcoq t $ getTyped cstType)]
 
-instance ToCoq t (GlobalDecl t) where
+instance ToCoq t (GlobalTermDecl t) where
   pcoqP p t decl = case decl of
     ConstantDecl  body  -> ctorP p "ConstantDecl"  [pcoqP 10 t body]
     InductiveDecl minds -> ctorP p "InductiveDecl" [pcoqP 10 t minds]
+
+instance ToCoq t (GlobalTypeDecl t) where
+  pcoqP p t decl = case decl of
     TypeAliasDecl typ   -> ctorP p "TypeAliasDecl" [pcoqP 10 t typ]
 
+instance ToCoq t (GlobalDecl t) where
+  pcoq ToTyped decl = case decl of
+    GlobalTermDecl (kn, d) -> tpcoq ((kn, True), d)
+    GlobalTypeDecl (Some (kn, d)) -> tpcoq ((kn, True), d)
+  pcoq ToUntyped decl = case decl of
+    GlobalTermDecl (kn, d) -> upcoq ((kn, True), d)
+    GlobalTypeDecl _ -> mempty
+
 instance ToCoq t (GlobalEnv t) where
-  pcoq ToUntyped (GlobalEnv env) = upcoq env
-  pcoq ToTyped   (GlobalEnv env) = tpcoq $ flip map env \(kn, decl) -> ((kn, True), decl)
+  pcoq p (GlobalEnv env) = pcoq p $ map (pcoq p) env
 
 instance ToCoq t (LBoxModule t) where
   pcoq ToUntyped LBoxModule{..} = vsep
