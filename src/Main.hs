@@ -137,7 +137,7 @@ writeModule Options{..} menv IsMain m defs = do
   liftIO $ createDirectoryIfMissing True outDir
 
   let fileName = outDir </> prettyShow m
-  let lboxMod  = LBoxModule env mains
+  let lboxMod  = mkLBoxModule optTarget env mains
 
   liftIO do
     putStrLn $ "Writing " <> fileName -<.> ".txt"

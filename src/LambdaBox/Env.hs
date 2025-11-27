@@ -135,9 +135,9 @@ data LBoxModule t = LBoxModule
   , lboxMain :: WhenUntyped t (NonEmpty KerName)
   }
 
-mkCoqMod :: Target t -> GlobalEnv Typed -> [KerName] -> CoqModule t
-mkCoqMod ToTyped env knames   = CoqModule env knames
-mkCoqMod ToUntyped env knames = erase (CoqModule env knames)
+mkLBoxModule :: Target t -> GlobalEnv Typed -> WhenUntyped t (NonEmpty KerName) -> LBoxModule t
+mkLBoxModule ToTyped env _ = LBoxModule env NoneU
+mkLBoxModule ToUntyped env knames = LBoxModule (erase env) knames
 
 -- Type Erasure
 ----------------------------
@@ -170,9 +170,6 @@ instance TypeErasure GlobalDecl where
 instance TypeErasure GlobalEnv where
   erase (GlobalEnv env) =
     GlobalEnv (map erase env)
-
-instance TypeErasure CoqModule where
-  erase CoqModule {..} = CoqModule (erase coqEnv) coqPrograms
 
 -- pretty-printing
 ----------------------------

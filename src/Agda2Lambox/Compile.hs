@@ -29,7 +29,7 @@ import Agda2Lambox.Compile.Inductive  ( compileInductive )
 import Agda2Lambox.Compile.TypeScheme ( compileTypeScheme )
 import Agda2Lambox.Compile.Type       ( compileTopLevelType )
 
-import LambdaBox ( emptyName, emptyDecl )
+import LambdaBox ( emptyGlobalDecl )
 import LambdaBox.Names
 import LambdaBox.Env (GlobalEnv(..), GlobalDecl(..), GlobalTermDecl(..), GlobalTypeDecl(..), ConstantBody(..))
 import LambdaBox.Term (Term(LBox))
@@ -40,7 +40,7 @@ import LambdaBox.Term (Term(LBox))
 compile :: [QName] -> CompileM (GlobalEnv Typed)
 compile qs = do
   items <- compileLoop compileDefinition qs
-  pure $ GlobalEnv $ map itemToEntry items ++ [(emptyName, emptyDecl t)]
+  pure $ GlobalEnv $ map itemToEntry items ++ [emptyGlobalDecl]
   where
     itemToEntry :: CompiledItem (Either (GlobalTermDecl Typed) (GlobalTypeDecl Typed))
                     -> GlobalDecl Typed
@@ -118,7 +118,6 @@ compileDefinition defn@Defn{..} = setCurrentRange defName do
         -- otherwise, compiling it as an axiom
         _ -> do
           reportSDoc "agda2lambox.compile" 5 $ "Compiling it to an axiom."
-            "Compiling it to an axiom."
           typ <- Some <$> compileTopLevelType defType
           pure $ Just . Left $ ConstantDecl $ ConstantBody typ Nothing
 

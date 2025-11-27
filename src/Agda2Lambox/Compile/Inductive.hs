@@ -138,7 +138,7 @@ actuallyConvertInductive defn = do
           RecordCon _ _ arity _ -> arity
 
         conTypeInfo <- do
-          conType <- liftTCM $ (`piApplyM` pvars) =<< defType =<< getConstInfo cname
+          conType <- liftTCM $ (`piApplyM` pvars) =<< defType <$> (getConstInfo cname)
           conTel  <- toList . theTel <$> telView conType
           compileArgs indPars conTel
 
