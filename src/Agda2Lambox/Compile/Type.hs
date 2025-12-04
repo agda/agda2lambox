@@ -28,6 +28,7 @@ import Agda.Compiler.Backend (HasConstInfo(getConstInfo), Definition(Defn), AddC
 import Agda.Utils (isDataOrRecDef, getInductiveParams, isArity, maybeUnfoldCopy)
 import Agda.TypeChecking.Substitute (absBody, TelV (theCore))
 import Agda.TypeChecking.Telescope (telView)
+import Agda.TypeChecking.Monad.Signature ( canonicalName )
 
 
 -- | The kind of variables that are locally bound
@@ -166,11 +167,17 @@ compileTypeTerm = \case
       ([],) . foldl' LBox.TApp (LBox.TInd ind)
         <$> compileElims (take (getInductiveParams def) es)
 
-    -- TODO: check if it is a type alias
-    --   (if it is, do more or less the same thing as above)
+    -- otherwise, it must have been compiled as a type scheme,
+    -- and therefore is kept with all arguments.
 
-    -- otherwise, we ignore it.
-    else pure ([], LBox.TAny)
+    -- TODO(flupe): check whether indeed the fallback is always compiled to a typescheme.
+    --              what about non-logical defs that are not arities or w/?
+    -- TODO(flupe): possibly merge the logic with the above for datatypes
+    else do
+      q <- liftTCM $ canonicalName q
+      let ts = qnameToKName q
+      ([],) . foldl' LBox.TApp (LBox.TConst ts)
+        <$> compileElims es
 
   Pi dom codom -> do
     let domType   = unDom dom
