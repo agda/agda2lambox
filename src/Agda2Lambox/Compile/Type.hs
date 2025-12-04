@@ -1,9 +1,10 @@
 {-# LANGUAGE LambdaCase, FlexibleInstances, MultiWayIf, NamedFieldPuns #-}
-module Agda2Lambox.Compile.Type
-  ( compileType
-  , compileTopLevelType
-  , compileArgs
-  ) where
+module Agda2Lambox.Compile.Type where
+--   ( compileType
+--   , compileTopLevelType
+--   , compileArgs
+--   , getTypeVarInfo
+--   ) where
 
 
 import Control.Category ((>>>))
@@ -56,6 +57,9 @@ initEnv tvs = TypeEnv
 
 runC :: Int -> C a -> CompileM a
 runC tvs m = runReaderT m (initEnv tvs)
+
+runCNoVars :: Int -> C a -> CompileM a
+runCNoVars tvs m = runReaderT m ((initEnv tvs) { insertVars = False })
 
 -- | Increment the number of locally-bound variables.
 --   Extend the context with the given type info.
@@ -114,12 +118,27 @@ compileElims = mapM \case
   Proj{}   -> genericError "type-level projection elim not supported."
   IApply{} -> genericError "type-level cubical path application not supported."
 
+getTypeVarInfo :: Dom Type -> TCM LBox.TypeVarInfo
+getTypeVarInfo typ = do
+  let theTyp = unDom typ
+  isLg <- isLogical theTyp
+  isAr <- isArity theTyp
+  let isSt = isJust $ isSort $ unEl theTyp
+  pure LBox.TypeVarInfo
+    { tvarName      = domToName typ
+    , tvarIsArity   = isAr
+    , tvarIsLogical = isLg
+    , tvarIsSort    = isSt
+    }
+
+
 compileTopLevelTypeC :: Type -> C ([LBox.Name], LBox.Type)
 compileTopLevelTypeC typ =
   ifM (liftTCM $ isLogical typ) (pure ([], LBox.TBox)) $
     compileTypeTerm (unEl typ)
 
--- NOTE(flupe): more or less the algorithm described in the paper.
+-- NOTE(flupe):
+--   More or less the algorithm described in the paper (E^T in Fig.2).
 compileTypeTerm :: Term -> C ([LBox.Name], LBox.Type)
 compileTypeTerm = \case
   Sort{}     -> pure ([], LBox.TBox)
@@ -160,13 +179,12 @@ compileTypeTerm = \case
     domIsLogical <- liftTCM $ isLogical dom
     domIsArity   <- liftTCM $ isArity domType
 
-    -- logical types and non-arities can never be lifted to type variables, we keep going
+    -- logical types and non-arities can never be lifted to type variables,
+    -- so we keep going
     if domIsLogical || not domIsArity then do
       domType' <- if domIsLogical then pure LBox.TBox
                                   else compileTypeC domType
-      (vars, codomType')
-        <- underBinder dom $ compileTopLevelTypeC codomType
-
+      (vars, codomType') <- underBinder dom $ compileTopLevelTypeC codomType
       pure (vars, LBox.TArr domType' codomType')
 
     else do

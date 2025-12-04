@@ -154,7 +154,7 @@ instance Pretty (GlobalDecl t) where
   pretty = \case
     ConstantDecl ConstantBody{..} ->
       hang "constant declaration:" 2 $ vcat
-        [ flip foldMap cstType \(tvs, typ) -> 
+        [ flip foldMap cstType \(tvs, typ) ->
             vcat [ "type variables:" <+> pretty tvs
                  ,  "type:" <+> pretty typ
                   ]
@@ -165,7 +165,13 @@ instance Pretty (GlobalDecl t) where
       hang "mutual inductive(s):" 2 $
         vsep $ map pretty indBodies
 
-    TypeAliasDecl _ -> "type alias:"
+    TypeAliasDecl decl ->
+      hang "type alias:" 2 $ case decl of
+        Nothing -> mempty
+        Just (vars, typ) -> vcat
+          [ "type variables:" <+> pretty vars
+          , "type:" <+> pretty typ
+          ]
 
 instance Pretty (GlobalEnv t) where
   pretty (GlobalEnv env) =
