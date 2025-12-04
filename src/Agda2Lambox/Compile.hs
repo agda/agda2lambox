@@ -55,6 +55,8 @@ compileDefinition target defn@Defn{..} = setCurrentRange defName do
 
   typ <- whenTyped target $ compileTopLevelType defType
 
+  -- TODO: check that we indeed don't compile defs marked with @0
+  --       especially record projections for erased fields
   -- logical definitions are immediately compiled to □
   ifM (liftTCM $ isLogical $ Arg defArgInfo defType)
      (pure $ Just $ ConstantDecl $ ConstantBody typ $ Just LBox) do
