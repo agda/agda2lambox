@@ -51,30 +51,24 @@ compileTypeScheme Defn{..} = do
   TelV tyargs _ <- telView defType
   let Function{..} = theDef
   case funClauses of
-    [cl] | onlyVarsPat (namedClausePats cl)
-         , isJust (clauseBody cl) -> do
+    [cl]
+      | onlyVarsPat (namedClausePats cl)
+      , isJust (clauseBody cl) -> do
+
+      -- We eta-expand the clause to maximal arity by inserting variable patterns
+      -- and applying the body to variables.
+      -- This also lifts all lambdas from the body to variable patterns.
       cl <- etaExpandClause cl
-      addContext (KeepNames $ clauseTel cl) do
-        -- retrieve the telescope of arguments that have not been introduced yet
-        let
-          -- number of parameters introduced in the clause
-          nvars = length $ namedClausePats cl
-          args = drop nvars $ telToList tyargs
 
-          -- we traverse explicit lambdas
-          underLams :: Term -> [Dom (ArgName, Type)] -> CompileM LBox.Type
-          underLams (Lam ai t) (dom:rest) =
-            underAbstraction (snd <$> dom) t \body ->
-              underLams body rest
-          underLams t args =
-            fmap snd $ runCNoVars nvars $ compileTypeTerm t
+      let
+        -- number of parameters introduced in the clause
+        nvars     = length $ namedClausePats cl
+        Just body = clauseBody cl
 
-          Just body = clauseBody cl
+      (_, res) <- addContext (KeepNames $ clauseTel cl) $ runCNoVars nvars $ compileTypeTerm body
+      tvarInfo <- compileTele tyargs
 
-        res      <- underLams body args
-        tvarInfo <- compileTele tyargs
-
-        pure $ TypeAliasDecl $ Just (tvarInfo, res)
+      pure $ TypeAliasDecl $ Just (tvarInfo, res)
 
     -- if there isn't exactly one clause, we give up
     -- compiling the type alias and return TAny

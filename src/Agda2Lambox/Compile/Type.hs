@@ -13,22 +13,23 @@ import Control.Monad ( mapM )
 import Data.List ( foldl' )
 import Data.Function ( (&) )
 import Data.Bifunctor ( second )
-import Data.Maybe ( isJust )
+import Data.Maybe ( isJust, mapMaybe )
 import Data.Function ( applyWhen )
 
 import Agda.Syntax.Common ( unArg, Arg (Arg) )
 import Agda.Syntax.Internal
+import Agda.TypeChecking.Substitute ( absBody, TelV (theCore), absApp )
+import Agda.TypeChecking.Telescope (telView)
 import Agda.TypeChecking.Monad.Base ( TCM, MonadTCM (liftTCM), Definition(..))
-import Agda.Utils.Monad (ifM)
+import Agda.TypeChecking.Monad.Signature ( canonicalName )
+import Agda.TypeChecking.Telescope ( mustBePi )
+import Agda.Utils.Monad ( ifM )
 
 import qualified LambdaBox as LBox
 import Agda2Lambox.Compile.Utils
 import Agda2Lambox.Compile.Monad
 import Agda.Compiler.Backend (HasConstInfo(getConstInfo), Definition(Defn), AddContext (addContext))
 import Agda.Utils (isDataOrRecDef, getInductiveParams, isArity, maybeUnfoldCopy)
-import Agda.TypeChecking.Substitute (absBody, TelV (theCore))
-import Agda.TypeChecking.Telescope (telView)
-import Agda.TypeChecking.Monad.Signature ( canonicalName )
 
 
 -- | The kind of variables that are locally bound
@@ -113,11 +114,15 @@ compileType tvars = runC tvars . compileTypeC
 compileTypeC :: Type -> C LBox.Type
 compileTypeC = local (\e -> e { insertVars = False }) . fmap snd . compileTopLevelTypeC
 
-compileElims :: Elims -> C [LBox.Type]
-compileElims = mapM \case
-  Apply a  -> fmap snd $ compileTypeTerm $ unArg a
-  Proj{}   -> genericError "type-level projection elim not supported."
-  IApply{} -> genericError "type-level cubical path application not supported."
+compileElims :: Type -> Args -> C [LBox.Type]
+compileElims _ [] = pure []
+compileElims ty (x:xs) = do
+  (a, b) <- mustBePi ty
+  rest   <- compileElims (absApp b $ unArg x) xs
+  first  <- ifM (liftTCM $ isLogical a)
+              (pure LBox.TBox)
+              (fmap snd $ compileTypeTerm $ unArg x)
+  pure (first : rest)
 
 getTypeVarInfo :: Dom Type -> TCM LBox.TypeVarInfo
 getTypeVarInfo typ = do
@@ -164,8 +169,9 @@ compileTypeTerm = \case
     else if isDataOrRecDef def then do
       lift $ requireDef q
       ind <- liftTCM $ toInductive q
+      let args = mapMaybe isApplyElim es
       ([],) . foldl' LBox.TApp (LBox.TInd ind)
-        <$> compileElims (take (getInductiveParams def) es)
+        <$> compileElims defType (take (getInductiveParams def) args)
 
     -- otherwise, it must have been compiled as a type scheme,
     -- and therefore is kept with all arguments.
@@ -175,9 +181,11 @@ compileTypeTerm = \case
     -- TODO(flupe): possibly merge the logic with the above for datatypes
     else do
       q <- liftTCM $ canonicalName q
+      lift $ requireDef q
       let ts = qnameToKName q
+      let args = mapMaybe isApplyElim es
       ([],) . foldl' LBox.TApp (LBox.TConst ts)
-        <$> compileElims es
+        <$> compileElims defType args
 
   Pi dom codom -> do
     let domType   = unDom dom
