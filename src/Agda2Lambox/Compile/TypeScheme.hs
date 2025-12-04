@@ -10,6 +10,7 @@ import Agda.TypeChecking.Pretty
 import Agda.Compiler.Backend
 import Agda.TypeChecking.Telescope ( telView )
 import Agda.TypeChecking.Substitute ( TelV(TelV), absBody )
+import Agda.TypeChecking.Functions ( etaExpandClause )
 
 import Agda2Lambox.Compile.Monad
 import Agda2Lambox.Compile.Target
@@ -51,7 +52,8 @@ compileTypeScheme Defn{..} = do
   let Function{..} = theDef
   case funClauses of
     [cl] | onlyVarsPat (namedClausePats cl)
-         , isJust (clauseBody cl) ->
+         , isJust (clauseBody cl) -> do
+      cl <- etaExpandClause cl
       addContext (KeepNames $ clauseTel cl) do
         -- retrieve the telescope of arguments that have not been introduced yet
         let
@@ -64,12 +66,7 @@ compileTypeScheme Defn{..} = do
           underLams (Lam ai t) (dom:rest) =
             underAbstraction (snd <$> dom) t \body ->
               underLams body rest
-          underLams t args = addMissingApps t args
-
-          -- we insert explicit applications
-          addMissingApps :: Term -> [Dom (ArgName, Type)] -> CompileM LBox.Type
-          -- TODO: add the missing applications
-          addMissingApps t _ = do
+          underLams t args =
             fmap snd $ runCNoVars nvars $ compileTypeTerm t
 
           Just body = clauseBody cl

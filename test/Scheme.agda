@@ -11,17 +11,23 @@ length : {A : Set} → List A → Nat
 length [] = 0
 length (_ ∷ xs) = suc (length xs)
 
+record Σ (A : Set) (B : A → Set) : Set where
+  constructor _,_
+  field
+    fst    : A
+    snd : B fst
+Σ-syntax : (A : Set) (B : A → Set) → Set
+Σ-syntax = Σ
 
+syntax Σ-syntax A (λ x → B) = [ x ∈ A ∣ B ]
 
-record Σ (A : Set) (@0 B : A → Set) : Set where
+-- NOTE: this doesn't compile properly?
+-- the snd projection is compiled while it shouldn't be?
+record Σ0 (A : Set) (@0 B : A → Set) : Set where
   constructor _,_
   field
     fst    : A
     @0 snd : B fst
-Σ-syntax : (A : Set) (@0 B : A → Set) → Set
-Σ-syntax = Σ
-
-syntax Σ-syntax A (λ x → B) = [ x ∈ A ∣ B ]
 
 -- expected: type scheme
 -- ­ vars: [a, b]
@@ -48,4 +54,4 @@ Vec A n = [ xs ∈ List A ∣ length xs ≡ n ]
 
 Bad : Bool → Set
 Bad false = Nat
-Bad true  = Bool 
+Bad true  = Bool
