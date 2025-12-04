@@ -21,7 +21,7 @@ import Data.List ( elemIndex, foldl' )
 import Data.Maybe ( fromMaybe, listToMaybe, isJust )
 
 import Unicode.Char.Identifiers
-import Agda.Compiler.Backend 
+import Agda.Compiler.Backend
 import Agda.Syntax.Internal
 import Agda.Syntax.Abstract.Name
 import Agda.Syntax.Common.Pretty ( prettyShow, Doc )
