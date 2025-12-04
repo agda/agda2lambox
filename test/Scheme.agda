@@ -1,4 +1,4 @@
-{-# OPTIONS --erasure #-}
+{-# OPTIONS --erasure --prop #-}
 -- compilation of λ□ type schemes
 module Scheme where
 
@@ -11,23 +11,26 @@ length : {A : Set} → List A → Nat
 length [] = 0
 length (_ ∷ xs) = suc (length xs)
 
-record Σ (A : Set) (B : A → Set) : Set where
+data Eq {A : Set} (x : A) : A -> Prop where
+  rfl : Eq x x
+
+record Σ (A : Set) (B : A → Prop) : Set where
   constructor _,_
   field
-    fst    : A
+    fst : A
     snd : B fst
-Σ-syntax : (A : Set) (B : A → Set) → Set
+Σ-syntax : (A : Set) (B : A → Prop) → Set
 Σ-syntax = Σ
 
 syntax Σ-syntax A (λ x → B) = [ x ∈ A ∣ B ]
 
 -- NOTE: this doesn't compile properly?
 -- the snd projection is compiled while it shouldn't be?
-record Σ0 (A : Set) (@0 B : A → Set) : Set where
-  constructor _,_
-  field
-    fst    : A
-    @0 snd : B fst
+-- record Σ0 (A : Set) (@0 B : A → Set) : Set where
+--   constructor _,_
+--   field
+--     fst    : A
+--     @0 snd : B fst
 
 -- expected: type scheme
 -- ­ vars: [a, b]
@@ -50,7 +53,7 @@ ListAlias' A = List A
 -- - vars: [a, n]
 -- - type: Σ (List a) □
 Vec : (A : Set) → Nat → Set
-Vec A n = [ xs ∈ List A ∣ length xs ≡ n ]
+Vec A n = [ xs ∈ List A ∣ Eq (length xs) n ]
 
 Bad : Bool → Set
 Bad false = Nat
