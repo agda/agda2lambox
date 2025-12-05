@@ -50,7 +50,7 @@ executable agda2lambox
                        filepath,
                        text,
                        mtl,
-		       unicode-data
+                       unicode-data
   default-language:    Haskell2010
   default-extensions:
     LambdaCase RecordWildCards PatternSynonyms TupleSections
@@ -60,3 +60,26 @@ executable agda2lambox
     FunctionalDependencies TypeSynonymInstances ConstraintKinds
     DoAndIfThenElse BlockArguments MultiWayIf
     ImportQualifiedPost
+
+test-suite agda2lambox-tests
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test
+  main-is:             Main.hs
+  build-depends:       base       >= 4.10  && < 4.22,
+                       tasty      >= 1.4   && < 1.6,
+                       tasty-hunit >= 0.10 && < 0.11,
+                       process    >= 1.6   && < 1.7,
+                       filepath   >= 1.4   && < 1.5,
+                       directory  >= 1.3   && < 1.4,
+                       text       >= 1.2   && < 2.2
+  build-tool-depends:  agda2lambox:agda2lambox
+  default-language:    Haskell2010
+  default-extensions:
+    LambdaCase RecordWildCards PatternSynonyms TupleSections
+    ViewPatterns PatternGuards
+    ScopedTypeVariables
+    TypeFamilies TypeOperators TypeApplications
+    FunctionalDependencies TypeSynonymInstances ConstraintKinds
+    DoAndIfThenElse BlockArguments MultiWayIf
+    ImportQualifiedPost
+
