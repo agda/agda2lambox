@@ -1,0 +1,3 @@
+name: agda2lambox-untyped
+include: .
+flags: --no-projection-like
