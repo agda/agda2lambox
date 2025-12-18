@@ -50,6 +50,7 @@ ctor :: Target t -> Text -> [Sexpable t] -> Exp
 ctor t n [] = SAtom (ANode n)
 ctor t n xs = SList () (SAtom (ANode n) : map (toSexp t) xs)
 
+instance ToSexp t Atom         where toSexp _   = SAtom
 instance ToSexp t (Sexp Atom)  where toSexp _ d = d
 instance ToSexp t Int          where toSexp _ s = SAtom (AInt s)
 instance ToSexp t Bool         where toSexp _ s = SAtom (ABool s)
@@ -88,6 +89,20 @@ instance ToSexp t Inductive where
 instance ToSexp t d => ToSexp t (Def d) where
   toSexp t Def{..} = ctor t "def" [S dName, S dBody, S dArgs]
 
+instance ToSexp t PrimValue where
+  toSexp t x = toSexp t (primTag x, primVal x)
+    where 
+      primTag = \case
+        PInt{}    -> ctor t "primInt" []
+        PFloat{}  -> ctor t "primFloat" []
+        PString{} -> ctor t "primString" []
+
+      primVal = \case
+        PInt   i  -> AString (show i)
+        PFloat f  -> AString (show f)
+        PString s -> AString s
+
+
 instance ToSexp t Term where
   toSexp t = \case
     LBox                -> ctor t "tBox"       []
@@ -99,6 +114,7 @@ instance ToSexp t Term where
     LConstruct ind i es -> ctor t "tConstruct" [S ind, S i, S es]
     LCase ind n u bs    -> ctor t "tCase"      [S (ind, n), S u, S bs]
     LFix mf i           -> ctor t "tFix"       [S mf, S i]
+    LPrim p             -> ctor t "tPrim"      [S p]
 
 instance ToSexp t Type where
   toSexp t = \case

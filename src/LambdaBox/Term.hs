@@ -2,46 +2,60 @@
 -- | Definition of λ□ terms.
 module LambdaBox.Term where
 
+import Data.Int (Int64)
 import Data.Bifunctor (first)
 import Agda.Syntax.Common.Pretty
 import LambdaBox.Names
 
 
--- | Definition component in a mutual fixpoint.
+-- | Definition component in a mutual fixpoint
 data Def t = Def
   { dName :: Name
   , dBody :: t
   , dArgs :: Int
   }
 
--- | Mutual components of a fixpoint.
+-- | Mutual components of a fixpoint
 type MFixpoint = [Def Term]
+
+-- | 
+data PrimValue
+  = PInt Int64
+      -- NOTE(flupe): ^ Should ensure they are restricted to Int63
+  | PFloat Int64
+  | PString String
 
 -- | λ□ terms
 data Term
-  = LBox          -- ^ Proofs and erased terms
-  | LRel Int      -- ^ Bound variable, with de Bruijn index
-  | LLambda Name Term  -- ^ Lambda abstraction
-  | LLetIn Name Term Term
-      -- ^ Let bindings.
-      --   Unused in the backend, since Agda itself no longer has let bindings
-      --   in the concrete syntac.
+  = LBox                             -- ^ Proofs and erased terms
+  | LRel Int                         -- ^ Bound variable, with de Bruijn index
+  | LLambda Name Term                -- ^ Lambda abstraction
+  | LLetIn Name Term Term            -- ^ Let bindings
   | LApp Term Term                   -- ^ Term application
-  | LConst KerName                   -- ^ Named constant.
-  | LConstruct Inductive Int [Term]  -- ^ Inductive constructor.
-  | LCase              -- ^ Pattern-matching case construct.
-      Inductive        -- ^ Inductive type we cae on.
+  | LConst KerName                   -- ^ Named constant
+  | LConstruct Inductive Int [Term]  -- ^ Inductive constructor
+  | LCase                            -- ^ Pattern-matching case construct
+      Inductive        -- ^ Inductive type we case on
       Int              -- ^ Number of parameters
       Term             -- ^ Discriminee
       [([Name], Term)] -- ^ Branches
-  | LFix        -- ^ Fixpoint combinator.
+  | LFix                             -- ^ Fixpoint combinator
       MFixpoint
-      Int       -- ^ Index of the fixpoint we keep.
+      Int       -- ^ Index of the fixpoint we keep
+  | LPrim PrimValue
+                -- ^ Primitive literal value
 
 
 instance Pretty t => Pretty (Def t) where
   -- prettyPrec _ (Def s _ _) = pretty s
   prettyPrec _ (Def _ t _) = pretty t
+
+
+instance Pretty PrimValue where
+  pretty (PInt i)    = text $ show i
+  pretty (PFloat f)  = text $ show f
+  pretty (PString f) = text $ show f
+
 
 instance Pretty Term where
   prettyPrec p v =
@@ -59,7 +73,6 @@ instance Pretty Term where
         in 
         mparens (p > 0) $
         hang ("λ" <+> sep (map pretty (n:ns)) <+> "→") 2 $ pretty t'
-        
 
       LLetIn n e t ->
         mparens (p > 0) $ sep
@@ -85,3 +98,6 @@ instance Pretty Term where
       LFix ds i -> -- FIXME: for mutual recursion
         mparens (p > 0) $
         hang "μ rec ->" 2 $ pretty $ ds !! i
+
+      LPrim p -> pretty p
+        

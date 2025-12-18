@@ -11,6 +11,7 @@ import Control.Monad.Trans
 import Data.List ( elemIndex, foldl', singleton )
 import Data.Maybe ( fromMaybe, listToMaybe )
 import Data.Foldable ( foldrM )
+import Data.Text qualified as Text ( unpack )
 
 import Agda.Compiler.Backend ( MonadTCState, HasOptions, canonicalName )
 import Agda.Compiler.Backend ( getConstInfo, theDef, pattern Datatype, dataMutual )
@@ -154,15 +155,19 @@ compileTermC = \case
 compileLit :: Literal -> C LBox.Term
 compileLit = \case
 
+  -- TODO(flupe):
+  --   optionally attempt compiling this to an Int63 Primitive
   LitNat i -> do
     qn <- liftTCM $ getBuiltinName_ builtinNat
     qz <- liftTCM $ getBuiltinName_ builtinZero
     qs <- liftTCM $ getBuiltinName_ builtinSuc
     lift do
       requireDef qn
-      iterate (toConApp qs . singleton =<<) 
-              (toConApp qz []) 
+      iterate (toConApp qs . singleton =<<)
+              (toConApp qz [])
         !! fromInteger i
+
+  LitString s -> pure $ LBox.LPrim $ LBox.PString $ Text.unpack s
 
   l -> genericError $ "unsupported literal: " <> prettyShow l
 
