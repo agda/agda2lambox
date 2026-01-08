@@ -17,7 +17,7 @@ import Agda.TypeChecking.Pretty
 import Agda.Utils.Monad ( ifM, ifNotM, orM )
 import Agda.Utils.SmallSet qualified as SmallSet
 
-import Agda.Utils ( hasPragma, isDataOrRecDef, treeless, isArity )
+import Agda.Utils ( isDataOrRecDef, isArity, getPragmaInfo )
 
 import Agda2Lambox.Compile.Monad
 import Agda2Lambox.Compile.Target
@@ -47,7 +47,13 @@ compile t qs = do
 
 compileDefinition :: Target t -> Definition -> CompileM (Maybe (GlobalDecl t))
 compileDefinition target defn@Defn{..} = setCurrentRange defName do
-  reportSDoc "agda2lambox.compile" 1 $ "Compiling definition: " <+> prettyTCM defName
+  reportSDoc "agda2lambox.compile" 1 $ "Compiling definition:" <+> prettyTCM defName
+
+  -- retrieve compile annotation written in COMPILE pragma
+  annotation <- liftTCM $ getPragmaInfo defName
+
+  reportSDoc "agda2lambox.compile" 1 $
+    "Definition is annotated as such:" <+> prettyTCM annotation
 
   -- we skip definitions introduced by module application
 
