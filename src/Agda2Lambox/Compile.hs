@@ -83,13 +83,18 @@ compileDefinition target defn@Defn{..} = setCurrentRange defName do
       reportSDoc "agda2lambox.compile" 5 $
         "Found primitive: " <> prettyTCM defName
 
-      getBuiltinThing (PrimitiveName primName) >>= \case
+      -- It's a primitive with no Agda definition
+      if null primClauses then do
+        -- we compile it as an axiom
+        reportSDoc "agda2lambox.compile" 5 "Compiling it to an axiom."
+        typ <- whenTyped target $ compileTopLevelType defType
+        pure $ Just $ ConstantDecl $ ConstantBody typ Nothing
 
-        -- if it's a primitive with an actual implementation
-        -- we try to convert it to a function, manually
-        Just (Prim (PrimFun{})) -> do
+      -- otherwise, we attempt compiling it as a regular Agda function
+      else do
           reportSDoc "agda2lambox.compile" 5 $
             "It's a builtin, converting it to a function."
+          reportSDoc "agda2lambox.compile" 5 $ prettyTCM primClauses
           let
             defn' = defn
               { theDef = Function
@@ -115,10 +120,5 @@ compileDefinition target defn@Defn{..} = setCurrentRange defName do
           -- and then we compile it as a regular function
           compileFunction target defn'
 
-        -- otherwise, compiling it as an axiom
-        _ -> do
-          reportSDoc "agda2lambox.compile" 5 $ "Compiling it to an axiom."
-          typ <- whenTyped target $ compileTopLevelType defType
-          pure $ Just $ ConstantDecl $ ConstantBody typ Nothing
 
     _ -> genericError $ "Cannot compile: " <> prettyShow defName
