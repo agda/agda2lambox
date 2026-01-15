@@ -88,7 +88,7 @@ instance ToCoq t Inductive where
            , ("inductive_ind",  pcoq t indInd)
            ]
 
-instance ToCoq t d => ToCoq t (Def d) where
+instance ToCoq t Def where
   pcoq t Def{..} =
     record [ ("dname", pcoq t dName)
            , ("dbody", pcoq t dBody)
