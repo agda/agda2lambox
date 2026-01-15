@@ -5,20 +5,21 @@ module LambdaBox.Term where
 import Data.Int (Int64)
 import Data.Bifunctor (first)
 import Agda.Syntax.Common.Pretty
+import Data.Kind (Type)
 
 import LambdaBox.Names
 import Agda2Lambox.Compile.Target
 
 
 -- | Definition component in a mutual fixpoint
-data Def = Def
+data Def t = Def
   { dName :: Name
-  , dBody :: Term
+  , dBody :: Term t
   , dArgs :: Int
   }
 
 -- | Mutual components of a fixpoint
-type MFixpoint = [Def]
+type MFixpoint t = [Def t]
 
 -- | 
 data PrimValue
@@ -28,27 +29,28 @@ data PrimValue
   | PString String
 
 -- | λ□ terms
-data Term
-  = LBox                             -- ^ Proofs and erased terms
-  | LRel Int                         -- ^ Bound variable, with de Bruijn index
-  | LLambda Name Term                -- ^ Lambda abstraction
-  | LLetIn Name Term Term            -- ^ Let bindings
-  | LApp Term Term                   -- ^ Term application
-  | LConst KerName                   -- ^ Named constant
-  | LConstruct Inductive Int [Term]  -- ^ Inductive constructor
-  | LCase                            -- ^ Pattern-matching case construct
-      Inductive        -- ^ Inductive type we case on
-      Int              -- ^ Number of parameters
-      Term             -- ^ Discriminee
-      [([Name], Term)] -- ^ Branches
-  | LFix                             -- ^ Fixpoint combinator
-      MFixpoint
-      Int       -- ^ Index of the fixpoint we keep
-  | LPrim PrimValue
-                -- ^ Primitive literal value
+data Term :: Typing -> Type where
+  LBox :: Term t -- ^ Proofs and erased terms
+  LRel :: Int -> Term t -- ^ Bound variable, with de Bruijn index
+  LLambda :: Name -> Term t -> Term t -- ^ Lambda abstraction
+  LLetIn :: Name -> Term t -> Term t -> Term t -- ^ Let bindings
+  LApp :: Term t -> Term t -> Term t -- ^ Term application
+  LConst :: KerName -> Term t -- ^ Named constant
+  LConstruct :: Inductive -> Int -> [Term t] -> Term t -- ^ Inductive constructor
+  LCase -- ^ Pattern-matching case construct
+    :: Inductive          -- ^ Inductive type we case on
+    -> Int                -- ^ Number of parameters
+    -> Term t             -- ^ Discriminee
+    -> [([Name], Term t)] -- ^ Branches
+    -> Term t
+  LFix  -- ^ Fixpoint combinator
+    :: MFixpoint t
+    -> Int -- ^ Index of the fixpoint we keep
+    -> Term t
+  LPrim :: PrimValue -> Term t -- ^ Primitive literal value
 
 
-instance Pretty Def where
+instance Pretty (Def t) where
   -- prettyPrec _ (Def s _ _) = pretty s
   prettyPrec _ (Def _ t _) = pretty t
 
@@ -59,7 +61,7 @@ instance Pretty PrimValue where
   pretty (PString f) = text $ show f
 
 
-instance Pretty Term where
+instance Pretty (Term t) where
   prettyPrec p v =
     case v of
       LBox   -> "□"
@@ -67,7 +69,7 @@ instance Pretty Term where
       LRel k -> "@" <> pretty k
 
       LLambda n t ->
-        let getLams :: Term -> ([Name], Term)
+        let getLams :: Term t -> ([Name], Term t)
             getLams (LLambda n t) = first (n:) $ getLams t
             getLams t = ([], t)
 

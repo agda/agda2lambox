@@ -40,7 +40,7 @@ isFunction _ = False
 
 
 -- | Convert a function body to a Lambdabox term.
-compileFunctionBody :: [QName] -> Definition -> CompileM LBox.Term
+compileFunctionBody :: [QName] -> Definition -> CompileM t (LBox.Term t)
 compileFunctionBody ms Defn{defName, theDef} = do
   Just t <- liftTCM $ treeless defName
 
@@ -59,9 +59,9 @@ shouldCompileFunction def@Defn{theDef} | Function{..} <- theDef
     && hasQuantityω def       -- non-erased
 
 -- | Convert a function definition to a λ□ declaration.
-compileFunction :: Target t -> Definition -> CompileM (Maybe (LBox.GlobalDecl t))
-compileFunction t defn | not (shouldCompileFunction defn) = pure Nothing
-compileFunction (t :: Target t) defn@Defn{defType} = do
+compileFunction :: forall t. Definition -> CompileM t (Maybe (LBox.GlobalDecl t))
+compileFunction defn | not (shouldCompileFunction defn) = pure Nothing
+compileFunction defn@Defn{defType} = do
   let fundef@Function{funMutual = Just mutuals} = theDef defn
 
   reportSDoc "agda2lambox.compile.function" 5 $
@@ -76,6 +76,8 @@ compileFunction (t :: Target t) defn@Defn{defType} = do
   -- (so no with-generated functions, etc...)
   let mdefs  = filter shouldCompileFunction defs
   let mnames = map defName mdefs
+
+  t <- getTarget
 
   -- (conditionally) compile type of function
   typ <- whenTyped t $ case isRecordProjection fundef of
@@ -94,7 +96,7 @@ compileFunction (t :: Target t) defn@Defn{defType} = do
     --                they should be eta-expanded somehow,
     --                OR treated like projections
 
-  let builder :: LBox.Term -> Maybe (LBox.GlobalDecl t)
+  let builder :: LBox.Term t -> Maybe (LBox.GlobalDecl t)
       builder = Just . ConstantDecl . ConstantBody typ . Just
 
   -- if the function is not recursive, just compile the body

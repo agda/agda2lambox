@@ -38,14 +38,14 @@ onlyVarsPat =
       VarP{} -> True
       _      -> False
 
-compileTele :: Tele (Dom Type) -> CompileM [TypeVarInfo]
+compileTele :: Tele (Dom Type) -> CompileM Typed [TypeVarInfo]
 compileTele EmptyTel = pure []
 compileTele (ExtendTel t tel) = do
   tvar <- liftTCM $ getTypeVarInfo t
   rest <- addContext t $ compileTele (absBody tel)
   pure $ tvar : rest
 
-compileTypeScheme :: Definition -> CompileM (GlobalDecl Typed)
+compileTypeScheme :: Definition -> CompileM Typed (GlobalDecl Typed)
 compileTypeScheme Defn{..} = do
   reportSDoc "agda2lambox.compile.typescheme" 5 $ "Compiling type scheme:" <+> prettyTCM defName
   TelV tyargs _ <- telView defType

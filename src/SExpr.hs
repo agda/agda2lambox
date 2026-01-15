@@ -86,7 +86,7 @@ instance ToSexp t KerName where
 instance ToSexp t Inductive where
   toSexp t Inductive{..} = ctor t "inductive" [S indMInd, S indInd]
 
-instance ToSexp t Def where
+instance ToSexp t (Def t) where
   toSexp t Def{..} = ctor t "def" [S dName, S dBody, S dArgs]
 
 instance ToSexp t PrimValue where
@@ -103,7 +103,7 @@ instance ToSexp t PrimValue where
         PString s -> AString s
 
 
-instance ToSexp t Term where
+instance ToSexp t (Term t) where
   toSexp t = \case
     LBox                -> ctor t "tBox"       []
     LRel k              -> ctor t "tRel"       [S k]

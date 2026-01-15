@@ -36,7 +36,7 @@ import LambdaBox.Term (Term(LBox))
 
 
 -- | Compile the given names into to a λ□ environment.
-compile :: Target t -> [QName] -> CompileM (GlobalEnv t)
+compile :: Target t -> [QName] -> CompileM t (GlobalEnv t)
 compile t qs = do
   items <- compileLoop (compileDefinition t) qs
   pure $ GlobalEnv $ map itemToEntry items ++ [(emptyName, emptyDecl t)]
@@ -45,7 +45,7 @@ compile t qs = do
     itemToEntry CompiledItem{..} = (qnameToKName itemName, itemValue)
 
 
-compileDefinition :: Target t -> Definition -> CompileM (Maybe (GlobalDecl t))
+compileDefinition :: Target t -> Definition -> CompileM t (Maybe (GlobalDecl t))
 compileDefinition target defn@Defn{..} = setCurrentRange defName do
   reportSDoc "agda2lambox.compile" 1 $ "Compiling definition: " <+> prettyTCM defName
 
@@ -72,14 +72,14 @@ compileDefinition target defn@Defn{..} = setCurrentRange defName do
     Constructor{conData} -> Nothing <$ requireDef conData
 
     Function{} -> do
-      ifNotM (liftTCM $ isArity defType) (compileFunction target defn) do
+      ifNotM (liftTCM $ isArity defType) (compileFunction defn) do
         -- it's a type scheme
         case target of
           ToUntyped -> pure Nothing
           -- we only compile it with --typed
           ToTyped   -> Just <$> compileTypeScheme defn
 
-    d | isDataOrRecDef d -> compileInductive target defn
+    d | isDataOrRecDef d -> compileInductive defn
 
     Primitive{..} -> do
       reportSDoc "agda2lambox.compile" 5 $
@@ -120,7 +120,6 @@ compileDefinition target defn@Defn{..} = setCurrentRange defName do
           liftTCM $ modifyGlobalDefinition defName $ const defn'
 
           -- and then we compile it as a regular function
-          compileFunction target defn'
-
+          compileFunction defn'
 
     _ -> genericError $ "Cannot compile: " <> prettyShow defName

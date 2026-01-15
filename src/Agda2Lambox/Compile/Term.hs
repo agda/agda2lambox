@@ -31,6 +31,7 @@ import LambdaBox ( Term(..), emptyName )
 import LambdaBox qualified as LBox
 import Agda2Lambox.Compile.Utils
 import Agda2Lambox.Compile.Monad
+import Agda2Lambox.Compile.Target
 
 
 -- * Term compilation monad
@@ -53,23 +54,23 @@ initEnv = TermEnv
   }
 
 -- | Compilation monad.
-type C a = ReaderT TermEnv CompileM a
+type C t a = ReaderT TermEnv (CompileM t) a
 
 -- | Run a compilation unit in @TCM@, in the initial environment.
-runC :: C a -> CompileM a
+runC :: C t a -> CompileM t a
 runC m = runReaderT m initEnv
 
 -- | Increase the number of locally-bound variables.
-underBinders :: Int -> C a -> C a
+underBinders :: Int -> C t a -> C t a
 underBinders n = local \e -> e { boundVars = boundVars e + n }
 
 -- | Increment the number of locally-bound variables.
-underBinder :: C a -> C a
+underBinder :: C t a -> C t a
 underBinder = underBinders 1
 {-# INLINE underBinder #-}
 
 -- | Set local mutual fixpoints.
-withMutuals :: [QName] -> C a -> C a
+withMutuals :: [QName] -> C t a -> C t a
 withMutuals ms = local \e -> e { mutuals = reverse ms }
 
 -- * Term conversion
@@ -79,11 +80,11 @@ compileTerm
   :: [QName]
      -- ^ Local fixpoints.
   -> TTerm
-  -> CompileM LBox.Term
+  -> CompileM t (LBox.Term t)
 compileTerm ms = runC . withMutuals ms . compileTermC
 
 -- | Convert a treeless term to its λ□ equivalent.
-compileTermC :: TTerm -> C LBox.Term
+compileTermC :: TTerm -> C t (LBox.Term t)
 compileTermC = \case
 
   TVar  n -> do
@@ -152,7 +153,7 @@ compileTermC = \case
 
   TCoerce tt  -> genericError "Coerces not supported."
 
-compileLit :: Literal -> C LBox.Term
+compileLit :: Literal -> C t (LBox.Term t)
 compileLit = \case
 
   -- TODO(flupe):
@@ -172,7 +173,7 @@ compileLit = \case
   l -> genericError $ "unsupported literal: " <> prettyShow l
 
 
-compileCaseType :: CaseType -> C LBox.Inductive
+compileCaseType :: CaseType -> C t LBox.Inductive
 compileCaseType = \case
   CTData qn -> do
     qn <- liftTCM $ canonicalName qn
@@ -196,7 +197,7 @@ compileCaseType = \case
 --   perhaps there's already a treeless translation to prevent this
 --   to inverstigate...
 
-compileAlt :: TAlt -> C ([LBox.Name], LBox.Term)
+compileAlt :: TAlt -> C t ([LBox.Name], LBox.Term t)
 compileAlt = \case
   TACon{..}   -> let names = take aArity $ repeat LBox.Anon
                  in (names,) <$> underBinders aArity (compileTermC aBody)

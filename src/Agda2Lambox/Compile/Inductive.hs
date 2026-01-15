@@ -35,8 +35,8 @@ import Agda2Lambox.Compile.Type
 import LambdaBox qualified as LBox
 
 -- | Toplevel conversion from a datatype/record definition to a Lambdabox declaration.
-compileInductive :: Target t -> Definition -> CompileM (Maybe (LBox.GlobalDecl t))
-compileInductive t defn@Defn{defName} = do
+compileInductive :: Definition -> CompileM t (Maybe (LBox.GlobalDecl t))
+compileInductive defn@Defn{defName} = do
   mutuals <- liftTCM $ dataOrRecDefMutuals defn
 
   reportSDoc "agda2lambox.compile.inductive" 5 $
@@ -70,7 +70,7 @@ compileInductive t defn@Defn{defName} = do
     unless (all (isDataOrRecDef . theDef) defs) $
       genericError "Mutually-defined datatypes/records *and* functions not supported."
 
-    bodies <- forM defs $ actuallyConvertInductive t
+    bodies <- forM defs actuallyConvertInductive
 
     return $ Just $ LBox.InductiveDecl $ LBox.MutualInductive
       { indFinite = LBox.Finite -- TODO(flupe)
@@ -106,8 +106,8 @@ getBundle defn@Defn{defName, defType, theDef} =
         }
 
 
-actuallyConvertInductive :: ∀ t. Target t -> Definition -> CompileM (LBox.OneInductiveBody t)
-actuallyConvertInductive t defn = do
+actuallyConvertInductive :: Definition -> CompileM t (LBox.OneInductiveBody t)
+actuallyConvertInductive defn = do
   let Bundle{..} = getBundle defn
 
   params <- theTel <$> telViewUpTo indPars indType
@@ -116,6 +116,8 @@ actuallyConvertInductive t defn = do
     "Inductive parameters:" <+> prettyTCM params
 
   let pvars :: [Arg Term] = teleArgs params
+
+  t <- getTarget
 
   addContext params do
 

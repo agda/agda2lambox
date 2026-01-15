@@ -78,7 +78,7 @@ toInductive q = do
 
 
 -- | Compile a constructor application to λ□.
-toConApp :: QName -> [LBox.Term] -> CompileM LBox.Term
+toConApp :: QName -> [LBox.Term t] -> CompileM t (LBox.Term t)
 toConApp qn es = do
   dt   <- getConstructorData qn
   ctrs <- liftTCM $ getConstructors dt

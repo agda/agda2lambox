@@ -1,4 +1,5 @@
 {-# LANGUAGE DerivingVia, GeneralizedNewtypeDeriving, OverloadedStrings, DeriveFunctor, DeriveTraversable, NamedFieldPuns #-}
+{-# LANGUAGE Rank2Types #-}
 -- | Compilation monad.
 module Agda2Lambox.Compile.Monad
   ( CompileM
@@ -12,6 +13,7 @@ module Agda2Lambox.Compile.Monad
   , CompiledItem(..)
   , ask
   , asks
+  , getTarget
   ) where
 
 import Control.Monad ( unless )
@@ -35,13 +37,16 @@ import Agda.Utils.Monad ( unlessM )
 import Agda.TypeChecking.Pretty
 import Control.Monad.Error.Class (MonadError)
 
+import Agda2Lambox.Compile.Target
+
 import Data.Foldable (traverse_)
 
 -- | Compilation Environment
-data CompileEnv = CompileEnv
+data CompileEnv t = CompileEnv
   { noBlocks :: Bool
       -- ^ When set to 'True', constructors take no arguments,
       -- and regular function application is used instead.
+  , target :: Target t
   }
 
 -- | Backend compilation state.
@@ -63,15 +68,19 @@ initState = CompileState
   }
 
 -- | Backend compilation monad.
-newtype CompileM a = Compile (ReaderT CompileEnv (StateT CompileState TCM) a)
+newtype CompileM t a = Compile (ReaderT (CompileEnv t) (StateT CompileState TCM) a)
   deriving newtype (Functor, Applicative, Monad)
   deriving newtype (MonadIO, MonadFail, MonadDebug, ReadTCState, MonadTrace)
   deriving newtype (MonadError TCErr, MonadTCEnv, MonadTCState, HasOptions, MonadTCM)
   deriving newtype (MonadAddContext, MonadReduce, HasConstInfo, HasBuiltins, PureTCM)
-  deriving newtype (MonadReader CompileEnv)
+  deriving newtype (MonadReader (CompileEnv t))
+
+-- | Retrieve current compile target
+getTarget :: CompileM t (Target t)
+getTarget = reader target
 
 -- | Require a definition to be compiled.
-requireDef :: QName -> CompileM ()
+requireDef :: QName -> forall t. CompileM t ()
 requireDef q = Compile $ do
   q <- liftTCM $ canonicalName q
 
@@ -92,7 +101,7 @@ requireDef q = Compile $ do
       }
 
 -- | Get the next qname to be compiled, if there is one.
-nextUnit :: CompileM (Maybe QName)
+nextUnit :: CompileM t (Maybe QName)
 nextUnit = Compile $
   gets compileStack >>= \case
     []   -> pure Nothing
@@ -100,7 +109,7 @@ nextUnit = Compile $
 
 
 -- | Record the required definitions of a compilation unit.
-trackDeps :: CompileM a -> CompileM (a, [QName])
+trackDeps :: CompileM t a -> CompileM t (a, [QName])
 trackDeps (Compile c) = Compile do
   modify \s -> s {requiredDefs = Set.empty}
   x <- c
@@ -108,22 +117,22 @@ trackDeps (Compile c) = Compile do
   pure (x, Set.toList deps)
 
 -- | Run a compile action in 'TCM'.
-runCompile :: CompileEnv -> CompileM a -> TCM a
+runCompile :: CompileEnv t -> CompileM t a -> TCM a
 runCompile env (Compile c) = evalStateT (runReaderT c env) initState
 
 -- | Run the processing function as long as there are names to be compiled.
 --  Returns a list of compiled items, (topologically) sorted by dependency order.
 --  This means that whenever @A@ depends on @B@, @A@ will appear before @B@ in the list.
 compileLoop
-  :: forall a. (Definition -> CompileM (Maybe a))
+  :: forall t a. (Definition -> CompileM t (Maybe a))
              -- ^ The compilation function
   -> [QName] -- ^ Initial names to compile
-  -> CompileM [CompiledItem a]
+  -> CompileM t [CompiledItem a]
 compileLoop step names = do
   traverse_ requireDef names
   topoSort <$> loop
   where
-  loop :: CompileM [CompiledItem (Maybe a)]
+  loop :: CompileM t [CompiledItem (Maybe a)]
   loop@(Compile unloop) = nextUnit >>= \case
     Nothing -> pure []
     Just q  -> do

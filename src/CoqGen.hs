@@ -88,14 +88,14 @@ instance ToCoq t Inductive where
            , ("inductive_ind",  pcoq t indInd)
            ]
 
-instance ToCoq t Def where
+instance ToCoq t (Def t) where
   pcoq t Def{..} =
     record [ ("dname", pcoq t dName)
            , ("dbody", pcoq t dBody)
            , ("rarg",  pcoq t dArgs)
            ]
 
-instance ToCoq t Term where
+instance ToCoq t (Term t) where
   pcoqP p t v = case v of
     LBox                -> ctorP p "tBox"       []
     LRel k              -> ctorP p "tRel"       [pretty k]
@@ -209,7 +209,7 @@ instance ToCoq t (LBoxModule t) where
     , vsep $ flip map (zip [1..] $ reverse $ NEL.toList $ getUntyped lboxMain) \(i :: Int, kn) -> 
         let progname = "prog" <> pretty i in vsep
         [ hang ("Definition " <> progname <> " : program :=") 2 $
-            upcoq (text "env" :: Doc, LConst kn) 
+            upcoq (text "env" :: Doc, LConst kn :: Term Untyped)
             <> "."
         , "Compute eval_program " <> progname <> "."
         ]

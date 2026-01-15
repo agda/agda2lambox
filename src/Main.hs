@@ -132,7 +132,7 @@ writeModule Options{..} menv IsMain m defs = do
   -- get defs annotated with a COMPILE pragma
   -- throw an error if none, when targetting untyped lbox
   mains    <- getMain optTarget programs
-  env      <- runCompile (CompileEnv optNoBlocks) $ compile optTarget defs
+  env      <- runCompile (CompileEnv optNoBlocks optTarget) $ compile optTarget defs
 
   liftIO $ createDirectoryIfMissing True outDir
 

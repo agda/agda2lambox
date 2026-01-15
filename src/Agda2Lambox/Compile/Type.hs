@@ -1,4 +1,4 @@
-{-# LANGUAGE LambdaCase, FlexibleInstances, MultiWayIf, NamedFieldPuns #-}
+{-# LANGUAGE LambdaCase, FlexibleInstances, MultiWayIf, NamedFieldPuns, DataKinds, Rank2Types #-}
 module Agda2Lambox.Compile.Type where
 --   ( compileType
 --   , compileTopLevelType
@@ -28,6 +28,7 @@ import Agda.Utils.Monad ( ifM )
 import qualified LambdaBox as LBox
 import Agda2Lambox.Compile.Utils
 import Agda2Lambox.Compile.Monad
+import Agda2Lambox.Compile.Target
 import Agda.Compiler.Backend (HasConstInfo(getConstInfo), Definition(Defn), AddContext (addContext))
 import Agda.Utils (isDataOrRecDef, getInductiveParams, isArity, maybeUnfoldCopy)
 
@@ -57,16 +58,16 @@ initEnv tvs = TypeEnv
   , insertVars = True
   }
 
-runC :: Int -> C a -> CompileM a
+runC :: Int -> C t a -> CompileM t a
 runC tvs m = runReaderT m (initEnv tvs)
 
-runCNoVars :: Int -> C a -> CompileM a
+runCNoVars :: Int -> C t a -> CompileM t a
 runCNoVars tvs m = runReaderT m ((initEnv tvs) { insertVars = False })
 
 -- | Increment the number of locally-bound variables.
 --   Extend the context with the given type info.
 --   The new variable is always considered 'Other'.
-underBinder :: Dom Type -> C a -> C a
+underBinder :: Dom Type -> C t a -> C t a
 underBinder v = addContext v . local \e -> e
   { boundVars  = boundVars e + 1
   , boundTypes = Other : boundTypes e
@@ -74,7 +75,7 @@ underBinder v = addContext v . local \e -> e
 
 -- | Increment the number of locally-bound variables.
 --   Tries to insert a new type variable, if it's allowed.
-underTypeVar :: Dom Type -> C a -> C a
+underTypeVar :: Dom Type -> C t a -> C t a
 underTypeVar b x = do
   shouldInsert <- asks insertVars
   if shouldInsert then
@@ -86,14 +87,13 @@ underTypeVar b x = do
   else underBinder b x
 
 -- | Type compilation monad.
-type C a = ReaderT TypeEnv CompileM a
-
+type C t a = ReaderT TypeEnv (CompileM t) a
 
 -- | Compile constructor arguments' types, given a set number of type variables.
-compileArgs :: Int -> [Dom Type] -> CompileM [(LBox.Name, LBox.Type)]
+compileArgs :: forall t. Int -> [Dom Type] -> CompileM t [(LBox.Name, LBox.Type)]
 compileArgs tvars = runC tvars . compileArgsC
   where
-  compileArgsC :: [Dom Type] -> C [(LBox.Name, LBox.Type)]
+  compileArgsC :: [Dom Type] -> C t [(LBox.Name, LBox.Type)]
   compileArgsC [] = pure []
   compileArgsC (dom:args) = do
     let name = domToName dom
@@ -103,18 +103,18 @@ compileArgs tvars = runC tvars . compileArgsC
 
 -- | Compile a top-level type to λ□, lifting out type variables.
 -- See [Extracting functional programs from Coq, in Coq](https://arxiv.org/pdf/2108.02995).
-compileTopLevelType :: Type -> CompileM ([LBox.Name], LBox.Type)
+compileTopLevelType :: Type -> CompileM t ([LBox.Name], LBox.Type)
 compileTopLevelType = runC 0 . compileTopLevelTypeC
 
 -- | Compile a type, given a number of type variables in scope.
 --   Will not introduce more type variables.
-compileType :: Int -> Type -> CompileM LBox.Type
+compileType :: Int -> Type -> CompileM t LBox.Type
 compileType tvars = runC tvars . compileTypeC
 
-compileTypeC :: Type -> C LBox.Type
+compileTypeC :: Type -> C t LBox.Type
 compileTypeC = local (\e -> e { insertVars = False }) . fmap snd . compileTopLevelTypeC
 
-compileElims :: Type -> Args -> C [LBox.Type]
+compileElims :: Type -> Args -> C t [LBox.Type]
 compileElims _ [] = pure []
 compileElims ty (x:xs) = do
   (a, b) <- mustBePi ty
@@ -138,14 +138,14 @@ getTypeVarInfo typ = do
     }
 
 
-compileTopLevelTypeC :: Type -> C ([LBox.Name], LBox.Type)
+compileTopLevelTypeC :: Type -> C t ([LBox.Name], LBox.Type)
 compileTopLevelTypeC typ =
   ifM (liftTCM $ isLogical typ) (pure ([], LBox.TBox)) $
     compileTypeTerm (unEl typ)
 
 -- NOTE(flupe):
 --   More or less the algorithm described in the paper (E^T in Fig.2).
-compileTypeTerm :: Term -> C ([LBox.Name], LBox.Type)
+compileTypeTerm :: Term -> C t ([LBox.Name], LBox.Type)
 compileTypeTerm = \case
   Sort{}     -> pure ([], LBox.TBox)
   Level{}    -> pure ([], LBox.TBox)
