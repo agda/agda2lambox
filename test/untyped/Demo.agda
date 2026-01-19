@@ -4,7 +4,6 @@ data Bool : Set where
 data Nat : Set where
   zero : Nat
   suc  : Nat → Nat
-{-# BUILTIN NATURAL Nat #-}
 
 data List (A : Set) : Set where
   empty : List A

@@ -1,4 +1,3 @@
-{-# OPTIONS --erasure --prop #-}
 -- compilation of λ□ type schemes
 module Scheme where
 

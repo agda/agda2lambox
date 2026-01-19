@@ -5,8 +5,10 @@ on:
   push:
     paths:
       - 'src/**'
+      - 'test/**'
       - 'agda2lambox.cabal'
       - 'cabal.project'
+      - 'Makefile'
     branches: [master]
   workflow_dispatch:
 
@@ -22,40 +24,54 @@ jobs:
         ghc: [9.10.1]
 
     steps:
-      - uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
-      - name: Set up GHC ${{ matrix.ghc }}
-        uses: haskell-actions/setup@v2
-        id: setup
-        with:
-          ghc-version: ${{ matrix.ghc }}
-          cabal-version: ${{ matrix.cabal }}
+    - name: Set up GHC ${{ matrix.ghc }}
+      uses: haskell-actions/setup@v2
+      id: setup
+      with:
+        ghc-version: ${{ matrix.ghc }}
+        cabal-version: ${{ matrix.cabal }}
 
-      - name: Configure the build
-        run: |
-          cabal configure --disable-documentation
-          cabal build all --dry-run
+    - name: Configure the build
+      run: |
+        cabal configure --disable-documentation
+        cabal build all --dry-run
 
-      - name: Restore cached dependencies
-        uses: actions/cache/restore@v4
-        id: cache
-        env:
-          key: ${{ runner.os }}-${{ matrix.ghc }}-${{ matrix.cabal }}
-        with:
-          path: ${{ steps.setup.outputs.cabal-store }}
-          key:  ${{ env.key }}-plan-${{ hashFiles('**/plan.json') }}
-          restore-keys: ${{ env.key }}-
+    - name: Restore cached dependencies
+      uses: actions/cache/restore@v4
+      id: cache
+      env:
+        key: ${{ runner.os }}-${{ matrix.ghc }}-${{ matrix.cabal }}
+      with:
+        path: ${{ steps.setup.outputs.cabal-store }}
+        key:  ${{ env.key }}-plan-${{ hashFiles('**/plan.json') }}
+        restore-keys: ${{ env.key }}-
 
-      - name: Install dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: cabal build all --only-dependencies
+    - name: Install dependencies
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: cabal build all --only-dependencies
 
-      - name: Save cached dependencies
-        uses: actions/cache/save@v4
-        if: steps.cache.outputs.cache-hit != 'true'
-        with:
-          path: ${{ steps.setup.outputs.cabal-store }}
-          key:  ${{ steps.cache.outputs.cache-primary-key }}
+    - name: Save cached dependencies
+      uses: actions/cache/save@v4
+      if: steps.cache.outputs.cache-hit != 'true'
+      with:
+        path: ${{ steps.setup.outputs.cabal-store }}
+        key:  ${{ steps.cache.outputs.cache-primary-key }}
 
-      - name: Build
-        run: cabal build
+    - name: Build
+      run: make build
+
+    - name: Test
+      run: make test
+
+    - name: Generate HTML
+      run: |
+        sudo apt-get install -y pandoc zsh
+        make html
+
+    - name: Deploy HTML
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: test/html
