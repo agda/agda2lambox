@@ -24,17 +24,24 @@ main = do
 
   -- Save the original directory and change to test/
   originalDir <- getCurrentDirectory
-  setCurrentDirectory "test"
+  let testDir = originalDir </> "test"
+  setCurrentDirectory testDir
 
   -- Create a temporary directory for build outputs
-  tempDir <- getTemporaryDirectory
-  let buildDir = tempDir </> "agda2lambox-test-build"
+  let buildDir = testDir </> "dist"
   createDirectoryIfMissing True buildDir
 
   -- Discover files: first untyped, then typed
   untypedFiles <- listAgdaBasenames "untyped"
   typedFiles   <- listAgdaBasenames "typed"
+  let allFiles = untypedFiles <> typedFiles
 
+  -- Create index file
+  let indexFile = testDir </> "Tests.agda"
+  let indexContents = unlines $ map (("open import " <>) . dropExtension) allFiles
+  writeFile indexFile indexContents
+
+  -- Create tests
   let untypedTests = map (mkAgdaTest lboxPath buildDir "untyped" False) untypedFiles
       typedTests   = map (mkAgdaTest lboxPath buildDir "typed" True) typedFiles
 
@@ -42,6 +49,7 @@ main = do
     [ testGroup "untyped" untypedTests
     , testGroup "typed" typedTests
     ]
+
 
 -- List basenames of .agda files in a subdirectory (returns [] if dir missing)
 listAgdaBasenames :: FilePath -> IO [FilePath]
@@ -85,7 +93,7 @@ mkAgdaTest mLboxPath buildDir subdir isTyped baseFile = testCase ("Test: " ++ (s
       case mLboxPath of
         Nothing -> return ()  -- lbox not available, skip validation
         Just lboxPath -> do
-          let validateArgs = ["validate"] ++ ["--typed=true" | isTyped] ++ [astTarget]
+          let validateArgs = ["validate"] ++ ["--typed=((MPfile (\"rust\")) \"testIdd\"))" | isTyped] ++ [astTarget]
           (validateExitCode, validateStdout, validateStderr) <-
             readProcessWithExitCode lboxPath validateArgs ""
 

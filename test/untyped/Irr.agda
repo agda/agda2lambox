@@ -1,4 +1,3 @@
-{-# OPTIONS --erasure #-}
 module Irr where
 
 open import Agda.Builtin.Nat
