@@ -70,8 +70,11 @@ jobs:
         sudo apt-get install -y pandoc zsh
         make html
 
-    - name: Deploy HTML
-      uses: peaceiris/actions-gh-pages@v3
+    - name: Deploy HTML website
+      # if: github.ref == 'refs/heads/master'
+      uses: ad-m/github-push-action@v0.6.0
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: test/html
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          force: true
+          directory: test/html
