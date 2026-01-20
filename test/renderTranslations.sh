@@ -10,18 +10,16 @@ echo "Rendering translations..."
 
 for f in $BUILD_DIR/**/**; do
 
-  echo " *** file: $f ***"
+  echo " * $f"
   ext=${f##*.}
   fn=${${f#"$BUILD_DIR"/}%."$ext"}
 
   mdFn="$f".md
-  # echo " Generating $mdFn"
   echo "\`\`\`" > $mdFn
   cat $f >> $mdFn
   echo "\`\`\`" >> $mdFn
 
   targetHtml="$f".html
-  # echo " Generating $targetHtml"
   pandoc --quiet -i "$mdFn" -o "$targetHtml" -s --highlight-style=tango
 done
 
@@ -40,9 +38,7 @@ for f in $BUILD_DIR/**/**.txt; do
   [ ! -f $sourceHtml ] && \
     echo " No corresponding HTML for $f (should be at $sourceHtml)" && \
     exit 1
-  echo " $f ~ $sourceHtml"
-
-  # echo " Modifying $sourceHtml"
+  echo " * $sourceHtml"
   sed -i "s%class=\"Agda\"%class=\"split left Agda\"%g" $sourceHtml
   newHtml="\
 <div class=\"split right\">\
