@@ -81,7 +81,7 @@ defaultOptions  = Options
 type ModuleEnv = ()
 type ModuleRes = ()
 
--- | The adga2lambox backend.
+-- | The agda2lambox backend.
 agda2lambox :: Backend
 agda2lambox = Backend backend
   where
