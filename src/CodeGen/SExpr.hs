@@ -1,7 +1,7 @@
 {-# LANGUAGE FlexibleInstances, FlexibleContexts, OverloadedStrings #-}
 {-# LANGUAGE DataKinds, MonadComprehensions, GADTs #-}
 -- | Converting the LambdaBox AST to s-expressions
-module SExpr (ToSexp, prettySexp) where
+module CodeGen.SExpr (ToSexp, prettySexp) where
 
 import Data.Bifunctor(bimap)
 import Data.List(intercalate)
