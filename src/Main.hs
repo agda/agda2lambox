@@ -46,35 +46,43 @@ data Output = RocqOutput | AstOutput
 
 -- | Backend options.
 data Options = forall t. Options
-  { optOutDir   :: Maybe FilePath
-  , optTarget   :: Target t
-  , optOutput   :: Output
-  , optNoBlocks :: Bool
+  { optOutDir    :: Maybe FilePath
+  , optTarget    :: Target t
+  , optOutput    :: Output
+  , optNoBlocks  :: Bool
+  , optTypecheck :: Bool
   }
 
 instance NFData Options where
-  rnf (Options m t o nb) = rnf m `seq` rnf t `seq` rnf o `seq` rnf nb
+  rnf (Options m t o nb tc) = rnf m `seq` rnf t `seq` rnf o `seq` rnf nb `seq` rnf tc
 
 -- | Setter for output directory option.
 outdirOpt :: Monad m => FilePath -> Options -> m Options
 outdirOpt dir opts = return opts { optOutDir = Just dir }
 
+-- | Setter for typed target option.
 typedOpt :: Monad m => Options -> m Options
 typedOpt opts = return opts { optTarget = ToTyped }
 
+-- | Setter for Rocq code generation.
 rocqOpt :: Monad m => Options -> m Options
 rocqOpt opts = return opts { optOutput = RocqOutput }
 
+-- | Setter for the no-blocks transform.
 noBlocksOpt :: Monad m => Options -> m Options
 noBlocksOpt opts = return opts { optNoBlocks = True }
 
+tcOpt :: Monad m => Options -> m Options
+tcOpt opts = return opts { optTypecheck = True }
+
 -- | Default backend options.
 defaultOptions :: Options
-defaultOptions  = Options
-  { optOutDir   = Nothing
-  , optTarget   = ToUntyped
-  , optOutput   = AstOutput
-  , optNoBlocks = False
+defaultOptions   = Options
+  { optOutDir    = Nothing
+  , optTarget    = ToUntyped
+  , optOutput    = AstOutput
+  , optNoBlocks  = False
+  , optTypecheck = False
   }
 
 -- | Backend module environments.
@@ -101,6 +109,8 @@ agda2lambox = Backend backend
             "Output a Rocq file."
           , Option [] ["no-blocks"] (NoArg noBlocksOpt)
             "Disable constructors as blocks."
+          , Option [] ["check"] (NoArg tcOpt)
+            "Typecheck the generated λ□ environment. Requires --typed."
           ]
       , isEnabled             = \ _ -> True
       , preCompile            = return

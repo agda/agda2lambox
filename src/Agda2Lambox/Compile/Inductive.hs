@@ -121,7 +121,7 @@ actuallyConvertInductive defn = do
 
   addContext params do
 
-    tyvars <- whenTyped t $ forM (flattenTel params) \pdom -> do
+    tyvars <- whenTypedA t $ forM (flattenTel params) \pdom -> do
       let domType = unDom pdom
       isParamLogical <- liftTCM $ isLogical pdom
       isParamArity   <- liftTCM $ isArity domType
@@ -139,7 +139,7 @@ actuallyConvertInductive defn = do
           DataCon arity         -> arity
           RecordCon _ _ arity _ -> arity
 
-        conTypeInfo <- whenTyped t do
+        conTypeInfo <- whenTypedA t do
           conType <- liftTCM $ (`piApplyM` pvars) . defType =<< getConstInfo cname
           conTel  <- toList . theTel <$> telView conType
           compileArgs indPars conTel

@@ -80,7 +80,7 @@ compileFunction defn@Defn{defType} = do
   t <- getTarget
 
   -- (conditionally) compile type of function
-  typ <- whenTyped t $ case isRecordProjection fundef of
+  typ <- whenTypedA t $ case isRecordProjection fundef of
     Nothing -> compileTopLevelType defType
 
     -- if it is a (real) projection, drop the parameters from the type

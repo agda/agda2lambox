@@ -8,6 +8,7 @@ module Agda2Lambox.Compile.Target
   , getTyped
   , getUntyped
   , whenTyped
+  , whenTypedA
   , whenUntyped
   ) where
 
@@ -72,16 +73,26 @@ getTyped (Some x) = x
 getUntyped :: WhenUntyped Untyped a ->  a
 getUntyped (SomeU x) = x
 
+-- | Wrap a value iff the target is typed.
+whenTyped :: Target t -> a -> WhenTyped t a
+whenTyped ToUntyped _ = None
+whenTyped ToTyped   x = Some x
+
 -- | Only perform a computation when targetting typed.
-whenTyped :: Applicative m => Target t -> m a -> m (WhenTyped t a)
-whenTyped ToUntyped _ = pure None
-whenTyped ToTyped   x = Some <$> x
+whenTypedA :: Applicative m => Target t -> m a -> m (WhenTyped t a)
+whenTypedA ToUntyped _ = pure None
+whenTypedA ToTyped   x = Some <$> x
 
 -- | Only perform a computation when targetting untyped.
 whenUntyped :: Applicative m => Target t -> m a -> m (WhenUntyped t a)
 whenUntyped ToTyped   _ = pure NoneU
 whenUntyped ToUntyped x = SomeU <$> x
 
+
 instance NFData (Target t) where
   rnf ToTyped   = ()
   rnf ToUntyped = ()
+
+instance NFData a => NFData (WhenTyped t a) where
+  rnf (Some x) = rnf x
+  rnf None     = ()

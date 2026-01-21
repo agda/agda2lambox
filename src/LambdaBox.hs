@@ -9,7 +9,6 @@ module LambdaBox
   , emptyDecl
   ) where
 
-import Control.Monad.Identity
 import Agda2Lambox.Compile.Target
 import LambdaBox.Names
 import LambdaBox.Term
@@ -31,7 +30,7 @@ emptyDecl t = InductiveDecl MutualInductive
         { indName          = "Empty"
         , indPropositional = False
         , indKElim         = IntoAny
-        , indTypeVars      = runIdentity $ whenTyped t $ pure []
+        , indTypeVars      = whenTyped t []
         , indCtors         = []
         , indProjs         = []
         }

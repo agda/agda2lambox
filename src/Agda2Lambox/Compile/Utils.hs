@@ -1,5 +1,6 @@
 {-# LANGUAGE NamedFieldPuns, FlexibleInstances, DeriveAnyClass #-}
 {-# LANGUAGE DeriveTraversable #-}
+{-# LANGUAGE GADTs #-}
 module Agda2Lambox.Compile.Utils
   ( modNameToModPath
   , qnameToKName
