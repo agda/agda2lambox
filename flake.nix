@@ -31,7 +31,9 @@
           haskellPackages = prev.haskellPackages.extend (
             hfinal: hprev: {
               sexpresso = hLib.doJailbreak (hLib.markUnbroken hprev.sexpresso);
-              agda2lambox = hLib.doJailbreak (hfinal.callCabal2nix "agda2lambox" ./. { });
+              agda2lambox = hLib.doJailbreak (hfinal.callCabal2nix "agda2lambox" ./. { }) // {
+                phases = [ "unpackPhase" "configurePhase" "buildPhase" "installPhase" "checkPhase" ];
+              };
             }
           );
         };
