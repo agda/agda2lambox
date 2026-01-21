@@ -1,6 +1,6 @@
 {-# LANGUAGE FlexibleInstances, FlexibleContexts, OverloadedStrings, DataKinds, MonadComprehensions #-}
 -- | Generating Coq code from our LambdaBox AST
-module CoqGen (prettyCoq) where
+module CodeGen.Coq (prettyCoq) where
 
 import Data.Bifunctor(bimap)
 import Data.List(intercalate)

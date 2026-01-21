@@ -3,10 +3,11 @@
 -- | The agda2lambox Agda backend
 module Main (main) where
 
-import Control.Monad ( unless, filterM )
+import Control.Monad ( unless, filterM, when )
 import Control.Monad.IO.Class ( liftIO )
 import Control.DeepSeq ( NFData(rnf) )
 import Data.Function ( (&) )
+import Data.List ( elem )
 import Data.List.NonEmpty ( NonEmpty )
 import Data.List.NonEmpty qualified as NEL
 import Data.Maybe ( fromMaybe )
@@ -30,12 +31,12 @@ import Agda.Syntax.Common.Pretty ( pretty, prettyShow )
 import Agda.Utils ( pp, hasPragma )
 import Agda2Lambox.Compile.Target
 import Agda2Lambox.Compile.Utils
-import Agda2Lambox.Compile       (compile)
-import CoqGen    ( prettyCoq  )
-import SExpr     ( prettySexp )
+import Agda2Lambox.Compile ( compile )
+import CodeGen.Coq ( prettyCoq  )
+import CodeGen.SExpr ( prettySexp )
 import LambdaBox.Env
-import LambdaBox.Names (KerName)
-import Agda2Lambox.Compile.Monad (runCompile, CompileEnv(..))
+import LambdaBox.Names ( KerName )
+import Agda2Lambox.Compile.Monad ( runCompile, CompileEnv(..) )
 
 
 main :: IO ()
@@ -48,7 +49,7 @@ data Output = RocqOutput | AstOutput
 data Options = forall t. Options
   { optOutDir   :: Maybe FilePath
   , optTarget   :: Target t
-  , optOutput   :: Output
+  , optOutputs  :: [Output]
   , optNoBlocks :: Bool
   }
 
@@ -63,7 +64,7 @@ typedOpt :: Monad m => Options -> m Options
 typedOpt opts = return opts { optTarget = ToTyped }
 
 rocqOpt :: Monad m => Options -> m Options
-rocqOpt opts = return opts { optOutput = RocqOutput }
+rocqOpt opts = return opts { optOutputs = RocqOutput : optOutputs opts }
 
 noBlocksOpt :: Monad m => Options -> m Options
 noBlocksOpt opts = return opts { optNoBlocks = True }
@@ -73,7 +74,7 @@ defaultOptions :: Options
 defaultOptions  = Options
   { optOutDir   = Nothing
   , optTarget   = ToUntyped
-  , optOutput   = AstOutput
+  , optOutputs  = [AstOutput]
   , optNoBlocks = False
   }
 
@@ -143,16 +144,15 @@ writeModule Options{..} menv IsMain m defs = do
     putStrLn $ "Writing " <> fileName -<.> ".txt"
     pp lboxMod <> "\n" & writeFile (fileName -<.> ".txt")
 
-  liftIO $ case optOutput of
-    RocqOutput -> do
-      putStrLn $ "Writing " <> fileName -<.> ".v"
-      prettyCoq optTarget lboxMod <> "\n"
-        & writeFile (fileName -<.> ".v")
+  when (AstOutput `elem` optOutputs) $ liftIO $ do
+    putStrLn $ "Writing " <> fileName -<.> ".ast"
+    prettySexp optTarget lboxMod <> "\n"
+      & LText.writeFile (fileName -<.> ".ast")
 
-    AstOutput -> do
-      putStrLn $ "Writing " <> fileName -<.> ".ast"
-      prettySexp optTarget lboxMod <> "\n"
-        & LText.writeFile (fileName -<.> ".ast")
+  when (RocqOutput `elem` optOutputs) $ liftIO $ do
+    putStrLn $ "Writing " <> fileName -<.> ".v"
+    prettyCoq optTarget lboxMod <> "\n"
+      & writeFile (fileName -<.> ".v")
 
   where
     getMain :: Target t -> [QName] -> TCM (WhenUntyped t (NonEmpty KerName))

@@ -73,7 +73,7 @@ mkAgdaTest mLboxPath buildDir subdir isTyped baseFile = testCase ("Test: " ++ (s
 
   -- Step 1: Run agda2lambox on the file (run with cwd=subdir so Agda sees basename)
   let typedFlag = ["--typed" | isTyped]
-      cp = (proc "agda2lambox" (typedFlag ++ ["-o", buildDir, baseFile]))
+      cp = (proc "agda2lambox" (typedFlag ++ ["--rocq", "-o", buildDir, baseFile]))
             { cwd = Just subdir }
   (exitCode, stdout, stderr) <- readCreateProcessWithExitCode cp ""
 

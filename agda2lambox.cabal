@@ -36,8 +36,8 @@ executable agda2lambox
                        LambdaBox.Type,
                        LambdaBox.Env,
                        LambdaBox,
-                       CoqGen,
-                       SExpr,
+                       CodeGen.Coq,
+                       CodeGen.SExpr,
                        Paths_agda2lambox
   autogen-modules:     Paths_agda2lambox
   build-depends:       base       >= 4.10  && < 4.22,
