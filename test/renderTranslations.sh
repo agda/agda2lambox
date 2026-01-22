@@ -26,7 +26,7 @@ for f in $BUILD_DIR/**/**; do
   echo "\`\`\`" >> $mdFn
 
   targetHtml="$f".html
-  pandoc --quiet -M document-css=false -i "$mdFn" -o "$targetHtml" -s --highlight-style=tango
+  pandoc --quiet -i "$mdFn" -o "$targetHtml" --highlight-style=tango
 done
 
 mkdir -p "$AGDA_HTML_DIR/$BUILD_DIR"
