@@ -15,11 +15,11 @@ import Test.Tasty.HUnit (testCase, assertFailure, (@?=))
 
 main :: IO ()
 main = do
-  lboxPath <- findExecutable "lbox"
+  peregrinePath <- findExecutable "peregrine"
 
-  -- Check if lbox executable exists (optional)
-  case lboxPath of
-    Nothing -> putStrLn "Warning: lbox executable not found. AST validation will be skipped."
+  -- Check if peregrine executable exists (optional)
+  case peregrinePath of
+    Nothing -> putStrLn "Warning: peregrine executable not found. AST validation will be skipped."
     Just _ -> return ()
 
   -- Save the original directory and change to test/
@@ -42,8 +42,8 @@ main = do
   writeFile indexFile indexContents
 
   -- Create tests
-  let untypedTests = map (mkAgdaTest lboxPath buildDir "untyped" False) untypedFiles
-      typedTests   = map (mkAgdaTest lboxPath buildDir "typed" True) typedFiles
+  let untypedTests = map (mkAgdaTest peregrinePath buildDir "untyped" False) untypedFiles
+      typedTests   = map (mkAgdaTest peregrinePath buildDir "typed" True) typedFiles
 
   defaultMain $ testGroup "agda2lambox tests"
     [ testGroup "untyped" untypedTests
@@ -68,7 +68,7 @@ listAgdaBasenames subdir = do
 -- Create a test case for a single .agda file located in `subdir`.
 -- subdir: "untyped" or "typed"; baseFile is the filename within that dir.
 mkAgdaTest :: Maybe FilePath -> FilePath -> FilePath -> Bool -> FilePath -> TestTree
-mkAgdaTest mLboxPath buildDir subdir isTyped baseFile = testCase ("Test: " ++ (subdir </> baseFile)) $ do
+mkAgdaTest mperegrinePath buildDir subdir isTyped baseFile = testCase ("Test: " ++ (subdir </> baseFile)) $ do
   let astTarget = buildDir </> baseFile -<.> ".ast"
 
   -- Step 1: Run agda2lambox on the file (run with cwd=subdir so Agda sees basename)
@@ -90,18 +90,18 @@ mkAgdaTest mLboxPath buildDir subdir isTyped baseFile = testCase ("Test: " ++ (s
       unless astExists $
         assertFailure $ "Expected AST file not created: " ++ astTarget
 
-      -- Step 2: Validate the AST file with lbox validate if available
-      case mLboxPath of
-        Nothing -> return ()  -- lbox not available, skip validation
-        Just lboxPath -> do
+      -- Step 2: Validate the AST file with peregrine validate if available
+      case mperegrinePath of
+        Nothing -> return ()  -- peregrine not available, skip validation
+        Just peregrinePath -> do
           let validateArgs = ["validate"] ++ ["--typed=((MPfile (\"rust\")) \"testIdd\"))" | isTyped] ++ [astTarget]
           (validateExitCode, validateStdout, validateStderr) <-
-            readProcessWithExitCode lboxPath validateArgs ""
+            readProcessWithExitCode peregrinePath validateArgs ""
 
           case validateExitCode of
             ExitFailure vcode -> do
               assertFailure $
-                "lbox validate failed with exit code " ++ show vcode ++ "\n" ++
+                "peregrine validate failed with exit code " ++ show vcode ++ "\n" ++
                 "File: " ++ astTarget ++ "\n" ++
                 "stdout: " ++ validateStdout ++ "\n" ++
                 "stderr: " ++ validateStderr
