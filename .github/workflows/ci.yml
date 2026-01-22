@@ -2,6 +2,13 @@ name: "CI"
 
 on:
   pull_request:
+    paths:
+      - 'src/**'
+      - 'test/**'
+      - 'agda2lambox.cabal'
+      - 'cabal.project'
+      - 'Makefile'
+      - '.github/workflows/**'
   push:
     paths:
       - 'src/**'
@@ -9,6 +16,7 @@ on:
       - 'agda2lambox.cabal'
       - 'cabal.project'
       - 'Makefile'
+      - '.github/workflows/**'
     branches: [master]
   workflow_dispatch:
 
