@@ -25,7 +25,7 @@ Then you're good to go.
 agda2lambox [AGDAFLAGS] [--out-dir DIR] [--typed] FILE
 ```
 
-Then, use the [following tool][peregrine] to further compile the generate `.ast` files to WASM, Rust and Elm.
+Then, use the [following tool][peregrine] to further compile the generate `.ast` files to WASM, Rust, OCaml, C, and Elm.
 
 [peregrine]: https://github.com/peregrine-project/peregrine-tool
 
