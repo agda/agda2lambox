@@ -16,7 +16,7 @@ cd agda2lambox
 cabal install
 ```
 
-This will take a while, as it has to (recursively) clone the Agda repo 
+This will take a while, as it has to (recursively) clone the Agda repo
 and compile from source.
 
 Then you're good to go.
@@ -25,9 +25,9 @@ Then you're good to go.
 agda2lambox [AGDAFLAGS] [--out-dir DIR] [--typed] FILE
 ```
 
-Then, use the [following tool][lbox] to further compile the generate `.ast` files to WASM, Rust and Elm.
+Then, use the [following tool][peregrine] to further compile the generate `.ast` files to WASM, Rust and Elm.
 
-[lbox]: https://github.com/AU-COBRA/lambda-box-extraction
+[peregrine]: https://github.com/peregrine-project/peregrine-tool
 
 ## Setup
 
@@ -68,7 +68,7 @@ Things that ought to be implemented, but not right now.
   and its [accompanying paper](https://dl.acm.org/doi/10.1145/3656379)
 - [Certified Erasure for Coq, in Coq](https://inria.hal.science/hal-04077552)
 - [Extracting functional programs from Coq, in Coq](https://arxiv.org/pdf/2108.02995)
-- [Lambdabox syntax and untyped environments](https://github.com/MetaCoq/metacoq/blob/coq-8.20/erasure/theories/EAst.v) 
-- [Lambdabox typed environments](https://github.com/MetaCoq/metacoq/blob/coq-8.20/erasure/theories/Typed/ExAst.v) 
+- [Lambdabox syntax and untyped environments](https://github.com/MetaCoq/metacoq/blob/coq-8.20/erasure/theories/EAst.v)
+- [Lambdabox typed environments](https://github.com/MetaCoq/metacoq/blob/coq-8.20/erasure/theories/Typed/ExAst.v)
 - [Coq Extraction Pipeline](https://gist.github.com/4ever2/991007b4418b0ba44f2ee7ed51147e19)
 - [Extraction Example](https://gist.github.com/4ever2/7fbfb3bf843c4773c933c2fdf6315b5c)
