@@ -1,3 +1,0 @@
-name: agda2lambox
-include: test
-flags: --no-projection-like

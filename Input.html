@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>Input</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="split left Agda"><a id="1" class="Keyword">data</a> <a id="Bool"></a><a id="6" href="Input.html#6" class="Datatype">Bool</a> <a id="11" class="Symbol">:</a> <a id="13" href="Agda.Primitive.html#388" class="Primitive">Set</a> <a id="17" class="Keyword">where</a>
+  <a id="Bool.false"></a><a id="25" href="Input.html#25" class="InductiveConstructor">false</a> <a id="Bool.true"></a><a id="31" href="Input.html#31" class="InductiveConstructor">true</a> <a id="36" class="Symbol">:</a> <a id="38" href="Input.html#6" class="Datatype">Bool</a>
+
+<a id="and"></a><a id="44" href="Input.html#44" class="Function">and</a> <a id="48" class="Symbol">:</a> <a id="50" href="Input.html#6" class="Datatype">Bool</a> <a id="55" class="Symbol">-&gt;</a> <a id="58" href="Input.html#6" class="Datatype">Bool</a> <a id="63" class="Symbol">-&gt;</a> <a id="66" href="Input.html#6" class="Datatype">Bool</a>
+<a id="71" href="Input.html#44" class="Function">and</a> <a id="75" href="Input.html#25" class="InductiveConstructor">false</a> <a id="81" class="Symbol">_</a> <a id="83" class="Symbol">=</a> <a id="85" href="Input.html#25" class="InductiveConstructor">false</a>
+<a id="91" href="Input.html#44" class="Function">and</a> <a id="95" href="Input.html#31" class="InductiveConstructor">true</a>  <a id="101" href="Input.html#101" class="Bound">y</a> <a id="103" class="Symbol">=</a> <a id="105" href="Input.html#101" class="Bound">y</a>
+
+<a id="not"></a><a id="108" href="Input.html#108" class="Function">not</a> <a id="112" class="Symbol">:</a> <a id="114" href="Input.html#6" class="Datatype">Bool</a> <a id="119" class="Symbol">-&gt;</a> <a id="122" href="Input.html#6" class="Datatype">Bool</a>
+<a id="127" href="Input.html#108" class="Function">not</a> <a id="131" href="Input.html#25" class="InductiveConstructor">false</a> <a id="137" class="Symbol">=</a> <a id="139" href="Input.html#31" class="InductiveConstructor">true</a>
+<a id="144" href="Input.html#108" class="Function">not</a> <a id="148" href="Input.html#31" class="InductiveConstructor">true</a>  <a id="154" class="Symbol">=</a> <a id="156" href="Input.html#25" class="InductiveConstructor">false</a>
+
+<a id="163" class="Keyword">record</a> <a id="Export"></a><a id="170" href="Input.html#170" class="Record">Export</a> <a id="177" class="Symbol">:</a> <a id="179" href="Agda.Primitive.html#388" class="Primitive">Set</a> <a id="183" class="Keyword">where</a>
+  <a id="191" class="Keyword">field</a>
+    <a id="Export.ad"></a><a id="201" href="Input.html#201" class="Field">ad</a> <a id="204" class="Symbol">:</a> <a id="206" href="Input.html#6" class="Datatype">Bool</a> <a id="211" class="Symbol">→</a> <a id="213" href="Input.html#6" class="Datatype">Bool</a> <a id="218" class="Symbol">→</a> <a id="220" href="Input.html#6" class="Datatype">Bool</a>
+    <a id="Export.nt"></a><a id="229" href="Input.html#229" class="Field">nt</a> <a id="232" class="Symbol">:</a> <a id="234" href="Input.html#6" class="Datatype">Bool</a> <a id="239" class="Symbol">→</a> <a id="241" href="Input.html#6" class="Datatype">Bool</a>
+<a id="246" class="Keyword">open</a> <a id="251" href="Input.html#170" class="Module">Export</a> <a id="258" class="Keyword">public</a>
+
+<a id="main"></a><a id="266" href="Input.html#266" class="Function">main</a> <a id="271" class="Symbol">:</a> <a id="273" href="Input.html#170" class="Record">Export</a>
+<a id="280" href="Input.html#266" class="Function">main</a> <a id="285" class="Symbol">=</a> <a id="287" class="Keyword">record</a>
+  <a id="296" class="Symbol">{</a> <a id="298" href="Input.html#201" class="Field">ad</a> <a id="301" class="Symbol">=</a> <a id="303" href="Input.html#44" class="Function">and</a>
+  <a id="309" class="Symbol">;</a> <a id="311" href="Input.html#229" class="Field">nt</a> <a id="314" class="Symbol">=</a> <a id="316" href="Input.html#108" class="Function">not</a>
+  <a id="322" class="Symbol">}</a>
+<a id="324" class="Symbol">{-#</a> <a id="328" class="Keyword">COMPILE</a> <a id="336" class="Keyword">AGDA2LAMBOX</a> <a id="348" href="Input.html#266" class="Function">main</a> <a id="353" class="Symbol">#-}</a>
+
+</pre><div class="split right"><div class="tabs">    <span data-tab-value="#tab_1">Debug</span>    <span data-tab-value="#tab_2">λ&#9744;</span>    <span data-tab-value="#tab_3">Rocq</span></div><div class="tab-content">    <div class="tabs__tab active" id="tab_1" data-tab-info>        <embed src="dist/Input.txt.html"/>    </div>    <div class="tabs__tab" id="tab_2" data-tab-info>        <embed src="dist/Input.ast.html"/>    </div>    <div class="tabs__tab" id="tab_3" data-tab-info>        <embed src="dist/Input.v.html"/>    </div></div></div><script type=text/javascript>  document.querySelectorAll('[data-tab-value]').forEach(tab => {tab.addEventListener('click', () => {    document.querySelectorAll('[data-tab-info]').forEach(tabInfo => {tabInfo.classList.remove('active') });    document.querySelector(tab.dataset.tabValue).classList.add('active');  })})</script></body></html>

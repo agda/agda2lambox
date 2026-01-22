@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>Scheme</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="split left Agda"><a id="1" class="Comment">-- compilation of λ□ type schemes</a>
+<a id="35" class="Keyword">module</a> <a id="42" href="Scheme.html" class="Module">Scheme</a> <a id="49" class="Keyword">where</a>
+
+<a id="56" class="Keyword">open</a> <a id="61" class="Keyword">import</a> <a id="68" href="Agda.Builtin.List.html" class="Module">Agda.Builtin.List</a>
+<a id="86" class="Keyword">open</a> <a id="91" class="Keyword">import</a> <a id="98" href="Agda.Builtin.Nat.html" class="Module">Agda.Builtin.Nat</a>
+<a id="115" class="Keyword">open</a> <a id="120" class="Keyword">import</a> <a id="127" href="Agda.Builtin.Bool.html" class="Module">Agda.Builtin.Bool</a>
+<a id="145" class="Keyword">open</a> <a id="150" class="Keyword">import</a> <a id="157" href="Agda.Builtin.Equality.html" class="Module">Agda.Builtin.Equality</a>
+
+<a id="length"></a><a id="180" href="Scheme.html#180" class="Function">length</a> <a id="187" class="Symbol">:</a> <a id="189" class="Symbol">{</a><a id="190" href="Scheme.html#190" class="Bound">A</a> <a id="192" class="Symbol">:</a> <a id="194" href="Agda.Primitive.html#388" class="Primitive">Set</a><a id="197" class="Symbol">}</a> <a id="199" class="Symbol">→</a> <a id="201" href="Agda.Builtin.List.html#147" class="Datatype">List</a> <a id="206" href="Scheme.html#190" class="Bound">A</a> <a id="208" class="Symbol">→</a> <a id="210" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="214" href="Scheme.html#180" class="Function">length</a> <a id="221" href="Agda.Builtin.List.html#184" class="InductiveConstructor">[]</a> <a id="224" class="Symbol">=</a> <a id="226" class="Number">0</a>
+<a id="228" href="Scheme.html#180" class="Function">length</a> <a id="235" class="Symbol">(_</a> <a id="238" href="Agda.Builtin.List.html#199" class="InductiveConstructor Operator">∷</a> <a id="240" href="Scheme.html#240" class="Bound">xs</a><a id="242" class="Symbol">)</a> <a id="244" class="Symbol">=</a> <a id="246" href="Agda.Builtin.Nat.html#234" class="InductiveConstructor">suc</a> <a id="250" class="Symbol">(</a><a id="251" href="Scheme.html#180" class="Function">length</a> <a id="258" href="Scheme.html#240" class="Bound">xs</a><a id="260" class="Symbol">)</a>
+
+<a id="263" class="Keyword">data</a> <a id="Eq"></a><a id="268" href="Scheme.html#268" class="Datatype">Eq</a> <a id="271" class="Symbol">{</a><a id="272" href="Scheme.html#272" class="Bound">A</a> <a id="274" class="Symbol">:</a> <a id="276" href="Agda.Primitive.html#388" class="Primitive">Set</a><a id="279" class="Symbol">}</a> <a id="281" class="Symbol">(</a><a id="282" href="Scheme.html#282" class="Bound">x</a> <a id="284" class="Symbol">:</a> <a id="286" href="Scheme.html#272" class="Bound">A</a><a id="287" class="Symbol">)</a> <a id="289" class="Symbol">:</a> <a id="291" href="Scheme.html#272" class="Bound">A</a> <a id="293" class="Symbol">-&gt;</a> <a id="296" href="Agda.Primitive.html#347" class="Primitive">Prop</a> <a id="301" class="Keyword">where</a>
+  <a id="Eq.rfl"></a><a id="309" href="Scheme.html#309" class="InductiveConstructor">rfl</a> <a id="313" class="Symbol">:</a> <a id="315" href="Scheme.html#268" class="Datatype">Eq</a> <a id="318" href="Scheme.html#282" class="Bound">x</a> <a id="320" href="Scheme.html#282" class="Bound">x</a>
+
+<a id="323" class="Keyword">record</a> <a id="Σ"></a><a id="330" href="Scheme.html#330" class="Record">Σ</a> <a id="332" class="Symbol">(</a><a id="333" href="Scheme.html#333" class="Bound">A</a> <a id="335" class="Symbol">:</a> <a id="337" href="Agda.Primitive.html#388" class="Primitive">Set</a><a id="340" class="Symbol">)</a> <a id="342" class="Symbol">(</a><a id="343" href="Scheme.html#343" class="Bound">B</a> <a id="345" class="Symbol">:</a> <a id="347" href="Scheme.html#333" class="Bound">A</a> <a id="349" class="Symbol">→</a> <a id="351" href="Agda.Primitive.html#347" class="Primitive">Prop</a><a id="355" class="Symbol">)</a> <a id="357" class="Symbol">:</a> <a id="359" href="Agda.Primitive.html#388" class="Primitive">Set</a> <a id="363" class="Keyword">where</a>
+  <a id="371" class="Keyword">constructor</a> <a id="_,_"></a><a id="383" href="Scheme.html#383" class="InductiveConstructor Operator">_,_</a>
+  <a id="389" class="Keyword">field</a>
+    <a id="Σ.fst"></a><a id="399" href="Scheme.html#399" class="Field">fst</a> <a id="403" class="Symbol">:</a> <a id="405" href="Scheme.html#333" class="Bound">A</a>
+    <a id="Σ.snd"></a><a id="411" href="Scheme.html#411" class="Field">snd</a> <a id="415" class="Symbol">:</a> <a id="417" href="Scheme.html#343" class="Bound">B</a> <a id="419" href="Scheme.html#399" class="Field">fst</a>
+<a id="Σ-syntax"></a><a id="423" href="Scheme.html#423" class="Function">Σ-syntax</a> <a id="432" class="Symbol">:</a> <a id="434" class="Symbol">(</a><a id="435" href="Scheme.html#435" class="Bound">A</a> <a id="437" class="Symbol">:</a> <a id="439" href="Agda.Primitive.html#388" class="Primitive">Set</a><a id="442" class="Symbol">)</a> <a id="444" class="Symbol">(</a><a id="445" href="Scheme.html#445" class="Bound">B</a> <a id="447" class="Symbol">:</a> <a id="449" href="Scheme.html#435" class="Bound">A</a> <a id="451" class="Symbol">→</a> <a id="453" href="Agda.Primitive.html#347" class="Primitive">Prop</a><a id="457" class="Symbol">)</a> <a id="459" class="Symbol">→</a> <a id="461" href="Agda.Primitive.html#388" class="Primitive">Set</a>
+<a id="465" href="Scheme.html#423" class="Function">Σ-syntax</a> <a id="474" class="Symbol">=</a> <a id="476" href="Scheme.html#330" class="Record">Σ</a>
+
+<a id="479" class="Keyword">syntax</a> <a id="486" href="Scheme.html#423" class="Function">Σ-syntax</a> <a id="495" class="Bound">A</a> <a id="497" class="Symbol">(λ</a> <a id="500" class="Bound">x</a> <a id="502" class="Symbol">→</a> <a id="504" class="Bound">B</a><a id="505" class="Symbol">)</a> <a id="507" class="Symbol">=</a> <a id="509" class="Function">[</a> <a id="511" class="Bound">x</a> <a id="513" class="Function">∈</a> <a id="515" class="Bound">A</a> <a id="517" class="Function">∣</a> <a id="519" class="Bound">B</a> <a id="521" class="Function">]</a>
+
+<a id="524" class="Comment">-- NOTE: this doesn&#39;t compile properly?</a>
+<a id="564" class="Comment">-- the snd projection is compiled while it shouldn&#39;t be?</a>
+<a id="621" class="Comment">-- record Σ0 (A : Set) (@0 B : A → Set) : Set where</a>
+<a id="673" class="Comment">--   constructor _,_</a>
+<a id="694" class="Comment">--   field</a>
+<a id="705" class="Comment">--     fst    : A</a>
+<a id="723" class="Comment">--     @0 snd : B fst</a>
+
+<a id="746" class="Comment">-- expected: type scheme</a>
+<a id="771" class="Comment">-- ­ vars: [a, b]</a>
+<a id="789" class="Comment">-- ­ type: a → b</a>
+<a id="Arrow"></a><a id="806" href="Scheme.html#806" class="Function">Arrow</a> <a id="812" class="Symbol">:</a> <a id="814" class="Symbol">(</a><a id="815" href="Scheme.html#815" class="Bound">A</a> <a id="817" href="Scheme.html#817" class="Bound">B</a> <a id="819" class="Symbol">:</a> <a id="821" href="Agda.Primitive.html#388" class="Primitive">Set</a><a id="824" class="Symbol">)</a> <a id="826" class="Symbol">→</a> <a id="828" href="Agda.Primitive.html#388" class="Primitive">Set</a>
+<a id="832" href="Scheme.html#806" class="Function">Arrow</a> <a id="838" href="Scheme.html#838" class="Bound">A</a> <a id="840" href="Scheme.html#840" class="Bound">B</a> <a id="842" class="Symbol">=</a> <a id="844" href="Scheme.html#838" class="Bound">A</a> <a id="846" class="Symbol">→</a> <a id="848" href="Scheme.html#840" class="Bound">B</a>
+
+<a id="851" class="Comment">-- expected: type scheme</a>
+<a id="876" class="Comment">-- - vars: [a]</a>
+<a id="891" class="Comment">-- - type: List a</a>
+<a id="ListAlias"></a><a id="909" href="Scheme.html#909" class="Function">ListAlias</a> <a id="919" class="Symbol">:</a> <a id="921" href="Agda.Primitive.html#388" class="Primitive">Set</a> <a id="925" class="Symbol">→</a> <a id="927" href="Agda.Primitive.html#388" class="Primitive">Set</a>
+<a id="931" href="Scheme.html#909" class="Function">ListAlias</a> <a id="941" class="Symbol">=</a> <a id="943" href="Agda.Builtin.List.html#147" class="Datatype">List</a>
+
+<a id="ListAlias&#39;"></a><a id="949" href="Scheme.html#949" class="Function">ListAlias&#39;</a> <a id="960" class="Symbol">:</a> <a id="962" href="Agda.Primitive.html#388" class="Primitive">Set</a> <a id="966" class="Symbol">→</a> <a id="968" href="Agda.Primitive.html#388" class="Primitive">Set</a>
+<a id="972" href="Scheme.html#949" class="Function">ListAlias&#39;</a> <a id="983" href="Scheme.html#983" class="Bound">A</a> <a id="985" class="Symbol">=</a> <a id="987" href="Agda.Builtin.List.html#147" class="Datatype">List</a> <a id="992" href="Scheme.html#983" class="Bound">A</a>
+
+<a id="995" class="Comment">-- Rocq-like vectors --</a>
+
+<a id="1020" class="Comment">-- expected: type scheme</a>
+<a id="1045" class="Comment">-- - vars: [a, n]</a>
+<a id="1063" class="Comment">-- - type: Σ (List a) □</a>
+<a id="Vec"></a><a id="1087" href="Scheme.html#1087" class="Function">Vec</a> <a id="1091" class="Symbol">:</a> <a id="1093" class="Symbol">(</a><a id="1094" href="Scheme.html#1094" class="Bound">A</a> <a id="1096" class="Symbol">:</a> <a id="1098" href="Agda.Primitive.html#388" class="Primitive">Set</a><a id="1101" class="Symbol">)</a> <a id="1103" class="Symbol">→</a> <a id="1105" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a> <a id="1109" class="Symbol">→</a> <a id="1111" href="Agda.Primitive.html#388" class="Primitive">Set</a>
+<a id="1115" href="Scheme.html#1087" class="Function">Vec</a> <a id="1119" href="Scheme.html#1119" class="Bound">A</a> <a id="1121" href="Scheme.html#1121" class="Bound">n</a> <a id="1123" class="Symbol">=</a> <a id="1125" href="Scheme.html#423" class="Function">[</a> <a id="1127" href="Scheme.html#1127" class="Bound">xs</a> <a id="1130" href="Scheme.html#423" class="Function">∈</a> <a id="1132" href="Agda.Builtin.List.html#147" class="Datatype">List</a> <a id="1137" href="Scheme.html#1119" class="Bound">A</a> <a id="1139" href="Scheme.html#423" class="Function">∣</a> <a id="1141" href="Scheme.html#268" class="Datatype">Eq</a> <a id="1144" class="Symbol">(</a><a id="1145" href="Scheme.html#180" class="Function">length</a> <a id="1152" href="Scheme.html#1127" class="Bound">xs</a><a id="1154" class="Symbol">)</a> <a id="1156" href="Scheme.html#1121" class="Bound">n</a> <a id="1158" href="Scheme.html#423" class="Function">]</a>
+
+<a id="Bad"></a><a id="1161" href="Scheme.html#1161" class="Function">Bad</a> <a id="1165" class="Symbol">:</a> <a id="1167" href="Agda.Builtin.Bool.html#173" class="Datatype">Bool</a> <a id="1172" class="Symbol">→</a> <a id="1174" href="Agda.Primitive.html#388" class="Primitive">Set</a>
+<a id="1178" href="Scheme.html#1161" class="Function">Bad</a> <a id="1182" href="Agda.Builtin.Bool.html#192" class="InductiveConstructor">false</a> <a id="1188" class="Symbol">=</a> <a id="1190" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="1194" href="Scheme.html#1161" class="Function">Bad</a> <a id="1198" href="Agda.Builtin.Bool.html#198" class="InductiveConstructor">true</a>  <a id="1204" class="Symbol">=</a> <a id="1206" href="Agda.Builtin.Bool.html#173" class="Datatype">Bool</a>
+</pre><div class="split right"><div class="tabs">    <span data-tab-value="#tab_1">Debug</span>    <span data-tab-value="#tab_2">λ&#9744;</span>    <span data-tab-value="#tab_3">Rocq</span></div><div class="tab-content">    <div class="tabs__tab active" id="tab_1" data-tab-info>        <embed src="dist/Scheme.txt.html"/>    </div>    <div class="tabs__tab" id="tab_2" data-tab-info>        <embed src="dist/Scheme.ast.html"/>    </div>    <div class="tabs__tab" id="tab_3" data-tab-info>        <embed src="dist/Scheme.v.html"/>    </div></div></div><script type=text/javascript>  document.querySelectorAll('[data-tab-value]').forEach(tab => {tab.addEventListener('click', () => {    document.querySelectorAll('[data-tab-info]').forEach(tabInfo => {tabInfo.classList.remove('active') });    document.querySelector(tab.dataset.tabValue).classList.add('active');  })})</script></body></html>

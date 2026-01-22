@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>Exports</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="split left Agda"><a id="1" class="Keyword">module</a> <a id="8" href="Exports.html" class="Module">Exports</a> <a id="16" class="Keyword">where</a>
+
+<a id="23" class="Keyword">open</a> <a id="28" class="Keyword">import</a> <a id="35" href="Agda.Builtin.Nat.html" class="Module">Agda.Builtin.Nat</a>
+
+<a id="one"></a><a id="53" href="Exports.html#53" class="Function">one</a> <a id="57" class="Symbol">:</a> <a id="59" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="63" href="Exports.html#53" class="Function">one</a> <a id="67" class="Symbol">=</a> <a id="69" class="Number">1</a>
+
+<a id="two"></a><a id="72" href="Exports.html#72" class="Function">two</a> <a id="76" class="Symbol">:</a> <a id="78" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="82" href="Exports.html#72" class="Function">two</a> <a id="86" class="Symbol">=</a> <a id="88" class="Number">2</a>
+
+<a id="three"></a><a id="91" href="Exports.html#91" class="Function">three</a> <a id="97" class="Symbol">:</a> <a id="99" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a> <a id="103" class="Symbol">→</a> <a id="105" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="109" href="Exports.html#91" class="Function">three</a> <a id="115" href="Agda.Builtin.Nat.html#221" class="InductiveConstructor">zero</a> <a id="120" class="Symbol">=</a> <a id="122" href="Agda.Builtin.Nat.html#221" class="InductiveConstructor">zero</a>
+<a id="127" href="Exports.html#91" class="Function">three</a> <a id="133" class="Symbol">(</a><a id="134" href="Agda.Builtin.Nat.html#234" class="InductiveConstructor">suc</a> <a id="138" href="Exports.html#138" class="Bound">n</a><a id="139" class="Symbol">)</a> <a id="141" class="Symbol">=</a> <a id="143" href="Exports.html#138" class="Bound">n</a>
+
+<a id="four"></a><a id="146" href="Exports.html#146" class="Function">four</a> <a id="151" class="Symbol">:</a> <a id="153" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a> <a id="157" class="Symbol">→</a> <a id="159" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a> <a id="163" class="Symbol">→</a> <a id="165" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="169" href="Exports.html#146" class="Function">four</a> <a id="174" href="Agda.Builtin.Nat.html#221" class="InductiveConstructor">zero</a> <a id="179" href="Exports.html#179" class="Bound">m</a> <a id="181" class="Symbol">=</a> <a id="183" href="Exports.html#179" class="Bound">m</a>
+<a id="185" href="Exports.html#146" class="Function">four</a> <a id="190" class="Symbol">(</a><a id="191" href="Agda.Builtin.Nat.html#234" class="InductiveConstructor">suc</a> <a id="195" href="Exports.html#195" class="Bound">n</a><a id="196" class="Symbol">)</a> <a id="198" href="Exports.html#198" class="Bound">m</a> <a id="200" class="Symbol">=</a> <a id="202" href="Agda.Builtin.Nat.html#234" class="InductiveConstructor">suc</a> <a id="206" class="Symbol">(</a><a id="207" href="Exports.html#146" class="Function">four</a> <a id="212" href="Exports.html#195" class="Bound">n</a> <a id="214" href="Exports.html#198" class="Bound">m</a><a id="215" class="Symbol">)</a>
+
+<a id="218" class="Keyword">record</a> <a id="Exports"></a><a id="225" href="Exports.html#225" class="Record">Exports</a> <a id="233" class="Symbol">:</a> <a id="235" href="Agda.Primitive.html#388" class="Primitive">Set</a> <a id="239" class="Keyword">where</a>
+  <a id="247" class="Keyword">field</a>
+    <a id="Exports.eone"></a><a id="257" href="Exports.html#257" class="Field">eone</a>   <a id="264" class="Symbol">:</a> <a id="266" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+    <a id="Exports.etwo"></a><a id="274" href="Exports.html#274" class="Field">etwo</a>   <a id="281" class="Symbol">:</a> <a id="283" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+    <a id="Exports.ethree"></a><a id="291" href="Exports.html#291" class="Field">ethree</a> <a id="298" class="Symbol">:</a> <a id="300" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a> <a id="304" class="Symbol">→</a> <a id="306" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+    <a id="Exports.efour"></a><a id="314" href="Exports.html#314" class="Field">efour</a>  <a id="321" class="Symbol">:</a> <a id="323" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a> <a id="327" class="Symbol">→</a> <a id="329" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a> <a id="333" class="Symbol">→</a> <a id="335" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="339" class="Keyword">open</a> <a id="344" href="Exports.html#225" class="Module">Exports</a>
+
+<a id="main"></a><a id="353" href="Exports.html#353" class="Function">main</a> <a id="358" class="Symbol">:</a> <a id="360" href="Exports.html#225" class="Record">Exports</a>
+<a id="368" href="Exports.html#353" class="Function">main</a> <a id="373" class="Symbol">=</a> <a id="375" class="Keyword">record</a>
+  <a id="384" class="Symbol">{</a> <a id="386" href="Exports.html#257" class="Field">eone</a>   <a id="393" class="Symbol">=</a> <a id="395" href="Exports.html#53" class="Function">one</a>
+  <a id="401" class="Symbol">;</a> <a id="403" href="Exports.html#274" class="Field">etwo</a>   <a id="410" class="Symbol">=</a> <a id="412" href="Exports.html#72" class="Function">two</a>
+  <a id="418" class="Symbol">;</a> <a id="420" href="Exports.html#291" class="Field">ethree</a> <a id="427" class="Symbol">=</a> <a id="429" href="Exports.html#91" class="Function">three</a>
+  <a id="437" class="Symbol">;</a> <a id="439" href="Exports.html#314" class="Field">efour</a>  <a id="446" class="Symbol">=</a> <a id="448" href="Exports.html#146" class="Function">four</a>
+  <a id="455" class="Symbol">}</a>
+<a id="457" class="Symbol">{-#</a> <a id="461" class="Keyword">COMPILE</a> <a id="469" class="Keyword">AGDA2LAMBOX</a> <a id="481" href="Exports.html#353" class="Function">main</a> <a id="486" class="Symbol">#-}</a>
+</pre><div class="split right"><div class="tabs">    <span data-tab-value="#tab_1">Debug</span>    <span data-tab-value="#tab_2">λ&#9744;</span>    <span data-tab-value="#tab_3">Rocq</span></div><div class="tab-content">    <div class="tabs__tab active" id="tab_1" data-tab-info>        <embed src="dist/Exports.txt.html"/>    </div>    <div class="tabs__tab" id="tab_2" data-tab-info>        <embed src="dist/Exports.ast.html"/>    </div>    <div class="tabs__tab" id="tab_3" data-tab-info>        <embed src="dist/Exports.v.html"/>    </div></div></div><script type=text/javascript>  document.querySelectorAll('[data-tab-value]').forEach(tab => {tab.addEventListener('click', () => {    document.querySelectorAll('[data-tab-info]').forEach(tabInfo => {tabInfo.classList.remove('active') });    document.querySelector(tab.dataset.tabValue).classList.add('active');  })})</script></body></html>

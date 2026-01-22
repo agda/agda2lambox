@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>rust</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="split left Agda"><a id="1" class="Keyword">module</a> <a id="8" href="rust.html" class="Module">rust</a> <a id="13" class="Keyword">where</a>
+
+<a id="20" class="Keyword">open</a> <a id="25" class="Keyword">import</a> <a id="32" href="Agda.Builtin.Nat.html" class="Module">Agda.Builtin.Nat</a>
+
+<a id="50" class="Keyword">data</a> <a id="List"></a><a id="55" href="rust.html#55" class="Datatype">List</a> <a id="60" class="Symbol">(</a><a id="61" href="rust.html#61" class="Bound">A</a> <a id="63" class="Symbol">:</a> <a id="65" href="Agda.Primitive.html#388" class="Primitive">Set</a><a id="68" class="Symbol">)</a> <a id="70" class="Symbol">:</a> <a id="72" href="Agda.Primitive.html#388" class="Primitive">Set</a> <a id="76" class="Keyword">where</a>
+  <a id="List.[]"></a><a id="84" href="rust.html#84" class="InductiveConstructor">[]</a>   <a id="89" class="Symbol">:</a> <a id="91" href="rust.html#55" class="Datatype">List</a> <a id="96" href="rust.html#61" class="Bound">A</a>
+  <a id="List._::_"></a><a id="100" href="rust.html#100" class="InductiveConstructor Operator">_::_</a> <a id="105" class="Symbol">:</a> <a id="107" href="rust.html#61" class="Bound">A</a> <a id="109" class="Symbol">-&gt;</a> <a id="112" href="rust.html#55" class="Datatype">List</a> <a id="117" href="rust.html#61" class="Bound">A</a> <a id="119" class="Symbol">-&gt;</a> <a id="122" href="rust.html#55" class="Datatype">List</a> <a id="127" href="rust.html#61" class="Bound">A</a>
+
+<a id="map"></a><a id="130" href="rust.html#130" class="Function">map</a> <a id="134" class="Symbol">:</a> <a id="136" class="Symbol">{</a><a id="137" href="rust.html#137" class="Bound">A</a> <a id="139" href="rust.html#139" class="Bound">B</a> <a id="141" class="Symbol">:</a> <a id="143" href="Agda.Primitive.html#388" class="Primitive">Set</a><a id="146" class="Symbol">}</a> <a id="148" class="Symbol">(</a><a id="149" href="rust.html#149" class="Bound">f</a> <a id="151" class="Symbol">:</a> <a id="153" href="rust.html#137" class="Bound">A</a> <a id="155" class="Symbol">-&gt;</a> <a id="158" href="rust.html#139" class="Bound">B</a><a id="159" class="Symbol">)</a> <a id="161" class="Symbol">-&gt;</a> <a id="164" href="rust.html#55" class="Datatype">List</a> <a id="169" href="rust.html#137" class="Bound">A</a> <a id="171" class="Symbol">-&gt;</a> <a id="174" href="rust.html#55" class="Datatype">List</a> <a id="179" href="rust.html#139" class="Bound">B</a>
+<a id="181" href="rust.html#130" class="Function">map</a> <a id="185" href="rust.html#185" class="Bound">f</a> <a id="187" href="rust.html#84" class="InductiveConstructor">[]</a> <a id="190" class="Symbol">=</a> <a id="192" href="rust.html#84" class="InductiveConstructor">[]</a>
+<a id="195" href="rust.html#130" class="Function">map</a> <a id="199" href="rust.html#199" class="Bound">f</a> <a id="201" class="Symbol">(</a><a id="202" href="rust.html#202" class="Bound">x</a> <a id="204" href="rust.html#100" class="InductiveConstructor Operator">::</a> <a id="207" href="rust.html#207" class="Bound">xs</a><a id="209" class="Symbol">)</a> <a id="211" class="Symbol">=</a> <a id="213" href="rust.html#199" class="Bound">f</a> <a id="215" href="rust.html#202" class="Bound">x</a> <a id="217" href="rust.html#100" class="InductiveConstructor Operator">::</a> <a id="220" href="rust.html#130" class="Function">map</a> <a id="224" href="rust.html#199" class="Bound">f</a> <a id="226" href="rust.html#207" class="Bound">xs</a>
+
+<a id="testIdd"></a><a id="230" href="rust.html#230" class="Function">testIdd</a> <a id="238" class="Symbol">:</a> <a id="240" href="rust.html#55" class="Datatype">List</a> <a id="245" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="249" href="rust.html#230" class="Function">testIdd</a> <a id="257" class="Symbol">=</a> <a id="259" href="rust.html#130" class="Function">map</a> <a id="263" class="Symbol">(</a><a id="264" class="Number">1</a> <a id="266" href="Agda.Builtin.Nat.html#336" class="Primitive Operator">+_</a><a id="268" class="Symbol">)</a> <a id="270" class="Symbol">(</a><a id="271" class="Number">2</a> <a id="273" href="rust.html#100" class="InductiveConstructor Operator">::</a> <a id="276" href="rust.html#84" class="InductiveConstructor">[]</a><a id="278" class="Symbol">)</a>
+<a id="280" class="Symbol">{-#</a> <a id="284" class="Keyword">COMPILE</a> <a id="292" class="Keyword">AGDA2LAMBOX</a> <a id="304" href="rust.html#230" class="Function">testIdd</a> <a id="312" class="Symbol">#-}</a>
+
+<a id="317" class="Comment">{-
+id : ∀ {A : Set} → A → A
+id x = x
+
+idd : ∀ {A : Set} → (A → A) → A → A
+idd id x = id x
+
+testIdd : Nat
+testIdd = idd id 2
+{-# COMPILE AGDA2LAMBOX testIdd #-}
+
+testIdId : Nat
+testIdId = (id id) 2
+{- id(id)(42) -}
+
+testIdIdId : Nat
+testIdIdId = id id id 42
+{- id(id)(id)(42) -}
+{- id(λ x → id x)(λ x → id x)(42) -}
+
+testNestedId : Nat
+testNestedId = id (id id) (id id id) (id id 42)
+{- id(id(id))(id(id)(id))(id(id)(42)) -}
+
+testIdAdd : Nat
+testIdAdd = id _+_ 40 2
+id : ∀ {A} → A → A
+id _+_ : Nat → Nat → Nat (A = Nat → Nat → Nat)
+id _+_ 40 : Nat → Nat
+id _+_ 40 2 : Nat
+{- id(_+_, 40, 2) -}
+{- id(_+_)(40, 2) -}
+
+add3 : Nat → Nat → Nat → Nat
+add3 x y z = x + y + z
+
+testIdAdd3 : Nat
+testIdAdd3 = id add3 40 1 1
+{- id(add3)(40, 1, 1) -}
+{- id(λ x y z → add3 x y z)(40, 1, 1) -}
+
+idF : (Nat → Nat → Nat) → Nat
+idF f = id f 40 2
+{- id(f)(40, 2) -}
+{- id(λ x y → f x y)(40, 2) -}
+
+testIdF : Nat
+testIdF = idF _+_
+
+idF3 : (Nat → Nat → Nat → Nat) → Nat
+idF3 f = id f 40 1 1
+{- id(f)(40, 1, 1) -}
+{- id(λ x y z → f x y z)(40, 1, 1) -}
+
+testIdF3 : Nat
+testIdF3 = idF3 add3
+
+-}</a>
+</pre><div class="split right"><div class="tabs">    <span data-tab-value="#tab_1">Debug</span>    <span data-tab-value="#tab_2">λ&#9744;</span>    <span data-tab-value="#tab_3">Rocq</span></div><div class="tab-content">    <div class="tabs__tab active" id="tab_1" data-tab-info>        <embed src="dist/rust.txt.html"/>    </div>    <div class="tabs__tab" id="tab_2" data-tab-info>        <embed src="dist/rust.ast.html"/>    </div>    <div class="tabs__tab" id="tab_3" data-tab-info>        <embed src="dist/rust.v.html"/>    </div></div></div><script type=text/javascript>  document.querySelectorAll('[data-tab-value]').forEach(tab => {tab.addEventListener('click', () => {    document.querySelectorAll('[data-tab-info]').forEach(tabInfo => {tabInfo.classList.remove('active') });    document.querySelector(tab.dataset.tabValue).classList.add('active');  })})</script></body></html>
