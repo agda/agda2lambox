@@ -110,7 +110,8 @@ compileFunction defn@Defn{defType} = do
       forM mdefs \def@Defn{defName} -> do
         body <- compileFunctionBody mnames def >>= \case
           l@LBox.LLambda{} -> pure l
-          LBox.LBox        -> pure $ LBox.LLambda LBox.Anon LBox.LBox
+                           -- TODO: add type
+          LBox.LBox        -> pure $ LBox.LLambda LBox.Anon undefined LBox.LBox
           _                -> genericError "Fixpoint body must be Lambda."
         return LBox.Def
           { dName = qnameToName defName

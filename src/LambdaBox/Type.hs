@@ -15,6 +15,7 @@ data Type
       --   Uses De Bruijn *levels* and NOT indices.
   | TInd Inductive
   | TConst KerName
+  deriving Eq
 
 instance Pretty Type where
   prettyPrec p = \case

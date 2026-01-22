@@ -99,8 +99,8 @@ instance ToCoq t (Term t) where
   pcoqP p t v = case v of
     LBox                -> ctorP p "tBox"       []
     LRel k              -> ctorP p "tRel"       [pretty k]
-    LLambda n u         -> ctorP p "tLambda"    [pcoq t n, pcoqP 10 t u]
-    LLetIn n u v        -> ctorP p "tLetIn"     [pcoq t n, pcoqP 10 t u, pcoqP 10 t v]
+    LLambda n _ u       -> ctorP p "tLambda"    [pcoq t n, pcoqP 10 t u]
+    LLetIn n _ u v      -> ctorP p "tLetIn"     [pcoq t n, pcoqP 10 t u, pcoqP 10 t v]
     LApp u v            -> ctorP p "tApp"       [pcoqP 10 t u, pcoqP 10 t v]
     LConst c            -> ctorP p "tConst"     [pcoqP 10 t c]
     LConstruct ind i es -> ctorP p "tConstruct" [pcoqP 10 t ind, pcoqP 10 t i, pcoqP 10 t es]

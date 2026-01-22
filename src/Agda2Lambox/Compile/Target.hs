@@ -6,6 +6,7 @@ module Agda2Lambox.Compile.Target
   , WhenTyped(..)
   , WhenUntyped(..)
   , getTyped
+  , getTypedMaybe
   , getUntyped
   , whenTyped
   , whenTypedA
@@ -44,6 +45,10 @@ instance Foldable (WhenTyped t) where
   foldMap f None     = mempty
   foldMap f (Some x) = f x
 
+instance Eq a => Eq (WhenTyped t a) where
+  Some x == Some y = x == y
+  None   == None   = True
+
 -- | Type wrapper that contains a value iff we're in the untyped setting.
 data WhenUntyped (t :: Typing) (a :: Type) :: Type where
   NoneU ::      WhenUntyped Typed a
@@ -72,6 +77,10 @@ getTyped (Some x) = x
 -- | Retrieve a value when it's there for sure, in the untyped setting.
 getUntyped :: WhenUntyped Untyped a ->  a
 getUntyped (SomeU x) = x
+
+getTypedMaybe :: WhenTyped t a -> Maybe a
+getTypedMaybe (Some x) = Just x
+getTypedMaybe None     = Nothing
 
 -- | Wrap a value iff the target is typed.
 whenTyped :: Target t -> a -> WhenTyped t a

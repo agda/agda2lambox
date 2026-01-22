@@ -35,6 +35,7 @@ executable agda2lambox
                        LambdaBox.Term,
                        LambdaBox.Type,
                        LambdaBox.Env,
+                       LambdaBox.Typecheck,
                        LambdaBox,
                        CoqGen,
                        SExpr,

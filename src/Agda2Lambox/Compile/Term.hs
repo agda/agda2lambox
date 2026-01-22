@@ -128,12 +128,17 @@ compileTermC = \case
     ces <- traverse compileTermC es
     pure $ foldl' LApp cu ces
 
-  TLam t -> underBinder $ LLambda Anon <$> compileTermC t
+  TLam t ->
+    -- TODO: add type of arg
+    underBinder $ LLambda Anon undefined <$> compileTermC t
 
   TLit l -> compileLit l
 
-  TLet u v -> LLetIn Anon <$> compileTermC u
-                          <*> underBinder (compileTermC v)
+  TLet u v ->
+    -- TODO: add type of arg
+    LLetIn Anon undefined
+      <$> compileTermC u
+      <*> underBinder (compileTermC v)
 
   TCase n CaseInfo{..} dt talts ->
     case caseErased of

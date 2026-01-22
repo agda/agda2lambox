@@ -33,11 +33,13 @@ data AllowedElims
   | IntoPropSProp
   | IntoSetPropSProp
   | IntoAny
+  deriving Eq
 
 data RecursivityKind
   = Finite   -- ^ Inductive datatype.
   | CoFinite -- ^ Coinductive datatype.
   | BiFinite -- ^ Non-recursive.
+  deriving Eq
 
 -- | Constructor info in datatype declaration.
 data ConstructorBody t = Constructor
@@ -45,12 +47,14 @@ data ConstructorBody t = Constructor
   , cstrArgs  :: Int
   , cstrTypes :: WhenTyped t [(Name, LBox.Type)]
   }
+  deriving Eq
 
 -- | Projection info in datatype declaration.
 data ProjectionBody t = Projection
   { projName :: Ident
   , projType :: WhenTyped t LBox.Type
   }
+  deriving Eq
 
 {- | Type variable information.
 
@@ -88,6 +92,7 @@ data TypeVarInfo = TypeVarInfo
   , tvarIsLogical :: Bool
   , tvarIsSort    :: Bool
   }
+  deriving Eq
 
 -- | Inductive datatype declaration body
 data OneInductiveBody t = OneInductive
@@ -98,6 +103,7 @@ data OneInductiveBody t = OneInductive
   , indCtors         :: [ConstructorBody t]
   , indProjs         :: [ProjectionBody t]
   }
+  deriving Eq
 
 -- | Declaration of mutually defined inductive types
 data MutualInductiveBody t = MutualInductive
@@ -105,12 +111,14 @@ data MutualInductiveBody t = MutualInductive
   , indPars   :: Int
   , indBodies :: [OneInductiveBody t]
   }
+  deriving Eq
 
 -- | Definition of a constant in the environment
 data ConstantBody t = ConstantBody
   { cstType :: WhenTyped t ([Name], LBox.Type)
   , cstBody :: Maybe (Term t)
   }
+  deriving Eq
 
 -- | Global declarations.
 data GlobalDecl (t :: Typing) :: Type where

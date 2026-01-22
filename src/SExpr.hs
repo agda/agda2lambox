@@ -107,8 +107,8 @@ instance ToSexp t (Term t) where
   toSexp t = \case
     LBox                -> ctor t "tBox"       []
     LRel k              -> ctor t "tRel"       [S k]
-    LLambda n u         -> ctor t "tLambda"    [S n, S u]
-    LLetIn n u v        -> ctor t "tLetIn"     [S n, S u, S v]
+    LLambda n _ u       -> ctor t "tLambda"    [S n, S u]
+    LLetIn n _ u v      -> ctor t "tLetIn"     [S n, S u, S v]
     LApp u v            -> ctor t "tApp"       [S u, S v]
     LConst c            -> ctor t "tConst"     [S c]
     LConstruct ind i es -> ctor t "tConstruct" [S ind, S i, S es]
