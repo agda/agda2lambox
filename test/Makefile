@@ -2,7 +2,7 @@
 MAIN=Tests
 .PHONY : html clean
 
-html :
+html:
 	@echo == Generating HTML ==
 	mkdir -p html/ && cp Agda.css html/
 	-cabal run -- agda2lambox --html --css=Agda.css $(MAIN).agda
