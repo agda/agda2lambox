@@ -81,3 +81,4 @@
 .tab-content { height: 100%; }
 .tabs__tab { height: 100%; }
 embed { height: 100%; width: 100%; }
+.code { white-space: pre-wrap; }
