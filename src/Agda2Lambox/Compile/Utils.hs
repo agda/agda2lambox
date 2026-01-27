@@ -16,11 +16,12 @@ module Agda2Lambox.Compile.Utils
 
 import Control.Monad.State
 import Control.Monad.IO.Class ( liftIO )
+import Numeric ( showHex )
 import Data.Char
 import Data.List ( elemIndex, foldl' )
 import Data.Maybe ( fromMaybe, listToMaybe, isJust )
 
-import Unicode.Char.Identifiers
+import Unicode.Char.Identifiers ( isXIDStart, isXIDContinue )
 import Agda.Compiler.Backend
 import Agda.Syntax.Internal
 import Agda.Syntax.Abstract.Name
@@ -138,48 +139,54 @@ instance MayBeLogical a => MayBeLogical (Arg a) where
   isLogical arg | not (usableModality arg) = pure True
   isLogical arg = isLogical $ unArg arg
 
--- | Sanitize an agda name to something without unicode.
--- Must be injective.
--- We may require a smarter transformation later on for other targets.
+-- | Delimitor used for name sanitization
+sDelim :: Char
+sDelim = 'Ֆ'
+
+-- | Sanitize an agda name to a Rust-compatible identifier.
+-- Injective by design.
 sanitize :: String -> String
-sanitize xs | xs `elem` ["true", "false"] = "r#" ++ xs
-sanitize [] = []
-sanitize (x:xs) = toXIDStart x <> concatMap toXIDContinue xs
+sanitize [] = sDelim : "empty" -- NOTE(flupe): should be unreachable
+sanitize s@(x:xs)
+  -- NOTE(flupe): Rust keywords are converted into raw identifiers
+  | s `elem` rustKeywords = "r#"   ++ s
+  -- NOTE(flupe): or prefixed with the 
+  | s `elem` forbiddenRaw = sDelim : s
+  | otherwise =
+      let hd = escapeChar isXIDStart x
+          tl = concatMap (escapeChar isXIDContinue) xs
+      in hd <> tl
   where
-    toXIDStart, toXIDContinue :: Char -> String
-    toXIDStart c
-      | isXIDStart c || c == '_' = [c]
-      | isXIDContinue c          = "_" <> [c]
-      | otherwise                = toXIDContinue c
+    escapeChar :: (Char -> Bool) -> Char -> String
+    escapeChar xid x = if xid x then [x] else sDelim : esc x
+      where
+        esc '_'  = "_" -- Preserve underscore (it's gonna get prefixed)
+        esc '+'  = "plus"
+        esc '-'  = "sub"
+        esc '*'  = "mult"
+        esc '/'  = "div"
+        esc '='  = "eq"
+        esc '<'  = "lt"
+        esc '>'  = "gt"
+        esc 'λ'  = "lam"
+        esc '→'  = "to"
+        esc '∷'  = "cons"
+        esc '?'  = "qen"
+        esc '!'  = "bng"
+        esc '#'  = "hsh"  -- This ensures names starting with # are escaped
+                          -- and enforces injectivity of the sanitization
+        esc '.'  = "dot"
+        esc c | c == sDelim   = [sDelim]
+              | otherwise     = showHex (ord c) [sDelim]
 
-    toXIDContinue c
-      | isXIDContinue c = [c]
-      | otherwise       = "y" <> show (ord c) <> "y"
-{-
-sanitize q = "agda" ++ concatMap encode q
-  where
-  encode '$' = "$$"
-  encode c
-    | isAscii c -- more agressive sanitization
-    , isLower c
-    || isUpper c
-    || c == '_'
-    || generalCategory c == DecimalNumber = [c]
-    | otherwise = "$" ++ show (fromEnum c) ++ "$"
+      -- standard rust keywords
+    rustKeywords =
+      [ "as", "break", "const", "continue", "else", "enum", "extern"
+      , "false", "fn", "for", "if", "impl", "in", "let", "loop", "match"
+      , "mod", "move", "mut", "pub", "ref", "return", "static", "struct"
+      , "trait", "true", "type", "unsafe", "use", "where", "while"
+      , "async", "await", "dyn"
+      ]
 
--- | Sanitize an agda name to something Rust-compliant.
--- Must be injective.
-sanitize :: String -> String
-sanitize [] = []
-sanitize (c:cs) = toXIDStart c <> concatMap toXIDContinue cs
-  where
-    toXIDStart, toXIDContinue :: Char -> String
-    toXIDStart c
-      | isXIDStart c || c == '_' = [c]
-      | isXIDContinue c          = "_" <> [c]
-      | otherwise                = toXIDContinue c
-
-    toXIDContinue c
-      | isXIDContinue c = [c]
-      | otherwise        = "Ֆ" <> show (ord c) <> "Ֆ"
-      -}
+    -- rust keywords that are also forbidden inside raw strings
+    forbiddenRaw = ["self", "Self", "super", "crate"]

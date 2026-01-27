@@ -5,7 +5,9 @@ module Agda.Utils where
 
 import Control.Applicative ( liftA2 )
 import Data.Bifunctor ( second )
+import Data.Functor ( (<&>) )
 import Data.Maybe ( isJust, isNothing, catMaybes )
+import Data.Text ( Text )
 
 import Agda.Compiler.Backend ( getUniqueCompilerPragma, PureTCM, HasConstInfo (getConstInfo) )
 import Agda.Syntax.Abstract.Name
@@ -31,11 +33,22 @@ import Agda.TypeChecking.Reduce (reduceDefCopy)
 
 -- * Miscellaneous
 
+-- | Pragma string for the agda2lambox backend.
+agda2lamboxP :: Text
+agda2lamboxP = "AGDA2LAMBOX"
+
 pp :: Pretty a => a -> String
 pp = prettyShow
 
 hasPragma :: QName -> TCM Bool
-hasPragma qn = isJust <$> getUniqueCompilerPragma "AGDA2LAMBOX" qn
+hasPragma qn = isJust <$> getUniqueCompilerPragma agda2lamboxP qn
+
+-- | Retrieve the additional info to a COMPILE pragma, if any
+getPragmaInfo :: QName -> TCM (Maybe String)
+getPragmaInfo qn =
+  getUniqueCompilerPragma agda2lamboxP qn <&> \case
+    Nothing                      -> Nothing
+    Just (CompilerPragma _ info) -> Just info
 
 isDataDef, isRecDef, isFunDef, isDataOrRecDef :: Defn -> Bool
 isDataDef = \case
