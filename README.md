@@ -1,33 +1,27 @@
 # agda2lambox
 
 An [Agda] backend to generate [MetaCoq] λ□ (LambdaBox) programs
-for further (verified) extraction to WASM or Rust.
+for further verified extraction to WASM or Rust using the [Peregrine] tool.
 The backend builds off Agda 2.7.0.1.
 Compatible with Coq 8.19.0, MetaCoq 1.3.1 and CertiCoq 0.9.
 
 [Agda]: https://github.com/agda/agda
 [MetaCoq]: https://metacoq.github.io/
+[Peregrine]: https://github.com/peregrine-project/peregrine-tool
 
 To install the backend, setup GHC (tested with `9.10.1`) and cabal.
 
 ```
-git clone git@github.com:omelkonian/agda2lambox.git
+git clone git@github.com:agda/agda2lambox.git
 cd agda2lambox
 cabal install
 ```
 
-This will take a while, as it has to (recursively) clone the Agda repo
-and compile from source.
-
-Then you're good to go.
-
 ```
-agda2lambox [AGDAFLAGS] [--out-dir DIR] [--typed] FILE
+agda2lambox [AGDAFLAGS] [--out-dir DIR] [--typed] [--no-blocks] FILE
 ```
 
-Then, use the [following tool][peregrine] to further compile the generate `.ast` files to WASM, Rust, OCaml, C, and Elm.
-
-[peregrine]: https://github.com/peregrine-project/peregrine-tool
+Then, use the [following tool][Peregrine] to further compile the generated `.ast` files to WASM, Rust, OCaml, C, and Elm.
 
 ## Setup
 
