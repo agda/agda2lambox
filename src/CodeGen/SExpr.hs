@@ -37,7 +37,16 @@ prettySexp t = flatPrint printer . toSexp t
     ANode   kw  -> kw
     AInt    i   -> pack $ show i
     ABool   b   -> if b then "true" else "false"
-    AString str -> pack $ show str
+    AString str -> pack $ quote str
+
+  -- wraps a string between double quotes, and escapes it
+  -- NOTE: there probably never are double quotes in the string, but regardless
+  quote :: String -> String
+  quote s = "\"" <> escape s <> "\""
+    where
+      escape []       = []
+      escape ('"':cs) = "\\\"" <> escape cs
+      escape (c  :cs) = c : escape cs
 
 
 class ToSexp t a where
