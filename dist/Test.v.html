@@ -36,7 +36,7 @@ Definition env : global_env :=
               (TInd
                  {| inductive_mind := (MPfile [&quot;Test&quot;%bs], &quot;Bool&quot;%bs);
                     inductive_ind := 0 |})) |});
-   (((MPfile [&quot;Test&quot;%bs], &quot;noty39y&quot;%bs), true),
+   (((MPfile [&quot;Test&quot;%bs], &quot;not\1366\&amp;27\1366&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
@@ -91,7 +91,8 @@ Definition env : global_env :=
                                (tLambda
                                   nAnon
                                   (tCase
-                                     ({| inductive_mind := (MPfile [&quot;Test&quot;%bs; &quot;_&quot;%bs], &quot;Maybe&quot;%bs);
+                                     ({| inductive_mind :=
+                                           (MPfile [&quot;Test&quot;%bs; &quot;\1366_&quot;%bs], &quot;Maybe&quot;%bs);
                                          inductive_ind := 0 |},
                                       0)
                                      (tRel 0) [([], tRel 1); ([nAnon], tRel 0)]))))
@@ -106,11 +107,11 @@ Definition env : global_env :=
                  (TArr
                     (TApp
                        (TInd
-                          {| inductive_mind := (MPfile [&quot;Test&quot;%bs; &quot;_&quot;%bs], &quot;Maybe&quot;%bs);
+                          {| inductive_mind := (MPfile [&quot;Test&quot;%bs; &quot;\1366_&quot;%bs], &quot;Maybe&quot;%bs);
                              inductive_ind := 0 |})
                        (TVar 0))
                     (TVar 0)))) |});
-   (((MPfile [&quot;Test&quot;%bs; &quot;_&quot;%bs], &quot;Maybe&quot;%bs), true),
+   (((MPfile [&quot;Test&quot;%bs; &quot;\1366_&quot;%bs], &quot;Maybe&quot;%bs), true),
     InductiveDecl
       {| ind_finite := Finite; ind_npars := 0;
          ind_bodies :=

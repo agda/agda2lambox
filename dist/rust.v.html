@@ -14,7 +14,9 @@ Definition env : global_declarations :=
                 (tApp
                    (tApp (tApp (tConst (MPfile [&quot;rust&quot;%bs], &quot;map&quot;%bs)) tBox) tBox)
                    (tApp
-                      (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_y43y_&quot;%bs))
+                      (tConst
+                         (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
+                          &quot;\1366_\1366plus_&quot;%bs))
                       (tConstruct
                          {| inductive_mind :=
                               (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
@@ -84,12 +86,13 @@ Definition env : global_declarations :=
                                            (tRel 0)])]))));
                     rarg := 0 |}]
                 0) |});
-   ((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_y43y_&quot;%bs),
+   ((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
+     &quot;\1366_\1366plus_&quot;%bs),
     ConstantDecl
       {| cst_body :=
            Some
              (tFix
-                [{| dname := nNamed &quot;_y43y_&quot;%bs;
+                [{| dname := nNamed &quot;\1366_\1366plus_&quot;%bs;
                     dbody :=
                       tLambda
                         nAnon
@@ -117,8 +120,10 @@ Definition env : global_declarations :=
            [{| ind_name := &quot;List&quot;%bs; ind_propositional := false;
                ind_kelim := IntoAny;
                ind_ctors :=
-                 [{| cstr_name := &quot;y91yy93y&quot;%bs; cstr_nargs := 0 |};
-                  {| cstr_name := &quot;_y58yy58y_&quot;%bs; cstr_nargs := 2 |}];
+                 [{| cstr_name := &quot;\1366\&amp;5b\1366\1366\&amp;5d\1366&quot;%bs;
+                     cstr_nargs := 0 |};
+                  {| cstr_name := &quot;\1366_\1366\&amp;3a\1366\1366\&amp;3a\1366_&quot;%bs;
+                     cstr_nargs := 2 |}];
                ind_projs := [] |}] |});
    ((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs),
     InductiveDecl

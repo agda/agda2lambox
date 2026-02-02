@@ -6,12 +6,12 @@ From Agda2Lambox     Require Import CheckWF Eval.
 Import ListNotations.
 
 Definition env : global_declarations :=
-  [((MPfile [&quot;Equality&quot;%bs], &quot;_y8801y_&quot;%bs),
+  [((MPfile [&quot;Equality&quot;%bs], &quot;\1366_\1366\&amp;2261\1366_&quot;%bs),
     InductiveDecl
       {| ind_finite := Finite; ind_npars := 0;
          ind_bodies :=
-           [{| ind_name := &quot;_y8801y_&quot;%bs; ind_propositional := false;
-               ind_kelim := IntoAny;
+           [{| ind_name := &quot;\1366_\1366\&amp;2261\1366_&quot;%bs;
+               ind_propositional := false; ind_kelim := IntoAny;
                ind_ctors := [{| cstr_name := &quot;refl&quot;%bs; cstr_nargs := 0 |}];
                ind_projs := [] |}] |});
    ((MPfile [&quot;Equality&quot;%bs], &quot;eqzero&quot;%bs),
@@ -22,7 +22,7 @@ Definition env : global_declarations :=
     ConstantDecl {| cst_body := Some tBox |});
    ((MPfile [&quot;Equality&quot;%bs], &quot;sym&quot;%bs),
     ConstantDecl {| cst_body := Some tBox |});
-   ((MPfile [&quot;Equality&quot;%bs], &quot;_y8728y_&quot;%bs),
+   ((MPfile [&quot;Equality&quot;%bs], &quot;\1366_\1366\&amp;2218\1366_&quot;%bs),
     ConstantDecl
       {| cst_body :=
            Some
@@ -59,15 +59,15 @@ Definition env : global_declarations :=
                    (tLambda
                       nAnon
                       (tLambda nAnon (tLambda nAnon (tLambda nAnon (tRel 0))))))) |});
-   ((MPfile [&quot;Equality&quot;%bs], &quot;addy45ylefty45yid&quot;%bs),
+   ((MPfile [&quot;Equality&quot;%bs], &quot;add\1366subleft\1366subid&quot;%bs),
     ConstantDecl
       {| cst_body :=
            Some
              (tFix
-                [{| dname := nNamed &quot;addy45ylefty45yid&quot;%bs;
+                [{| dname := nNamed &quot;add\1366subleft\1366subid&quot;%bs;
                     dbody := tLambda nAnon tBox; rarg := 0 |}]
                 0) |});
-   ((MPfile [&quot;Equality&quot;%bs], &quot;sucy45ylefty45yadd&quot;%bs),
+   ((MPfile [&quot;Equality&quot;%bs], &quot;suc\1366subleft\1366subadd&quot;%bs),
     ConstantDecl {| cst_body := Some tBox |});
    ((MPfile [&quot;Equality&quot;%bs], &quot;eqLevel&quot;%bs),
     ConstantDecl {| cst_body := Some tBox |});
@@ -80,7 +80,9 @@ Definition env : global_declarations :=
                    (tApp
                       (tApp
                          (tApp
-                            (tApp (tConst (MPfile [&quot;Equality&quot;%bs], &quot;_y36y_&quot;%bs)) tBox) tBox)
+                            (tApp
+                               (tConst (MPfile [&quot;Equality&quot;%bs], &quot;\1366_\1366\&amp;24\1366_&quot;%bs)) tBox)
+                            tBox)
                          tBox)
                       tBox)
                    (tApp
@@ -159,7 +161,7 @@ Definition env : global_declarations :=
                                   1 [tApp (tApp (tRel 3) (tRel 0)) (tRel 1)])]));
                     rarg := 0 |}]
                 0) |});
-   ((MPfile [&quot;Equality&quot;%bs], &quot;_y36y_&quot;%bs),
+   ((MPfile [&quot;Equality&quot;%bs], &quot;\1366_\1366\&amp;24\1366_&quot;%bs),
     ConstantDecl
       {| cst_body :=
            Some

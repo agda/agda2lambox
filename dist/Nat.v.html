@@ -12,7 +12,9 @@ Definition env : global_declarations :=
            Some
              (tApp
                 (tApp
-                   (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_y43y_&quot;%bs))
+                   (tConst
+                      (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
+                       &quot;\1366_\1366plus_&quot;%bs))
                    (tConstruct
                       {| inductive_mind :=
                            (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
@@ -38,12 +40,13 @@ Definition env : global_declarations :=
                               (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
                             inductive_ind := 0 |}
                          0 []]])) |});
-   ((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_y43y_&quot;%bs),
+   ((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
+     &quot;\1366_\1366plus_&quot;%bs),
     ConstantDecl
       {| cst_body :=
            Some
              (tFix
-                [{| dname := nNamed &quot;_y43y_&quot;%bs;
+                [{| dname := nNamed &quot;\1366_\1366plus_&quot;%bs;
                     dbody :=
                       tLambda
                         nAnon

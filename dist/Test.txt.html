@@ -4,7 +4,7 @@
     type variables:  []
       constructors:
 
-Test._.Maybe:
+Test.Ֆ_.Maybe:
   mutual inductive(s):
     Maybe
     type variables:  [a]
@@ -16,10 +16,10 @@ Test._.Maybe:
 Test.fromMaybe:
   constant declaration:
     type variables: [a]
-    type: □ → @0 → Test._.Maybe{0} @0 → @0
+    type: □ → @0 → Test.Ֆ_.Maybe{0} @0 → @0
     body: λ _ _ →
             λ _ _ _ →
-              case&lt;Test._.Maybe{0},0&gt; @0 of
+              case&lt;Test.Ֆ_.Maybe{0},0&gt; @0 of
                 λ&lt;[]&gt; @1
                 λ&lt;[_]&gt; @0
               @1
@@ -33,7 +33,7 @@ Test.Bool:
         r#true (0 arg(s))
         r#false (0 arg(s))
 
-Test.noty39y:
+Test.notՖ27Ֆ:
   constant declaration:
     type variables: []
     type: (Test.Bool{0}) → Test.Bool{0}

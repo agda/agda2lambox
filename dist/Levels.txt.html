@@ -10,7 +10,7 @@ Agda.Builtin.Nat.Nat:
         zero (0 arg(s))
         suc (1 arg(s))
 
-Levels._.toNat:
+Levels.Ֆ_.toNat:
   constant declaration:
     body: λ _ →
             Agda.Builtin.Nat.Nat{0}{1}
@@ -79,7 +79,7 @@ Levels._.toNat:
                                                                                                 Builtin.
                                                                                                 Nat.Nat{0}{0}
 
-Levels.testWhere: constant declaration: body: Levels._.toNat □
+Levels.testWhere: constant declaration: body: Levels.Ֆ_.toNat □
 
 Levels.SomeLvl:
   mutual inductive(s):
@@ -90,10 +90,10 @@ Levels.SomeLvl.ℓ:
   constant declaration:
     body: λ _ → case&lt;Levels.SomeLvl{0},0&gt; @0 of λ&lt;[_]&gt; @0
 
-Levels._0ℓ: constant declaration: body: □
+Levels.Ֆ30Ֆℓ: constant declaration: body: □
 
 Levels.someLvl:
-  constant declaration: body: Levels.SomeLvl{0}{0} (Levels._0ℓ)
+  constant declaration: body: Levels.SomeLvl{0}{0} (Levels.Ֆ30Ֆℓ)
 
 Levels.testConstLvl2:
   constant declaration:
@@ -454,7 +454,7 @@ Levels.mkLevel:
     body: μ rec -&gt;
             λ _ →
               case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @0 of
-                λ&lt;[]&gt; Levels._0ℓ
+                λ&lt;[]&gt; Levels.Ֆ30Ֆℓ
                 λ&lt;[_]&gt; Agda.Primitive.lsuc (@2 @0)
 main program: [Levels.testMkLevel, Levels.testSomeLvl,
                Levels.testConstLvl, Levels.testConst, Levels.testConstLvl2,

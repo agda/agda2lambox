@@ -16,7 +16,7 @@ Definition env : global_declarations :=
                ind_kelim := IntoAny;
                ind_ctors :=
                  [{| cstr_name := &quot;\8469&quot;%bs; cstr_nargs := 0 |};
-                  {| cstr_name := &quot;_y8658y_&quot;%bs; cstr_nargs := 2 |}];
+                  {| cstr_name := &quot;\1366_\1366\&amp;21d2\1366_&quot;%bs; cstr_nargs := 2 |}];
                ind_projs := [] |}] |});
    ((MPfile [&quot;STLC&quot;%bs], &quot;\945&quot;%bs),
     ConstantDecl {| cst_body := Some tBox |});
@@ -29,8 +29,9 @@ Definition env : global_declarations :=
            [{| ind_name := &quot;Ctx&quot;%bs; ind_propositional := false;
                ind_kelim := IntoAny;
                ind_ctors :=
-                 [{| cstr_name := &quot;y91yy93y&quot;%bs; cstr_nargs := 0 |};
-                  {| cstr_name := &quot;_y9655y_&quot;%bs; cstr_nargs := 3 |}];
+                 [{| cstr_name := &quot;\1366\&amp;5b\1366\1366\&amp;5d\1366&quot;%bs;
+                     cstr_nargs := 0 |};
+                  {| cstr_name := &quot;\1366_\1366\&amp;25b7\1366_&quot;%bs; cstr_nargs := 3 |}];
                ind_projs := [] |}] |});
    ((MPfile [&quot;STLC&quot;%bs], &quot;\915&quot;%bs),
     ConstantDecl {| cst_body := Some tBox |});
@@ -48,21 +49,25 @@ Definition env : global_declarations :=
                          inductive_ind := 0 |}
                       0 []))
                 (tConstruct
-                   {| inductive_mind := (MPfile [&quot;STLC&quot;%bs], &quot;_y8866y_&quot;%bs);
+                   {| inductive_mind :=
+                        (MPfile [&quot;STLC&quot;%bs], &quot;\1366_\1366\&amp;22a2\1366_&quot;%bs);
                       inductive_ind := 0 |}
                    2
                    [tBox; tBox;
                     tConstruct
-                      {| inductive_mind := (MPfile [&quot;STLC&quot;%bs], &quot;_y8866y_&quot;%bs);
+                      {| inductive_mind :=
+                           (MPfile [&quot;STLC&quot;%bs], &quot;\1366_\1366\&amp;22a2\1366_&quot;%bs);
                          inductive_ind := 0 |}
                       1
                       [tBox; tBox;
                        tConstruct
-                         {| inductive_mind := (MPfile [&quot;STLC&quot;%bs], &quot;_y8866y_&quot;%bs);
+                         {| inductive_mind :=
+                              (MPfile [&quot;STLC&quot;%bs], &quot;\1366_\1366\&amp;22a2\1366_&quot;%bs);
                             inductive_ind := 0 |}
                          4
                          [tConstruct
-                            {| inductive_mind := (MPfile [&quot;STLC&quot;%bs], &quot;_y8866y_&quot;%bs);
+                            {| inductive_mind :=
+                                 (MPfile [&quot;STLC&quot;%bs], &quot;\1366_\1366\&amp;22a2\1366_&quot;%bs);
                                inductive_ind := 0 |}
                             3
                             [tConstruct
@@ -76,16 +81,19 @@ Definition env : global_declarations :=
                                      inductive_ind := 0 |}
                                   0 []]];
                           tConstruct
-                            {| inductive_mind := (MPfile [&quot;STLC&quot;%bs], &quot;_y8866y_&quot;%bs);
+                            {| inductive_mind :=
+                                 (MPfile [&quot;STLC&quot;%bs], &quot;\1366_\1366\&amp;22a2\1366_&quot;%bs);
                                inductive_ind := 0 |}
                             0
                             [tBox;
                              tConstruct
-                               {| inductive_mind := (MPfile [&quot;STLC&quot;%bs], &quot;_y8715y_&quot;%bs);
+                               {| inductive_mind :=
+                                    (MPfile [&quot;STLC&quot;%bs], &quot;\1366_\1366\&amp;220b\1366_&quot;%bs);
                                   inductive_ind := 0 |}
                                0 [tBox; tBox; tBox]]]];
                     tConstruct
-                      {| inductive_mind := (MPfile [&quot;STLC&quot;%bs], &quot;_y8866y_&quot;%bs);
+                      {| inductive_mind :=
+                           (MPfile [&quot;STLC&quot;%bs], &quot;\1366_\1366\&amp;22a2\1366_&quot;%bs);
                          inductive_ind := 0 |}
                       3
                       [tConstruct
@@ -116,7 +124,8 @@ Definition env : global_declarations :=
                                  (tLambda
                                     nAnon
                                     (tCase
-                                       ({| inductive_mind := (MPfile [&quot;STLC&quot;%bs], &quot;_y8866y_&quot;%bs);
+                                       ({| inductive_mind :=
+                                             (MPfile [&quot;STLC&quot;%bs], &quot;\1366_\1366\&amp;22a2\1366_&quot;%bs);
                                            inductive_ind := 0 |},
                                         0)
                                        (tRel 0)
@@ -162,7 +171,7 @@ Definition env : global_declarations :=
                                            (tApp
                                               (tConst
                                                  (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                                  &quot;_y43y_&quot;%bs))
+                                                  &quot;\1366_\1366plus_&quot;%bs))
                                               (tApp
                                                  (tApp
                                                     (tApp (tApp (tApp (tRel 7) tBox) tBox) tBox)
@@ -206,7 +215,7 @@ Definition env : global_declarations :=
                                         ([nAnon; nAnon; nAnon; nAnon; nAnon],
                                          tCase
                                            ({| inductive_mind :=
-                                                 (MPfile [&quot;STLC&quot;%bs], &quot;_y8715y_&quot;%bs);
+                                                 (MPfile [&quot;STLC&quot;%bs], &quot;\1366_\1366\&amp;220b\1366_&quot;%bs);
                                                inductive_ind := 0 |},
                                             0)
                                            (tRel 5)
@@ -219,12 +228,13 @@ Definition env : global_declarations :=
                                                (tRel 0))])])))));
                     rarg := 0 |}]
                 0) |});
-   ((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_y43y_&quot;%bs),
+   ((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
+     &quot;\1366_\1366plus_&quot;%bs),
     ConstantDecl
       {| cst_body :=
            Some
              (tFix
-                [{| dname := nNamed &quot;_y43y_&quot;%bs;
+                [{| dname := nNamed &quot;\1366_\1366plus_&quot;%bs;
                     dbody :=
                       tLambda
                         nAnon
@@ -252,15 +262,16 @@ Definition env : global_declarations :=
            [{| ind_name := &quot;Env&quot;%bs; ind_propositional := false;
                ind_kelim := IntoAny;
                ind_ctors :=
-                 [{| cstr_name := &quot;y91yy93y&quot;%bs; cstr_nargs := 0 |};
-                  {| cstr_name := &quot;_y9655y_&quot;%bs; cstr_nargs := 5 |}];
+                 [{| cstr_name := &quot;\1366\&amp;5b\1366\1366\&amp;5d\1366&quot;%bs;
+                     cstr_nargs := 0 |};
+                  {| cstr_name := &quot;\1366_\1366\&amp;25b7\1366_&quot;%bs; cstr_nargs := 5 |}];
                ind_projs := [] |}] |});
-   ((MPfile [&quot;STLC&quot;%bs], &quot;_y8866y_&quot;%bs),
+   ((MPfile [&quot;STLC&quot;%bs], &quot;\1366_\1366\&amp;22a2\1366_&quot;%bs),
     InductiveDecl
       {| ind_finite := Finite; ind_npars := 0;
          ind_bodies :=
-           [{| ind_name := &quot;_y8866y_&quot;%bs; ind_propositional := false;
-               ind_kelim := IntoAny;
+           [{| ind_name := &quot;\1366_\1366\&amp;22a2\1366_&quot;%bs;
+               ind_propositional := false; ind_kelim := IntoAny;
                ind_ctors :=
                  [{| cstr_name := &quot;var&quot;%bs; cstr_nargs := 2 |};
                   {| cstr_name := &quot;lam&quot;%bs; cstr_nargs := 3 |};
@@ -268,12 +279,12 @@ Definition env : global_declarations :=
                   {| cstr_name := &quot;lit&quot;%bs; cstr_nargs := 1 |};
                   {| cstr_name := &quot;plus&quot;%bs; cstr_nargs := 2 |}];
                ind_projs := [] |}] |});
-   ((MPfile [&quot;STLC&quot;%bs], &quot;_y8715y_&quot;%bs),
+   ((MPfile [&quot;STLC&quot;%bs], &quot;\1366_\1366\&amp;220b\1366_&quot;%bs),
     InductiveDecl
       {| ind_finite := Finite; ind_npars := 0;
          ind_bodies :=
-           [{| ind_name := &quot;_y8715y_&quot;%bs; ind_propositional := false;
-               ind_kelim := IntoAny;
+           [{| ind_name := &quot;\1366_\1366\&amp;220b\1366_&quot;%bs;
+               ind_propositional := false; ind_kelim := IntoAny;
                ind_ctors :=
                  [{| cstr_name := &quot;here&quot;%bs; cstr_nargs := 3 |};
                   {| cstr_name := &quot;there&quot;%bs; cstr_nargs := 5 |}];

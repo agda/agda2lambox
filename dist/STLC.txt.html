@@ -10,16 +10,16 @@ Agda.Builtin.Nat.Nat:
         zero (0 arg(s))
         suc (1 arg(s))
 
-STLC._y8715y_:
+STLC.Ֆ_Ֆ220bՖ_:
   mutual inductive(s):
-    _y8715y_
+    Ֆ_Ֆ220bՖ_
       constructors:
         here (3 arg(s))
         there (5 arg(s))
 
-STLC._y8866y_:
+STLC.Ֆ_Ֆ22a2Ֆ_:
   mutual inductive(s):
-    _y8866y_
+    Ֆ_Ֆ22a2Ֆ_
       constructors:
         var (2 arg(s))
         lam (3 arg(s))
@@ -31,10 +31,10 @@ STLC.Env:
   mutual inductive(s):
     Env
       constructors:
-        y91yy93y (0 arg(s))
-        _y9655y_ (5 arg(s))
+        Ֆ5bՖՖ5dՖ (0 arg(s))
+        Ֆ_Ֆ25b7Ֆ_ (5 arg(s))
 
-Agda.Builtin.Nat._y43y_:
+Agda.Builtin.Nat.Ֆ_Ֆplus_:
   constant declaration:
     body: μ rec -&gt;
             λ _ _ →
@@ -49,7 +49,7 @@ STLC.lookupEnv:
               case&lt;STLC.Env{0},0&gt; @1 of
                 λ&lt;[]&gt; case&lt;LamBox.Empty{0},0&gt; □ of
                 λ&lt;[_, _, _, _, _]&gt;
-                  case&lt;STLC._y8715y_{0},0&gt; @5 of
+                  case&lt;STLC.Ֆ_Ֆ220bՖ_{0},0&gt; @5 of
                     λ&lt;[_, _, _]&gt; @3
                     λ&lt;[_, _, _, _, _]&gt; @15 □ □ □ @6 @0
 
@@ -57,27 +57,28 @@ STLC.eval:
   constant declaration:
     body: μ rec -&gt;
             λ _ _ _ _ _ →
-              case&lt;STLC._y8866y_{0},0&gt; @0 of
+              case&lt;STLC.Ֆ_Ֆ22a2Ֆ_{0},0&gt; @0 of
                 λ&lt;[_, _]&gt; STLC.lookupEnv □ □ □ @3 @0
                 λ&lt;[_, _, _]&gt; λ _ → @9 □ □ □ STLC.Env{0}{1} □ □ □ @5 @0 @1
                 λ&lt;[_, _, _, _]&gt; @9 □ □ □ @5 @1 (@9 □ □ □ @5 @0)
                 λ&lt;[_]&gt; @0
-                λ&lt;[_, _]&gt; Agda.Builtin.Nat._y43y_ (@7 □ □ □ @3 @1) (@7 □ □ □ @3 @0)
+                λ&lt;[_, _]&gt;
+                  Agda.Builtin.Nat.Ֆ_Ֆplus_ (@7 □ □ □ @3 @1) (@7 □ □ □ @3 @0)
 
 STLC.test:
   constant declaration:
     body: STLC.eval □ □ □ STLC.Env{0}{0}
-            STLC._y8866y_{0}{2}
+            STLC.Ֆ_Ֆ22a2Ֆ_{0}{2}
               □
               □
-              STLC._y8866y_{0}{1}
+              STLC.Ֆ_Ֆ22a2Ֆ_{0}{1}
                 □
                 □
-                STLC._y8866y_{0}{4}
-                  STLC._y8866y_{0}{3}
+                STLC.Ֆ_Ֆ22a2Ֆ_{0}{4}
+                  STLC.Ֆ_Ֆ22a2Ֆ_{0}{3}
                     Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}
-                  STLC._y8866y_{0}{0} □ STLC._y8715y_{0}{0} □ □ □
-              STLC._y8866y_{0}{3}
+                  STLC.Ֆ_Ֆ22a2Ֆ_{0}{0} □ STLC.Ֆ_Ֆ220bՖ_{0}{0} □ □ □
+              STLC.Ֆ_Ֆ22a2Ֆ_{0}{3}
                 Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}
 
 STLC.Γ: constant declaration: body: □
@@ -86,8 +87,8 @@ STLC.Ctx:
   mutual inductive(s):
     Ctx
       constructors:
-        y91yy93y (0 arg(s))
-        _y9655y_ (3 arg(s))
+        Ֆ5bՖՖ5dՖ (0 arg(s))
+        Ֆ_Ֆ25b7Ֆ_ (3 arg(s))
 
 STLC.β: constant declaration: body: □
 
@@ -98,7 +99,7 @@ STLC.Type:
     Type
       constructors:
         ℕ (0 arg(s))
-        _y8658y_ (2 arg(s))
+        Ֆ_Ֆ21d2Ֆ_ (2 arg(s))
 
 STLC.n: constant declaration: body: □
 main program: [STLC.test]</code></pre>
