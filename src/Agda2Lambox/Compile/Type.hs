@@ -1,4 +1,4 @@
-{-# LANGUAGE LambdaCase, FlexibleInstances, MultiWayIf, NamedFieldPuns #-}
+{-# LANGUAGE LambdaCase, FlexibleInstances, MultiWayIf, NamedFieldPuns, OverloadedStrings #-}
 module Agda2Lambox.Compile.Type where
 --   ( compileType
 --   , compileTopLevelType
@@ -19,11 +19,14 @@ import Data.Function ( applyWhen )
 import Agda.Syntax.Common ( unArg, Arg (Arg) )
 import Agda.Syntax.Internal
 import Agda.TypeChecking.Substitute ( absBody, TelV (theCore), absApp )
-import Agda.TypeChecking.Telescope (telView)
+import Agda.TypeChecking.Telescope (telView, piApplyM)
 import Agda.TypeChecking.Monad.Base ( TCM, MonadTCM (liftTCM), Definition(..))
+import Agda.TypeChecking.Monad.Debug ( reportSDoc )
 import Agda.TypeChecking.Monad.Signature ( canonicalName )
-import Agda.TypeChecking.Telescope ( mustBePi )
+import Agda.TypeChecking.Telescope ( mustBePi, shouldBePi )
+import Agda.TypeChecking.Pretty ( prettyTCM, (<+>) )
 import Agda.Utils.Monad ( ifM )
+import Agda.Utils ( unSpine1 )
 
 import qualified LambdaBox as LBox
 import Agda2Lambox.Compile.Utils
@@ -97,19 +100,28 @@ compileArgs tvars = runC tvars . compileArgsC
   compileArgsC [] = pure []
   compileArgsC (dom:args) = do
     let name = domToName dom
-    typ <- ifM (liftTCM $ isLogical dom) (pure LBox.TBox) (compileTypeC $ unDom dom)
+    liftTCM $ reportSDoc "agda2lambox.compile.arg" 100 $
+      "Compiling arg: " <+> prettyTCM dom
+    typ <- ifM (liftTCM $ isLogical dom)
+                 (pure LBox.TBox)
+                 (compileTypeC $ unDom dom)
     ((name, typ):) <$> underBinder dom (compileArgsC args)
 
 
 -- | Compile a top-level type to λ□, lifting out type variables.
 -- See [Extracting functional programs from Coq, in Coq](https://arxiv.org/pdf/2108.02995).
 compileTopLevelType :: Type -> CompileM ([LBox.Name], LBox.Type)
-compileTopLevelType = runC 0 . compileTopLevelTypeC
+compileTopLevelType ty = do
+  liftTCM $ reportSDoc "agda2lambox.compile.type" 10 $ "Compiling top level type: " <+> prettyTCM ty
+  runC 0 $ compileTopLevelTypeC ty
 
 -- | Compile a type, given a number of type variables in scope.
 --   Will not introduce more type variables.
 compileType :: Int -> Type -> CompileM LBox.Type
-compileType tvars = runC tvars . compileTypeC
+compileType tvars ty = do
+  liftTCM $ reportSDoc "agda2lambox.compile.type" 10 $ "Compiling type: " <+> prettyTCM ty
+  liftTCM $ reportSDoc "agda2lambox.compile.type" 10 $ "With vars: " <+> prettyTCM tvars
+  runC tvars $ compileTypeC ty
 
 compileTypeC :: Type -> C LBox.Type
 compileTypeC = local (\e -> e { insertVars = False }) . fmap snd . compileTopLevelTypeC
@@ -117,7 +129,10 @@ compileTypeC = local (\e -> e { insertVars = False }) . fmap snd . compileTopLev
 compileElims :: Type -> Args -> C [LBox.Type]
 compileElims _ [] = pure []
 compileElims ty (x:xs) = do
-  (a, b) <- mustBePi ty
+  liftTCM $ reportSDoc "agda2lambox.compile.elims" 100 $ "Full elim type:" <+> prettyTCM ty
+  liftTCM $ reportSDoc "agda2lambox.compile.elims" 100 $ "Current elim:" <+> prettyTCM x
+  (a, b) <- liftTCM $ shouldBePi ty
+  -- b <- piApplyM ty x
   rest   <- compileElims (absApp b $ unArg x) xs
   first  <- ifM (liftTCM $ isLogical a)
               (pure LBox.TBox)
@@ -146,65 +161,67 @@ compileTopLevelTypeC typ =
 -- NOTE(flupe):
 --   More or less the algorithm described in the paper (E^T in Fig.2).
 compileTypeTerm :: Term -> C ([LBox.Name], LBox.Type)
-compileTypeTerm = \case
-  Sort{}     -> pure ([], LBox.TBox)
-  Level{}    -> pure ([], LBox.TBox)
-  DontCare{} -> pure ([], LBox.TBox)
+compileTypeTerm t = do
+  liftTCM $ reportSDoc "agda2lambox.compile.type" 200 $ "Compiling type:" <+> prettyTCM t
+  case unSpine1 t of
+    Sort{}     -> pure ([], LBox.TBox)
+    Level{}    -> pure ([], LBox.TBox)
+    DontCare{} -> pure ([], LBox.TBox)
 
-  Var n _ -> do
-    -- NOTE(flupe): I think we should distinguish b/w "other" and logical variables
-    (!! n) <$> asks boundTypes >>= \case
-      TypeVar n -> pure ([], LBox.TVar n)
-      Other     -> pure ([], LBox.TAny  )
+    Var n _ -> do
+      -- NOTE(flupe): I think we should distinguish b/w "other" and logical variables
+      (!! n) <$> asks boundTypes >>= \case
+        TypeVar n -> pure ([], LBox.TVar n)
+        Other     -> pure ([], LBox.TAny  )
 
-  Def q es -> maybeUnfoldCopy q es compileTypeTerm \q es -> do
-    Defn{theDef = def, defType, defArgInfo, defName} <- liftTCM $ getConstInfo q
+    Def q es -> maybeUnfoldCopy q es compileTypeTerm \q es -> do
+      Defn{theDef = def, defType, defArgInfo, defName} <- liftTCM $ getConstInfo q
 
-    isLogicalDef <- liftTCM $ isLogical $ Arg defArgInfo defType
+      isLogicalDef <- liftTCM $ isLogical $ Arg defArgInfo defType
 
-    -- if this def is logical, we ignore it (and its arguments)
-    if isLogicalDef then pure ([], LBox.TBox)
+      -- if this def is logical, we ignore it (and its arguments)
+      if isLogicalDef then pure ([], LBox.TBox)
 
-    -- if it's an inductive, we only apply the parameters
-    else if isDataOrRecDef def then do
-      lift $ requireDef q
-      ind <- liftTCM $ toInductive q
-      let args = mapMaybe isApplyElim es
-      ([],) . foldl' LBox.TApp (LBox.TInd ind)
-        <$> compileElims defType (take (getInductiveParams def) args)
+      -- if it's an inductive, we only apply the parameters
+      else if isDataOrRecDef def then do
+        lift $ requireDef q
+        ind <- liftTCM $ toInductive q
+        let args = mapMaybe isApplyElim es
+        ([],) . foldl' LBox.TApp (LBox.TInd ind)
+          <$> compileElims defType (take (getInductiveParams def) args)
 
-    -- otherwise, it must have been compiled as a type scheme,
-    -- and therefore is kept with all arguments.
+      -- otherwise, it must have been compiled as a type scheme,
+      -- and therefore is kept with all arguments.
 
-    -- TODO(flupe): check whether indeed the fallback is always compiled to a typescheme.
-    --              what about non-logical defs that are not arities or w/?
-    -- TODO(flupe): possibly merge the logic with the above for datatypes
-    else do
-      q <- liftTCM $ canonicalName q
-      lift $ requireDef q
-      let ts = qnameToKName q
-      let args = mapMaybe isApplyElim es
-      ([],) . foldl' LBox.TApp (LBox.TConst ts)
-        <$> compileElims defType args
+      -- TODO(flupe): check whether indeed the fallback is always compiled to a typescheme.
+      --              what about non-logical defs that are not arities or w/?
+      -- TODO(flupe): possibly merge the logic with the above for datatypes
+      else do
+        q <- liftTCM $ canonicalName q
+        lift $ requireDef q
+        let ts = qnameToKName q
+        let args = mapMaybe isApplyElim es
+        ([],) . foldl' LBox.TApp (LBox.TConst ts)
+          <$> compileElims defType args
 
-  Pi dom codom -> do
-    let domType   = unDom dom
-    let codomType = absBody codom
+    Pi dom codom -> do
+      let domType   = unDom dom
+      let codomType = absBody codom
 
-    domIsLogical <- liftTCM $ isLogical dom
-    domIsArity   <- liftTCM $ isArity domType
+      domIsLogical <- liftTCM $ isLogical dom
+      domIsArity   <- liftTCM $ isArity domType
 
-    -- logical types and non-arities can never be lifted to type variables,
-    -- so we keep going
-    if domIsLogical || not domIsArity then do
-      domType' <- if domIsLogical then pure LBox.TBox
-                                  else compileTypeC domType
-      (vars, codomType') <- underBinder dom $ compileTopLevelTypeC codomType
-      pure (vars, LBox.TArr domType' codomType')
+      -- logical types and non-arities can never be lifted to type variables,
+      -- so we keep going
+      if domIsLogical || not domIsArity then do
+        domType' <- if domIsLogical then pure LBox.TBox
+                                    else compileTypeC domType
+        (vars, codomType') <- underBinder dom $ compileTopLevelTypeC codomType
+        pure (vars, LBox.TArr domType' codomType')
 
-    else do
-      (vars, codomType') <- underTypeVar dom $ compileTopLevelTypeC codomType
-      let name = domToName dom
-      pure (name : vars, LBox.TArr LBox.TBox codomType')
+      else do
+        (vars, codomType') <- underTypeVar dom $ compileTopLevelTypeC codomType
+        let name = domToName dom
+        pure (name : vars, LBox.TArr LBox.TBox codomType')
 
-  _ -> pure ([], LBox.TAny)
+    _ -> pure ([], LBox.TAny)
