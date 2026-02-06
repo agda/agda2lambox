@@ -37,6 +37,9 @@ import LambdaBox qualified as LBox
 -- | Toplevel conversion from a datatype/record definition to a Lambdabox declaration.
 compileInductive :: Target t -> Definition -> CompileM (Maybe (LBox.GlobalDecl t))
 compileInductive t defn@Defn{defName} = do
+  reportSDoc "agda2lambox.compile.inductive" 5 $
+    "Compiling inductive:" <+> prettyTCM defName
+
   mutuals <- liftTCM $ dataOrRecDefMutuals defn
 
   reportSDoc "agda2lambox.compile.inductive" 5 $
@@ -86,6 +89,14 @@ data InductiveBundle = Bundle
   , indPars :: Int
   }
 
+instance PrettyTCM InductiveBundle where
+  prettyTCM Bundle{..} = hang "Bundle:" 2 $ vcat
+    [ "Name:" <+> prettyTCM indName
+    , "Type:" <+> prettyTCM indType
+    , "Cons:" <+> prettyTCM indCons
+    , "Pars:" <+> prettyTCM indPars
+    ]
+
 -- | Gather the shared information for compiling inductives.
 getBundle :: Definition -> InductiveBundle
 getBundle defn@Defn{defName, defType, theDef} =
@@ -108,7 +119,9 @@ getBundle defn@Defn{defName, defType, theDef} =
 
 actuallyConvertInductive :: ∀ t. Target t -> Definition -> CompileM (LBox.OneInductiveBody t)
 actuallyConvertInductive t defn = do
-  let Bundle{..} = getBundle defn
+  let bundle@Bundle{..} = getBundle defn
+
+  reportSDoc "agda2lambox.compile.inductive" 10 $ prettyTCM bundle
 
   params <- theTel <$> telViewUpTo indPars indType
 
@@ -132,14 +145,25 @@ actuallyConvertInductive t defn = do
         }
 
     ctors :: [LBox.ConstructorBody t] <-
+
       forM indCons \cname -> do
+
+        reportSDoc "agda2lambox.compile.inductive" 10 $
+          "Compiling constructor:" <+> prettyTCM cname
+
         arity <- liftTCM $ getConstructorInfo cname <&> \case
           DataCon arity         -> arity
           RecordCon _ _ arity _ -> arity
 
+        reportSDoc "agda2lambox.compile.inductive" 10 $
+          "Constructor arity:" <+> prettyTCM arity
+
         conTypeInfo <- whenTyped t do
-          conType <- liftTCM $ (`piApplyM` pvars) . defType =<< getConstInfo cname
+          theType <- liftTCM $ defType <$> getConstInfo cname
+          conType <- liftTCM $ theType `piApplyM` pvars
           conTel  <- toList . theTel <$> telView conType
+          reportSDoc "agda2lambox.compile.inductive" 10 $
+            "Constructor telescope:" <+> prettyTCM conTel
           compileArgs indPars conTel
 
         pure LBox.Constructor

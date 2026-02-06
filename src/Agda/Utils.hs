@@ -6,11 +6,12 @@ module Agda.Utils where
 import Control.Applicative ( liftA2 )
 import Data.Bifunctor ( second )
 import Data.Functor ( (<&>) )
-import Data.Maybe ( isJust, isNothing, catMaybes )
+import Data.Maybe ( isJust, isNothing, catMaybes, fromMaybe )
 import Data.Text ( Text )
 
 import Agda.Compiler.Backend ( getUniqueCompilerPragma, PureTCM, HasConstInfo (getConstInfo) )
 import Agda.Syntax.Abstract.Name
+import Agda.Syntax.Common ( defaultArg )
 import Agda.Syntax.Internal
 import Agda.TypeChecking.Monad.Base hiding ( conArity )
 import Agda.TypeChecking.Datatypes ( getConstructorInfo, ConstructorInfo(..) )
@@ -135,6 +136,22 @@ filterOutWhere (q:qs) = do
     pure case theDef def of
       Function{..} -> catMaybes $ map clauseWhereModule funClauses
       _            -> []
+
+-- | Unspines 1 layer of a term,
+-- transforming eventual projection elims into 'Def' projection applications.
+unSpine1 :: Term -> Term
+unSpine1 v =
+  case hasElims v of
+    Just (h, es) -> fromMaybe v $ loop h [] es
+    Nothing      -> v
+  where
+    loop :: (Elims -> Term) -> Elims -> Elims -> Maybe Term
+    loop h res es =
+      case es of
+        []             -> Nothing
+        Proj o f : es' -> Just $ fromMaybe (Def f (Apply (defaultArg v) : es')) $ loop h (Proj o f : res) es'
+        e        : es' -> loop h (e : res) es'
+      where v = h $ reverse res
 
 {-
 lookupCtx :: MonadTCEnv m => Int -> m (String, Type)

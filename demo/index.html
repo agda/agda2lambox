@@ -105,6 +105,8 @@ async function exec() {
   try {
     wasm.exports.main_function()
 
+    log("main_function() done running")
+
     mem = new Uint32Array(wasm.exports.memory.buffer)
     let res = wasm.exports.result.value
     let dec = decoders[decoder.value]

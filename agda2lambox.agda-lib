@@ -1,3 +1,3 @@
 name: agda2lambox
-include: test
+include: test .
 flags: --no-projection-like
