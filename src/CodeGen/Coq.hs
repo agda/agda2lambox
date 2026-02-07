@@ -53,8 +53,15 @@ instance ToCoq t Doc  where pcoq _ d = d
 instance ToCoq t Int  where pcoq _ s = pretty s
 instance ToCoq t Bool where pcoq _ v = if v then "true" else "false"
 
+quote :: String -> String
+quote s = "\"" <> escape s <> "\""
+  where
+    escape []       = []
+    escape ('"':cs) = "\\\"" <> escape cs
+    escape (c  :cs) = c : escape cs
+
 instance {-# OVERLAPPING #-} ToCoq t String where
-  pcoq _ s = text (show s) <> "%bs"
+  pcoq _ s = text (quote s) <> "%bs"
   -- NOTE(flupe): "%bs" to make sure that we produce Coq bytestrings
 
 instance ToCoq t a => ToCoq t (Maybe a) where
