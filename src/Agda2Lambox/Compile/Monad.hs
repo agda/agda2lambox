@@ -39,8 +39,8 @@ import Data.Foldable (traverse_)
 
 -- | Compilation Environment
 data CompileEnv = CompileEnv
-  { noBlocks :: Bool
-      -- ^ When set to 'True', constructors take no arguments,
+  { blocks :: Bool
+      -- ^ When set to 'False', constructors take no arguments,
       -- and regular function application is used instead.
   }
 

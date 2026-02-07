@@ -35,4 +35,4 @@ clean:
 	agda2lambox -o build --rocq test/$*.agda
 
 %.typed:
-	agda2lambox -o build --typed --no-blocks test/$*.agda
+	agda2lambox -o build --typed test/$*.agda

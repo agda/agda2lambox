@@ -50,7 +50,7 @@ data Options = forall t. Options
   { optOutDir   :: Maybe FilePath
   , optTarget   :: Target t
   , optOutputs  :: [Output]
-  , optNoBlocks :: Bool
+  , optBlocks :: Bool
   }
 
 instance NFData Options where
@@ -66,8 +66,8 @@ typedOpt opts = return opts { optTarget = ToTyped }
 rocqOpt :: Monad m => Options -> m Options
 rocqOpt opts = return opts { optOutputs = RocqOutput : optOutputs opts }
 
-noBlocksOpt :: Monad m => Options -> m Options
-noBlocksOpt opts = return opts { optNoBlocks = True }
+blocksOpt :: Monad m => Options -> m Options
+blocksOpt opts = return opts { optBlocks = True }
 
 -- | Default backend options.
 defaultOptions :: Options
@@ -75,7 +75,7 @@ defaultOptions  = Options
   { optOutDir   = Nothing
   , optTarget   = ToUntyped
   , optOutputs  = [AstOutput]
-  , optNoBlocks = False
+  , optBlocks = False
   }
 
 -- | Backend module environments.
@@ -100,8 +100,8 @@ agda2lambox = Backend backend
             "Compile to typed λ□ environments."
           , Option ['c'] ["rocq"] (NoArg rocqOpt)
             "Output a Rocq file."
-          , Option [] ["no-blocks"] (NoArg noBlocksOpt)
-            "Disable constructors as blocks."
+          , Option [] ["blocks"] (NoArg blocksOpt)
+            "Enable constructors as blocks."
           ]
       , isEnabled             = \ _ -> True
       , preCompile            = return
@@ -133,7 +133,7 @@ writeModule Options{..} menv IsMain m defs = do
   -- get defs annotated with a COMPILE pragma
   -- throw an error if none, when targetting untyped lbox
   mains    <- getMain optTarget programs
-  env      <- runCompile (CompileEnv optNoBlocks) $ compile optTarget defs
+  env      <- runCompile (CompileEnv optBlocks) $ compile optTarget defs
 
   liftIO $ createDirectoryIfMissing True outDir
 
