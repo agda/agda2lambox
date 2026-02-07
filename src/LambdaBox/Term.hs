@@ -6,44 +6,8 @@ import Data.Int (Int64)
 import Data.Bifunctor (first)
 import Agda.Syntax.Common.Pretty
 import LambdaBox.Names
+import LambdaBox.LambdaBox
 
-
--- | Definition component in a mutual fixpoint
-data Def t = Def
-  { dName :: Name
-  , dBody :: t
-  , dArgs :: Int
-  }
-
--- | Mutual components of a fixpoint
-type MFixpoint = [Def Term]
-
--- | 
-data PrimValue
-  = PInt Int64
-      -- NOTE(flupe): ^ Should ensure they are restricted to Int63
-  | PFloat Int64
-  | PString String
-
--- | λ□ terms
-data Term
-  = LBox                             -- ^ Proofs and erased terms
-  | LRel Int                         -- ^ Bound variable, with de Bruijn index
-  | LLambda Name Term                -- ^ Lambda abstraction
-  | LLetIn Name Term Term            -- ^ Let bindings
-  | LApp Term Term                   -- ^ Term application
-  | LConst KerName                   -- ^ Named constant
-  | LConstruct Inductive Int [Term]  -- ^ Inductive constructor
-  | LCase                            -- ^ Pattern-matching case construct
-      Inductive        -- ^ Inductive type we case on
-      Int              -- ^ Number of parameters
-      Term             -- ^ Discriminee
-      [([Name], Term)] -- ^ Branches
-  | LFix                             -- ^ Fixpoint combinator
-      MFixpoint
-      Int       -- ^ Index of the fixpoint we keep
-  | LPrim PrimValue
-                -- ^ Primitive literal value
 
 
 instance Pretty t => Pretty (Def t) where
@@ -51,10 +15,11 @@ instance Pretty t => Pretty (Def t) where
   prettyPrec _ (Def _ t _) = pretty t
 
 
-instance Pretty PrimValue where
-  pretty (PInt i)    = text $ show i
-  pretty (PFloat f)  = text $ show f
-  pretty (PString f) = text $ show f
+instance Pretty t => Pretty (PrimValue t) where
+  pretty (PInt i)      = text $ show i
+  pretty (PFloat f)    = text $ show f
+  pretty (PString f)   = text $ show f
+  pretty (PArray x xs) = pretty x
 
 
 instance Pretty Term where
@@ -70,7 +35,7 @@ instance Pretty Term where
             getLams t = ([], t)
 
             (ns, t') = getLams t
-        in 
+        in
         mparens (p > 0) $
         hang ("λ" <+> sep (map pretty (n:ns)) <+> "→") 2 $ pretty t'
 
@@ -100,4 +65,3 @@ instance Pretty Term where
         hang "μ rec ->" 2 $ pretty $ ds !! i
 
       LPrim p -> pretty p
-        

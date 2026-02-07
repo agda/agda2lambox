@@ -13,11 +13,10 @@ import Agda.TypeChecking.Substitute ( TelV(TelV), absBody )
 import Agda.TypeChecking.Functions ( etaExpandClause )
 
 import Agda2Lambox.Compile.Monad
-import Agda2Lambox.Compile.Target
+import LambdaBox.Target
 import Agda2Lambox.Compile.Utils
 import Agda2Lambox.Compile.Type
-import LambdaBox.Env
-import LambdaBox.Type qualified as LBox
+import LambdaBox.LambdaBox qualified as LBox
 
 {- If we've reached type scheme compilation, this means the definition:
  - - is a function.
@@ -38,14 +37,14 @@ onlyVarsPat =
       VarP{} -> True
       _      -> False
 
-compileTele :: Tele (Dom Type) -> CompileM [TypeVarInfo]
+compileTele :: Tele (Dom Type) -> CompileM [LBox.TypeVarInfo]
 compileTele EmptyTel = pure []
 compileTele (ExtendTel t tel) = do
   tvar <- liftTCM $ getTypeVarInfo t
   rest <- addContext t $ compileTele (absBody tel)
   pure $ tvar : rest
 
-compileTypeScheme :: Definition -> CompileM (GlobalDecl Typed)
+compileTypeScheme :: Definition -> CompileM (LBox.GlobalDecl Typed)
 compileTypeScheme Defn{..} = do
   reportSDoc "agda2lambox.compile.typescheme" 5 $ "Compiling type scheme:" <+> prettyTCM defName
   TelV tyargs _ <- telView defType
@@ -68,10 +67,10 @@ compileTypeScheme Defn{..} = do
       (_, res) <- addContext (KeepNames $ clauseTel cl) $ runCNoVars nvars $ compileTypeTerm body
       tvarInfo <- compileTele tyargs
 
-      pure $ TypeAliasDecl $ Just (tvarInfo, res)
+      pure $ LBox.TypeAliasDecl $ Just (tvarInfo, res)
 
     -- if there isn't exactly one clause, we give up
     -- compiling the type alias and return TAny
     _ -> do
       reportSDoc "agda2lambox.compile.typescheme" 5 "Could not compile type scheme. Defaulting to TAny."
-      pure $ TypeAliasDecl $ Just ([], LBox.TAny)
+      pure $ LBox.TypeAliasDecl $ Just ([], LBox.TAny)

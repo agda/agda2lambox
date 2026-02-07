@@ -1,5 +1,5 @@
 {-# LANGUAGE NamedFieldPuns, DataKinds, OverloadedStrings, NondecreasingIndentation #-}
-module Agda2Lambox.Compile 
+module Agda2Lambox.Compile
   ( compile
   ) where
 
@@ -20,7 +20,7 @@ import Agda.Utils.SmallSet qualified as SmallSet
 import Agda.Utils ( isDataOrRecDef, isArity, getPragmaInfo )
 
 import Agda2Lambox.Compile.Monad
-import Agda2Lambox.Compile.Target
+import LambdaBox.Target
 import Agda2Lambox.Compile.Utils
 import Agda2Lambox.Compile.Term       ( compileTerm )
 import Agda2Lambox.Compile.Function   ( compileFunction )
@@ -29,9 +29,9 @@ import Agda2Lambox.Compile.TypeScheme ( compileTypeScheme )
 import Agda2Lambox.Compile.Type       ( compileTopLevelType )
 
 import LambdaBox ( emptyName, emptyDecl )
-import LambdaBox.Names
-import LambdaBox.Env (GlobalEnv(..), GlobalDecl(..), ConstantBody(..))
-import LambdaBox.Term (Term(LBox))
+import LambdaBox.LambdaBox (KerName)
+import LambdaBox.LambdaBox (GlobalEnv(..), GlobalDecl(..), ConstantBody(..))
+import LambdaBox.LambdaBox (Term(LBox))
 
 
 

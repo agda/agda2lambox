@@ -9,7 +9,7 @@ import Data.List.NonEmpty qualified as NEL
 import Agda.Syntax.Common.Pretty
 import LambdaBox
 import Agda.Utils.Function (applyWhen)
-import Agda2Lambox.Compile.Target
+import LambdaBox.Target
 
 
 class ToCoq t a where
@@ -206,10 +206,10 @@ instance ToCoq t (LBoxModule t) where
 
     , "Compute @check_wf_glob eflags env."
 
-    , vsep $ flip map (zip [1..] $ reverse $ NEL.toList $ getUntyped lboxMain) \(i :: Int, kn) -> 
+    , vsep $ flip map (zip [1..] $ reverse $ NEL.toList $ getUntyped lboxMain) \(i :: Int, kn) ->
         let progname = "prog" <> pretty i in vsep
         [ hang ("Definition " <> progname <> " : program :=") 2 $
-            upcoq (text "env" :: Doc, LConst kn) 
+            upcoq (text "env" :: Doc, LConst kn)
             <> "."
         , "Compute eval_program " <> progname <> "."
         ]

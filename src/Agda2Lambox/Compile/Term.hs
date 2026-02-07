@@ -26,7 +26,7 @@ import Agda.TypeChecking.Datatypes ( getConstructorData, getConstructors )
 import Agda.TypeChecking.Monad.Base ( TCM , liftTCM, MonadTCEnv, MonadTCM )
 import Agda.TypeChecking.Monad.Builtin ( getBuiltinName_ )
 
-import LambdaBox.Names ( Name(..) )
+import LambdaBox.LambdaBox ( Name(..) )
 import LambdaBox ( Term(..), emptyName )
 import LambdaBox qualified as LBox
 import Agda2Lambox.Compile.Utils

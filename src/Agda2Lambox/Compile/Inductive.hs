@@ -28,7 +28,7 @@ import Agda.Syntax.Internal
 import Agda.Utils.Monad ( unlessM )
 
 import Agda.Utils
-import Agda2Lambox.Compile.Target
+import LambdaBox.Target
 import Agda2Lambox.Compile.Utils
 import Agda2Lambox.Compile.Monad
 import Agda2Lambox.Compile.Type

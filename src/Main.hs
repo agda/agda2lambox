@@ -29,13 +29,13 @@ import Agda.Syntax.TopLevelModuleName ( TopLevelModuleName, moduleNameToFileName
 import Agda.Syntax.Common.Pretty ( pretty, prettyShow )
 
 import Agda.Utils ( pp, hasPragma )
-import Agda2Lambox.Compile.Target
+import LambdaBox.Target
 import Agda2Lambox.Compile.Utils
 import Agda2Lambox.Compile ( compile )
 import CodeGen.Coq ( prettyCoq  )
-import CodeGen.SExpr ( prettySexp )
+import LambdaBox.SExpr ( lBoxModuleToSexp )
 import LambdaBox.Env
-import LambdaBox.Names ( KerName )
+import LambdaBox.LambdaBox ( KerName, LBoxModule(LBoxModule) )
 import Agda2Lambox.Compile.Monad ( runCompile, CompileEnv(..) )
 
 
@@ -146,8 +146,9 @@ writeModule Options{..} menv IsMain m defs = do
 
   when (AstOutput `elem` optOutputs) $ liftIO $ do
     putStrLn $ "Writing " <> fileName -<.> ".ast"
-    prettySexp optTarget lboxMod <> "\n"
-      & LText.writeFile (fileName -<.> ".ast")
+    lBoxModuleToSexp optTarget lboxMod <> "\n"
+      & writeFile (fileName -<.> ".ast")
+      -- & LText.writeFile (fileName -<.> ".ast")
 
   when (RocqOutput `elem` optOutputs) $ liftIO $ do
     putStrLn $ "Writing " <> fileName -<.> ".v"
