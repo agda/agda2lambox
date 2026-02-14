@@ -27,7 +27,7 @@ fieldset {
   margin: 0;
   padding: 0;
   border: none;
-  +fieldset {margin-top: .5rem;}
+  + fieldset {margin-top: .5rem;}
 }
 pre {
   overflow-y: scroll;
@@ -47,6 +47,18 @@ pre {
     <button id="run" disabled>Run</button>
     <button id="reload" disabled>Reload</button>
     <button id="clear">Clear</button>
+    <input type="file" id="file" />
+  </fieldset>
+  <fieldset>
+    <label for="useinput">Input</label>
+    <input type="checkbox" id="useinput">
+    <input type="text" id="input">
+    <select id="encoder">
+      <option value="bool">Bool</option>
+    </select>
+  </fieldset>
+  <fieldset>
+    Output
     <select id="decoder">
       <option value="nat">Nat</option>
       <option value="bool">Bool</option>
@@ -54,23 +66,29 @@ pre {
       <option value="listbool">List Bool</option>
       <option value="string">String (List Nat)</option>
     </select>
-    <input type="file" id="file" />
+  </fieldset>
+  <fieldset>
+    Function
+    <select id="program"></select>
   </fieldset>
 </header>
 <pre><code id="output"></code></pre>
 <script type="module">
 const on = (t, e, f) => t.addEventListener(e, f)
 
-run.disabled = true
-reload.disabled = true
+run.disabled = reload.disabled = true
+input.disabled = encoder.disabled = !useinput.checked
+on(useinput, "change", () => input.disabled = encoder.disabled = !useinput.checked)
 
-let wasm = null
-let mem  = null
+let wasm    = null
+let mem_ptr = null
+let mem     = null
+let exposed = null
 
 on(file,   "change", load)
 on(reload, "click",  load)
 on(run,    "click",  exec)
-on(clear,  "click", () => {output.innerHTML = ""})
+on(clear,  "click", () => output.innerHTML = "")
 
 async function load() {
   if (file.files.length == 0) return
@@ -84,12 +102,29 @@ async function load() {
     wasm =
       await blob.arrayBuffer()
         .then(buf => {
-            log("Compiling...")
-            return WebAssembly.compile(buf)
-          })
+          log("Compiling...")
+          return WebAssembly.compile(buf)
+        })
         .then(mod => new WebAssembly.Instance(mod))
 
+    mem_ptr = wasm.exports.mem_ptr
+    mem     = wasm.exports.memory.buffer
+
     log(`Compiled!`)
+
+    exposed =
+      Object.keys(wasm.exports)
+        .filter(key => typeof wasm.exports[key] == 'function')
+
+    // update available function list
+    program.textContent = ''
+    exposed.forEach(fn => {
+      let opt = document.createElement('option')
+      opt.value = fn
+      // show arity
+      opt.textContent = `${fn} (${wasm.exports[fn].length})`
+      program.appendChild(opt)
+    })
 
     run.disabled = false
     reload.disabled = false
@@ -100,15 +135,24 @@ async function load() {
 }
 
 async function exec() {
-  log("Running main_function()")
+  log(`Running ${program.value}`)
+
+  let fn = wasm.exports[program.value]
 
   try {
-    wasm.exports.main_function()
+    if (useinput.checked) {
+      let val = eval(input.value)
+      let enc = encoders[encoder.value]
+      let res = enc(val)
+      fn(res)
+    }
+    else {
+      fn()
+    }
 
-    mem = new Uint32Array(wasm.exports.memory.buffer)
     let res = wasm.exports.result.value
     let dec = decoders[decoder.value]
-    // mem = new Uint32Array(wasm.exports.memory.buffer)
+
     log(`Result: ${pretty(dec(res))}`)
   } catch (e) {
     log(`Failed to run: ${e}`, true)
@@ -137,7 +181,19 @@ load()
 
 // custom decoders -------------------------
 
-const bool = value => (value >> 1) == 1
+/* "CertiCoq-Wasm’s representation of
+    a 𝜆ANF constructor value 𝐶(𝑣s) is based on the one used by
+    CertiCoq’s C backend [ 41, §4.1], which in turn is based on the
+    one used by the OCaml compiler. For efficiency, we represent
+    nullary constructor values as unboxed i32 values (using 31
+    bits), while non-nullary constructor values are boxed: they
+    are represented by an address starting from which linear
+    memory contains the code of the constructor, followed by
+    the arguments. The least significant bit of the i32 is used to
+    distinguish the two."
+*/
+
+const bool  = value => (value >> 1) == 1
 
 const nat = value => {
   let acc = 0
@@ -169,6 +225,24 @@ const decoders =
   , listnat: list(nat)
   , listbool: list(bool)
   , string
+  }
+
+// custom encoders -------------------------------
+
+/*
+  NOTE: for now, encoders happily write in the memory buffer,
+        and update the mem_ptr.
+  TODO: proper memory mgmt, where the linear memory is expanded if
+        we run out of memory.
+
+- All encoders take a JS value as input,
+- They write it in memory starting from mem_ptr.
+- They update mem_ptr to point to the next available location.
+- They return a value to be given to programs.
+    (Likely to be the a pointer, but not necessarily).
+*/
+const encoders =
+  { bool: v => v << 1 | 1
   }
 </script>
   </body>
