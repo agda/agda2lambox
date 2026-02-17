@@ -6,4 +6,4 @@ tests: True
 source-repository-package
   type:     git
   location: https://github.com/peregrine-project/haskell-lambdabox.git
-  tag:      cd686c8b559df5c41fcfddece15fcba61bba39f7
+  tag:      4c9093c2edc0089d407e45dd60e8345be234be9c
