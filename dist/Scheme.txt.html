@@ -4,27 +4,10 @@
     type variables:  []
       constructors:
 
-Agda.Builtin.Bool.Bool:
-  mutual inductive(s):
-    Bool
-    type variables:  []
-      constructors:
-        r#false (0 arg(s))
-        r#true (0 arg(s))
-
 Scheme.Bad:
   type alias:
     type variables: []
     type: 𝕋
-
-Agda.Builtin.Nat.Nat:
-  mutual inductive(s):
-    Nat
-    type variables:  []
-      constructors:
-        zero (0 arg(s))
-        suc (1 arg(s))
-          n : Agda.Builtin.Nat.Nat{0}
 
 Agda.Builtin.List.List:
   mutual inductive(s):
@@ -87,6 +70,15 @@ Scheme.Eq:
     type variables: []
     type: □
     body: □
+
+Agda.Builtin.Nat.Nat:
+  mutual inductive(s):
+    Nat
+    type variables:  []
+      constructors:
+        zero (0 arg(s))
+        suc (1 arg(s))
+          n : Agda.Builtin.Nat.Nat{0}
 
 Scheme.length:
   constant declaration:

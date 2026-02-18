@@ -54,6 +54,22 @@ Definition env : global_env :=
                     {| inductive_mind :=
                          (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
                        inductive_ind := 0 |}))) |});
+   (((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs), true),
+    InductiveDecl
+      {| ind_finite := Finite; ind_npars := 0;
+         ind_bodies :=
+           [{| ind_name := &quot;Nat&quot;%bs; ind_propositional := false;
+               ind_kelim := IntoAny;
+               ind_ctors :=
+                 [((&quot;zero&quot;%bs, []), 0);
+                  ((&quot;suc&quot;%bs,
+                    [(nNamed &quot;n&quot;%bs,
+                      TInd
+                        {| inductive_mind :=
+                             (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                           inductive_ind := 0 |})]),
+                   1)];
+               ind_projs := []; ind_type_vars := [] |}] |});
    (((MPfile [&quot;Scheme&quot;%bs], &quot;Eq&quot;%bs), true),
     ConstantDecl {| cst_body := Some tBox; cst_type := ([], TBox) |});
    (((MPfile [&quot;Scheme&quot;%bs; &quot;\931&quot;%bs], &quot;fst&quot;%bs), true),
@@ -189,32 +205,8 @@ Definition env : global_env :=
                      tvar_is_arity := false; tvar_is_sort := false |};
                   {| tvar_name := nNamed &quot;A&quot;%bs; tvar_is_logical := false;
                      tvar_is_arity := true; tvar_is_sort := true |}] |}] |});
-   (((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs), true),
-    InductiveDecl
-      {| ind_finite := Finite; ind_npars := 0;
-         ind_bodies :=
-           [{| ind_name := &quot;Nat&quot;%bs; ind_propositional := false;
-               ind_kelim := IntoAny;
-               ind_ctors :=
-                 [((&quot;zero&quot;%bs, []), 0);
-                  ((&quot;suc&quot;%bs,
-                    [(nNamed &quot;n&quot;%bs,
-                      TInd
-                        {| inductive_mind :=
-                             (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                           inductive_ind := 0 |})]),
-                   1)];
-               ind_projs := []; ind_type_vars := [] |}] |});
    (((MPfile [&quot;Scheme&quot;%bs], &quot;Bad&quot;%bs), true),
     TypeAliasDecl (Some ([], TAny)));
-   (((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Bool&quot;%bs], &quot;Bool&quot;%bs), true),
-    InductiveDecl
-      {| ind_finite := Finite; ind_npars := 0;
-         ind_bodies :=
-           [{| ind_name := &quot;Bool&quot;%bs; ind_propositional := false;
-               ind_kelim := IntoAny;
-               ind_ctors := [((&quot;r#false&quot;%bs, []), 0); ((&quot;r#true&quot;%bs, []), 0)];
-               ind_projs := []; ind_type_vars := [] |}] |});
    (((MPfile [&quot;LamBox&quot;%bs], &quot;Empty&quot;%bs), true),
     InductiveDecl
       {| ind_finite := Finite; ind_npars := 0;
