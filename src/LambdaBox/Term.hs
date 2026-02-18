@@ -95,9 +95,10 @@ instance Pretty Term where
         sep [ ("case<" <> pretty ind <> "," <> pretty n <> ">") <+> pretty t <+> "of"
             , nest 2 $ vcat (map (\(n, e) -> sep ["λ<" <> pretty n <> ">", nest 2 (pretty e)]) bs) ]
 
-      LFix ds i -> -- FIXME: for mutual recursion
+      LFix ds i ->
         mparens (p > 0) $
-        hang "μ rec ->" 2 $ pretty $ ds !! i
+        hang ("μrec [" <> pretty i <> "] :=") 2 $
+          vcat (zipWith (\i c -> pretty i <> ": " <> pretty c) ([0..] :: [Int]) ds)
 
       LPrim p -> pretty p
         
