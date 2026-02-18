@@ -10,7 +10,7 @@ install:
 
 test: test/Tests.agda
 
-test/Tests.agda: test/Main.hs test/typed/*.agda test/untyped/*.agda
+test/Tests.agda: test/Main.hs test/agda2lambox-tests.agda-lib test/untyped/*.agda test/typed/*.agda test/agda2rust/*.agda
 	cabal test
 
 html: test

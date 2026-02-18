@@ -2,7 +2,7 @@
 -- | Test suite for agda2lambox using tasty
 module Main (main) where
 
-import Control.Monad (filterM, unless)
+import Control.Monad (filterM, unless, forM)
 import System.Directory
 import System.FilePath
 import System.Process
@@ -31,24 +31,24 @@ main = do
   let buildDir = testDir </> "dist"
   createDirectoryIfMissing True buildDir
 
-  -- Discover files: first untyped, then typed
-  untypedFiles <- listAgdaBasenames "untyped"
-  typedFiles   <- listAgdaBasenames "typed"
-  let allFiles = untypedFiles <> typedFiles
+  -- Discover files
+  let testFolders :: [(String {-folder-}, Bool {-typed?-})]
+      testFolders = [ ("untyped", False)
+                    , ("typed", True)
+                    , ("agda2rust", True)
+                    ]
+  files <- forM testFolders \(d,t) -> (d,t,) <$> listAgdaBasenames d
 
   -- Create index file
-  let indexFile = testDir </> "Tests.agda"
-  let indexContents = unlines $ map (("open import " <>) . dropExtension) allFiles
-  writeFile indexFile indexContents
+  writeFile (testDir </> "Tests.agda")
+     $ unlines
+     $ flip concatMap files \(d, _, fs) ->
+          ("-- " ++ d) : map (("open import " <>) . dropExtension) fs
 
   -- Create tests
-  let untypedTests = map (mkAgdaTest peregrinePath buildDir "untyped" False) untypedFiles
-      typedTests   = map (mkAgdaTest peregrinePath buildDir "typed" True) typedFiles
-
-  defaultMain $ testGroup "agda2lambox tests"
-    [ testGroup "untyped" untypedTests
-    , testGroup "typed" typedTests
-    ]
+  defaultMain $ testGroup "agda2lambox tests" $
+    flip map files \(d, t, fs) ->
+      testGroup d (mkAgdaTest peregrinePath buildDir d t <$> fs)
 
 
 -- List basenames of .agda files in a subdirectory (returns [] if dir missing)

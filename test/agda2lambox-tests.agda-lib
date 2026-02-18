@@ -1,5 +1,5 @@
-name: agda2lambox-untyped
-include: . typed untyped
+name: agda2lambox-tests
+include: . typed untyped agda2rust
 flags:
   --no-projection-like
   --erasure
