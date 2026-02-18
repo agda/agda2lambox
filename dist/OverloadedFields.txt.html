@@ -13,11 +13,19 @@ Agda.Builtin.Nat.Nat:
         suc (1 arg(s))
           n : Agda.Builtin.Nat.Nat{0}
 
-Levels.testLevel:
+OverloadedFields.X:
+  mutual inductive(s):
+    X
+    type variables:  []
+      constructors:
+        constructor (1 arg(s))
+          id : Agda.Builtin.Nat.Nat{0}
+
+OverloadedFields.exX:
   constant declaration:
     type variables: []
-    type: □ → Agda.Builtin.Nat.Nat{0}
-    body: λ _ →
+    type: OverloadedFields.X{0}
+    body: OverloadedFields.X{0}{0}
             Agda.Builtin.Nat.Nat{0}{1}
               Agda.Builtin.Nat.Nat{0}{1}
                 Agda.Builtin.Nat.Nat{0}{1}
@@ -83,12 +91,6 @@ Levels.testLevel:
                                                                                                 Agda.
                                                                                                 Builtin.
                                                                                                 Nat.Nat{0}{0}
-
-Levels.testMkLevel:
-  constant declaration:
-    type variables: []
-    type: Agda.Builtin.Nat.Nat{0}
-    body: Levels.testLevel □
 
 Agda.Builtin.Nat.Ֆ_Ֆplus_:
   constant declaration:
@@ -102,330 +104,19 @@ Agda.Builtin.Nat.Ֆ_Ֆplus_:
                 λ&lt;[]&gt; @0
                 λ&lt;[_]&gt; Agda.Builtin.Nat.Nat{0}{1} (@3 @0 @1)
 
-Levels.lvlToNat:
-  constant declaration:
-    type variables: []
-    type: □ → Agda.Builtin.Nat.Nat{0}
-    body: λ _ →
-            Agda.Builtin.Nat.Nat{0}{1}
-              Agda.Builtin.Nat.Nat{0}{1}
-                Agda.Builtin.Nat.Nat{0}{1}
-                  Agda.Builtin.Nat.Nat{0}{1}
-                    Agda.Builtin.Nat.Nat{0}{1}
-                      Agda.Builtin.Nat.Nat{0}{1}
-                        Agda.Builtin.Nat.Nat{0}{1}
-                          Agda.Builtin.Nat.Nat{0}{1}
-                            Agda.Builtin.Nat.Nat{0}{1}
-                              Agda.Builtin.Nat.Nat{0}{1}
-                                Agda.Builtin.Nat.Nat{0}{1}
-                                  Agda.Builtin.Nat.Nat{0}{1}
-                                    Agda.Builtin.Nat.Nat{0}{1}
-                                      Agda.Builtin.Nat.Nat{0}{1}
-                                        Agda.Builtin.Nat.Nat{0}{1}
-                                          Agda.Builtin.Nat.Nat{0}{1}
-                                            Agda.Builtin.Nat.Nat{0}{1}
-                                              Agda.Builtin.Nat.Nat{0}{1}
-                                                Agda.Builtin.Nat.Nat{0}{1}
-                                                  Agda.Builtin.Nat.Nat{0}{1}
-                                                    Agda.Builtin.Nat.Nat{0}{1}
-                                                      Agda.Builtin.Nat.Nat{0}{1}
-                                                        Agda.Builtin.Nat.Nat{0}{1}
-                                                          Agda.Builtin.Nat.Nat{0}{1}
-                                                            Agda.Builtin.Nat.Nat{0}{1}
-                                                              Agda.Builtin.Nat.Nat{0}{1}
-                                                                Agda.Builtin.Nat.Nat{0}{1}
-                                                                  Agda.Builtin.Nat.Nat{0}{1}
-                                                                    Agda.Builtin.Nat.Nat{0}{1}
-                                                                      Agda.Builtin.Nat.Nat{0}{1}
-                                                                        Agda.Builtin.Nat.Nat{0}{1}
-                                                                          Agda.Builtin.Nat.Nat{0}{1}
-                                                                            Agda.
-                                                                            Builtin.
-                                                                            Nat.Nat{0}{1}
-                                                                              Agda.
-                                                                              Builtin.
-                                                                              Nat.Nat{0}{1}
-                                                                                Agda.
-                                                                                Builtin.
-                                                                                Nat.Nat{0}{1}
-                                                                                  Agda.
-                                                                                  Builtin.
-                                                                                  Nat.Nat{0}{1}
-                                                                                    Agda.
-                                                                                    Builtin.
-                                                                                    Nat.Nat{0}{1}
-                                                                                      Agda.
-                                                                                      Builtin.
-                                                                                      Nat.Nat{0}{1}
-                                                                                        Agda.
-                                                                                        Builtin.
-                                                                                        Nat.Nat{0}{1}
-                                                                                          Agda.
-                                                                                          Builtin.
-                                                                                          Nat.Nat{0}{1}
-                                                                                            Agda.
-                                                                                            Builtin.
-                                                                                            Nat.Nat{0}{1}
-                                                                                              Agda.
-                                                                                              Builtin.
-                                                                                              Nat.Nat{0}{1}
-                                                                                                Agda.
-                                                                                                Builtin.
-                                                                                                Nat.Nat{0}{0}
-
-Levels.testSomeLvl:
-  constant declaration:
-    type variables: []
-    type: Agda.Builtin.Nat.Nat{0}
-    body: Levels.lvlToNat □
-
-Levels.SomeLvl:
+OverloadedFields.Y:
   mutual inductive(s):
-    SomeLvl
+    Y
     type variables:  []
       constructors:
-        this (1 arg(s))
-          ℓ : □
+        constructor (1 arg(s))
+          id : Agda.Builtin.Nat.Nat{0}
 
-Levels.SomeLvl.ℓ:
+OverloadedFields.exY:
   constant declaration:
     type variables: []
-    type: (Levels.SomeLvl{0}) → □
-    body: λ _ → case&lt;Levels.SomeLvl{0},0&gt; @0 of λ&lt;[_]&gt; @0
-
-Levels.Ֆ30Ֆℓ:
-  constant declaration:
-    type variables: []
-    type: □
-    body: □
-
-Levels.someLvl:
-  constant declaration:
-    type variables: []
-    type: Levels.SomeLvl{0}
-    body: Levels.SomeLvl{0}{0} (Levels.Ֆ30Ֆℓ)
-
-Levels.testConstLvl:
-  constant declaration:
-    type variables: []
-    type: Agda.Builtin.Nat.Nat{0}
-    body: λ _ _ _ → @1 □
-            Agda.Builtin.Nat.Nat{0}{1}
-              Agda.Builtin.Nat.Nat{0}{1}
-                Agda.Builtin.Nat.Nat{0}{1}
-                  Agda.Builtin.Nat.Nat{0}{1}
-                    Agda.Builtin.Nat.Nat{0}{1}
-                      Agda.Builtin.Nat.Nat{0}{1}
-                        Agda.Builtin.Nat.Nat{0}{1}
-                          Agda.Builtin.Nat.Nat{0}{1}
-                            Agda.Builtin.Nat.Nat{0}{1}
-                              Agda.Builtin.Nat.Nat{0}{1}
-                                Agda.Builtin.Nat.Nat{0}{1}
-                                  Agda.Builtin.Nat.Nat{0}{1}
-                                    Agda.Builtin.Nat.Nat{0}{1}
-                                      Agda.Builtin.Nat.Nat{0}{1}
-                                        Agda.Builtin.Nat.Nat{0}{1}
-                                          Agda.Builtin.Nat.Nat{0}{1}
-                                            Agda.Builtin.Nat.Nat{0}{1}
-                                              Agda.Builtin.Nat.Nat{0}{1}
-                                                Agda.Builtin.Nat.Nat{0}{1}
-                                                  Agda.Builtin.Nat.Nat{0}{1}
-                                                    Agda.Builtin.Nat.Nat{0}{1}
-                                                      Agda.Builtin.Nat.Nat{0}{1}
-                                                        Agda.Builtin.Nat.Nat{0}{1}
-                                                          Agda.Builtin.Nat.Nat{0}{1}
-                                                            Agda.Builtin.Nat.Nat{0}{1}
-                                                              Agda.Builtin.Nat.Nat{0}{1}
-                                                                Agda.Builtin.Nat.Nat{0}{1}
-                                                                  Agda.Builtin.Nat.Nat{0}{1}
-                                                                    Agda.Builtin.Nat.Nat{0}{1}
-                                                                      Agda.Builtin.Nat.Nat{0}{1}
-                                                                        Agda.Builtin.Nat.Nat{0}{1}
-                                                                          Agda.Builtin.Nat.Nat{0}{1}
-                                                                            Agda.
-                                                                            Builtin.
-                                                                            Nat.Nat{0}{1}
-                                                                              Agda.
-                                                                              Builtin.
-                                                                              Nat.Nat{0}{1}
-                                                                                Agda.
-                                                                                Builtin.
-                                                                                Nat.Nat{0}{1}
-                                                                                  Agda.
-                                                                                  Builtin.
-                                                                                  Nat.Nat{0}{1}
-                                                                                    Agda.
-                                                                                    Builtin.
-                                                                                    Nat.Nat{0}{1}
-                                                                                      Agda.
-                                                                                      Builtin.
-                                                                                      Nat.Nat{0}{1}
-                                                                                        Agda.
-                                                                                        Builtin.
-                                                                                        Nat.Nat{0}{1}
-                                                                                          Agda.
-                                                                                          Builtin.
-                                                                                          Nat.Nat{0}{1}
-                                                                                            Agda.
-                                                                                            Builtin.
-                                                                                            Nat.Nat{0}{1}
-                                                                                              Agda.
-                                                                                              Builtin.
-                                                                                              Nat.Nat{0}{1}
-                                                                                                Agda.
-                                                                                                Builtin.
-                                                                                                Nat.Nat{0}{0}
-            (Levels.SomeLvl.ℓ (Levels.someLvl))
-
-Levels.testConst:
-  constant declaration:
-    type variables: []
-    type: Agda.Builtin.Nat.Nat{0}
-    body: λ _ _ _ _ → @1 □ □
-            Agda.Builtin.Nat.Nat{0}{1}
-              Agda.Builtin.Nat.Nat{0}{1}
-                Agda.Builtin.Nat.Nat{0}{1}
-                  Agda.Builtin.Nat.Nat{0}{1}
-                    Agda.Builtin.Nat.Nat{0}{1}
-                      Agda.Builtin.Nat.Nat{0}{1}
-                        Agda.Builtin.Nat.Nat{0}{1}
-                          Agda.Builtin.Nat.Nat{0}{1}
-                            Agda.Builtin.Nat.Nat{0}{1}
-                              Agda.Builtin.Nat.Nat{0}{1}
-                                Agda.Builtin.Nat.Nat{0}{1}
-                                  Agda.Builtin.Nat.Nat{0}{1}
-                                    Agda.Builtin.Nat.Nat{0}{1}
-                                      Agda.Builtin.Nat.Nat{0}{1}
-                                        Agda.Builtin.Nat.Nat{0}{1}
-                                          Agda.Builtin.Nat.Nat{0}{1}
-                                            Agda.Builtin.Nat.Nat{0}{1}
-                                              Agda.Builtin.Nat.Nat{0}{1}
-                                                Agda.Builtin.Nat.Nat{0}{1}
-                                                  Agda.Builtin.Nat.Nat{0}{1}
-                                                    Agda.Builtin.Nat.Nat{0}{1}
-                                                      Agda.Builtin.Nat.Nat{0}{1}
-                                                        Agda.Builtin.Nat.Nat{0}{1}
-                                                          Agda.Builtin.Nat.Nat{0}{1}
-                                                            Agda.Builtin.Nat.Nat{0}{1}
-                                                              Agda.Builtin.Nat.Nat{0}{1}
-                                                                Agda.Builtin.Nat.Nat{0}{1}
-                                                                  Agda.Builtin.Nat.Nat{0}{1}
-                                                                    Agda.Builtin.Nat.Nat{0}{1}
-                                                                      Agda.Builtin.Nat.Nat{0}{1}
-                                                                        Agda.Builtin.Nat.Nat{0}{1}
-                                                                          Agda.Builtin.Nat.Nat{0}{1}
-                                                                            Agda.
-                                                                            Builtin.
-                                                                            Nat.Nat{0}{1}
-                                                                              Agda.
-                                                                              Builtin.
-                                                                              Nat.Nat{0}{1}
-                                                                                Agda.
-                                                                                Builtin.
-                                                                                Nat.Nat{0}{1}
-                                                                                  Agda.
-                                                                                  Builtin.
-                                                                                  Nat.Nat{0}{1}
-                                                                                    Agda.
-                                                                                    Builtin.
-                                                                                    Nat.Nat{0}{1}
-                                                                                      Agda.
-                                                                                      Builtin.
-                                                                                      Nat.Nat{0}{1}
-                                                                                        Agda.
-                                                                                        Builtin.
-                                                                                        Nat.Nat{0}{1}
-                                                                                          Agda.
-                                                                                          Builtin.
-                                                                                          Nat.Nat{0}{1}
-                                                                                            Agda.
-                                                                                            Builtin.
-                                                                                            Nat.Nat{0}{1}
-                                                                                              Agda.
-                                                                                              Builtin.
-                                                                                              Nat.Nat{0}{1}
-                                                                                                Agda.
-                                                                                                Builtin.
-                                                                                                Nat.Nat{0}{0}
-            Agda.Builtin.Nat.Nat{0}{0}
-
-Levels.testConstLvl2:
-  constant declaration:
-    type variables: []
-    type: Agda.Builtin.Nat.Nat{0}
-    body: λ _ _ _ _ → @1 □ □
-            Agda.Builtin.Nat.Nat{0}{1}
-              Agda.Builtin.Nat.Nat{0}{1}
-                Agda.Builtin.Nat.Nat{0}{1}
-                  Agda.Builtin.Nat.Nat{0}{1}
-                    Agda.Builtin.Nat.Nat{0}{1}
-                      Agda.Builtin.Nat.Nat{0}{1}
-                        Agda.Builtin.Nat.Nat{0}{1}
-                          Agda.Builtin.Nat.Nat{0}{1}
-                            Agda.Builtin.Nat.Nat{0}{1}
-                              Agda.Builtin.Nat.Nat{0}{1}
-                                Agda.Builtin.Nat.Nat{0}{1}
-                                  Agda.Builtin.Nat.Nat{0}{1}
-                                    Agda.Builtin.Nat.Nat{0}{1}
-                                      Agda.Builtin.Nat.Nat{0}{1}
-                                        Agda.Builtin.Nat.Nat{0}{1}
-                                          Agda.Builtin.Nat.Nat{0}{1}
-                                            Agda.Builtin.Nat.Nat{0}{1}
-                                              Agda.Builtin.Nat.Nat{0}{1}
-                                                Agda.Builtin.Nat.Nat{0}{1}
-                                                  Agda.Builtin.Nat.Nat{0}{1}
-                                                    Agda.Builtin.Nat.Nat{0}{1}
-                                                      Agda.Builtin.Nat.Nat{0}{1}
-                                                        Agda.Builtin.Nat.Nat{0}{1}
-                                                          Agda.Builtin.Nat.Nat{0}{1}
-                                                            Agda.Builtin.Nat.Nat{0}{1}
-                                                              Agda.Builtin.Nat.Nat{0}{1}
-                                                                Agda.Builtin.Nat.Nat{0}{1}
-                                                                  Agda.Builtin.Nat.Nat{0}{1}
-                                                                    Agda.Builtin.Nat.Nat{0}{1}
-                                                                      Agda.Builtin.Nat.Nat{0}{1}
-                                                                        Agda.Builtin.Nat.Nat{0}{1}
-                                                                          Agda.Builtin.Nat.Nat{0}{1}
-                                                                            Agda.
-                                                                            Builtin.
-                                                                            Nat.Nat{0}{1}
-                                                                              Agda.
-                                                                              Builtin.
-                                                                              Nat.Nat{0}{1}
-                                                                                Agda.
-                                                                                Builtin.
-                                                                                Nat.Nat{0}{1}
-                                                                                  Agda.
-                                                                                  Builtin.
-                                                                                  Nat.Nat{0}{1}
-                                                                                    Agda.
-                                                                                    Builtin.
-                                                                                    Nat.Nat{0}{1}
-                                                                                      Agda.
-                                                                                      Builtin.
-                                                                                      Nat.Nat{0}{1}
-                                                                                        Agda.
-                                                                                        Builtin.
-                                                                                        Nat.Nat{0}{1}
-                                                                                          Agda.
-                                                                                          Builtin.
-                                                                                          Nat.Nat{0}{1}
-                                                                                            Agda.
-                                                                                            Builtin.
-                                                                                            Nat.Nat{0}{1}
-                                                                                              Agda.
-                                                                                              Builtin.
-                                                                                              Nat.Nat{0}{1}
-                                                                                                Agda.
-                                                                                                Builtin.
-                                                                                                Nat.Nat{0}{0}
-            (Levels.SomeLvl.ℓ (Levels.someLvl))
-
-Levels.Ֆ_.toNat:
-  constant declaration:
-    type variables: []
-    type: □ → Agda.Builtin.Nat.Nat{0}
-    body: λ _ →
+    type: OverloadedFields.Y{0}
+    body: OverloadedFields.Y{0}{0}
             Agda.Builtin.Nat.Nat{0}{1}
               Agda.Builtin.Nat.Nat{0}{1}
                 Agda.Builtin.Nat.Nat{0}{1}
@@ -492,41 +183,178 @@ Levels.Ֆ_.toNat:
                                                                                                 Builtin.
                                                                                                 Nat.Nat{0}{0}
 
-Levels.testWhere:
+OverloadedFields.X.id:
   constant declaration:
     type variables: []
-    type: Agda.Builtin.Nat.Nat{0}
-    body: Levels.Ֆ_.toNat □
+    type: (OverloadedFields.X{0}) → Agda.Builtin.Nat.Nat{0}
+    body: λ _ → case&lt;OverloadedFields.X{0},0&gt; @0 of λ&lt;[_]&gt; @0
 
-Levels.test:
+OverloadedFields.idX:
+  constant declaration:
+    type variables: []
+    type: (OverloadedFields.X{0}) → Agda.Builtin.Nat.Nat{0}
+    body: λ _ → OverloadedFields.X.id @0
+
+OverloadedFields.Y.id:
+  constant declaration:
+    type variables: []
+    type: (OverloadedFields.Y{0}) → Agda.Builtin.Nat.Nat{0}
+    body: λ _ → case&lt;OverloadedFields.Y{0},0&gt; @0 of λ&lt;[_]&gt; @0
+
+OverloadedFields.idY:
+  constant declaration:
+    type variables: []
+    type: (OverloadedFields.Y{0}) → Agda.Builtin.Nat.Nat{0}
+    body: λ _ → OverloadedFields.Y.id @0
+
+OverloadedFields.test:
   constant declaration:
     type variables: []
     type: Agda.Builtin.Nat.Nat{0}
     body: Agda.Builtin.Nat.Ֆ_Ֆplus_
             (Agda.Builtin.Nat.Ֆ_Ֆplus_
                (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                  (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                     (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                        (Agda.Builtin.Nat.Ֆ_Ֆplus_ (Levels.testLevel □)
-                           (Levels.testMkLevel))
-                        (Levels.testSomeLvl))
-                     (Levels.testConstLvl))
-                  (Levels.testConst))
-               (Levels.testConstLvl2))
-            (Levels.testWhere)
-
-Agda.Primitive.lsuc:
-  constant declaration:
-    type variables: []
-    type: □
-    body: □
-
-Levels.mkLevel:
-  constant declaration:
-    type variables: []
-    type: (Agda.Builtin.Nat.Nat{0}) → □
-    body: μ rec -&gt;
-            λ _ →
-              case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @0 of
-                λ&lt;[]&gt; Levels.Ֆ30Ֆℓ
-                λ&lt;[_]&gt; Agda.Primitive.lsuc (@2 @0)</code></pre>
+                  Agda.Builtin.Nat.Nat{0}{1}
+                    Agda.Builtin.Nat.Nat{0}{1}
+                      Agda.Builtin.Nat.Nat{0}{1}
+                        Agda.Builtin.Nat.Nat{0}{1}
+                          Agda.Builtin.Nat.Nat{0}{1}
+                            Agda.Builtin.Nat.Nat{0}{1}
+                              Agda.Builtin.Nat.Nat{0}{1}
+                                Agda.Builtin.Nat.Nat{0}{1}
+                                  Agda.Builtin.Nat.Nat{0}{1}
+                                    Agda.Builtin.Nat.Nat{0}{1}
+                                      Agda.Builtin.Nat.Nat{0}{1}
+                                        Agda.Builtin.Nat.Nat{0}{1}
+                                          Agda.Builtin.Nat.Nat{0}{1}
+                                            Agda.Builtin.Nat.Nat{0}{1}
+                                              Agda.Builtin.Nat.Nat{0}{1}
+                                                Agda.Builtin.Nat.Nat{0}{1}
+                                                  Agda.Builtin.Nat.Nat{0}{1}
+                                                    Agda.Builtin.Nat.Nat{0}{1}
+                                                      Agda.Builtin.Nat.Nat{0}{1}
+                                                        Agda.Builtin.Nat.Nat{0}{1}
+                                                          Agda.Builtin.Nat.Nat{0}{1}
+                                                            Agda.Builtin.Nat.Nat{0}{1}
+                                                              Agda.Builtin.Nat.Nat{0}{1}
+                                                                Agda.Builtin.Nat.Nat{0}{1}
+                                                                  Agda.Builtin.Nat.Nat{0}{1}
+                                                                    Agda.Builtin.Nat.Nat{0}{1}
+                                                                      Agda.Builtin.Nat.Nat{0}{1}
+                                                                        Agda.Builtin.Nat.Nat{0}{1}
+                                                                          Agda.Builtin.Nat.Nat{0}{1}
+                                                                            Agda.
+                                                                            Builtin.
+                                                                            Nat.Nat{0}{1}
+                                                                              Agda.
+                                                                              Builtin.
+                                                                              Nat.Nat{0}{1}
+                                                                                Agda.
+                                                                                Builtin.
+                                                                                Nat.Nat{0}{1}
+                                                                                  Agda.
+                                                                                  Builtin.
+                                                                                  Nat.Nat{0}{1}
+                                                                                    Agda.
+                                                                                    Builtin.
+                                                                                    Nat.Nat{0}{1}
+                                                                                      Agda.
+                                                                                      Builtin.
+                                                                                      Nat.Nat{0}{1}
+                                                                                        Agda.
+                                                                                        Builtin.
+                                                                                        Nat.Nat{0}{1}
+                                                                                          Agda.
+                                                                                          Builtin.
+                                                                                          Nat.Nat{0}{1}
+                                                                                            Agda.
+                                                                                            Builtin.
+                                                                                            Nat.Nat{0}{1}
+                                                                                              Agda.
+                                                                                              Builtin.
+                                                                                              Nat.Nat{0}{1}
+                                                                                                Agda.
+                                                                                                Builtin.
+                                                                                                Nat.Nat{0}{1}
+                                                                                                  Agda.
+                                                                                                  Builtin.
+                                                                                                  Nat.Nat{0}{1}
+                                                                                                    Agda.
+                                                                                                    Builtin.
+                                                                                                    Nat.Nat{0}{1}
+                                                                                                      Agda.
+                                                                                                      Builtin.
+                                                                                                      Nat.Nat{0}{0}
+                  Agda.Builtin.Nat.Nat{0}{1}
+                    Agda.Builtin.Nat.Nat{0}{1}
+                      Agda.Builtin.Nat.Nat{0}{1}
+                        Agda.Builtin.Nat.Nat{0}{1}
+                          Agda.Builtin.Nat.Nat{0}{1}
+                            Agda.Builtin.Nat.Nat{0}{1}
+                              Agda.Builtin.Nat.Nat{0}{1}
+                                Agda.Builtin.Nat.Nat{0}{1}
+                                  Agda.Builtin.Nat.Nat{0}{1}
+                                    Agda.Builtin.Nat.Nat{0}{1}
+                                      Agda.Builtin.Nat.Nat{0}{1}
+                                        Agda.Builtin.Nat.Nat{0}{1}
+                                          Agda.Builtin.Nat.Nat{0}{1}
+                                            Agda.Builtin.Nat.Nat{0}{1}
+                                              Agda.Builtin.Nat.Nat{0}{1}
+                                                Agda.Builtin.Nat.Nat{0}{1}
+                                                  Agda.Builtin.Nat.Nat{0}{1}
+                                                    Agda.Builtin.Nat.Nat{0}{1}
+                                                      Agda.Builtin.Nat.Nat{0}{1}
+                                                        Agda.Builtin.Nat.Nat{0}{1}
+                                                          Agda.Builtin.Nat.Nat{0}{1}
+                                                            Agda.Builtin.Nat.Nat{0}{1}
+                                                              Agda.Builtin.Nat.Nat{0}{1}
+                                                                Agda.Builtin.Nat.Nat{0}{1}
+                                                                  Agda.Builtin.Nat.Nat{0}{1}
+                                                                    Agda.Builtin.Nat.Nat{0}{1}
+                                                                      Agda.Builtin.Nat.Nat{0}{1}
+                                                                        Agda.Builtin.Nat.Nat{0}{1}
+                                                                          Agda.Builtin.Nat.Nat{0}{1}
+                                                                            Agda.
+                                                                            Builtin.
+                                                                            Nat.Nat{0}{1}
+                                                                              Agda.
+                                                                              Builtin.
+                                                                              Nat.Nat{0}{1}
+                                                                                Agda.
+                                                                                Builtin.
+                                                                                Nat.Nat{0}{1}
+                                                                                  Agda.
+                                                                                  Builtin.
+                                                                                  Nat.Nat{0}{1}
+                                                                                    Agda.
+                                                                                    Builtin.
+                                                                                    Nat.Nat{0}{1}
+                                                                                      Agda.
+                                                                                      Builtin.
+                                                                                      Nat.Nat{0}{1}
+                                                                                        Agda.
+                                                                                        Builtin.
+                                                                                        Nat.Nat{0}{1}
+                                                                                          Agda.
+                                                                                          Builtin.
+                                                                                          Nat.Nat{0}{1}
+                                                                                            Agda.
+                                                                                            Builtin.
+                                                                                            Nat.Nat{0}{1}
+                                                                                              Agda.
+                                                                                              Builtin.
+                                                                                              Nat.Nat{0}{1}
+                                                                                                Agda.
+                                                                                                Builtin.
+                                                                                                Nat.Nat{0}{1}
+                                                                                                  Agda.
+                                                                                                  Builtin.
+                                                                                                  Nat.Nat{0}{1}
+                                                                                                    Agda.
+                                                                                                    Builtin.
+                                                                                                    Nat.Nat{0}{1}
+                                                                                                      Agda.
+                                                                                                      Builtin.
+                                                                                                      Nat.Nat{0}{0})
+               (OverloadedFields.idX (OverloadedFields.exX)))
+            (OverloadedFields.idY (OverloadedFields.exY))</code></pre>

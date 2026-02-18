@@ -13,10 +13,24 @@ Agda.Builtin.Nat.Nat:
         suc (1 arg(s))
           n : Agda.Builtin.Nat.Nat{0}
 
-Levels.testLevel:
+ConsImplicitArgs.Bar:
+  mutual inductive(s):
+    Bar
+    type variables:  []
+      constructors: bar (0 arg(s))
+
+ConsImplicitArgs.Foo:
+  mutual inductive(s):
+    Foo
+    type variables:  []
+      constructors:
+        foo (1 arg(s))
+          _ : ConsImplicitArgs.Bar{0}
+
+ConsImplicitArgs.fooToNat:
   constant declaration:
     type variables: []
-    type: □ → Agda.Builtin.Nat.Nat{0}
+    type: (ConsImplicitArgs.Foo{0}) → Agda.Builtin.Nat.Nat{0}
     body: λ _ →
             Agda.Builtin.Nat.Nat{0}{1}
               Agda.Builtin.Nat.Nat{0}{1}
@@ -83,12 +97,6 @@ Levels.testLevel:
                                                                                                 Agda.
                                                                                                 Builtin.
                                                                                                 Nat.Nat{0}{0}
-
-Levels.testMkLevel:
-  constant declaration:
-    type variables: []
-    type: Agda.Builtin.Nat.Nat{0}
-    body: Levels.testLevel □
 
 Agda.Builtin.Nat.Ֆ_Ֆplus_:
   constant declaration:
@@ -102,12 +110,38 @@ Agda.Builtin.Nat.Ֆ_Ֆplus_:
                 λ&lt;[]&gt; @0
                 λ&lt;[_]&gt; Agda.Builtin.Nat.Nat{0}{1} (@3 @0 @1)
 
-Levels.lvlToNat:
+ConsImplicitArgs.BarA:
+  mutual inductive(s):
+    BarA
+    type variables:  [ℓ, A]
+      constructors:
+        bar (1 arg(s))
+          _ : @1
+
+ConsImplicitArgs.FooA:
+  mutual inductive(s):
+    FooA
+    type variables:  [ℓ, A]
+      constructors:
+        foo (1 arg(s))
+          _ : ConsImplicitArgs.BarA{0} □ @1
+
+ConsImplicitArgs.fooAToNat:
   constant declaration:
     type variables: []
-    type: □ → Agda.Builtin.Nat.Nat{0}
+    type: ConsImplicitArgs.FooA{0} □ (Agda.Builtin.Nat.Nat{0}) → Agda.
+                                                                 Builtin.
+                                                                 Nat.Nat{0}
     body: λ _ →
-            Agda.Builtin.Nat.Nat{0}{1}
+            case&lt;ConsImplicitArgs.FooA{0},0&gt; @0 of
+              λ&lt;[_]&gt; case&lt;ConsImplicitArgs.BarA{0},0&gt; @0 of λ&lt;[_]&gt; @0
+
+ConsImplicitArgs.testFooA:
+  constant declaration:
+    type variables: []
+    type: ConsImplicitArgs.FooA{0} □ (Agda.Builtin.Nat.Nat{0})
+    body: ConsImplicitArgs.FooA{0}{0}
+            ConsImplicitArgs.BarA{0}{0}
               Agda.Builtin.Nat.Nat{0}{1}
                 Agda.Builtin.Nat.Nat{0}{1}
                   Agda.Builtin.Nat.Nat{0}{1}
@@ -171,260 +205,29 @@ Levels.lvlToNat:
                                                                                               Nat.Nat{0}{1}
                                                                                                 Agda.
                                                                                                 Builtin.
-                                                                                                Nat.Nat{0}{0}
+                                                                                                Nat.Nat{0}{1}
+                                                                                                  Agda.
+                                                                                                  Builtin.
+                                                                                                  Nat.Nat{0}{0}
 
-Levels.testSomeLvl:
-  constant declaration:
-    type variables: []
-    type: Agda.Builtin.Nat.Nat{0}
-    body: Levels.lvlToNat □
-
-Levels.SomeLvl:
+ConsImplicitArgs.BarR:
   mutual inductive(s):
-    SomeLvl
+    BarR
+    type variables:  []
+      constructors: bar (0 arg(s))
+
+ConsImplicitArgs.FooR:
+  mutual inductive(s):
+    FooR
     type variables:  []
       constructors:
-        this (1 arg(s))
-          ℓ : □
+        foo (1 arg(s))
+          getBar : ConsImplicitArgs.BarR{0}
 
-Levels.SomeLvl.ℓ:
+ConsImplicitArgs.fooRToNat:
   constant declaration:
     type variables: []
-    type: (Levels.SomeLvl{0}) → □
-    body: λ _ → case&lt;Levels.SomeLvl{0},0&gt; @0 of λ&lt;[_]&gt; @0
-
-Levels.Ֆ30Ֆℓ:
-  constant declaration:
-    type variables: []
-    type: □
-    body: □
-
-Levels.someLvl:
-  constant declaration:
-    type variables: []
-    type: Levels.SomeLvl{0}
-    body: Levels.SomeLvl{0}{0} (Levels.Ֆ30Ֆℓ)
-
-Levels.testConstLvl:
-  constant declaration:
-    type variables: []
-    type: Agda.Builtin.Nat.Nat{0}
-    body: λ _ _ _ → @1 □
-            Agda.Builtin.Nat.Nat{0}{1}
-              Agda.Builtin.Nat.Nat{0}{1}
-                Agda.Builtin.Nat.Nat{0}{1}
-                  Agda.Builtin.Nat.Nat{0}{1}
-                    Agda.Builtin.Nat.Nat{0}{1}
-                      Agda.Builtin.Nat.Nat{0}{1}
-                        Agda.Builtin.Nat.Nat{0}{1}
-                          Agda.Builtin.Nat.Nat{0}{1}
-                            Agda.Builtin.Nat.Nat{0}{1}
-                              Agda.Builtin.Nat.Nat{0}{1}
-                                Agda.Builtin.Nat.Nat{0}{1}
-                                  Agda.Builtin.Nat.Nat{0}{1}
-                                    Agda.Builtin.Nat.Nat{0}{1}
-                                      Agda.Builtin.Nat.Nat{0}{1}
-                                        Agda.Builtin.Nat.Nat{0}{1}
-                                          Agda.Builtin.Nat.Nat{0}{1}
-                                            Agda.Builtin.Nat.Nat{0}{1}
-                                              Agda.Builtin.Nat.Nat{0}{1}
-                                                Agda.Builtin.Nat.Nat{0}{1}
-                                                  Agda.Builtin.Nat.Nat{0}{1}
-                                                    Agda.Builtin.Nat.Nat{0}{1}
-                                                      Agda.Builtin.Nat.Nat{0}{1}
-                                                        Agda.Builtin.Nat.Nat{0}{1}
-                                                          Agda.Builtin.Nat.Nat{0}{1}
-                                                            Agda.Builtin.Nat.Nat{0}{1}
-                                                              Agda.Builtin.Nat.Nat{0}{1}
-                                                                Agda.Builtin.Nat.Nat{0}{1}
-                                                                  Agda.Builtin.Nat.Nat{0}{1}
-                                                                    Agda.Builtin.Nat.Nat{0}{1}
-                                                                      Agda.Builtin.Nat.Nat{0}{1}
-                                                                        Agda.Builtin.Nat.Nat{0}{1}
-                                                                          Agda.Builtin.Nat.Nat{0}{1}
-                                                                            Agda.
-                                                                            Builtin.
-                                                                            Nat.Nat{0}{1}
-                                                                              Agda.
-                                                                              Builtin.
-                                                                              Nat.Nat{0}{1}
-                                                                                Agda.
-                                                                                Builtin.
-                                                                                Nat.Nat{0}{1}
-                                                                                  Agda.
-                                                                                  Builtin.
-                                                                                  Nat.Nat{0}{1}
-                                                                                    Agda.
-                                                                                    Builtin.
-                                                                                    Nat.Nat{0}{1}
-                                                                                      Agda.
-                                                                                      Builtin.
-                                                                                      Nat.Nat{0}{1}
-                                                                                        Agda.
-                                                                                        Builtin.
-                                                                                        Nat.Nat{0}{1}
-                                                                                          Agda.
-                                                                                          Builtin.
-                                                                                          Nat.Nat{0}{1}
-                                                                                            Agda.
-                                                                                            Builtin.
-                                                                                            Nat.Nat{0}{1}
-                                                                                              Agda.
-                                                                                              Builtin.
-                                                                                              Nat.Nat{0}{1}
-                                                                                                Agda.
-                                                                                                Builtin.
-                                                                                                Nat.Nat{0}{0}
-            (Levels.SomeLvl.ℓ (Levels.someLvl))
-
-Levels.testConst:
-  constant declaration:
-    type variables: []
-    type: Agda.Builtin.Nat.Nat{0}
-    body: λ _ _ _ _ → @1 □ □
-            Agda.Builtin.Nat.Nat{0}{1}
-              Agda.Builtin.Nat.Nat{0}{1}
-                Agda.Builtin.Nat.Nat{0}{1}
-                  Agda.Builtin.Nat.Nat{0}{1}
-                    Agda.Builtin.Nat.Nat{0}{1}
-                      Agda.Builtin.Nat.Nat{0}{1}
-                        Agda.Builtin.Nat.Nat{0}{1}
-                          Agda.Builtin.Nat.Nat{0}{1}
-                            Agda.Builtin.Nat.Nat{0}{1}
-                              Agda.Builtin.Nat.Nat{0}{1}
-                                Agda.Builtin.Nat.Nat{0}{1}
-                                  Agda.Builtin.Nat.Nat{0}{1}
-                                    Agda.Builtin.Nat.Nat{0}{1}
-                                      Agda.Builtin.Nat.Nat{0}{1}
-                                        Agda.Builtin.Nat.Nat{0}{1}
-                                          Agda.Builtin.Nat.Nat{0}{1}
-                                            Agda.Builtin.Nat.Nat{0}{1}
-                                              Agda.Builtin.Nat.Nat{0}{1}
-                                                Agda.Builtin.Nat.Nat{0}{1}
-                                                  Agda.Builtin.Nat.Nat{0}{1}
-                                                    Agda.Builtin.Nat.Nat{0}{1}
-                                                      Agda.Builtin.Nat.Nat{0}{1}
-                                                        Agda.Builtin.Nat.Nat{0}{1}
-                                                          Agda.Builtin.Nat.Nat{0}{1}
-                                                            Agda.Builtin.Nat.Nat{0}{1}
-                                                              Agda.Builtin.Nat.Nat{0}{1}
-                                                                Agda.Builtin.Nat.Nat{0}{1}
-                                                                  Agda.Builtin.Nat.Nat{0}{1}
-                                                                    Agda.Builtin.Nat.Nat{0}{1}
-                                                                      Agda.Builtin.Nat.Nat{0}{1}
-                                                                        Agda.Builtin.Nat.Nat{0}{1}
-                                                                          Agda.Builtin.Nat.Nat{0}{1}
-                                                                            Agda.
-                                                                            Builtin.
-                                                                            Nat.Nat{0}{1}
-                                                                              Agda.
-                                                                              Builtin.
-                                                                              Nat.Nat{0}{1}
-                                                                                Agda.
-                                                                                Builtin.
-                                                                                Nat.Nat{0}{1}
-                                                                                  Agda.
-                                                                                  Builtin.
-                                                                                  Nat.Nat{0}{1}
-                                                                                    Agda.
-                                                                                    Builtin.
-                                                                                    Nat.Nat{0}{1}
-                                                                                      Agda.
-                                                                                      Builtin.
-                                                                                      Nat.Nat{0}{1}
-                                                                                        Agda.
-                                                                                        Builtin.
-                                                                                        Nat.Nat{0}{1}
-                                                                                          Agda.
-                                                                                          Builtin.
-                                                                                          Nat.Nat{0}{1}
-                                                                                            Agda.
-                                                                                            Builtin.
-                                                                                            Nat.Nat{0}{1}
-                                                                                              Agda.
-                                                                                              Builtin.
-                                                                                              Nat.Nat{0}{1}
-                                                                                                Agda.
-                                                                                                Builtin.
-                                                                                                Nat.Nat{0}{0}
-            Agda.Builtin.Nat.Nat{0}{0}
-
-Levels.testConstLvl2:
-  constant declaration:
-    type variables: []
-    type: Agda.Builtin.Nat.Nat{0}
-    body: λ _ _ _ _ → @1 □ □
-            Agda.Builtin.Nat.Nat{0}{1}
-              Agda.Builtin.Nat.Nat{0}{1}
-                Agda.Builtin.Nat.Nat{0}{1}
-                  Agda.Builtin.Nat.Nat{0}{1}
-                    Agda.Builtin.Nat.Nat{0}{1}
-                      Agda.Builtin.Nat.Nat{0}{1}
-                        Agda.Builtin.Nat.Nat{0}{1}
-                          Agda.Builtin.Nat.Nat{0}{1}
-                            Agda.Builtin.Nat.Nat{0}{1}
-                              Agda.Builtin.Nat.Nat{0}{1}
-                                Agda.Builtin.Nat.Nat{0}{1}
-                                  Agda.Builtin.Nat.Nat{0}{1}
-                                    Agda.Builtin.Nat.Nat{0}{1}
-                                      Agda.Builtin.Nat.Nat{0}{1}
-                                        Agda.Builtin.Nat.Nat{0}{1}
-                                          Agda.Builtin.Nat.Nat{0}{1}
-                                            Agda.Builtin.Nat.Nat{0}{1}
-                                              Agda.Builtin.Nat.Nat{0}{1}
-                                                Agda.Builtin.Nat.Nat{0}{1}
-                                                  Agda.Builtin.Nat.Nat{0}{1}
-                                                    Agda.Builtin.Nat.Nat{0}{1}
-                                                      Agda.Builtin.Nat.Nat{0}{1}
-                                                        Agda.Builtin.Nat.Nat{0}{1}
-                                                          Agda.Builtin.Nat.Nat{0}{1}
-                                                            Agda.Builtin.Nat.Nat{0}{1}
-                                                              Agda.Builtin.Nat.Nat{0}{1}
-                                                                Agda.Builtin.Nat.Nat{0}{1}
-                                                                  Agda.Builtin.Nat.Nat{0}{1}
-                                                                    Agda.Builtin.Nat.Nat{0}{1}
-                                                                      Agda.Builtin.Nat.Nat{0}{1}
-                                                                        Agda.Builtin.Nat.Nat{0}{1}
-                                                                          Agda.Builtin.Nat.Nat{0}{1}
-                                                                            Agda.
-                                                                            Builtin.
-                                                                            Nat.Nat{0}{1}
-                                                                              Agda.
-                                                                              Builtin.
-                                                                              Nat.Nat{0}{1}
-                                                                                Agda.
-                                                                                Builtin.
-                                                                                Nat.Nat{0}{1}
-                                                                                  Agda.
-                                                                                  Builtin.
-                                                                                  Nat.Nat{0}{1}
-                                                                                    Agda.
-                                                                                    Builtin.
-                                                                                    Nat.Nat{0}{1}
-                                                                                      Agda.
-                                                                                      Builtin.
-                                                                                      Nat.Nat{0}{1}
-                                                                                        Agda.
-                                                                                        Builtin.
-                                                                                        Nat.Nat{0}{1}
-                                                                                          Agda.
-                                                                                          Builtin.
-                                                                                          Nat.Nat{0}{1}
-                                                                                            Agda.
-                                                                                            Builtin.
-                                                                                            Nat.Nat{0}{1}
-                                                                                              Agda.
-                                                                                              Builtin.
-                                                                                              Nat.Nat{0}{1}
-                                                                                                Agda.
-                                                                                                Builtin.
-                                                                                                Nat.Nat{0}{0}
-            (Levels.SomeLvl.ℓ (Levels.someLvl))
-
-Levels.Ֆ_.toNat:
-  constant declaration:
-    type variables: []
-    type: □ → Agda.Builtin.Nat.Nat{0}
+    type: (ConsImplicitArgs.FooR{0}) → Agda.Builtin.Nat.Nat{0}
     body: λ _ →
             Agda.Builtin.Nat.Nat{0}{1}
               Agda.Builtin.Nat.Nat{0}{1}
@@ -492,41 +295,130 @@ Levels.Ֆ_.toNat:
                                                                                                 Builtin.
                                                                                                 Nat.Nat{0}{0}
 
-Levels.testWhere:
+ConsImplicitArgs.BarRA:
+  mutual inductive(s):
+    BarRA
+    type variables:  [ℓ, A]
+      constructors: bar (0 arg(s))
+
+ConsImplicitArgs.FooRA:
+  mutual inductive(s):
+    FooRA
+    type variables:  [ℓ, A]
+      constructors:
+        foo (1 arg(s))
+          getBar : ConsImplicitArgs.BarRA{0} □ @1
+
+ConsImplicitArgs.fooRAToNat:
   constant declaration:
     type variables: []
-    type: Agda.Builtin.Nat.Nat{0}
-    body: Levels.Ֆ_.toNat □
+    type: ConsImplicitArgs.FooRA{0} □ (Agda.Builtin.Nat.Nat{0}) → Agda.
+                                                                  Builtin.
+                                                                  Nat.Nat{0}
+    body: λ _ →
+            Agda.Builtin.Nat.Nat{0}{1}
+              Agda.Builtin.Nat.Nat{0}{1}
+                Agda.Builtin.Nat.Nat{0}{1}
+                  Agda.Builtin.Nat.Nat{0}{1}
+                    Agda.Builtin.Nat.Nat{0}{1}
+                      Agda.Builtin.Nat.Nat{0}{1}
+                        Agda.Builtin.Nat.Nat{0}{1}
+                          Agda.Builtin.Nat.Nat{0}{1}
+                            Agda.Builtin.Nat.Nat{0}{1}
+                              Agda.Builtin.Nat.Nat{0}{1}
+                                Agda.Builtin.Nat.Nat{0}{1}
+                                  Agda.Builtin.Nat.Nat{0}{1}
+                                    Agda.Builtin.Nat.Nat{0}{1}
+                                      Agda.Builtin.Nat.Nat{0}{1}
+                                        Agda.Builtin.Nat.Nat{0}{1}
+                                          Agda.Builtin.Nat.Nat{0}{1}
+                                            Agda.Builtin.Nat.Nat{0}{1}
+                                              Agda.Builtin.Nat.Nat{0}{1}
+                                                Agda.Builtin.Nat.Nat{0}{1}
+                                                  Agda.Builtin.Nat.Nat{0}{1}
+                                                    Agda.Builtin.Nat.Nat{0}{1}
+                                                      Agda.Builtin.Nat.Nat{0}{1}
+                                                        Agda.Builtin.Nat.Nat{0}{1}
+                                                          Agda.Builtin.Nat.Nat{0}{1}
+                                                            Agda.Builtin.Nat.Nat{0}{1}
+                                                              Agda.Builtin.Nat.Nat{0}{1}
+                                                                Agda.Builtin.Nat.Nat{0}{1}
+                                                                  Agda.Builtin.Nat.Nat{0}{1}
+                                                                    Agda.Builtin.Nat.Nat{0}{1}
+                                                                      Agda.Builtin.Nat.Nat{0}{1}
+                                                                        Agda.Builtin.Nat.Nat{0}{1}
+                                                                          Agda.Builtin.Nat.Nat{0}{1}
+                                                                            Agda.
+                                                                            Builtin.
+                                                                            Nat.Nat{0}{1}
+                                                                              Agda.
+                                                                              Builtin.
+                                                                              Nat.Nat{0}{1}
+                                                                                Agda.
+                                                                                Builtin.
+                                                                                Nat.Nat{0}{1}
+                                                                                  Agda.
+                                                                                  Builtin.
+                                                                                  Nat.Nat{0}{1}
+                                                                                    Agda.
+                                                                                    Builtin.
+                                                                                    Nat.Nat{0}{1}
+                                                                                      Agda.
+                                                                                      Builtin.
+                                                                                      Nat.Nat{0}{1}
+                                                                                        Agda.
+                                                                                        Builtin.
+                                                                                        Nat.Nat{0}{1}
+                                                                                          Agda.
+                                                                                          Builtin.
+                                                                                          Nat.Nat{0}{1}
+                                                                                            Agda.
+                                                                                            Builtin.
+                                                                                            Nat.Nat{0}{1}
+                                                                                              Agda.
+                                                                                              Builtin.
+                                                                                              Nat.Nat{0}{1}
+                                                                                                Agda.
+                                                                                                Builtin.
+                                                                                                Nat.Nat{0}{0}
 
-Levels.test:
+ConsImplicitArgs.test:
   constant declaration:
     type variables: []
     type: Agda.Builtin.Nat.Nat{0}
     body: Agda.Builtin.Nat.Ֆ_Ֆplus_
             (Agda.Builtin.Nat.Ֆ_Ֆplus_
-               (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                  (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                     (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                        (Agda.Builtin.Nat.Ֆ_Ֆplus_ (Levels.testLevel □)
-                           (Levels.testMkLevel))
-                        (Levels.testSomeLvl))
-                     (Levels.testConstLvl))
-                  (Levels.testConst))
-               (Levels.testConstLvl2))
-            (Levels.testWhere)
+               (Agda.Builtin.Nat.Ֆ_Ֆplus_ (ConsImplicitArgs.fooToNat □)
+                  (ConsImplicitArgs.fooAToNat (ConsImplicitArgs.testFooA)))
+               (ConsImplicitArgs.fooRToNat □))
+            (ConsImplicitArgs.fooRAToNat □)
 
-Agda.Primitive.lsuc:
+ConsImplicitArgs.testFooRA:
   constant declaration:
     type variables: []
-    type: □
+    type: ConsImplicitArgs.FooRA{0} □ (Agda.Builtin.Nat.Nat{0})
     body: □
 
-Levels.mkLevel:
+ConsImplicitArgs.FooRA.getBar:
+  constant declaration:
+    type variables: [ℓ, A]
+    type: ConsImplicitArgs.FooRA{0} □ @1 → ConsImplicitArgs.BarRA{0} □ @1
+    body: □
+
+ConsImplicitArgs.testFooR:
   constant declaration:
     type variables: []
-    type: (Agda.Builtin.Nat.Nat{0}) → □
-    body: μ rec -&gt;
-            λ _ →
-              case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @0 of
-                λ&lt;[]&gt; Levels.Ֆ30Ֆℓ
-                λ&lt;[_]&gt; Agda.Primitive.lsuc (@2 @0)</code></pre>
+    type: ConsImplicitArgs.FooR{0}
+    body: □
+
+ConsImplicitArgs.FooR.getBar:
+  constant declaration:
+    type variables: []
+    type: (ConsImplicitArgs.FooR{0}) → ConsImplicitArgs.BarR{0}
+    body: □
+
+ConsImplicitArgs.testFoo:
+  constant declaration:
+    type variables: []
+    type: ConsImplicitArgs.Foo{0}
+    body: □</code></pre>

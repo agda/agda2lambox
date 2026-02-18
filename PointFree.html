@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>PointFree</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="split left Agda"><a id="1" class="Comment">-- Issue #2</a>
+<a id="13" class="Keyword">open</a> <a id="18" class="Keyword">import</a> <a id="25" href="Agda.Builtin.Nat.html" class="Module">Agda.Builtin.Nat</a> <a id="42" class="Keyword">using</a> <a id="48" class="Symbol">(</a><a id="49" href="Agda.Builtin.Nat.html#234" class="InductiveConstructor">suc</a><a id="52" class="Symbol">)</a> <a id="54" class="Keyword">renaming</a> <a id="63" class="Symbol">(</a><a id="64" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a> <a id="68" class="Symbol">to</a> <a id="71" class="Datatype">ℕ</a><a id="72" class="Symbol">)</a>
+
+<a id="75" class="Keyword">data</a> <a id="Foo"></a><a id="80" href="PointFree.html#80" class="Datatype">Foo</a> <a id="84" class="Symbol">:</a> <a id="86" href="Agda.Primitive.html#388" class="Primitive">Set</a> <a id="90" class="Keyword">where</a>
+  <a id="Foo.foo"></a><a id="98" href="PointFree.html#98" class="InductiveConstructor">foo</a> <a id="102" class="Symbol">:</a> <a id="104" href="PointFree.html#71" class="Datatype">ℕ</a> <a id="106" class="Symbol">→</a> <a id="108" href="PointFree.html#80" class="Datatype">Foo</a>
+
+<a id="f"></a><a id="113" href="PointFree.html#113" class="Function">f</a> <a id="115" class="Symbol">:</a> <a id="117" href="PointFree.html#71" class="Datatype">ℕ</a> <a id="119" class="Symbol">→</a> <a id="121" href="PointFree.html#80" class="Datatype">Foo</a>
+<a id="125" href="PointFree.html#113" class="Function">f</a> <a id="127" class="Symbol">=</a> <a id="129" href="PointFree.html#98" class="InductiveConstructor">foo</a>
+
+<a id="g"></a><a id="134" href="PointFree.html#134" class="Function">g</a> <a id="136" class="Symbol">:</a> <a id="138" href="PointFree.html#71" class="Datatype">ℕ</a> <a id="140" class="Symbol">→</a> <a id="142" href="PointFree.html#71" class="Datatype">ℕ</a>
+<a id="144" href="PointFree.html#134" class="Function">g</a> <a id="146" class="Symbol">=</a> <a id="148" href="Agda.Builtin.Nat.html#234" class="InductiveConstructor">suc</a>
+
+<a id="h"></a><a id="153" href="PointFree.html#153" class="Function">h</a> <a id="155" class="Symbol">:</a> <a id="157" href="PointFree.html#71" class="Datatype">ℕ</a> <a id="159" class="Symbol">→</a> <a id="161" href="PointFree.html#71" class="Datatype">ℕ</a>
+<a id="163" href="PointFree.html#153" class="Function">h</a> <a id="165" class="Symbol">=</a> <a id="167" href="PointFree.html#134" class="Function">g</a>
+
+<a id="170" class="Keyword">open</a> <a id="175" class="Keyword">import</a> <a id="182" href="Agda.Builtin.Nat.html" class="Module">Agda.Builtin.Nat</a>
+
+<a id="toNat"></a><a id="200" href="PointFree.html#200" class="Function">toNat</a> <a id="206" class="Symbol">:</a> <a id="208" href="PointFree.html#80" class="Datatype">Foo</a> <a id="212" class="Symbol">→</a> <a id="214" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="218" href="PointFree.html#200" class="Function">toNat</a> <a id="224" class="Symbol">(</a><a id="225" href="PointFree.html#98" class="InductiveConstructor">foo</a> <a id="229" href="PointFree.html#229" class="Bound">n</a><a id="230" class="Symbol">)</a> <a id="232" class="Symbol">=</a> <a id="234" href="PointFree.html#229" class="Bound">n</a>
+
+<a id="test"></a><a id="237" href="PointFree.html#237" class="Function">test</a> <a id="242" class="Symbol">:</a> <a id="244" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="248" href="PointFree.html#237" class="Function">test</a> <a id="253" class="Symbol">=</a> <a id="255" href="PointFree.html#200" class="Function">toNat</a> <a id="261" class="Symbol">(</a><a id="262" href="PointFree.html#113" class="Function">f</a> <a id="264" class="Number">42</a><a id="266" class="Symbol">)</a>
+     <a id="273" href="Agda.Builtin.Nat.html#336" class="Primitive Operator">+</a> <a id="275" href="PointFree.html#134" class="Function">g</a> <a id="277" class="Number">41</a>
+     <a id="285" href="Agda.Builtin.Nat.html#336" class="Primitive Operator">+</a> <a id="287" href="PointFree.html#153" class="Function">h</a> <a id="289" class="Number">41</a>
+<a id="292" class="Symbol">{-#</a> <a id="296" class="Keyword">COMPILE</a> <a id="304" class="Keyword">AGDA2LAMBOX</a> <a id="316" href="PointFree.html#237" class="Function">test</a> <a id="321" class="Symbol">#-}</a>
+</pre><div class="split right"><div class="tabs">    <span data-tab-value="#tab_1">Debug</span>    <span data-tab-value="#tab_2">λ&#9744;</span>    <span data-tab-value="#tab_3">Rocq</span></div><div class="tab-content">    <div class="tabs__tab active" id="tab_1" data-tab-info>        <embed src="dist/PointFree.txt.html"/>    </div>    <div class="tabs__tab" id="tab_2" data-tab-info>        <embed src="dist/PointFree.ast.html"/>    </div>    <div class="tabs__tab" id="tab_3" data-tab-info>        <embed src="dist/PointFree.v.html"/>    </div></div></div><script type=text/javascript>  document.querySelectorAll('[data-tab-value]').forEach(tab => {tab.addEventListener('click', () => {    document.querySelectorAll('[data-tab-info]').forEach(tabInfo => {tabInfo.classList.remove('active') });    document.querySelector(tab.dataset.tabValue).classList.add('active');  })})</script></body></html>

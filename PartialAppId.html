@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>PartialAppId</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="split left Agda"><a id="1" class="Keyword">open</a> <a id="6" class="Keyword">import</a> <a id="13" href="Agda.Builtin.Nat.html" class="Module">Agda.Builtin.Nat</a> <a id="30" class="Keyword">using</a> <a id="36" class="Symbol">(</a><a id="37" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a><a id="40" class="Symbol">;</a> <a id="42" href="Agda.Builtin.Nat.html#336" class="Primitive Operator">_+_</a><a id="45" class="Symbol">)</a>
+
+<a id="id"></a><a id="48" href="PartialAppId.html#48" class="Function">id</a> <a id="51" class="Symbol">:</a> <a id="53" class="Symbol">∀</a> <a id="55" class="Symbol">{</a><a id="56" href="PartialAppId.html#56" class="Bound">A</a> <a id="58" class="Symbol">:</a> <a id="60" href="Agda.Primitive.html#388" class="Primitive">Set</a><a id="63" class="Symbol">}</a> <a id="65" class="Symbol">→</a> <a id="67" href="PartialAppId.html#56" class="Bound">A</a> <a id="69" class="Symbol">→</a> <a id="71" href="PartialAppId.html#56" class="Bound">A</a>
+<a id="73" href="PartialAppId.html#48" class="Function">id</a> <a id="76" href="PartialAppId.html#76" class="Bound">x</a> <a id="78" class="Symbol">=</a> <a id="80" href="PartialAppId.html#76" class="Bound">x</a>
+
+<a id="idd"></a><a id="83" href="PartialAppId.html#83" class="Function">idd</a> <a id="87" class="Symbol">:</a> <a id="89" class="Symbol">∀</a> <a id="91" class="Symbol">{</a><a id="92" href="PartialAppId.html#92" class="Bound">A</a> <a id="94" class="Symbol">:</a> <a id="96" href="Agda.Primitive.html#388" class="Primitive">Set</a><a id="99" class="Symbol">}</a> <a id="101" class="Symbol">→</a> <a id="103" class="Symbol">(</a><a id="104" href="PartialAppId.html#92" class="Bound">A</a> <a id="106" class="Symbol">→</a> <a id="108" href="PartialAppId.html#92" class="Bound">A</a><a id="109" class="Symbol">)</a> <a id="111" class="Symbol">→</a> <a id="113" href="PartialAppId.html#92" class="Bound">A</a> <a id="115" class="Symbol">→</a> <a id="117" href="PartialAppId.html#92" class="Bound">A</a>
+<a id="119" href="PartialAppId.html#83" class="Function">idd</a> <a id="123" href="PartialAppId.html#123" class="Bound">id</a> <a id="126" href="PartialAppId.html#126" class="Bound">x</a> <a id="128" class="Symbol">=</a> <a id="130" href="PartialAppId.html#123" class="Bound">id</a> <a id="133" href="PartialAppId.html#126" class="Bound">x</a>
+
+<a id="testIdd"></a><a id="136" href="PartialAppId.html#136" class="Function">testIdd</a> <a id="144" class="Symbol">:</a> <a id="146" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="150" href="PartialAppId.html#136" class="Function">testIdd</a> <a id="158" class="Symbol">=</a> <a id="160" href="PartialAppId.html#83" class="Function">idd</a> <a id="164" href="PartialAppId.html#48" class="Function">id</a> <a id="167" class="Number">42</a>
+
+<a id="testIdId"></a><a id="171" href="PartialAppId.html#171" class="Function">testIdId</a> <a id="180" class="Symbol">:</a> <a id="182" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="186" href="PartialAppId.html#171" class="Function">testIdId</a> <a id="195" class="Symbol">=</a> <a id="197" class="Symbol">(</a><a id="198" href="PartialAppId.html#48" class="Function">id</a> <a id="201" href="PartialAppId.html#48" class="Function">id</a><a id="203" class="Symbol">)</a> <a id="205" class="Number">42</a>
+<a id="208" class="Comment">{- id(id)(42) -}</a>
+
+<a id="testIdIdId"></a><a id="226" href="PartialAppId.html#226" class="Function">testIdIdId</a> <a id="237" class="Symbol">:</a> <a id="239" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="243" href="PartialAppId.html#226" class="Function">testIdIdId</a> <a id="254" class="Symbol">=</a> <a id="256" href="PartialAppId.html#48" class="Function">id</a> <a id="259" href="PartialAppId.html#48" class="Function">id</a> <a id="262" href="PartialAppId.html#48" class="Function">id</a> <a id="265" class="Number">42</a>
+<a id="268" class="Comment">{- id(id)(id)(42) -}</a>
+<a id="289" class="Comment">{- id(λ x → id x)(λ x → id x)(42) -}</a>
+
+<a id="testNestedId"></a><a id="327" href="PartialAppId.html#327" class="Function">testNestedId</a> <a id="340" class="Symbol">:</a> <a id="342" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="346" href="PartialAppId.html#327" class="Function">testNestedId</a> <a id="359" class="Symbol">=</a> <a id="361" href="PartialAppId.html#48" class="Function">id</a> <a id="364" class="Symbol">(</a><a id="365" href="PartialAppId.html#48" class="Function">id</a> <a id="368" href="PartialAppId.html#48" class="Function">id</a><a id="370" class="Symbol">)</a> <a id="372" class="Symbol">(</a><a id="373" href="PartialAppId.html#48" class="Function">id</a> <a id="376" href="PartialAppId.html#48" class="Function">id</a> <a id="379" href="PartialAppId.html#48" class="Function">id</a><a id="381" class="Symbol">)</a> <a id="383" class="Symbol">(</a><a id="384" href="PartialAppId.html#48" class="Function">id</a> <a id="387" href="PartialAppId.html#48" class="Function">id</a> <a id="390" class="Number">42</a><a id="392" class="Symbol">)</a>
+<a id="394" class="Comment">{- id(id(id))(id(id)(id))(id(id)(42)) -}</a>
+
+<a id="testIdAdd"></a><a id="436" href="PartialAppId.html#436" class="Function">testIdAdd</a> <a id="446" class="Symbol">:</a> <a id="448" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="452" href="PartialAppId.html#436" class="Function">testIdAdd</a> <a id="462" class="Symbol">=</a> <a id="464" href="PartialAppId.html#48" class="Function">id</a> <a id="467" href="Agda.Builtin.Nat.html#336" class="Primitive Operator">_+_</a> <a id="471" class="Number">40</a> <a id="474" class="Number">2</a>
+<a id="476" class="Comment">{-
+id : ∀ {A} → A → A
+id _+_ : Nat → Nat → Nat (A = Nat → Nat → Nat)
+id _+_ 40 : Nat → Nat
+id _+_ 40 2 : Nat
+-}</a>
+<a id="588" class="Comment">{- id(_+_, 40, 2) -}</a>
+<a id="609" class="Comment">{- id(_+_)(40, 2) -}</a>
+
+<a id="add3"></a><a id="631" href="PartialAppId.html#631" class="Function">add3</a> <a id="636" class="Symbol">:</a> <a id="638" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a> <a id="642" class="Symbol">→</a> <a id="644" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a> <a id="648" class="Symbol">→</a> <a id="650" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a> <a id="654" class="Symbol">→</a> <a id="656" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="660" href="PartialAppId.html#631" class="Function">add3</a> <a id="665" href="PartialAppId.html#665" class="Bound">x</a> <a id="667" href="PartialAppId.html#667" class="Bound">y</a> <a id="669" href="PartialAppId.html#669" class="Bound">z</a> <a id="671" class="Symbol">=</a> <a id="673" href="PartialAppId.html#665" class="Bound">x</a> <a id="675" href="Agda.Builtin.Nat.html#336" class="Primitive Operator">+</a> <a id="677" href="PartialAppId.html#667" class="Bound">y</a> <a id="679" href="Agda.Builtin.Nat.html#336" class="Primitive Operator">+</a> <a id="681" href="PartialAppId.html#669" class="Bound">z</a>
+
+<a id="testIdAdd3"></a><a id="684" href="PartialAppId.html#684" class="Function">testIdAdd3</a> <a id="695" class="Symbol">:</a> <a id="697" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="701" href="PartialAppId.html#684" class="Function">testIdAdd3</a> <a id="712" class="Symbol">=</a> <a id="714" href="PartialAppId.html#48" class="Function">id</a> <a id="717" href="PartialAppId.html#631" class="Function">add3</a> <a id="722" class="Number">40</a> <a id="725" class="Number">1</a> <a id="727" class="Number">1</a>
+<a id="729" class="Comment">{- id(add3)(40, 1, 1) -}</a>
+<a id="754" class="Comment">{- id(λ x y z → add3 x y z)(40, 1, 1) -}</a>
+
+<a id="idF"></a><a id="796" href="PartialAppId.html#796" class="Function">idF</a> <a id="800" class="Symbol">:</a> <a id="802" class="Symbol">(</a><a id="803" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a> <a id="807" class="Symbol">→</a> <a id="809" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a> <a id="813" class="Symbol">→</a> <a id="815" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a><a id="818" class="Symbol">)</a> <a id="820" class="Symbol">→</a> <a id="822" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="826" href="PartialAppId.html#796" class="Function">idF</a> <a id="830" href="PartialAppId.html#830" class="Bound">f</a> <a id="832" class="Symbol">=</a> <a id="834" href="PartialAppId.html#48" class="Function">id</a> <a id="837" href="PartialAppId.html#830" class="Bound">f</a> <a id="839" class="Number">40</a> <a id="842" class="Number">2</a>
+<a id="844" class="Comment">{- id(f)(40, 2) -}</a>
+<a id="863" class="Comment">{- id(λ x y → f x y)(40, 2) -}</a>
+
+<a id="testIdF"></a><a id="895" href="PartialAppId.html#895" class="Function">testIdF</a> <a id="903" class="Symbol">:</a> <a id="905" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="909" href="PartialAppId.html#895" class="Function">testIdF</a> <a id="917" class="Symbol">=</a> <a id="919" href="PartialAppId.html#796" class="Function">idF</a> <a id="923" href="Agda.Builtin.Nat.html#336" class="Primitive Operator">_+_</a>
+
+<a id="idF3"></a><a id="928" href="PartialAppId.html#928" class="Function">idF3</a> <a id="933" class="Symbol">:</a> <a id="935" class="Symbol">(</a><a id="936" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a> <a id="940" class="Symbol">→</a> <a id="942" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a> <a id="946" class="Symbol">→</a> <a id="948" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a> <a id="952" class="Symbol">→</a> <a id="954" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a><a id="957" class="Symbol">)</a> <a id="959" class="Symbol">→</a> <a id="961" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="965" href="PartialAppId.html#928" class="Function">idF3</a> <a id="970" href="PartialAppId.html#970" class="Bound">f</a> <a id="972" class="Symbol">=</a> <a id="974" href="PartialAppId.html#48" class="Function">id</a> <a id="977" href="PartialAppId.html#970" class="Bound">f</a> <a id="979" class="Number">40</a> <a id="982" class="Number">1</a> <a id="984" class="Number">1</a>
+<a id="986" class="Comment">{- id(f)(40, 1, 1) -}</a>
+<a id="1008" class="Comment">{- id(λ x y z → f x y z)(40, 1, 1) -}</a>
+
+<a id="testIdF3"></a><a id="1047" href="PartialAppId.html#1047" class="Function">testIdF3</a> <a id="1056" class="Symbol">:</a> <a id="1058" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="1062" href="PartialAppId.html#1047" class="Function">testIdF3</a> <a id="1071" class="Symbol">=</a> <a id="1073" href="PartialAppId.html#928" class="Function">idF3</a> <a id="1078" href="PartialAppId.html#631" class="Function">add3</a>
+
+<a id="1084" class="Keyword">open</a> <a id="1089" class="Keyword">import</a> <a id="1096" href="Agda.Builtin.Nat.html" class="Module">Agda.Builtin.Nat</a>
+
+<a id="test"></a><a id="1114" href="PartialAppId.html#1114" class="Function">test</a> <a id="1119" class="Symbol">:</a> <a id="1121" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="1125" href="PartialAppId.html#1114" class="Function">test</a>
+  <a id="1132" class="Symbol">=</a> <a id="1134" href="PartialAppId.html#136" class="Function">testIdd</a>
+  <a id="1144" href="Agda.Builtin.Nat.html#336" class="Primitive Operator">+</a> <a id="1146" href="PartialAppId.html#171" class="Function">testIdId</a>
+  <a id="1157" href="Agda.Builtin.Nat.html#336" class="Primitive Operator">+</a> <a id="1159" href="PartialAppId.html#226" class="Function">testIdIdId</a>
+  <a id="1172" href="Agda.Builtin.Nat.html#336" class="Primitive Operator">+</a> <a id="1174" href="PartialAppId.html#327" class="Function">testNestedId</a>
+
+  <a id="1190" href="Agda.Builtin.Nat.html#336" class="Primitive Operator">+</a> <a id="1192" href="PartialAppId.html#436" class="Function">testIdAdd</a>
+  <a id="1204" href="Agda.Builtin.Nat.html#336" class="Primitive Operator">+</a> <a id="1206" href="PartialAppId.html#684" class="Function">testIdAdd3</a>
+  <a id="1219" href="Agda.Builtin.Nat.html#336" class="Primitive Operator">+</a> <a id="1221" href="PartialAppId.html#895" class="Function">testIdF</a>
+  <a id="1231" href="Agda.Builtin.Nat.html#336" class="Primitive Operator">+</a> <a id="1233" href="PartialAppId.html#1047" class="Function">testIdF3</a>
+<a id="1242" class="Symbol">{-#</a> <a id="1246" class="Keyword">COMPILE</a> <a id="1254" class="Keyword">AGDA2LAMBOX</a> <a id="1266" href="PartialAppId.html#1114" class="Function">test</a> <a id="1271" class="Symbol">#-}</a>
+</pre><div class="split right"><div class="tabs">    <span data-tab-value="#tab_1">Debug</span>    <span data-tab-value="#tab_2">λ&#9744;</span>    <span data-tab-value="#tab_3">Rocq</span></div><div class="tab-content">    <div class="tabs__tab active" id="tab_1" data-tab-info>        <embed src="dist/PartialAppId.txt.html"/>    </div>    <div class="tabs__tab" id="tab_2" data-tab-info>        <embed src="dist/PartialAppId.ast.html"/>    </div>    <div class="tabs__tab" id="tab_3" data-tab-info>        <embed src="dist/PartialAppId.v.html"/>    </div></div></div><script type=text/javascript>  document.querySelectorAll('[data-tab-value]').forEach(tab => {tab.addEventListener('click', () => {    document.querySelectorAll('[data-tab-info]').forEach(tabInfo => {tabInfo.classList.remove('active') });    document.querySelector(tab.dataset.tabValue).classList.add('active');  })})</script></body></html>

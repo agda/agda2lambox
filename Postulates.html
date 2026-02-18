@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>Postulates</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="split left Agda"><a id="1" class="Keyword">open</a> <a id="6" class="Keyword">import</a> <a id="13" href="Agda.Builtin.Nat.html" class="Module">Agda.Builtin.Nat</a> <a id="30" class="Keyword">using</a> <a id="36" class="Symbol">(</a><a id="37" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a><a id="40" class="Symbol">;</a> <a id="42" href="Agda.Builtin.Nat.html#221" class="InductiveConstructor">zero</a><a id="46" class="Symbol">;</a> <a id="48" href="Agda.Builtin.Nat.html#234" class="InductiveConstructor">suc</a><a id="51" class="Symbol">)</a>
+
+<a id="54" class="Keyword">postulate</a> <a id="TODO"></a><a id="64" href="Postulates.html#64" class="Postulate">TODO</a> <a id="69" class="Symbol">:</a> <a id="71" class="Symbol">∀</a> <a id="73" class="Symbol">{</a><a id="74" href="Postulates.html#74" class="Bound">A</a> <a id="76" class="Symbol">:</a> <a id="78" href="Agda.Primitive.html#388" class="Primitive">Set</a><a id="81" class="Symbol">}</a> <a id="83" class="Symbol">→</a> <a id="85" href="Postulates.html#74" class="Bound">A</a>
+
+<a id="max"></a><a id="88" href="Postulates.html#88" class="Function">max</a> <a id="92" class="Symbol">:</a> <a id="94" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a> <a id="98" class="Symbol">→</a> <a id="100" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="104" href="Postulates.html#88" class="Function">max</a> <a id="108" class="Symbol">=</a> <a id="110" href="Postulates.html#64" class="Postulate">TODO</a>
+
+<a id="testMax"></a><a id="116" href="Postulates.html#116" class="Function">testMax</a> <a id="124" class="Symbol">:</a> <a id="126" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="130" href="Postulates.html#116" class="Function">testMax</a> <a id="138" class="Keyword">with</a> <a id="143" class="Number">0</a>
+<a id="145" href="Postulates.html#116" class="Function">...</a> <a id="149" class="Symbol">|</a> <a id="151" href="Agda.Builtin.Nat.html#221" class="InductiveConstructor">zero</a>  <a id="157" class="Symbol">=</a> <a id="159" class="Number">42</a>
+<a id="162" href="Postulates.html#116" class="Function">...</a> <a id="166" class="Symbol">|</a> <a id="168" href="Agda.Builtin.Nat.html#234" class="InductiveConstructor">suc</a> <a id="172" class="Symbol">_</a> <a id="174" class="Symbol">=</a> <a id="176" href="Postulates.html#88" class="Function">max</a> <a id="180" class="Number">42</a>
+
+<a id="getTestMax"></a><a id="184" href="Postulates.html#184" class="Function">getTestMax</a> <a id="195" class="Symbol">:</a> <a id="197" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="201" href="Postulates.html#184" class="Function">getTestMax</a> <a id="212" class="Symbol">=</a> <a id="214" href="Postulates.html#116" class="Function">testMax</a>
+
+<a id="223" class="Keyword">postulate</a> <a id="Key"></a><a id="233" href="Postulates.html#233" class="Postulate">Key</a> <a id="237" class="Symbol">:</a> <a id="239" href="Agda.Primitive.html#388" class="Primitive">Set</a>
+<a id="243" class="Comment">-- {-# COMPILE AGDA2RUST Key = u64 #-}</a>
+
+<a id="idKey"></a><a id="283" href="Postulates.html#283" class="Function">idKey</a> <a id="289" class="Symbol">:</a> <a id="291" href="Postulates.html#233" class="Postulate">Key</a> <a id="295" class="Symbol">→</a> <a id="297" href="Postulates.html#233" class="Postulate">Key</a>
+<a id="301" href="Postulates.html#283" class="Function">idKey</a> <a id="307" href="Postulates.html#307" class="Bound">k</a> <a id="309" class="Symbol">=</a> <a id="311" href="Postulates.html#307" class="Bound">k</a>
+
+<a id="314" class="Keyword">postulate</a> <a id="getDefaultKey"></a><a id="324" href="Postulates.html#324" class="Postulate">getDefaultKey</a> <a id="338" class="Symbol">:</a> <a id="340" href="Postulates.html#233" class="Postulate">Key</a>
+<a id="344" class="Comment">-- {-# COMPILE AGDA2RUST getDefaultKey = getDefaultKey #-}</a>
+<a id="403" class="Comment">-- {-# FOREIGN AGDA2RUST</a>
+<a id="428" class="Comment">-- fn getDefaultKey() -&gt; u64 {</a>
+<a id="459" class="Comment">--   42</a>
+<a id="467" class="Comment">-- }</a>
+<a id="472" class="Comment">-- #-}</a>
+
+<a id="testGetKey"></a><a id="480" href="Postulates.html#480" class="Function">testGetKey</a> <a id="491" class="Symbol">:</a> <a id="493" href="Postulates.html#233" class="Postulate">Key</a>
+<a id="497" href="Postulates.html#480" class="Function">testGetKey</a> <a id="508" class="Symbol">=</a> <a id="510" href="Postulates.html#324" class="Postulate">getDefaultKey</a>
+
+<a id="525" class="Keyword">postulate</a> <a id="defaultKey"></a><a id="535" href="Postulates.html#535" class="Postulate">defaultKey</a> <a id="546" class="Symbol">:</a> <a id="548" href="Postulates.html#233" class="Postulate">Key</a>
+<a id="552" class="Comment">-- {-# COMPILE AGDA2RUST defaultKey const = 42 #-}</a>
+
+<a id="testKey"></a><a id="604" href="Postulates.html#604" class="Function">testKey</a> <a id="612" class="Symbol">:</a> <a id="614" href="Postulates.html#233" class="Postulate">Key</a>
+<a id="618" href="Postulates.html#604" class="Function">testKey</a> <a id="626" class="Symbol">=</a> <a id="628" href="Postulates.html#535" class="Postulate">defaultKey</a>
+
+<a id="640" class="Keyword">postulate</a> <a id="hash"></a><a id="650" href="Postulates.html#650" class="Postulate">hash</a> <a id="655" class="Symbol">:</a> <a id="657" class="Symbol">∀</a> <a id="659" class="Symbol">{</a><a id="660" href="Postulates.html#660" class="Bound">A</a> <a id="662" class="Symbol">:</a> <a id="664" href="Agda.Primitive.html#388" class="Primitive">Set</a><a id="667" class="Symbol">}</a> <a id="669" class="Symbol">→</a> <a id="671" href="Postulates.html#660" class="Bound">A</a> <a id="673" class="Symbol">→</a> <a id="675" href="Postulates.html#233" class="Postulate">Key</a>
+<a id="679" class="Comment">-- {-# COMPILE AGDA2RUST hash = idHash #-}</a>
+<a id="722" class="Comment">-- {-# FOREIGN AGDA2RUST</a>
+<a id="747" class="Comment">-- use std::hash::{DefaultHasher, Hash, Hasher};</a>
+
+<a id="797" class="Comment">-- fn idHash&lt;A: Hash&gt;(x: i32) -&gt; u64 {</a>
+<a id="836" class="Comment">--   let mut s = DefaultHasher::new();</a>
+<a id="875" class="Comment">--   x.hash(&amp;mut s);</a>
+<a id="896" class="Comment">--   s.finish()</a>
+<a id="912" class="Comment">-- }</a>
+<a id="917" class="Comment">-- #-}</a>
+
+<a id="testHash"></a><a id="925" href="Postulates.html#925" class="Function">testHash</a> <a id="934" class="Symbol">:</a> <a id="936" href="Postulates.html#233" class="Postulate">Key</a>
+<a id="940" href="Postulates.html#925" class="Function">testHash</a> <a id="949" class="Symbol">=</a> <a id="951" href="Postulates.html#650" class="Postulate">hash</a> <a id="956" href="Postulates.html#116" class="Function">testMax</a>
+
+<a id="965" class="Keyword">open</a> <a id="970" class="Keyword">import</a> <a id="977" href="Agda.Builtin.Nat.html" class="Module">Agda.Builtin.Nat</a>
+
+<a id="toNat"></a><a id="995" href="Postulates.html#995" class="Function">toNat</a> <a id="1001" class="Symbol">:</a> <a id="1003" href="Postulates.html#233" class="Postulate">Key</a> <a id="1007" class="Symbol">→</a> <a id="1009" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="1013" href="Postulates.html#995" class="Function">toNat</a> <a id="1019" class="Symbol">_</a> <a id="1021" class="Symbol">=</a> <a id="1023" class="Number">42</a>
+
+<a id="test"></a><a id="1027" href="Postulates.html#1027" class="Function">test</a> <a id="1032" class="Symbol">:</a> <a id="1034" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="1038" href="Postulates.html#1027" class="Function">test</a> <a id="1043" class="Symbol">=</a> <a id="1045" href="Postulates.html#116" class="Function">testMax</a>
+     <a id="1058" href="Agda.Builtin.Nat.html#336" class="Primitive Operator">+</a> <a id="1060" href="Postulates.html#184" class="Function">getTestMax</a>
+<a id="1071" class="Symbol">{-#</a> <a id="1075" class="Keyword">COMPILE</a> <a id="1083" class="Keyword">AGDA2LAMBOX</a> <a id="1095" href="Postulates.html#1027" class="Function">test</a> <a id="1100" class="Symbol">#-}</a>
+</pre><div class="split right"><div class="tabs">    <span data-tab-value="#tab_1">Debug</span>    <span data-tab-value="#tab_2">λ&#9744;</span>    <span data-tab-value="#tab_3">Rocq</span></div><div class="tab-content">    <div class="tabs__tab active" id="tab_1" data-tab-info>        <embed src="dist/Postulates.txt.html"/>    </div>    <div class="tabs__tab" id="tab_2" data-tab-info>        <embed src="dist/Postulates.ast.html"/>    </div>    <div class="tabs__tab" id="tab_3" data-tab-info>        <embed src="dist/Postulates.v.html"/>    </div></div></div><script type=text/javascript>  document.querySelectorAll('[data-tab-value]').forEach(tab => {tab.addEventListener('click', () => {    document.querySelectorAll('[data-tab-info]').forEach(tabInfo => {tabInfo.classList.remove('active') });    document.querySelector(tab.dataset.tabValue).classList.add('active');  })})</script></body></html>

@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>Where</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="split left Agda"><a id="1" class="Keyword">open</a> <a id="6" class="Keyword">import</a> <a id="13" href="Agda.Builtin.Nat.html" class="Module">Agda.Builtin.Nat</a> <a id="30" class="Keyword">using</a> <a id="36" class="Symbol">(</a><a id="37" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a><a id="40" class="Symbol">;</a> <a id="42" href="Agda.Builtin.Nat.html#234" class="InductiveConstructor">suc</a><a id="45" class="Symbol">)</a>
+
+<a id="48" class="Comment">-- ** Skip pattern lambdas and with-generated functions.</a>
+<a id="105" class="Keyword">data</a> <a id="II"></a><a id="110" href="Where.html#110" class="Datatype">II</a> <a id="113" class="Symbol">:</a> <a id="115" href="Agda.Primitive.html#388" class="Primitive">Set</a> <a id="119" class="Keyword">where</a>
+  <a id="II.◇"></a><a id="127" href="Where.html#127" class="InductiveConstructor">◇</a> <a id="II.◆"></a><a id="129" href="Where.html#129" class="InductiveConstructor">◆</a> <a id="131" class="Symbol">:</a> <a id="133" href="Where.html#110" class="Datatype">II</a>
+
+<a id="ii"></a><a id="137" href="Where.html#137" class="Function">ii</a> <a id="ii&#39;"></a><a id="140" href="Where.html#140" class="Function">ii&#39;</a> <a id="144" class="Symbol">:</a> <a id="146" href="Where.html#110" class="Datatype">II</a>
+<a id="149" href="Where.html#137" class="Function">ii</a>  <a id="153" class="Symbol">=</a> <a id="155" href="Where.html#127" class="InductiveConstructor">◇</a>
+<a id="157" href="Where.html#140" class="Function">ii&#39;</a> <a id="161" class="Symbol">=</a> <a id="163" href="Where.html#129" class="InductiveConstructor">◆</a>
+
+<a id="II→II"></a><a id="166" href="Where.html#166" class="Function">II→II</a> <a id="172" class="Symbol">:</a> <a id="174" href="Where.html#110" class="Datatype">II</a> <a id="177" class="Symbol">→</a> <a id="179" href="Where.html#110" class="Datatype">II</a>
+<a id="182" href="Where.html#166" class="Function">II→II</a> <a id="188" href="Where.html#127" class="InductiveConstructor">◇</a> <a id="190" class="Symbol">=</a> <a id="192" href="Where.html#129" class="InductiveConstructor">◆</a>
+<a id="194" href="Where.html#166" class="Function">II→II</a> <a id="200" href="Where.html#129" class="InductiveConstructor">◆</a> <a id="202" class="Symbol">=</a> <a id="204" href="Where.html#127" class="InductiveConstructor">◇</a>
+
+<a id="II→II&#39;"></a><a id="207" href="Where.html#207" class="Function">II→II&#39;</a> <a id="214" class="Symbol">:</a> <a id="216" href="Where.html#110" class="Datatype">II</a> <a id="219" class="Symbol">→</a> <a id="221" href="Where.html#110" class="Datatype">II</a>
+<a id="224" href="Where.html#207" class="Function">II→II&#39;</a> <a id="231" class="Symbol">=</a> <a id="233" class="Symbol">λ</a> <a id="235" class="Keyword">where</a>
+  <a id="243" href="Where.html#127" class="InductiveConstructor">◇</a> <a id="245" class="Symbol">→</a> <a id="247" href="Where.html#129" class="InductiveConstructor">◆</a>
+  <a id="251" href="Where.html#129" class="InductiveConstructor">◆</a> <a id="253" class="Symbol">→</a> <a id="255" href="Where.html#127" class="InductiveConstructor">◇</a>
+
+<a id="II→II&#39;&#39;"></a><a id="258" href="Where.html#258" class="Function">II→II&#39;&#39;</a> <a id="266" class="Symbol">:</a> <a id="268" href="Where.html#110" class="Datatype">II</a> <a id="271" class="Symbol">→</a> <a id="273" href="Where.html#110" class="Datatype">II</a>
+<a id="276" href="Where.html#258" class="Function">II→II&#39;&#39;</a> <a id="284" href="Where.html#284" class="Bound">x</a> <a id="286" class="Keyword">with</a> <a id="291" href="Where.html#284" class="Bound">x</a>
+<a id="293" class="Symbol">...</a> <a id="297" class="Symbol">|</a> <a id="299" href="Where.html#127" class="InductiveConstructor">◇</a> <a id="301" class="Symbol">=</a> <a id="303" href="Where.html#129" class="InductiveConstructor">◆</a>
+<a id="305" class="Symbol">...</a> <a id="309" class="Symbol">|</a> <a id="311" href="Where.html#129" class="InductiveConstructor">◆</a> <a id="313" class="Symbol">=</a> <a id="315" href="Where.html#127" class="InductiveConstructor">◇</a>
+
+<a id="II→II&#39;&#39;&#39;"></a><a id="318" href="Where.html#318" class="Function">II→II&#39;&#39;&#39;</a> <a id="327" class="Symbol">:</a> <a id="329" href="Where.html#110" class="Datatype">II</a> <a id="332" class="Symbol">→</a> <a id="334" href="Where.html#110" class="Datatype">II</a>
+<a id="337" href="Where.html#318" class="Function">II→II&#39;&#39;&#39;</a> <a id="346" href="Where.html#346" class="Bound">x</a> <a id="348" class="Keyword">with</a> <a id="353" href="Where.html#166" class="Function">II→II</a> <a id="359" href="Where.html#346" class="Bound">x</a>
+<a id="361" class="Symbol">...</a> <a id="365" class="Symbol">|</a> <a id="367" href="Where.html#127" class="InductiveConstructor">◇</a> <a id="369" class="Symbol">=</a> <a id="371" href="Where.html#129" class="InductiveConstructor">◆</a>
+<a id="373" class="Symbol">...</a> <a id="377" class="Symbol">|</a> <a id="379" href="Where.html#129" class="InductiveConstructor">◆</a> <a id="381" class="Symbol">=</a> <a id="383" href="Where.html#127" class="InductiveConstructor">◇</a>
+
+<a id="testII"></a><a id="386" href="Where.html#386" class="Function">testII</a> <a id="393" class="Symbol">:</a> <a id="395" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="399" href="Where.html#386" class="Function">testII</a>
+  <a id="408" class="Keyword">with</a> <a id="413" href="Where.html#413" class="Bound">s</a> ← <a id="417" href="Where.html#137" class="Function">ii</a>
+  <a id="422" class="Keyword">with</a> <a id="427" href="Where.html#166" class="Function">II→II</a> <a id="433" href="Where.html#413" class="Bound">s</a> <a id="435" class="Symbol">|</a> <a id="437" href="Where.html#207" class="Function">II→II&#39;</a> <a id="444" href="Where.html#413" class="Bound">s</a> <a id="446" class="Symbol">|</a> <a id="448" href="Where.html#258" class="Function">II→II&#39;&#39;</a> <a id="456" href="Where.html#413" class="Bound">s</a> <a id="458" class="Symbol">|</a> <a id="460" href="Where.html#318" class="Function">II→II&#39;&#39;&#39;</a> <a id="469" href="Where.html#413" class="Bound">s</a>
+<a id="471" href="Where.html#386" class="Function">...</a> <a id="475" class="Symbol">|</a> <a id="477" href="Where.html#129" class="InductiveConstructor">◆</a> <a id="479" class="Symbol">|</a> <a id="481" href="Where.html#129" class="InductiveConstructor">◆</a> <a id="483" class="Symbol">|</a> <a id="485" href="Where.html#129" class="InductiveConstructor">◆</a> <a id="487" class="Symbol">|</a> <a id="489" href="Where.html#127" class="InductiveConstructor">◇</a> <a id="491" class="Symbol">=</a> <a id="493" class="Number">42</a>
+<a id="496" href="Where.html#386" class="CatchallClause Function">...</a><a id="499" class="CatchallClause"> </a><a id="500" class="CatchallClause Symbol">|</a><a id="501" class="CatchallClause"> </a><a id="502" class="CatchallClause Symbol">_</a><a id="503" class="CatchallClause"> </a><a id="504" class="CatchallClause Symbol">|</a><a id="505" class="CatchallClause"> </a><a id="506" class="CatchallClause Symbol">_</a><a id="507" class="CatchallClause"> </a><a id="508" class="CatchallClause Symbol">|</a><a id="509" class="CatchallClause"> </a><a id="510" class="CatchallClause Symbol">_</a><a id="511" class="CatchallClause"> </a><a id="512" class="CatchallClause Symbol">|</a><a id="513" class="CatchallClause"> </a><a id="514" class="CatchallClause Symbol">_</a> <a id="516" class="Symbol">=</a> <a id="518" class="Number">0</a>
+
+<a id="521" class="Comment">-- ** Do not erase unit-like types/values.</a>
+<a id="564" class="Keyword">data</a> <a id="I"></a><a id="569" href="Where.html#569" class="Datatype">I</a> <a id="571" class="Symbol">:</a> <a id="573" href="Agda.Primitive.html#388" class="Primitive">Set</a> <a id="577" class="Keyword">where</a>
+  <a id="I.◇"></a><a id="585" href="Where.html#585" class="InductiveConstructor">◇</a> <a id="587" class="Symbol">:</a> <a id="589" href="Where.html#569" class="Datatype">I</a>
+
+<a id="i"></a><a id="592" href="Where.html#592" class="Function">i</a> <a id="594" class="Symbol">:</a> <a id="596" href="Where.html#569" class="Datatype">I</a>
+<a id="598" href="Where.html#592" class="Function">i</a> <a id="600" class="Symbol">=</a> <a id="602" href="Where.html#585" class="InductiveConstructor">◇</a>
+
+<a id="I→II"></a><a id="605" href="Where.html#605" class="Function">I→II</a> <a id="610" class="Symbol">:</a> <a id="612" href="Where.html#569" class="Datatype">I</a> <a id="614" class="Symbol">→</a> <a id="616" href="Where.html#110" class="Datatype">II</a>
+<a id="619" href="Where.html#605" class="Function">I→II</a> <a id="624" href="Where.html#585" class="InductiveConstructor">◇</a> <a id="626" class="Symbol">=</a> <a id="628" href="Where.html#127" class="InductiveConstructor">◇</a>
+
+<a id="II→I"></a><a id="631" href="Where.html#631" class="Function">II→I</a> <a id="636" class="Symbol">:</a> <a id="638" href="Where.html#110" class="Datatype">II</a> <a id="641" class="Symbol">→</a> <a id="643" href="Where.html#569" class="Datatype">I</a>
+<a id="645" href="Where.html#631" class="Function">II→I</a> <a id="650" class="Symbol">_</a> <a id="652" class="Symbol">=</a> <a id="654" href="Where.html#585" class="InductiveConstructor">◇</a>
+
+<a id="testI"></a><a id="657" href="Where.html#657" class="Function">testI</a> <a id="663" class="Symbol">:</a> <a id="665" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="669" href="Where.html#657" class="Function">testI</a> <a id="675" class="Keyword">with</a> <a id="680" href="Where.html#585" class="InductiveConstructor">◇</a> ← <a id="684" href="Where.html#631" class="Function">II→I</a> <a id="689" class="Symbol">(</a><a id="690" href="Where.html#605" class="Function">I→II</a> <a id="695" href="Where.html#592" class="Function">i</a><a id="696" class="Symbol">)</a> <a id="698" class="Symbol">=</a> <a id="700" class="Number">42</a>
+
+<a id="704" class="Comment">-- ** Do not name-clash different `where`-clauses</a>
+<a id="f"></a><a id="754" href="Where.html#754" class="Function">f</a> <a id="756" class="Symbol">:</a> <a id="758" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="762" href="Where.html#754" class="Function">f</a> <a id="764" class="Symbol">=</a> <a id="766" href="Where.html#782" class="Function">go</a> <a id="769" class="Number">21</a>
+  <a id="774" class="Keyword">where</a>
+  <a id="782" href="Where.html#782" class="Function">go</a> <a id="785" class="Symbol">:</a> <a id="787" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a> <a id="791" class="Symbol">→</a> <a id="793" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+  <a id="799" href="Where.html#782" class="Function">go</a> <a id="802" class="Number">0</a> <a id="804" class="Symbol">=</a> <a id="806" class="Number">0</a>
+  <a id="810" href="Where.html#782" class="Function">go</a> <a id="813" class="Symbol">(</a><a id="814" href="Agda.Builtin.Nat.html#234" class="InductiveConstructor">suc</a> <a id="818" href="Where.html#818" class="Bound">n</a><a id="819" class="Symbol">)</a> <a id="821" class="Symbol">=</a> <a id="823" href="Agda.Builtin.Nat.html#234" class="InductiveConstructor">suc</a> <a id="827" class="Symbol">(</a><a id="828" href="Agda.Builtin.Nat.html#234" class="InductiveConstructor">suc</a> <a id="832" class="Symbol">(</a><a id="833" href="Where.html#782" class="Function">go</a> <a id="836" href="Where.html#818" class="Bound">n</a><a id="837" class="Symbol">))</a>
+
+<a id="g"></a><a id="841" href="Where.html#841" class="Function">g</a> <a id="843" class="Symbol">:</a> <a id="845" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a> <a id="849" class="Symbol">→</a> <a id="851" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="855" href="Where.html#841" class="Function">g</a> <a id="857" class="Symbol">=</a> <a id="859" href="Where.html#872" class="Function">go</a>
+  <a id="864" class="Keyword">where</a>
+  <a id="872" href="Where.html#872" class="Function">go</a> <a id="875" class="Symbol">:</a> <a id="877" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a> <a id="881" class="Symbol">→</a> <a id="883" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+  <a id="889" href="Where.html#872" class="Function">go</a> <a id="892" class="Number">0</a> <a id="894" class="Symbol">=</a> <a id="896" class="Number">0</a>
+  <a id="900" href="Where.html#872" class="Function">go</a> <a id="903" class="Symbol">(</a><a id="904" href="Agda.Builtin.Nat.html#234" class="InductiveConstructor">suc</a> <a id="908" href="Where.html#908" class="Bound">n</a><a id="909" class="Symbol">)</a> <a id="911" class="Symbol">=</a> <a id="913" href="Agda.Builtin.Nat.html#234" class="InductiveConstructor">suc</a> <a id="917" class="Symbol">(</a><a id="918" href="Agda.Builtin.Nat.html#234" class="InductiveConstructor">suc</a> <a id="922" class="Symbol">(</a><a id="923" href="Where.html#872" class="Function">go</a> <a id="926" href="Where.html#908" class="Bound">n</a><a id="927" class="Symbol">))</a>
+
+<a id="h"></a><a id="931" href="Where.html#931" class="Function">h</a> <a id="933" class="Symbol">:</a> <a id="935" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a> <a id="939" class="Symbol">→</a> <a id="941" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="945" href="Where.html#931" class="Function">h</a> <a id="947" class="Symbol">=</a> <a id="949" href="Where.html#962" class="Function">go</a>
+  <a id="954" class="Keyword">where</a>
+  <a id="962" href="Where.html#962" class="Function">go</a> <a id="965" class="Symbol">:</a> <a id="967" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a> <a id="971" class="Symbol">→</a> <a id="973" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+  <a id="979" href="Where.html#962" class="Function">go</a> <a id="982" class="Symbol">_</a> <a id="984" class="Symbol">=</a> <a id="986" class="Number">42</a>
+
+<a id="990" class="Keyword">open</a> <a id="995" class="Keyword">import</a> <a id="1002" href="Agda.Builtin.Nat.html" class="Module">Agda.Builtin.Nat</a>
+
+<a id="test"></a><a id="1020" href="Where.html#1020" class="Function">test</a> <a id="1025" class="Symbol">:</a> <a id="1027" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="1031" href="Where.html#1020" class="Function">test</a> <a id="1036" class="Symbol">=</a> <a id="1038" href="Where.html#386" class="Function">testII</a>
+     <a id="1050" href="Agda.Builtin.Nat.html#336" class="Primitive Operator">+</a> <a id="1052" href="Where.html#657" class="Function">testI</a>
+     <a id="1063" href="Agda.Builtin.Nat.html#336" class="Primitive Operator">+</a> <a id="1065" href="Where.html#754" class="Function">f</a>
+     <a id="1072" href="Agda.Builtin.Nat.html#336" class="Primitive Operator">+</a> <a id="1074" href="Where.html#841" class="Function">g</a> <a id="1076" class="Number">21</a>
+     <a id="1084" href="Agda.Builtin.Nat.html#336" class="Primitive Operator">+</a> <a id="1086" href="Where.html#931" class="Function">h</a> <a id="1088" class="Number">0</a>
+<a id="1090" class="Symbol">{-#</a> <a id="1094" class="Keyword">COMPILE</a> <a id="1102" class="Keyword">AGDA2LAMBOX</a> <a id="1114" href="Where.html#1020" class="Function">test</a> <a id="1119" class="Symbol">#-}</a>
+</pre><div class="split right"><div class="tabs">    <span data-tab-value="#tab_1">Debug</span>    <span data-tab-value="#tab_2">λ&#9744;</span>    <span data-tab-value="#tab_3">Rocq</span></div><div class="tab-content">    <div class="tabs__tab active" id="tab_1" data-tab-info>        <embed src="dist/Where.txt.html"/>    </div>    <div class="tabs__tab" id="tab_2" data-tab-info>        <embed src="dist/Where.ast.html"/>    </div>    <div class="tabs__tab" id="tab_3" data-tab-info>        <embed src="dist/Where.v.html"/>    </div></div></div><script type=text/javascript>  document.querySelectorAll('[data-tab-value]').forEach(tab => {tab.addEventListener('click', () => {    document.querySelectorAll('[data-tab-info]').forEach(tabInfo => {tabInfo.classList.remove('active') });    document.querySelector(tab.dataset.tabValue).classList.add('active');  })})</script></body></html>

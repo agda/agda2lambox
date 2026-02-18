@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>OpenModule</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="split left Agda"><a id="1" class="Keyword">module</a> <a id="8" href="OpenModule.html" class="Module">_</a> <a id="10" class="Keyword">where</a>
+
+<a id="17" class="Keyword">open</a> <a id="22" class="Keyword">import</a> <a id="29" href="Agda.Builtin.Nat.html" class="Module">Agda.Builtin.Nat</a> <a id="46" class="Keyword">using</a> <a id="52" class="Symbol">(</a><a id="53" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a><a id="56" class="Symbol">;</a> <a id="58" href="Agda.Builtin.Nat.html#234" class="InductiveConstructor">suc</a><a id="61" class="Symbol">;</a> <a id="63" href="Agda.Builtin.Nat.html#336" class="Primitive Operator">_+_</a><a id="66" class="Symbol">)</a>
+
+<a id="69" class="Keyword">module</a> <a id="M"></a><a id="76" href="OpenModule.html#76" class="Module">M</a> <a id="78" class="Symbol">(</a><a id="79" href="OpenModule.html#79" class="Bound">n</a> <a id="81" class="Symbol">:</a> <a id="83" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a><a id="86" class="Symbol">)</a> <a id="88" class="Keyword">where</a>
+  <a id="M.add40"></a><a id="96" href="OpenModule.html#96" class="Function">add40</a> <a id="M.add41"></a><a id="102" href="OpenModule.html#102" class="Function">add41</a> <a id="108" class="Symbol">:</a> <a id="110" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+  <a id="116" href="OpenModule.html#96" class="Function">add40</a> <a id="122" class="Symbol">=</a> <a id="124" class="Number">40</a> <a id="127" href="Agda.Builtin.Nat.html#336" class="Primitive Operator">+</a> <a id="129" href="OpenModule.html#79" class="Bound">n</a>
+  <a id="133" href="OpenModule.html#102" class="Function">add41</a> <a id="139" class="Symbol">=</a> <a id="141" href="Agda.Builtin.Nat.html#234" class="InductiveConstructor">suc</a> <a id="145" href="OpenModule.html#96" class="Function">add40</a>
+
+<a id="152" class="Keyword">open</a> <a id="157" href="OpenModule.html#76" class="Module">M</a> <a id="159" class="Number">1</a>
+
+<a id="testAdd40"></a><a id="162" href="OpenModule.html#162" class="Function">testAdd40</a> <a id="testAdd41"></a><a id="172" href="OpenModule.html#172" class="Function">testAdd41</a> <a id="182" class="Symbol">:</a> <a id="184" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="188" href="OpenModule.html#162" class="Function">testAdd40</a> <a id="198" class="Symbol">=</a> <a id="200" href="Agda.Builtin.Nat.html#234" class="InductiveConstructor">suc</a> <a id="204" href="OpenModule.html#96" class="Function">add40</a>
+<a id="210" href="OpenModule.html#172" class="Function">testAdd41</a> <a id="220" class="Symbol">=</a> <a id="222" href="OpenModule.html#102" class="Function">add41</a>
+
+<a id="229" class="Keyword">open</a> <a id="234" class="Keyword">import</a> <a id="241" href="Agda.Builtin.Nat.html" class="Module">Agda.Builtin.Nat</a>
+
+<a id="test"></a><a id="259" href="OpenModule.html#259" class="Function">test</a> <a id="264" class="Symbol">:</a> <a id="266" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="270" href="OpenModule.html#259" class="Function">test</a> <a id="275" class="Symbol">=</a> <a id="277" href="OpenModule.html#96" class="Function">M.add40</a> <a id="285" class="Number">2</a>
+     <a id="292" href="Agda.Builtin.Nat.html#336" class="Primitive Operator">+</a> <a id="294" href="OpenModule.html#102" class="Function">M.add41</a> <a id="302" class="Number">1</a>
+     <a id="309" href="Agda.Builtin.Nat.html#336" class="Primitive Operator">+</a> <a id="311" href="OpenModule.html#102" class="Function">add41</a>
+     <a id="322" href="Agda.Builtin.Nat.html#336" class="Primitive Operator">+</a> <a id="324" href="OpenModule.html#162" class="Function">testAdd40</a>
+     <a id="339" href="Agda.Builtin.Nat.html#336" class="Primitive Operator">+</a> <a id="341" href="OpenModule.html#172" class="Function">testAdd41</a>
+<a id="351" class="Symbol">{-#</a> <a id="355" class="Keyword">COMPILE</a> <a id="363" class="Keyword">AGDA2LAMBOX</a> <a id="375" href="OpenModule.html#259" class="Function">test</a> <a id="380" class="Symbol">#-}</a>
+</pre><div class="split right"><div class="tabs">    <span data-tab-value="#tab_1">Debug</span>    <span data-tab-value="#tab_2">λ&#9744;</span>    <span data-tab-value="#tab_3">Rocq</span></div><div class="tab-content">    <div class="tabs__tab active" id="tab_1" data-tab-info>        <embed src="dist/OpenModule.txt.html"/>    </div>    <div class="tabs__tab" id="tab_2" data-tab-info>        <embed src="dist/OpenModule.ast.html"/>    </div>    <div class="tabs__tab" id="tab_3" data-tab-info>        <embed src="dist/OpenModule.v.html"/>    </div></div></div><script type=text/javascript>  document.querySelectorAll('[data-tab-value]').forEach(tab => {tab.addEventListener('click', () => {    document.querySelectorAll('[data-tab-info]').forEach(tabInfo => {tabInfo.classList.remove('active') });    document.querySelector(tab.dataset.tabValue).classList.add('active');  })})</script></body></html>

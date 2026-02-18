@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>Top</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="split left Agda"><a id="1" class="Keyword">data</a> <a id="Unit"></a><a id="6" href="Top.html#6" class="Datatype">Unit</a> <a id="11" class="Symbol">:</a> <a id="13" href="Agda.Primitive.html#388" class="Primitive">Set</a> <a id="17" class="Keyword">where</a>
+  <a id="Unit.tt"></a><a id="25" href="Top.html#25" class="InductiveConstructor">tt</a> <a id="28" class="Symbol">:</a> <a id="30" href="Top.html#6" class="Datatype">Unit</a>
+
+<a id="idUnit"></a><a id="36" href="Top.html#36" class="Function">idUnit</a> <a id="43" class="Symbol">:</a> <a id="45" href="Top.html#6" class="Datatype">Unit</a> <a id="50" class="Symbol">→</a> <a id="52" href="Top.html#6" class="Datatype">Unit</a>
+<a id="57" href="Top.html#36" class="Function">idUnit</a> <a id="64" href="Top.html#25" class="InductiveConstructor">tt</a> <a id="67" class="Symbol">=</a> <a id="69" href="Top.html#25" class="InductiveConstructor">tt</a>
+
+<a id="73" class="Keyword">open</a> <a id="78" class="Keyword">import</a> <a id="85" href="Agda.Builtin.Nat.html" class="Module">Agda.Builtin.Nat</a>
+
+<a id="toNat"></a><a id="103" href="Top.html#103" class="Function">toNat</a> <a id="109" class="Symbol">:</a> <a id="111" href="Top.html#6" class="Datatype">Unit</a> <a id="116" class="Symbol">→</a> <a id="118" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="122" href="Top.html#103" class="Function">toNat</a> <a id="128" class="Symbol">_</a> <a id="130" class="Symbol">=</a> <a id="132" class="Number">42</a>
+
+<a id="test"></a><a id="136" href="Top.html#136" class="Function">test</a> <a id="141" class="Symbol">:</a> <a id="143" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="147" href="Top.html#136" class="Function">test</a> <a id="152" class="Symbol">=</a> <a id="154" href="Top.html#103" class="Function">toNat</a> <a id="160" class="Symbol">(</a><a id="161" href="Top.html#36" class="Function">idUnit</a> <a id="168" href="Top.html#25" class="InductiveConstructor">tt</a><a id="170" class="Symbol">)</a>
+<a id="172" class="Symbol">{-#</a> <a id="176" class="Keyword">COMPILE</a> <a id="184" class="Keyword">AGDA2LAMBOX</a> <a id="196" href="Top.html#136" class="Function">test</a> <a id="201" class="Symbol">#-}</a>
+</pre><div class="split right"><div class="tabs">    <span data-tab-value="#tab_1">Debug</span>    <span data-tab-value="#tab_2">λ&#9744;</span>    <span data-tab-value="#tab_3">Rocq</span></div><div class="tab-content">    <div class="tabs__tab active" id="tab_1" data-tab-info>        <embed src="dist/Top.txt.html"/>    </div>    <div class="tabs__tab" id="tab_2" data-tab-info>        <embed src="dist/Top.ast.html"/>    </div>    <div class="tabs__tab" id="tab_3" data-tab-info>        <embed src="dist/Top.v.html"/>    </div></div></div><script type=text/javascript>  document.querySelectorAll('[data-tab-value]').forEach(tab => {tab.addEventListener('click', () => {    document.querySelectorAll('[data-tab-info]').forEach(tabInfo => {tabInfo.classList.remove('active') });    document.querySelector(tab.dataset.tabValue).classList.add('active');  })})</script></body></html>

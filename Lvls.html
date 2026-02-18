@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>Lvls</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="split left Agda"><a id="1" class="Comment">-- {-# OPTIONS --level-universe #-}</a>
+<a id="37" class="Keyword">open</a> <a id="42" class="Keyword">import</a> <a id="49" href="Agda.Builtin.Nat.html" class="Module">Agda.Builtin.Nat</a> <a id="66" class="Keyword">using</a> <a id="72" class="Symbol">(</a><a id="73" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a><a id="76" class="Symbol">;</a> <a id="78" href="Agda.Builtin.Nat.html#234" class="InductiveConstructor">suc</a><a id="81" class="Symbol">)</a>
+
+<a id="84" class="Keyword">open</a> <a id="89" class="Keyword">import</a> <a id="96" href="Agda.Primitive.html" class="Module">Agda.Primitive</a>
+
+<a id="112" class="Comment">-- ** level definitions should be ignored</a>
+<a id="0ℓ"></a><a id="154" href="Lvls.html#154" class="Function">0ℓ</a> <a id="157" class="Symbol">:</a> <a id="159" href="Agda.Primitive.html#742" class="Postulate">Level</a>
+<a id="165" href="Lvls.html#154" class="Function">0ℓ</a> <a id="168" class="Symbol">=</a> <a id="170" href="Agda.Primitive.html#915" class="Primitive">lzero</a>
+
+<a id="mkLevel"></a><a id="177" href="Lvls.html#177" class="Function">mkLevel</a> <a id="185" class="Symbol">:</a> <a id="187" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a> <a id="191" class="Symbol">→</a> <a id="193" href="Agda.Primitive.html#742" class="Postulate">Level</a>
+<a id="199" href="Lvls.html#177" class="Function">mkLevel</a> <a id="207" class="Number">0</a> <a id="209" class="Symbol">=</a> <a id="211" href="Lvls.html#154" class="Function">0ℓ</a>
+<a id="214" href="Lvls.html#177" class="Function">mkLevel</a> <a id="222" class="Symbol">(</a><a id="223" href="Agda.Builtin.Nat.html#234" class="InductiveConstructor">suc</a> <a id="227" href="Lvls.html#227" class="Bound">n</a><a id="228" class="Symbol">)</a> <a id="230" class="Symbol">=</a> <a id="232" href="Agda.Primitive.html#931" class="Primitive">lsuc</a> <a id="237" class="Symbol">(</a><a id="238" href="Lvls.html#177" class="Function">mkLevel</a> <a id="246" href="Lvls.html#227" class="Bound">n</a><a id="247" class="Symbol">)</a>
+
+<a id="250" class="Comment">-- ** level function arguments should be erased</a>
+<a id="testLevel"></a><a id="298" href="Lvls.html#298" class="Function">testLevel</a> <a id="308" class="Symbol">:</a> <a id="310" href="Agda.Primitive.html#742" class="Postulate">Level</a> <a id="316" class="Symbol">→</a> <a id="318" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="322" href="Lvls.html#298" class="Function">testLevel</a> <a id="332" class="Symbol">_</a> <a id="334" class="Symbol">=</a> <a id="336" class="Number">42</a>
+
+<a id="340" class="Comment">-- ** level application arguments should be erased</a>
+<a id="testMkLevel"></a><a id="391" href="Lvls.html#391" class="Function">testMkLevel</a> <a id="403" class="Symbol">:</a> <a id="405" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="409" href="Lvls.html#391" class="Function">testMkLevel</a> <a id="421" class="Symbol">=</a> <a id="423" href="Lvls.html#298" class="Function">testLevel</a> <a id="433" class="Symbol">(</a><a id="434" href="Lvls.html#177" class="Function">mkLevel</a> <a id="442" class="Number">42</a><a id="444" class="Symbol">)</a>
+<a id="446" class="Symbol">{-#</a> <a id="450" class="Keyword">COMPILE</a> <a id="458" class="Keyword">AGDA2LAMBOX</a> <a id="470" href="Lvls.html#391" class="Function">testMkLevel</a> <a id="482" class="Symbol">#-}</a>
+
+<a id="487" class="Comment">-- ** level record fields should be erased</a>
+<a id="530" class="Keyword">record</a> <a id="SomeLvl"></a><a id="537" href="Lvls.html#537" class="Record">SomeLvl</a> <a id="545" class="Symbol">:</a> <a id="547" href="Agda.Primitive.html#388" class="Primitive">Set</a> <a id="551" class="Keyword">where</a>
+  <a id="559" class="Keyword">constructor</a> <a id="this"></a><a id="571" href="Lvls.html#571" class="InductiveConstructor">this</a>
+  <a id="578" class="Keyword">field</a> <a id="SomeLvl.ℓ"></a><a id="584" href="Lvls.html#584" class="Field">ℓ</a> <a id="586" class="Symbol">:</a> <a id="588" href="Agda.Primitive.html#742" class="Postulate">Level</a>
+<a id="594" class="Keyword">open</a> <a id="599" href="Lvls.html#537" class="Module">SomeLvl</a> <a id="607" class="Keyword">public</a>
+
+<a id="someLvl"></a><a id="615" href="Lvls.html#615" class="Function">someLvl</a> <a id="623" class="Symbol">:</a> <a id="625" href="Lvls.html#537" class="Record">SomeLvl</a>
+<a id="633" href="Lvls.html#615" class="Function">someLvl</a> <a id="641" class="Symbol">=</a> <a id="643" href="Lvls.html#571" class="InductiveConstructor">this</a> <a id="648" href="Lvls.html#154" class="Function">0ℓ</a>
+
+<a id="lvlToNat"></a><a id="652" href="Lvls.html#652" class="Function">lvlToNat</a> <a id="661" class="Symbol">:</a> <a id="663" href="Agda.Primitive.html#742" class="Postulate">Level</a> <a id="669" class="Symbol">→</a> <a id="671" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="675" href="Lvls.html#652" class="Function">lvlToNat</a> <a id="684" class="Symbol">_</a> <a id="686" class="Symbol">=</a> <a id="688" class="Number">42</a>
+
+<a id="testSomeLvl"></a><a id="692" href="Lvls.html#692" class="Function">testSomeLvl</a> <a id="704" class="Symbol">:</a> <a id="706" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="710" href="Lvls.html#692" class="Function">testSomeLvl</a> <a id="722" class="Symbol">=</a> <a id="724" href="Lvls.html#652" class="Function">lvlToNat</a> <a id="733" class="Symbol">(</a><a id="734" href="Lvls.html#615" class="Function">someLvl</a> <a id="742" class="Symbol">.</a><a id="743" href="Lvls.html#584" class="Field">ℓ</a><a id="744" class="Symbol">)</a>
+<a id="746" class="Symbol">{-#</a> <a id="750" class="Keyword">COMPILE</a> <a id="758" class="Keyword">AGDA2LAMBOX</a> <a id="770" href="Lvls.html#692" class="Function">testSomeLvl</a> <a id="782" class="Symbol">#-}</a>
+
+<a id="constLvl"></a><a id="787" href="Lvls.html#787" class="Function">constLvl</a> <a id="796" class="Symbol">:</a> <a id="798" class="Symbol">∀</a> <a id="800" class="Symbol">{</a><a id="801" href="Lvls.html#801" class="Bound">A</a> <a id="803" class="Symbol">:</a> <a id="805" href="Agda.Primitive.html#388" class="Primitive">Set</a><a id="808" class="Symbol">}</a> <a id="810" class="Symbol">→</a> <a id="812" href="Lvls.html#801" class="Bound">A</a> <a id="814" class="Symbol">→</a> <a id="816" href="Agda.Primitive.html#742" class="Postulate">Level</a> <a id="822" class="Symbol">→</a> <a id="824" href="Lvls.html#801" class="Bound">A</a>
+<a id="826" href="Lvls.html#787" class="Function">constLvl</a> <a id="835" href="Lvls.html#835" class="Bound">x</a> <a id="837" class="Symbol">_</a> <a id="839" class="Symbol">=</a> <a id="841" href="Lvls.html#835" class="Bound">x</a>
+
+<a id="testConstLvl"></a><a id="844" href="Lvls.html#844" class="Function">testConstLvl</a> <a id="857" class="Symbol">:</a> <a id="859" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="863" href="Lvls.html#844" class="Function">testConstLvl</a> <a id="876" class="Symbol">=</a> <a id="878" href="Lvls.html#787" class="Function">constLvl</a> <a id="887" class="Number">42</a> <a id="890" class="Symbol">(</a><a id="891" href="Lvls.html#615" class="Function">someLvl</a> <a id="899" class="Symbol">.</a><a id="900" href="Lvls.html#584" class="Field">ℓ</a><a id="901" class="Symbol">)</a>
+<a id="903" class="Symbol">{-#</a> <a id="907" class="Keyword">COMPILE</a> <a id="915" class="Keyword">AGDA2LAMBOX</a> <a id="927" href="Lvls.html#844" class="Function">testConstLvl</a> <a id="940" class="Symbol">#-}</a>
+
+<a id="const"></a><a id="945" href="Lvls.html#945" class="Function">const</a> <a id="951" class="Symbol">:</a> <a id="953" class="Symbol">∀</a> <a id="955" class="Symbol">{</a><a id="956" href="Lvls.html#956" class="Bound">A</a> <a id="958" href="Lvls.html#958" class="Bound">B</a> <a id="960" class="Symbol">:</a> <a id="962" href="Agda.Primitive.html#388" class="Primitive">Set</a><a id="965" class="Symbol">}</a> <a id="967" class="Symbol">→</a> <a id="969" href="Lvls.html#956" class="Bound">A</a> <a id="971" class="Symbol">→</a> <a id="973" href="Lvls.html#958" class="Bound">B</a> <a id="975" class="Symbol">→</a> <a id="977" href="Lvls.html#956" class="Bound">A</a>
+<a id="979" href="Lvls.html#945" class="Function">const</a> <a id="985" href="Lvls.html#985" class="Bound">x</a> <a id="987" class="Symbol">_</a> <a id="989" class="Symbol">=</a> <a id="991" href="Lvls.html#985" class="Bound">x</a>
+
+<a id="testConst"></a><a id="994" href="Lvls.html#994" class="Function">testConst</a> <a id="1004" class="Symbol">:</a> <a id="1006" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="1010" href="Lvls.html#994" class="Function">testConst</a> <a id="1020" class="Symbol">=</a> <a id="1022" href="Lvls.html#945" class="Function">const</a> <a id="1028" class="Number">42</a> <a id="1031" class="Number">0</a>
+<a id="1033" class="Symbol">{-#</a> <a id="1037" class="Keyword">COMPILE</a> <a id="1045" class="Keyword">AGDA2LAMBOX</a> <a id="1057" href="Lvls.html#994" class="Function">testConst</a> <a id="1067" class="Symbol">#-}</a>
+
+<a id="testConstLvl2"></a><a id="1072" href="Lvls.html#1072" class="Function">testConstLvl2</a> <a id="1086" class="Symbol">:</a> <a id="1088" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="1092" href="Lvls.html#1072" class="Function">testConstLvl2</a> <a id="1106" class="Symbol">=</a> <a id="1108" href="Lvls.html#945" class="Function">const</a> <a id="1114" class="Number">42</a> <a id="1117" class="Symbol">(</a><a id="1118" href="Lvls.html#615" class="Function">someLvl</a> <a id="1126" class="Symbol">.</a><a id="1127" href="Lvls.html#584" class="Field">ℓ</a><a id="1128" class="Symbol">)</a>
+<a id="1130" class="Symbol">{-#</a> <a id="1134" class="Keyword">COMPILE</a> <a id="1142" class="Keyword">AGDA2LAMBOX</a> <a id="1154" href="Lvls.html#1072" class="Function">testConstLvl2</a> <a id="1168" class="Symbol">#-}</a>
+
+<a id="testWhere"></a><a id="1173" href="Lvls.html#1173" class="Function">testWhere</a> <a id="1183" class="Symbol">:</a> <a id="1185" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="1189" href="Lvls.html#1173" class="Function">testWhere</a> <a id="1199" class="Symbol">=</a> <a id="1201" href="Lvls.html#1230" class="Function">toNat</a> <a id="1207" class="Symbol">(</a><a id="1208" href="Lvls.html#615" class="Function">someLvl</a> <a id="1216" class="Symbol">.</a><a id="1217" href="Lvls.html#584" class="Field">ℓ</a><a id="1218" class="Symbol">)</a>
+  <a id="1222" class="Keyword">where</a>
+  <a id="1230" href="Lvls.html#1230" class="Function">toNat</a> <a id="1236" class="Symbol">:</a> <a id="1238" href="Agda.Primitive.html#742" class="Postulate">Level</a> <a id="1244" class="Symbol">→</a> <a id="1246" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+  <a id="1252" href="Lvls.html#1230" class="Function">toNat</a> <a id="1258" class="Symbol">_</a> <a id="1260" class="Symbol">=</a> <a id="1262" class="Number">42</a>
+<a id="1265" class="Symbol">{-#</a> <a id="1269" class="Keyword">COMPILE</a> <a id="1277" class="Keyword">AGDA2LAMBOX</a> <a id="1289" href="Lvls.html#1173" class="Function">testWhere</a> <a id="1299" class="Symbol">#-}</a>
+</pre><div class="split right"><div class="tabs">    <span data-tab-value="#tab_1">Debug</span>    <span data-tab-value="#tab_2">λ&#9744;</span>    <span data-tab-value="#tab_3">Rocq</span></div><div class="tab-content">    <div class="tabs__tab active" id="tab_1" data-tab-info>        <embed src="dist/Lvls.txt.html"/>    </div>    <div class="tabs__tab" id="tab_2" data-tab-info>        <embed src="dist/Lvls.ast.html"/>    </div>    <div class="tabs__tab" id="tab_3" data-tab-info>        <embed src="dist/Lvls.v.html"/>    </div></div></div><script type=text/javascript>  document.querySelectorAll('[data-tab-value]').forEach(tab => {tab.addEventListener('click', () => {    document.querySelectorAll('[data-tab-info]').forEach(tabInfo => {tabInfo.classList.remove('active') });    document.querySelector(tab.dataset.tabValue).classList.add('active');  })})</script></body></html>

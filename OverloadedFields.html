@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>OverloadedFields</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="split left Agda"><a id="1" class="Keyword">open</a> <a id="6" class="Keyword">import</a> <a id="13" href="Agda.Builtin.Nat.html" class="Module">Agda.Builtin.Nat</a> <a id="30" class="Keyword">using</a> <a id="36" class="Symbol">()</a> <a id="39" class="Keyword">renaming</a> <a id="48" class="Symbol">(</a><a id="49" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a> <a id="53" class="Symbol">to</a> <a id="56" class="Datatype">ℕ</a><a id="57" class="Symbol">)</a>
+
+<a id="60" class="Keyword">record</a> <a id="X"></a><a id="67" href="OverloadedFields.html#67" class="Record">X</a> <a id="69" class="Symbol">:</a> <a id="71" href="Agda.Primitive.html#388" class="Primitive">Set</a> <a id="75" class="Keyword">where</a>
+  <a id="83" class="Keyword">field</a> <a id="X.id"></a><a id="89" href="OverloadedFields.html#89" class="Field">id</a> <a id="92" class="Symbol">:</a> <a id="94" href="OverloadedFields.html#56" class="Datatype">ℕ</a>
+<a id="96" class="Keyword">open</a> <a id="101" href="OverloadedFields.html#67" class="Module">X</a> <a id="103" class="Keyword">public</a>
+
+<a id="exX"></a><a id="111" href="OverloadedFields.html#111" class="Function">exX</a> <a id="115" class="Symbol">:</a> <a id="117" href="OverloadedFields.html#67" class="Record">X</a>
+<a id="119" href="OverloadedFields.html#111" class="Function">exX</a> <a id="123" class="Symbol">.</a><a id="124" href="OverloadedFields.html#89" class="Field">id</a> <a id="127" class="Symbol">=</a> <a id="129" class="Number">42</a>
+
+<a id="133" class="Keyword">record</a> <a id="Y"></a><a id="140" href="OverloadedFields.html#140" class="Record">Y</a> <a id="142" class="Symbol">:</a> <a id="144" href="Agda.Primitive.html#388" class="Primitive">Set</a> <a id="148" class="Keyword">where</a>
+  <a id="156" class="Keyword">field</a> <a id="Y.id"></a><a id="162" href="OverloadedFields.html#162" class="Field">id</a> <a id="165" class="Symbol">:</a> <a id="167" href="OverloadedFields.html#56" class="Datatype">ℕ</a>
+<a id="169" class="Keyword">open</a> <a id="174" href="OverloadedFields.html#140" class="Module">Y</a> <a id="176" class="Keyword">public</a>
+
+<a id="exY"></a><a id="184" href="OverloadedFields.html#184" class="Function">exY</a> <a id="188" class="Symbol">:</a> <a id="190" href="OverloadedFields.html#140" class="Record">Y</a>
+<a id="192" href="OverloadedFields.html#184" class="Function">exY</a> <a id="196" class="Symbol">=</a> <a id="198" class="Symbol">λ</a> <a id="200" class="Keyword">where</a> <a id="206" class="Symbol">.</a><a id="207" href="OverloadedFields.html#162" class="Field">id</a> <a id="210" class="Symbol">→</a> <a id="212" class="Number">42</a>
+
+<a id="idX"></a><a id="216" href="OverloadedFields.html#216" class="Function">idX</a> <a id="220" class="Symbol">:</a> <a id="222" href="OverloadedFields.html#67" class="Record">X</a> <a id="224" class="Symbol">→</a> <a id="226" href="OverloadedFields.html#56" class="Datatype">ℕ</a>
+<a id="228" href="OverloadedFields.html#216" class="Function">idX</a> <a id="232" class="Symbol">=</a> <a id="234" href="OverloadedFields.html#89" class="Field">id</a>
+
+<a id="idY"></a><a id="238" href="OverloadedFields.html#238" class="Function">idY</a> <a id="242" class="Symbol">:</a> <a id="244" href="OverloadedFields.html#140" class="Record">Y</a> <a id="246" class="Symbol">→</a> <a id="248" href="OverloadedFields.html#56" class="Datatype">ℕ</a>
+<a id="250" href="OverloadedFields.html#238" class="Function">idY</a> <a id="254" class="Symbol">=</a> <a id="256" href="OverloadedFields.html#162" class="Field">id</a>
+
+<a id="260" class="Symbol">{-#</a> <a id="264" class="Keyword">FOREIGN</a> <a id="272" class="Pragma">AGDA2RUST</a>
+<a id="282" class="Pragma">pub</a> <a id="286" class="Pragma">fn</a> <a id="289" class="Pragma">main()</a> <a id="296" class="Pragma">{</a>
+  <a id="300" class="Pragma">println!(&quot;{}:\t</a> <a id="316" class="Pragma">{}</a> <a id="319" class="Pragma">|</a> <a id="321" class="Pragma">{}</a> <a id="324" class="Pragma">|</a> <a id="326" class="Pragma">{}</a> <a id="329" class="Pragma">|</a> <a id="331" class="Pragma">{}</a> <a id="334" class="Pragma">&quot;,</a> <a id="337" class="Pragma">module_path!(),</a>
+    <a id="357" class="Pragma">X·id(X{id:</a> <a id="368" class="Pragma">42}),</a>
+    <a id="378" class="Pragma">Y·id(Y{id:</a> <a id="389" class="Pragma">42}),</a>
+    <a id="399" class="Pragma">idX(exX()),</a>
+    <a id="415" class="Pragma">idY(exY()),</a>
+  <a id="429" class="Pragma">);</a>
+<a id="432" class="Pragma">}</a>
+<a id="434" class="Symbol">#-}</a>
+
+<a id="439" class="Keyword">open</a> <a id="444" class="Keyword">import</a> <a id="451" href="Agda.Builtin.Nat.html" class="Module">Agda.Builtin.Nat</a>
+
+<a id="test"></a><a id="469" href="OverloadedFields.html#469" class="Function">test</a> <a id="474" class="Symbol">:</a> <a id="476" href="Agda.Builtin.Nat.html#203" class="Datatype">Nat</a>
+<a id="480" href="OverloadedFields.html#469" class="Function">test</a> <a id="485" class="Symbol">=</a> <a id="487" href="OverloadedFields.html#89" class="Field">X.id</a> <a id="492" class="Symbol">(</a><a id="493" class="Keyword">record</a> <a id="500" class="Symbol">{</a><a id="501" href="OverloadedFields.html#89" class="Field">id</a> <a id="504" class="Symbol">=</a> <a id="506" class="Number">42</a><a id="508" class="Symbol">})</a>
+     <a id="516" href="Agda.Builtin.Nat.html#336" class="Primitive Operator">+</a> <a id="518" href="OverloadedFields.html#162" class="Field">Y.id</a> <a id="523" class="Symbol">(</a><a id="524" class="Keyword">record</a> <a id="531" class="Symbol">{</a><a id="532" href="OverloadedFields.html#162" class="Field">id</a> <a id="535" class="Symbol">=</a> <a id="537" class="Number">42</a><a id="539" class="Symbol">})</a>
+     <a id="547" href="Agda.Builtin.Nat.html#336" class="Primitive Operator">+</a> <a id="549" href="OverloadedFields.html#216" class="Function">idX</a> <a id="553" href="OverloadedFields.html#111" class="Function">exX</a>
+     <a id="562" href="Agda.Builtin.Nat.html#336" class="Primitive Operator">+</a> <a id="564" href="OverloadedFields.html#238" class="Function">idY</a> <a id="568" href="OverloadedFields.html#184" class="Function">exY</a>
+<a id="572" class="Symbol">{-#</a> <a id="576" class="Keyword">COMPILE</a> <a id="584" class="Keyword">AGDA2LAMBOX</a> <a id="596" href="OverloadedFields.html#469" class="Function">test</a> <a id="601" class="Symbol">#-}</a>
+</pre><div class="split right"><div class="tabs">    <span data-tab-value="#tab_1">Debug</span>    <span data-tab-value="#tab_2">λ&#9744;</span>    <span data-tab-value="#tab_3">Rocq</span></div><div class="tab-content">    <div class="tabs__tab active" id="tab_1" data-tab-info>        <embed src="dist/OverloadedFields.txt.html"/>    </div>    <div class="tabs__tab" id="tab_2" data-tab-info>        <embed src="dist/OverloadedFields.ast.html"/>    </div>    <div class="tabs__tab" id="tab_3" data-tab-info>        <embed src="dist/OverloadedFields.v.html"/>    </div></div></div><script type=text/javascript>  document.querySelectorAll('[data-tab-value]').forEach(tab => {tab.addEventListener('click', () => {    document.querySelectorAll('[data-tab-info]').forEach(tabInfo => {tabInfo.classList.remove('active') });    document.querySelector(tab.dataset.tabValue).classList.add('active');  })})</script></body></html>
