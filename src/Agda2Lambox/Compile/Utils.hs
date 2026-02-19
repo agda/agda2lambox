@@ -85,13 +85,7 @@ toConApp qn es = do
   ctrs <- liftTCM $ getConstructors dt
   ind  <- liftTCM $ toInductive dt
   let idx = fromMaybe 0 $ qn `elemIndex` ctrs
-
-  -- if the no blocks option is enabled
-  -- no argument is given to LConstruct
-  -- and we instead use regular application
-  nb <- asks noBlocks
-  if nb then pure $ foldl' LBox.LApp (LBox.LConstruct ind idx []) es
-        else pure $ LBox.LConstruct ind idx es
+  pure $ foldl' LBox.LApp (LBox.LConstruct ind idx []) es
 
 
 -- | Class for things that may be considered logical, and thus erased.

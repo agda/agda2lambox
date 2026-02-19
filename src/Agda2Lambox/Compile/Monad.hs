@@ -39,9 +39,7 @@ import Data.Foldable (traverse_)
 
 -- | Compilation Environment
 data CompileEnv = CompileEnv
-  { noBlocks :: Bool
-      -- ^ When set to 'True', constructors take no arguments,
-      -- and regular function application is used instead.
+  {
   }
 
 -- | Backend compilation state.

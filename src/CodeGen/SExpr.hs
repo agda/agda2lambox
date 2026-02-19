@@ -212,5 +212,6 @@ instance ToSexp t (GlobalEnv t) where
 
 instance ToSexp t (LBoxModule t) where
   toSexp t@ToUntyped LBoxModule{..} =
-    toSexp t (lboxEnv, ctor t "tConst" [S $ NEL.head $ getUntyped lboxMain])
-  toSexp t@ToTyped LBoxModule{..} = toSexp t lboxEnv
+    ctor t "Untyped" [S lboxEnv, S $ Just $ LConst $ NEL.head $ getUntyped lboxMain]
+  toSexp t@ToTyped LBoxModule{..} =
+    ctor t "Typed" [S $ toSexp t lboxEnv, S (Nothing :: Maybe Exp)]
