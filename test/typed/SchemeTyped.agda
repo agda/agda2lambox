@@ -1,5 +1,5 @@
 -- compilation of λ□ type schemes
-module Scheme where
+module SchemeTyped where
 
 open import Agda.Builtin.List
 open import Agda.Builtin.Nat
