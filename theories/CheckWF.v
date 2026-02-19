@@ -1,8 +1,8 @@
-From Coq             Require Import List Logic.Decidable ssreflect.
-From MetaCoq.Common  Require Import BasicAst Kernames Universes EnvMap.
-From MetaCoq.Erasure Require Import EAst EWellformed.
-From MetaCoq.Utils   Require Import bytestring ReflectEq.
-From Equations       Require Import Equations.
+From Stdlib           Require Import List Logic.Decidable ssreflect.
+From MetaRocq.Common  Require Import BasicAst Kernames Universes EnvMap.
+From MetaRocq.Erasure Require Import EAst EWellformed.
+From MetaRocq.Utils   Require Import bytestring ReflectEq.
+From Equations        Require Import Equations.
 
 Import ListNotations.
 Import EnvMap.
