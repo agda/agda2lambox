@@ -19,11 +19,11 @@ Agda.Builtin.Nat.Ֆ_Ֆplus_:
     type: (Agda.Builtin.Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → Agda.
                                                                   Builtin.
                                                                   Nat.Nat{0}
-    body: μ rec -&gt;
-            λ _ _ →
-              case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @1 of
-                λ&lt;[]&gt; @0
-                λ&lt;[_]&gt; Agda.Builtin.Nat.Nat{0}{1} (@3 @0 @1)
+    body: μrec [0] :=
+            0: λ _ _ →
+                 case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @1 of
+                   λ&lt;[]&gt; @0
+                   λ&lt;[_]&gt; Agda.Builtin.Nat.Nat{0}{1} (@3 @0 @1)
 
 Agda.Builtin.List.List:
   mutual inductive(s):
@@ -41,11 +41,11 @@ PartialApp.map:
     type: □ → □ → (@0 → @1) → Agda.Builtin.List.List{0} □ @0 → Agda.
                                                                Builtin.
                                                                List.List{0} □ @1
-    body: μ rec -&gt;
-            λ _ _ _ _ →
-              case&lt;Agda.Builtin.List.List{0},0&gt; @0 of
-                λ&lt;[]&gt; Agda.Builtin.List.List{0}{0}
-                λ&lt;[_, _]&gt; Agda.Builtin.List.List{0}{1} (@3 @1) (@6 □ □ @3 @0)
+    body: μrec [0] :=
+            0: λ _ _ _ _ →
+                 case&lt;Agda.Builtin.List.List{0},0&gt; @0 of
+                   λ&lt;[]&gt; Agda.Builtin.List.List{0}{0}
+                   λ&lt;[_, _]&gt; Agda.Builtin.List.List{0}{1} (@3 @1) (@6 □ □ @3 @0)
 
 PartialApp.sum:
   constant declaration:
@@ -53,11 +53,11 @@ PartialApp.sum:
     type: Agda.Builtin.List.List{0} □ (Agda.Builtin.Nat.Nat{0}) → Agda.
                                                                   Builtin.
                                                                   Nat.Nat{0}
-    body: μ rec -&gt;
-            λ _ →
-              case&lt;Agda.Builtin.List.List{0},0&gt; @0 of
-                λ&lt;[]&gt; Agda.Builtin.Nat.Nat{0}{0}
-                λ&lt;[_, _]&gt; Agda.Builtin.Nat.Ֆ_Ֆplus_ @1 (@3 @0)
+    body: μrec [0] :=
+            0: λ _ →
+                 case&lt;Agda.Builtin.List.List{0},0&gt; @0 of
+                   λ&lt;[]&gt; Agda.Builtin.Nat.Nat{0}{0}
+                   λ&lt;[_, _]&gt; Agda.Builtin.Nat.Ֆ_Ֆplus_ @1 (@3 @0)
 
 PartialApp.testPartialAdd:
   constant declaration:
@@ -254,15 +254,15 @@ PartialApp.zipWith:
                                        List.List{0} □ @0 → Agda.Builtin.List.List{0} □ @1 → Agda.
                                                                                             Builtin.
                                                                                             List.List{0} □ @2
-    body: μ rec -&gt;
-            λ _ _ _ _ _ _ →
-              case&lt;Agda.Builtin.List.List{0},0&gt; @1 of
-                λ&lt;[]&gt; Agda.Builtin.List.List{0}{0}
-                λ&lt;[_, _]&gt;
-                  case&lt;Agda.Builtin.List.List{0},0&gt; @2 of
-                    λ&lt;[]&gt; Agda.Builtin.List.List{0}{0}
-                    λ&lt;[_, _]&gt;
-                      Agda.Builtin.List.List{0}{1} (@6 @3 @1) (@10 □ □ □ @6 @2 @0)
+    body: μrec [0] :=
+            0: λ _ _ _ _ _ _ →
+                 case&lt;Agda.Builtin.List.List{0},0&gt; @1 of
+                   λ&lt;[]&gt; Agda.Builtin.List.List{0}{0}
+                   λ&lt;[_, _]&gt;
+                     case&lt;Agda.Builtin.List.List{0},0&gt; @2 of
+                       λ&lt;[]&gt; Agda.Builtin.List.List{0}{0}
+                       λ&lt;[_, _]&gt;
+                         Agda.Builtin.List.List{0}{1} (@6 @3 @1) (@10 □ □ □ @6 @2 @0)
 
 PartialApp.testPartialAdd2:
   constant declaration:

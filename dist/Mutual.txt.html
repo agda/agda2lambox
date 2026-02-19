@@ -22,8 +22,13 @@ Mutual.Nat:
 
 Mutual.oddNat:
   constant declaration:
-    body: μ rec -&gt;
-            λ _ → case&lt;Mutual.Odd{0},0&gt; @0 of λ&lt;[_]&gt; Mutual.Nat{0}{1} (@2 @0)
+    body: μrec [0] :=
+            0: λ _ →
+                 case&lt;Mutual.Odd{0},0&gt; @0 of λ&lt;[_]&gt; Mutual.Nat{0}{1} (@2 @0)
+            1: λ _ →
+                 case&lt;Mutual.Odd{1},0&gt; @0 of
+                   λ&lt;[]&gt; Mutual.Nat{0}{0}
+                   λ&lt;[_]&gt; Mutual.Nat{0}{1} (@3 @0)
 
 Mutual.test:
   constant declaration:
@@ -31,9 +36,11 @@ Mutual.test:
 
 Mutual.evenNat:
   constant declaration:
-    body: μ rec -&gt;
-            λ _ →
-              case&lt;Mutual.Odd{1},0&gt; @0 of
-                λ&lt;[]&gt; Mutual.Nat{0}{0}
-                λ&lt;[_]&gt; Mutual.Nat{0}{1} (@3 @0)
+    body: μrec [1] :=
+            0: λ _ →
+                 case&lt;Mutual.Odd{0},0&gt; @0 of λ&lt;[_]&gt; Mutual.Nat{0}{1} (@2 @0)
+            1: λ _ →
+                 case&lt;Mutual.Odd{1},0&gt; @0 of
+                   λ&lt;[]&gt; Mutual.Nat{0}{0}
+                   λ&lt;[_]&gt; Mutual.Nat{0}{1} (@3 @0)
 main program: [Mutual.test]</code></pre>

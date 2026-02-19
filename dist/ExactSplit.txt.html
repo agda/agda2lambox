@@ -19,14 +19,14 @@ ExactSplit.min:
     type: (Agda.Builtin.Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → Agda.
                                                                   Builtin.
                                                                   Nat.Nat{0}
-    body: μ rec -&gt;
-            λ _ _ →
-              case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @1 of
-                λ&lt;[]&gt; Agda.Builtin.Nat.Nat{0}{0}
-                λ&lt;[_]&gt;
-                  case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @1 of
-                    λ&lt;[]&gt; Agda.Builtin.Nat.Nat{0}{0}
-                    λ&lt;[_]&gt; @4 @1 @0
+    body: μrec [0] :=
+            0: λ _ _ →
+                 case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @1 of
+                   λ&lt;[]&gt; Agda.Builtin.Nat.Nat{0}{0}
+                   λ&lt;[_]&gt;
+                     case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @1 of
+                       λ&lt;[]&gt; Agda.Builtin.Nat.Nat{0}{0}
+                       λ&lt;[_]&gt; @4 @1 @0
 
 ExactSplit.test:
   constant declaration:

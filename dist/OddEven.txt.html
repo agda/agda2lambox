@@ -32,11 +32,15 @@ OddEven.Bool:
 
 OddEven.odd:
   constant declaration:
-    body: μ rec -&gt;
-            λ _ →
-              case&lt;OddEven.Nat{0},0&gt; @0 of
-                λ&lt;[]&gt; OddEven.Bool{0}{0}
-                λ&lt;[_]&gt; @2 @0
+    body: μrec [0] :=
+            0: λ _ →
+                 case&lt;OddEven.Nat{0},0&gt; @0 of
+                   λ&lt;[]&gt; OddEven.Bool{0}{0}
+                   λ&lt;[_]&gt; @2 @0
+            1: λ _ →
+                 case&lt;OddEven.Nat{0},0&gt; @0 of
+                   λ&lt;[]&gt; OddEven.Bool{0}{1}
+                   λ&lt;[_]&gt; @3 @0
 
 OddEven.test:
   constant declaration:
@@ -45,19 +49,23 @@ OddEven.test:
 
 OddEven.even:
   constant declaration:
-    body: μ rec -&gt;
-            λ _ →
-              case&lt;OddEven.Nat{0},0&gt; @0 of
-                λ&lt;[]&gt; OddEven.Bool{0}{1}
-                λ&lt;[_]&gt; @3 @0
+    body: μrec [1] :=
+            0: λ _ →
+                 case&lt;OddEven.Nat{0},0&gt; @0 of
+                   λ&lt;[]&gt; OddEven.Bool{0}{0}
+                   λ&lt;[_]&gt; @2 @0
+            1: λ _ →
+                 case&lt;OddEven.Nat{0},0&gt; @0 of
+                   λ&lt;[]&gt; OddEven.Bool{0}{1}
+                   λ&lt;[_]&gt; @3 @0
 
 OddEven.double:
   constant declaration:
-    body: μ rec -&gt;
-            λ _ →
-              case&lt;OddEven.Nat{0},0&gt; @0 of
-                λ&lt;[]&gt; OddEven.Nat{0}{0}
-                λ&lt;[_]&gt; OddEven.Nat{0}{1} OddEven.Nat{0}{1} (@2 @0)
+    body: μrec [0] :=
+            0: λ _ →
+                 case&lt;OddEven.Nat{0},0&gt; @0 of
+                   λ&lt;[]&gt; OddEven.Nat{0}{0}
+                   λ&lt;[_]&gt; OddEven.Nat{0}{1} OddEven.Nat{0}{1} (@2 @0)
 
 OddEven.not:
   constant declaration:

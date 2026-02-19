@@ -14,11 +14,11 @@ Equality.Ֆ_Ֆ24Ֆ_: constant declaration: body: λ _ _ _ _ _ _ → @1 @0
 
 Equality.add:
   constant declaration:
-    body: μ rec -&gt;
-            λ _ _ →
-              case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @1 of
-                λ&lt;[]&gt; @0
-                λ&lt;[_]&gt; Agda.Builtin.Nat.Nat{0}{1} (@3 @0 @1)
+    body: μrec [0] :=
+            0: λ _ _ →
+                 case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @1 of
+                   λ&lt;[]&gt; @0
+                   λ&lt;[_]&gt; Agda.Builtin.Nat.Nat{0}{1} (@3 @0 @1)
 
 Equality.test:
   constant declaration:
@@ -38,7 +38,7 @@ Equality.eqLevel: constant declaration: body: □
 Equality.sucՖsubleftՖsubadd: constant declaration: body: □
 
 Equality.addՖsubleftՖsubid:
-  constant declaration: body: μ rec -&gt; λ _ → □
+  constant declaration: body: μrec [0] := 0: λ _ → □
 
 Equality.subst: constant declaration: body: λ _ _ _ _ _ _ → @0
 

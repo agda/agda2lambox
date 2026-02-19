@@ -28,11 +28,11 @@ Exports.three:
 
 Exports.four:
   constant declaration:
-    body: μ rec -&gt;
-            λ _ _ →
-              case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @1 of
-                λ&lt;[]&gt; @0
-                λ&lt;[_]&gt; Agda.Builtin.Nat.Nat{0}{1} (@3 @0 @1)
+    body: μrec [0] :=
+            0: λ _ _ →
+                 case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @1 of
+                   λ&lt;[]&gt; @0
+                   λ&lt;[_]&gt; Agda.Builtin.Nat.Nat{0}{1} (@3 @0 @1)
 
 Exports.Exports:
   mutual inductive(s):

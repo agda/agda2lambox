@@ -84,8 +84,8 @@ Scheme.length:
   constant declaration:
     type variables: [A]
     type: □ → Agda.Builtin.List.List{0} □ @0 → Agda.Builtin.Nat.Nat{0}
-    body: μ rec -&gt;
-            λ _ _ →
-              case&lt;Agda.Builtin.List.List{0},0&gt; @0 of
-                λ&lt;[]&gt; Agda.Builtin.Nat.Nat{0}{0}
-                λ&lt;[_, _]&gt; Agda.Builtin.Nat.Nat{0}{1} (@4 □ @0)</code></pre>
+    body: μrec [0] :=
+            0: λ _ _ →
+                 case&lt;Agda.Builtin.List.List{0},0&gt; @0 of
+                   λ&lt;[]&gt; Agda.Builtin.Nat.Nat{0}{0}
+                   λ&lt;[_, _]&gt; Agda.Builtin.Nat.Nat{0}{1} (@4 □ @0)</code></pre>

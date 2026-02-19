@@ -12,12 +12,12 @@ Agda.Builtin.Nat.Nat:
 
 Map.double:
   constant declaration:
-    body: μ rec -&gt;
-            λ _ →
-              case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @0 of
-                λ&lt;[]&gt; Agda.Builtin.Nat.Nat{0}{0}
-                λ&lt;[_]&gt;
-                  Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{1} (@2 @0)
+    body: μrec [0] :=
+            0: λ _ →
+                 case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @0 of
+                   λ&lt;[]&gt; Agda.Builtin.Nat.Nat{0}{0}
+                   λ&lt;[_]&gt;
+                     Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{1} (@2 @0)
 
 Agda.Builtin.List.List:
   mutual inductive(s):
@@ -44,11 +44,11 @@ Map.xs:
 
 Map.map:
   constant declaration:
-    body: μ rec -&gt;
-            λ _ _ _ _ →
-              case&lt;Agda.Builtin.List.List{0},0&gt; @0 of
-                λ&lt;[]&gt; Agda.Builtin.List.List{0}{0}
-                λ&lt;[_, _]&gt; Agda.Builtin.List.List{0}{1} (@3 @1) (@6 □ □ @3 @0)
+    body: μrec [0] :=
+            0: λ _ _ _ _ →
+                 case&lt;Agda.Builtin.List.List{0},0&gt; @0 of
+                   λ&lt;[]&gt; Agda.Builtin.List.List{0}{0}
+                   λ&lt;[_, _]&gt; Agda.Builtin.List.List{0}{1} (@3 @1) (@6 □ □ @3 @0)
 
 Map.ys:
   constant declaration: body: Map.map □ □ (Map.double) (Map.xs)

@@ -451,11 +451,11 @@ Agda.Primitive.lsuc: constant declaration: body: □
 
 Lvls.mkLevel:
   constant declaration:
-    body: μ rec -&gt;
-            λ _ →
-              case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @0 of
-                λ&lt;[]&gt; Lvls.Ֆ30Ֆℓ
-                λ&lt;[_]&gt; Agda.Primitive.lsuc (@2 @0)
+    body: μrec [0] :=
+            0: λ _ →
+                 case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @0 of
+                   λ&lt;[]&gt; Lvls.Ֆ30Ֆℓ
+                   λ&lt;[_]&gt; Agda.Primitive.lsuc (@2 @0)
 main program: [Lvls.testMkLevel, Lvls.testSomeLvl,
                Lvls.testConstLvl, Lvls.testConst, Lvls.testConstLvl2,
                Lvls.testWhere]</code></pre>

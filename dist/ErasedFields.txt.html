@@ -34,11 +34,11 @@ Agda.Builtin.Nat.Ֆ_Ֆplus_:
     type: (Agda.Builtin.Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → Agda.
                                                                   Builtin.
                                                                   Nat.Nat{0}
-    body: μ rec -&gt;
-            λ _ _ →
-              case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @1 of
-                λ&lt;[]&gt; @0
-                λ&lt;[_]&gt; Agda.Builtin.Nat.Nat{0}{1} (@3 @0 @1)
+    body: μrec [0] :=
+            0: λ _ _ →
+                 case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @1 of
+                   λ&lt;[]&gt; @0
+                   λ&lt;[_]&gt; Agda.Builtin.Nat.Nat{0}{1} (@3 @0 @1)
 
 ErasedFields.testFoo:
   constant declaration:

@@ -19,20 +19,20 @@ With.List:
 
 With.filter:
   constant declaration:
-    body: μ rec -&gt;
-            λ _ _ _ →
-              case&lt;With.List{0},0&gt; @0 of
-                λ&lt;[]&gt; With.List{0}{0}
-                λ&lt;[_, _]&gt;
-                  λ _ _ _ _ _ →
-                    case&lt;With.Bool{0},0&gt; @1 of
-                      λ&lt;[]&gt; @10 □ @3 @0
-                      λ&lt;[]&gt; With.List{0}{1} @2 (@10 □ @3 @0)
-                    @4
-                    @3
-                    @1
-                    (@3 @1)
-                    @0
+    body: μrec [0] :=
+            0: λ _ _ _ →
+                 case&lt;With.List{0},0&gt; @0 of
+                   λ&lt;[]&gt; With.List{0}{0}
+                   λ&lt;[_, _]&gt;
+                     λ _ _ _ _ _ →
+                       case&lt;With.Bool{0},0&gt; @1 of
+                         λ&lt;[]&gt; @10 □ @3 @0
+                         λ&lt;[]&gt; With.List{0}{1} @2 (@10 □ @3 @0)
+                       @4
+                       @3
+                       @1
+                       (@3 @1)
+                       @0
 
 With.xs:
   constant declaration:

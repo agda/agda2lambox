@@ -19,11 +19,11 @@ Irr.Vec:
 
 Irr.map:
   constant declaration:
-    body: μ rec -&gt;
-            λ _ _ _ _ _ →
-              case&lt;Irr.Vec{0},0&gt; @0 of
-                λ&lt;[]&gt; Irr.Vec{0}{0}
-                λ&lt;[_, _, _]&gt; Irr.Vec{0}{1} □ (@4 @1) (@8 □ □ □ @4 @0)
+    body: μrec [0] :=
+            0: λ _ _ _ _ _ →
+                 case&lt;Irr.Vec{0},0&gt; @0 of
+                   λ&lt;[]&gt; Irr.Vec{0}{0}
+                   λ&lt;[_, _, _]&gt; Irr.Vec{0}{1} □ (@4 @1) (@8 □ □ □ @4 @0)
 
 Irr.xs:
   constant declaration:

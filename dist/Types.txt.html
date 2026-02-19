@@ -20,11 +20,11 @@ Types.listrect:
     type: □ → □ → @1 → (@0 → Agda.
                              Builtin.
                              List.List{0} □ @0 → @1 → @1) → Agda.Builtin.List.List{0} □ @0 → @1
-    body: μ rec -&gt;
-            λ _ _ _ _ _ →
-              case&lt;Agda.Builtin.List.List{0},0&gt; @0 of
-                λ&lt;[]&gt; @2
-                λ&lt;[_, _]&gt; @3 @1 @0 (@7 □ □ @4 @3 @0)
+    body: μrec [0] :=
+            0: λ _ _ _ _ _ →
+                 case&lt;Agda.Builtin.List.List{0},0&gt; @0 of
+                   λ&lt;[]&gt; @2
+                   λ&lt;[_, _]&gt; @3 @1 @0 (@7 □ □ @4 @3 @0)
 
 Types.map:
   constant declaration:
