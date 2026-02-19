@@ -1,8 +1,8 @@
-<pre class="coq"><code>From Coq             Require Import List.
-From MetaCoq.Common  Require Import BasicAst Kernames Universes.
-From MetaCoq.Utils   Require Import bytestring.
-From MetaCoq.Erasure Require Import EAst ExAst.
-From Agda2Lambox     Require Import CheckWF Eval.
+<pre class="coq"><code>From Stdlib           Require Import List.
+From MetaRocq.Common  Require Import BasicAst Kernames Universes.
+From MetaRocq.Utils   Require Import bytestring.
+From MetaRocq.Erasure Require Import EAst ExAst.
+From Agda2Lambox      Require Import CheckWF Eval.
 Import ListNotations.
 
 Definition env : global_env :=
@@ -71,11 +71,16 @@ Definition env : global_env :=
                                nAnon
                                (tLambda
                                   nAnon
-                                  (tConstruct
-                                     {| inductive_mind :=
-                                          (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
-                                        inductive_ind := 0 |}
-                                     1 [tApp (tRel 3) (tRel 2); tRel 0]))))))));
+                                  (tApp
+                                     (tApp
+                                        (tConstruct
+                                           {| inductive_mind :=
+                                                (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
+                                                 &quot;List&quot;%bs);
+                                              inductive_ind := 0 |}
+                                           1 [])
+                                        (tApp (tRel 3) (tRel 2)))
+                                     (tRel 0)))))))));
          cst_type :=
            ([nNamed &quot;A&quot;%bs; nNamed &quot;B&quot;%bs],
             TArr

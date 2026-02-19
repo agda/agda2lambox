@@ -17,7 +17,7 @@ Map.double:
                  case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @0 of
                    λ&lt;[]&gt; Agda.Builtin.Nat.Nat{0}{0}
                    λ&lt;[_]&gt;
-                     Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{1} (@2 @0)
+                     Agda.Builtin.Nat.Nat{0}{1} (Agda.Builtin.Nat.Nat{0}{1} (@2 @0))
 
 Agda.Builtin.List.List:
   mutual inductive(s):
@@ -29,18 +29,18 @@ Agda.Builtin.List.List:
 Map.xs:
   constant declaration:
     body: Agda.Builtin.List.List{0}{1}
-            Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}
-            Agda.Builtin.List.List{0}{1}
-              Agda.Builtin.Nat.Nat{0}{1}
-                Agda.Builtin.Nat.Nat{0}{1}
-                  Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}
-              Agda.Builtin.List.List{0}{1}
-                Agda.Builtin.Nat.Nat{0}{1}
-                  Agda.Builtin.Nat.Nat{0}{1}
-                    Agda.Builtin.Nat.Nat{0}{1}
-                      Agda.Builtin.Nat.Nat{0}{1}
-                        Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}
-                Agda.Builtin.List.List{0}{0}
+            (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0})
+            (Agda.Builtin.List.List{0}{1}
+               (Agda.Builtin.Nat.Nat{0}{1}
+                  (Agda.Builtin.Nat.Nat{0}{1}
+                     (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0})))
+               (Agda.Builtin.List.List{0}{1}
+                  (Agda.Builtin.Nat.Nat{0}{1}
+                     (Agda.Builtin.Nat.Nat{0}{1}
+                        (Agda.Builtin.Nat.Nat{0}{1}
+                           (Agda.Builtin.Nat.Nat{0}{1}
+                              (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0})))))
+                  Agda.Builtin.List.List{0}{0}))
 
 Map.map:
   constant declaration:

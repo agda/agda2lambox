@@ -1,7 +1,7 @@
-<pre class="coq"><code>From Coq             Require Import List.
-From MetaCoq.Common  Require Import BasicAst Kernames Universes.
-From MetaCoq.Utils   Require Import bytestring.
-From MetaCoq.Erasure Require Import EAst.
+<pre class="coq"><code>From Stdlib           Require Import List.
+From MetaRocq.Common  Require Import BasicAst Kernames Universes.
+From MetaRocq.Utils   Require Import bytestring.
+From MetaRocq.Erasure Require Import EAst.
 From Agda2Lambox     Require Import CheckWF Eval.
 Import ListNotations.
 
@@ -17,45 +17,54 @@ Definition env : global_declarations :=
                       tBox)
                    (tLambda
                       nAnon
-                      (tConstruct
-                         {| inductive_mind :=
-                              (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                            inductive_ind := 0 |}
-                         1 [tRel 0])))
+                      (tApp
+                         (tConstruct
+                            {| inductive_mind :=
+                                 (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                               inductive_ind := 0 |}
+                            1 [])
+                         (tRel 0))))
                 (tConst (MPfile [&quot;Irr&quot;%bs], &quot;xs&quot;%bs))) |});
    ((MPfile [&quot;Irr&quot;%bs], &quot;xs&quot;%bs),
     ConstantDecl
       {| cst_body :=
            Some
-             (tConstruct
-                {| inductive_mind := (MPfile [&quot;Irr&quot;%bs], &quot;Vec&quot;%bs);
-                   inductive_ind := 0 |}
-                1
-                [tBox;
-                 tConstruct
-                   {| inductive_mind :=
-                        (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                      inductive_ind := 0 |}
-                   1
-                   [tConstruct
-                      {| inductive_mind :=
-                           (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                         inductive_ind := 0 |}
-                      0 []];
-                 tConstruct
-                   {| inductive_mind := (MPfile [&quot;Irr&quot;%bs], &quot;Vec&quot;%bs);
-                      inductive_ind := 0 |}
-                   1
-                   [tBox;
-                    tConstruct
-                      {| inductive_mind :=
-                           (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                         inductive_ind := 0 |}
-                      0 [];
-                    tConstruct
+             (tApp
+                (tApp
+                   (tApp
+                      (tConstruct
+                         {| inductive_mind := (MPfile [&quot;Irr&quot;%bs], &quot;Vec&quot;%bs);
+                            inductive_ind := 0 |}
+                         1 [])
+                      tBox)
+                   (tApp
+                      (tConstruct
+                         {| inductive_mind :=
+                              (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                            inductive_ind := 0 |}
+                         1 [])
+                      (tConstruct
+                         {| inductive_mind :=
+                              (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                            inductive_ind := 0 |}
+                         0 [])))
+                (tApp
+                   (tApp
+                      (tApp
+                         (tConstruct
+                            {| inductive_mind := (MPfile [&quot;Irr&quot;%bs], &quot;Vec&quot;%bs);
+                               inductive_ind := 0 |}
+                            1 [])
+                         tBox)
+                      (tConstruct
+                         {| inductive_mind :=
+                              (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                            inductive_ind := 0 |}
+                         0 []))
+                   (tConstruct
                       {| inductive_mind := (MPfile [&quot;Irr&quot;%bs], &quot;Vec&quot;%bs);
                          inductive_ind := 0 |}
-                      0 []]]) |});
+                      0 []))) |});
    ((MPfile [&quot;Irr&quot;%bs], &quot;map&quot;%bs),
     ConstantDecl
       {| cst_body :=
@@ -84,16 +93,21 @@ Definition env : global_declarations :=
                                               inductive_ind := 0 |}
                                            0 []);
                                         ([nAnon; nAnon; nAnon],
-                                         tConstruct
-                                           {| inductive_mind := (MPfile [&quot;Irr&quot;%bs], &quot;Vec&quot;%bs);
-                                              inductive_ind := 0 |}
-                                           1
-                                           [tBox; tApp (tRel 4) (tRel 1);
-                                            tApp
+                                         tApp
+                                           (tApp
+                                              (tApp
+                                                 (tConstruct
+                                                    {| inductive_mind :=
+                                                         (MPfile [&quot;Irr&quot;%bs], &quot;Vec&quot;%bs);
+                                                       inductive_ind := 0 |}
+                                                    1 [])
+                                                 tBox)
+                                              (tApp (tRel 4) (tRel 1)))
+                                           (tApp
                                               (tApp
                                                  (tApp (tApp (tApp (tRel 8) tBox) tBox) tBox)
                                                  (tRel 4))
-                                              (tRel 0)])])))));
+                                              (tRel 0)))])))));
                     rarg := 0 |}]
                 0) |});
    ((MPfile [&quot;Irr&quot;%bs], &quot;Vec&quot;%bs),

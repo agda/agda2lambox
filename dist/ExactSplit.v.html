@@ -1,8 +1,8 @@
-<pre class="coq"><code>From Coq             Require Import List.
-From MetaCoq.Common  Require Import BasicAst Kernames Universes.
-From MetaCoq.Utils   Require Import bytestring.
-From MetaCoq.Erasure Require Import EAst ExAst.
-From Agda2Lambox     Require Import CheckWF Eval.
+<pre class="coq"><code>From Stdlib           Require Import List.
+From MetaRocq.Common  Require Import BasicAst Kernames Universes.
+From MetaRocq.Utils   Require Import bytestring.
+From MetaRocq.Erasure Require Import EAst ExAst.
+From Agda2Lambox      Require Import CheckWF Eval.
 Import ListNotations.
 
 Definition env : global_env :=

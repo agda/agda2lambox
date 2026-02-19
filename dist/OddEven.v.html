@@ -1,7 +1,7 @@
-<pre class="coq"><code>From Coq             Require Import List.
-From MetaCoq.Common  Require Import BasicAst Kernames Universes.
-From MetaCoq.Utils   Require Import bytestring.
-From MetaCoq.Erasure Require Import EAst.
+<pre class="coq"><code>From Stdlib           Require Import List.
+From MetaRocq.Common  Require Import BasicAst Kernames Universes.
+From MetaRocq.Utils   Require Import bytestring.
+From MetaRocq.Erasure Require Import EAst.
 From Agda2Lambox     Require Import CheckWF Eval.
 Import ListNotations.
 
@@ -56,14 +56,17 @@ Definition env : global_declarations :=
                                   inductive_ind := 0 |}
                                0 []);
                             ([nAnon],
-                             tConstruct
-                               {| inductive_mind := (MPfile [&quot;OddEven&quot;%bs], &quot;Nat&quot;%bs);
-                                  inductive_ind := 0 |}
-                               1
-                               [tConstruct
+                             tApp
+                               (tConstruct
                                   {| inductive_mind := (MPfile [&quot;OddEven&quot;%bs], &quot;Nat&quot;%bs);
                                      inductive_ind := 0 |}
-                                  1 [tApp (tRel 2) (tRel 0)]])]);
+                                  1 [])
+                               (tApp
+                                  (tConstruct
+                                     {| inductive_mind := (MPfile [&quot;OddEven&quot;%bs], &quot;Nat&quot;%bs);
+                                        inductive_ind := 0 |}
+                                     1 [])
+                                  (tApp (tRel 2) (tRel 0))))]);
                     rarg := 0 |}]
                 0) |});
    ((MPfile [&quot;OddEven&quot;%bs], &quot;even&quot;%bs),
@@ -110,18 +113,20 @@ Definition env : global_declarations :=
            Some
              (tApp
                 (tConst (MPfile [&quot;OddEven&quot;%bs], &quot;odd&quot;%bs))
-                (tConstruct
-                   {| inductive_mind := (MPfile [&quot;OddEven&quot;%bs], &quot;Nat&quot;%bs);
-                      inductive_ind := 0 |}
-                   1
-                   [tConstruct
+                (tApp
+                   (tConstruct
                       {| inductive_mind := (MPfile [&quot;OddEven&quot;%bs], &quot;Nat&quot;%bs);
                          inductive_ind := 0 |}
-                      1
-                      [tConstruct
+                      1 [])
+                   (tApp
+                      (tConstruct
                          {| inductive_mind := (MPfile [&quot;OddEven&quot;%bs], &quot;Nat&quot;%bs);
                             inductive_ind := 0 |}
-                         0 []]])) |});
+                         1 [])
+                      (tConstruct
+                         {| inductive_mind := (MPfile [&quot;OddEven&quot;%bs], &quot;Nat&quot;%bs);
+                            inductive_ind := 0 |}
+                         0 [])))) |});
    ((MPfile [&quot;OddEven&quot;%bs], &quot;odd&quot;%bs),
     ConstantDecl
       {| cst_body :=

@@ -37,14 +37,14 @@ Imports.test2:
   constant declaration:
     body: Imports.map □ □
             (Agda.Builtin.Nat.Ֆ_Ֆplus_
-               Agda.Builtin.Nat.Nat{0}{1}
-                 Agda.Builtin.Nat.Nat{0}{1}
-                   Agda.Builtin.Nat.Nat{0}{1}
-                     Agda.Builtin.Nat.Nat{0}{1}
-                       Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0})
-            Agda.Builtin.List.List{0}{1}
-              Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}
-              Agda.Builtin.List.List{0}{0}
+               (Agda.Builtin.Nat.Nat{0}{1}
+                  (Agda.Builtin.Nat.Nat{0}{1}
+                     (Agda.Builtin.Nat.Nat{0}{1}
+                        (Agda.Builtin.Nat.Nat{0}{1}
+                           (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}))))))
+            (Agda.Builtin.List.List{0}{1}
+               (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0})
+               Agda.Builtin.List.List{0}{0})
 
 Agda.Builtin.Bool.Bool:
   mutual inductive(s):
@@ -55,8 +55,7 @@ Agda.Builtin.Bool.Bool:
 
 Imports.test:
   constant declaration:
-    body: Agda.Builtin.List.List{0}{1}
-            Agda.Builtin.Bool.Bool{0}{1}
-            Agda.Builtin.List.List{0}{1}
-              Agda.Builtin.Bool.Bool{0}{0} Agda.Builtin.List.List{0}{0}
+    body: Agda.Builtin.List.List{0}{1} Agda.Builtin.Bool.Bool{0}{1}
+            (Agda.Builtin.List.List{0}{1} Agda.Builtin.Bool.Bool{0}{0}
+               Agda.Builtin.List.List{0}{0})
 main program: [Imports.test2]</code></pre>

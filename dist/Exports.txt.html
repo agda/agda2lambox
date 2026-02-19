@@ -17,7 +17,7 @@ Exports.one:
 Exports.two:
   constant declaration:
     body: Agda.Builtin.Nat.Nat{0}{1}
-            Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}
+            (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0})
 
 Exports.three:
   constant declaration:
@@ -41,8 +41,9 @@ Exports.Exports:
 
 Exports.main:
   constant declaration:
-    body: Exports.Exports{0}{0}
-            (Exports.one) (Exports.two) (Exports.three) (Exports.four)
+    body: Exports.Exports{0}{0} (Exports.one) (Exports.two)
+            (Exports.three)
+            (Exports.four)
 
 Exports.Exports.efour:
   constant declaration:

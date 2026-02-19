@@ -1,7 +1,7 @@
-<pre class="coq"><code>From Coq             Require Import List.
-From MetaCoq.Common  Require Import BasicAst Kernames Universes.
-From MetaCoq.Utils   Require Import bytestring.
-From MetaCoq.Erasure Require Import EAst.
+<pre class="coq"><code>From Stdlib           Require Import List.
+From MetaRocq.Common  Require Import BasicAst Kernames Universes.
+From MetaRocq.Utils   Require Import bytestring.
+From MetaRocq.Erasure Require Import EAst.
 From Agda2Lambox     Require Import CheckWF Eval.
 Import ListNotations.
 
@@ -32,12 +32,14 @@ Definition env : global_declarations :=
     ConstantDecl
       {| cst_body :=
            Some
-             (tConstruct
-                {| inductive_mind := (MPfile [&quot;Input&quot;%bs], &quot;Export&quot;%bs);
-                   inductive_ind := 0 |}
-                0
-                [tConst (MPfile [&quot;Input&quot;%bs], &quot;and&quot;%bs);
-                 tConst (MPfile [&quot;Input&quot;%bs], &quot;not&quot;%bs)]) |});
+             (tApp
+                (tApp
+                   (tConstruct
+                      {| inductive_mind := (MPfile [&quot;Input&quot;%bs], &quot;Export&quot;%bs);
+                         inductive_ind := 0 |}
+                      0 [])
+                   (tConst (MPfile [&quot;Input&quot;%bs], &quot;and&quot;%bs)))
+                (tConst (MPfile [&quot;Input&quot;%bs], &quot;not&quot;%bs))) |});
    ((MPfile [&quot;Input&quot;%bs], &quot;Export&quot;%bs),
     InductiveDecl
       {| ind_finite := Finite; ind_npars := 0;

@@ -31,7 +31,7 @@ Simplification.increment:
     type: (Agda.Builtin.Nat.Nat{0}) → Agda.Builtin.Nat.Nat{0}
     body: λ _ →
             Agda.Builtin.Nat.Ֆ_Ֆplus_ @0
-              Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}
+              (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0})
 
 Simplification.test:
   constant declaration:
@@ -39,66 +39,86 @@ Simplification.test:
     type: Agda.Builtin.Nat.Nat{0}
     body: Simplification.increment
             (Simplification.increment
-               Agda.Builtin.Nat.Nat{0}{1}
-                 Agda.Builtin.Nat.Nat{0}{1}
-                   Agda.Builtin.Nat.Nat{0}{1}
-                     Agda.Builtin.Nat.Nat{0}{1}
-                       Agda.Builtin.Nat.Nat{0}{1}
-                         Agda.Builtin.Nat.Nat{0}{1}
-                           Agda.Builtin.Nat.Nat{0}{1}
-                             Agda.Builtin.Nat.Nat{0}{1}
-                               Agda.Builtin.Nat.Nat{0}{1}
-                                 Agda.Builtin.Nat.Nat{0}{1}
-                                   Agda.Builtin.Nat.Nat{0}{1}
-                                     Agda.Builtin.Nat.Nat{0}{1}
-                                       Agda.Builtin.Nat.Nat{0}{1}
-                                         Agda.Builtin.Nat.Nat{0}{1}
-                                           Agda.Builtin.Nat.Nat{0}{1}
-                                             Agda.Builtin.Nat.Nat{0}{1}
-                                               Agda.Builtin.Nat.Nat{0}{1}
-                                                 Agda.Builtin.Nat.Nat{0}{1}
-                                                   Agda.Builtin.Nat.Nat{0}{1}
-                                                     Agda.Builtin.Nat.Nat{0}{1}
-                                                       Agda.Builtin.Nat.Nat{0}{1}
-                                                         Agda.Builtin.Nat.Nat{0}{1}
-                                                           Agda.Builtin.Nat.Nat{0}{1}
-                                                             Agda.Builtin.Nat.Nat{0}{1}
-                                                               Agda.Builtin.Nat.Nat{0}{1}
-                                                                 Agda.Builtin.Nat.Nat{0}{1}
-                                                                   Agda.Builtin.Nat.Nat{0}{1}
-                                                                     Agda.Builtin.Nat.Nat{0}{1}
-                                                                       Agda.Builtin.Nat.Nat{0}{1}
-                                                                         Agda.Builtin.Nat.Nat{0}{1}
-                                                                           Agda.
-                                                                           Builtin.
-                                                                           Nat.Nat{0}{1}
-                                                                             Agda.
-                                                                             Builtin.
-                                                                             Nat.Nat{0}{1}
-                                                                               Agda.
+               (Agda.Builtin.Nat.Nat{0}{1}
+                  (Agda.Builtin.Nat.Nat{0}{1}
+                     (Agda.Builtin.Nat.Nat{0}{1}
+                        (Agda.Builtin.Nat.Nat{0}{1}
+                           (Agda.Builtin.Nat.Nat{0}{1}
+                              (Agda.Builtin.Nat.Nat{0}{1}
+                                 (Agda.Builtin.Nat.Nat{0}{1}
+                                    (Agda.Builtin.Nat.Nat{0}{1}
+                                       (Agda.Builtin.Nat.Nat{0}{1}
+                                          (Agda.Builtin.Nat.Nat{0}{1}
+                                             (Agda.Builtin.Nat.Nat{0}{1}
+                                                (Agda.Builtin.Nat.Nat{0}{1}
+                                                   (Agda.Builtin.Nat.Nat{0}{1}
+                                                      (Agda.Builtin.Nat.Nat{0}{1}
+                                                         (Agda.Builtin.Nat.Nat{0}{1}
+                                                            (Agda.Builtin.Nat.Nat{0}{1}
+                                                               (Agda.Builtin.Nat.Nat{0}{1}
+                                                                  (Agda.Builtin.Nat.Nat{0}{1}
+                                                                     (Agda.Builtin.Nat.Nat{0}{1}
+                                                                        (Agda.Builtin.Nat.Nat{0}{1}
+                                                                           (Agda.
+                                                                            Builtin.
+                                                                            Nat.Nat{0}{1}
+                                                                              (Agda.
                                                                                Builtin.
                                                                                Nat.Nat{0}{1}
-                                                                                 Agda.
-                                                                                 Builtin.
-                                                                                 Nat.Nat{0}{1}
-                                                                                   Agda.
-                                                                                   Builtin.
-                                                                                   Nat.Nat{0}{1}
-                                                                                     Agda.
+                                                                                 (Agda.
+                                                                                  Builtin.
+                                                                                  Nat.Nat{0}{1}
+                                                                                    (Agda.
                                                                                      Builtin.
                                                                                      Nat.Nat{0}{1}
-                                                                                       Agda.
-                                                                                       Builtin.
-                                                                                       Nat.Nat{0}{1}
-                                                                                         Agda.
-                                                                                         Builtin.
-                                                                                         Nat.Nat{0}{1}
-                                                                                           Agda.
+                                                                                       (Agda.
+                                                                                        Builtin.
+                                                                                        Nat.Nat{0}{1}
+                                                                                          (Agda.
                                                                                            Builtin.
                                                                                            Nat.Nat{0}{1}
-                                                                                             Agda.
-                                                                                             Builtin.
-                                                                                             Nat.Nat{0}{1}
-                                                                                               Agda.
-                                                                                               Builtin.
-                                                                                               Nat.Nat{0}{0})</code></pre>
+                                                                                             (Agda.
+                                                                                              Builtin.
+                                                                                              Nat.Nat{0}{1}
+                                                                                                (Agda.
+                                                                                                 Builtin.
+                                                                                                 Nat.Nat{0}{1}
+                                                                                                   (Agda.
+                                                                                                    Builtin.
+                                                                                                    Nat.Nat{0}{1}
+                                                                                                      (Agda.
+                                                                                                       Builtin.
+                                                                                                       Nat.Nat{0}{1}
+                                                                                                         (Agda.
+                                                                                                          Builtin.
+                                                                                                          Nat.Nat{0}{1}
+                                                                                                            (Agda.
+                                                                                                             Builtin.
+                                                                                                             Nat.Nat{0}{1}
+                                                                                                               (Agda.
+                                                                                                                Builtin.
+                                                                                                                Nat.Nat{0}{1}
+                                                                                                                  (Agda.
+                                                                                                                   Builtin.
+                                                                                                                   Nat.Nat{0}{1}
+                                                                                                                     (Agda.
+                                                                                                                      Builtin.
+                                                                                                                      Nat.Nat{0}{1}
+                                                                                                                        (Agda.
+                                                                                                                         Builtin.
+                                                                                                                         Nat.Nat{0}{1}
+                                                                                                                           (Agda.
+                                                                                                                            Builtin.
+                                                                                                                            Nat.Nat{0}{1}
+                                                                                                                              (Agda.
+                                                                                                                               Builtin.
+                                                                                                                               Nat.Nat{0}{1}
+                                                                                                                                 (Agda.
+                                                                                                                                  Builtin.
+                                                                                                                                  Nat.Nat{0}{1}
+                                                                                                                                    (Agda.
+                                                                                                                                     Builtin.
+                                                                                                                                     Nat.Nat{0}{1}
+                                                                                                                                       Agda.
+                                                                                                                                       Builtin.
+                                                                                                                                       Nat.Nat{0}{0})))))))))))))))))))))))))))))))))))))))))</code></pre>

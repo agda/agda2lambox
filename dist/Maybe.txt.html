@@ -45,12 +45,12 @@ Maybe.m1:
     type variables: []
     type: Maybe.Maybe{0} □ (Agda.Builtin.Nat.Nat{0})
     body: Maybe.Maybe{0}{1}
-            Agda.Builtin.Nat.Nat{0}{1}
-              Agda.Builtin.Nat.Nat{0}{1}
-                Agda.Builtin.Nat.Nat{0}{1}
-                  Agda.Builtin.Nat.Nat{0}{1}
-                    Agda.Builtin.Nat.Nat{0}{1}
-                      Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}
+            (Agda.Builtin.Nat.Nat{0}{1}
+               (Agda.Builtin.Nat.Nat{0}{1}
+                  (Agda.Builtin.Nat.Nat{0}{1}
+                     (Agda.Builtin.Nat.Nat{0}{1}
+                        (Agda.Builtin.Nat.Nat{0}{1}
+                           (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}))))))
 
 Maybe.fromMaybeNat:
   constant declaration:
@@ -62,11 +62,11 @@ Maybe.fromMaybeNat:
             case&lt;Maybe.Maybe{0},0&gt; @0 of
               λ&lt;[]&gt;
                 Agda.Builtin.Nat.Nat{0}{1}
-                  Agda.Builtin.Nat.Nat{0}{1}
-                    Agda.Builtin.Nat.Nat{0}{1}
-                      Agda.Builtin.Nat.Nat{0}{1}
-                        Agda.Builtin.Nat.Nat{0}{1}
-                          Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}
+                  (Agda.Builtin.Nat.Nat{0}{1}
+                     (Agda.Builtin.Nat.Nat{0}{1}
+                        (Agda.Builtin.Nat.Nat{0}{1}
+                           (Agda.Builtin.Nat.Nat{0}{1}
+                              (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0})))))
               λ&lt;[_]&gt; @0
 
 Maybe.fromMaybe:
@@ -98,23 +98,24 @@ Maybe.test:
                         (Agda.Builtin.Nat.Ֆ_Ֆplus_
                            (Maybe.toNat
                               (λ _ _ _ → @0 □ □
-                                 Maybe.Maybe{0}{1}
-                                   Agda.Builtin.Nat.Nat{0}{1}
-                                     Agda.Builtin.Nat.Nat{0}{1}
-                                       Agda.Builtin.Nat.Nat{0}{1}
-                                         Agda.Builtin.Nat.Nat{0}{1}
-                                           Agda.Builtin.Nat.Nat{0}{1}
-                                             Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}))
+                                 (Maybe.Maybe{0}{1}
+                                    (Agda.Builtin.Nat.Nat{0}{1}
+                                       (Agda.Builtin.Nat.Nat{0}{1}
+                                          (Agda.Builtin.Nat.Nat{0}{1}
+                                             (Agda.Builtin.Nat.Nat{0}{1}
+                                                (Agda.Builtin.Nat.Nat{0}{1}
+                                                   (Agda.Builtin.Nat.Nat{0}{1}
+                                                      Agda.Builtin.Nat.Nat{0}{0})))))))))
                            (Maybe.toNat (λ _ _ _ → @0 □ □ (Maybe.m1))))
                         (Maybe.fromMaybeNat Maybe.Maybe{0}{0}))
                      (Maybe.fromMaybeNat (Maybe.m0)))
                   (Maybe.fromMaybeNat (Maybe.m1)))
                (Maybe.fromMaybe □ □
-                  Agda.Builtin.Nat.Nat{0}{1}
-                    Agda.Builtin.Nat.Nat{0}{1}
-                      Agda.Builtin.Nat.Nat{0}{1}
-                        Agda.Builtin.Nat.Nat{0}{1}
-                          Agda.Builtin.Nat.Nat{0}{1}
-                            Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}
+                  (Agda.Builtin.Nat.Nat{0}{1}
+                     (Agda.Builtin.Nat.Nat{0}{1}
+                        (Agda.Builtin.Nat.Nat{0}{1}
+                           (Agda.Builtin.Nat.Nat{0}{1}
+                              (Agda.Builtin.Nat.Nat{0}{1}
+                                 (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}))))))
                   (Maybe.m0)))
             (Maybe.fromMaybe □ □ Agda.Builtin.Nat.Nat{0}{0} (Maybe.m1))</code></pre>

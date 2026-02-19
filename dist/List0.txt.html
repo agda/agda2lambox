@@ -71,13 +71,13 @@ List0.headNum:
             case&lt;List0.List{0},0&gt; @0 of
               λ&lt;[]&gt;
                 Agda.Builtin.Nat.Nat{0}{1}
-                  Agda.Builtin.Nat.Nat{0}{1}
-                    Agda.Builtin.Nat.Nat{0}{1}
-                      Agda.Builtin.Nat.Nat{0}{1}
-                        Agda.Builtin.Nat.Nat{0}{1}
-                          Agda.Builtin.Nat.Nat{0}{1}
-                            Agda.Builtin.Nat.Nat{0}{1}
-                              Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}
+                  (Agda.Builtin.Nat.Nat{0}{1}
+                     (Agda.Builtin.Nat.Nat{0}{1}
+                        (Agda.Builtin.Nat.Nat{0}{1}
+                           (Agda.Builtin.Nat.Nat{0}{1}
+                              (Agda.Builtin.Nat.Nat{0}{1}
+                                 (Agda.Builtin.Nat.Nat{0}{1}
+                                    (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0})))))))
               λ&lt;[_, _]&gt; @1
 
 List0.single:
@@ -116,24 +116,24 @@ List0.testFlatten:
     type: Agda.Builtin.Nat.Nat{0}
     body: List0.sum
             (List0.flatten □
-               List0.List{0}{1}
-                 List0.List{0}{1}
-                   Agda.Builtin.Nat.Nat{0}{1}
-                     Agda.Builtin.Nat.Nat{0}{1}
-                       Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}
-                   List0.List{0}{0}
-                 List0.List{0}{1}
-                   List0.List{0}{1}
-                     Agda.Builtin.Nat.Nat{0}{1}
-                       Agda.Builtin.Nat.Nat{0}{1}
-                         Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}
-                     List0.List{0}{0}
-                   List0.List{0}{1}
-                     List0.List{0}{1}
-                       Agda.Builtin.Nat.Nat{0}{1}
-                         Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}
-                       List0.List{0}{0}
+               (List0.List{0}{1}
+                  (List0.List{0}{1}
+                     (Agda.Builtin.Nat.Nat{0}{1}
+                        (Agda.Builtin.Nat.Nat{0}{1}
+                           (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0})))
                      List0.List{0}{0})
+                  (List0.List{0}{1}
+                     (List0.List{0}{1}
+                        (Agda.Builtin.Nat.Nat{0}{1}
+                           (Agda.Builtin.Nat.Nat{0}{1}
+                              (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0})))
+                        List0.List{0}{0})
+                     (List0.List{0}{1}
+                        (List0.List{0}{1}
+                           (Agda.Builtin.Nat.Nat{0}{1}
+                              (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}))
+                           List0.List{0}{0})
+                        List0.List{0}{0}))))
 
 List0.head:
   constant declaration:
@@ -152,27 +152,27 @@ List0.testHead:
     type variables: []
     type: List0.List{0} □ (Agda.Builtin.Nat.Nat{0})
     body: List0.head □
-            List0.List{0}{1}
-              List0.List{0}{1}
-                Agda.Builtin.Nat.Nat{0}{1}
-                  Agda.Builtin.Nat.Nat{0}{1}
-                    Agda.Builtin.Nat.Nat{0}{1}
-                      Agda.Builtin.Nat.Nat{0}{1}
-                        Agda.Builtin.Nat.Nat{0}{1}
-                          Agda.Builtin.Nat.Nat{0}{1}
-                            Agda.Builtin.Nat.Nat{0}{1}
-                              Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}
-                List0.List{0}{1}
-                  Agda.Builtin.Nat.Nat{0}{0}
-                  List0.List{0}{1}
-                    Agda.Builtin.Nat.Nat{0}{1}
-                      Agda.Builtin.Nat.Nat{0}{1}
-                        Agda.Builtin.Nat.Nat{0}{1}
-                          Agda.Builtin.Nat.Nat{0}{1}
-                            Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}
-                    List0.List{0}{0}
-              List0.List{0}{1}
-                List0.List{0}{0} List0.List{0}{1} List0.List{0}{0} List0.List{0}{0}
+            (List0.List{0}{1}
+               (List0.List{0}{1}
+                  (Agda.Builtin.Nat.Nat{0}{1}
+                     (Agda.Builtin.Nat.Nat{0}{1}
+                        (Agda.Builtin.Nat.Nat{0}{1}
+                           (Agda.Builtin.Nat.Nat{0}{1}
+                              (Agda.Builtin.Nat.Nat{0}{1}
+                                 (Agda.Builtin.Nat.Nat{0}{1}
+                                    (Agda.Builtin.Nat.Nat{0}{1}
+                                       (Agda.Builtin.Nat.Nat{0}{1}
+                                          Agda.Builtin.Nat.Nat{0}{0}))))))))
+                  (List0.List{0}{1} Agda.Builtin.Nat.Nat{0}{0}
+                     (List0.List{0}{1}
+                        (Agda.Builtin.Nat.Nat{0}{1}
+                           (Agda.Builtin.Nat.Nat{0}{1}
+                              (Agda.Builtin.Nat.Nat{0}{1}
+                                 (Agda.Builtin.Nat.Nat{0}{1}
+                                    (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0})))))
+                        List0.List{0}{0})))
+               (List0.List{0}{1} List0.List{0}{0}
+                  (List0.List{0}{1} List0.List{0}{0} List0.List{0}{0})))
 
 List0.test:
   constant declaration:
@@ -183,31 +183,32 @@ List0.test:
                (Agda.Builtin.Nat.Ֆ_Ֆplus_
                   (Agda.Builtin.Nat.Ֆ_Ֆplus_
                      (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                        Agda.Builtin.Nat.Nat{0}{1}
-                          Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}
+                        (Agda.Builtin.Nat.Nat{0}{1}
+                           (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}))
                         (List0.headNum (List0.empty)))
                      (List0.sum
                         (List0.single
-                           Agda.Builtin.Nat.Nat{0}{1}
-                             Agda.Builtin.Nat.Nat{0}{1}
-                               Agda.Builtin.Nat.Nat{0}{1}
-                                 Agda.Builtin.Nat.Nat{0}{1}
-                                   Agda.Builtin.Nat.Nat{0}{1}
-                                     Agda.Builtin.Nat.Nat{0}{1}
-                                       Agda.Builtin.Nat.Nat{0}{1}
-                                         Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0})))
+                           (Agda.Builtin.Nat.Nat{0}{1}
+                              (Agda.Builtin.Nat.Nat{0}{1}
+                                 (Agda.Builtin.Nat.Nat{0}{1}
+                                    (Agda.Builtin.Nat.Nat{0}{1}
+                                       (Agda.Builtin.Nat.Nat{0}{1}
+                                          (Agda.Builtin.Nat.Nat{0}{1}
+                                             (Agda.Builtin.Nat.Nat{0}{1}
+                                                (Agda.Builtin.Nat.Nat{0}{1}
+                                                   Agda.Builtin.Nat.Nat{0}{0})))))))))))
                   (List0.sum
                      (List0.map □ □ (λ _ → Agda.Builtin.Nat.Nat{0}{1} @0)
                         (List0.cat □
-                           List0.List{0}{1}
-                             Agda.Builtin.Nat.Nat{0}{1}
-                               Agda.Builtin.Nat.Nat{0}{1}
-                                 Agda.Builtin.Nat.Nat{0}{1}
-                                   Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}
-                             List0.List{0}{0}
-                           List0.List{0}{1}
-                             Agda.Builtin.Nat.Nat{0}{1}
-                               Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}
-                             List0.List{0}{0}))))
+                           (List0.List{0}{1}
+                              (Agda.Builtin.Nat.Nat{0}{1}
+                                 (Agda.Builtin.Nat.Nat{0}{1}
+                                    (Agda.Builtin.Nat.Nat{0}{1}
+                                       (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}))))
+                              List0.List{0}{0})
+                           (List0.List{0}{1}
+                              (Agda.Builtin.Nat.Nat{0}{1}
+                                 (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}))
+                              List0.List{0}{0})))))
                (List0.testFlatten))
             (List0.sum (List0.testHead))</code></pre>

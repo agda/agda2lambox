@@ -36,10 +36,9 @@ With.filter:
 
 With.xs:
   constant declaration:
-    body: With.List{0}{1}
-            With.Bool{0}{0}
-            With.List{0}{1}
-              With.Bool{0}{1} With.List{0}{1} With.Bool{0}{0} With.List{0}{0}
+    body: With.List{0}{1} With.Bool{0}{0}
+            (With.List{0}{1} With.Bool{0}{1}
+               (With.List{0}{1} With.Bool{0}{0} With.List{0}{0}))
 
 With.ys:
   constant declaration: body: With.filter □ (λ _ → @0) (With.xs)

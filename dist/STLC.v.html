@@ -1,7 +1,7 @@
-<pre class="coq"><code>From Coq             Require Import List.
-From MetaCoq.Common  Require Import BasicAst Kernames Universes.
-From MetaCoq.Utils   Require Import bytestring.
-From MetaCoq.Erasure Require Import EAst.
+<pre class="coq"><code>From Stdlib           Require Import List.
+From MetaRocq.Common  Require Import BasicAst Kernames Universes.
+From MetaRocq.Utils   Require Import bytestring.
+From MetaRocq.Erasure Require Import EAst.
 From Agda2Lambox     Require Import CheckWF Eval.
 Import ListNotations.
 
@@ -48,64 +48,87 @@ Definition env : global_declarations :=
                       {| inductive_mind := (MPfile [&quot;STLC&quot;%bs], &quot;Env&quot;%bs);
                          inductive_ind := 0 |}
                       0 []))
-                (tConstruct
-                   {| inductive_mind :=
-                        (MPfile [&quot;STLC&quot;%bs], &quot;\1366_\1366\&amp;22a2\1366_&quot;%bs);
-                      inductive_ind := 0 |}
-                   2
-                   [tBox; tBox;
-                    tConstruct
-                      {| inductive_mind :=
-                           (MPfile [&quot;STLC&quot;%bs], &quot;\1366_\1366\&amp;22a2\1366_&quot;%bs);
-                         inductive_ind := 0 |}
-                      1
-                      [tBox; tBox;
-                       tConstruct
+                (tApp
+                   (tApp
+                      (tApp
+                         (tApp
+                            (tConstruct
+                               {| inductive_mind :=
+                                    (MPfile [&quot;STLC&quot;%bs], &quot;\1366_\1366\&amp;22a2\1366_&quot;%bs);
+                                  inductive_ind := 0 |}
+                               2 [])
+                            tBox)
+                         tBox)
+                      (tApp
+                         (tApp
+                            (tApp
+                               (tConstruct
+                                  {| inductive_mind :=
+                                       (MPfile [&quot;STLC&quot;%bs], &quot;\1366_\1366\&amp;22a2\1366_&quot;%bs);
+                                     inductive_ind := 0 |}
+                                  1 [])
+                               tBox)
+                            tBox)
+                         (tApp
+                            (tApp
+                               (tConstruct
+                                  {| inductive_mind :=
+                                       (MPfile [&quot;STLC&quot;%bs], &quot;\1366_\1366\&amp;22a2\1366_&quot;%bs);
+                                     inductive_ind := 0 |}
+                                  4 [])
+                               (tApp
+                                  (tConstruct
+                                     {| inductive_mind :=
+                                          (MPfile [&quot;STLC&quot;%bs], &quot;\1366_\1366\&amp;22a2\1366_&quot;%bs);
+                                        inductive_ind := 0 |}
+                                     3 [])
+                                  (tApp
+                                     (tConstruct
+                                        {| inductive_mind :=
+                                             (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                           inductive_ind := 0 |}
+                                        1 [])
+                                     (tConstruct
+                                        {| inductive_mind :=
+                                             (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                           inductive_ind := 0 |}
+                                        0 []))))
+                            (tApp
+                               (tApp
+                                  (tConstruct
+                                     {| inductive_mind :=
+                                          (MPfile [&quot;STLC&quot;%bs], &quot;\1366_\1366\&amp;22a2\1366_&quot;%bs);
+                                        inductive_ind := 0 |}
+                                     0 [])
+                                  tBox)
+                               (tApp
+                                  (tApp
+                                     (tApp
+                                        (tConstruct
+                                           {| inductive_mind :=
+                                                (MPfile [&quot;STLC&quot;%bs], &quot;\1366_\1366\&amp;220b\1366_&quot;%bs);
+                                              inductive_ind := 0 |}
+                                           0 [])
+                                        tBox)
+                                     tBox)
+                                  tBox)))))
+                   (tApp
+                      (tConstruct
                          {| inductive_mind :=
                               (MPfile [&quot;STLC&quot;%bs], &quot;\1366_\1366\&amp;22a2\1366_&quot;%bs);
                             inductive_ind := 0 |}
-                         4
-                         [tConstruct
-                            {| inductive_mind :=
-                                 (MPfile [&quot;STLC&quot;%bs], &quot;\1366_\1366\&amp;22a2\1366_&quot;%bs);
-                               inductive_ind := 0 |}
-                            3
-                            [tConstruct
-                               {| inductive_mind :=
-                                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                                  inductive_ind := 0 |}
-                               1
-                               [tConstruct
-                                  {| inductive_mind :=
-                                       (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                                     inductive_ind := 0 |}
-                                  0 []]];
-                          tConstruct
-                            {| inductive_mind :=
-                                 (MPfile [&quot;STLC&quot;%bs], &quot;\1366_\1366\&amp;22a2\1366_&quot;%bs);
-                               inductive_ind := 0 |}
-                            0
-                            [tBox;
-                             tConstruct
-                               {| inductive_mind :=
-                                    (MPfile [&quot;STLC&quot;%bs], &quot;\1366_\1366\&amp;220b\1366_&quot;%bs);
-                                  inductive_ind := 0 |}
-                               0 [tBox; tBox; tBox]]]];
-                    tConstruct
-                      {| inductive_mind :=
-                           (MPfile [&quot;STLC&quot;%bs], &quot;\1366_\1366\&amp;22a2\1366_&quot;%bs);
-                         inductive_ind := 0 |}
-                      3
-                      [tConstruct
-                         {| inductive_mind :=
-                              (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                            inductive_ind := 0 |}
-                         1
-                         [tConstruct
+                         3 [])
+                      (tApp
+                         (tConstruct
                             {| inductive_mind :=
                                  (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
                                inductive_ind := 0 |}
-                            0 []]]])) |});
+                            1 [])
+                         (tConstruct
+                            {| inductive_mind :=
+                                 (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                               inductive_ind := 0 |}
+                            0 []))))) |});
    ((MPfile [&quot;STLC&quot;%bs], &quot;eval&quot;%bs),
     ConstantDecl
       {| cst_body :=
@@ -147,11 +170,22 @@ Definition env : global_declarations :=
                                            (tApp
                                               (tApp
                                                  (tApp (tApp (tApp (tRel 9) tBox) tBox) tBox)
-                                                 (tConstruct
-                                                    {| inductive_mind :=
-                                                         (MPfile [&quot;STLC&quot;%bs], &quot;Env&quot;%bs);
-                                                       inductive_ind := 0 |}
-                                                    1 [tBox; tBox; tBox; tRel 5; tRel 0]))
+                                                 (tApp
+                                                    (tApp
+                                                       (tApp
+                                                          (tApp
+                                                             (tApp
+                                                                (tConstruct
+                                                                   {| inductive_mind :=
+                                                                        (MPfile [&quot;STLC&quot;%bs],
+                                                                         &quot;Env&quot;%bs);
+                                                                      inductive_ind := 0 |}
+                                                                   1 [])
+                                                                tBox)
+                                                             tBox)
+                                                          tBox)
+                                                       (tRel 5))
+                                                    (tRel 0)))
                                               (tRel 1)));
                                         ([nAnon; nAnon; nAnon; nAnon],
                                          tApp
@@ -248,11 +282,13 @@ Definition env : global_declarations :=
                               (tRel 1)
                               [([], tRel 0);
                                ([nAnon],
-                                tConstruct
-                                  {| inductive_mind :=
-                                       (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                                     inductive_ind := 0 |}
-                                  1 [tApp (tApp (tRel 3) (tRel 0)) (tRel 1)])]));
+                                tApp
+                                  (tConstruct
+                                     {| inductive_mind :=
+                                          (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                        inductive_ind := 0 |}
+                                     1 [])
+                                  (tApp (tApp (tRel 3) (tRel 0)) (tRel 1)))]));
                     rarg := 0 |}]
                 0) |});
    ((MPfile [&quot;STLC&quot;%bs], &quot;Env&quot;%bs),

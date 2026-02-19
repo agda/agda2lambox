@@ -59,7 +59,7 @@ STLC.eval:
             0: λ _ _ _ _ _ →
                  case&lt;STLC.Ֆ_Ֆ22a2Ֆ_{0},0&gt; @0 of
                    λ&lt;[_, _]&gt; STLC.lookupEnv □ □ □ @3 @0
-                   λ&lt;[_, _, _]&gt; λ _ → @9 □ □ □ STLC.Env{0}{1} □ □ □ @5 @0 @1
+                   λ&lt;[_, _, _]&gt; λ _ → @9 □ □ □ (STLC.Env{0}{1} □ □ □ @5 @0) @1
                    λ&lt;[_, _, _, _]&gt; @9 □ □ □ @5 @1 (@9 □ □ □ @5 @0)
                    λ&lt;[_]&gt; @0
                    λ&lt;[_, _]&gt;
@@ -68,18 +68,14 @@ STLC.eval:
 STLC.test:
   constant declaration:
     body: STLC.eval □ □ □ STLC.Env{0}{0}
-            STLC.Ֆ_Ֆ22a2Ֆ_{0}{2}
-              □
-              □
-              STLC.Ֆ_Ֆ22a2Ֆ_{0}{1}
-                □
-                □
-                STLC.Ֆ_Ֆ22a2Ֆ_{0}{4}
-                  STLC.Ֆ_Ֆ22a2Ֆ_{0}{3}
-                    Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}
-                  STLC.Ֆ_Ֆ22a2Ֆ_{0}{0} □ STLC.Ֆ_Ֆ220bՖ_{0}{0} □ □ □
-              STLC.Ֆ_Ֆ22a2Ֆ_{0}{3}
-                Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}
+            (STLC.Ֆ_Ֆ22a2Ֆ_{0}{2} □ □
+               (STLC.Ֆ_Ֆ22a2Ֆ_{0}{1} □ □
+                  (STLC.Ֆ_Ֆ22a2Ֆ_{0}{4}
+                     (STLC.Ֆ_Ֆ22a2Ֆ_{0}{3}
+                        (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}))
+                     (STLC.Ֆ_Ֆ22a2Ֆ_{0}{0} □ (STLC.Ֆ_Ֆ220bՖ_{0}{0} □ □ □))))
+               (STLC.Ֆ_Ֆ22a2Ֆ_{0}{3}
+                  (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0})))
 
 STLC.Γ: constant declaration: body: □
 

@@ -1,7 +1,7 @@
-<pre class="coq"><code>From Coq             Require Import List.
-From MetaCoq.Common  Require Import BasicAst Kernames Universes.
-From MetaCoq.Utils   Require Import bytestring.
-From MetaCoq.Erasure Require Import EAst.
+<pre class="coq"><code>From Stdlib           Require Import List.
+From MetaRocq.Common  Require Import BasicAst Kernames Universes.
+From MetaRocq.Utils   Require Import bytestring.
+From MetaRocq.Erasure Require Import EAst.
 From Agda2Lambox     Require Import CheckWF Eval.
 Import ListNotations.
 
@@ -12,11 +12,13 @@ Definition env : global_declarations :=
            Some
              (tLambda
                 nAnon
-                (tConstruct
-                   {| inductive_mind :=
-                        (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                      inductive_ind := 0 |}
-                   1 [tRel 0])) |});
+                (tApp
+                   (tConstruct
+                      {| inductive_mind :=
+                           (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                         inductive_ind := 0 |}
+                      1 [])
+                   (tRel 0))) |});
    ((MPfile [&quot;EtaCon&quot;%bs], &quot;example&quot;%bs),
     ConstantDecl
       {| cst_body :=
@@ -24,16 +26,17 @@ Definition env : global_declarations :=
              (tApp
                 (tApp
                    (tApp (tConst (MPfile [&quot;EtaCon&quot;%bs], &quot;cons&quot;%bs)) tBox)
-                   (tConstruct
-                      {| inductive_mind :=
-                           (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                         inductive_ind := 0 |}
-                      1
-                      [tConstruct
+                   (tApp
+                      (tConstruct
                          {| inductive_mind :=
                               (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
                             inductive_ind := 0 |}
-                         0 []]))
+                         1 [])
+                      (tConstruct
+                         {| inductive_mind :=
+                              (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                            inductive_ind := 0 |}
+                         0 [])))
                 (tConstruct
                    {| inductive_mind :=
                         (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
@@ -49,11 +52,15 @@ Definition env : global_declarations :=
                    nAnon
                    (tLambda
                       nAnon
-                      (tConstruct
-                         {| inductive_mind :=
-                              (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
-                            inductive_ind := 0 |}
-                         1 [tRel 1; tRel 0])))) |});
+                      (tApp
+                         (tApp
+                            (tConstruct
+                               {| inductive_mind :=
+                                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
+                                  inductive_ind := 0 |}
+                               1 [])
+                            (tRel 1))
+                         (tRel 0))))) |});
    ((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs),
     InductiveDecl
       {| ind_finite := Finite; ind_npars := 0;

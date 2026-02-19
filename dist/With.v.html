@@ -1,7 +1,7 @@
-<pre class="coq"><code>From Coq             Require Import List.
-From MetaCoq.Common  Require Import BasicAst Kernames Universes.
-From MetaCoq.Utils   Require Import bytestring.
-From MetaCoq.Erasure Require Import EAst.
+<pre class="coq"><code>From Stdlib           Require Import List.
+From MetaRocq.Common  Require Import BasicAst Kernames Universes.
+From MetaRocq.Utils   Require Import bytestring.
+From MetaRocq.Erasure Require Import EAst.
 From Agda2Lambox     Require Import CheckWF Eval.
 Import ListNotations.
 
@@ -19,34 +19,40 @@ Definition env : global_declarations :=
     ConstantDecl
       {| cst_body :=
            Some
-             (tConstruct
-                {| inductive_mind := (MPfile [&quot;With&quot;%bs], &quot;List&quot;%bs);
-                   inductive_ind := 0 |}
-                1
-                [tConstruct
-                   {| inductive_mind := (MPfile [&quot;With&quot;%bs], &quot;Bool&quot;%bs);
-                      inductive_ind := 0 |}
-                   0 [];
-                 tConstruct
-                   {| inductive_mind := (MPfile [&quot;With&quot;%bs], &quot;List&quot;%bs);
-                      inductive_ind := 0 |}
-                   1
-                   [tConstruct
-                      {| inductive_mind := (MPfile [&quot;With&quot;%bs], &quot;Bool&quot;%bs);
-                         inductive_ind := 0 |}
-                      1 [];
-                    tConstruct
+             (tApp
+                (tApp
+                   (tConstruct
                       {| inductive_mind := (MPfile [&quot;With&quot;%bs], &quot;List&quot;%bs);
                          inductive_ind := 0 |}
-                      1
-                      [tConstruct
-                         {| inductive_mind := (MPfile [&quot;With&quot;%bs], &quot;Bool&quot;%bs);
-                            inductive_ind := 0 |}
-                         0 [];
-                       tConstruct
+                      1 [])
+                   (tConstruct
+                      {| inductive_mind := (MPfile [&quot;With&quot;%bs], &quot;Bool&quot;%bs);
+                         inductive_ind := 0 |}
+                      0 []))
+                (tApp
+                   (tApp
+                      (tConstruct
                          {| inductive_mind := (MPfile [&quot;With&quot;%bs], &quot;List&quot;%bs);
                             inductive_ind := 0 |}
-                         0 []]]]) |});
+                         1 [])
+                      (tConstruct
+                         {| inductive_mind := (MPfile [&quot;With&quot;%bs], &quot;Bool&quot;%bs);
+                            inductive_ind := 0 |}
+                         1 []))
+                   (tApp
+                      (tApp
+                         (tConstruct
+                            {| inductive_mind := (MPfile [&quot;With&quot;%bs], &quot;List&quot;%bs);
+                               inductive_ind := 0 |}
+                            1 [])
+                         (tConstruct
+                            {| inductive_mind := (MPfile [&quot;With&quot;%bs], &quot;Bool&quot;%bs);
+                               inductive_ind := 0 |}
+                            0 []))
+                      (tConstruct
+                         {| inductive_mind := (MPfile [&quot;With&quot;%bs], &quot;List&quot;%bs);
+                            inductive_ind := 0 |}
+                         0 [])))) |});
    ((MPfile [&quot;With&quot;%bs], &quot;filter&quot;%bs),
     ConstantDecl
       {| cst_body :=
@@ -100,18 +106,22 @@ Definition env : global_declarations :=
                                                                           (tRel 3))
                                                                        (tRel 0));
                                                                     ([],
-                                                                     tConstruct
-                                                                       {| inductive_mind :=
-                                                                            (MPfile [&quot;With&quot;%bs],
-                                                                             &quot;List&quot;%bs);
-                                                                          inductive_ind := 0 |}
-                                                                       1
-                                                                       [tRel 2;
-                                                                        tApp
+                                                                     tApp
+                                                                       (tApp
+                                                                          (tConstruct
+                                                                             {| inductive_mind :=
+                                                                                  (MPfile
+                                                                                     [&quot;With&quot;%bs],
+                                                                                   &quot;List&quot;%bs);
+                                                                                inductive_ind :=
+                                                                                  0 |}
+                                                                             1 [])
+                                                                          (tRel 2))
+                                                                       (tApp
                                                                           (tApp
                                                                              (tApp (tRel 10) tBox)
                                                                              (tRel 3))
-                                                                          (tRel 0)])]))))))
+                                                                          (tRel 0)))]))))))
                                                  (tRel 4))
                                               (tRel 3))
                                            (tRel 1))

@@ -52,19 +52,19 @@ List.testSum:
     type variables: []
     type: Agda.Builtin.Nat.Nat{0}
     body: List.sum
-            Agda.Builtin.List.List{0}{1}
-              Agda.Builtin.Nat.Nat{0}{1}
-                Agda.Builtin.Nat.Nat{0}{1}
-                  Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}
-              Agda.Builtin.List.List{0}{1}
-                Agda.Builtin.Nat.Nat{0}{1}
-                  Agda.Builtin.Nat.Nat{0}{1}
-                    Agda.Builtin.Nat.Nat{0}{1}
-                      Agda.Builtin.Nat.Nat{0}{1}
-                        Agda.Builtin.Nat.Nat{0}{1}
-                          Agda.Builtin.Nat.Nat{0}{1}
-                            Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}
-                Agda.Builtin.List.List{0}{0}
+            (Agda.Builtin.List.List{0}{1}
+               (Agda.Builtin.Nat.Nat{0}{1}
+                  (Agda.Builtin.Nat.Nat{0}{1}
+                     (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0})))
+               (Agda.Builtin.List.List{0}{1}
+                  (Agda.Builtin.Nat.Nat{0}{1}
+                     (Agda.Builtin.Nat.Nat{0}{1}
+                        (Agda.Builtin.Nat.Nat{0}{1}
+                           (Agda.Builtin.Nat.Nat{0}{1}
+                              (Agda.Builtin.Nat.Nat{0}{1}
+                                 (Agda.Builtin.Nat.Nat{0}{1}
+                                    (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0})))))))
+                  Agda.Builtin.List.List{0}{0}))
 
 List.map:
   constant declaration:
@@ -104,52 +104,54 @@ List.test:
             (Agda.Builtin.Nat.Ֆ_Ֆplus_
                (Agda.Builtin.Nat.Ֆ_Ֆplus_
                   (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                     Agda.Builtin.Nat.Nat{0}{1}
-                       Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}
+                     (Agda.Builtin.Nat.Nat{0}{1}
+                        (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}))
                      (List.testSum))
                   (List.sum
-                     Agda.Builtin.List.List{0}{1}
-                       Agda.Builtin.Nat.Nat{0}{1}
-                         Agda.Builtin.Nat.Nat{0}{1}
-                           Agda.Builtin.Nat.Nat{0}{1}
-                             Agda.Builtin.Nat.Nat{0}{1}
-                               Agda.Builtin.Nat.Nat{0}{1}
-                                 Agda.Builtin.Nat.Nat{0}{1}
-                                   Agda.Builtin.Nat.Nat{0}{1}
-                                     Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}
-                       Agda.Builtin.List.List{0}{1}
-                         Agda.Builtin.Nat.Nat{0}{1}
-                           Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}
-                         Agda.Builtin.List.List{0}{0}))
+                     (Agda.Builtin.List.List{0}{1}
+                        (Agda.Builtin.Nat.Nat{0}{1}
+                           (Agda.Builtin.Nat.Nat{0}{1}
+                              (Agda.Builtin.Nat.Nat{0}{1}
+                                 (Agda.Builtin.Nat.Nat{0}{1}
+                                    (Agda.Builtin.Nat.Nat{0}{1}
+                                       (Agda.Builtin.Nat.Nat{0}{1}
+                                          (Agda.Builtin.Nat.Nat{0}{1}
+                                             (Agda.Builtin.Nat.Nat{0}{1}
+                                                Agda.Builtin.Nat.Nat{0}{0}))))))))
+                        (Agda.Builtin.List.List{0}{1}
+                           (Agda.Builtin.Nat.Nat{0}{1}
+                              (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}))
+                           Agda.Builtin.List.List{0}{0}))))
                (List.sum
                   (List.map □ □ (λ _ → Agda.Builtin.Nat.Nat{0}{1} @0)
-                     Agda.Builtin.List.List{0}{1}
-                       Agda.Builtin.Nat.Nat{0}{1}
-                         Agda.Builtin.Nat.Nat{0}{1}
-                           Agda.Builtin.Nat.Nat{0}{1}
-                             Agda.Builtin.Nat.Nat{0}{1}
-                               Agda.Builtin.Nat.Nat{0}{1}
-                                 Agda.Builtin.Nat.Nat{0}{1}
-                                   Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}
-                       Agda.Builtin.List.List{0}{1}
-                         Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}
-                         Agda.Builtin.List.List{0}{0})))
+                     (Agda.Builtin.List.List{0}{1}
+                        (Agda.Builtin.Nat.Nat{0}{1}
+                           (Agda.Builtin.Nat.Nat{0}{1}
+                              (Agda.Builtin.Nat.Nat{0}{1}
+                                 (Agda.Builtin.Nat.Nat{0}{1}
+                                    (Agda.Builtin.Nat.Nat{0}{1}
+                                       (Agda.Builtin.Nat.Nat{0}{1}
+                                          (Agda.Builtin.Nat.Nat{0}{1}
+                                             Agda.Builtin.Nat.Nat{0}{0})))))))
+                        (Agda.Builtin.List.List{0}{1}
+                           (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0})
+                           Agda.Builtin.List.List{0}{0})))))
             (List.sum
                (List.zipWith □ □ □ (Agda.Builtin.Nat.Ֆ_Ֆplus_)
-                  Agda.Builtin.List.List{0}{1}
-                    Agda.Builtin.Nat.Nat{0}{1}
-                      Agda.Builtin.Nat.Nat{0}{1}
-                        Agda.Builtin.Nat.Nat{0}{1}
-                          Agda.Builtin.Nat.Nat{0}{1}
-                            Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}
-                    Agda.Builtin.List.List{0}{0}
-                  Agda.Builtin.List.List{0}{1}
-                    Agda.Builtin.Nat.Nat{0}{1}
-                      Agda.Builtin.Nat.Nat{0}{1}
-                        Agda.Builtin.Nat.Nat{0}{1}
-                          Agda.Builtin.Nat.Nat{0}{1}
-                            Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}
-                    Agda.Builtin.List.List{0}{0}))
+                  (Agda.Builtin.List.List{0}{1}
+                     (Agda.Builtin.Nat.Nat{0}{1}
+                        (Agda.Builtin.Nat.Nat{0}{1}
+                           (Agda.Builtin.Nat.Nat{0}{1}
+                              (Agda.Builtin.Nat.Nat{0}{1}
+                                 (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0})))))
+                     Agda.Builtin.List.List{0}{0})
+                  (Agda.Builtin.List.List{0}{1}
+                     (Agda.Builtin.Nat.Nat{0}{1}
+                        (Agda.Builtin.Nat.Nat{0}{1}
+                           (Agda.Builtin.Nat.Nat{0}{1}
+                              (Agda.Builtin.Nat.Nat{0}{1}
+                                 (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0})))))
+                     Agda.Builtin.List.List{0}{0})))
 
 List.Ֆ_ՖplusՖplus_:
   constant declaration:

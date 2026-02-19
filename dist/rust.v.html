@@ -1,7 +1,7 @@
-<pre class="coq"><code>From Coq             Require Import List.
-From MetaCoq.Common  Require Import BasicAst Kernames Universes.
-From MetaCoq.Utils   Require Import bytestring.
-From MetaCoq.Erasure Require Import EAst.
+<pre class="coq"><code>From Stdlib           Require Import List.
+From MetaRocq.Common  Require Import BasicAst Kernames Universes.
+From MetaRocq.Utils   Require Import bytestring.
+From MetaRocq.Erasure Require Import EAst.
 From Agda2Lambox     Require Import CheckWF Eval.
 Import ListNotations.
 
@@ -17,39 +17,44 @@ Definition env : global_declarations :=
                       (tConst
                          (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
                           &quot;\1366_\1366plus_&quot;%bs))
+                      (tApp
+                         (tConstruct
+                            {| inductive_mind :=
+                                 (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                               inductive_ind := 0 |}
+                            1 [])
+                         (tConstruct
+                            {| inductive_mind :=
+                                 (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                               inductive_ind := 0 |}
+                            0 []))))
+                (tApp
+                   (tApp
                       (tConstruct
-                         {| inductive_mind :=
-                              (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                         {| inductive_mind := (MPfile [&quot;rust&quot;%bs], &quot;List&quot;%bs);
                             inductive_ind := 0 |}
-                         1
-                         [tConstruct
+                         1 [])
+                      (tApp
+                         (tConstruct
                             {| inductive_mind :=
                                  (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
                                inductive_ind := 0 |}
-                            0 []])))
-                (tConstruct
-                   {| inductive_mind := (MPfile [&quot;rust&quot;%bs], &quot;List&quot;%bs);
-                      inductive_ind := 0 |}
-                   1
-                   [tConstruct
-                      {| inductive_mind :=
-                           (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                         inductive_ind := 0 |}
-                      1
-                      [tConstruct
-                         {| inductive_mind :=
-                              (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                            inductive_ind := 0 |}
-                         1
-                         [tConstruct
-                            {| inductive_mind :=
-                                 (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                               inductive_ind := 0 |}
-                            0 []]];
-                    tConstruct
+                            1 [])
+                         (tApp
+                            (tConstruct
+                               {| inductive_mind :=
+                                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                  inductive_ind := 0 |}
+                               1 [])
+                            (tConstruct
+                               {| inductive_mind :=
+                                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                  inductive_ind := 0 |}
+                               0 []))))
+                   (tConstruct
                       {| inductive_mind := (MPfile [&quot;rust&quot;%bs], &quot;List&quot;%bs);
                          inductive_ind := 0 |}
-                      0 []])) |});
+                      0 []))) |});
    ((MPfile [&quot;rust&quot;%bs], &quot;map&quot;%bs),
     ConstantDecl
       {| cst_body :=
@@ -76,14 +81,16 @@ Definition env : global_declarations :=
                                            inductive_ind := 0 |}
                                         0 []);
                                      ([nAnon; nAnon],
-                                      tConstruct
-                                        {| inductive_mind := (MPfile [&quot;rust&quot;%bs], &quot;List&quot;%bs);
-                                           inductive_ind := 0 |}
-                                        1
-                                        [tApp (tRel 3) (tRel 1);
-                                         tApp
+                                      tApp
+                                        (tApp
+                                           (tConstruct
+                                              {| inductive_mind := (MPfile [&quot;rust&quot;%bs], &quot;List&quot;%bs);
+                                                 inductive_ind := 0 |}
+                                              1 [])
+                                           (tApp (tRel 3) (tRel 1)))
+                                        (tApp
                                            (tApp (tApp (tApp (tRel 6) tBox) tBox) (tRel 3))
-                                           (tRel 0)])]))));
+                                           (tRel 0)))]))));
                     rarg := 0 |}]
                 0) |});
    ((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
@@ -106,11 +113,13 @@ Definition env : global_declarations :=
                               (tRel 1)
                               [([], tRel 0);
                                ([nAnon],
-                                tConstruct
-                                  {| inductive_mind :=
-                                       (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                                     inductive_ind := 0 |}
-                                  1 [tApp (tApp (tRel 3) (tRel 0)) (tRel 1)])]));
+                                tApp
+                                  (tConstruct
+                                     {| inductive_mind :=
+                                          (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                        inductive_ind := 0 |}
+                                     1 [])
+                                  (tApp (tApp (tRel 3) (tRel 0)) (tRel 1)))]));
                     rarg := 0 |}]
                 0) |});
    ((MPfile [&quot;rust&quot;%bs], &quot;List&quot;%bs),

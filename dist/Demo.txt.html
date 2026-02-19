@@ -19,12 +19,10 @@ Demo.List:
 
 Demo.test:
   constant declaration:
-    body: Demo.List{0}{1}
-            Demo.Bool{0}{1}
-            Demo.List{0}{1}
-              Demo.Bool{0}{0}
-              Demo.List{0}{1}
-                Demo.Bool{0}{1} Demo.List{0}{1} Demo.Bool{0}{0} Demo.List{0}{0}
+    body: Demo.List{0}{1} Demo.Bool{0}{1}
+            (Demo.List{0}{1} Demo.Bool{0}{0}
+               (Demo.List{0}{1} Demo.Bool{0}{1}
+                  (Demo.List{0}{1} Demo.Bool{0}{0} Demo.List{0}{0})))
 
 Demo.or:
   constant declaration:
