@@ -15,10 +15,9 @@ record Export : Set where
     nt : Bool → Bool
 open Export public
 
-main : Export
-main = record
+test : Export
+test = record
   { ad = and
   ; nt = not
   }
-{-# COMPILE AGDA2LAMBOX main #-}
-
+{-# COMPILE AGDA2LAMBOX test #-}

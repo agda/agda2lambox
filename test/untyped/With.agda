@@ -16,6 +16,6 @@ filter f (x :: xs) with f x
 xs : List Bool
 xs = false :: true :: false :: []
 
-ys : List Bool
-ys = filter (λ b → b) xs
-{-# COMPILE AGDA2LAMBOX ys #-}
+test : List Bool
+test = filter (λ b → b) xs
+{-# COMPILE AGDA2LAMBOX test #-}

@@ -12,6 +12,6 @@ map : {A B : Set} -> (A → B) → List A → List B
 map f [] = []
 map f (x ∷ xs) = f x ∷ map f xs
 
-ys : List Nat
-ys = map double xs
-{-# COMPILE AGDA2LAMBOX ys #-}
+test : List Nat
+test = map double xs
+{-# COMPILE AGDA2LAMBOX test #-}
