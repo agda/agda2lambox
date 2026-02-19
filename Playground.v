@@ -1,10 +1,10 @@
-From MetaCoq.Template      Require Import Loader Ast.
-From MetaCoq.ErasurePlugin Require Import Erasure Loader.
-From MetaCoq.Utils         Require Import utils.
-From MetaCoq.Erasure.Typed Require Import ResultMonad.
-From MetaCoq.Erasure.Typed Require Import Optimize.
-From MetaCoq.Erasure.Typed Require Import Extraction.
-From Coq Require Import ZArith List String Nat.
+From MetaRocq.Template      Require Import Loader Ast.
+From MetaRocq.ErasurePlugin Require Import Erasure Loader.
+From MetaRocq.Utils         Require Import utils.
+From MetaRocq.Erasure.Typed Require Import ResultMonad.
+From MetaRocq.Erasure.Typed Require Import Optimize.
+From MetaRocq.Erasure.Typed Require Import Extraction.
+From Stdlib Require Import ZArith List String Nat.
 
 Import MCMonadNotation.
 Import ListNotations.
