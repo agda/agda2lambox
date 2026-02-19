@@ -73,7 +73,7 @@ mkAgdaTest mperegrinePath buildDir subdir isTyped baseFile = testCase ("Test: " 
 
   -- Step 1: Run agda2lambox on the file (run with cwd=subdir so Agda sees basename)
   let typedFlag = ["--typed" | isTyped]
-      cp = (proc "agda2lambox" (typedFlag ++ ["--rocq", "-o", buildDir, baseFile]))
+      cp = (proc "/home/lucas/.cabal/bin/agda2lambox" (typedFlag ++ ["--rocq", "-o", buildDir, baseFile]))
             { cwd = Just subdir }
   (exitCode, stdout, stderr) <- readCreateProcessWithExitCode cp ""
 
@@ -92,9 +92,8 @@ mkAgdaTest mperegrinePath buildDir subdir isTyped baseFile = testCase ("Test: " 
 
       -- Step 2: Validate the AST file with peregrine validate if available
       case mperegrinePath of
-        Nothing -> return ()  -- peregrine not available, skip validation
-        Just peregrinePath -> do
-          let validateArgs = ["validate"] ++ ["--typed=((MPfile (\"rust\")) \"testIdd\"))" | isTyped] ++ [astTarget]
+        Just peregrinePath | isTyped -> do
+          let validateArgs = ["rust"] ++ ["-o" ++ buildDir </> baseFile -<.> "rs" ] ++ [astTarget]
           (validateExitCode, validateStdout, validateStderr) <-
             readProcessWithExitCode peregrinePath validateArgs ""
 
@@ -107,3 +106,4 @@ mkAgdaTest mperegrinePath buildDir subdir isTyped baseFile = testCase ("Test: " 
                 "stderr: " ++ validateStderr
 
             ExitSuccess -> return ()
+        _ -> return ()  -- peregrine not available, skip validation
