@@ -2,4 +2,9 @@ module _ where
 
 K : {A B : Set} → A → B → A
 K = λ a b → a
-{-# COMPILE AGDA2LAMBOX K #-}
+
+open import Agda.Builtin.Nat
+
+test : Nat
+test = K 42 0
+{-# COMPILE AGDA2LAMBOX test #-}

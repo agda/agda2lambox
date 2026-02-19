@@ -24,11 +24,11 @@ record Exports : Set where
     efour  : Nat → Nat → Nat
 open Exports
 
-main : Exports
-main = record
+test : Exports
+test = record
   { eone   = one
   ; etwo   = two
   ; ethree = three
   ; efour  = four
   }
-{-# COMPILE AGDA2LAMBOX main #-}
+{-# COMPILE AGDA2LAMBOX test #-}

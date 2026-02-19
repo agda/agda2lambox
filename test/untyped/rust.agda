@@ -12,7 +12,9 @@ map f (x :: xs) = f x :: map f xs
 
 testIdd : List Nat
 testIdd = map (1 +_) (2 :: [])
-{-# COMPILE AGDA2LAMBOX testIdd #-}
+
+test = testIdd
+{-# COMPILE AGDA2LAMBOX test #-}
 
 {-
 id : ∀ {A : Set} → A → A

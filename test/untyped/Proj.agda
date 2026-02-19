@@ -10,6 +10,6 @@ open Pair
 pair : Pair Bool Bool
 pair = true , false
 
-second : Bool
-second = snd pair
-{-# COMPILE AGDA2LAMBOX second #-}
+test : Bool
+test = snd pair
+{-# COMPILE AGDA2LAMBOX test #-}

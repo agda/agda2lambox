@@ -57,3 +57,13 @@ Vec A n = [ xs ∈ List A ∣ Eq (length xs) n ]
 Bad : Bool → Set
 Bad false = Nat
 Bad true  = Bool
+
+testVec : Vec Nat 1
+testVec = (42 ∷ []) , rfl
+
+head : ∀ {A n} → Vec A (suc n) → A
+head ((x ∷ _) , _) = x
+
+test : Bad false
+test = head testVec
+{-# COMPILE AGDA2LAMBOX test #-}

@@ -14,6 +14,6 @@ map f (x ∷ xs) = f x ∷ map f xs
 xs : Vec Nat 2
 xs = 1 ∷ 0 ∷ []
 
-ys : Vec Nat 2
-ys = map suc xs
-{-# COMPILE AGDA2LAMBOX ys #-}
+test : Vec Nat 2
+test = map suc xs
+{-# COMPILE AGDA2LAMBOX test #-}
