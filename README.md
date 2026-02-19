@@ -18,7 +18,7 @@ cabal install
 ```
 
 ```
-agda2lambox [AGDAFLAGS] [--out-dir DIR] [--typed] [--no-blocks] FILE
+agda2lambox [AGDAFLAGS] [--out-dir DIR] [--typed] [--blocks] FILE
 ```
 
 Then, use the [following tool][Peregrine] to further compile the generated `.ast` files to WASM, Rust, OCaml, C, and Elm.

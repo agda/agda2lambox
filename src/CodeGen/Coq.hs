@@ -9,7 +9,7 @@ import Data.List.NonEmpty qualified as NEL
 import Agda.Syntax.Common.Pretty
 import LambdaBox
 import Agda.Utils.Function (applyWhen)
-import Agda2Lambox.Compile.Target
+import LambdaBox.Target
 
 
 class ToCoq t a where
@@ -53,8 +53,15 @@ instance ToCoq t Doc  where pcoq _ d = d
 instance ToCoq t Int  where pcoq _ s = pretty s
 instance ToCoq t Bool where pcoq _ v = if v then "true" else "false"
 
+quote :: String -> String
+quote s = "\"" <> escape s <> "\""
+  where
+    escape []       = []
+    escape ('"':cs) = "\\\"" <> escape cs
+    escape (c  :cs) = c : escape cs
+
 instance {-# OVERLAPPING #-} ToCoq t String where
-  pcoq _ s = text (show s) <> "%bs"
+  pcoq _ s = text (quote s) <> "%bs"
   -- NOTE(flupe): "%bs" to make sure that we produce Coq bytestrings
 
 instance ToCoq t a => ToCoq t (Maybe a) where
@@ -206,10 +213,10 @@ instance ToCoq t (LBoxModule t) where
 
     , "Compute @check_wf_glob eflags env."
 
-    , vsep $ flip map (zip [1..] $ reverse $ NEL.toList $ getUntyped lboxMain) \(i :: Int, kn) -> 
+    , vsep $ flip map (zip [1..] $ reverse $ NEL.toList $ getUntyped lboxMain) \(i :: Int, kn) ->
         let progname = "prog" <> pretty i in vsep
         [ hang ("Definition " <> progname <> " : program :=") 2 $
-            upcoq (text "env" :: Doc, LConst kn) 
+            upcoq (text "env" :: Doc, LConst kn)
             <> "."
         , "Compute eval_program " <> progname <> "."
         ]

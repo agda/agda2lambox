@@ -22,7 +22,6 @@ executable agda2lambox
                        Agda.Utils.EtaExpandConstructors,
                        Agda.Utils.Simplify,
                        Agda.Utils.Treeless,
-                       Agda2Lambox.Compile.Target,
                        Agda2Lambox.Compile.Utils,
                        Agda2Lambox.Compile.Monad,
                        Agda2Lambox.Compile.Term,
@@ -37,7 +36,6 @@ executable agda2lambox
                        LambdaBox.Env,
                        LambdaBox,
                        CodeGen.Coq,
-                       CodeGen.SExpr,
                        Paths_agda2lambox
   autogen-modules:     Paths_agda2lambox
   build-depends:       base       >= 4.10  && < 4.22,
@@ -50,7 +48,8 @@ executable agda2lambox
                        filepath,
                        text,
                        mtl,
-                       unicode-data
+                       unicode-data,
+                       lambdabox
   default-language:    Haskell2010
   default-extensions:
     LambdaCase RecordWildCards PatternSynonyms TupleSections
@@ -82,4 +81,3 @@ test-suite agda2lambox-tests
     FunctionalDependencies TypeSynonymInstances ConstraintKinds
     DoAndIfThenElse BlockArguments MultiWayIf
     ImportQualifiedPost
-

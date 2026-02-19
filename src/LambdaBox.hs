@@ -5,16 +5,18 @@ module LambdaBox
   , module LambdaBox.Term
   , module LambdaBox.Type
   , module LambdaBox.Env
+  , module LambdaBox.LambdaBox
   , emptyName
   , emptyDecl
   ) where
 
 import Control.Monad.Identity
-import Agda2Lambox.Compile.Target
+import LambdaBox.Target
 import LambdaBox.Names
 import LambdaBox.Term
 import LambdaBox.Type
 import LambdaBox.Env
+import LambdaBox.LambdaBox
 
 -- | Kername for the backed-in empty type.
 emptyName :: KerName

@@ -4,17 +4,7 @@ module LambdaBox.Type where
 
 import Agda.Syntax.Common.Pretty
 import LambdaBox.Names
-
-data Type
-  = TBox
-  | TAny
-  | TArr Type Type
-  | TApp Type Type
-  | TVar Int
-      -- ^ Reference to a type variable.
-      --   Uses De Bruijn *levels* and NOT indices.
-  | TInd Inductive
-  | TConst KerName
+import LambdaBox.LambdaBox
 
 instance Pretty Type where
   prettyPrec p = \case

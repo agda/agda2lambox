@@ -86,12 +86,13 @@ toConApp qn es = do
   ind  <- liftTCM $ toInductive dt
   let idx = fromMaybe 0 $ qn `elemIndex` ctrs
 
-  -- if the no blocks option is enabled
+  -- if the blocks option is disabled
   -- no argument is given to LConstruct
   -- and we instead use regular application
-  nb <- asks noBlocks
-  if nb then pure $ foldl' LBox.LApp (LBox.LConstruct ind idx []) es
-        else pure $ LBox.LConstruct ind idx es
+  nb <- asks blocks
+  if nb then pure $ LBox.LConstruct ind idx es
+        else pure $ foldl' LBox.LApp (LBox.LConstruct ind idx []) es
+
 
 
 -- | Class for things that may be considered logical, and thus erased.
@@ -102,7 +103,7 @@ class MayBeLogical a where
 
 -- * Logical types
 --
--- Note that we may also want to consider logical products 
+-- Note that we may also want to consider logical products
 -- into logical types?, Say "proof builders", or "level builders", etc.
 
 -- | Logical types.
@@ -150,7 +151,7 @@ sanitize [] = sDelim : "empty" -- NOTE(flupe): should be unreachable
 sanitize s@(x:xs)
   -- NOTE(flupe): Rust keywords are converted into raw identifiers
   | s `elem` rustKeywords = "r#"   ++ s
-  -- NOTE(flupe): or prefixed with the 
+  -- NOTE(flupe): or prefixed with the
   | s `elem` forbiddenRaw = sDelim : s
   | otherwise =
       let hd = escapeChar isXIDStart x

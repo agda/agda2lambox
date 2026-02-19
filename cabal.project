@@ -2,3 +2,8 @@ packages: agda2lambox.cabal
 constraints: Agda +debug
 ignore-project: False
 tests: True
+
+source-repository-package
+  type:     git
+  location: https://github.com/peregrine-project/haskell-lambdabox.git
+  tag:      4c9093c2edc0089d407e45dd60e8345be234be9c

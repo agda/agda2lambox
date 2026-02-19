@@ -21,14 +21,14 @@ import Agda.Utils.Monad (guardWithError, whenM)
 import Agda.Utils.Lens ( (^.) )
 
 import Agda.Utils ( treeless, pp, isRecordProjection, isArity )
-import Agda2Lambox.Compile.Target
+import LambdaBox.Target
 import Agda2Lambox.Compile.Utils
 import Agda2Lambox.Compile.Monad
 import Agda2Lambox.Compile.Term ( compileTerm )
 import Agda2Lambox.Compile.Type ( compileTopLevelType, compileType )
 
 import LambdaBox qualified as LBox
-import LambdaBox.Env
+import LambdaBox.LambdaBox
 import Agda.TypeChecking.Telescope (telViewUpTo)
 import Agda.TypeChecking.Substitute (TelV(theCore, theTel))
 
