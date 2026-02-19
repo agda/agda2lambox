@@ -32,7 +32,7 @@ import Agda.Utils ( pp, hasPragma )
 import Agda2Lambox.Compile.Target
 import Agda2Lambox.Compile.Utils
 import Agda2Lambox.Compile ( compile )
-import CodeGen.Coq ( prettyCoq  )
+import CodeGen.Rocq ( prettyRocq  )
 import CodeGen.SExpr ( prettySexp )
 import LambdaBox.Env
 import LambdaBox.Names ( KerName )
@@ -50,11 +50,10 @@ data Options = forall t. Options
   { optOutDir   :: Maybe FilePath
   , optTarget   :: Target t
   , optOutputs  :: [Output]
-  , optNoBlocks :: Bool
   }
 
 instance NFData Options where
-  rnf (Options m t o nb) = rnf m `seq` rnf t `seq` rnf o `seq` rnf nb
+  rnf (Options m t o) = rnf m `seq` rnf t `seq` rnf o
 
 -- | Setter for output directory option.
 outdirOpt :: Monad m => FilePath -> Options -> m Options
@@ -66,16 +65,12 @@ typedOpt opts = return opts { optTarget = ToTyped }
 rocqOpt :: Monad m => Options -> m Options
 rocqOpt opts = return opts { optOutputs = RocqOutput : optOutputs opts }
 
-noBlocksOpt :: Monad m => Options -> m Options
-noBlocksOpt opts = return opts { optNoBlocks = True }
-
 -- | Default backend options.
 defaultOptions :: Options
 defaultOptions  = Options
   { optOutDir   = Nothing
   , optTarget   = ToUntyped
   , optOutputs  = [AstOutput]
-  , optNoBlocks = False
   }
 
 -- | Backend module environments.
@@ -100,8 +95,6 @@ agda2lambox = Backend backend
             "Compile to typed λ□ environments."
           , Option ['c'] ["rocq"] (NoArg rocqOpt)
             "Output a Rocq file."
-          , Option [] ["no-blocks"] (NoArg noBlocksOpt)
-            "Disable constructors as blocks."
           ]
       , isEnabled             = \ _ -> True
       , preCompile            = return
@@ -133,7 +126,7 @@ writeModule Options{..} menv IsMain m defs = do
   -- get defs annotated with a COMPILE pragma
   -- throw an error if none, when targetting untyped lbox
   mains    <- getMain optTarget programs
-  env      <- runCompile (CompileEnv optNoBlocks) $ compile optTarget defs
+  env      <- runCompile CompileEnv $ compile optTarget defs
 
   liftIO $ createDirectoryIfMissing True outDir
 
@@ -151,7 +144,7 @@ writeModule Options{..} menv IsMain m defs = do
 
   when (RocqOutput `elem` optOutputs) $ liftIO $ do
     putStrLn $ "Writing " <> fileName -<.> ".v"
-    prettyCoq optTarget lboxMod <> "\n"
+    prettyRocq optTarget lboxMod <> "\n"
       & writeFile (fileName -<.> ".v")
 
   where
