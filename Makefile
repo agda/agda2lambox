@@ -18,6 +18,7 @@ html: test
 
 clean:
 	rm -rf test/Tests.agda test/dist/
+	make -C test clean
 
 %.ast:
 	agda2lambox -o build test/$*.agda

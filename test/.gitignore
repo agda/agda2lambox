@@ -1,4 +1,5 @@
 dist/
 html/
+gen/
 _build/
 Tests.agda

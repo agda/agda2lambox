@@ -37,6 +37,13 @@ fromMaybe def = λ where
   nothing  → def
   (just a) → a
 
+open import Agda.Builtin.Nat
+
+test : Nat
+test = fromMaybe 0 (just 42)
+{-# COMPILE AGDA2LAMBOX test #-}
+
+
 {-
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 
