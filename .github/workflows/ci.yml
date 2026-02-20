@@ -30,11 +30,12 @@ jobs:
         os: [ubuntu-latest]
         cabal: [3.12.1]
         ghc: [9.10.1]
+        ocaml: [4.14.2]
 
     steps:
     - uses: actions/checkout@v4
 
-    - name: Set up GHC ${{ matrix.ghc }}
+    - name: Set up GHC
       uses: haskell-actions/setup@v2
       id: setup
       with:
@@ -73,9 +74,28 @@ jobs:
     - name: Test
       run: make test
 
+    - name: Checkout Peregrine
+      uses: actions/checkout@v6
+      with:
+        repository: peregrine-project/peregrine-tool
+        ref: 6e3971e07897f17e06cd21c4e20558ea4161861a
+        path: peregrine-tool
+
+    - name: Set up OCaml
+      uses: ocaml/setup-ocaml@v3
+      with:
+        ocaml-compiler: ${{ matrix.ocaml }}
+
+    - name: Install Peregrine
+      working-directory: peregrine-tool/
+      run: |
+        opam repo add rocq-released https://rocq-prover.org/opam/released
+        opam install --deps-only -j4 .github/rocq-peregrine.opam.locked
+        opam install -j4 ./rocq-peregrine.opam
+
     - name: Generate HTML
       run: |
-        sudo apt-get install -y pandoc zsh
+        sudo apt-get install -y pandoc zsh wabt
         make html
 
     - name: Deploy HTML website
