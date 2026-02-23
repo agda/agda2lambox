@@ -90,6 +90,8 @@ mkAgdaTest mperegrinePath buildDir subdir isTyped baseFile = testCase ("Test: " 
       unless astExists $
         assertFailure $ "Expected AST file not created: " ++ astTarget
 
+    -- `peregrine validate` no longer exists
+  {-
       -- Step 2: Validate the AST file with peregrine validate if available
       case mperegrinePath of
         Nothing -> return ()  -- peregrine not available, skip validation
@@ -107,3 +109,4 @@ mkAgdaTest mperegrinePath buildDir subdir isTyped baseFile = testCase ("Test: " 
                 "stderr: " ++ validateStderr
 
             ExitSuccess -> return ()
+      -}

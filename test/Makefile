@@ -5,7 +5,10 @@ MAIN=Tests
 html:
 	@echo == Generating HTML ==
 	mkdir -p html/ && cp Agda.css html/
-	-cabal run -- agda2lambox --html --css=Agda.css $(MAIN).agda
+	-cabal run -- agda2lambox \
+		--html \
+		--html-highlight=code \
+		$(MAIN).agda
 	./renderTranslations.sh
 	cp html/$(MAIN).html html/index.html
 
