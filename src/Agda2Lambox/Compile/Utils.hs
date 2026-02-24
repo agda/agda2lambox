@@ -26,7 +26,7 @@ import Agda.Compiler.Backend
 import Agda.Syntax.Internal
 import Agda.Syntax.Abstract.Name
 import Agda.Syntax.Common.Pretty ( prettyShow, Doc )
-import Agda.Syntax.Common ( usableModality, Arg(..) )
+import Agda.Syntax.Common ( usableModality, Arg(..), NameId(..) )
 import Agda.TypeChecking.Datatypes ( getConstructors, getConstructorData )
 import Agda.TypeChecking.Level ( isLevelType )
 import Agda.TypeChecking.Monad.SizedTypes ( isSizeType )
@@ -54,7 +54,9 @@ domToName :: Dom' a b -> LBox.Name
 domToName = maybe LBox.Anon (LBox.Named . sanitize . prettyShow) . domName
 
 qnameToIdent :: QName -> LBox.Ident
-qnameToIdent = sanitize . prettyShow . qnameName
+qnameToIdent q = sanitize $ prettyShow name ++ "_" ++ show idx
+  where name         = qnameName q
+        NameId idx _ = nameId name
 
 qnameToName :: QName -> LBox.Name
 qnameToName = LBox.Named . qnameToIdent
