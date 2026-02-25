@@ -3,7 +3,7 @@
 -- | The agda2lambox Agda backend
 module Main (main) where
 
-import Control.Monad ( unless, filterM, when )
+import Control.Monad ( unless, filterM, when, mapM )
 import Control.Monad.IO.Class ( liftIO )
 import Control.DeepSeq ( NFData(rnf) )
 import Data.Function ( (&) )
@@ -153,4 +153,4 @@ writeModule Options{..} menv IsMain m defs = do
     getMain ToUntyped qs =
       case NEL.nonEmpty qs of
         Nothing -> genericError "No main program specified. Please use a COMPILE pragma."
-        Just ms -> pure $ SomeU (NEL.map qnameToKName ms)
+        Just ms -> liftTCM $ SomeU <$> mapM qnameToKName ms

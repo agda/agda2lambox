@@ -121,8 +121,9 @@ compileFunction (t :: Target t) defn = do
             l@LBox.LLambda{} -> pure l
             LBox.LBox        -> pure $ LBox.LLambda LBox.Anon LBox.LBox
             _                -> genericError "Fixpoint body must be Lambda."
+          name <- liftTCM $ qnameToName defName
           return LBox.Def
-            { dName = qnameToName defName
+            { dName = name
             , dBody = body
             , dArgs = 0
             }

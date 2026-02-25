@@ -39,10 +39,10 @@ import LambdaBox.Term (Term(LBox))
 compile :: Target t -> [QName] -> CompileM (GlobalEnv t)
 compile t qs = do
   items <- compileLoop (compileDefinition t) qs
-  pure $ GlobalEnv $ map itemToEntry items ++ [(emptyName, emptyDecl t)]
-  where
-    itemToEntry :: CompiledItem (GlobalDecl t) -> (KerName, GlobalDecl t)
-    itemToEntry CompiledItem{..} = (qnameToKName itemName, itemValue)
+  liftTCM $ GlobalEnv . (++ [(emptyName, emptyDecl t)]) <$> mapM itemToEntry items
+    where
+      itemToEntry :: CompiledItem (GlobalDecl t) -> TCM (KerName, GlobalDecl t)
+      itemToEntry CompiledItem{..} = (,itemValue) <$> qnameToKName itemName
 
 
 compileDefinition :: Target t -> Definition -> CompileM (Maybe (GlobalDecl t))
