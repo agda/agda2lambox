@@ -17,6 +17,7 @@ module Agda.Utils.Treeless
   , compilerPipeline
   , CCConfig
   , CCSubst(..)
+  , alwaysInline
   ) where
 
 import Prelude hiding ((!!))
