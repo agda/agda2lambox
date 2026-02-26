@@ -1,4 +1,4 @@
-.PHONY: default build install html clean
+.PHONY: default build install coq html clean
 
 default: build
 
@@ -12,6 +12,10 @@ test: test/Tests.agda
 
 test/Tests.agda: test/Main.hs test/agda2lambox-tests.agda-lib test/untyped/*.agda test/typed/*.agda test/agda2rust/*.agda
 	cabal test
+
+coq:
+	coq_makefile -f _CoqProject -o CoqMakefile
+	make -f CoqMakefile
 
 html: test
 	make -C test html

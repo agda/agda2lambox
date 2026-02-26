@@ -81,6 +81,15 @@ jobs:
         ref: 6e3971e07897f17e06cd21c4e20558ea4161861a
         path: peregrine-tool
 
+    - name: Restore OPAM cache
+      id: opam-cache
+      uses: actions/cache@v5
+      with:
+        path: "~/.opam"
+        key: opam-${{matrix.ocaml}}-${{hashFiles('peregrine-tool/.github/rocq-peregrine.opam.locked')}}
+        restore-keys: |
+          opam-${{matrix.ocaml}}-
+
     - name: Set up OCaml
       uses: ocaml/setup-ocaml@v3
       with:
@@ -105,3 +114,9 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: test/html
 
+    - name: OPAM cache clean-up
+      run: |
+        opam remove rocq-peregrine
+        opam pin remove rocq-peregrine
+        eval $(opam env)
+        opam clean -a -c -s --logs
