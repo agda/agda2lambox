@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Singleton.rs.result</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+</head>
+<body>
+<pre><code>[1m[33mwarning[0m[1m:[0m no edition set: defaulting to the 2015 edition while the latest is 2024
+[1m[32m   Compiling[0m main v0.0.0 (/home/runner/work/agda2lambox/agda2lambox/test/gen/rust)
+[0m[1m[33mwarning[0m[0m[1m: identifier contains a non normalized (NFKC) character: &#39;ℓ&#39;[0m
+[0m  [0m[0m[1m[38;5;12m--&gt; [0m[0mSingleton.rs:21:28[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m21[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mpub enum Singleton_The&lt;&#39;a, ℓ, A&gt; {[0m
+[0m   [0m[0m[1m[38;5;12m|[0m[0m                            [0m[0m[1m[33m^[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: this character is included in the Not_NFKC Unicode general security profile[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(uncommon_codepoints)]` on by default[0m
+
+[0m[1m[38;5;9merror[E0282][0m[0m[1m: type annotations needed[0m
+[0m   [0m[0m[1m[38;5;12m--&gt; [0m[0mSingleton.rs:179:299[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m179[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m...[0m[0m                   Singleton_The::the([0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m                       [0m[0m[1m[38;5;9m^^^^^^^^^^^^^^^^^^[0m[0m [0m[0m[1m[38;5;9mcannot infer type of the type parameter `ℓ` declared on the enum `Singleton_The`[0m
+[0m[1m[38;5;12m180[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m...[0m[0m                     PhantomData,[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m                         [0m[0m[1m[38;5;12m-----------[0m[0m [0m[0m[1m[38;5;12mtype must be known at this point[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;14mhelp[0m[0m: consider specifying the generic arguments[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m179[0m[0m [0m[0m[1m[38;5;12m| [0m[0m                                                                                                                                                                                                                                                                                                          Singleton_The[0m[0m[38;5;10m::&lt;ℓ, &amp;Nat_Builtin_Agda_Nat&lt;&#39;_&gt;&gt;[0m[0m::the([0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m                                                                                                                                                                                                                                                                                                                        [0m[0m[38;5;10m++++++++++++++++++++++++++++++++[0m
+
+[0m[1mFor more information about this error, try `rustc --explain E0282`.[0m
+[1m[33mwarning[0m[1m:[0m `main` (bin &quot;Singleton&quot;) generated 1 warning
+[1m[31merror[0m[1m:[0m could not compile `main` (bin &quot;Singleton&quot;) due to 1 previous error; 1 warning emitted</code></pre>
+</body>
+</html>

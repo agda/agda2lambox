@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Scheme.rs.result</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+</head>
+<body>
+<pre><code>[1m[33mwarning[0m[1m:[0m no edition set: defaulting to the 2015 edition while the latest is 2024
+[1m[32m   Compiling[0m main v0.0.0 (/home/runner/work/agda2lambox/agda2lambox/test/gen/rust)
+[0m[1m[38;5;9merror[E0107][0m[0m[1m: type alias takes 0 generic arguments but 1 generic argument was supplied[0m
+[0m   [0m[0m[1m[38;5;12m--&gt; [0m[0mScheme.rs:232:33[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m232[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mpub fn Scheme_test(&amp;&#39;a self) -&gt; Scheme_Bad&lt;&#39;a, ()&gt; {[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m                                 [0m[0m[1m[38;5;9m^^^^^^^^^^[0m[0m     [0m[0m[1m[38;5;12m--[0m[0m [0m[0m[1m[38;5;12mhelp: remove the unnecessary generic argument[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m                                 [0m[0m[1m[38;5;9m|[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m                                 [0m[0m[1m[38;5;9mexpected 0 generic arguments[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;10mnote[0m[0m: type alias defined here, with 0 generic parameters[0m
+[0m   [0m[0m[1m[38;5;12m--&gt; [0m[0mScheme.rs:14:6[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m14[0m[0m  [0m[0m[1m[38;5;12m|[0m[0m [0m[0mtype Scheme_Bad&lt;&#39;a&gt; = ();[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m      [0m[0m[1m[38;5;10m^^^^^^^^^^[0m
+
+[0m[1m[38;5;9merror[E0091][0m[0m[1m: type parameter `B` is never used[0m
+[0m  [0m[0m[1m[38;5;12m--&gt; [0m[0mScheme.rs:33:32[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m33[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mtype Scheme_ΣՖsubsyntax&lt;&#39;a, A, B&gt; = &amp;&#39;a Scheme_Σ&lt;&#39;a, A, ()&gt;;[0m
+[0m   [0m[0m[1m[38;5;12m|[0m[0m                                [0m[0m[1m[38;5;9m^[0m[0m [0m[0m[1m[38;5;9munused type parameter[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mhelp[0m[0m: consider removing `B` or referring to it in the body of the type alias[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mhelp[0m[0m: if you intended `B` to be a const parameter, use `const B: /* Type */` instead[0m
+
+[0m[1m[38;5;9merror[E0091][0m[0m[1m: type parameter `a` is never used[0m
+[0m  [0m[0m[1m[38;5;12m--&gt; [0m[0mScheme.rs:35:24[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m35[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mtype Scheme_Vec&lt;&#39;a, A, a&gt; = Scheme_ΣՖsubsyntax&lt;&#39;a, &amp;&#39;a List_Builtin_Agda_List&lt;&#39;a, (), A&gt;, ()&gt;;[0m
+[0m   [0m[0m[1m[38;5;12m|[0m[0m                        [0m[0m[1m[38;5;9m^[0m[0m [0m[0m[1m[38;5;9munused type parameter[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mhelp[0m[0m: consider removing `a` or referring to it in the body of the type alias[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mhelp[0m[0m: if you intended `a` to be a const parameter, use `const a: /* Type */` instead[0m
+
+[0m[1m[38;5;9merror[E0308][0m[0m[1m: arguments to this method are incorrect[0m
+[0m   [0m[0m[1m[38;5;12m--&gt; [0m[0mScheme.rs:233:8[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m233[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m  self.Scheme_head([0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m        [0m[0m[1m[38;5;9m^^^^^^^^^^^[0m
+[0m[1m[38;5;12m234[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m    (),[0m
+[0m[1m[38;5;12m235[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m    (),[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m     [0m[0m[1m[38;5;12m--[0m[0m [0m[0m[1m[38;5;12mexpected `&amp;Nat_Builtin_Agda_Nat&lt;&#39;_&gt;`, found `()`[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;10mnote[0m[0m: expected `()`, found `&amp;Nat_Builtin_Agda_Nat&lt;&#39;_&gt;`[0m
+[0m   [0m[0m[1m[38;5;12m--&gt; [0m[0mScheme.rs:236:5[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m236[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m    self.Scheme_testVec())[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m     [0m[0m[1m[38;5;10m^^^^^^^^^^^^^^^^^^^^^[0m
+[0m    [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: expected reference `&amp;Scheme_Σ&lt;[0m[0m[1m[35m&#39;_[0m[0m, &amp;List_Builtin_Agda_List&lt;[0m[0m[1m[35m&#39;_[0m[0m, _, [0m[0m[1m[35m()[0m[0m&gt;, _&gt;`[0m
+[0m               found reference `&amp;Scheme_Σ&lt;[0m[0m[1m[35m&#39;_[0m[0m, &amp;List_Builtin_Agda_List&lt;[0m[0m[1m[35m&#39;_[0m[0m, _, [0m[0m[1m[35m&amp;Nat_Builtin_Agda_Nat&lt;&#39;_&gt;[0m[0m&gt;, _&gt;`[0m
+[0m[1m[38;5;10mnote[0m[0m: method defined here[0m
+[0m   [0m[0m[1m[38;5;12m--&gt; [0m[0mScheme.rs:205:8[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m205[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mpub fn Scheme_head&lt;A: Copy&gt;(&amp;&#39;a self, x: (), x2: &amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;, x3: Scheme_Vec&lt;&#39;a, A, ()&gt;) -&gt; A {[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m        [0m[0m[1m[38;5;10m^^^^^^^^^^^[0m[0m                    [0m[0m[1m[38;5;12m-----[0m[0m  [0m[0m[1m[38;5;12m--------------------------------[0m[0m  [0m[0m[1m[38;5;12m-------------------------[0m
+
+[0m[1m[38;5;9merror[E0283][0m[0m[1m: type annotations needed[0m
+[0m   [0m[0m[1m[38;5;12m--&gt; [0m[0mScheme.rs:252:10[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m252[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m    self.Σ_Scheme_fst([0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m          [0m[0m[1m[38;5;9m^^^^^^^^^^^^[0m[0m [0m[0m[1m[38;5;9mcannot infer type of the type parameter `B` declared on the method `Σ_Scheme_fst`[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m    [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: cannot satisfy `_: Copy`[0m
+[0m[1m[38;5;10mnote[0m[0m: required by a bound in `Program::Σ_Scheme_fst`[0m
+[0m   [0m[0m[1m[38;5;12m--&gt; [0m[0mScheme.rs:243:33[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m243[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mpub fn Σ_Scheme_fst&lt;A: Copy, B: Copy&gt;(&amp;&#39;a self, x: &amp;&#39;a Scheme_Σ&lt;&#39;a, A, ()&gt;) -&gt; A {[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m                                 [0m[0m[1m[38;5;10m^^^^[0m[0m [0m[0m[1m[38;5;10mrequired by this bound in `Program::Σ_Scheme_fst`[0m
+[0m[1m[38;5;14mhelp[0m[0m: consider specifying the generic arguments[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m252[0m[0m [0m[0m[1m[38;5;12m| [0m[0m    self.Σ_Scheme_fst[0m[0m[38;5;10m::&lt;A, B&gt;[0m[0m([0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m                      [0m[0m[38;5;10m++++++++[0m
+
+[0m[1mSome errors have detailed explanations: E0091, E0107, E0283, E0308.[0m
+[0m[1mFor more information about an error, try `rustc --explain E0091`.[0m
+[1m[31merror[0m[1m:[0m could not compile `main` (bin &quot;Scheme&quot;) due to 5 previous errors</code></pre>
+</body>
+</html>

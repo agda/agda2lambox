@@ -84,7 +84,7 @@
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a><span class="kw">use</span> <span class="pp">std::marker::</span>PhantomData<span class="op">;</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a><span class="kw">fn</span> hint_app<span class="op">&lt;</span>TArg<span class="op">,</span> TRet<span class="op">&gt;</span>(f<span class="op">:</span> <span class="op">&amp;</span><span class="kw">dyn</span> <span class="bu">Fn</span>(TArg) <span class="op">-&gt;</span> TRet) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="kw">dyn</span> <span class="bu">Fn</span>(TArg) <span class="op">-&gt;</span> TRet <span class="op">{</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> hint_app<span class="op">&lt;</span>TArg<span class="op">,</span> TRet<span class="op">&gt;</span>(f<span class="op">:</span> <span class="op">&amp;</span><span class="kw">dyn</span> <span class="bu">Fn</span>(TArg) <span class="op">-&gt;</span> TRet) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="kw">dyn</span> <span class="bu">Fn</span>(TArg) <span class="op">-&gt;</span> TRet <span class="op">{</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a>  f</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a><span class="op">}</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a></span>
@@ -95,27 +95,27 @@
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true"></a>  suc(PhantomData<span class="op">&lt;&amp;</span><span class="ot">&#39;a</span> ()<span class="op">&gt;,</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>)</span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true"></a><span class="op">}</span></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true"></a><span class="kw">struct</span> Program <span class="op">{</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">struct</span> Program <span class="op">{</span></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true"></a>  __alloc<span class="op">:</span> <span class="pp">bumpalo::</span>Bump<span class="op">,</span></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true"></a><span class="op">}</span></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true"></a></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true"></a><span class="kw">impl</span><span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> Program <span class="op">{</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true"></a><span class="kw">fn</span> new() <span class="op">-&gt;</span> <span class="dt">Self</span> <span class="op">{</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> new() <span class="op">-&gt;</span> <span class="dt">Self</span> <span class="op">{</span></span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true"></a>  Program <span class="op">{</span></span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true"></a>    __alloc<span class="op">:</span> <span class="pp">bumpalo::Bump::</span>new()<span class="op">,</span></span>
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true"></a>  <span class="op">}</span></span>
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true"></a><span class="op">}</span></span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true"></a></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true"></a><span class="kw">fn</span> alloc<span class="op">&lt;</span>T<span class="op">&gt;</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> t<span class="op">:</span> T) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> T <span class="op">{</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> alloc<span class="op">&lt;</span>T<span class="op">&gt;</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> t<span class="op">:</span> T) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> T <span class="op">{</span></span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>__alloc<span class="op">.</span>alloc(t)</span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true"></a><span class="op">}</span></span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true"></a></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true"></a><span class="kw">fn</span> closure<span class="op">&lt;</span>TArg<span class="op">,</span> TRet<span class="op">&gt;</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> F<span class="op">:</span> <span class="kw">impl</span> <span class="bu">Fn</span>(TArg) <span class="op">-&gt;</span> TRet <span class="op">+</span> <span class="ot">&#39;a</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(TArg) <span class="op">-&gt;</span> TRet <span class="op">{</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> closure<span class="op">&lt;</span>TArg<span class="op">,</span> TRet<span class="op">&gt;</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> F<span class="op">:</span> <span class="kw">impl</span> <span class="bu">Fn</span>(TArg) <span class="op">-&gt;</span> TRet <span class="op">+</span> <span class="ot">&#39;a</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(TArg) <span class="op">-&gt;</span> TRet <span class="op">{</span></span>
 <span id="cb1-36"><a href="#cb1-36" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>__alloc<span class="op">.</span>alloc(F)</span>
 <span id="cb1-37"><a href="#cb1-37" aria-hidden="true"></a><span class="op">}</span></span>
 <span id="cb1-38"><a href="#cb1-38" aria-hidden="true"></a></span>
 <span id="cb1-39"><a href="#cb1-39" aria-hidden="true"></a></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true"></a><span class="kw">fn</span> Prim_testLevel(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> ()) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Prim_testLevel(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> ()) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb1-41"><a href="#cb1-41" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>alloc(</span>
 <span id="cb1-42"><a href="#cb1-42" aria-hidden="true"></a>    <span class="pp">Nat_Builtin_Agda_Nat::</span>suc(</span>
 <span id="cb1-43"><a href="#cb1-43" aria-hidden="true"></a>      PhantomData<span class="op">,</span></span>
@@ -246,21 +246,24 @@
 <span id="cb1-168"><a href="#cb1-168" aria-hidden="true"></a>                                                                                                                                                                            <span class="pp">Nat_Builtin_Agda_Nat::</span>zero(</span>
 <span id="cb1-169"><a href="#cb1-169" aria-hidden="true"></a>                                                                                                                                                                              PhantomData))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))</span>
 <span id="cb1-170"><a href="#cb1-170" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-171"><a href="#cb1-171" aria-hidden="true"></a><span class="kw">fn</span> Prim_testLevel__curried(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(()) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb1-171"><a href="#cb1-171" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Prim_testLevel__curried(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(()) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb1-172"><a href="#cb1-172" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x<span class="op">|</span> <span class="op">{</span></span>
 <span id="cb1-173"><a href="#cb1-173" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>Prim_testLevel(</span>
 <span id="cb1-174"><a href="#cb1-174" aria-hidden="true"></a>      x)</span>
 <span id="cb1-175"><a href="#cb1-175" aria-hidden="true"></a>  <span class="op">}</span>)</span>
 <span id="cb1-176"><a href="#cb1-176" aria-hidden="true"></a><span class="op">}</span></span>
 <span id="cb1-177"><a href="#cb1-177" aria-hidden="true"></a></span>
-<span id="cb1-178"><a href="#cb1-178" aria-hidden="true"></a><span class="kw">fn</span> Prim_test(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb1-178"><a href="#cb1-178" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Prim_test(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb1-179"><a href="#cb1-179" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>Prim_testLevel(</span>
 <span id="cb1-180"><a href="#cb1-180" aria-hidden="true"></a>    ())</span>
 <span id="cb1-181"><a href="#cb1-181" aria-hidden="true"></a><span class="op">}</span></span>
 <span id="cb1-182"><a href="#cb1-182" aria-hidden="true"></a></span>
-<span id="cb1-183"><a href="#cb1-183" aria-hidden="true"></a><span class="kw">fn</span> Prim_Ֆ30Ֆℓ(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> () <span class="op">{</span></span>
+<span id="cb1-183"><a href="#cb1-183" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Prim_Ֆ30Ֆℓ(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> () <span class="op">{</span></span>
 <span id="cb1-184"><a href="#cb1-184" aria-hidden="true"></a>  ()</span>
 <span id="cb1-185"><a href="#cb1-185" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-186"><a href="#cb1-186" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb1-186"><a href="#cb1-186" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-187"><a href="#cb1-187" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb1-188"><a href="#cb1-188" aria-hidden="true"></a>  <span class="pp">println!</span>(<span class="st">&quot;{:?}&quot;</span><span class="op">,</span> <span class="pp">Program::</span>new()<span class="op">.</span>Prim_test())<span class="op">;</span></span>
+<span id="cb1-189"><a href="#cb1-189" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
 </body>
 </html>

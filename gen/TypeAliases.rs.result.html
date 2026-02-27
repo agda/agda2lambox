@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>TypeAliases.rs.result</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+</head>
+<body>
+<pre><code>[1m[33mwarning[0m[1m:[0m no edition set: defaulting to the 2015 edition while the latest is 2024
+[1m[32m   Compiling[0m main v0.0.0 (/home/runner/work/agda2lambox/agda2lambox/test/gen/rust)
+[0m[1m[33mwarning[0m[0m[1m: identifier contains a non normalized (NFKC) character: &#39;ℕ&#39;[0m
+[0m  [0m[0m[1m[38;5;12m--&gt; [0m[0mTypeAliases.rs:20:6[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m20[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mtype TypeAliases_ℕ&lt;&#39;a&gt; = &amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;;[0m
+[0m   [0m[0m[1m[38;5;12m|[0m[0m      [0m[0m[1m[33m^^^^^^^^^^^^^[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: this character is included in the Not_NFKC Unicode general security profile[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(uncommon_codepoints)]` on by default[0m
+
+[0m[1m[33mwarning[0m[0m[1m: identifier contains 2 non normalized (NFKC) characters: &#39;ℕ&#39; and &#39;ℕ&#39;[0m
+[0m  [0m[0m[1m[38;5;12m--&gt; [0m[0mTypeAliases.rs:22:6[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m22[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mtype TypeAliases_ℕՖtoℕ&lt;&#39;a&gt; = &amp;&#39;a dyn Fn(TypeAliases_ℕ&lt;&#39;a&gt;) -&gt; TypeAliases_ℕ&lt;&#39;a&gt;;[0m
+[0m   [0m[0m[1m[38;5;12m|[0m[0m      [0m[0m[1m[33m^^^^^^^^^^^^^^^^^[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: these characters are included in the Not_NFKC Unicode general security profile[0m
+
+[0m[1m[38;5;9merror[E0091][0m[0m[1m: type parameter `a2` is never used[0m
+[0m  [0m[0m[1m[38;5;12m--&gt; [0m[0mTypeAliases.rs:24:31[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m24[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mtype TypeAliases_Const&lt;&#39;a, a, a2&gt; = a;[0m
+[0m   [0m[0m[1m[38;5;12m|[0m[0m                               [0m[0m[1m[38;5;9m^^[0m[0m [0m[0m[1m[38;5;9munused type parameter[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mhelp[0m[0m: consider removing `a2` or referring to it in the body of the type alias[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mhelp[0m[0m: if you intended `a2` to be a const parameter, use `const a2: /* Type */` instead[0m
+
+[0m[1mFor more information about this error, try `rustc --explain E0091`.[0m
+[1m[33mwarning[0m[1m:[0m `main` (bin &quot;TypeAliases&quot;) generated 2 warnings
+[1m[31merror[0m[1m:[0m could not compile `main` (bin &quot;TypeAliases&quot;) due to 1 previous error; 2 warnings emitted</code></pre>
+</body>
+</html>

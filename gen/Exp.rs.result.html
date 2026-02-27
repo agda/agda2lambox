@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Exp.rs.result</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+</head>
+<body>
+<pre><code>[1m[33mwarning[0m[1m:[0m no edition set: defaulting to the 2015 edition while the latest is 2024
+[1m[32m   Compiling[0m main v0.0.0 (/home/runner/work/agda2lambox/agda2lambox/test/gen/rust)
+[0m[1m[38;5;9merror[E0308][0m[0m[1m: `match` arms have incompatible types[0m
+[0m   [0m[0m[1m[38;5;12m--&gt; [0m[0mExp.rs:263:15[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m258[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m/[0m[0m [0m[0m          match x3 {[0m
+[0m[1m[38;5;12m259[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m            &amp;Exp_GExp::nat(_, x4) =&gt; {[0m
+[0m[1m[38;5;12m260[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m              x4[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m               [0m[0m[1m[38;5;12m--[0m[0m [0m[0m[1m[38;5;12mthis is found to be of type `&amp;Nat_Builtin_Agda_Nat&lt;&#39;_&gt;`[0m
+[0m[1m[38;5;12m261[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m            },[0m
+[0m[1m[38;5;12m262[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m            &amp;Exp_GExp::bool(_, x4) =&gt; {[0m
+[0m[1m[38;5;12m263[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m              x4[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m               [0m[0m[1m[38;5;9m^^[0m[0m [0m[0m[1m[38;5;9mexpected `&amp;Nat_Builtin_Agda_Nat&lt;&#39;_&gt;`, found `&amp;Exp_Bool&lt;&#39;_&gt;`[0m
+[0m[1m[38;5;12m...[0m[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m294[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m            },[0m
+[0m[1m[38;5;12m295[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m          }[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|___________-[0m[0m [0m[0m[1m[38;5;12m`match` arms have incompatible types[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m    [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: expected reference `&amp;[0m[0m[1m[35mNat_Builtin_Agda_Nat&lt;&#39;_&gt;[0m[0m`[0m
+[0m               found reference `&amp;[0m[0m[1m[35mExp_Bool&lt;&#39;_&gt;[0m[0m`[0m
+
+[0m[1m[38;5;9merror[E0308][0m[0m[1m: mismatched types[0m
+[0m   [0m[0m[1m[38;5;12m--&gt; [0m[0mExp.rs:293:83[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m274[0m[0m [0m[0m[1m[38;5;12m|[0m[0m   [0m[0m              hint_app(hint_app(hint_app(hint_app(hint_app(hint_app(self.closure(move |x8| {[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m __________________________________________-[0m
+[0m[1m[38;5;12m275[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m                                                                      self.closure(move |x9| {[0m
+[0m[1m[38;5;12m276[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m                                                                        self.closure(move |x10| {[0m
+[0m[1m[38;5;12m277[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m                                                                          self.closure(move |x11| {[0m
+[0m[1m[38;5;12m...[0m[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m292[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m                                                                      })[0m
+[0m[1m[38;5;12m293[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m                                                                    }))(x2))(x5))(hint_app(hint_app(hint_app(geval.get().unwrap())(()))(x2))(x5)))([0m[0m[1m[38;5;12m...[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m                                                                                 [0m[0m[1m[38;5;12m-[0m[0m [0m[0m[1m[38;5;9m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[0m [0m[0m[1m[38;5;9mexpected `&amp;Exp_Bool&lt;&#39;_&gt;`, found `&amp;Nat_Builtin_Agda_Nat&lt;&#39;_&gt;`[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|_________________________________________________________________________________|[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m                                                                                   [0m[0m[1m[38;5;12marguments to this function are incorrect[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m    [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: expected reference `&amp;[0m[0m[1m[35mExp_Bool&lt;&#39;_&gt;[0m[0m`[0m
+[0m               found reference `&amp;[0m[0m[1m[35mNat_Builtin_Agda_Nat&lt;&#39;_&gt;[0m[0m`[0m
+
+[0m[1m[38;5;9merror[E0308][0m[0m[1m: mismatched types[0m
+[0m   [0m[0m[1m[38;5;12m--&gt; [0m[0mExp.rs:299:3[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m252[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mpub fn Exp_geval&lt;A: Copy&gt;(&amp;&#39;a self) -&gt; &amp;&#39;a dyn Fn(()) -&gt; &amp;&#39;a dyn Fn(&amp;&#39;a dyn Fn(&amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;) -&gt; &amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;) -&gt; &amp;&#39;a dyn Fn(&amp;&#39;a Exp_GExp&lt;&#39;a&gt;) -&gt; [0m[0m[1m[38;5;12m...[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m                  [0m[0m[1m[38;5;12m-[0m[0m                     [0m[0m[1m[38;5;12m-------------------------------------------------------------------------------------------------------------------------------------------[0m[0m [0m[0m[1m[38;5;12mexpected `&amp;&#39;a (dyn Fn(()) -&gt; &amp;&#39;a (dyn Fn(&amp;&#39;a (dyn Fn(&amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;) -&gt; &amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt; + &#39;a)) -&gt; &amp;&#39;a (dyn Fn(&amp;&#39;a Exp_GExp&lt;&#39;a&gt;) -&gt; A + &#39;a) + &#39;a) + &#39;a)` because of return type[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m                  [0m[0m[1m[38;5;12m|[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m                  [0m[0m[1m[38;5;12mexpected this type parameter[0m
+[0m[1m[38;5;12m...[0m
+[0m[1m[38;5;12m299[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m  geval.get().unwrap()[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m   [0m[0m[1m[38;5;9m^^^^^^^^^^^^^^^^^^^^[0m[0m [0m[0m[1m[38;5;9mexpected type parameter `A`, found `&amp;Nat_Builtin_Agda_Nat&lt;&#39;_&gt;`[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m    [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: expected reference `[0m[0m[1m[35m&amp;&#39;a (dyn Fn(()) -&gt; &amp;&#39;a (dyn Fn(&amp;&#39;a (dyn Fn(&amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;) -&gt; &amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt; + &#39;a)) -&gt; &amp;&#39;a (dyn Fn(&amp;&#39;a Exp_GExp&lt;&#39;a&gt;) -&gt; A + &#39;a) + &#39;a) + &#39;a)[0m[0m`[0m
+[0m               found reference `[0m[0m[1m[35m&amp;dyn Fn(()) -&gt; &amp;dyn Fn(&amp;dyn Fn(&amp;Nat_Builtin_Agda_Nat&lt;&#39;_&gt;) -&gt; _) -&gt; &amp;dyn Fn(&amp;Exp_GExp&lt;&#39;_&gt;) -&gt; &amp;Nat_Builtin_Agda_Nat&lt;&#39;_&gt;[0m[0m`[0m
+
+[0m[1mFor more information about this error, try `rustc --explain E0308`.[0m
+[1m[31merror[0m[1m:[0m could not compile `main` (bin &quot;Exp&quot;) due to 3 previous errors</code></pre>
+</body>
+</html>

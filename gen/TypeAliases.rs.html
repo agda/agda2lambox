@@ -84,7 +84,7 @@
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a><span class="kw">use</span> <span class="pp">std::marker::</span>PhantomData<span class="op">;</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a><span class="kw">fn</span> hint_app<span class="op">&lt;</span>TArg<span class="op">,</span> TRet<span class="op">&gt;</span>(f<span class="op">:</span> <span class="op">&amp;</span><span class="kw">dyn</span> <span class="bu">Fn</span>(TArg) <span class="op">-&gt;</span> TRet) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="kw">dyn</span> <span class="bu">Fn</span>(TArg) <span class="op">-&gt;</span> TRet <span class="op">{</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> hint_app<span class="op">&lt;</span>TArg<span class="op">,</span> TRet<span class="op">&gt;</span>(f<span class="op">:</span> <span class="op">&amp;</span><span class="kw">dyn</span> <span class="bu">Fn</span>(TArg) <span class="op">-&gt;</span> TRet) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="kw">dyn</span> <span class="bu">Fn</span>(TArg) <span class="op">-&gt;</span> TRet <span class="op">{</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a>  f</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a><span class="op">}</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a></span>
@@ -103,27 +103,27 @@
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true"></a></span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true"></a><span class="kw">type</span> TypeAliases_Id<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">,</span> a<span class="op">&gt;</span> <span class="op">=</span> a<span class="op">;</span></span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true"></a><span class="kw">struct</span> Program <span class="op">{</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">struct</span> Program <span class="op">{</span></span>
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true"></a>  __alloc<span class="op">:</span> <span class="pp">bumpalo::</span>Bump<span class="op">,</span></span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true"></a><span class="op">}</span></span>
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true"></a></span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true"></a><span class="kw">impl</span><span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> Program <span class="op">{</span></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true"></a><span class="kw">fn</span> new() <span class="op">-&gt;</span> <span class="dt">Self</span> <span class="op">{</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> new() <span class="op">-&gt;</span> <span class="dt">Self</span> <span class="op">{</span></span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true"></a>  Program <span class="op">{</span></span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true"></a>    __alloc<span class="op">:</span> <span class="pp">bumpalo::Bump::</span>new()<span class="op">,</span></span>
 <span id="cb1-36"><a href="#cb1-36" aria-hidden="true"></a>  <span class="op">}</span></span>
 <span id="cb1-37"><a href="#cb1-37" aria-hidden="true"></a><span class="op">}</span></span>
 <span id="cb1-38"><a href="#cb1-38" aria-hidden="true"></a></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true"></a><span class="kw">fn</span> alloc<span class="op">&lt;</span>T<span class="op">&gt;</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> t<span class="op">:</span> T) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> T <span class="op">{</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> alloc<span class="op">&lt;</span>T<span class="op">&gt;</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> t<span class="op">:</span> T) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> T <span class="op">{</span></span>
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>__alloc<span class="op">.</span>alloc(t)</span>
 <span id="cb1-41"><a href="#cb1-41" aria-hidden="true"></a><span class="op">}</span></span>
 <span id="cb1-42"><a href="#cb1-42" aria-hidden="true"></a></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true"></a><span class="kw">fn</span> closure<span class="op">&lt;</span>TArg<span class="op">,</span> TRet<span class="op">&gt;</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> F<span class="op">:</span> <span class="kw">impl</span> <span class="bu">Fn</span>(TArg) <span class="op">-&gt;</span> TRet <span class="op">+</span> <span class="ot">&#39;a</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(TArg) <span class="op">-&gt;</span> TRet <span class="op">{</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> closure<span class="op">&lt;</span>TArg<span class="op">,</span> TRet<span class="op">&gt;</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> F<span class="op">:</span> <span class="kw">impl</span> <span class="bu">Fn</span>(TArg) <span class="op">-&gt;</span> TRet <span class="op">+</span> <span class="ot">&#39;a</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(TArg) <span class="op">-&gt;</span> TRet <span class="op">{</span></span>
 <span id="cb1-44"><a href="#cb1-44" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>__alloc<span class="op">.</span>alloc(F)</span>
 <span id="cb1-45"><a href="#cb1-45" aria-hidden="true"></a><span class="op">}</span></span>
 <span id="cb1-46"><a href="#cb1-46" aria-hidden="true"></a></span>
 <span id="cb1-47"><a href="#cb1-47" aria-hidden="true"></a></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true"></a><span class="kw">fn</span> TypeAliases_testAlias(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> TypeAliases_ℕ<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> TypeAliases_testAlias(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> TypeAliases_ℕ<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb1-49"><a href="#cb1-49" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>alloc(</span>
 <span id="cb1-50"><a href="#cb1-50" aria-hidden="true"></a>    <span class="pp">Nat_Builtin_Agda_Nat::</span>suc(</span>
 <span id="cb1-51"><a href="#cb1-51" aria-hidden="true"></a>      PhantomData<span class="op">,</span></span>
@@ -255,7 +255,7 @@
 <span id="cb1-177"><a href="#cb1-177" aria-hidden="true"></a>                                                                                                                                                                              PhantomData))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))</span>
 <span id="cb1-178"><a href="#cb1-178" aria-hidden="true"></a><span class="op">}</span></span>
 <span id="cb1-179"><a href="#cb1-179" aria-hidden="true"></a></span>
-<span id="cb1-180"><a href="#cb1-180" aria-hidden="true"></a><span class="kw">fn</span> Nat_Builtin_Agda_Ֆ_Ֆplus_(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb1-180"><a href="#cb1-180" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Nat_Builtin_Agda_Ֆ_Ֆplus_(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb1-181"><a href="#cb1-181" aria-hidden="true"></a>  <span class="kw">let</span> Ֆ_Ֆplus_ <span class="op">=</span> <span class="kw">self</span><span class="op">.</span>alloc(<span class="pp">std::cell::Cell::</span>new(<span class="cn">None</span>))<span class="op">;</span></span>
 <span id="cb1-182"><a href="#cb1-182" aria-hidden="true"></a>  Ֆ_Ֆplus_<span class="op">.</span>set(<span class="cn">Some</span>(</span>
 <span id="cb1-183"><a href="#cb1-183" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x<span class="op">|</span> <span class="op">{</span></span>
@@ -276,7 +276,7 @@
 <span id="cb1-198"><a href="#cb1-198" aria-hidden="true"></a>  Ֆ_Ֆplus_<span class="op">.</span>get()<span class="op">.</span>unwrap()</span>
 <span id="cb1-199"><a href="#cb1-199" aria-hidden="true"></a><span class="op">}</span></span>
 <span id="cb1-200"><a href="#cb1-200" aria-hidden="true"></a></span>
-<span id="cb1-201"><a href="#cb1-201" aria-hidden="true"></a><span class="kw">fn</span> TypeAliases_incr(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> TypeAliases_ℕՖtoℕ<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb1-201"><a href="#cb1-201" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> TypeAliases_incr(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> TypeAliases_ℕՖtoℕ<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb1-202"><a href="#cb1-202" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x<span class="op">|</span> <span class="op">{</span></span>
 <span id="cb1-203"><a href="#cb1-203" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>Nat_Builtin_Agda_Ֆ_Ֆplus_()(</span>
 <span id="cb1-204"><a href="#cb1-204" aria-hidden="true"></a>      x)(</span>
@@ -289,7 +289,7 @@
 <span id="cb1-211"><a href="#cb1-211" aria-hidden="true"></a>  <span class="op">}</span>)</span>
 <span id="cb1-212"><a href="#cb1-212" aria-hidden="true"></a><span class="op">}</span></span>
 <span id="cb1-213"><a href="#cb1-213" aria-hidden="true"></a></span>
-<span id="cb1-214"><a href="#cb1-214" aria-hidden="true"></a><span class="kw">fn</span> TypeAliases_testAliasF(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> TypeAliases_ℕ<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb1-214"><a href="#cb1-214" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> TypeAliases_testAliasF(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> TypeAliases_ℕ<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb1-215"><a href="#cb1-215" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>TypeAliases_incr()(</span>
 <span id="cb1-216"><a href="#cb1-216" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>alloc(</span>
 <span id="cb1-217"><a href="#cb1-217" aria-hidden="true"></a>      <span class="pp">Nat_Builtin_Agda_Nat::</span>suc(</span>
@@ -419,7 +419,7 @@
 <span id="cb1-341"><a href="#cb1-341" aria-hidden="true"></a>                                                                                                                                                                            PhantomData)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))</span>
 <span id="cb1-342"><a href="#cb1-342" aria-hidden="true"></a><span class="op">}</span></span>
 <span id="cb1-343"><a href="#cb1-343" aria-hidden="true"></a></span>
-<span id="cb1-344"><a href="#cb1-344" aria-hidden="true"></a><span class="kw">fn</span> TypeAliases_test(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb1-344"><a href="#cb1-344" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> TypeAliases_test(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb1-345"><a href="#cb1-345" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>Nat_Builtin_Agda_Ֆ_Ֆplus_()(</span>
 <span id="cb1-346"><a href="#cb1-346" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>Nat_Builtin_Agda_Ֆ_Ֆplus_()(</span>
 <span id="cb1-347"><a href="#cb1-347" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>Nat_Builtin_Agda_Ֆ_Ֆplus_()(</span>
@@ -692,6 +692,9 @@
 <span id="cb1-614"><a href="#cb1-614" aria-hidden="true"></a>                                                                                                                                                                                                         <span class="pp">Nat_Builtin_Agda_Nat::</span>zero(</span>
 <span id="cb1-615"><a href="#cb1-615" aria-hidden="true"></a>                                                                                                                                                                                                           PhantomData))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))</span>
 <span id="cb1-616"><a href="#cb1-616" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-617"><a href="#cb1-617" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb1-617"><a href="#cb1-617" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-618"><a href="#cb1-618" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb1-619"><a href="#cb1-619" aria-hidden="true"></a>  <span class="pp">println!</span>(<span class="st">&quot;{:?}&quot;</span><span class="op">,</span> <span class="pp">Program::</span>new()<span class="op">.</span>TypeAliases_test())<span class="op">;</span></span>
+<span id="cb1-620"><a href="#cb1-620" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
 </body>
 </html>

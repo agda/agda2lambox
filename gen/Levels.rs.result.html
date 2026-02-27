@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Levels.rs.result</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+</head>
+<body>
+<pre><code>[1m[33mwarning[0m[1m:[0m no edition set: defaulting to the 2015 edition while the latest is 2024
+[1m[32m   Compiling[0m main v0.0.0 (/home/runner/work/agda2lambox/agda2lambox/test/gen/rust)
+[0m[1m[33mwarning[0m[0m[1m: identifier contains a non normalized (NFKC) character: &#39;ℓ&#39;[0m
+[0m   [0m[0m[1m[38;5;12m--&gt; [0m[0mLevels.rs:352:8[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m352[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mpub fn SomeLvl_Levels_ℓ(&amp;&#39;a self, x: &amp;&#39;a Levels_SomeLvl&lt;&#39;a&gt;) -&gt; () {[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m        [0m[0m[1m[33m^^^^^^^^^^^^^^^^[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m    [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: this character is included in the Not_NFKC Unicode general security profile[0m
+[0m    [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `#[warn(uncommon_codepoints)]` on by default[0m
+
+[0m[1m[33mwarning[0m[0m[1m: identifier contains a non normalized (NFKC) character: &#39;ℓ&#39;[0m
+[0m   [0m[0m[1m[38;5;12m--&gt; [0m[0mLevels.rs:359:8[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m359[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mpub fn SomeLvl_Levels_ℓ__curried(&amp;&#39;a self) -&gt; &amp;&#39;a dyn Fn(&amp;&#39;a Levels_SomeLvl&lt;&#39;a&gt;) -&gt; () {[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m        [0m[0m[1m[33m^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m    [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: this character is included in the Not_NFKC Unicode general security profile[0m
+
+[0m[1m[33mwarning[0m[0m[1m: identifier contains a non normalized (NFKC) character: &#39;ℓ&#39;[0m
+[0m   [0m[0m[1m[38;5;12m--&gt; [0m[0mLevels.rs:366:8[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m366[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mpub fn Levels_Ֆ30Ֆℓ(&amp;&#39;a self) -&gt; () {[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m        [0m[0m[1m[33m^^^^^^^^^^^^[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m    [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: this character is included in the Not_NFKC Unicode general security profile[0m
+
+[0m[1m[38;5;9merror[E0618][0m[0m[1m: expected function, found `()`[0m
+[0m   [0m[0m[1m[38;5;12m--&gt; [0m[0mLevels.rs:972:11[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m972[0m[0m [0m[0m[1m[38;5;12m|[0m[0m   [0m[0m          self.Primitive_Agda_lsuc()([0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m             [0m[0m[1m[38;5;12m-[0m[0m[1m[38;5;9m^^^^^^^^^^^^^^^^^^^^^^^^^[0m[0m[1m[38;5;12m-[0m[0m [0m[0m[1m[38;5;12mhelp: consider using a semicolon here to finish the statement: `;`[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m ___________|[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m973[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m            hint_app(mkLevel.get().unwrap())(x2))[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|_________________________________________________-[0m[0m [0m[0m[1m[38;5;12mcall expression requires function[0m
+
+[0m[1mFor more information about this error, try `rustc --explain E0618`.[0m
+[1m[33mwarning[0m[1m:[0m `main` (bin &quot;Levels&quot;) generated 3 warnings
+[1m[31merror[0m[1m:[0m could not compile `main` (bin &quot;Levels&quot;) due to 1 previous error; 3 warnings emitted</code></pre>
+</body>
+</html>
