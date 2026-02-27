@@ -104,7 +104,7 @@ compileTermC = \case
     TermEnv{mutuals, boundVars} <- ask
     case qn `elemIndex` mutuals of
       Nothing -> do lift $ requireDef qn
-                    pure $ LConst $ qnameToKName qn
+                    liftTCM $ LConst <$> qnameToKName qn
       Just i  -> pure $ LRel  $ i + boundVars
 
   TCon q -> do

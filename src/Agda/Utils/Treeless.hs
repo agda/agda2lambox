@@ -17,6 +17,7 @@ module Agda.Utils.Treeless
   , compilerPipeline
   , CCConfig
   , CCSubst(..)
+  , alwaysInline
   ) where
 
 import Prelude hiding ((!!))
@@ -189,13 +190,13 @@ compilerPipeline v q =
     [ FixedPoint 5 $ Sequential
       -- [ compilerPass "simpl"  (30 + v) "simplification"     $ const simplifyTTerm
       [ compilerPass "erase"  (30 + v) "erasure"            $ eraseTerms q
-      , compilerPass "uncase" (30 + v) "uncase"             $ const caseToSeq
+      -- , compilerPass "uncase" (30 + v) "uncase"             $ const caseToSeq
 
 
       --, compilerPass "aspat"  (30 + v) "@-pattern recovery" $ const recoverAsPatterns
       ]
 
-    , compilerPass "id" (30 + v) "identity function detection" $ const (detectIdentityFunctions q)
+    -- , compilerPass "id" (30 + v) "identity function detection" $ const (detectIdentityFunctions q)
 
     -- NOTE(flupe): those are custom transformations required by the backend
     , compilerPass "ctors"    (30 + v) "eta-expand constructors" $ const etaExpandConstructors
