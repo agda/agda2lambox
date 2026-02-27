@@ -9,7 +9,13 @@ gen:
 	mkdir -p gen/
 	./compile.sh
 
-html: gen
+run: # gen
+	@echo == Evaluating λ-box output ==
+	./runRocq.sh
+	@echo == Running Rust ==
+	./runRust.sh
+
+html: # gen run
 	@echo == Generating HTML ==
 	mkdir -p html/ && cp Agda.css html/
 	-cabal run -- agda2lambox --html --css=Agda.css $(MAIN).agda

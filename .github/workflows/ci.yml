@@ -108,13 +108,17 @@ jobs:
 
     - name: Install Peregrine
       working-directory: peregrine-tool/
-      run: |
-        eval $(opam env) && opam install -j4 ./rocq-peregrine.opam
+      run: eval $(opam env) && opam install -j4 ./rocq-peregrine.opam
+
+    - name: Set up Rust
+      uses: dtolnay/rust-toolchain@v1
+      with:
+        toolchain: 1.85.0
 
     - name: Generate HTML
       run: |
         sudo apt-get install -y pandoc zsh wabt
-        eval $(opam env) && make html
+        eval $(opam env) && make gen run html
 
     - name: Deploy HTML website
       if: github.ref == 'refs/heads/master'

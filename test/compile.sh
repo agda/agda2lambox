@@ -1,11 +1,11 @@
 #!/bin/zsh
 
-# PREREQUISITES:
+# PRE:
 #   - generated target files are placed under dist/
 BUILD_DIR=dist
 #   - Peregrine compilation output is placed under gen/
 GEN_DIR=gen
-#   - `peregrine` binary should be available
+#   - `peregrine` command should be available
 
 echo "Compiling λ-box..."
 

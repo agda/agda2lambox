@@ -62,7 +62,7 @@
 
 /* Tabs */
 [data-tab-info] { display: none; }
-.active[data-tab-info] { display: block; }
+.active[data-tab-info] { display: flex; }
 
 .tabs {
     font-size: 25px;

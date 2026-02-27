@@ -1,16 +1,17 @@
 #!/bin/zsh
 
-# PREREQUISITES:
-#   - generated target files are placed under dist/
+# PRE:
+#   - path to generated λ-box files
 BUILD_DIR=dist
-#   - Peregrine compilation output is placed under gen/
+#   - path to Peregrine compilation output
 GEN_DIR=gen
-#   - Agda generated HTML is placed under html/
+# POST:
+#   - path to Agda generated HTML
 AGDA_HTML_DIR=html
 
 echo "Rendering translations..."
 
-for f in $BUILD_DIR/**/* $GEN_DIR/**/**/*; do
+for f in $BUILD_DIR/* $GEN_DIR/*/*; do
 
   echo " * $f"
   ext=${f##*.}
@@ -23,6 +24,7 @@ for f in $BUILD_DIR/**/* $GEN_DIR/**/**/*; do
     "v") echo "coq";; # alas, pandoc has no coq/rocq syntax-highlighting support
     "rs") echo "rust";;
     "ml"|"sml") echo "ocaml";;
+    "result") echo "";;
     *) echo "$ext";;
   esac)
   echo "\`\`\`$lang" > $mdFn
@@ -82,6 +84,8 @@ for f in $BUILD_DIR/**/**.txt; do
     </div>\
     <div class=\"tabs__tab\" id=\"in_3\" data-tab-info>\
         <embed src=\"$fCoq.html\"/>\
+        <div style=\"font-size:50px;\">\&nbsp; ↪ \&nbsp;</div>\
+        <embed src=\"$fCoq.result.html\"/>\
     </div>\
     <div class=\"tabs__tab\" id=\"out_1\" data-tab-info>\
         <embed src=\"$fWasm.html\"/>\
@@ -97,6 +101,8 @@ for f in $BUILD_DIR/**/**.txt; do
     </div>\
     <div class=\"tabs__tab\" id=\"out_5\" data-tab-info>\
         <embed src=\"$fRust.html\"/>\
+        <div style=\"font-size:50px;\">\&nbsp; ↪ \&nbsp;</div>\
+        <embed src=\"$fRust.result.html\"/>\
     </div>\
     <div class=\"tabs__tab\" id=\"out_6\" data-tab-info>\
         <embed src=\"$fElm.html\"/>\
