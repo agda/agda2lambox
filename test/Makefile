@@ -17,7 +17,7 @@ run: # gen
 
 html: # gen run
 	@echo == Generating HTML ==
-	mkdir -p html/ && cp Agda.css html/
+	mkdir -p html/ && cp Agda.css html/ && cp favicon.ico html/
 	-cabal run -- agda2lambox --html --css=Agda.css $(MAIN).agda
 	./renderTranslations.sh
 	cp html/$(MAIN).html html/index.html
