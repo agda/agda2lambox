@@ -27,7 +27,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest]
+        os: [ubuntu-22.04]
         cabal: [3.12.1]
         ghc: [9.10.1]
         ocaml: [4.14.2]
@@ -90,17 +90,26 @@ jobs:
         restore-keys: |
           opam-${{matrix.ocaml}}-
 
+    - run: sudo apt-get update
     - name: Set up OCaml
-      uses: ocaml/setup-ocaml@v3
+      # uses: ocaml/setup-ocaml@v3
+      uses: avsm/setup-ocaml@v1
       with:
-        ocaml-compiler: ${{ matrix.ocaml }}
+        # ocaml-compiler: ${{ matrix.ocaml }}
+        ocaml-version: ${{ matrix.ocaml }}
 
-    - name: Install Peregrine
+    - name: Build Peregrine dependencies
+      # if: ${{ !steps.opam-cache.outputs.cache-hit }}
       working-directory: peregrine-tool/
       run: |
         opam repo add rocq-released https://rocq-prover.org/opam/released
         opam install --deps-only -j4 .github/rocq-peregrine.opam.locked
-        opam install -j4 ./rocq-peregrine.opam
+        opam clean -a -c -s --logs
+
+    - name: Install Peregrine
+      working-directory: peregrine-tool/
+      run: |
+        eval $(opam env) && opam install -j4 ./rocq-peregrine.opam
 
     - name: Generate HTML
       run: |
