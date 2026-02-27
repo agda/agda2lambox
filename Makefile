@@ -20,10 +20,10 @@ coq:
 gen: test
 	make -C test gen
 
-run: test
+run: coq test
 	make -C test run
 
-html: test
+html: coq test
 	make -C test html
 
 clean:
