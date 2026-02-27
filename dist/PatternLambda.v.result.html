@@ -15,9 +15,14 @@
   </style>
 </head>
 <body>
-<pre><code>File &quot;./PatternLambda.v&quot;, line 5, characters 36-43:
-Error: Cannot find a physical path bound to logical path
-CheckWF with prefix Agda2Lambox.
-</code></pre>
+<pre><code>     = true
+     : bool
+     = exceptionMonad.Ret
+         (compile.TConstruct
+            {|
+              inductive_mind := (MPfile [&quot;PatternLambda&quot;%bs], &quot;Bool&quot;%bs);
+              inductive_ind := 0
+            |} 0 compile.tnil)
+     : exceptionMonad.exception compile.Term</code></pre>
 </body>
 </html>
