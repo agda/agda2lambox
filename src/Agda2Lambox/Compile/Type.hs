@@ -199,7 +199,7 @@ compileTypeTerm t = do
       else do
         q <- liftTCM $ canonicalName q
         lift $ requireDef q
-        let ts = qnameToKName q
+        ts <- liftTCM $ qnameToKName q
         let args = mapMaybe isApplyElim es
         ([],) . foldl' LBox.TApp (LBox.TConst ts)
           <$> compileElims defType args

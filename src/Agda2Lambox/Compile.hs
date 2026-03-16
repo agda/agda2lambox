@@ -39,10 +39,10 @@ import LambdaBox.Term (Term(LBox))
 compile :: Target t -> [QName] -> CompileM (GlobalEnv t)
 compile t qs = do
   items <- compileLoop (compileDefinition t) qs
-  pure $ GlobalEnv $ map itemToEntry items ++ [(emptyName, emptyDecl t)]
-  where
-    itemToEntry :: CompiledItem (GlobalDecl t) -> (KerName, GlobalDecl t)
-    itemToEntry CompiledItem{..} = (qnameToKName itemName, itemValue)
+  liftTCM $ GlobalEnv . (++ [(emptyName, emptyDecl t)]) <$> mapM itemToEntry items
+    where
+      itemToEntry :: CompiledItem (GlobalDecl t) -> TCM (KerName, GlobalDecl t)
+      itemToEntry CompiledItem{..} = (,itemValue) <$> qnameToKName itemName
 
 
 compileDefinition :: Target t -> Definition -> CompileM (Maybe (GlobalDecl t))
@@ -52,12 +52,15 @@ compileDefinition target defn@Defn{..} = setCurrentRange defName do
   -- retrieve compile annotation written in COMPILE pragma
   annotation <- liftTCM $ getPragmaInfo defName
 
-  reportSDoc "agda2lambox.compile" 1 $
+  reportSDoc "agda2lambox.compile" 10 $
     "Definition is annotated as such:" <+> prettyTCM annotation
 
   -- we skip definitions introduced by module application
+  if defCopy then do
+    reportSDoc "agda2lambox.compile" 10 "The definition is a copy from module application: skipping"
+    pure Nothing
 
-  if defCopy then pure Nothing else do
+  else do
 
   -- TODO: check that we indeed don't compile defs marked with @0
   --       especially record projections for erased fields
@@ -78,6 +81,7 @@ compileDefinition target defn@Defn{..} = setCurrentRange defName do
 
     Function{} -> do
       ifNotM (liftTCM $ isArity defType) (compileFunction target defn) do
+        reportSDoc "agda2lambox.compile" 10 "Function is a type scheme"
         -- it's a type scheme
         case target of
           ToUntyped -> pure Nothing

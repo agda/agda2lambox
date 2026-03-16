@@ -166,14 +166,18 @@ actuallyConvertInductive t defn = do
             "Constructor telescope:" <+> prettyTCM conTel
           compileArgs indPars conTel
 
+        ident <- liftTCM $ qnameToIdent cname
+
         pure LBox.Constructor
-          { cstrName  = qnameToIdent cname
+          { cstrName  = ident
           , cstrArgs  = arity
           , cstrTypes = conTypeInfo
           }
 
+    ident <- liftTCM $ qnameToIdent indName
+
     pure LBox.OneInductive
-      { indName          = qnameToIdent indName
+      { indName          = ident
       , indPropositional = False        -- TODO(flupe)
       , indKElim         = LBox.IntoAny -- TODO(flupe)
       , indCtors         = ctors

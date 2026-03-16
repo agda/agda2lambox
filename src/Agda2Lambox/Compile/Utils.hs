@@ -14,7 +14,10 @@ module Agda2Lambox.Compile.Utils
   , sanitize
   ) where
 
+import Control.Monad ( (<=<) )
 import Control.Monad.State
+import Data.Maybe ( isJust )
+import Data.Functor ( (<&>) )
 import Control.Monad.IO.Class ( liftIO )
 import Numeric ( showHex )
 import Data.Char
@@ -26,14 +29,16 @@ import Agda.Compiler.Backend
 import Agda.Syntax.Internal
 import Agda.Syntax.Abstract.Name
 import Agda.Syntax.Common.Pretty ( prettyShow, Doc )
-import Agda.Syntax.Common ( usableModality, Arg(..) )
+import Agda.Syntax.Common ( usableModality, Arg(..), NameId(..) )
 import Agda.TypeChecking.Datatypes ( getConstructors, getConstructorData )
 import Agda.TypeChecking.Level ( isLevelType )
 import Agda.TypeChecking.Monad.SizedTypes ( isSizeType )
 import Agda.TypeChecking.Monad.Base ( TCM )
 import Agda.TypeChecking.Substitute (TelV(TelV))
 import Agda.TypeChecking.Telescope (telView)
-import Agda.Utils.Monad (orM)
+import Agda.Utils.Monad ( andM, orM, ifM )
+import Agda.Utils.Treeless ( alwaysInline )
+import Agda.Utils.Functor ( (<.>) )
 
 import Agda2Lambox.Compile.Monad
 import LambdaBox qualified as LBox
@@ -44,20 +49,37 @@ modNameToModPath =
   LBox.MPFile . map (sanitize . prettyShow) . mnameToList
 
 -- | Convert and Agda definition name to a λ□ kernel name.
-qnameToKName :: QName -> LBox.KerName
+qnameToKName :: QName -> TCM LBox.KerName
 qnameToKName qn =
-  LBox.KerName
-    (modNameToModPath $ qnameModule qn)
-    (qnameToIdent qn)
+  LBox.KerName (modNameToModPath $ qnameModule qn)
+    <$> qnameToIdent qn
 
 domToName :: Dom' a b -> LBox.Name
 domToName = maybe LBox.Anon (LBox.Named . sanitize . prettyShow) . domName
 
-qnameToIdent :: QName -> LBox.Ident
-qnameToIdent = sanitize . prettyShow . qnameName
+ -- | Whether a definition has a generated name and still must be compiled
+ --   i.e not systematically inline
+isKeptGenerated :: QName -> TCM Bool
+isKeptGenerated q = andM [ isGenerated,  not <$> alwaysInline q ]
+  where
+    isGenerated :: TCM Bool
+    isGenerated = theDef <$> getConstInfo q <&> \case
+      Function{..} -> isJust funExtLam || isJust funWith
+      _            -> False
 
-qnameToName :: QName -> LBox.Name
-qnameToName = LBox.Named . qnameToIdent
+qnameToIdent :: QName -> TCM LBox.Ident
+qnameToIdent q = do
+  keptGen <- isKeptGenerated q
+  -- NOTE(flupe): we only add nameId to generated names which are not inlined
+  let suffix = if keptGen then "_" ++ show idx 
+                          else ""
+  pure $ sanitize $ prettyShow name ++ suffix
+  where
+    name         = qnameName q
+    NameId idx _ = nameId name
+
+qnameToName :: QName -> TCM LBox.Name
+qnameToName = LBox.Named <.> qnameToIdent
 
 dataOrRecDefMutuals :: Definition -> TCM [QName]
 dataOrRecDefMutuals d = do
@@ -75,7 +97,7 @@ toInductive q = do
   names <- dataOrRecMutuals q
   let repr = fromMaybe q $ listToMaybe names
   let idx  = fromMaybe 0 $ elemIndex q names
-  pure $ LBox.Inductive (qnameToKName repr) idx
+  LBox.Inductive <$> qnameToKName repr <*> pure idx
 
 
 -- | Compile a constructor application to λ□.
