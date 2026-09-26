@@ -2,15 +2,34 @@
 
 From Stdlib                Require Import Nat.
 From MetaRocq.Utils        Require Import utils.
-From MetaRocq.Erasure      Require Import EAst.
+From MetaRocq.Utils        Require Import ReflectEq.
+From MetaRocq.Erasure      Require Import EAst EWellformed EEnvMap EProgram EConstructorsAsBlocks.
 From CertiCoq.Common       Require Import Common.
 From CertiCoq.LambdaBoxMut Require Import compile term program wcbvEval.
+From Agda2Lambox           Require Import CheckWF.
 
 
 (* TODO: eta-expand here *)
 
+(* CertiRocq's LambdaBoxMut expects constructors as blocks, which Peregrine produces
+   from our spines with `constructors_as_blocks_transformation`; we do the same here. *)
+Definition from_reflect {P b} (r : reflectProp P b) : b = true -> P :=
+  match r in reflectProp _ b' return b' = true -> P with
+  | reflectP p  => fun _ => p
+  | reflectF np => fun e => False_rect _ (diff_false_true e)
+  end.
+
+Definition blocks (p : EAst.program) : EAst.program :=
+  match inspect (@check_wf_glob eflags p.1) with
+  | exist true H =>
+      let Σ := GlobalContextMap.make p.1 (wf_glob_fresh _ (from_reflect (check_wf_globP p.1) H)) in
+      (transform_blocks_env Σ, transform_blocks Σ p.2)
+  | exist false _ => p
+  end.
+
 (* convert a lambda box program to certicoq lambda box mut, and run it *)
 Definition eval_program (p : EAst.program) : exception Term :=
+  let p := blocks p in
   let prog := {| env  := LambdaBoxMut.compile.compile_ctx (fst p);
       main := compile (snd p)
   |}
@@ -27,6 +46,7 @@ Import MonadNotation.
 From CertiCoq Require Import Common.Common Common.compM Common.Pipeline_utils.
 
 Definition box_to_wasm (p : EAst.program) :=
+  let p := blocks p in
   (* For simplicity we assume that the program contains no primitives *)
   let prims := [] in
   let next_id := 100%positive in
