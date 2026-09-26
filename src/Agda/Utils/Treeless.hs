@@ -66,6 +66,7 @@ import qualified Agda.Utils.SmallSet as SmallSet
 import Agda.Utils.Impossible
 
 import Agda.Utils.EliminateDefaults
+import Agda.Utils.ThunkLets
 import Agda.Utils.EtaExpandConstructors
 import Agda.Utils.Simplify
 
@@ -200,6 +201,7 @@ compilerPipeline v q =
     -- NOTE(flupe): those are custom transformations required by the backend
     , compilerPass "ctors"    (30 + v) "eta-expand constructors" $ const etaExpandConstructors
     , compilerPass "defaults" (30 + v) "remove default branches" $ const eliminateCaseDefaults
+    , compilerPass "thunks"   (30 + v) "thunk lazy let-bindings" $ const (pure . thunkLets)
     , compilerPass "names"    (30 + v) "normalize names"         $ const normalizeNames
     ]
 

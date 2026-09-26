@@ -22,6 +22,7 @@ executable agda2lambox
                        Agda.Utils.EtaExpandConstructors,
                        Agda.Utils.Simplify,
                        Agda.Utils.Treeless,
+                       Agda.Utils.ThunkLets,
                        Agda2Lambox.Compile.Target,
                        Agda2Lambox.Compile.Utils,
                        Agda2Lambox.Compile.Monad,
