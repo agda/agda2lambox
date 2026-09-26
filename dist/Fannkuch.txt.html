@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Fannkuch.txt</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+</head>
+<body>
+<pre><code>LamBox.Empty:
+  mutual inductive(s):
+    Empty
+      constructors:
+
+Agda.Builtin.Nat.Nat:
+  mutual inductive(s):
+    Nat
+      constructors:
+        zero (0 arg(s))
+        suc (1 arg(s))
+
+Agda.Builtin.Maybe.Maybe:
+  mutual inductive(s):
+    Maybe
+      constructors:
+        just (1 arg(s))
+        nothing (0 arg(s))
+
+Agda.Builtin.Bool.Bool:
+  mutual inductive(s):
+    Bool
+      constructors:
+        r#false (0 arg(s))
+        r#true (0 arg(s))
+
+Prelude.if_then_else_:
+  constant declaration:
+    body: λ _ _ _ _ _ →
+            case&lt;Agda.Builtin.Bool.Bool{0},0&gt; @2 of
+              λ&lt;[]&gt; @0
+              λ&lt;[]&gt; @1
+
+Agda.Builtin.Nat.Ֆ_Ֆlt_:
+  constant declaration:
+    body: μrec [0] :=
+            0: λ _ _ →
+                 case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @0 of
+                   λ&lt;[]&gt; Agda.Builtin.Bool.Bool{0}{0}
+                   λ&lt;[_]&gt;
+                     case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @2 of
+                       λ&lt;[]&gt; Agda.Builtin.Bool.Bool{0}{1}
+                       λ&lt;[_]&gt; @4 @0 @1
+
+Prelude.max:
+  constant declaration:
+    body: λ _ _ →
+            Prelude.if_then_else_ □ □ (Agda.Builtin.Nat.Ֆ_Ֆlt_ @1 @0) @0 @1
+
+Agda.Builtin.List.List:
+  mutual inductive(s):
+    List
+      constructors:
+        Ֆ5bՖՖ5dՖ (0 arg(s))
+        Ֆ_Ֆcons_ (2 arg(s))
+
+Prelude.reverseAux:
+  constant declaration:
+    body: μrec [0] :=
+            0: λ _ _ _ _ →
+                 case&lt;Agda.Builtin.List.List{0},0&gt; @1 of
+                   λ&lt;[]&gt; @0
+                   λ&lt;[_, _]&gt; @6 □ □ @0 (Agda.Builtin.List.List{0}{1} @1 @2)
+
+Prelude.reverse:
+  constant declaration:
+    body: λ _ _ _ →
+            Prelude.reverseAux □ □ @0 Agda.Builtin.List.List{0}{0}
+
+Prelude.appendTR:
+  constant declaration:
+    body: λ _ _ _ _ →
+            Prelude.reverseAux □ □ (Prelude.reverse □ □ @1) @0
+
+Fannkuch.reversePrefixAux:
+  constant declaration:
+    body: μrec [0] :=
+            0: λ _ _ _ →
+                 case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @2 of
+                   λ&lt;[]&gt; Prelude.appendTR □ □ @0 @1
+                   λ&lt;[_]&gt;
+                     case&lt;Agda.Builtin.List.List{0},0&gt; @2 of
+                       λ&lt;[]&gt; @1
+                       λ&lt;[_, _]&gt; @6 @2 @0 (Agda.Builtin.List.List{0}{1} @1 @3)
+
+Fannkuch.reversePrefix:
+  constant declaration:
+    body: λ _ _ →
+            Fannkuch.reversePrefixAux @1 @0 Agda.Builtin.List.List{0}{0}
+
+Fannkuch.flip:
+  constant declaration:
+    body: λ _ →
+            case&lt;Agda.Builtin.List.List{0},0&gt; @0 of
+              λ&lt;[]&gt; Agda.Builtin.List.List{0}{0}
+              λ&lt;[_, _]&gt;
+                Fannkuch.reversePrefix (Agda.Builtin.Nat.Nat{0}{1} @1)
+                  (Agda.Builtin.List.List{0}{1} @1 @0)
+
+Fannkuch.countFlipsAux:
+  constant declaration:
+    body: μrec [0] :=
+            0: λ _ _ →
+                 case&lt;Agda.Builtin.List.List{0},0&gt; @0 of
+                   λ&lt;[]&gt; @1
+                   λ&lt;[_, _]&gt;
+                     case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @1 of
+                       λ&lt;[]&gt; @3
+                       λ&lt;[_]&gt; @5 (Agda.Builtin.Nat.Nat{0}{1} @4) (Fannkuch.flip @3)
+
+Fannkuch.countFlips:
+  constant declaration:
+    body: Fannkuch.countFlipsAux Agda.Builtin.Nat.Nat{0}{0}
+
+Prelude.Ֆ_Ֆd7Ֆ_:
+  mutual inductive(s):
+    Ֆ_Ֆd7Ֆ_
+      constructors: Ֆ_Ֆ2cՖ_ (2 arg(s))
+
+Prelude.Ֆ_Ֆd7Ֆ_.fst:
+  constant declaration:
+    body: λ _ → case&lt;Prelude.Ֆ_Ֆd7Ֆ_{0},0&gt; @0 of λ&lt;[_, _]&gt; @1
+
+Prelude.Ֆ_Ֆd7Ֆ_.snd:
+  constant declaration:
+    body: λ _ → case&lt;Prelude.Ֆ_Ֆd7Ֆ_{0},0&gt; @0 of λ&lt;[_, _]&gt; @0
+
+Prelude.splitAt:
+  constant declaration:
+    body: μrec [0] :=
+            0: λ _ _ _ _ →
+                 case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @1 of
+                   λ&lt;[]&gt; Prelude.Ֆ_Ֆd7Ֆ_{0}{0} Agda.Builtin.List.List{0}{0} @0
+                   λ&lt;[_]&gt;
+                     case&lt;Agda.Builtin.List.List{0},0&gt; @1 of
+                       λ&lt;[]&gt;
+                         Prelude.Ֆ_Ֆd7Ֆ_{0}{0} Agda.Builtin.List.List{0}{0}
+                           Agda.Builtin.List.List{0}{0}
+                       λ&lt;[_, _]&gt;
+                         λ _ _ _ _ _ _ →
+                           case&lt;Prelude.Ֆ_Ֆd7Ֆ_{0},0&gt; @1 of
+                             λ&lt;[_, _]&gt;
+                               Prelude.Ֆ_Ֆd7Ֆ_{0}{0} (Agda.Builtin.List.List{0}{1} @2 @1) @0
+                           @6
+                           @5
+                           @2
+                           @0
+                           (@7 @6 □ @2 @0)
+                           @1
+
+Fannkuch.rotatePrefix:
+  constant declaration:
+    body: λ _ _ →
+            case&lt;Agda.Builtin.List.List{0},0&gt; @1 of
+              λ&lt;[]&gt; Agda.Builtin.List.List{0}{0}
+              λ&lt;[_, _]&gt;
+                case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @2 of
+                  λ&lt;[]&gt; Agda.Builtin.List.List{0}{1} @1 @0
+                  λ&lt;[_]&gt;
+                    case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @0 of
+                      λ&lt;[]&gt; Agda.Builtin.List.List{0}{1} @2 @1
+                      λ&lt;[_]&gt;
+                        Prelude.appendTR □ □
+                          (Prelude.Ֆ_Ֆd7Ֆ_.fst (Prelude.splitAt □ □ @1 @2))
+                          (Prelude.appendTR □ □
+                             (Agda.Builtin.List.List{0}{1} @3 Agda.Builtin.List.List{0}{0})
+                             (Prelude.Ֆ_Ֆd7Ֆ_.snd (Prelude.splitAt □ □ @1 @2)))
+
+Fannkuch.resetCounts:
+  constant declaration:
+    body: μrec [0] :=
+            0: λ _ _ →
+                 case&lt;Agda.Builtin.List.List{0},0&gt; @1 of
+                   λ&lt;[]&gt; Agda.Builtin.List.List{0}{0}
+                   λ&lt;[_, _]&gt;
+                     case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @2 of
+                       λ&lt;[]&gt; Agda.Builtin.List.List{0}{1} @1 @0
+                       λ&lt;[_]&gt;
+                         Agda.Builtin.List.List{0}{1} Agda.Builtin.Nat.Nat{0}{0} (@5 @1 @0)
+
+Prelude.updateAt:
+  constant declaration:
+    body: μrec [0] :=
+            0: λ _ _ _ _ _ →
+                 case&lt;Agda.Builtin.List.List{0},0&gt; @1 of
+                   λ&lt;[]&gt; Agda.Builtin.List.List{0}{0}
+                   λ&lt;[_, _]&gt;
+                     case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @2 of
+                       λ&lt;[]&gt; Agda.Builtin.List.List{0}{1} (@4 @1) @0
+                       λ&lt;[_]&gt; Agda.Builtin.List.List{0}{1} @2 (@8 □ □ @5 @1 @0)
+
+Prelude.findIndexAux:
+  constant declaration:
+    body: μrec [0] :=
+            0: λ _ _ _ _ _ →
+                 case&lt;Agda.Builtin.List.List{0},0&gt; @0 of
+                   λ&lt;[]&gt; Agda.Builtin.Maybe.Maybe{0}{1}
+                   λ&lt;[_, _]&gt;
+                     Prelude.if_then_else_ □ □ (@4 @3 @1)
+                       (Agda.Builtin.Maybe.Maybe{0}{0} @3)
+                       (@7 □ □ @4 (Agda.Builtin.Nat.Nat{0}{1} @3) @0)
+
+Fannkuch.nextPerm:
+  constant declaration:
+    body: λ _ _ →
+            λ _ _ _ →
+              case&lt;Agda.Builtin.Maybe.Maybe{0},0&gt; @1 of
+                λ&lt;[_]&gt;
+                  Agda.Builtin.Maybe.Maybe{0}{0}
+                    (Prelude.Ֆ_Ֆd7Ֆ_{0}{0}
+                       (Fannkuch.rotatePrefix @1 (Agda.Builtin.Nat.Nat{0}{1} @0))
+                       (Fannkuch.resetCounts
+                          (Prelude.updateAt □ □ (λ _ → Agda.Builtin.Nat.Nat{0}{1} @0) @3 @0)
+                          @0))
+                λ&lt;[]&gt; Agda.Builtin.Maybe.Maybe{0}{1}
+              @0
+              (Prelude.findIndexAux □ □ (λ _ _ → Agda.Builtin.Nat.Ֆ_Ֆlt_ @0 @1)
+                 Agda.Builtin.Nat.Nat{0}{0}
+                 @0)
+              @1
+
+Fannkuch.fannkuchLoop:
+  constant declaration:
+    body: μrec [0] :=
+            0: λ _ _ _ →
+                 @3 (Prelude.max @0 (Fannkuch.countFlips @2))
+                   (Fannkuch.nextPerm @2 @1)
+            1: λ _ _ →
+                 case&lt;Agda.Builtin.Maybe.Maybe{0},0&gt; @0 of
+                   λ&lt;[_]&gt; case&lt;Prelude.Ֆ_Ֆd7Ֆ_{0},0&gt; @0 of λ&lt;[_, _]&gt; @6 @1 @0 @4
+                   λ&lt;[]&gt; @1
+
+Prelude.foldl:
+  constant declaration:
+    body: μrec [0] :=
+            0: λ _ _ _ _ _ _ _ →
+                 case&lt;Agda.Builtin.List.List{0},0&gt; @0 of
+                   λ&lt;[]&gt; @1
+                   λ&lt;[_, _]&gt; @9 □ □ □ □ @4 (@4 @3 @1) @0
+
+Prelude.rev:
+  constant declaration:
+    body: λ _ _ →
+            Prelude.foldl □ □ □ □ (λ _ _ → Agda.Builtin.List.List{0}{1} @0 @1)
+              Agda.Builtin.List.List{0}{0}
+
+Prelude.invrange:
+  constant declaration:
+    body: μrec [0] :=
+            0: λ _ →
+                 case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @0 of
+                   λ&lt;[]&gt; Agda.Builtin.List.List{0}{0}
+                   λ&lt;[_]&gt; Agda.Builtin.List.List{0}{1} @0 (@2 @0)
+
+Prelude.range:
+  constant declaration:
+    body: λ _ → Prelude.rev □ □ (Prelude.invrange @0)
+
+Prelude.replicate:
+  constant declaration:
+    body: μrec [0] :=
+            0: λ _ _ _ _ →
+                 case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @1 of
+                   λ&lt;[]&gt; Agda.Builtin.List.List{0}{0}
+                   λ&lt;[_]&gt; Agda.Builtin.List.List{0}{1} @1 (@5 □ □ @0 @1)
+
+Fannkuch.fannkuch:
+  constant declaration:
+    body: λ _ →
+            Fannkuch.fannkuchLoop (Prelude.range @0)
+              (Prelude.replicate □ □ @0 Agda.Builtin.Nat.Nat{0}{0})
+              Agda.Builtin.Nat.Nat{0}{0}
+
+Fannkuch.fannkuchBench:
+  constant declaration: body: λ _ → Fannkuch.fannkuch @0
+
+Fannkuch.fannkuchLoopAux:
+  constant declaration:
+    body: μrec [1] :=
+            0: λ _ _ _ →
+                 @3 (Prelude.max @0 (Fannkuch.countFlips @2))
+                   (Fannkuch.nextPerm @2 @1)
+            1: λ _ _ →
+                 case&lt;Agda.Builtin.Maybe.Maybe{0},0&gt; @0 of
+                   λ&lt;[_]&gt; case&lt;Prelude.Ֆ_Ֆd7Ֆ_{0},0&gt; @0 of λ&lt;[_, _]&gt; @6 @1 @0 @4
+                   λ&lt;[]&gt; @1
+
+Prelude.findIndex:
+  constant declaration:
+    body: λ _ _ _ →
+            Prelude.findIndexAux □ □ @0 Agda.Builtin.Nat.Nat{0}{0}
+
+Fannkuch.findI:
+  constant declaration:
+    body: Prelude.findIndex □ □ (λ _ _ → Agda.Builtin.Nat.Ֆ_Ֆlt_ @0 @1)
+main program: [Fannkuch.fannkuchBench]</code></pre>
+</body>
+</html>

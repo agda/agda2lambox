@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>StrictLet.txt</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+</head>
+<body>
+<pre><code>LamBox.Empty:
+  mutual inductive(s):
+    Empty
+      constructors:
+
+Agda.Builtin.Nat.Nat:
+  mutual inductive(s):
+    Nat
+      constructors:
+        zero (0 arg(s))
+        suc (1 arg(s))
+
+Agda.Builtin.Nat.Ֆ_Ֆsub_:
+  constant declaration:
+    body: μrec [0] :=
+            0: λ _ _ →
+                 case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @0 of
+                   λ&lt;[]&gt; @1
+                   λ&lt;[_]&gt;
+                     case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @2 of
+                       λ&lt;[]&gt; Agda.Builtin.Nat.Nat{0}{0}
+                       λ&lt;[_]&gt; @4 @0 @1
+
+StrictLet.countdown:
+  constant declaration:
+    body: μrec [0] :=
+            0: λ _ _ →
+                 case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @0 of
+                   λ&lt;[]&gt; @1
+                   λ&lt;[_]&gt;
+                     @3 (Agda.Builtin.Nat.Nat{0}{1} @2)
+                       (Agda.Builtin.Nat.Ֆ_Ֆsub_ @1
+                          (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}))
+
+StrictLet.test:
+  constant declaration:
+    body: StrictLet.countdown Agda.Builtin.Nat.Nat{0}{0}
+            (Agda.Builtin.Nat.Nat{0}{1}
+               (Agda.Builtin.Nat.Nat{0}{1}
+                  (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0})))
+main program: [StrictLet.test]</code></pre>
+</body>
+</html>

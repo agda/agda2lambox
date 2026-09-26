@@ -15,10 +15,75 @@
   </style>
 </head>
 <body>
-<pre><code>     = false
+<pre><code>     = true
      : bool
-     = exceptionMonad.Exc
-         &quot;(wcbvEval;TApp:fnwcbvEval,Cong,Constructor:  (inductive:Demo.List:0) 1)&quot;
+     = exceptionMonad.Ret
+         (compile.TConstruct
+            {|
+              inductive_mind := (MPfile [&quot;Demo&quot;%bs], &quot;List&quot;%bs);
+              inductive_ind := 0
+            |} 1
+            (compile.tcons
+               (compile.TConstruct
+                  {|
+                    inductive_mind := (MPfile [&quot;Demo&quot;%bs], &quot;Bool&quot;%bs);
+                    inductive_ind := 0
+                  |} 1 compile.tnil)
+               (compile.tcons
+                  (compile.TConstruct
+                     {|
+                       inductive_mind := (MPfile [&quot;Demo&quot;%bs], &quot;List&quot;%bs);
+                       inductive_ind := 0
+                     |} 1
+                     (compile.tcons
+                        (compile.TConstruct
+                           {|
+                             inductive_mind :=
+                               (MPfile [&quot;Demo&quot;%bs], &quot;Bool&quot;%bs);
+                             inductive_ind := 0
+                           |} 0 compile.tnil)
+                        (compile.tcons
+                           (compile.TConstruct
+                              {|
+                                inductive_mind :=
+                                  (MPfile [&quot;Demo&quot;%bs], &quot;List&quot;%bs);
+                                inductive_ind := 0
+                              |} 1
+                              (compile.tcons
+                                 (compile.TConstruct
+                                    {|
+                                      inductive_mind :=
+                                        (MPfile [&quot;Demo&quot;%bs], &quot;Bool&quot;%bs);
+                                      inductive_ind := 0
+                                    |} 1 compile.tnil)
+                                 (compile.tcons
+                                    (compile.TConstruct
+                                       {|
+                                         inductive_mind :=
+                                           (MPfile [&quot;Demo&quot;%bs], &quot;List&quot;%bs);
+                                         inductive_ind := 0
+                                       |} 1
+                                       (compile.tcons
+                                          (compile.TConstruct
+                                             {|
+                                               inductive_mind :=
+                                                 (
+                                                 MPfile [&quot;Demo&quot;%bs],
+                                                 &quot;Bool&quot;%bs);
+                                               inductive_ind := 0
+                                             |} 0 compile.tnil)
+                                          (compile.tcons
+                                             (compile.TConstruct
+                                                {|
+                                                 inductive_mind :=
+                                                 (MPfile [&quot;Demo&quot;%bs],
+                                                 &quot;List&quot;%bs);
+                                                 inductive_ind := 0
+                                                |} 0 compile.tnil)
+                                             compile.tnil)))
+                                    compile.tnil)))
+                           compile.tnil)))
+                  compile.tnil)))
      : exceptionMonad.exception compile.Term</code></pre>
 </body>
 </html>

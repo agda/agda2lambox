@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>StrictLet.v</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+</head>
+<body>
+<pre class="coq"><code>From Stdlib           Require Import List.
+From MetaRocq.Common  Require Import BasicAst Kernames Universes.
+From MetaRocq.Utils   Require Import bytestring.
+From MetaRocq.Erasure Require Import EAst.
+From Agda2Lambox     Require Import CheckWF Eval.
+Import ListNotations.
+
+Definition env : global_declarations :=
+  [((MPfile [&quot;StrictLet&quot;%bs], &quot;test&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tApp
+                (tApp
+                   (tConst (MPfile [&quot;StrictLet&quot;%bs], &quot;countdown&quot;%bs))
+                   (tConstruct
+                      {| inductive_mind :=
+                           (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                         inductive_ind := 0 |}
+                      0 []))
+                (tApp
+                   (tConstruct
+                      {| inductive_mind :=
+                           (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                         inductive_ind := 0 |}
+                      1 [])
+                   (tApp
+                      (tConstruct
+                         {| inductive_mind :=
+                              (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                            inductive_ind := 0 |}
+                         1 [])
+                      (tApp
+                         (tConstruct
+                            {| inductive_mind :=
+                                 (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                               inductive_ind := 0 |}
+                            1 [])
+                         (tConstruct
+                            {| inductive_mind :=
+                                 (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                               inductive_ind := 0 |}
+                            0 []))))) |});
+   ((MPfile [&quot;StrictLet&quot;%bs], &quot;countdown&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tFix
+                [{| dname := nNamed &quot;countdown&quot;%bs;
+                    dbody :=
+                      tLambda
+                        nAnon
+                        (tLambda
+                           nAnon
+                           (tCase
+                              ({| inductive_mind :=
+                                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                  inductive_ind := 0 |},
+                               0)
+                              (tRel 0)
+                              [([], tRel 1);
+                               ([nAnon],
+                                tApp
+                                  (tApp
+                                     (tRel 3)
+                                     (tApp
+                                        (tConstruct
+                                           {| inductive_mind :=
+                                                (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
+                                                 &quot;Nat&quot;%bs);
+                                              inductive_ind := 0 |}
+                                           1 [])
+                                        (tRel 2)))
+                                  (tApp
+                                     (tApp
+                                        (tConst
+                                           (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
+                                            &quot;\1366_\1366sub_&quot;%bs))
+                                        (tRel 1))
+                                     (tApp
+                                        (tConstruct
+                                           {| inductive_mind :=
+                                                (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
+                                                 &quot;Nat&quot;%bs);
+                                              inductive_ind := 0 |}
+                                           1 [])
+                                        (tConstruct
+                                           {| inductive_mind :=
+                                                (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
+                                                 &quot;Nat&quot;%bs);
+                                              inductive_ind := 0 |}
+                                           0 []))))]));
+                    rarg := 0 |}]
+                0) |});
+   ((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
+     &quot;\1366_\1366sub_&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tFix
+                [{| dname := nNamed &quot;\1366_\1366sub_&quot;%bs;
+                    dbody :=
+                      tLambda
+                        nAnon
+                        (tLambda
+                           nAnon
+                           (tCase
+                              ({| inductive_mind :=
+                                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                  inductive_ind := 0 |},
+                               0)
+                              (tRel 0)
+                              [([], tRel 1);
+                               ([nAnon],
+                                tCase
+                                  ({| inductive_mind :=
+                                        (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                      inductive_ind := 0 |},
+                                   0)
+                                  (tRel 2)
+                                  [([],
+                                    tConstruct
+                                      {| inductive_mind :=
+                                           (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                         inductive_ind := 0 |}
+                                      0 []);
+                                   ([nAnon], tApp (tApp (tRel 4) (tRel 0)) (tRel 1))])]));
+                    rarg := 0 |}]
+                0) |});
+   ((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs),
+    InductiveDecl
+      {| ind_finite := Finite; ind_npars := 0;
+         ind_bodies :=
+           [{| ind_name := &quot;Nat&quot;%bs; ind_propositional := false;
+               ind_kelim := IntoAny;
+               ind_ctors :=
+                 [{| cstr_name := &quot;zero&quot;%bs; cstr_nargs := 0 |};
+                  {| cstr_name := &quot;suc&quot;%bs; cstr_nargs := 1 |}];
+               ind_projs := [] |}] |});
+   ((MPfile [&quot;LamBox&quot;%bs], &quot;Empty&quot;%bs),
+    InductiveDecl
+      {| ind_finite := Finite; ind_npars := 0;
+         ind_bodies :=
+           [{| ind_name := &quot;Empty&quot;%bs; ind_propositional := false;
+               ind_kelim := IntoAny; ind_ctors := []; ind_projs := [] |}] |})].
+
+Compute @check_wf_glob eflags env.
+
+Definition prog1 : program :=
+  (env, tConst (MPfile [&quot;StrictLet&quot;%bs], &quot;test&quot;%bs)).
+
+Compute eval_program prog1.</code></pre>
+</body>
+</html>

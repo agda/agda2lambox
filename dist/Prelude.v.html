@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Prelude.v</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+</head>
+<body>
+<pre class="coq"><code>From Stdlib           Require Import List.
+From MetaRocq.Common  Require Import BasicAst Kernames Universes.
+From MetaRocq.Utils   Require Import bytestring.
+From MetaRocq.Erasure Require Import EAst.
+From Agda2Lambox     Require Import CheckWF Eval.
+Import ListNotations.
+
+Definition env : global_declarations :=
+  [((MPfile [&quot;Prelude&quot;%bs], &quot;a&quot;%bs),
+    ConstantDecl {| cst_body := Some tBox |});
+   ((MPfile [&quot;Prelude&quot;%bs], &quot;b&quot;%bs),
+    ConstantDecl {| cst_body := Some tBox |});
+   ((MPfile [&quot;Prelude&quot;%bs], &quot;double&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tFix
+                [{| dname := nNamed &quot;double&quot;%bs;
+                    dbody :=
+                      tLambda
+                        nAnon
+                        (tCase
+                           ({| inductive_mind :=
+                                 (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                               inductive_ind := 0 |},
+                            0)
+                           (tRel 0)
+                           [([],
+                             tConstruct
+                               {| inductive_mind :=
+                                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                  inductive_ind := 0 |}
+                               0 []);
+                            ([nAnon],
+                             tApp
+                               (tConstruct
+                                  {| inductive_mind :=
+                                       (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                     inductive_ind := 0 |}
+                                  1 [])
+                               (tApp
+                                  (tConstruct
+                                     {| inductive_mind :=
+                                          (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                        inductive_ind := 0 |}
+                                     1 [])
+                                  (tApp (tRel 2) (tRel 0))))]);
+                    rarg := 0 |}]
+                0) |});
+   ((MPfile [&quot;Prelude&quot;%bs], &quot;pow2&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tLambda
+                nAnon
+                (tApp
+                   (tApp
+                      (tConst (MPfile [&quot;Prelude&quot;%bs], &quot;pow&quot;%bs))
+                      (tApp
+                         (tConstruct
+                            {| inductive_mind :=
+                                 (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                               inductive_ind := 0 |}
+                            1 [])
+                         (tApp
+                            (tConstruct
+                               {| inductive_mind :=
+                                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                  inductive_ind := 0 |}
+                               1 [])
+                            (tConstruct
+                               {| inductive_mind :=
+                                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                  inductive_ind := 0 |}
+                               0 []))))
+                   (tRel 0))) |});
+   ((MPfile [&quot;Prelude&quot;%bs], &quot;pow&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tFix
+                [{| dname := nNamed &quot;pow&quot;%bs;
+                    dbody :=
+                      tLambda
+                        nAnon
+                        (tLambda
+                           nAnon
+                           (tCase
+                              ({| inductive_mind :=
+                                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                  inductive_ind := 0 |},
+                               0)
+                              (tRel 0)
+                              [([],
+                                tApp
+                                  (tConstruct
+                                     {| inductive_mind :=
+                                          (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                        inductive_ind := 0 |}
+                                     1 [])
+                                  (tConstruct
+                                     {| inductive_mind :=
+                                          (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                        inductive_ind := 0 |}
+                                     0 []));
+                               ([nAnon],
+                                tApp
+                                  (tApp
+                                     (tConst
+                                        (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
+                                         &quot;\1366_\1366mult_&quot;%bs))
+                                     (tRel 2))
+                                  (tApp (tApp (tRel 3) (tRel 2)) (tRel 0)))]));
+                    rarg := 0 |}]
+                0) |});
+   ((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
+     &quot;\1366_\1366mult_&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tFix
+                [{| dname := nNamed &quot;\1366_\1366mult_&quot;%bs;
+                    dbody :=
+                      tLambda
+                        nAnon
+                        (tLambda
+                           nAnon
+                           (tCase
+                              ({| inductive_mind :=
+                                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                  inductive_ind := 0 |},
+                               0)
+                              (tRel 1)
+                              [([],
+                                tConstruct
+                                  {| inductive_mind :=
+                                       (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                     inductive_ind := 0 |}
+                                  0 []);
+                               ([nAnon],
+                                tApp
+                                  (tApp
+                                     (tConst
+                                        (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
+                                         &quot;\1366_\1366plus_&quot;%bs))
+                                     (tRel 1))
+                                  (tApp (tApp (tRel 3) (tRel 0)) (tRel 1)))]));
+                    rarg := 0 |}]
+                0) |});
+   ((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
+     &quot;\1366_\1366plus_&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tFix
+                [{| dname := nNamed &quot;\1366_\1366plus_&quot;%bs;
+                    dbody :=
+                      tLambda
+                        nAnon
+                        (tLambda
+                           nAnon
+                           (tCase
+                              ({| inductive_mind :=
+                                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                  inductive_ind := 0 |},
+                               0)
+                              (tRel 1)
+                              [([], tRel 0);
+                               ([nAnon],
+                                tApp
+                                  (tConstruct
+                                     {| inductive_mind :=
+                                          (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                        inductive_ind := 0 |}
+                                     1 [])
+                                  (tApp (tApp (tRel 3) (tRel 0)) (tRel 1)))]));
+                    rarg := 0 |}]
+                0) |});
+   ((MPfile [&quot;Prelude&quot;%bs], &quot;max&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tLambda
+                nAnon
+                (tLambda
+                   nAnon
+                   (tApp
+                      (tApp
+                         (tApp
+                            (tApp
+                               (tApp (tConst (MPfile [&quot;Prelude&quot;%bs], &quot;if_then_else_&quot;%bs)) tBox)
+                               tBox)
+                            (tApp
+                               (tApp
+                                  (tConst
+                                     (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
+                                      &quot;\1366_\1366lt_&quot;%bs))
+                                  (tRel 1))
+                               (tRel 0)))
+                         (tRel 0))
+                      (tRel 1)))) |});
+   ((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;\1366_\1366lt_&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tFix
+                [{| dname := nNamed &quot;\1366_\1366lt_&quot;%bs;
+                    dbody :=
+                      tLambda
+                        nAnon
+                        (tLambda
+                           nAnon
+                           (tCase
+                              ({| inductive_mind :=
+                                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                  inductive_ind := 0 |},
+                               0)
+                              (tRel 0)
+                              [([],
+                                tConstruct
+                                  {| inductive_mind :=
+                                       (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Bool&quot;%bs], &quot;Bool&quot;%bs);
+                                     inductive_ind := 0 |}
+                                  0 []);
+                               ([nAnon],
+                                tCase
+                                  ({| inductive_mind :=
+                                        (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                      inductive_ind := 0 |},
+                                   0)
+                                  (tRel 2)
+                                  [([],
+                                    tConstruct
+                                      {| inductive_mind :=
+                                           (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Bool&quot;%bs], &quot;Bool&quot;%bs);
+                                         inductive_ind := 0 |}
+                                      1 []);
+                                   ([nAnon], tApp (tApp (tRel 4) (tRel 0)) (tRel 1))])]));
+                    rarg := 0 |}]
+                0) |});
+   ((MPfile [&quot;Prelude&quot;%bs], &quot;\1366_\1366plus\1366plus_&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tFix
+                [{| dname := nNamed &quot;\1366_\1366plus\1366plus_&quot;%bs;
+                    dbody :=
+                      tLambda
+                        nAnon
+                        (tLambda
+                           nAnon
+                           (tLambda
+                              nAnon
+                              (tLambda
+                                 nAnon
+                                 (tCase
+                                    ({| inductive_mind :=
+                                          (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
+                                        inductive_ind := 0 |},
+                                     0)
+                                    (tRel 1)
+                                    [([], tRel 0);
+                                     ([nAnon; nAnon],
+                                      tApp
+                                        (tApp
+                                           (tConstruct
+                                              {| inductive_mind :=
+                                                   (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
+                                                    &quot;List&quot;%bs);
+                                                 inductive_ind := 0 |}
+                                              1 [])
+                                           (tRel 1))
+                                        (tApp
+                                           (tApp (tApp (tApp (tRel 6) tBox) tBox) (tRel 0))
+                                           (tRel 2)))]))));
+                    rarg := 0 |}]
+                0) |});
+   ((MPfile [&quot;Prelude&quot;%bs], &quot;length&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tLambda
+                nAnon
+                (tLambda
+                   nAnon
+                   (tApp
+                      (tApp
+                         (tApp
+                            (tApp
+                               (tApp
+                                  (tApp (tConst (MPfile [&quot;Prelude&quot;%bs], &quot;foldr&quot;%bs)) tBox) tBox)
+                               tBox)
+                            tBox)
+                         (tLambda
+                            nAnon
+                            (tLambda
+                               nAnon
+                               (tApp
+                                  (tConstruct
+                                     {| inductive_mind :=
+                                          (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                        inductive_ind := 0 |}
+                                     1 [])
+                                  (tRel 0)))))
+                      (tConstruct
+                         {| inductive_mind :=
+                              (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                            inductive_ind := 0 |}
+                         0 [])))) |});
+   ((MPfile [&quot;Prelude&quot;%bs], &quot;foldr&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tFix
+                [{| dname := nNamed &quot;foldr&quot;%bs;
+                    dbody :=
+                      tLambda
+                        nAnon
+                        (tLambda
+                           nAnon
+                           (tLambda
+                              nAnon
+                              (tLambda
+                                 nAnon
+                                 (tLambda
+                                    nAnon
+                                    (tLambda
+                                       nAnon
+                                       (tLambda
+                                          nAnon
+                                          (tCase
+                                             ({| inductive_mind :=
+                                                   (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
+                                                    &quot;List&quot;%bs);
+                                                 inductive_ind := 0 |},
+                                              0)
+                                             (tRel 0)
+                                             [([], tRel 1);
+                                              ([nAnon; nAnon],
+                                               tApp
+                                                 (tApp (tRel 4) (tRel 1))
+                                                 (tApp
+                                                    (tApp
+                                                       (tApp
+                                                          (tApp
+                                                             (tApp
+                                                                (tApp (tApp (tRel 9) tBox) tBox)
+                                                                tBox)
+                                                             tBox)
+                                                          (tRel 4))
+                                                       (tRel 3))
+                                                    (tRel 0)))])))))));
+                    rarg := 0 |}]
+                0) |});
+   ((MPfile [&quot;Prelude&quot;%bs; &quot;\1366_\1366d7\1366_&quot;%bs], &quot;fst&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tLambda
+                nAnon
+                (tCase
+                   ({| inductive_mind :=
+                         (MPfile [&quot;Prelude&quot;%bs], &quot;\1366_\1366d7\1366_&quot;%bs);
+                       inductive_ind := 0 |},
+                    0)
+                   (tRel 0) [([nAnon; nAnon], tRel 1)])) |});
+   ((MPfile [&quot;Prelude&quot;%bs; &quot;\1366_\1366d7\1366_&quot;%bs], &quot;snd&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tLambda
+                nAnon
+                (tCase
+                   ({| inductive_mind :=
+                         (MPfile [&quot;Prelude&quot;%bs], &quot;\1366_\1366d7\1366_&quot;%bs);
+                       inductive_ind := 0 |},
+                    0)
+                   (tRel 0) [([nAnon; nAnon], tRel 0)])) |});
+   ((MPfile [&quot;Prelude&quot;%bs], &quot;r#mod&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tLambda
+                nAnon
+                (tLambda
+                   nAnon
+                   (tCase
+                      ({| inductive_mind :=
+                            (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                          inductive_ind := 0 |},
+                       0)
+                      (tRel 0)
+                      [([], tRel 1);
+                       ([nAnon],
+                        tApp
+                          (tApp
+                             (tConst
+                                (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;\1366_\1366sub_&quot;%bs))
+                             (tRel 0))
+                          (tApp
+                             (tApp
+                                (tApp (tConst (MPfile [&quot;Prelude&quot;%bs], &quot;divmod&quot;%bs)) (tRel 2))
+                                (tRel 0))
+                             (tRel 0)))]))) |});
+   ((MPfile [&quot;Prelude&quot;%bs], &quot;divmod&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tFix
+                [{| dname := nNamed &quot;divmod&quot;%bs;
+                    dbody :=
+                      tLambda
+                        nAnon
+                        (tLambda
+                           nAnon
+                           (tLambda
+                              nAnon
+                              (tCase
+                                 ({| inductive_mind :=
+                                       (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                     inductive_ind := 0 |},
+                                  0)
+                                 (tRel 2)
+                                 [([], tRel 0);
+                                  ([nAnon],
+                                   tCase
+                                     ({| inductive_mind :=
+                                           (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                         inductive_ind := 0 |},
+                                      0)
+                                     (tRel 1)
+                                     [([], tApp (tApp (tApp (tRel 4) (tRel 0)) (tRel 2)) (tRel 2));
+                                      ([nAnon],
+                                       tApp
+                                         (tApp (tApp (tRel 5) (tRel 1)) (tRel 3)) (tRel 0))])])));
+                    rarg := 0 |}]
+                0) |});
+   ((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
+     &quot;\1366_\1366sub_&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tFix
+                [{| dname := nNamed &quot;\1366_\1366sub_&quot;%bs;
+                    dbody :=
+                      tLambda
+                        nAnon
+                        (tLambda
+                           nAnon
+                           (tCase
+                              ({| inductive_mind :=
+                                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                  inductive_ind := 0 |},
+                               0)
+                              (tRel 0)
+                              [([], tRel 1);
+                               ([nAnon],
+                                tCase
+                                  ({| inductive_mind :=
+                                        (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                      inductive_ind := 0 |},
+                                   0)
+                                  (tRel 2)
+                                  [([],
+                                    tConstruct
+                                      {| inductive_mind :=
+                                           (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                         inductive_ind := 0 |}
+                                      0 []);
+                                   ([nAnon], tApp (tApp (tRel 4) (tRel 0)) (tRel 1))])]));
+                    rarg := 0 |}]
+                0) |});
+   ((MPfile [&quot;Prelude&quot;%bs], &quot;splitAt&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tFix
+                [{| dname := nNamed &quot;splitAt&quot;%bs;
+                    dbody :=
+                      tLambda
+                        nAnon
+                        (tLambda
+                           nAnon
+                           (tLambda
+                              nAnon
+                              (tLambda
+                                 nAnon
+                                 (tCase
+                                    ({| inductive_mind :=
+                                          (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                        inductive_ind := 0 |},
+                                     0)
+                                    (tRel 1)
+                                    [([],
+                                      tApp
+                                        (tApp
+                                           (tConstruct
+                                              {| inductive_mind :=
+                                                   (MPfile [&quot;Prelude&quot;%bs],
+                                                    &quot;\1366_\1366d7\1366_&quot;%bs);
+                                                 inductive_ind := 0 |}
+                                              0 [])
+                                           (tConstruct
+                                              {| inductive_mind :=
+                                                   (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
+                                                    &quot;List&quot;%bs);
+                                                 inductive_ind := 0 |}
+                                              0 []))
+                                        (tRel 0));
+                                     ([nAnon],
+                                      tCase
+                                        ({| inductive_mind :=
+                                              (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
+                                               &quot;List&quot;%bs);
+                                            inductive_ind := 0 |},
+                                         0)
+                                        (tRel 1)
+                                        [([],
+                                          tApp
+                                            (tApp
+                                               (tConstruct
+                                                  {| inductive_mind :=
+                                                       (MPfile [&quot;Prelude&quot;%bs],
+                                                        &quot;\1366_\1366d7\1366_&quot;%bs);
+                                                     inductive_ind := 0 |}
+                                                  0 [])
+                                               (tConstruct
+                                                  {| inductive_mind :=
+                                                       (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
+                                                        &quot;List&quot;%bs);
+                                                     inductive_ind := 0 |}
+                                                  0 []))
+                                            (tConstruct
+                                               {| inductive_mind :=
+                                                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
+                                                     &quot;List&quot;%bs);
+                                                  inductive_ind := 0 |}
+                                               0 []));
+                                         ([nAnon; nAnon],
+                                          tApp
+                                            (tApp
+                                               (tApp
+                                                  (tApp
+                                                     (tApp
+                                                        (tApp
+                                                           (tLambda
+                                                              nAnon
+                                                              (tLambda
+                                                                 nAnon
+                                                                 (tLambda
+                                                                    nAnon
+                                                                    (tLambda
+                                                                       nAnon
+                                                                       (tLambda
+                                                                          nAnon
+                                                                          (tLambda
+                                                                             nAnon
+                                                                             (tCase
+                                                                                ({| inductive_mind :=
+                                                                                      (MPfile
+                                                                                         [&quot;Prelude&quot;%bs],
+                                                                                       &quot;\1366_\1366d7\1366_&quot;%bs);
+                                                                                    inductive_ind :=
+                                                                                      0 |},
+                                                                                 0)
+                                                                                (tRel 1)
+                                                                                [([nAnon; nAnon],
+                                                                                  tApp
+                                                                                    (tApp
+                                                                                       (tConstruct
+                                                                                          {| inductive_mind :=
+                                                                                               (MPfile
+                                                                                                  [&quot;Prelude&quot;%bs],
+                                                                                                &quot;\1366_\1366d7\1366_&quot;%bs);
+                                                                                             inductive_ind :=
+                                                                                               0 |}
+                                                                                          0 [])
+                                                                                       (tApp
+                                                                                          (tApp
+                                                                                             (tConstruct
+                                                                                                {| inductive_mind :=
+                                                                                                     (MPfile
+                                                                                                        [&quot;Agda&quot;%bs;
+                                                                                                         &quot;Builtin&quot;%bs;
+                                                                                                         &quot;List&quot;%bs],
+                                                                                                      &quot;List&quot;%bs);
+                                                                                                   inductive_ind :=
+                                                                                                     0 |}
+                                                                                                1
+                                                                                                [])
+                                                                                             (tRel
+                                                                                                2))
+                                                                                          (tRel 1)))
+                                                                                    (tRel
+                                                                                       0))])))))))
+                                                           (tRel 6))
+                                                        (tRel 5))
+                                                     (tRel 2))
+                                                  (tRel 0))
+                                               (tApp
+                                                  (tApp
+                                                     (tApp (tApp (tRel 7) (tRel 6)) tBox) (tRel 2))
+                                                  (tRel 0)))
+                                            (tRel 1))])]))));
+                    rarg := 0 |}]
+                0) |});
+   ((MPfile [&quot;Prelude&quot;%bs], &quot;\1366_\1366d7\1366_&quot;%bs),
+    InductiveDecl
+      {| ind_finite := Finite; ind_npars := 0;
+         ind_bodies :=
+           [{| ind_name := &quot;\1366_\1366d7\1366_&quot;%bs;
+               ind_propositional := false; ind_kelim := IntoAny;
+               ind_ctors :=
+                 [{| cstr_name := &quot;\1366_\1366\&amp;2c\1366_&quot;%bs; cstr_nargs := 2 |}];
+               ind_projs := [] |}] |});
+   ((MPfile [&quot;Prelude&quot;%bs], &quot;setAt&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tFix
+                [{| dname := nNamed &quot;setAt&quot;%bs;
+                    dbody :=
+                      tLambda
+                        nAnon
+                        (tLambda
+                           nAnon
+                           (tLambda
+                              nAnon
+                              (tLambda
+                                 nAnon
+                                 (tLambda
+                                    nAnon
+                                    (tCase
+                                       ({| inductive_mind :=
+                                             (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
+                                              &quot;List&quot;%bs);
+                                           inductive_ind := 0 |},
+                                        0)
+                                       (tRel 2)
+                                       [([],
+                                         tConstruct
+                                           {| inductive_mind :=
+                                                (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
+                                                 &quot;List&quot;%bs);
+                                              inductive_ind := 0 |}
+                                           0 []);
+                                        ([nAnon; nAnon],
+                                         tCase
+                                           ({| inductive_mind :=
+                                                 (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
+                                                  &quot;Nat&quot;%bs);
+                                               inductive_ind := 0 |},
+                                            0)
+                                           (tRel 3)
+                                           [([],
+                                             tApp
+                                               (tApp
+                                                  (tConstruct
+                                                     {| inductive_mind :=
+                                                          (MPfile
+                                                             [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
+                                                           &quot;List&quot;%bs);
+                                                        inductive_ind := 0 |}
+                                                     1 [])
+                                                  (tRel 2))
+                                               (tRel 0));
+                                            ([nAnon],
+                                             tApp
+                                               (tApp
+                                                  (tConstruct
+                                                     {| inductive_mind :=
+                                                          (MPfile
+                                                             [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
+                                                           &quot;List&quot;%bs);
+                                                        inductive_ind := 0 |}
+                                                     1 [])
+                                                  (tRel 2))
+                                               (tApp
+                                                  (tApp
+                                                     (tApp
+                                                        (tApp (tApp (tRel 8) tBox) tBox) (tRel 1))
+                                                     (tRel 0))
+                                                  (tRel 3)))])])))));
+                    rarg := 0 |}]
+                0) |});
+   ((MPfile [&quot;Prelude&quot;%bs], &quot;getAt&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tFix
+                [{| dname := nNamed &quot;getAt&quot;%bs;
+                    dbody :=
+                      tLambda
+                        nAnon
+                        (tLambda
+                           nAnon
+                           (tCase
+                              ({| inductive_mind :=
+                                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
+                                  inductive_ind := 0 |},
+                               0)
+                              (tRel 1)
+                              [([],
+                                tConstruct
+                                  {| inductive_mind :=
+                                       (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                     inductive_ind := 0 |}
+                                  0 []);
+                               ([nAnon; nAnon],
+                                tCase
+                                  ({| inductive_mind :=
+                                        (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                      inductive_ind := 0 |},
+                                   0)
+                                  (tRel 2)
+                                  [([], tRel 1);
+                                   ([nAnon], tApp (tApp (tRel 5) (tRel 1)) (tRel 0))])]));
+                    rarg := 0 |}]
+                0) |});
+   ((MPfile [&quot;Prelude&quot;%bs], &quot;updateAt&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tFix
+                [{| dname := nNamed &quot;updateAt&quot;%bs;
+                    dbody :=
+                      tLambda
+                        nAnon
+                        (tLambda
+                           nAnon
+                           (tLambda
+                              nAnon
+                              (tLambda
+                                 nAnon
+                                 (tLambda
+                                    nAnon
+                                    (tCase
+                                       ({| inductive_mind :=
+                                             (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
+                                              &quot;List&quot;%bs);
+                                           inductive_ind := 0 |},
+                                        0)
+                                       (tRel 1)
+                                       [([],
+                                         tConstruct
+                                           {| inductive_mind :=
+                                                (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
+                                                 &quot;List&quot;%bs);
+                                              inductive_ind := 0 |}
+                                           0 []);
+                                        ([nAnon; nAnon],
+                                         tCase
+                                           ({| inductive_mind :=
+                                                 (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
+                                                  &quot;Nat&quot;%bs);
+                                               inductive_ind := 0 |},
+                                            0)
+                                           (tRel 2)
+                                           [([],
+                                             tApp
+                                               (tApp
+                                                  (tConstruct
+                                                     {| inductive_mind :=
+                                                          (MPfile
+                                                             [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
+                                                           &quot;List&quot;%bs);
+                                                        inductive_ind := 0 |}
+                                                     1 [])
+                                                  (tApp (tRel 4) (tRel 1)))
+                                               (tRel 0));
+                                            ([nAnon],
+                                             tApp
+                                               (tApp
+                                                  (tConstruct
+                                                     {| inductive_mind :=
+                                                          (MPfile
+                                                             [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
+                                                           &quot;List&quot;%bs);
+                                                        inductive_ind := 0 |}
+                                                     1 [])
+                                                  (tRel 2))
+                                               (tApp
+                                                  (tApp
+                                                     (tApp
+                                                        (tApp (tApp (tRel 8) tBox) tBox) (tRel 5))
+                                                     (tRel 1))
+                                                  (tRel 0)))])])))));
+                    rarg := 0 |}]
+                0) |});
+   ((MPfile [&quot;Prelude&quot;%bs], &quot;findIndex&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tLambda
+                nAnon
+                (tLambda
+                   nAnon
+                   (tLambda
+                      nAnon
+                      (tApp
+                         (tApp
+                            (tApp
+                               (tApp (tConst (MPfile [&quot;Prelude&quot;%bs], &quot;findIndexAux&quot;%bs)) tBox)
+                               tBox)
+                            (tRel 0))
+                         (tConstruct
+                            {| inductive_mind :=
+                                 (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                               inductive_ind := 0 |}
+                            0 []))))) |});
+   ((MPfile [&quot;Prelude&quot;%bs], &quot;findIndexAux&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tFix
+                [{| dname := nNamed &quot;findIndexAux&quot;%bs;
+                    dbody :=
+                      tLambda
+                        nAnon
+                        (tLambda
+                           nAnon
+                           (tLambda
+                              nAnon
+                              (tLambda
+                                 nAnon
+                                 (tLambda
+                                    nAnon
+                                    (tCase
+                                       ({| inductive_mind :=
+                                             (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
+                                              &quot;List&quot;%bs);
+                                           inductive_ind := 0 |},
+                                        0)
+                                       (tRel 0)
+                                       [([],
+                                         tConstruct
+                                           {| inductive_mind :=
+                                                (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Maybe&quot;%bs],
+                                                 &quot;Maybe&quot;%bs);
+                                              inductive_ind := 0 |}
+                                           1 []);
+                                        ([nAnon; nAnon],
+                                         tApp
+                                           (tApp
+                                              (tApp
+                                                 (tApp
+                                                    (tApp
+                                                       (tConst
+                                                          (MPfile [&quot;Prelude&quot;%bs],
+                                                           &quot;if_then_else_&quot;%bs))
+                                                       tBox)
+                                                    tBox)
+                                                 (tApp (tApp (tRel 4) (tRel 3)) (tRel 1)))
+                                              (tApp
+                                                 (tConstruct
+                                                    {| inductive_mind :=
+                                                         (MPfile
+                                                            [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Maybe&quot;%bs],
+                                                          &quot;Maybe&quot;%bs);
+                                                       inductive_ind := 0 |}
+                                                    0 [])
+                                                 (tRel 3)))
+                                           (tApp
+                                              (tApp
+                                                 (tApp (tApp (tApp (tRel 7) tBox) tBox) (tRel 4))
+                                                 (tApp
+                                                    (tConstruct
+                                                       {| inductive_mind :=
+                                                            (MPfile
+                                                               [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
+                                                             &quot;Nat&quot;%bs);
+                                                          inductive_ind := 0 |}
+                                                       1 [])
+                                                    (tRel 3)))
+                                              (tRel 0)))])))));
+                    rarg := 0 |}]
+                0) |});
+   ((MPfile [&quot;Prelude&quot;%bs], &quot;if_then_else_&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tLambda
+                nAnon
+                (tLambda
+                   nAnon
+                   (tLambda
+                      nAnon
+                      (tLambda
+                         nAnon
+                         (tLambda
+                            nAnon
+                            (tCase
+                               ({| inductive_mind :=
+                                     (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Bool&quot;%bs], &quot;Bool&quot;%bs);
+                                   inductive_ind := 0 |},
+                                0)
+                               (tRel 2) [([], tRel 0); ([], tRel 1)])))))) |});
+   ((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Bool&quot;%bs], &quot;Bool&quot;%bs),
+    InductiveDecl
+      {| ind_finite := Finite; ind_npars := 0;
+         ind_bodies :=
+           [{| ind_name := &quot;Bool&quot;%bs; ind_propositional := false;
+               ind_kelim := IntoAny;
+               ind_ctors :=
+                 [{| cstr_name := &quot;r#false&quot;%bs; cstr_nargs := 0 |};
+                  {| cstr_name := &quot;r#true&quot;%bs; cstr_nargs := 0 |}];
+               ind_projs := [] |}] |});
+   ((MPfile [&quot;Prelude&quot;%bs], &quot;tail&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tLambda
+                nAnon
+                (tLambda
+                   nAnon
+                   (tLambda
+                      nAnon
+                      (tCase
+                         ({| inductive_mind :=
+                               (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
+                             inductive_ind := 0 |},
+                          0)
+                         (tRel 0)
+                         [([],
+                           tConstruct
+                             {| inductive_mind :=
+                                  (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
+                                inductive_ind := 0 |}
+                             0 []);
+                          ([nAnon; nAnon], tRel 0)])))) |});
+   ((MPfile [&quot;Prelude&quot;%bs], &quot;case_of_&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tLambda
+                nAnon
+                (tLambda
+                   nAnon
+                   (tLambda
+                      nAnon
+                      (tLambda
+                         nAnon
+                         (tLambda nAnon (tLambda nAnon (tApp (tRel 0) (tRel 1)))))))) |});
+   ((MPfile [&quot;Prelude&quot;%bs], &quot;replicate&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tFix
+                [{| dname := nNamed &quot;replicate&quot;%bs;
+                    dbody :=
+                      tLambda
+                        nAnon
+                        (tLambda
+                           nAnon
+                           (tLambda
+                              nAnon
+                              (tLambda
+                                 nAnon
+                                 (tCase
+                                    ({| inductive_mind :=
+                                          (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                        inductive_ind := 0 |},
+                                     0)
+                                    (tRel 1)
+                                    [([],
+                                      tConstruct
+                                        {| inductive_mind :=
+                                             (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
+                                              &quot;List&quot;%bs);
+                                           inductive_ind := 0 |}
+                                        0 []);
+                                     ([nAnon],
+                                      tApp
+                                        (tApp
+                                           (tConstruct
+                                              {| inductive_mind :=
+                                                   (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
+                                                    &quot;List&quot;%bs);
+                                                 inductive_ind := 0 |}
+                                              1 [])
+                                           (tRel 1))
+                                        (tApp
+                                           (tApp (tApp (tApp (tRel 5) tBox) tBox) (tRel 0))
+                                           (tRel 1)))]))));
+                    rarg := 0 |}]
+                0) |});
+   ((MPfile [&quot;Prelude&quot;%bs], &quot;mapMaybe&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tLambda
+                nAnon
+                (tLambda
+                   nAnon
+                   (tLambda
+                      nAnon
+                      (tLambda
+                         nAnon
+                         (tCase
+                            ({| inductive_mind :=
+                                  (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Maybe&quot;%bs], &quot;Maybe&quot;%bs);
+                                inductive_ind := 0 |},
+                             0)
+                            (tRel 0)
+                            [([nAnon],
+                              tApp
+                                (tConstruct
+                                   {| inductive_mind :=
+                                        (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Maybe&quot;%bs], &quot;Maybe&quot;%bs);
+                                      inductive_ind := 0 |}
+                                   0 [])
+                                (tApp (tRel 2) (tRel 0)));
+                             ([],
+                              tConstruct
+                                {| inductive_mind :=
+                                     (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Maybe&quot;%bs], &quot;Maybe&quot;%bs);
+                                   inductive_ind := 0 |}
+                                1 [])]))))) |});
+   ((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Maybe&quot;%bs], &quot;Maybe&quot;%bs),
+    InductiveDecl
+      {| ind_finite := Finite; ind_npars := 0;
+         ind_bodies :=
+           [{| ind_name := &quot;Maybe&quot;%bs; ind_propositional := false;
+               ind_kelim := IntoAny;
+               ind_ctors :=
+                 [{| cstr_name := &quot;just&quot;%bs; cstr_nargs := 1 |};
+                  {| cstr_name := &quot;nothing&quot;%bs; cstr_nargs := 0 |}];
+               ind_projs := [] |}] |});
+   ((MPfile [&quot;Prelude&quot;%bs], &quot;testPrelude&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tLambda
+                nAnon
+                (tApp
+                   (tApp
+                      (tApp
+                         (tApp (tConst (MPfile [&quot;Prelude&quot;%bs], &quot;appendTR&quot;%bs)) tBox) tBox)
+                      (tApp
+                         (tApp
+                            (tApp (tConst (MPfile [&quot;Prelude&quot;%bs], &quot;reverse&quot;%bs)) tBox) tBox)
+                         (tApp (tConst (MPfile [&quot;Prelude&quot;%bs], &quot;range&quot;%bs)) (tRel 0))))
+                   (tApp
+                      (tConst (MPfile [&quot;Prelude&quot;%bs], &quot;invrange&quot;%bs)) (tRel 0)))) |});
+   ((MPfile [&quot;Prelude&quot;%bs], &quot;appendTR&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tLambda
+                nAnon
+                (tLambda
+                   nAnon
+                   (tLambda
+                      nAnon
+                      (tLambda
+                         nAnon
+                         (tApp
+                            (tApp
+                               (tApp
+                                  (tApp (tConst (MPfile [&quot;Prelude&quot;%bs], &quot;reverseAux&quot;%bs)) tBox)
+                                  tBox)
+                               (tApp
+                                  (tApp
+                                     (tApp (tConst (MPfile [&quot;Prelude&quot;%bs], &quot;reverse&quot;%bs)) tBox)
+                                     tBox)
+                                  (tRel 1)))
+                            (tRel 0)))))) |});
+   ((MPfile [&quot;Prelude&quot;%bs], &quot;reverse&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tLambda
+                nAnon
+                (tLambda
+                   nAnon
+                   (tLambda
+                      nAnon
+                      (tApp
+                         (tApp
+                            (tApp
+                               (tApp (tConst (MPfile [&quot;Prelude&quot;%bs], &quot;reverseAux&quot;%bs)) tBox) tBox)
+                            (tRel 0))
+                         (tConstruct
+                            {| inductive_mind :=
+                                 (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
+                               inductive_ind := 0 |}
+                            0 []))))) |});
+   ((MPfile [&quot;Prelude&quot;%bs], &quot;reverseAux&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tFix
+                [{| dname := nNamed &quot;reverseAux&quot;%bs;
+                    dbody :=
+                      tLambda
+                        nAnon
+                        (tLambda
+                           nAnon
+                           (tLambda
+                              nAnon
+                              (tLambda
+                                 nAnon
+                                 (tCase
+                                    ({| inductive_mind :=
+                                          (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
+                                        inductive_ind := 0 |},
+                                     0)
+                                    (tRel 1)
+                                    [([], tRel 0);
+                                     ([nAnon; nAnon],
+                                      tApp
+                                        (tApp (tApp (tApp (tRel 6) tBox) tBox) (tRel 0))
+                                        (tApp
+                                           (tApp
+                                              (tConstruct
+                                                 {| inductive_mind :=
+                                                      (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
+                                                       &quot;List&quot;%bs);
+                                                    inductive_ind := 0 |}
+                                                 1 [])
+                                              (tRel 1))
+                                           (tRel 2)))]))));
+                    rarg := 0 |}]
+                0) |});
+   ((MPfile [&quot;Prelude&quot;%bs], &quot;range&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tLambda
+                nAnon
+                (tApp
+                   (tApp (tApp (tConst (MPfile [&quot;Prelude&quot;%bs], &quot;rev&quot;%bs)) tBox) tBox)
+                   (tApp
+                      (tConst (MPfile [&quot;Prelude&quot;%bs], &quot;invrange&quot;%bs)) (tRel 0)))) |});
+   ((MPfile [&quot;Prelude&quot;%bs], &quot;rev&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tLambda
+                nAnon
+                (tLambda
+                   nAnon
+                   (tApp
+                      (tApp
+                         (tApp
+                            (tApp
+                               (tApp
+                                  (tApp (tConst (MPfile [&quot;Prelude&quot;%bs], &quot;foldl&quot;%bs)) tBox) tBox)
+                               tBox)
+                            tBox)
+                         (tLambda
+                            nAnon
+                            (tLambda
+                               nAnon
+                               (tApp
+                                  (tApp
+                                     (tConstruct
+                                        {| inductive_mind :=
+                                             (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
+                                              &quot;List&quot;%bs);
+                                           inductive_ind := 0 |}
+                                        1 [])
+                                     (tRel 0))
+                                  (tRel 1)))))
+                      (tConstruct
+                         {| inductive_mind :=
+                              (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
+                            inductive_ind := 0 |}
+                         0 [])))) |});
+   ((MPfile [&quot;Prelude&quot;%bs], &quot;foldl&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tFix
+                [{| dname := nNamed &quot;foldl&quot;%bs;
+                    dbody :=
+                      tLambda
+                        nAnon
+                        (tLambda
+                           nAnon
+                           (tLambda
+                              nAnon
+                              (tLambda
+                                 nAnon
+                                 (tLambda
+                                    nAnon
+                                    (tLambda
+                                       nAnon
+                                       (tLambda
+                                          nAnon
+                                          (tCase
+                                             ({| inductive_mind :=
+                                                   (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
+                                                    &quot;List&quot;%bs);
+                                                 inductive_ind := 0 |},
+                                              0)
+                                             (tRel 0)
+                                             [([], tRel 1);
+                                              ([nAnon; nAnon],
+                                               tApp
+                                                 (tApp
+                                                    (tApp
+                                                       (tApp
+                                                          (tApp
+                                                             (tApp (tApp (tRel 9) tBox) tBox) tBox)
+                                                          tBox)
+                                                       (tRel 4))
+                                                    (tApp (tApp (tRel 4) (tRel 3)) (tRel 1)))
+                                                 (tRel 0))])))))));
+                    rarg := 0 |}]
+                0) |});
+   ((MPfile [&quot;Prelude&quot;%bs], &quot;invrange&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tFix
+                [{| dname := nNamed &quot;invrange&quot;%bs;
+                    dbody :=
+                      tLambda
+                        nAnon
+                        (tCase
+                           ({| inductive_mind :=
+                                 (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                               inductive_ind := 0 |},
+                            0)
+                           (tRel 0)
+                           [([],
+                             tConstruct
+                               {| inductive_mind :=
+                                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
+                                  inductive_ind := 0 |}
+                               0 []);
+                            ([nAnon],
+                             tApp
+                               (tApp
+                                  (tConstruct
+                                     {| inductive_mind :=
+                                          (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
+                                        inductive_ind := 0 |}
+                                     1 [])
+                                  (tRel 0))
+                               (tApp (tRel 2) (tRel 0)))]);
+                    rarg := 0 |}]
+                0) |});
+   ((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs),
+    InductiveDecl
+      {| ind_finite := Finite; ind_npars := 0;
+         ind_bodies :=
+           [{| ind_name := &quot;List&quot;%bs; ind_propositional := false;
+               ind_kelim := IntoAny;
+               ind_ctors :=
+                 [{| cstr_name := &quot;\1366\&amp;5b\1366\1366\&amp;5d\1366&quot;%bs;
+                     cstr_nargs := 0 |};
+                  {| cstr_name := &quot;\1366_\1366cons_&quot;%bs; cstr_nargs := 2 |}];
+               ind_projs := [] |}] |});
+   ((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs),
+    InductiveDecl
+      {| ind_finite := Finite; ind_npars := 0;
+         ind_bodies :=
+           [{| ind_name := &quot;Nat&quot;%bs; ind_propositional := false;
+               ind_kelim := IntoAny;
+               ind_ctors :=
+                 [{| cstr_name := &quot;zero&quot;%bs; cstr_nargs := 0 |};
+                  {| cstr_name := &quot;suc&quot;%bs; cstr_nargs := 1 |}];
+               ind_projs := [] |}] |});
+   ((MPfile [&quot;LamBox&quot;%bs], &quot;Empty&quot;%bs),
+    InductiveDecl
+      {| ind_finite := Finite; ind_npars := 0;
+         ind_bodies :=
+           [{| ind_name := &quot;Empty&quot;%bs; ind_propositional := false;
+               ind_kelim := IntoAny; ind_ctors := []; ind_projs := [] |}] |})].
+
+Compute @check_wf_glob eflags env.
+
+Definition prog1 : program :=
+  (env, tConst (MPfile [&quot;Prelude&quot;%bs], &quot;testPrelude&quot;%bs)).
+
+Compute eval_program prog1.</code></pre>
+</body>
+</html>

@@ -15,10 +15,113 @@
   </style>
 </head>
 <body>
-<pre><code>     = false
+<pre><code>     = true
      : bool
-     = exceptionMonad.Exc
-         &quot;(wcbvEval;TApp:fn(wcbvEval;TApp:fn(wcbvEval;TApp:fnwcbvEval,Cong,Constructor:  (inductive:Exports.Exports:0) 0)))&quot;
+     = exceptionMonad.Ret
+         (compile.TConstruct
+            {|
+              inductive_mind := (MPfile [&quot;Exports&quot;%bs], &quot;Exports&quot;%bs);
+              inductive_ind := 0
+            |} 0
+            (compile.tcons
+               (compile.TConstruct
+                  {|
+                    inductive_mind :=
+                      (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                    inductive_ind := 0
+                  |} 1
+                  (compile.tcons
+                     (compile.TConstruct
+                        {|
+                          inductive_mind :=
+                            (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
+                             &quot;Nat&quot;%bs);
+                          inductive_ind := 0
+                        |} 0 compile.tnil)
+                     compile.tnil))
+               (compile.tcons
+                  (compile.TConstruct
+                     {|
+                       inductive_mind :=
+                         (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
+                          &quot;Nat&quot;%bs);
+                       inductive_ind := 0
+                     |} 1
+                     (compile.tcons
+                        (compile.TConstruct
+                           {|
+                             inductive_mind :=
+                               (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
+                                &quot;Nat&quot;%bs);
+                             inductive_ind := 0
+                           |} 1
+                           (compile.tcons
+                              (compile.TConstruct
+                                 {|
+                                   inductive_mind :=
+                                     (MPfile
+                                        [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
+                                      &quot;Nat&quot;%bs);
+                                   inductive_ind := 0
+                                 |} 0 compile.tnil)
+                              compile.tnil))
+                        compile.tnil))
+                  (compile.tcons
+                     (compile.TLambda nAnon
+                        (compile.TCase
+                           {|
+                             inductive_mind :=
+                               (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
+                                &quot;Nat&quot;%bs);
+                             inductive_ind := 0
+                           |} (compile.TRel 0)
+                           (compile.bcons []
+                              (compile.TConstruct
+                                 {|
+                                   inductive_mind :=
+                                     (MPfile
+                                        [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
+                                      &quot;Nat&quot;%bs);
+                                   inductive_ind := 0
+                                 |} 0 compile.tnil)
+                              (compile.bcons [nAnon] 
+                                 (compile.TRel 0) compile.bnil))))
+                     (compile.tcons
+                        (compile.TFix
+                           (compile.dcons (nNamed &quot;four&quot;)
+                              (compile.TLambda nAnon
+                                 (compile.TLambda nAnon
+                                    (compile.TCase
+                                       {|
+                                         inductive_mind :=
+                                           (MPfile
+                                              [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs;
+                                               &quot;Nat&quot;%bs],
+                                            &quot;Nat&quot;%bs);
+                                         inductive_ind := 0
+                                       |} (compile.TRel 1)
+                                       (compile.bcons [] 
+                                          (compile.TRel 0)
+                                          (compile.bcons [nAnon]
+                                             (compile.TConstruct
+                                                {|
+                                                 inductive_mind :=
+                                                 (MPfile
+                                                 [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs;
+                                                 &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                                 inductive_ind := 0
+                                                |} 1
+                                                (compile.tcons
+                                                 (compile.TApp
+                                                 (compile.TApp
+                                                 (compile.TRel 3)
+                                                 (compile.TRel 0))
+                                                 (compile.TRel 1))
+                                                 compile.tnil))
+                                             compile.bnil)))))
+                              0 compile.dnil)
+                           0)
+                        compile.tnil)))))
      : exceptionMonad.exception compile.Term</code></pre>
 </body>
 </html>
