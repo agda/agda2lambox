@@ -43,7 +43,7 @@ Definition eflags : EEnvFlags :=
         ; has_tLazy_Force := true
         |};
      has_cstr_params := false;  (* Agda already drops constructor params *)
-     cstr_as_blocks  := true;   (* The backend fully applies ctors       *)
+     cstr_as_blocks  := false;  (* Constructors are applied as spines    *)
   |}.
 
 Fixpoint check_fresh_global (k : kername) (decls : global_declarations) : bool :=
