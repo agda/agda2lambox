@@ -61,8 +61,11 @@ compileDefinition target defn@Defn{..} = setCurrentRange defName do
 
   -- TODO: check that we indeed don't compile defs marked with @0
   --       especially record projections for erased fields
-  -- logical definitions are immediately compiled to □
-  ifM (liftTCM $ isLogical $ Arg defArgInfo defType)
+  -- logical definitions are immediately compiled to □,
+  -- except constructors, which are compiled as part of their datatype
+  ifM (case theDef of
+         Constructor{} -> pure False
+         _             -> liftTCM $ isLogical $ Arg defArgInfo defType)
      (do typ <- whenTyped target $ compileTopLevelType defType
          pure $ Just $ ConstantDecl $ ConstantBody typ $ Just LBox) do
 

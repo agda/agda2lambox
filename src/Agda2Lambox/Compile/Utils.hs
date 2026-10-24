@@ -17,6 +17,7 @@ import Control.Monad.State
 import Control.Monad.IO.Class ( liftIO )
 import Numeric ( showHex )
 import Data.Char
+import Data.Functor ( (<&>) )
 import Data.List ( elemIndex, foldl' )
 import Data.Maybe ( fromMaybe, listToMaybe, isJust )
 
@@ -30,6 +31,7 @@ import Agda.TypeChecking.Datatypes ( getConstructors, getConstructorData )
 import Agda.TypeChecking.Level ( isLevelType )
 import Agda.TypeChecking.Monad.SizedTypes ( isSizeType )
 import Agda.TypeChecking.Monad.Base ( TCM )
+import Agda.TypeChecking.Reduce ( reduce )
 import Agda.TypeChecking.Substitute (TelV(TelV))
 import Agda.TypeChecking.Telescope (telView)
 import Agda.Utils.Monad (orM)
@@ -95,34 +97,35 @@ class MayBeLogical a where
   isLogical :: a -> TCM Bool
 
 -- * Logical types
---
--- Note that we may also want to consider logical products 
--- into logical types?, Say "proof builders", or "level builders", etc.
 
 -- | Logical types.
 --
 -- A type is considered logical when it is a proposition
 -- (its inhabitants are proofs) or when it is an arity in Prop.
 --
--- @Size@ and @Level@ are also considered logical.
+-- Products into @Size@ and @Level@ are also considered logical.
 instance MayBeLogical Type where
-  isLogical typ = orM
-    [ pure $ isLogicalSort $ getSort typ
-    , isLevelType typ
-    , isJust <$> isSizeType typ
-    , do TelV tel typ <- telView typ
-         case unEl typ of
-           Sort s -> pure $ isLogicalSort s
-           _      -> pure False
-    ]
+  isLogical typ = do
+    TelV tel cod <- telView typ
+    addContext tel $ orM
+      [ isLogicalSort $ getSort cod
+      , isLevelType cod
+      , isJust <$> isSizeType cod
+      , case unEl cod of
+          Sort s -> isLogicalSort s
+          _      -> pure False
+      ]
     where
-      isLogicalSort :: Sort -> Bool
+      -- @LevelUniv@ is matched before reduction, as it reduces to @Set@ without --level-universe.
+      isLogicalSort :: Sort -> TCM Bool
       isLogicalSort = \case
-        Prop{}      -> True -- Prop
-        Inf UProp _ -> True -- Propw
-        SizeUniv{}  -> True -- SizeUniv
-        LevelUniv{} -> True -- LevelUniv
-        _           -> False
+        LevelUniv{} -> pure True
+        s -> reduce s <&> \case
+          Prop{}      -> True -- Prop
+          Inf UProp _ -> True -- Propw
+          SizeUniv{}  -> True -- SizeUniv
+          LevelUniv{} -> True -- LevelUniv
+          _           -> False
 
 -- | Additionally, we consider erased domains logical.
 instance MayBeLogical a => MayBeLogical (Dom a) where
