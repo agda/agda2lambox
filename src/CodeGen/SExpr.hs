@@ -5,7 +5,7 @@ module CodeGen.SExpr (ToSexp, prettySexp) where
 
 import Data.Bifunctor(bimap)
 import Data.List(intercalate)
-import Data.List.NonEmpty qualified as NEL (head)
+import Data.Maybe(listToMaybe)
 
 import Agda.Syntax.Common.Pretty
 import LambdaBox
@@ -211,7 +211,6 @@ instance ToSexp t (GlobalEnv t) where
   toSexp t@ToTyped   (GlobalEnv env) = toSexp t $ flip map env \(kn, decl) -> ((kn, True), decl)
 
 instance ToSexp t (LBoxModule t) where
-  toSexp t@ToUntyped LBoxModule{..} =
-    ctor t "Untyped" [S lboxEnv, S $ Just $ LConst $ NEL.head $ getUntyped lboxMain]
-  toSexp t@ToTyped LBoxModule{..} =
-    ctor t "Typed" [S $ toSexp t lboxEnv, S (Nothing :: Maybe Exp)]
+  toSexp t LBoxModule{..} =
+    let n = case t of {ToUntyped -> "Untyped"; ToTyped -> "Typed"}
+    in ctor t n [S lboxEnv, S $ LConst <$> listToMaybe lboxMain]

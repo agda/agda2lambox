@@ -1,5 +1,4 @@
-{-# LANGUAGE DeriveGeneric, DeriveAnyClass, OverloadedStrings #-}
-{-# LANGUAGE GADTs #-}
+{-# LANGUAGE DeriveGeneric, DeriveAnyClass, OverloadedStrings, GADTs #-}
 -- | The agda2lambox Agda backend
 module Main (main) where
 
@@ -8,8 +7,6 @@ import Control.Monad.IO.Class ( liftIO )
 import Control.DeepSeq ( NFData(rnf) )
 import Data.Function ( (&) )
 import Data.List ( elem )
-import Data.List.NonEmpty ( NonEmpty )
-import Data.List.NonEmpty qualified as NEL
 import Data.Maybe ( fromMaybe )
 import Data.Version ( showVersion )
 import Data.Text ( pack )
@@ -148,9 +145,6 @@ writeModule Options{..} menv IsMain m defs = do
       & writeFile (fileName -<.> ".v")
 
   where
-    getMain :: Target t -> [QName] -> TCM (WhenUntyped t (NonEmpty KerName))
-    getMain ToTyped   _  = pure NoneU
-    getMain ToUntyped qs =
-      case NEL.nonEmpty qs of
-        Nothing -> genericError "No main program specified. Please use a COMPILE pragma."
-        Just ms -> pure $ SomeU (NEL.map qnameToKName ms)
+    getMain :: Target t -> [QName] -> TCM [KerName]
+    getMain ToUntyped [] = genericError "No main program specified. Please use a COMPILE pragma."
+    getMain _         qs = pure $ map qnameToKName qs

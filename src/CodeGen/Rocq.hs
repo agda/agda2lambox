@@ -4,7 +4,6 @@ module CodeGen.Rocq (prettyRocq) where
 
 import Data.Bifunctor(bimap)
 import Data.List(intercalate)
-import Data.List.NonEmpty qualified as NEL
 
 import Agda.Syntax.Common.Pretty
 import LambdaBox
@@ -206,13 +205,7 @@ instance ToRocq t (LBoxModule t) where
 
     , "Compute @check_wf_glob eflags env."
 
-    , vsep $ flip map (zip [1..] $ reverse $ NEL.toList $ getUntyped lboxMain) \(i :: Int, kn) -> 
-        let progname = "prog" <> pretty i in vsep
-        [ hang ("Definition " <> progname <> " : program :=") 2 $
-            uprocq (text "env" :: Doc, LConst kn)
-            <> "."
-        , "Compute eval_program " <> progname <> "."
-        ]
+    , programs "env" lboxMain
     ]
 
   procq ToTyped LBoxModule{..} = vsep
@@ -226,4 +219,17 @@ instance ToRocq t (LBoxModule t) where
         ]
 
     , hang "Definition env : global_env :=" 2 $ tprocq lboxEnv <> "."
+
+    , "Compute @check_wf_glob eflags (ExAst.trans_env env)."
+
+    , programs "ExAst.trans_env env" lboxMain
     ]
+
+-- | Evaluate each main program in the given untyped environment.
+programs :: Doc -> [KerName] -> Doc
+programs env mains = vsep $ flip map (zip [1..] $ reverse mains) \(i :: Int, kn) ->
+  let progname = "prog" <> pretty i in vsep
+  [ hang ("Definition " <> progname <> " : program :=") 2 $
+      uprocq (env, LConst kn) <> "."
+  , "Compute eval_program " <> progname <> "."
+  ]

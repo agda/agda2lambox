@@ -1,5 +1,4 @@
-{-# LANGUAGE NamedFieldPuns, FlexibleInstances, DeriveAnyClass #-}
-{-# LANGUAGE DeriveTraversable #-}
+{-# LANGUAGE NamedFieldPuns, FlexibleInstances #-}
 module Agda2Lambox.Compile.Utils
   ( modNameToModPath
   , qnameToKName
@@ -54,7 +53,8 @@ domToName :: Dom' a b -> LBox.Name
 domToName = maybe LBox.Anon (LBox.Named . sanitize . prettyShow) . domName
 
 qnameToIdent :: QName -> LBox.Ident
-qnameToIdent = sanitize . prettyShow . qnameName
+qnameToIdent = sanitize . prettyShow . nameCanonical . qnameName
+-- NB: use of nameCanonical to handle renamed imports (c.f. Agda issue #4735)
 
 qnameToName :: QName -> LBox.Name
 qnameToName = LBox.Named . qnameToIdent

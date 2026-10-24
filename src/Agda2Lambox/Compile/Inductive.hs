@@ -4,28 +4,25 @@ module Agda2Lambox.Compile.Inductive
   ( compileInductive
   ) where
 
-import Control.Monad.Reader ( ask, liftIO )
-import Control.Monad ( forM, when, unless, (>=>) )
+import Control.Monad.Reader ( liftIO )
+import Control.Monad ( forM, unless )
 import Data.Functor ((<&>))
 import Data.Foldable ( toList )
-import Data.List ( elemIndex )
 import Data.List.NonEmpty ( NonEmpty(..) )
 import Data.List.NonEmpty qualified as NEL
-import Data.Maybe ( isJust, listToMaybe, fromMaybe )
+import Data.Maybe ( isJust, fromMaybe )
 import Data.Traversable ( mapM )
 
-import Agda.Syntax.Abstract.Name ( QName, qnameModule, qnameName )
-import Agda.TypeChecking.Monad.Base hiding (None)
-import Agda.TypeChecking.Monad.Env ( withCurrentModule )
-import Agda.TypeChecking.Datatypes ( ConstructorInfo(..), getConstructorInfo, isDatatype )
+import Agda.Syntax.Abstract.Name ( QName )
+import Agda.TypeChecking.Monad.Base hiding ( None )
+import Agda.TypeChecking.Datatypes ( ConstructorInfo(..), getConstructorInfo )
 import Agda.TypeChecking.Pretty
-import Agda.TypeChecking.Telescope (telViewUpTo, piApplyM, teleArgs, telView, flattenTel)
-import Agda.TypeChecking.Substitute (TelView, TelV(theTel), apply)
-import Agda.Compiler.Backend ( getConstInfo, lookupMutualBlock, reportSDoc, AddContext (addContext), constructorForm)
+import Agda.TypeChecking.Telescope ( telViewUpTo, piApplyM, teleArgs, telView, flattenTel )
+import Agda.TypeChecking.Substitute ( TelV(theTel) )
+import Agda.Compiler.Backend ( getConstInfo, reportSDoc, AddContext (addContext))
 import Agda.Syntax.Common.Pretty ( prettyShow )
-import Agda.Syntax.Common (Arg)
+import Agda.Syntax.Common ( Arg )
 import Agda.Syntax.Internal
-import Agda.Utils.Monad ( unlessM )
 
 import Agda.Utils
 import Agda2Lambox.Compile.Target
