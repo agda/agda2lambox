@@ -2,13 +2,14 @@
 -- | Test suite for agda2lambox using tasty
 module Main (main) where
 
-import Control.Monad (filterM, unless, forM)
+import Control.Monad (filterM, unless, when, forM)
 import System.Directory
 import System.FilePath
 import System.Process
 
 import System.Exit (ExitCode(..))
-import Data.List (sort)
+import Data.Char (isSpace)
+import Data.List (sort, isSuffixOf, dropWhileEnd)
 
 import Test.Tasty (defaultMain, testGroup, TestTree)
 import Test.Tasty.HUnit (testCase, assertFailure, (@?=))
@@ -89,6 +90,11 @@ mkAgdaTest mperegrinePath buildDir subdir isTyped baseFile = testCase ("Test: " 
       astExists <- doesFileExist astTarget
       unless astExists $
         assertFailure $ "Expected AST file not created: " ++ astTarget
+
+      -- Check that the program carries its main term
+      ast <- readFile astTarget
+      when ("None)" `isSuffixOf` dropWhileEnd isSpace ast) $
+        assertFailure $ "AST file has no main program: " ++ astTarget
 
       -- Step 2: Validate the AST file with peregrine validate if available
       case mperegrinePath of

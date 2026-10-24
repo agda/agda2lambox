@@ -18,7 +18,7 @@ module LambdaBox.Env where
 
 
 import Data.Kind ( Type )
-import Data.List.NonEmpty ( NonEmpty )
+import Data.List.NonEmpty ( nonEmpty )
 
 import Agda.Syntax.Common.Pretty
 
@@ -121,10 +121,10 @@ data GlobalDecl (t :: Typing) :: Type where
 -- | Global environment.
 newtype GlobalEnv t = GlobalEnv [(KerName, GlobalDecl t)]
 
--- | Generated module
+-- | Generated module.
 data LBoxModule t = LBoxModule
   { lboxEnv  :: GlobalEnv t
-  , lboxMain :: WhenUntyped t (NonEmpty KerName)
+  , lboxMain :: [KerName] -- the definitions annotated by a COMPILE pragma
   }
 
 
@@ -181,5 +181,5 @@ instance Pretty (GlobalEnv t) where
 instance Pretty (LBoxModule t) where
   pretty LBoxModule{..} = vcat
     [ pretty lboxEnv
-    , flip foldMap lboxMain \kn -> "main program:" <+> pretty kn
+    , flip foldMap (nonEmpty lboxMain) \kns -> "main program:" <+> pretty kns
     ]
