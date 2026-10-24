@@ -78,7 +78,7 @@ jobs:
       uses: actions/checkout@v6
       with:
         repository: peregrine-project/peregrine-tool
-        ref: 6e3971e07897f17e06cd21c4e20558ea4161861a
+        ref: 8077cfd00489c01eb4142937f72848303d286c7a
         path: peregrine-tool
 
     - name: Restore OPAM cache

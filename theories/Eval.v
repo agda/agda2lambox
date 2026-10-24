@@ -1,12 +1,12 @@
 (* This file provides utilises to evaluate lambda box programs *)
 
-From Stdlib                Require Import Nat.
-From MetaRocq.Utils        Require Import utils.
-From MetaRocq.Utils        Require Import ReflectEq.
-From MetaRocq.Erasure      Require Import EAst EWellformed EEnvMap EProgram EConstructorsAsBlocks.
-From CertiCoq.Common       Require Import Common.
-From CertiCoq.LambdaBoxMut Require Import compile term program wcbvEval.
-From Agda2Lambox           Require Import CheckWF.
+From Stdlib                 Require Import Nat.
+From MetaRocq.Utils         Require Import utils.
+From MetaRocq.Utils         Require Import ReflectEq.
+From MetaRocq.Erasure       Require Import EAst EWellformed EEnvMap EProgram EConstructorsAsBlocks.
+From CertiRocq.Common       Require Import Common.
+From CertiRocq.LambdaBoxMut Require Import compile term program wcbvEval.
+From Agda2Lambox            Require Import CheckWF.
 
 
 (* TODO: eta-expand here *)
@@ -38,12 +38,12 @@ Definition eval_program (p : EAst.program) : exception Term :=
 
 (* Courtesy of Eske *)
 
-From CertiCoq Require Import LambdaBoxLocal.toplevel.
-From CertiCoq Require Import LambdaANF.toplevel.
-From CertiCoq Require Import Compiler.pipeline.
+From CertiRocq Require Import LambdaBoxLocal.toplevel.
+From CertiRocq Require Import LambdaANF.toplevel.
+From CertiRocq Require Import Compiler.pipeline.
 Require Import ExtLib.Structures.Monad.
 Import MonadNotation.
-From CertiCoq Require Import Common.Common Common.compM Common.Pipeline_utils.
+From CertiRocq Require Import Common.Common Common.compM Common.Pipeline_utils.
 
 Definition box_to_wasm (p : EAst.program) :=
   let p := blocks p in
@@ -52,7 +52,7 @@ Definition box_to_wasm (p : EAst.program) :=
   let next_id := 100%positive in
   let opts := default_opts in
   (* Translate lambda_box -> lambda_boxmut *)
-  let p_mut := {| CertiCoq.Common.AstCommon.main := LambdaBoxMut.compile.compile (snd p) ; CertiCoq.Common.AstCommon.env := LambdaBoxMut.compile.compile_ctx (fst p) |} in
+  let p_mut := {| CertiRocq.Common.AstCommon.main := LambdaBoxMut.compile.compile (snd p) ; CertiRocq.Common.AstCommon.env := LambdaBoxMut.compile.compile_ctx (fst p) |} in
   check_axioms prims p_mut;;
   (* Translate lambda_boxmut -> lambda_boxlocal *)
   p_local <- compile_LambdaBoxLocal prims p_mut;;
