@@ -73,6 +73,12 @@ Definition env : global_env :=
                          (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
                        inductive_ind := 0 |})
                  TBox)) |});
+   (((MPfile [&quot;RunTimeIrrelevance&quot;%bs; &quot;ErasedRec&quot;%bs],
+      &quot;x\1366\&amp;2261\1366y&quot;%bs),
+     true),
+    ConstantDecl
+      {| cst_body := Some tBox;
+         cst_type := ([], TArr TBox (TArr TBox (TArr TBox TBox))) |});
    (((MPfile [&quot;RunTimeIrrelevance&quot;%bs], &quot;ErasedRec&quot;%bs), true),
     ConstantDecl
       {| cst_body := Some tBox;
@@ -89,18 +95,6 @@ Definition env : global_env :=
                          (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
                        inductive_ind := 0 |})
                  TBox)) |});
-   (((MPfile [&quot;RunTimeIrrelevance&quot;%bs; &quot;ErasedRec&quot;%bs],
-      &quot;x\1366\&amp;2261\1366y&quot;%bs),
-     true),
-    ConstantDecl
-      {| cst_body := Some tBox;
-         cst_type := ([], TArr TBox (TArr TBox (TArr TBox TBox))) |});
-   (((MPfile [&quot;RunTimeIrrelevance&quot;%bs; &quot;ErasedRec&quot;%bs],
-      &quot;constructor&quot;%bs),
-     true),
-    ConstantDecl
-      {| cst_body := Some tBox;
-         cst_type := ([], TArr TBox (TArr TBox (TArr TBox TBox))) |});
    (((MPfile [&quot;RunTimeIrrelevance&quot;%bs; &quot;ErasedField&quot;%bs], &quot;x&quot;%bs),
      true),
     ConstantDecl
@@ -183,40 +177,6 @@ Definition env : global_env :=
                  TBox)) |});
    (((MPfile [&quot;RunTimeIrrelevance&quot;%bs], &quot;ErasedData&quot;%bs), true),
     ConstantDecl {| cst_body := Some tBox; cst_type := ([], TBox) |});
-   (((MPfile [&quot;RunTimeIrrelevance&quot;%bs; &quot;ErasedData&quot;%bs], &quot;mk&quot;%bs),
-     true),
-    ConstantDecl
-      {| cst_body := Some tBox;
-         cst_type :=
-           ([],
-            TArr
-              (TInd
-                 {| inductive_mind :=
-                      (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                    inductive_ind := 0 |})
-              (TArr
-                 (TInd
-                    {| inductive_mind :=
-                         (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                       inductive_ind := 0 |})
-                 (TArr TBox TBox))) |});
-   (((MPfile [&quot;RunTimeIrrelevance&quot;%bs; &quot;ErasedCon&quot;%bs], &quot;mkIrr&quot;%bs),
-     true),
-    ConstantDecl
-      {| cst_body := Some tBox;
-         cst_type :=
-           ([],
-            TArr
-              (TInd
-                 {| inductive_mind :=
-                      (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                    inductive_ind := 0 |})
-              (TArr
-                 TBox
-                 (TInd
-                    {| inductive_mind :=
-                         (MPfile [&quot;RunTimeIrrelevance&quot;%bs], &quot;ErasedCon&quot;%bs);
-                       inductive_ind := 0 |}))) |});
    (((MPfile [&quot;RunTimeIrrelevance&quot;%bs], &quot;refl&quot;%bs), true),
     ConstantDecl
       {| cst_body := None;
@@ -4939,6 +4899,14 @@ Definition env : global_env :=
          ind_bodies :=
            [{| ind_name := &quot;Empty&quot;%bs; ind_propositional := false;
                ind_kelim := IntoAny; ind_ctors := []; ind_projs := [];
-               ind_type_vars := [] |}] |})].</code></pre>
+               ind_type_vars := [] |}] |})].
+
+Compute @check_wf_glob eflags (ExAst.trans_env env).
+
+Definition prog1 : program :=
+  (ExAst.trans_env env,
+   tConst (MPfile [&quot;RunTimeIrrelevance&quot;%bs], &quot;test&quot;%bs)).
+
+Compute eval_program prog1.</code></pre>
 </body>
 </html>

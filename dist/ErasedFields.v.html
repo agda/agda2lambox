@@ -2005,7 +2005,7 @@ Definition env : global_env :=
                      (nNamed &quot;bar&quot;%bs, TBox)]),
                    2)];
                ind_projs := []; ind_type_vars := [] |}] |});
-   (((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;\8469&quot;%bs), true),
+   (((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs), true),
     InductiveDecl
       {| ind_finite := Finite; ind_npars := 0;
          ind_bodies :=
@@ -2027,6 +2027,14 @@ Definition env : global_env :=
          ind_bodies :=
            [{| ind_name := &quot;Empty&quot;%bs; ind_propositional := false;
                ind_kelim := IntoAny; ind_ctors := []; ind_projs := [];
-               ind_type_vars := [] |}] |})].</code></pre>
+               ind_type_vars := [] |}] |})].
+
+Compute @check_wf_glob eflags (ExAst.trans_env env).
+
+Definition prog1 : program :=
+  (ExAst.trans_env env,
+   tConst (MPfile [&quot;ErasedFields&quot;%bs], &quot;test&quot;%bs)).
+
+Compute eval_program prog1.</code></pre>
 </body>
 </html>

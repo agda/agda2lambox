@@ -516,6 +516,13 @@ Definition env : global_env :=
          ind_bodies :=
            [{| ind_name := &quot;Empty&quot;%bs; ind_propositional := false;
                ind_kelim := IntoAny; ind_ctors := []; ind_projs := [];
-               ind_type_vars := [] |}] |})].</code></pre>
+               ind_type_vars := [] |}] |})].
+
+Compute @check_wf_glob eflags (ExAst.trans_env env).
+
+Definition prog1 : program :=
+  (ExAst.trans_env env, tConst (MPfile [&quot;Top&quot;%bs], &quot;test&quot;%bs)).
+
+Compute eval_program prog1.</code></pre>
 </body>
 </html>

@@ -79,7 +79,7 @@
 <div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="pp">#ifndef WITH_C</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="pp">#define WITH_C</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&lt;gc_stack.h&gt;</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&quot;gen/c/With.h&quot;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&quot;With.h&quot;</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a><span class="kw">extern</span> <span class="kw">struct</span> thread_info *make_tinfo(<span class="dt">void</span>);</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a><span class="kw">extern</span> value y_105(<span class="kw">struct</span> thread_info *, value, value);</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a><span class="kw">extern</span> value reccall_104(<span class="kw">struct</span> thread_info *, value, value);</span>
@@ -156,7 +156,7 @@
 <span id="cb1-78"><a href="#cb1-78" aria-hidden="true"></a>  $reccall_clo_130 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-79"><a href="#cb1-79" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">3</span><span class="bu">LL</span>;</span>
 <span id="cb1-80"><a href="#cb1-80" aria-hidden="true"></a>  *((value *) $reccall_clo_130 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">2048</span><span class="bu">LL</span>;</span>
-<span id="cb1-81"><a href="#cb1-81" aria-hidden="true"></a>  *((value *) $reccall_clo_130 + <span class="dv">0</span><span class="bu">LL</span>) = reccall_104;</span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true"></a>  *((value *) $reccall_clo_130 + <span class="dv">0</span><span class="bu">LL</span>) = (value) reccall_104;</span>
 <span id="cb1-82"><a href="#cb1-82" aria-hidden="true"></a>  *((value *) $reccall_clo_130 + <span class="dv">1</span><span class="bu">LL</span>) = $env_128;</span>
 <span id="cb1-83"><a href="#cb1-83" aria-hidden="true"></a>  (*$tinfo).alloc = $alloc;</span>
 <span id="cb1-84"><a href="#cb1-84" aria-hidden="true"></a>  (*$tinfo).limit = $limit;</span>
@@ -193,7 +193,7 @@
 <span id="cb1-115"><a href="#cb1-115" aria-hidden="true"></a>  $reccall_clo_127 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-116"><a href="#cb1-116" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">3</span><span class="bu">LL</span>;</span>
 <span id="cb1-117"><a href="#cb1-117" aria-hidden="true"></a>  *((value *) $reccall_clo_127 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">2048</span><span class="bu">LL</span>;</span>
-<span id="cb1-118"><a href="#cb1-118" aria-hidden="true"></a>  *((value *) $reccall_clo_127 + <span class="dv">0</span><span class="bu">LL</span>) = reccall_103;</span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true"></a>  *((value *) $reccall_clo_127 + <span class="dv">0</span><span class="bu">LL</span>) = (value) reccall_103;</span>
 <span id="cb1-119"><a href="#cb1-119" aria-hidden="true"></a>  *((value *) $reccall_clo_127 + <span class="dv">1</span><span class="bu">LL</span>) = $env_125;</span>
 <span id="cb1-120"><a href="#cb1-120" aria-hidden="true"></a>  (*$tinfo).alloc = $alloc;</span>
 <span id="cb1-121"><a href="#cb1-121" aria-hidden="true"></a>  (*$tinfo).limit = $limit;</span>
@@ -230,7 +230,7 @@
 <span id="cb1-152"><a href="#cb1-152" aria-hidden="true"></a>  $reccall_clo_124 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-153"><a href="#cb1-153" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">3</span><span class="bu">LL</span>;</span>
 <span id="cb1-154"><a href="#cb1-154" aria-hidden="true"></a>  *((value *) $reccall_clo_124 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">2048</span><span class="bu">LL</span>;</span>
-<span id="cb1-155"><a href="#cb1-155" aria-hidden="true"></a>  *((value *) $reccall_clo_124 + <span class="dv">0</span><span class="bu">LL</span>) = reccall_102;</span>
+<span id="cb1-155"><a href="#cb1-155" aria-hidden="true"></a>  *((value *) $reccall_clo_124 + <span class="dv">0</span><span class="bu">LL</span>) = (value) reccall_102;</span>
 <span id="cb1-156"><a href="#cb1-156" aria-hidden="true"></a>  *((value *) $reccall_clo_124 + <span class="dv">1</span><span class="bu">LL</span>) = $env_122;</span>
 <span id="cb1-157"><a href="#cb1-157" aria-hidden="true"></a>  (*$tinfo).alloc = $alloc;</span>
 <span id="cb1-158"><a href="#cb1-158" aria-hidden="true"></a>  (*$tinfo).limit = $limit;</span>
@@ -404,7 +404,7 @@
 <span id="cb1-326"><a href="#cb1-326" aria-hidden="true"></a>  $y_clo_143 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-327"><a href="#cb1-327" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">3</span><span class="bu">LL</span>;</span>
 <span id="cb1-328"><a href="#cb1-328" aria-hidden="true"></a>  *((value *) $y_clo_143 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">2048</span><span class="bu">LL</span>;</span>
-<span id="cb1-329"><a href="#cb1-329" aria-hidden="true"></a>  *((value *) $y_clo_143 + <span class="dv">0</span><span class="bu">LL</span>) = y_105;</span>
+<span id="cb1-329"><a href="#cb1-329" aria-hidden="true"></a>  *((value *) $y_clo_143 + <span class="dv">0</span><span class="bu">LL</span>) = (value) y_105;</span>
 <span id="cb1-330"><a href="#cb1-330" aria-hidden="true"></a>  *((value *) $y_clo_143 + <span class="dv">1</span><span class="bu">LL</span>) = $env_142;</span>
 <span id="cb1-331"><a href="#cb1-331" aria-hidden="true"></a>  $args = (*$tinfo).args;</span>
 <span id="cb1-332"><a href="#cb1-332" aria-hidden="true"></a>  (*$tinfo).alloc = $alloc;</span>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Exports.rs.result</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+</head>
+<body>
+<pre><code>[1m[33mwarning[0m[1m:[0m no edition set: defaulting to the 2015 edition while the latest is 2024
+[1m[32m   Compiling[0m main v0.0.0 (/home/runner/work/agda2lambox/agda2lambox/test/gen/rust)
+[0m[1m[38;5;9merror[E0277][0m[0m[1m: `dyn Fn(&amp;Nat_Builtin_Agda_Nat&lt;&#39;_&gt;) -&gt; &amp;Nat_Builtin_Agda_Nat&lt;&#39;_&gt;` doesn&#39;t implement `Debug`[0m
+[0m  [0m[0m[1m[38;5;12m--&gt; [0m[0mExports.rs:22:96[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m20[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m...[0m[0mve(Debug, Clone)][0m
+[0m   [0m[0m[1m[38;5;12m|[0m[0m       [0m[0m[1m[38;5;12m-----[0m[0m [0m[0m[1m[38;5;12min this derive macro expansion[0m
+[0m[1m[38;5;12m21[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m...[0m[0mum Exports_Exports&lt;&#39;a&gt; {[0m
+[0m[1m[38;5;12m22[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m...[0m[0mtructor(PhantomData&lt;&amp;&#39;a ()&gt;, &amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;, &amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;, &amp;&#39;a dyn Fn(&amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;) -&gt; &amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;, &amp;[0m[0m[1m[38;5;12m...[0m
+[0m   [0m[0m[1m[38;5;12m|[0m[0m                                                                                             [0m[0m[1m[38;5;9m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[0m [0m[0m[1m[38;5;9m`dyn Fn(&amp;Nat_Builtin_Agda_Nat&lt;&#39;_&gt;) -&gt; &amp;Nat_Builtin_Agda_Nat&lt;&#39;_&gt;` cannot be formatted using `{:?}` because it doesn&#39;t implement `Debug`[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mhelp[0m[0m: the trait `Debug` is not implemented for `dyn Fn(&amp;Nat_Builtin_Agda_Nat&lt;&#39;_&gt;) -&gt; &amp;Nat_Builtin_Agda_Nat&lt;&#39;_&gt;`[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: this error originates in the derive macro `Debug` (in Nightly builds, run with -Z macro-backtrace for more info)[0m
+
+[0m[1m[38;5;9merror[E0277][0m[0m[1m: `dyn Fn(&amp;Nat_Builtin_Agda_Nat&lt;&#39;_&gt;) -&gt; &amp;dyn Fn(&amp;...) -&gt; ...` doesn&#39;t implement `Debug`[0m
+[0m  [0m[0m[1m[38;5;12m--&gt; [0m[0mExports.rs:22:170[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m20[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m...[0m[0mve(Debug, Clone)][0m
+[0m   [0m[0m[1m[38;5;12m|[0m[0m       [0m[0m[1m[38;5;12m-----[0m[0m [0m[0m[1m[38;5;12min this derive macro expansion[0m
+[0m[1m[38;5;12m21[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m...[0m[0mum Exports_Exports&lt;&#39;a&gt; {[0m
+[0m[1m[38;5;12m22[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m...[0m[0mtructor(PhantomData&lt;&amp;&#39;a ()&gt;, &amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;, &amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;, &amp;&#39;a dyn Fn(&amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;) -&gt; &amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;, &amp;&#39;a dyn Fn(&amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;) -&gt; &amp;&#39;a dyn Fn(&amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;) -&gt; &amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;[0m[0m[1m[38;5;12m...[0m
+[0m   [0m[0m[1m[38;5;12m|[0m[0m                                                                                                                                                                       [0m[0m[1m[38;5;9m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[0m [0m[0m[1m[38;5;9m`dyn Fn(&amp;Nat_Builtin_Agda_Nat&lt;&#39;_&gt;) -&gt; &amp;dyn Fn(&amp;...) -&gt; ...` cannot be formatted using `{:?}` because it doesn&#39;t implement `Debug`[0m
+[0m   [0m[0m[1m[38;5;12m|[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: the full name for the type has been written to &#39;/home/runner/work/agda2lambox/agda2lambox/test/gen/rust/target/debug/deps/Exports-8fde4852694d5923.long-type-10213041597794814702.txt&#39;[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: consider using `--verbose` to print the full type name to the console[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mhelp[0m[0m: the trait `Debug` is not implemented for `dyn Fn(&amp;Nat_Builtin_Agda_Nat&lt;&#39;_&gt;) -&gt; &amp;dyn Fn(&amp;...) -&gt; ...`[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mhelp[0m[0m: the following other types implement trait `Debug`:[0m
+[0m             dyn Any + Send + Sync[0m
+[0m             dyn Any + Send[0m
+[0m             dyn Any[0m
+[0m   [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: this error originates in the derive macro `Debug` (in Nightly builds, run with -Z macro-backtrace for more info)[0m
+
+[0m[1mFor more information about this error, try `rustc --explain E0277`.[0m
+[1m[31merror[0m[1m:[0m could not compile `main` (bin &quot;Exports&quot;) due to 2 previous errors</code></pre>
+</body>
+</html>

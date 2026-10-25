@@ -240,6 +240,18 @@ Levels.testSomeLvl:
     type: Agda.Builtin.Nat.Nat{0}
     body: Levels.lvlToNat □
 
+Levels.SomeLvl.ℓ:
+  constant declaration:
+    type variables: []
+    type: □
+    body: □
+
+Levels.Ֆ30Ֆℓ:
+  constant declaration:
+    type variables: []
+    type: □
+    body: □
+
 Levels.SomeLvl:
   mutual inductive(s):
     SomeLvl
@@ -247,18 +259,6 @@ Levels.SomeLvl:
       constructors:
         this (1 arg(s))
           ℓ : □
-
-Levels.SomeLvl.ℓ:
-  constant declaration:
-    type variables: []
-    type: (Levels.SomeLvl{0}) → □
-    body: λ _ → case&lt;Levels.SomeLvl{0},0&gt; @0 of λ&lt;[_]&gt; @0
-
-Levels.Ֆ30Ֆℓ:
-  constant declaration:
-    type variables: []
-    type: □
-    body: □
 
 Levels.someLvl:
   constant declaration:
@@ -664,20 +664,11 @@ Levels.test:
                (Levels.testConstLvl2))
             (Levels.testWhere)
 
-Agda.Primitive.lsuc:
+Levels.mkLevel:
   constant declaration:
     type variables: []
     type: □
     body: □
-
-Levels.mkLevel:
-  constant declaration:
-    type variables: []
-    type: (Agda.Builtin.Nat.Nat{0}) → □
-    body: μrec [0] :=
-            0: λ _ →
-                 case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @0 of
-                   λ&lt;[]&gt; Levels.Ֆ30Ֆℓ
-                   λ&lt;[_]&gt; Agda.Primitive.lsuc (@2 @0)</code></pre>
+main program: [Levels.test]</code></pre>
 </body>
 </html>

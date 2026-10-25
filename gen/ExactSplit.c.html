@@ -79,15 +79,15 @@
 <div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="pp">#ifndef EXACTSPLIT_C</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="pp">#define EXACTSPLIT_C</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&lt;gc_stack.h&gt;</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&quot;gen/c/ExactSplit.h&quot;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&quot;ExactSplit.h&quot;</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a><span class="kw">extern</span> <span class="kw">struct</span> thread_info *make_tinfo(<span class="dt">void</span>);</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a><span class="kw">extern</span> value min_uncurried_101(<span class="kw">struct</span> thread_info *, value, value);</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a><span class="kw">extern</span> value body(<span class="kw">struct</span> thread_info *);</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a>value min_uncurried_101(<span class="kw">struct</span> thread_info *, value, value);</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a>value body(<span class="kw">struct</span> thread_info *);</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a><span class="dt">unsigned</span> <span class="dt">long</span> <span class="dt">long</span> <span class="dt">const</span> body_info_115[<span class="dv">2</span>] = { <span class="dv">0</span><span class="bu">LL</span>, <span class="dv">0</span><span class="bu">LL</span>, };</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a><span class="dt">unsigned</span> <span class="dt">long</span> <span class="dt">long</span> <span class="dt">const</span> body_info_114[<span class="dv">2</span>] = { <span class="dv">0</span><span class="bu">LL</span>, <span class="dv">0</span><span class="bu">LL</span>, };</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a><span class="dt">unsigned</span> <span class="dt">long</span> <span class="dt">long</span> <span class="dt">const</span> min_uncurried_info_114[<span class="dv">4</span>] = { <span class="dv">0</span><span class="bu">LL</span>, <span class="dv">2</span><span class="bu">LL</span>, <span class="dv">0</span><span class="bu">LL</span>, <span class="dv">1</span><span class="bu">LL</span>, };</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a><span class="dt">unsigned</span> <span class="dt">long</span> <span class="dt">long</span> <span class="dt">const</span> min_uncurried_info_113[<span class="dv">4</span>] = { <span class="dv">0</span><span class="bu">LL</span>, <span class="dv">2</span><span class="bu">LL</span>, <span class="dv">0</span><span class="bu">LL</span>, <span class="dv">1</span><span class="bu">LL</span>, };</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true"></a></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true"></a>value min_uncurried_101(<span class="kw">struct</span> thread_info *$tinfo, value $anon_103, value $anon_104)</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true"></a>{</span>
@@ -160,35 +160,33 @@
 <span id="cb1-82"><a href="#cb1-82" aria-hidden="true"></a>  <span class="dt">register</span> value $y_110;</span>
 <span id="cb1-83"><a href="#cb1-83" aria-hidden="true"></a>  <span class="dt">register</span> value $y_111;</span>
 <span id="cb1-84"><a href="#cb1-84" aria-hidden="true"></a>  <span class="dt">register</span> value $ExactSplitdtest_112;</span>
-<span id="cb1-85"><a href="#cb1-85" aria-hidden="true"></a>  <span class="dt">register</span> value $y_113;</span>
-<span id="cb1-86"><a href="#cb1-86" aria-hidden="true"></a>  <span class="dt">register</span> value *$alloc;</span>
-<span id="cb1-87"><a href="#cb1-87" aria-hidden="true"></a>  <span class="dt">register</span> value *$limit;</span>
-<span id="cb1-88"><a href="#cb1-88" aria-hidden="true"></a>  <span class="dt">register</span> value *$args;</span>
-<span id="cb1-89"><a href="#cb1-89" aria-hidden="true"></a>  $alloc = (*$tinfo).alloc;</span>
-<span id="cb1-90"><a href="#cb1-90" aria-hidden="true"></a>  $limit = (*$tinfo).limit;</span>
-<span id="cb1-91"><a href="#cb1-91" aria-hidden="true"></a>  $args = (*$tinfo).args;</span>
-<span id="cb1-92"><a href="#cb1-92" aria-hidden="true"></a>  frame.next = root;</span>
-<span id="cb1-93"><a href="#cb1-93" aria-hidden="true"></a>  frame.root = root;</span>
-<span id="cb1-94"><a href="#cb1-94" aria-hidden="true"></a>  frame.prev = (*$tinfo).fp;</span>
-<span id="cb1-95"><a href="#cb1-95" aria-hidden="true"></a>  $y_110 = <span class="dv">1</span><span class="bu">LL</span>;</span>
-<span id="cb1-96"><a href="#cb1-96" aria-hidden="true"></a>  $y_111 = <span class="dv">1</span><span class="bu">LL</span>;</span>
-<span id="cb1-97"><a href="#cb1-97" aria-hidden="true"></a>  $args = (*$tinfo).args;</span>
-<span id="cb1-98"><a href="#cb1-98" aria-hidden="true"></a>  (*$tinfo).alloc = $alloc;</span>
-<span id="cb1-99"><a href="#cb1-99" aria-hidden="true"></a>  (*$tinfo).limit = $limit;</span>
-<span id="cb1-100"><a href="#cb1-100" aria-hidden="true"></a>  <span class="co">/*skip*/</span>;</span>
-<span id="cb1-101"><a href="#cb1-101" aria-hidden="true"></a>  $ExactSplitdtest_112 =</span>
-<span id="cb1-102"><a href="#cb1-102" aria-hidden="true"></a>    ((value (*)(<span class="kw">struct</span> thread_info *, value, value)) min_uncurried_101)</span>
-<span id="cb1-103"><a href="#cb1-103" aria-hidden="true"></a>    ($tinfo, $y_111, $y_110);</span>
-<span id="cb1-104"><a href="#cb1-104" aria-hidden="true"></a>  $alloc = (*$tinfo).alloc;</span>
-<span id="cb1-105"><a href="#cb1-105" aria-hidden="true"></a>  $limit = (*$tinfo).limit;</span>
-<span id="cb1-106"><a href="#cb1-106" aria-hidden="true"></a>  <span class="co">/*skip*/</span>;</span>
-<span id="cb1-107"><a href="#cb1-107" aria-hidden="true"></a>  $y_113 = <span class="dv">1</span><span class="bu">LL</span>;</span>
-<span id="cb1-108"><a href="#cb1-108" aria-hidden="true"></a>  (*$tinfo).alloc = $alloc;</span>
-<span id="cb1-109"><a href="#cb1-109" aria-hidden="true"></a>  (*$tinfo).limit = $limit;</span>
-<span id="cb1-110"><a href="#cb1-110" aria-hidden="true"></a>  <span class="cf">return</span> $y_113;</span>
-<span id="cb1-111"><a href="#cb1-111" aria-hidden="true"></a>}</span>
-<span id="cb1-112"><a href="#cb1-112" aria-hidden="true"></a></span>
-<span id="cb1-113"><a href="#cb1-113" aria-hidden="true"></a></span>
-<span id="cb1-114"><a href="#cb1-114" aria-hidden="true"></a><span class="pp">#endif </span><span class="co">/* EXACTSPLIT_C */</span></span></code></pre></div>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true"></a>  <span class="dt">register</span> value *$alloc;</span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true"></a>  <span class="dt">register</span> value *$limit;</span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true"></a>  <span class="dt">register</span> value *$args;</span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true"></a>  $alloc = (*$tinfo).alloc;</span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true"></a>  $limit = (*$tinfo).limit;</span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true"></a>  $args = (*$tinfo).args;</span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true"></a>  frame.next = root;</span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true"></a>  frame.root = root;</span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true"></a>  frame.prev = (*$tinfo).fp;</span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true"></a>  $y_110 = <span class="dv">1</span><span class="bu">LL</span>;</span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true"></a>  $y_111 = <span class="dv">1</span><span class="bu">LL</span>;</span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true"></a>  $args = (*$tinfo).args;</span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true"></a>  (*$tinfo).alloc = $alloc;</span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true"></a>  (*$tinfo).limit = $limit;</span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true"></a>  <span class="co">/*skip*/</span>;</span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true"></a>  $ExactSplitdtest_112 =</span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true"></a>    ((value (*)(<span class="kw">struct</span> thread_info *, value, value)) min_uncurried_101)</span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true"></a>    ($tinfo, $y_111, $y_110);</span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true"></a>  $alloc = (*$tinfo).alloc;</span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true"></a>  $limit = (*$tinfo).limit;</span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true"></a>  <span class="co">/*skip*/</span>;</span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true"></a>  (*$tinfo).alloc = $alloc;</span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true"></a>  (*$tinfo).limit = $limit;</span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true"></a>  <span class="cf">return</span> $ExactSplitdtest_112;</span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true"></a>}</span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true"></a></span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true"></a></span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true"></a><span class="pp">#endif </span><span class="co">/* EXACTSPLIT_C */</span></span></code></pre></div>
 </body>
 </html>

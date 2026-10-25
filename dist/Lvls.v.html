@@ -24,28 +24,6 @@ Import ListNotations.
 
 Definition env : global_declarations :=
   [((MPfile [&quot;Lvls&quot;%bs], &quot;mkLevel&quot;%bs),
-    ConstantDecl
-      {| cst_body :=
-           Some
-             (tFix
-                [{| dname := nNamed &quot;mkLevel&quot;%bs;
-                    dbody :=
-                      tLambda
-                        nAnon
-                        (tCase
-                           ({| inductive_mind :=
-                                 (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                               inductive_ind := 0 |},
-                            0)
-                           (tRel 0)
-                           [([], tConst (MPfile [&quot;Lvls&quot;%bs], &quot;\1366\&amp;30\1366\8467&quot;%bs));
-                            ([nAnon],
-                             tApp
-                               (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Primitive&quot;%bs], &quot;lsuc&quot;%bs))
-                               (tApp (tRel 2) (tRel 0)))]);
-                    rarg := 0 |}]
-                0) |});
-   ((MPfile [&quot;Agda&quot;%bs; &quot;Primitive&quot;%bs], &quot;lsuc&quot;%bs),
     ConstantDecl {| cst_body := Some tBox |});
    ((MPfile [&quot;Lvls&quot;%bs], &quot;testConstLvl&quot;%bs),
     ConstantDecl
@@ -1414,19 +1392,6 @@ Definition env : global_declarations :=
                       inductive_ind := 0 |}
                    0 [])
                 (tConst (MPfile [&quot;Lvls&quot;%bs], &quot;\1366\&amp;30\1366\8467&quot;%bs))) |});
-   ((MPfile [&quot;Lvls&quot;%bs], &quot;\1366\&amp;30\1366\8467&quot;%bs),
-    ConstantDecl {| cst_body := Some tBox |});
-   ((MPfile [&quot;Lvls&quot;%bs; &quot;SomeLvl&quot;%bs], &quot;\8467&quot;%bs),
-    ConstantDecl
-      {| cst_body :=
-           Some
-             (tLambda
-                nAnon
-                (tCase
-                   ({| inductive_mind := (MPfile [&quot;Lvls&quot;%bs], &quot;SomeLvl&quot;%bs);
-                       inductive_ind := 0 |},
-                    0)
-                   (tRel 0) [([nAnon], tRel 0)])) |});
    ((MPfile [&quot;Lvls&quot;%bs], &quot;SomeLvl&quot;%bs),
     InductiveDecl
       {| ind_finite := Finite; ind_npars := 0;
@@ -1435,6 +1400,10 @@ Definition env : global_declarations :=
                ind_kelim := IntoAny;
                ind_ctors := [{| cstr_name := &quot;this&quot;%bs; cstr_nargs := 1 |}];
                ind_projs := [] |}] |});
+   ((MPfile [&quot;Lvls&quot;%bs], &quot;\1366\&amp;30\1366\8467&quot;%bs),
+    ConstantDecl {| cst_body := Some tBox |});
+   ((MPfile [&quot;Lvls&quot;%bs; &quot;SomeLvl&quot;%bs], &quot;\8467&quot;%bs),
+    ConstantDecl {| cst_body := Some tBox |});
    ((MPfile [&quot;Lvls&quot;%bs], &quot;testConst&quot;%bs),
     ConstantDecl
       {| cst_body :=

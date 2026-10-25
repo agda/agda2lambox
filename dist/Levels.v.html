@@ -24,36 +24,6 @@ Import ListNotations.
 
 Definition env : global_env :=
   [(((MPfile [&quot;Levels&quot;%bs], &quot;mkLevel&quot;%bs), true),
-    ConstantDecl
-      {| cst_body :=
-           Some
-             (tFix
-                [{| dname := nNamed &quot;mkLevel&quot;%bs;
-                    dbody :=
-                      tLambda
-                        nAnon
-                        (tCase
-                           ({| inductive_mind :=
-                                 (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                               inductive_ind := 0 |},
-                            0)
-                           (tRel 0)
-                           [([], tConst (MPfile [&quot;Levels&quot;%bs], &quot;\1366\&amp;30\1366\8467&quot;%bs));
-                            ([nAnon],
-                             tApp
-                               (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Primitive&quot;%bs], &quot;lsuc&quot;%bs))
-                               (tApp (tRel 2) (tRel 0)))]);
-                    rarg := 0 |}]
-                0);
-         cst_type :=
-           ([],
-            TArr
-              (TInd
-                 {| inductive_mind :=
-                      (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                    inductive_ind := 0 |})
-              TBox) |});
-   (((MPfile [&quot;Agda&quot;%bs; &quot;Primitive&quot;%bs], &quot;lsuc&quot;%bs), true),
     ConstantDecl {| cst_body := Some tBox; cst_type := ([], TBox) |});
    (((MPfile [&quot;Levels&quot;%bs], &quot;test&quot;%bs), true),
     ConstantDecl
@@ -1928,26 +1898,6 @@ Definition env : global_env :=
             TInd
               {| inductive_mind := (MPfile [&quot;Levels&quot;%bs], &quot;SomeLvl&quot;%bs);
                  inductive_ind := 0 |}) |});
-   (((MPfile [&quot;Levels&quot;%bs], &quot;\1366\&amp;30\1366\8467&quot;%bs), true),
-    ConstantDecl {| cst_body := Some tBox; cst_type := ([], TBox) |});
-   (((MPfile [&quot;Levels&quot;%bs; &quot;SomeLvl&quot;%bs], &quot;\8467&quot;%bs), true),
-    ConstantDecl
-      {| cst_body :=
-           Some
-             (tLambda
-                nAnon
-                (tCase
-                   ({| inductive_mind := (MPfile [&quot;Levels&quot;%bs], &quot;SomeLvl&quot;%bs);
-                       inductive_ind := 0 |},
-                    0)
-                   (tRel 0) [([nAnon], tRel 0)]));
-         cst_type :=
-           ([],
-            TArr
-              (TInd
-                 {| inductive_mind := (MPfile [&quot;Levels&quot;%bs], &quot;SomeLvl&quot;%bs);
-                    inductive_ind := 0 |})
-              TBox) |});
    (((MPfile [&quot;Levels&quot;%bs], &quot;SomeLvl&quot;%bs), true),
     InductiveDecl
       {| ind_finite := Finite; ind_npars := 0;
@@ -1956,6 +1906,10 @@ Definition env : global_env :=
                ind_kelim := IntoAny;
                ind_ctors := [((&quot;this&quot;%bs, [(nNamed &quot;\8467&quot;%bs, TBox)]), 1)];
                ind_projs := []; ind_type_vars := [] |}] |});
+   (((MPfile [&quot;Levels&quot;%bs], &quot;\1366\&amp;30\1366\8467&quot;%bs), true),
+    ConstantDecl {| cst_body := Some tBox; cst_type := ([], TBox) |});
+   (((MPfile [&quot;Levels&quot;%bs; &quot;SomeLvl&quot;%bs], &quot;\8467&quot;%bs), true),
+    ConstantDecl {| cst_body := Some tBox; cst_type := ([], TBox) |});
    (((MPfile [&quot;Levels&quot;%bs], &quot;testSomeLvl&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
@@ -2924,6 +2878,13 @@ Definition env : global_env :=
          ind_bodies :=
            [{| ind_name := &quot;Empty&quot;%bs; ind_propositional := false;
                ind_kelim := IntoAny; ind_ctors := []; ind_projs := [];
-               ind_type_vars := [] |}] |})].</code></pre>
+               ind_type_vars := [] |}] |})].
+
+Compute @check_wf_glob eflags (ExAst.trans_env env).
+
+Definition prog1 : program :=
+  (ExAst.trans_env env, tConst (MPfile [&quot;Levels&quot;%bs], &quot;test&quot;%bs)).
+
+Compute eval_program prog1.</code></pre>
 </body>
 </html>

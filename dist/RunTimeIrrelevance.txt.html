@@ -993,20 +993,6 @@ RunTimeIrrelevance.refl:
     type: (Agda.Builtin.Nat.Nat{0}) → □
     body:
 
-RunTimeIrrelevance.ErasedCon.mkIrr:
-  constant declaration:
-    type variables: []
-    type: (Agda.
-           Builtin.
-           Nat.Nat{0}) → □ → RunTimeIrrelevance.ErasedCon{0}
-    body: □
-
-RunTimeIrrelevance.ErasedData.mk:
-  constant declaration:
-    type variables: []
-    type: (Agda.Builtin.Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → □ → □
-    body: □
-
 RunTimeIrrelevance.ErasedData:
   constant declaration:
     type variables: []
@@ -1041,22 +1027,16 @@ RunTimeIrrelevance.ErasedField.x:
     body: λ _ →
             case&lt;RunTimeIrrelevance.ErasedField{0},0&gt; @0 of λ&lt;[_, _]&gt; @1
 
-RunTimeIrrelevance.ErasedRec.constructor:
+RunTimeIrrelevance.ErasedRec:
   constant declaration:
     type variables: []
-    type: □ → □ → □ → □
+    type: (Agda.Builtin.Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → □
     body: □
 
 RunTimeIrrelevance.ErasedRec.xՖ2261Ֆy:
   constant declaration:
     type variables: []
     type: □ → □ → □ → □
-    body: □
-
-RunTimeIrrelevance.ErasedRec:
-  constant declaration:
-    type variables: []
-    type: (Agda.Builtin.Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → □
     body: □
 
 RunTimeIrrelevance.ErasedModule.Ֆ_Ֆ2264Ֆ_:
@@ -1075,6 +1055,7 @@ RunTimeIrrelevance.erasedFun:
   constant declaration:
     type variables: []
     type: (Agda.Builtin.Nat.Nat{0}) → Agda.Builtin.Nat.Nat{0}
-    body: □</code></pre>
+    body: □
+main program: [RunTimeIrrelevance.test]</code></pre>
 </body>
 </html>

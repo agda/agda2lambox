@@ -313,16 +313,14 @@ Lvls.testConst:
                                                                                                                                           Nat.Nat{0}{0}))))))))))))))))))))))))))))))))))))))))))
             Agda.Builtin.Nat.Nat{0}{0}
 
+Lvls.SomeLvl.ℓ: constant declaration: body: □
+
+Lvls.Ֆ30Ֆℓ: constant declaration: body: □
+
 Lvls.SomeLvl:
   mutual inductive(s):
     SomeLvl
       constructors: this (1 arg(s))
-
-Lvls.SomeLvl.ℓ:
-  constant declaration:
-    body: λ _ → case&lt;Lvls.SomeLvl{0},0&gt; @0 of λ&lt;[_]&gt; @0
-
-Lvls.Ֆ30Ֆℓ: constant declaration: body: □
 
 Lvls.someLvl:
   constant declaration: body: Lvls.SomeLvl{0}{0} (Lvls.Ֆ30Ֆℓ)
@@ -614,15 +612,7 @@ Lvls.testConstLvl:
                                                                                                                                           Nat.Nat{0}{0}))))))))))))))))))))))))))))))))))))))))))
             (Lvls.SomeLvl.ℓ (Lvls.someLvl))
 
-Agda.Primitive.lsuc: constant declaration: body: □
-
-Lvls.mkLevel:
-  constant declaration:
-    body: μrec [0] :=
-            0: λ _ →
-                 case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @0 of
-                   λ&lt;[]&gt; Lvls.Ֆ30Ֆℓ
-                   λ&lt;[_]&gt; Agda.Primitive.lsuc (@2 @0)
+Lvls.mkLevel: constant declaration: body: □
 main program: [Lvls.test]</code></pre>
 </body>
 </html>
