@@ -26,7 +26,7 @@ import Agda.Compiler.Backend
 import Agda.Syntax.Internal
 import Agda.Syntax.Abstract.Name
 import Agda.Syntax.Common.Pretty ( prettyShow, Doc )
-import Agda.Syntax.Common ( usableModality, Arg(..) )
+import Agda.Syntax.Common ( usableModality, Arg(..), NameId(..) )
 import Agda.TypeChecking.Datatypes ( getConstructors, getConstructorData )
 import Agda.TypeChecking.Level ( isLevelType )
 import Agda.TypeChecking.Monad.SizedTypes ( isSizeType )
@@ -39,10 +39,15 @@ import Agda.Utils.Monad (orM)
 import Agda2Lambox.Compile.Monad
 import LambdaBox qualified as LBox
 
--- | Convert and Agda module name to its "equivalent" λ□ module path.
+-- | Convert an Agda module name to its "equivalent" λ□ module path.
 modNameToModPath :: ModuleName -> LBox.ModPath
-modNameToModPath =
-  LBox.MPFile . map (sanitize . prettyShow) . mnameToList
+modNameToModPath = LBox.MPFile . map (sanitize . showPart) . mnameToList
+  where
+    -- anonymous modules are suffixed with their name id
+    showPart :: Name -> String
+    showPart x
+      | isNoName x, NameId i _ <- nameId x = prettyShow x <> show i
+      | otherwise                          = prettyShow x
 
 -- | Convert and Agda definition name to a λ□ kernel name.
 qnameToKName :: QName -> LBox.KerName
