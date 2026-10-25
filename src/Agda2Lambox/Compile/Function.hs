@@ -6,8 +6,13 @@ module Agda2Lambox.Compile.Function
 
 import Control.Monad ( forM, when, filterM, unless )
 import Control.Monad.IO.Class ( liftIO )
-import Data.List ( elemIndex )
+import Data.Graph ( stronglyConnComp, SCC(..) )
+import Data.List ( elemIndex, find, sort )
+import Data.Map ( Map )
+import Data.Map qualified as M
 import Data.Maybe ( isNothing, fromMaybe )
+import Data.Set ( Set )
+import Data.Set qualified as S
 
 import Data.Foldable (toList)
 import Agda.Syntax.Abstract.Name ( QName, qnameModule )
@@ -15,6 +20,7 @@ import Agda.TypeChecking.Monad.Base hiding ( None )
 import Agda.TypeChecking.Pretty
 import Agda.Compiler.Backend ( getConstInfo, funInline, reportSDoc )
 import Agda.Syntax.Internal (domName)
+import Agda.Syntax.Internal.Names ( namesIn )
 import Agda.Syntax.Common.Pretty ( prettyShow )
 import Agda.Syntax.Common ( hasQuantityω )
 import Agda.Utils.Monad (guardWithError, whenM)
@@ -58,27 +64,49 @@ shouldCompileFunction def@Defn{theDef} | Function{..} <- theDef
     && isNothing funWith      -- not a with-generated function           (inlined by the treeless translation)
     && hasQuantityω def       -- non-erased
 
+type MutualGraph = Map QName (Set QName)
+
+-- | Detect the mutually-recursive group of a function via treeless traversal.
+--
+-- NB: see the discussion on Agda issue #8111 on why @funMutual@ is not enough,
+-- i.e. the positivity checker misses some calls on agruments it deems unused.
+recursiveGroup :: Definition -> TCM [QName]
+recursiveGroup Defn{defName, defMutual = block} =
+  explore M.empty [defName] >>= pure . extractGroup
+  where
+  explore :: MutualGraph -> [QName] -> TCM MutualGraph
+  explore gr [] = pure gr
+  explore gr (q:qs)
+    | q `M.member` gr
+    = explore gr qs
+    | otherwise
+    = calls q >>= \cs -> explore (M.insert q cs gr) (S.toList cs ++ qs)
+
+  calls :: QName -> TCM (Set QName)
+  calls q = treeless q >>= \case
+    Nothing -> pure S.empty
+    Just t  -> S.fromList <$> filterM inBlock (S.toList $ namesIn t)
+
+  inBlock :: QName -> TCM Bool
+  inBlock q = do
+    def <- getConstInfo q
+    pure $ defMutual def == block && isFunction def
+
+  extractGroup :: MutualGraph -> [QName]
+  extractGroup g =
+    let sccs = stronglyConnComp [ (q, q, S.toList qs) | (q, qs) <- M.toList g ]
+    in fromMaybe [] $ find (defName `elem`) [ sort qs | CyclicSCC qs <- sccs ]
+
 -- | Convert a function definition to a λ□ declaration.
 compileFunction :: Target t -> Definition -> CompileM (Maybe (LBox.GlobalDecl t))
 compileFunction t defn | not (shouldCompileFunction defn) = pure Nothing
 compileFunction (t :: Target t) defn@Defn{defType} = do
-  let fundef@Function{funMutual = Just mutuals} = theDef defn
-
+  mnames <- liftTCM $ recursiveGroup defn
+  mdefs  <- liftTCM $ mapM getConstInfo mnames
   reportSDoc "agda2lambox.compile.function" 5 $
-    "Function mutuals:" <+> prettyTCM mutuals
-
-  defs <- liftTCM $ mapM getConstInfo mutuals
-
-  unless (all isFunction defs) $
-    genericError "Only mutually defined functions are supported."
-
-  -- the mutual functions that we actually compile
-  -- (so no with-generated functions, etc...)
-  let mdefs  = filter shouldCompileFunction defs
-  let mnames = map defName mdefs
-
+    "Recursive group:" <+> prettyTCM mnames
   -- (conditionally) compile type of function
-  typ <- whenTyped t $ case isRecordProjection fundef of
+  typ <- whenTyped t $ case isRecordProjection (theDef defn) of
     Nothing -> compileTopLevelType defType
 
     -- if it is a (real) projection, drop the parameters from the type
