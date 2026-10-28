@@ -10,18 +10,14 @@ module Agda2Lambox.Compile.Utils
   , toInductive
   , toConApp
   , MayBeLogical(isLogical)
-  , sanitize
   ) where
 
 import Control.Monad.State
 import Control.Monad.IO.Class ( liftIO )
-import Numeric ( showHex )
-import Data.Char
 import Data.Functor ( (<&>) )
 import Data.List ( elemIndex, foldl' )
 import Data.Maybe ( fromMaybe, listToMaybe, isJust )
 
-import Unicode.Char.Identifiers ( isXIDStart, isXIDContinue )
 import Agda.Compiler.Backend
 import Agda.Syntax.Internal
 import Agda.Syntax.Abstract.Name
@@ -41,7 +37,7 @@ import LambdaBox qualified as LBox
 
 -- | Convert an Agda module name to its "equivalent" λ□ module path.
 modNameToModPath :: ModuleName -> LBox.ModPath
-modNameToModPath = LBox.MPFile . map (sanitize . showPart) . mnameToList
+modNameToModPath = LBox.MPFile . map showPart . mnameToList
   where
     -- anonymous modules are suffixed with their name id
     showPart :: Name -> String
@@ -57,10 +53,10 @@ qnameToKName qn =
     (qnameToIdent qn)
 
 domToName :: Dom' a b -> LBox.Name
-domToName = maybe LBox.Anon (LBox.Named . sanitize . prettyShow) . domName
+domToName = maybe LBox.Anon (LBox.Named . prettyShow) . domName
 
 qnameToIdent :: QName -> LBox.Ident
-qnameToIdent = sanitize . prettyShow . nameCanonical . qnameName
+qnameToIdent = prettyShow . nameCanonical . qnameName
 -- NB: use of nameCanonical to handle renamed imports (c.f. Agda issue #4735)
 
 qnameToName :: QName -> LBox.Name
@@ -140,55 +136,3 @@ instance MayBeLogical a => MayBeLogical (Dom a) where
 instance MayBeLogical a => MayBeLogical (Arg a) where
   isLogical arg | not (usableModality arg) = pure True
   isLogical arg = isLogical $ unArg arg
-
--- | Delimitor used for name sanitization
-sDelim :: Char
-sDelim = 'Ֆ'
-
--- | Sanitize an agda name to a Rust-compatible identifier.
--- Injective by design.
-sanitize :: String -> String
-sanitize [] = sDelim : "empty" -- NOTE(flupe): should be unreachable
-sanitize s@(x:xs)
-  -- NOTE(flupe): Rust keywords are converted into raw identifiers
-  | s `elem` rustKeywords = "r#"   ++ s
-  -- NOTE(flupe): or prefixed with the 
-  | s `elem` forbiddenRaw = sDelim : s
-  | otherwise =
-      let hd = escapeChar isXIDStart x
-          tl = concatMap (escapeChar isXIDContinue) xs
-      in hd <> tl
-  where
-    escapeChar :: (Char -> Bool) -> Char -> String
-    escapeChar xid x = if xid x then [x] else sDelim : esc x
-      where
-        esc '_'  = "_" -- Preserve underscore (it's gonna get prefixed)
-        esc '+'  = "plus"
-        esc '-'  = "sub"
-        esc '*'  = "mult"
-        esc '/'  = "div"
-        esc '='  = "eq"
-        esc '<'  = "lt"
-        esc '>'  = "gt"
-        esc 'λ'  = "lam"
-        esc '→'  = "to"
-        esc '∷'  = "cons"
-        esc '?'  = "qen"
-        esc '!'  = "bng"
-        esc '#'  = "hsh"  -- This ensures names starting with # are escaped
-                          -- and enforces injectivity of the sanitization
-        esc '.'  = "dot"
-        esc c | c == sDelim   = [sDelim]
-              | otherwise     = showHex (ord c) [sDelim]
-
-      -- standard rust keywords
-    rustKeywords =
-      [ "as", "break", "const", "continue", "else", "enum", "extern"
-      , "false", "fn", "for", "if", "impl", "in", "let", "loop", "match"
-      , "mod", "move", "mut", "pub", "ref", "return", "static", "struct"
-      , "trait", "true", "type", "unsafe", "use", "where", "while"
-      , "async", "await", "dyn"
-      ]
-
-    -- rust keywords that are also forbidden inside raw strings
-    forbiddenRaw = ["self", "Self", "super", "crate"]
