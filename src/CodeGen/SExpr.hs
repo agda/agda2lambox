@@ -40,14 +40,9 @@ prettySexp t = flatPrint printer . toSexp t
     AString str -> pack $ quote str
 
   -- wraps a string between double quotes, and escapes it
-  -- NOTE: there probably never are double quotes in the string, but regardless
   quote :: String -> String
-  quote s = "\"" <> escape s <> "\""
-    where
-      escape []       = []
-      escape ('"':cs) = "\\\"" <> escape cs
-      escape (c  :cs) = c : escape cs
-
+  quote s = "\"" <> concatMap escape s <> "\""
+    where escape = \case {'"' -> "\\\""; '\\' -> "\\\\"; '\n' -> "\\n"; '\t' -> "\\t"; '\r' -> "\\r"; c -> [c]}
 
 class ToSexp t a where
   toSexp  :: Target t -> a -> Exp
