@@ -22,6 +22,7 @@ testSwapSwap3 : Nat
 testSwapSwap3 = swapF (swapF add3) 40 1 1
 
 open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
 
 test : Nat
 test
@@ -31,3 +32,6 @@ test
   + testSwapAdd3
   + testSwapSwap3
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 210
+_ = refl

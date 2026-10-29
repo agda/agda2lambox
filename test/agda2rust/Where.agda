@@ -72,6 +72,7 @@ h = go
   go _ = 42
 
 open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
 
 test : Nat
 test = testII
@@ -80,3 +81,6 @@ test = testII
      + g 21
      + h 0
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 210
+_ = refl

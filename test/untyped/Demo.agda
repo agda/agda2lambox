@@ -1,3 +1,5 @@
+open import Agda.Builtin.Equality
+
 data Bool : Set where
   false true : Bool
 
@@ -28,3 +30,6 @@ or false b = b
 test : List Bool
 test = cons true (cons false (cons true (cons false empty)))
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ cons true (cons false (cons true (cons false empty)))
+_ = refl

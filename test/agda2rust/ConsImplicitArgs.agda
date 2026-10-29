@@ -60,6 +60,7 @@ testFooRA : FooRA Nat
 testFooRA = foo {_}{_}{bar}
 
 open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
 
 test : Nat
 test = fooToNat testFoo
@@ -67,3 +68,6 @@ test = fooToNat testFoo
      + fooRToNat testFooR
      + fooRAToNat testFooRA
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 168
+_ = refl

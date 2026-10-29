@@ -1,3 +1,5 @@
+open import Agda.Builtin.Equality
+
 data Bool : Set where false true : Bool
 
 record Pair (A B : Set) : Set where
@@ -13,3 +15,6 @@ pair = true , false
 test : Bool
 test = snd pair
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ false
+_ = refl

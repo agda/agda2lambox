@@ -130,6 +130,7 @@ addId3 x y = id ((x + y) +_)
 -}
 
 open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
 
 test : Nat
 test
@@ -152,3 +153,6 @@ test
   + maybeIncInc (just (just 40)) 2
   + maybeIncInc2 (just (just 40)) 1 1
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 672
+_ = refl

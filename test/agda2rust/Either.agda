@@ -36,6 +36,7 @@ fromOnlyLeftR2 : OnlyLeftR (OnlyLeftR A B) C → A
 fromOnlyLeftR2 r = r .left .left
 
 open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
 
 test : Nat
 test = fromEitherAB {B = Nat} 42 (Left 0)
@@ -44,3 +45,6 @@ test = fromEitherAB {B = Nat} 42 (Left 0)
      + fromOnlyLeft2 {B = Nat} {C = Nat} (Left (Left 0))
      + fromOnlyLeftR2 {B = Nat} {C = Nat} (record { left = record { left = 42 } })
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 42
+_ = refl

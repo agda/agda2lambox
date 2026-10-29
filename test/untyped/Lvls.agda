@@ -56,8 +56,12 @@ testWhere = toNat (someLvl .ℓ)
   toNat _ = 42
 
 open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
 
 test : Nat
 test = testMkLevel + testSomeLvl
      + testConst + testConstLvl2 + testWhere
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 210
+_ = refl

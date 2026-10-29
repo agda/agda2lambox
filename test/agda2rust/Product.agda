@@ -17,7 +17,11 @@ fst : A × B → A
 fst = proj₁
 
 open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
 
 test : Nat
 test = mapSnd (_+ 1) (0 , 20) .proj₂ + mapFst (_+ 2) (19 , 0) .proj₁
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 42
+_ = refl

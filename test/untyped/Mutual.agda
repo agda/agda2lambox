@@ -1,3 +1,5 @@
+open import Agda.Builtin.Equality
+
 data Odd  : Set
 data Even : Set
 
@@ -23,3 +25,6 @@ evenNat (succ o) = succ (oddNat o)
 test : Nat
 test = oddNat (succ zero)
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ succ zero
+_ = refl

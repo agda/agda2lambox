@@ -1,4 +1,5 @@
 open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
 
 infixr 5 _∷_
 
@@ -17,3 +18,6 @@ double = go where go = λ n → n + n
 test : Nat
 test = double (length (1 ∷ 2 ∷ 3 ∷ []))
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 6
+_ = refl

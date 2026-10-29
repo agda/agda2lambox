@@ -67,6 +67,7 @@ testSomeNat : Nat
 testSomeNat = addSomeNat (` 40) 2
 
 open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
 
 test : Nat
 test
@@ -80,3 +81,6 @@ test
   + testSumWithConst
   + testSomeNat
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 378
+_ = refl

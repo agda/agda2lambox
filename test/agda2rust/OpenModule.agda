@@ -14,6 +14,7 @@ testAdd40 = suc add40
 testAdd41 = add41
 
 open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
 
 test : Nat
 test = M.add40 2
@@ -22,3 +23,6 @@ test = M.add40 2
      + testAdd40
      + testAdd41
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 210
+_ = refl

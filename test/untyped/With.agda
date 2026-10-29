@@ -1,3 +1,5 @@
+open import Agda.Builtin.Equality
+
 data Bool : Set where
   false true : Bool
 
@@ -19,3 +21,6 @@ xs = false :: true :: false :: []
 test : List Bool
 test = filter (λ b → b) xs
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ true :: []
+_ = refl

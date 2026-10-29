@@ -1,4 +1,5 @@
 open import Agda.Builtin.Nat using (Nat; _+_)
+open import Agda.Builtin.Equality
 
 data Exp (V : Set) : Set where
   Plus : Exp V → Exp V → Exp V
@@ -43,3 +44,6 @@ test = eval (λ x → x) exampleExp
      + geval (λ x → x) (plus (nat 5) (var 37))
      + geval (λ x → x + 1) (plus (nat 5) (var 36))
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 168
+_ = refl

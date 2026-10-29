@@ -29,8 +29,12 @@ testIte : Nat
 testIte = if true then 42 else 0
 
 open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
 
 test : Nat
 test = bool2Nat testBool
      + testIte
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 84
+_ = refl

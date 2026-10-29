@@ -1,3 +1,5 @@
+open import Agda.Builtin.Equality
+
 data Bool : Set where false true : Bool
 
 not : Bool -> Bool
@@ -26,3 +28,6 @@ even (succ n) = odd n
 test : Bool
 test = odd (succ (succ zero))
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ false
+_ = refl

@@ -17,7 +17,11 @@ id0H : (@0 A : Set) → {A} → A
 id0H _ {x} = x
 
 open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
 
 test : Nat
 test = id0H _ {idH _ {id0⟨ _ ⟩ id⟨ _ ⟩ id0 id 42}}
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 42
+_ = refl

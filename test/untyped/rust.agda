@@ -1,6 +1,7 @@
 module rust where
 
 open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
 
 data List (A : Set) : Set where
   []   : List A
@@ -15,6 +16,9 @@ testIdd = map (1 +_) (2 :: [])
 
 test = testIdd
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 3 :: []
+_ = refl
 
 {-
 id : ∀ {A : Set} → A → A

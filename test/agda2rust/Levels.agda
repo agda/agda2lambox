@@ -66,6 +66,7 @@ pub fn main () {
 #-}
 
 open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
 
 test : Nat
 test = testLevel 0ℓ
@@ -76,3 +77,6 @@ test = testLevel 0ℓ
      + testConstLvl2
      + testWhere
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 294
+_ = refl

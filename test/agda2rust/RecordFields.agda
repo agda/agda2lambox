@@ -50,6 +50,7 @@ pred 0 = 0
 pred (suc n) = n
 
 open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
 
 test : Nat
 test = unmk (exPoint .slot)
@@ -63,3 +64,6 @@ test = unmk (exPoint .slot)
                  })
      + matchHeader exHeader
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 168
+_ = refl

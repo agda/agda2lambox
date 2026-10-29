@@ -67,3 +67,6 @@ head ((x ∷ _) , _) = x
 test : Bad false
 test = head testVec
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 42
+_ = refl

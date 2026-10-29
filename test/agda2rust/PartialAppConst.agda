@@ -21,8 +21,12 @@ testIte : Nat
 testIte = (if T then add3 else add2) 40 1 1
 
 open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
 
 test : Nat
 test = testConst
      + testIte
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 84
+_ = refl

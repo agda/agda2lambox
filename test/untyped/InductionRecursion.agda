@@ -1,4 +1,5 @@
 open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
 
 data List (A : Set) : Set where
   []  : List A
@@ -26,3 +27,6 @@ mutual
 test : Nat
 test = run (inc ∷ (inc ∷ [] ⊣ mk 1) ⊣ mk 2)
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 3
+_ = refl

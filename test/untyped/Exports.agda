@@ -1,6 +1,7 @@
 module Exports where
 
 open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
 
 one : Nat
 one = 1
@@ -32,3 +33,6 @@ test = record
   ; efour  = four
   }
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ record { eone = 1 ; etwo = 2 ; ethree = three ; efour = four }
+_ = refl
