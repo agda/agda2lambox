@@ -5,6 +5,7 @@ idUnit : Unit → Unit
 idUnit tt = tt
 
 open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
 
 toNat : Unit → Nat
 toNat _ = 42
@@ -12,3 +13,6 @@ toNat _ = 42
 test : Nat
 test = toNat (idUnit tt)
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 42
+_ = refl

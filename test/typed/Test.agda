@@ -38,10 +38,14 @@ fromMaybe def = λ where
   (just a) → a
 
 open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
 
 test : Nat
 test = fromMaybe 0 (just 42)
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 42
+_ = refl
 
 
 {-

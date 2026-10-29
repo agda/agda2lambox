@@ -1,5 +1,6 @@
 -- {-# OPTIONS --exact-split #-}
 open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
 
 -- non-exact split generates "unreachable pattern" warning
 min : Nat → Nat → Nat
@@ -11,3 +12,6 @@ min (suc n) (suc m) = min n m
 test : Nat
 test = min zero zero
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 0
+_ = refl

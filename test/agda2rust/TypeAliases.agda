@@ -1,4 +1,5 @@
 open import Agda.Builtin.Nat using (Nat; _+_)
+open import Agda.Builtin.Equality
 
 ℕ : Set
 ℕ = Nat
@@ -33,3 +34,6 @@ test = testAlias
      + id 42
      + idK 42
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 168
+_ = refl

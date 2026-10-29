@@ -52,6 +52,7 @@ testHash : Key
 testHash = hash testMax
 
 open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
 
 toNat : Key → Nat
 toNat _ = 42
@@ -60,3 +61,6 @@ test : Nat
 test = testMax
      + getTestMax
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 84
+_ = refl

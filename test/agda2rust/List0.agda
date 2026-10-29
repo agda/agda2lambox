@@ -52,7 +52,11 @@ testHead : List Nat
 testHead = head [ [ 8 ⨾ 0 ⨾ 5 ] ⨾ [] ⨾ [] ]
 
 open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
 
 test : Nat
 test = 2 + headNum empty + sum (single 8) + sum (map suc (cat [ 4 ] [ 2 ])) + testFlatten + sum testHead
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 42
+_ = refl

@@ -58,6 +58,7 @@ testIdF3 : Nat
 testIdF3 = idF3 add3
 
 open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
 
 test : Nat
 test
@@ -71,3 +72,6 @@ test
   + testIdF
   + testIdF3
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 336
+_ = refl

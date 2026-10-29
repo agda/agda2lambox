@@ -1,3 +1,5 @@
+open import Agda.Builtin.Equality
+
 data Bool : Set where
   false true : Bool
 
@@ -12,3 +14,6 @@ not x = case x λ where
 test : Bool
 test = not true
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ false
+_ = refl

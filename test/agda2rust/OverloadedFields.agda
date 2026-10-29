@@ -32,6 +32,7 @@ pub fn main() {
 #-}
 
 open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
 
 test : Nat
 test = X.id (record {id = 42})
@@ -39,3 +40,6 @@ test = X.id (record {id = 42})
      + idX exX
      + idY exY
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 168
+_ = refl

@@ -1,5 +1,6 @@
 open import Agda.Builtin.Nat using (Nat; suc; zero)
 open import Agda.Builtin.List
+open import Agda.Builtin.Equality
 
 double : Nat → Nat
 double zero = zero
@@ -15,3 +16,6 @@ map f (x ∷ xs) = f x ∷ map f xs
 test : List Nat
 test = map double xs
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 2 ∷ 6 ∷ 10 ∷ []
+_ = refl

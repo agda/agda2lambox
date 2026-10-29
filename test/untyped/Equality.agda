@@ -62,3 +62,6 @@ toNat {x = x} {y = .x} refl = x
 test : Nat
 test = toNat $ suc-left-add 1 0
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 2
+_ = refl

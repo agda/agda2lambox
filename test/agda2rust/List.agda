@@ -26,6 +26,7 @@ zipWith f _        []       = []
 zipWith f (a ∷ as) (b ∷ bs) = f a b ∷ zipWith f as bs
 
 open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
 
 test : Nat
 test = 2 + testSum
@@ -33,3 +34,6 @@ test = 2 + testSum
          + sum (map suc (7 ∷ 1 ∷ []))
          + sum (zipWith _+_ (5 ∷ []) (5 ∷ []))
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 42
+_ = refl

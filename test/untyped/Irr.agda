@@ -1,6 +1,7 @@
 module Irr where
 
 open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
 
 infixr 7 _∷_
 data Vec (A : Set) : @0 Nat → Set where
@@ -17,3 +18,6 @@ xs = 1 ∷ 0 ∷ []
 test : Vec Nat 2
 test = map suc xs
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 2 ∷ 1 ∷ []
+_ = refl

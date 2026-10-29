@@ -68,6 +68,7 @@ data BST (@0 lower upper : Nat) : Set where
   Node : (x : Nat) (l : BST lower x) (r : BST x upper) → BST lower upper
 
 open import Agda.Builtin.Nat
+import Agda.Builtin.Equality as Eq
 
 postulate
   refl   : ∀ {n} → n ≡ n
@@ -88,3 +89,6 @@ test = (erasedFunArg 0 refl + erasedHigherOrderFunArg 0 (λ _ → 40))
      + (erasedClause (mk 42) + erasedConArg (mk 0 refl))
      + sumBST (Node 21 (Leaf ≤-refl) (Node 21 (Leaf ≤-refl) (Leaf ≤-refl)))
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test Eq.≡ 336
+_ = Eq.refl

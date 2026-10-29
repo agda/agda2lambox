@@ -1,4 +1,5 @@
 open import Agda.Builtin.Nat using (Nat; _+_)
+open import Agda.Builtin.Equality
 
 answer : Nat
 answer = 42
@@ -21,3 +22,6 @@ add3b x y z = add x (add y z)
 test : Nat
 test = add3b (add_answer 0) (add 0 0) (add3 0 0 0)
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 42
+_ = refl

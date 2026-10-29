@@ -1,4 +1,5 @@
 open import Agda.Builtin.Nat using (_+_) renaming (Nat to ℕ)
+open import Agda.Builtin.Equality
 
 record Foo : Set where
   field foo : ℕ
@@ -34,3 +35,6 @@ test = testFoo
      + getFoo (record {foo = 42; bar = 0})
      + getBar (bar 42 0)
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 168
+_ = refl

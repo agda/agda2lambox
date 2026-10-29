@@ -61,6 +61,7 @@ q = addN 40 2
 r = exG 40 2
 
 open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
 
 test : Nat
 test
@@ -82,3 +83,6 @@ test
   + q
   + r
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 630
+_ = refl

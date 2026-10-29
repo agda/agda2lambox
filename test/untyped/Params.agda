@@ -5,6 +5,7 @@
 open import Agda.Builtin.Bool
 open import Agda.Builtin.List
 open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
 
 map : {A B : Set} → (A → B) → List A → List B
 map f []       = []
@@ -72,3 +73,6 @@ test = count (map isZero (0 ∷ 1 ∷ 0 ∷ []))
      + sumTree (node 1 (cons (node 2 leaf) leaf))
      + depth (es (os 5 ez))
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 25
+_ = refl

@@ -1,3 +1,5 @@
+open import Agda.Builtin.Equality
+
 data Bool : Set where
   false true : Bool
 
@@ -21,3 +23,6 @@ test = record
   ; nt = not
   }
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ record { ad = and ; nt = not }
+_ = refl

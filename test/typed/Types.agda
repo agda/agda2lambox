@@ -4,6 +4,7 @@
 
 open import Agda.Builtin.Nat
 open import Agda.Builtin.List
+open import Agda.Builtin.Equality
 
 listrect
   : {A : Set} (P : List A → Set)
@@ -33,3 +34,6 @@ test : Nat
 test = head (map (λ (x : sig Nat (λ _ → Top)) → suc (x .sig.fst))
                  (exist 41 tt ∷ exist 0 tt ∷ []))
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 42
+_ = refl

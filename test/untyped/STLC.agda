@@ -1,5 +1,6 @@
 {-# OPTIONS --erasure #-}
 open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
 
 variable @0 n : Nat
 
@@ -51,3 +52,6 @@ eval env (plus u v) = eval env u + eval env v
 test : Nat
 test = eval [] (app (lam (plus (lit 1) (var here))) (lit 1)) 
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 2
+_ = refl

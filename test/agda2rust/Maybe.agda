@@ -23,6 +23,7 @@ fromMaybe def Nothing  = def
 fromMaybe _   (Just x) = x
 
 open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
 
 toNat = fromMaybe 0
 
@@ -31,3 +32,6 @@ test = toNat (idMaybe(Just 6)) + toNat (idMaybe m1)
      + fromMaybeNat Nothing + fromMaybeNat m0 + fromMaybeNat m1
      + fromMaybe 6 m0 + fromMaybe 0 m1
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 42
+_ = refl

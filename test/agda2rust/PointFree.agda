@@ -14,6 +14,7 @@ h : ℕ → ℕ
 h = g
 
 open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
 
 toNat : Foo → Nat
 toNat (foo n) = n
@@ -23,3 +24,6 @@ test = toNat (f 42)
      + g 41
      + h 41
 {-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 126
+_ = refl
