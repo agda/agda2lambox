@@ -1,8 +1,6 @@
-{-# LANGUAGE NamedFieldPuns, ImportQualifiedPost, DataKinds, OverloadedStrings, UnicodeSyntax #-}
--- | Convert Agda datatypes to λ□ inductive declarations
-module Agda2Lambox.Compile.Inductive
-  ( compileInductive
-  ) where
+{-# LANGUAGE OverloadedStrings #-}
+-- | Convert Agda datatypes to λ□ inductive declarations.
+module Agda2Lambox.Compile.Inductive (compileInductive) where
 
 import Control.Monad.Reader ( liftIO )
 import Control.Monad ( forM, unless )
@@ -31,7 +29,7 @@ import Agda2Lambox.Compile.Monad
 import Agda2Lambox.Compile.Type
 import LambdaBox qualified as LBox
 
--- | Toplevel conversion from a datatype/record definition to a Lambdabox declaration.
+-- | Toplevel conversion from a datatype/record definition to a λ□ declaration.
 compileInductive :: Target t -> Definition -> CompileM (Maybe (LBox.GlobalDecl t))
 compileInductive t defn@Defn{defName} = do
   reportSDoc "agda2lambox.compile.inductive" 5 $
@@ -70,11 +68,12 @@ compileInductive t defn@Defn{defName} = do
     unless (all (isDataOrRecDef . theDef) defs) $
       genericError "Mutually-defined datatypes/records *and* functions not supported."
 
-    bodies <- forM defs $ actuallyConvertInductive t
+    pars   <- liftTCM $ toInductivePars defName
+    bodies <- forM defs $ compileInductive' t pars
 
     return $ Just $ LBox.InductiveDecl $ LBox.MutualInductive
       { indFinite = LBox.Finite -- TODO(flupe)
-      , indPars   = 0
+      , indPars   = pars
       , indBodies = NEL.toList bodies
       }
 
@@ -113,9 +112,9 @@ getBundle defn@Defn{defName, defType, theDef} =
         , indPars = recPars
         }
 
-
-actuallyConvertInductive :: ∀ t. Target t -> Definition -> CompileM (LBox.OneInductiveBody t)
-actuallyConvertInductive t defn = do
+-- | Convert one datatype/record of a mutual block with @pars@ parameters.
+compileInductive' :: forall t. Target t -> Int -> Definition -> CompileM (LBox.OneInductiveBody t)
+compileInductive' t pars defn = do
   let bundle@Bundle{..} = getBundle defn
 
   reportSDoc "agda2lambox.compile.inductive" 10 $ prettyTCM bundle
@@ -125,6 +124,7 @@ actuallyConvertInductive t defn = do
   reportSDoc "agda2lambox.compile.inductive" 10 $
     "Inductive parameters:" <+> prettyTCM params
 
+  cpars <- take pars <$> liftTCM (inductivePars defn)
   let pvars :: [Arg Term] = teleArgs params
 
   addContext params do
@@ -161,7 +161,9 @@ actuallyConvertInductive t defn = do
           conTel  <- toList . theTel <$> telView conType
           reportSDoc "agda2lambox.compile.inductive" 10 $
             "Constructor telescope:" <+> prettyTCM conTel
-          compileArgs indPars conTel
+          -- constructors take the block's □-params first
+          let parArgs = (, LBox.TBox) . domToName <$> cpars
+          (parArgs ++) <$> compileArgs indPars conTel
 
         pure LBox.Constructor
           { cstrName  = qnameToIdent cname

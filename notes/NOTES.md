@@ -98,11 +98,11 @@ All the remaining transformations optimize this program, but remain in λ□*.
     Simulation of the guarded fixpoint rules with a single unguarded one.
 
     I don't know what this does, let's keep it.
-6. ~~`remove_params_optimization`:~~
+6. `remove_params_optimization`:
     Remove all constructor parameters.
 
-    Treeless (and Agda's internal syntax?) already has dropped constructor parameters.
-    We don't need this transformation.
+    Treeless (and Agda's internal syntax) drops constructor parameters,
+    but agda2lambox re-introduces them (c.f. `compileInductive`).
 7. `rebuild_wf_env_transform`:
     Rebuild the efficient lookup table.
 8. `optimize_prop_discr_optimization`:

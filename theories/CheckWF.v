@@ -42,8 +42,8 @@ Definition eflags : EEnvFlags :=
         ; has_tPrim       := all_primitive_flags
         ; has_tLazy_Force := true
         |};
-     has_cstr_params := false;  (* Agda already drops constructor params *)
-     cstr_as_blocks  := false;  (* Constructors are applied as spines    *)
+     has_cstr_params := true;   (* Constructors are applied to □-params *)
+     cstr_as_blocks  := false;  (* Constructors are applied as spines *)
   |}.
 
 Fixpoint check_fresh_global (k : kername) (decls : global_declarations) : bool :=

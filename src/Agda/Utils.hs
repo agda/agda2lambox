@@ -59,25 +59,24 @@ isFunction _ = False
 
 -- | Check whether a definition is a datatype/record.
 isDataDef, isRecDef, isFunDef, isDataOrRecDef :: Defn -> Bool
-isDataDef = \case
-  Datatype{} -> True
-  _ -> False
-
-isRecDef = \case
-  Record{} -> True
-  _ -> False
-
-isFunDef = \case
-  Function{} -> True
-  _ -> False
-
+isDataDef = \case Datatype{} -> True; _ -> False
+isRecDef  = \case Record{}   -> True; _ -> False
+isFunDef  = \case Function{} -> True; _ -> False
 isDataOrRecDef = liftA2 (||) isDataDef isRecDef
 
--- | Extract a datatype/record's parameters.
+dataOrRecDefMutuals :: Definition -> TCM [QName]
+dataOrRecDefMutuals d = do
+  case theDef d of
+    Datatype{dataMutual} -> pure $ fromMaybe [] dataMutual
+    Record  {recMutual}  -> pure $ fromMaybe [] recMutual
+    _                    -> internalError "Not a datatype or record"
+
+dataOrRecMutuals :: QName -> TCM [QName]
+dataOrRecMutuals q = dataOrRecDefMutuals =<< getConstInfo q
+
 getInductiveParams :: Defn -> Int
 getInductiveParams Datatype{dataPars} = dataPars
 getInductiveParams Record{recPars}    = recPars
-
 
 -- TODO: consider erased things to be logical
 --       so maybe take a Dom Type instead

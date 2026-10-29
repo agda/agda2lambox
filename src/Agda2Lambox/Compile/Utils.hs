@@ -1,16 +1,5 @@
 {-# LANGUAGE NamedFieldPuns, FlexibleInstances #-}
-module Agda2Lambox.Compile.Utils
-  ( modNameToModPath
-  , qnameToKName
-  , qnameToName
-  , qnameToIdent
-  , domToName
-  , dataOrRecDefMutuals
-  , dataOrRecMutuals
-  , toInductive
-  , toConApp
-  , MayBeLogical(isLogical)
-  ) where
+module Agda2Lambox.Compile.Utils where
 
 import Control.Monad.State
 import Control.Monad.IO.Class ( liftIO )
@@ -28,10 +17,11 @@ import Agda.TypeChecking.Level ( isLevelType )
 import Agda.TypeChecking.Monad.SizedTypes ( isSizeType )
 import Agda.TypeChecking.Monad.Base ( TCM )
 import Agda.TypeChecking.Reduce ( reduce )
-import Agda.TypeChecking.Substitute (TelV(TelV))
-import Agda.TypeChecking.Telescope (telView)
-import Agda.Utils.Monad (orM)
+import Agda.TypeChecking.Substitute ( TelV(TelV), theTel )
+import Agda.TypeChecking.Telescope ( telView, telViewUpTo, flattenTel )
+import Agda.Utils.Monad ( orM, andM, filterM, forM )
 
+import Agda.Utils ( getInductiveParams, isDataOrRecDef, isArity, dataOrRecMutuals )
 import Agda2Lambox.Compile.Monad
 import LambdaBox qualified as LBox
 
@@ -62,16 +52,6 @@ qnameToIdent = prettyShow . nameCanonical . qnameName
 qnameToName :: QName -> LBox.Name
 qnameToName = LBox.Named . qnameToIdent
 
-dataOrRecDefMutuals :: Definition -> TCM [QName]
-dataOrRecDefMutuals d = do
-  case theDef d of
-    Datatype{dataMutual} -> pure $ fromMaybe [] dataMutual
-    Record  {recMutual}  -> pure $ fromMaybe [] recMutual
-    _                    -> internalError "Not a datatype or record"
-
-dataOrRecMutuals :: QName -> TCM [QName]
-dataOrRecMutuals q = dataOrRecDefMutuals =<< getConstInfo q
-
 -- | Fetch the λ□ inductive associated with a @QName@.
 toInductive :: QName -> TCM LBox.Inductive
 toInductive q = do
@@ -80,6 +60,23 @@ toInductive q = do
   let idx  = fromMaybe 0 $ elemIndex q names
   pure $ LBox.Inductive (qnameToKName repr) idx
 
+-- | The parameters of a datatype/record that are λ□ parameters.
+inductivePars :: Definition -> TCM [Dom Type]
+inductivePars Defn{theDef, defType} = do
+  let n = getInductiveParams theDef
+  params <- flattenTel . theTel <$> telViewUpTo n defType
+  -- only consider type parameters (non-logical arities) which inform typing
+  let isTypeParam ty = andM [ isArity ty, not <$> isLogical ty ]
+  addContext params $ filterM (isTypeParam . unDom) params
+
+-- | Number of parameters of the λ□ mutual block a datatype/record belongs to.
+toInductivePars :: QName -> TCM Int
+toInductivePars q = do
+  defs <- mapM getConstInfo . (q :) =<< dataOrRecMutuals q
+  pars <- forM (filter (isDataOrRecDef . theDef) defs) $ \d ->
+    length <$> inductivePars d
+  -- keep the common prefix of all members of a mutual block
+  return $ minimum pars
 
 -- | Compile a constructor application to λ□.
 toConApp :: QName -> [LBox.Term] -> CompileM LBox.Term
@@ -87,9 +84,10 @@ toConApp qn es = do
   dt   <- getConstructorData qn
   ctrs <- liftTCM $ getConstructors dt
   ind  <- liftTCM $ toInductive dt
+  pars <- liftTCM $ toInductivePars dt
+  let es' = replicate pars LBox.LBox ++ es -- replace type parameters with □
   let idx = fromMaybe 0 $ qn `elemIndex` ctrs
-  pure $ foldl' LBox.LApp (LBox.LConstruct ind idx []) es
-
+  pure $ foldl' LBox.LApp (LBox.LConstruct ind idx []) es'
 
 -- | Class for things that may be considered logical, and thus erased.
 -- See https://arxiv.org/pdf/2108.02995 for the precise definition.

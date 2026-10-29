@@ -1,31 +1,38 @@
-(* This file provides utilises to evaluate lambda box programs *)
+(* Evaluate λ-box programs.
+
+CertiRocq's LambdaBoxMut expects constructors as blocks without parameters,
+which Peregrine produces from our spines with the following transformations:
+- `remove_params`
+- `constructors_as_blocks_transformation`
+
+*)
 
 From Stdlib                 Require Import Nat.
 From MetaRocq.Utils         Require Import utils.
 From MetaRocq.Utils         Require Import ReflectEq.
 From MetaRocq.Erasure       Require Import EAst EWellformed EEnvMap EProgram EConstructorsAsBlocks.
+From MetaRocq.Erasure       Require ERemoveParams.
 From CertiRocq.Common       Require Import Common.
 From CertiRocq.LambdaBoxMut Require Import compile term program wcbvEval.
 From Agda2Lambox            Require Import CheckWF.
 
-
 (* TODO: eta-expand here *)
 
-(* CertiRocq's LambdaBoxMut expects constructors as blocks, which Peregrine produces
-   from our spines with `constructors_as_blocks_transformation`; we do the same here. *)
 Definition from_reflect {P b} (r : reflectProp P b) : b = true -> P :=
   match r in reflectProp _ b' return b' = true -> P with
   | reflectP p  => fun _ => p
   | reflectF np => fun e => False_rect _ (diff_false_true e)
   end.
 
-Definition blocks (p : EAst.program) : EAst.program :=
+Definition on_wf (f : GlobalContextMap.t -> term -> EAst.program) (p : EAst.program) : EAst.program :=
   match inspect (@check_wf_glob eflags p.1) with
-  | exist true H =>
-      let Σ := GlobalContextMap.make p.1 (wf_glob_fresh _ (from_reflect (check_wf_globP p.1) H)) in
-      (transform_blocks_env Σ, transform_blocks Σ p.2)
+  | exist true H => f (GlobalContextMap.make p.1 (wf_glob_fresh _ (from_reflect (check_wf_globP p.1) H))) p.2
   | exist false _ => p
   end.
+
+Definition blocks (p : EAst.program) : EAst.program :=
+  on_wf (fun Σ t => (transform_blocks_env Σ, transform_blocks Σ t))
+        (on_wf (fun Σ t => ERemoveParams.strip_program (Σ, t)) p).
 
 (* convert a lambda box program to certicoq lambda box mut, and run it *)
 Definition eval_program (p : EAst.program) : exception Term :=

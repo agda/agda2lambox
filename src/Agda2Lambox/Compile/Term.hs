@@ -1,7 +1,4 @@
-{-# LANGUAGE NamedFieldPuns, DerivingVia, OverloadedStrings #-}
-module Agda2Lambox.Compile.Term
-  ( compileTerm
-  ) where
+module Agda2Lambox.Compile.Term (compileTerm) where
 
 import Control.Monad.Fail ( MonadFail )
 import Control.Monad.IO.Class (MonadIO)
@@ -138,8 +135,8 @@ compileTermC = \case
     case caseErased of
       Erased _    -> genericError "Erased matches not supported."
       NotErased _ -> do
-        cind  <- compileCaseType caseType
-        LCase cind 0 (LRel n) <$> traverse compileAlt talts
+        (cind, pars) <- compileCaseType caseType
+        LCase cind pars (LRel n) <$> traverse compileAlt talts
 
   TUnit   -> return LBox
   TSort   -> return LBox
@@ -171,18 +168,15 @@ compileLit = \case
 
   l -> genericError $ "unsupported literal: " <> prettyShow l
 
-
-compileCaseType :: CaseType -> C LBox.Inductive
+compileCaseType :: CaseType -> C (LBox.Inductive, Int {-parameters-})
 compileCaseType = \case
-  CTData qn -> do
-    qn <- liftTCM $ canonicalName qn
-    lift $ requireDef qn
-    liftTCM $ toInductive qn
-  CTNat -> do
-    qn <- liftTCM $ getBuiltinName_ builtinNat
-    lift $ requireDef qn
-    liftTCM $ toInductive qn
+  CTData qn -> caseOn =<< liftTCM (canonicalName qn)
+  CTNat     -> caseOn =<< liftTCM (getBuiltinName_ builtinNat)
   ct -> genericError $ "Case type not supported: " <> show ct
+  where
+    caseOn qn = do
+      lift $ requireDef qn
+      liftTCM $ (,) <$> toInductive qn <*> toInductivePars qn
 
 -- TODO: flupe
 --   literal patterns are a bit annoying.
