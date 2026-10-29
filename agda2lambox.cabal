@@ -59,7 +59,7 @@ executable agda2lambox
     TypeFamilies TypeOperators TypeApplications
     FunctionalDependencies TypeSynonymInstances ConstraintKinds
     DoAndIfThenElse BlockArguments MultiWayIf
-    ImportQualifiedPost
+    ImportQualifiedPost NamedFieldPuns
 
 test-suite agda2lambox-tests
   type:                exitcode-stdio-1.0
