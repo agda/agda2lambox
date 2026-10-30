@@ -231,5 +231,5 @@ programs env mains = vsep $ flip map (zip [1..] $ reverse mains) \(i :: Int, kn)
   let progname = "prog" <> pretty i in vsep
   [ hang ("Definition " <> progname <> " : program :=") 2 $
       uprocq (env, LConst kn) <> "."
-  , "Compute eval_program " <> progname <> "."
+  , "Compute show_program " <> progname <> "."
   ]
