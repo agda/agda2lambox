@@ -7,11 +7,9 @@ data List (A : Set) : Set where
   _∷_ : A → List A → List A
 
 length : List Nat → Nat
-length = go
-  where
-  go : _
-  go []       = 0
-  go (_ ∷ xs) = suc (go xs)
+length = go where go = λ where
+  []       → 0
+  (_ ∷ xs) → suc (go xs)
 
 double : Nat → Nat
 double = go where go = λ n → n + n
