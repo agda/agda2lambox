@@ -42,6 +42,64 @@ Definition eval_program (p : EAst.program) : exception Term :=
   |}
   in wcbvEval (env prog) (2 ^ 14) (main prog).
 
+(* Render an evaluated program as an Agda-like value: constructors are named as in
+   the environment, and `Agda.Builtin.Nat` is printed in decimal. *)
+Section Show.
+  Local Open Scope bs_scope.
+  Context (Σ : global_declarations).
+
+  Definition agda_nat : kername := (MPfile ["Agda"; "Builtin"; "Nat"], "Nat").
+
+  Fixpoint as_nat (t : Term) : option nat :=
+    match t with
+    | TConstruct ind 0 tnil =>
+        if ind.(inductive_mind) == agda_nat then Some 0 else None
+    | TConstruct ind 1 (tcons t tnil) =>
+        if ind.(inductive_mind) == agda_nat then option_map S (as_nat t) else None
+    | _ => None
+    end.
+
+  Definition constructor_name (ind : inductive) (c : nat) : string :=
+    match EGlobalEnv.lookup_constructor Σ ind c with
+    | Some (_, _, cdecl) => cdecl.(cstr_name)
+    | None               => "<unknown constructor>"
+    end.
+
+  Definition atomic (t : Term) : bool :=
+    match t with
+    | TConstruct _ _ (tcons _ _) => isSome (as_nat t)
+    | _                          => true
+    end.
+
+  Fixpoint show_term (t : Term) : string :=
+    match t with
+    | TConstruct ind c es =>
+        match as_nat t with
+        | Some n => string_of_nat n
+        | None   => constructor_name ind c ++ show_args es
+        end
+    | TProof      => "□"
+    | TLambda _ _ => "<function>"
+    | TFix _ _    => "<fixpoint>"
+    | TPrim _     => "<primitive>"
+    | TWrong msg  => "<wrong: " ++ msg ++ ">"
+    | _           => "<not a value>"
+    end
+  with show_args (es : Terms) : string :=
+    match es with
+    | tnil       => ""
+    | tcons e es =>
+        let s := show_term e in
+        " " ++ (if atomic e then s else "(" ++ s ++ ")") ++ show_args es
+    end.
+End Show.
+
+Definition show_program (p : EAst.program) : string :=
+  match eval_program p with
+  | Ret t => show_term (fst p) t
+  | Exc m => "<error: " ++ m ++ ">"
+  end%bs.
+
 
 (* Courtesy of Eske *)
 

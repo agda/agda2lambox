@@ -11,7 +11,9 @@ AGDA_HTML_DIR=html
 
 echo "Rendering translations..."
 
-for f in $BUILD_DIR/* $GEN_DIR/*/*; do
+# skip what earlier runs rendered, WASM binaries, and build directories
+setopt extendedglob
+for f in $BUILD_DIR/*~*.(html|md)(.) $GEN_DIR/*/*~*.(html|md|wasm)(.); do
 
   echo " * $f"
   ext=${f##*.}
@@ -23,12 +25,18 @@ for f in $BUILD_DIR/* $GEN_DIR/*/*; do
     "txt") echo "";;
     "v") echo "coq";; # alas, pandoc has no coq/rocq syntax-highlighting support
     "rs") echo "rust";;
-    "ml"|"sml") echo "ocaml";;
-    "result") echo "";;
+    "sml") echo "ocaml";;
+    "mlf") echo "scheme";; # Malfunction
+    "result"|"value") echo "";;
     *) echo "$ext";;
   esac)
-  echo "\`\`\`$lang" > $mdFn
-  cat $f >> $mdFn
+  : > $mdFn
+  # show the value of the entry point above the raw output that contains it
+  value=${f%.result}.value
+  [[ $ext == "result" && -f $value ]] && \
+    printf '```\n%s\n```\n\n---\n\n' "$(<$value)" >> $mdFn
+  echo "\`\`\`$lang" >> $mdFn
+  sed '$a\' $f >> $mdFn # Peregrine's OCaml and CakeML output lacks a final newline
   echo "\`\`\`" >> $mdFn
 
   targetHtml="$f".html
@@ -49,8 +57,9 @@ for f in $BUILD_DIR/**/**.txt; do
   fCoq="$BUILD_DIR"/"$fn".v
 
   fWasm="$GEN_DIR"/"$fn".wat
+  fWasmBin="$GEN_DIR"/"$fn".wasm
   fC="$GEN_DIR"/"$fn".c
-  fOcaml="$GEN_DIR"/"$fn".ml
+  fOcaml="$GEN_DIR"/"$fn".mlf
   fCakeml="$GEN_DIR"/"$fn".sml
   fRust="$GEN_DIR"/"$fn".rs
   fElm="$GEN_DIR"/"$fn".elm
@@ -89,12 +98,18 @@ for f in $BUILD_DIR/**/**.txt; do
     </div>\
     <div class=\"tabs__tab\" id=\"out_1\" data-tab-info>\
         <embed src=\"$fWasm.html\"/>\
+        <div style=\"font-size:50px;\">\&nbsp; ↪ \&nbsp;</div>\
+        <embed src=\"$fWasmBin.result.html\"/>\
     </div>\
     <div class=\"tabs__tab\" id=\"out_2\" data-tab-info>\
         <embed src=\"$fC.html\"/>\
+        <div style=\"font-size:50px;\">\&nbsp; ↪ \&nbsp;</div>\
+        <embed src=\"$fC.result.html\"/>\
     </div>\
     <div class=\"tabs__tab\" id=\"out_3\" data-tab-info>\
         <embed src=\"$fOcaml.html\"/>\
+        <div style=\"font-size:50px;\">\&nbsp; ↪ \&nbsp;</div>\
+        <embed src=\"$fOcaml.result.html\"/>\
     </div>\
     <div class=\"tabs__tab\" id=\"out_4\" data-tab-info>\
         <embed src=\"$fCakeml.html\"/>\

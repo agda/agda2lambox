@@ -1,4 +1,8 @@
 .PHONY: default build install coq gen run html clean
+.DELETE_ON_ERROR:
+
+SOURCES := agda2lambox.cabal $(wildcard cabal.project cabal.project.local) $(shell find src -name '*.hs')
+TEST_DIRS := test/untyped test/typed test/agda2rust
 
 default: build
 
@@ -10,7 +14,8 @@ install:
 
 test: test/Tests.agda
 
-test/Tests.agda: test/Main.hs test/agda2lambox-tests.agda-lib test/untyped/*.agda test/typed/*.agda test/agda2rust/*.agda
+test/Tests.agda: test/Main.hs test/agda2lambox-tests.agda-lib $(TEST_DIRS) $(wildcard $(TEST_DIRS:=/*.agda)) $(SOURCES)
+	rm -rf test/dist
 	cabal test
 
 coq:
@@ -20,7 +25,7 @@ coq:
 gen: test
 	make -C test gen
 
-run: coq test
+run: coq gen
 	make -C test run
 
 html: coq test

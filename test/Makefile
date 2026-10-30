@@ -14,6 +14,8 @@ run: # gen
 	./runRocq.sh
 	@echo == Running Rust ==
 	./runRust.sh
+	@echo == Running C/OCaml/WASM ==
+	./runNative.sh
 
 html: # gen run
 	@echo == Generating HTML ==

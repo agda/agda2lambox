@@ -96,5 +96,11 @@ fannkuch n =
 
 fannkuchBench : Nat → Nat
 fannkuchBench n = fannkuch n
+-- {-# COMPILE AGDA2LAMBOX fannkuchBench #-}
 
-{-# COMPILE AGDA2LAMBOX fannkuchBench #-}
+test : Nat
+test = fannkuchBench 5
+{-# COMPILE AGDA2LAMBOX test #-}
+
+_ : test ≡ 7
+_ = refl
