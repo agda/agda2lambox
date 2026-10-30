@@ -19,8 +19,9 @@ mutual
     _∷_⊣_ : ∀ {αs} α (tr : Trace αs) → Valid α (run tr) → Trace (α ∷ αs)
 
   run : ∀ {αs} → Trace αs → Nat
-  run []           = 0
-  run (_ ∷ _ ⊣ vα) = step vα
+  run = λ where
+    []           → 0
+    (_ ∷ _ ⊣ vα) → step vα
 
 test : Nat
 test = run (inc ∷ (inc ∷ [] ⊣ mk 1) ⊣ mk 2)
