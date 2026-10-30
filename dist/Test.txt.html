@@ -30,22 +30,24 @@ Agda.Builtin.Nat.Nat:
         suc (1 arg(s))
           n : Agda.Builtin.Nat.Nat{0}
 
-Test.Ֆ_.Maybe:
+Test._20.Maybe:
   mutual inductive(s):
     Maybe
     type variables:  [a]
       constructors:
         nothing (0 arg(s))
+          a : □
         just (1 arg(s))
+          a : □
           _ : @0
 
 Test.fromMaybe:
   constant declaration:
     type variables: [a]
-    type: □ → @0 → Test.Ֆ_.Maybe{0} @0 → @0
+    type: □ → @0 → Test._20.Maybe{0} @0 → @0
     body: λ _ _ →
             λ _ _ _ →
-              case&lt;Test.Ֆ_.Maybe{0},0&gt; @0 of
+              case&lt;Test._20.Maybe{0},1&gt; @0 of
                 λ&lt;[]&gt; @1
                 λ&lt;[_]&gt; @0
               @1
@@ -56,7 +58,7 @@ Test.test:
     type variables: []
     type: Agda.Builtin.Nat.Nat{0}
     body: Test.fromMaybe □ Agda.Builtin.Nat.Nat{0}{0}
-            (Test.Ֆ_.Maybe{0}{1}
+            (Test._20.Maybe{0}{1} □
                (Agda.Builtin.Nat.Nat{0}{1}
                   (Agda.Builtin.Nat.Nat{0}{1}
                      (Agda.Builtin.Nat.Nat{0}{1}
@@ -152,10 +154,10 @@ Test.Bool:
     Bool
     type variables:  []
       constructors:
-        r#true (0 arg(s))
-        r#false (0 arg(s))
+        true (0 arg(s))
+        false (0 arg(s))
 
-Test.notՖ27Ֆ:
+Test.not&#39;:
   constant declaration:
     type variables: []
     type: (Test.Bool{0}) → Test.Bool{0}

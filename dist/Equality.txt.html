@@ -27,7 +27,7 @@ Agda.Builtin.Nat.Nat:
         zero (0 arg(s))
         suc (1 arg(s))
 
-Equality.Ֆ_Ֆ24Ֆ_: constant declaration: body: λ _ _ _ _ _ _ → @1 @0
+Equality._$_: constant declaration: body: λ _ _ _ _ _ _ → @1 @0
 
 Equality.add:
   constant declaration:
@@ -39,7 +39,7 @@ Equality.add:
 
 Equality.test:
   constant declaration:
-    body: Equality.Ֆ_Ֆ24Ֆ_ □ □ □ □
+    body: Equality._$_ □ □ □ □
             (λ _ _ _ → @2
                (Equality.add
                   (Agda.Builtin.Nat.Nat{0}{1}
@@ -51,12 +51,13 @@ Equality.test:
                      Agda.Builtin.Nat.Nat{0}{0})))
             □
 
+Equality.toNat: constant declaration: body: λ _ _ _ → @2
+
 Equality.eqLevel: constant declaration: body: □
 
-Equality.sucՖsubleftՖsubadd: constant declaration: body: □
+Equality.suc-left-add: constant declaration: body: □
 
-Equality.addՖsubleftՖsubid:
-  constant declaration: body: μrec [0] := 0: λ _ → □
+Equality.add-left-id: constant declaration: body: □
 
 Equality.subst: constant declaration: body: λ _ _ _ _ _ _ → @0
 
@@ -64,7 +65,7 @@ Equality.trans: constant declaration: body: □
 
 Equality.eqTwo: constant declaration: body: □
 
-Equality.Ֆ_Ֆ2218Ֆ_:
+Equality._∘_:
   constant declaration: body: λ _ _ _ _ _ _ _ _ _ → @2 (@1 @0)
 
 Equality.sym: constant declaration: body: □
@@ -75,9 +76,9 @@ Equality.cong: constant declaration: body: □
 
 Equality.eqzero: constant declaration: body: □
 
-Equality.Ֆ_Ֆ2261Ֆ_:
+Equality._≡_:
   mutual inductive(s):
-    Ֆ_Ֆ2261Ֆ_
+    _≡_
       constructors: refl (0 arg(s))
 main program: [Equality.test]</code></pre>
 </body>

@@ -35,8 +35,10 @@ Agda.Builtin.List.List:
     List
     type variables:  [a, A]
       constructors:
-        Ֆ5bՖՖ5dՖ (0 arg(s))
-        Ֆ_Ֆcons_ (2 arg(s))
+        [] (0 arg(s))
+          A : □
+        _∷_ (2 arg(s))
+          A : □
           x : @1
           xs : Agda.Builtin.List.List{0} □ @1
 
@@ -48,7 +50,7 @@ Types.listrect:
                              List.List{0} □ @0 → @1 → @1) → Agda.Builtin.List.List{0} □ @0 → @1
     body: μrec [0] :=
             0: λ _ _ _ _ _ →
-                 case&lt;Agda.Builtin.List.List{0},0&gt; @0 of
+                 case&lt;Agda.Builtin.List.List{0},1&gt; @0 of
                    λ&lt;[]&gt; @2
                    λ&lt;[_, _]&gt; @3 @1 @0 (@7 □ □ @4 @3 @0)
 
@@ -59,8 +61,8 @@ Types.map:
                                                                Builtin.
                                                                List.List{0} □ @1
     body: λ _ _ _ →
-            Types.listrect □ □ Agda.Builtin.List.List{0}{0}
-              (λ _ _ _ → Agda.Builtin.List.List{0}{1} (@3 @2) @0)
+            Types.listrect □ □ (Agda.Builtin.List.List{0}{0} □)
+              (λ _ _ _ → Agda.Builtin.List.List{0}{1} □ (@3 @2) @0)
 
 Types.head:
   constant declaration:
@@ -69,7 +71,7 @@ Types.head:
                                                                   Builtin.
                                                                   Nat.Nat{0}
     body: λ _ →
-            case&lt;Agda.Builtin.List.List{0},0&gt; @0 of
+            case&lt;Agda.Builtin.List.List{0},1&gt; @0 of
               λ&lt;[]&gt; Agda.Builtin.Nat.Nat{0}{0}
               λ&lt;[_, _]&gt; @1
 
@@ -79,6 +81,7 @@ Types.sig:
     type variables:  [A, P]
       constructors:
         exist (2 arg(s))
+          A : □
           fst : @0
           snd : □
 
@@ -86,7 +89,7 @@ Types.sig.fst:
   constant declaration:
     type variables: [A, P]
     type: Types.sig{0} @0 □ → @0
-    body: λ _ → case&lt;Types.sig{0},0&gt; @0 of λ&lt;[_, _]&gt; @1
+    body: λ _ → case&lt;Types.sig{0},1&gt; @0 of λ&lt;[_, _]&gt; @1
 
 Types.test:
   constant declaration:
@@ -95,8 +98,8 @@ Types.test:
     body: Types.head
             (Types.map □ □
                (λ _ → Agda.Builtin.Nat.Nat{0}{1} (Types.sig.fst @0))
-               (Agda.Builtin.List.List{0}{1}
-                  (Types.sig{0}{0}
+               (Agda.Builtin.List.List{0}{1} □
+                  (Types.sig{0}{0} □
                      (Agda.Builtin.Nat.Nat{0}{1}
                         (Agda.Builtin.Nat.Nat{0}{1}
                            (Agda.Builtin.Nat.Nat{0}{1}
@@ -188,9 +191,9 @@ Types.test:
                                                                                                                                                 Builtin.
                                                                                                                                                 Nat.Nat{0}{0})))))))))))))))))))))))))))))))))))))))))
                      □)
-                  (Agda.Builtin.List.List{0}{1}
-                     (Types.sig{0}{0} Agda.Builtin.Nat.Nat{0}{0} □)
-                     Agda.Builtin.List.List{0}{0})))
+                  (Agda.Builtin.List.List{0}{1} □
+                     (Types.sig{0}{0} □ Agda.Builtin.Nat.Nat{0}{0} □)
+                     (Agda.Builtin.List.List{0}{0} □))))
 
 Types.Top:
   constant declaration:

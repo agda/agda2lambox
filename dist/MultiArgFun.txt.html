@@ -26,8 +26,8 @@ Agda.Builtin.Bool.Bool:
     Bool
     type variables:  []
       constructors:
-        r#false (0 arg(s))
-        r#true (0 arg(s))
+        false (0 arg(s))
+        true (0 arg(s))
 
 Agda.Builtin.Nat.Nat:
   mutual inductive(s):
@@ -38,7 +38,7 @@ Agda.Builtin.Nat.Nat:
         suc (1 arg(s))
           n : Agda.Builtin.Nat.Nat{0}
 
-Agda.Builtin.Nat.Ֆ_Ֆplus_:
+Agda.Builtin.Nat._+_:
   constant declaration:
     type variables: []
     type: (Agda.Builtin.Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → Agda.
@@ -50,7 +50,7 @@ Agda.Builtin.Nat.Ֆ_Ֆplus_:
                    λ&lt;[]&gt; @0
                    λ&lt;[_]&gt; Agda.Builtin.Nat.Nat{0}{1} (@3 @0 @1)
 
-Agda.Builtin.Nat.Ֆ_Ֆmult_:
+Agda.Builtin.Nat._*_:
   constant declaration:
     type variables: []
     type: (Agda.Builtin.Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → Agda.
@@ -60,7 +60,7 @@ Agda.Builtin.Nat.Ֆ_Ֆmult_:
             0: λ _ _ →
                  case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @1 of
                    λ&lt;[]&gt; Agda.Builtin.Nat.Nat{0}{0}
-                   λ&lt;[_]&gt; Agda.Builtin.Nat.Ֆ_Ֆplus_ @1 (@3 @0 @1)
+                   λ&lt;[_]&gt; Agda.Builtin.Nat._+_ @1 (@3 @0 @1)
 
 MultiArgFun.exB:
   constant declaration:
@@ -72,8 +72,8 @@ MultiArgFun.exB:
                                                                                    Nat.Nat{0}
     body: λ _ →
             case&lt;Agda.Builtin.Bool.Bool{0},0&gt; @0 of
-              λ&lt;[]&gt; Agda.Builtin.Nat.Ֆ_Ֆmult_
-              λ&lt;[]&gt; Agda.Builtin.Nat.Ֆ_Ֆplus_
+              λ&lt;[]&gt; Agda.Builtin.Nat._*_
+              λ&lt;[]&gt; Agda.Builtin.Nat._+_
 
 MultiArgFun.exB2:
   constant declaration:
@@ -85,8 +85,8 @@ MultiArgFun.exB2:
                                                                                        Nat.Nat{0}
     body: λ _ _ →
             case&lt;Agda.Builtin.Bool.Bool{0},0&gt; @0 of
-              λ&lt;[]&gt; Agda.Builtin.Nat.Ֆ_Ֆmult_
-              λ&lt;[]&gt; Agda.Builtin.Nat.Ֆ_Ֆplus_
+              λ&lt;[]&gt; Agda.Builtin.Nat._*_
+              λ&lt;[]&gt; Agda.Builtin.Nat._+_
 
 MultiArgFun.exB3:
   constant declaration:
@@ -98,8 +98,8 @@ MultiArgFun.exB3:
                                                                                        Nat.Nat{0}
     body: λ _ _ →
             case&lt;Agda.Builtin.Bool.Bool{0},0&gt; @1 of
-              λ&lt;[]&gt; Agda.Builtin.Nat.Ֆ_Ֆmult_
-              λ&lt;[]&gt; Agda.Builtin.Nat.Ֆ_Ֆplus_
+              λ&lt;[]&gt; Agda.Builtin.Nat._*_
+              λ&lt;[]&gt; Agda.Builtin.Nat._+_
 
 MultiArgFun.exB4:
   constant declaration:
@@ -111,8 +111,8 @@ MultiArgFun.exB4:
                                                                                        Nat.Nat{0}
     body: λ _ _ _ →
             case&lt;Agda.Builtin.Bool.Bool{0},0&gt; @2 of
-              λ&lt;[]&gt; Agda.Builtin.Nat.Ֆ_Ֆmult_ @1
-              λ&lt;[]&gt; Agda.Builtin.Nat.Ֆ_Ֆplus_ @1
+              λ&lt;[]&gt; Agda.Builtin.Nat._*_ @1
+              λ&lt;[]&gt; Agda.Builtin.Nat._+_ @1
 
 MultiArgFun.exB5:
   constant declaration:
@@ -124,8 +124,8 @@ MultiArgFun.exB5:
                                                                                        Nat.Nat{0}
     body: λ _ _ _ _ →
             case&lt;Agda.Builtin.Bool.Bool{0},0&gt; @3 of
-              λ&lt;[]&gt; Agda.Builtin.Nat.Ֆ_Ֆmult_ @2 @1
-              λ&lt;[]&gt; Agda.Builtin.Nat.Ֆ_Ֆplus_ @2 @1
+              λ&lt;[]&gt; Agda.Builtin.Nat._*_ @2 @1
+              λ&lt;[]&gt; Agda.Builtin.Nat._+_ @2 @1
 
 MultiArgFun.exH2:
   constant declaration:
@@ -137,8 +137,8 @@ MultiArgFun.exH2:
                                                                                        Nat.Nat{0}
     body: λ _ _ →
             case&lt;Agda.Builtin.Bool.Bool{0},0&gt; @0 of
-              λ&lt;[]&gt; Agda.Builtin.Nat.Ֆ_Ֆmult_
-              λ&lt;[]&gt; Agda.Builtin.Nat.Ֆ_Ֆplus_
+              λ&lt;[]&gt; Agda.Builtin.Nat._*_
+              λ&lt;[]&gt; Agda.Builtin.Nat._+_
 
 MultiArgFun.exH3:
   constant declaration:
@@ -150,8 +150,8 @@ MultiArgFun.exH3:
                                                                                        Nat.Nat{0}
     body: λ _ _ →
             case&lt;Agda.Builtin.Bool.Bool{0},0&gt; @1 of
-              λ&lt;[]&gt; Agda.Builtin.Nat.Ֆ_Ֆmult_
-              λ&lt;[]&gt; Agda.Builtin.Nat.Ֆ_Ֆplus_
+              λ&lt;[]&gt; Agda.Builtin.Nat._*_
+              λ&lt;[]&gt; Agda.Builtin.Nat._+_
 
 MultiArgFun.exH4:
   constant declaration:
@@ -163,8 +163,8 @@ MultiArgFun.exH4:
                                                                                        Nat.Nat{0}
     body: λ _ _ _ →
             case&lt;Agda.Builtin.Bool.Bool{0},0&gt; @2 of
-              λ&lt;[]&gt; Agda.Builtin.Nat.Ֆ_Ֆmult_ @1
-              λ&lt;[]&gt; Agda.Builtin.Nat.Ֆ_Ֆplus_ @1
+              λ&lt;[]&gt; Agda.Builtin.Nat._*_ @1
+              λ&lt;[]&gt; Agda.Builtin.Nat._+_ @1
 
 MultiArgFun.exH5:
   constant declaration:
@@ -176,8 +176,8 @@ MultiArgFun.exH5:
                                                                                        Nat.Nat{0}
     body: λ _ _ _ _ →
             case&lt;Agda.Builtin.Bool.Bool{0},0&gt; @3 of
-              λ&lt;[]&gt; Agda.Builtin.Nat.Ֆ_Ֆmult_ @2 @1
-              λ&lt;[]&gt; Agda.Builtin.Nat.Ֆ_Ֆplus_ @2 @1
+              λ&lt;[]&gt; Agda.Builtin.Nat._*_ @2 @1
+              λ&lt;[]&gt; Agda.Builtin.Nat._+_ @2 @1
 
 MultiArgFun.apply2:
   constant declaration:
@@ -197,7 +197,7 @@ MultiArgFun.x:
   constant declaration:
     type variables: []
     type: Agda.Builtin.Nat.Nat{0}
-    body: MultiArgFun.apply2 (Agda.Builtin.Nat.Ֆ_Ֆplus_)
+    body: MultiArgFun.apply2 (Agda.Builtin.Nat._+_)
             (Agda.Builtin.Nat.Nat{0}{1}
                (Agda.Builtin.Nat.Nat{0}{1}
                   (Agda.Builtin.Nat.Nat{0}{1}
@@ -288,7 +288,7 @@ MultiArgFun.exF:
     type: (Agda.Builtin.Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → Agda.
                                                                   Builtin.
                                                                   Nat.Nat{0}
-    body: λ _ _ → Agda.Builtin.Nat.Ֆ_Ֆplus_ @1 @0
+    body: λ _ _ → Agda.Builtin.Nat._+_ @1 @0
 
 MultiArgFun.y:
   constant declaration:
@@ -383,7 +383,7 @@ MultiArgFun.z:
   constant declaration:
     type variables: []
     type: Agda.Builtin.Nat.Nat{0}
-    body: MultiArgFun.apply2 (Agda.Builtin.Nat.Ֆ_Ֆplus_)
+    body: MultiArgFun.apply2 (Agda.Builtin.Nat._+_)
             (Agda.Builtin.Nat.Nat{0}{1}
                (Agda.Builtin.Nat.Nat{0}{1}
                   (Agda.Builtin.Nat.Nat{0}{1}
@@ -474,7 +474,7 @@ MultiArgFun.exG:
     type: (Agda.Builtin.Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → Agda.
                                                                   Builtin.
                                                                   Nat.Nat{0}
-    body: Agda.Builtin.Nat.Ֆ_Ֆplus_
+    body: Agda.Builtin.Nat._+_
 
 MultiArgFun.w:
   constant declaration:
@@ -571,7 +571,7 @@ MultiArgFun.addN:
     type: (Agda.Builtin.Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → Agda.
                                                                   Builtin.
                                                                   Nat.Nat{0}
-    body: λ _ → Agda.Builtin.Nat.Ֆ_Ֆplus_ @0
+    body: λ _ → Agda.Builtin.Nat._+_ @0
 
 MultiArgFun.q:
   constant declaration:
@@ -755,20 +755,20 @@ MultiArgFun.test:
   constant declaration:
     type variables: []
     type: Agda.Builtin.Nat.Nat{0}
-    body: Agda.Builtin.Nat.Ֆ_Ֆplus_
-            (Agda.Builtin.Nat.Ֆ_Ֆplus_
-               (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                  (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                     (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                        (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                           (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                              (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                                 (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                                    (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                                       (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                                          (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                                             (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                                                (Agda.Builtin.Nat.Ֆ_Ֆplus_
+    body: Agda.Builtin.Nat._+_
+            (Agda.Builtin.Nat._+_
+               (Agda.Builtin.Nat._+_
+                  (Agda.Builtin.Nat._+_
+                     (Agda.Builtin.Nat._+_
+                        (Agda.Builtin.Nat._+_
+                           (Agda.Builtin.Nat._+_
+                              (Agda.Builtin.Nat._+_
+                                 (Agda.Builtin.Nat._+_
+                                    (Agda.Builtin.Nat._+_
+                                       (Agda.Builtin.Nat._+_
+                                          (Agda.Builtin.Nat._+_
+                                             (Agda.Builtin.Nat._+_
+                                                (Agda.Builtin.Nat._+_
                                                    (MultiArgFun.exB Agda.Builtin.Bool.Bool{0}{1}
                                                       (Agda.Builtin.Nat.Nat{0}{1}
                                                          (Agda.Builtin.Nat.Nat{0}{1}
@@ -1687,8 +1687,10 @@ Agda.Builtin.Maybe.Maybe:
     type variables:  [a, A]
       constructors:
         just (1 arg(s))
+          A : □
           _ : @1
         nothing (0 arg(s))
+          A : □
 
 MultiArgFun.exM:
   constant declaration:
@@ -1701,9 +1703,9 @@ MultiArgFun.exM:
                                                                                                   Builtin.
                                                                                                   Nat.Nat{0}
     body: λ _ →
-            case&lt;Agda.Builtin.Maybe.Maybe{0},0&gt; @0 of
-              λ&lt;[_]&gt; Agda.Builtin.Nat.Ֆ_Ֆplus_
-              λ&lt;[]&gt; Agda.Builtin.Nat.Ֆ_Ֆmult_
+            case&lt;Agda.Builtin.Maybe.Maybe{0},1&gt; @0 of
+              λ&lt;[_]&gt; Agda.Builtin.Nat._+_
+              λ&lt;[]&gt; Agda.Builtin.Nat._*_
 main program: [MultiArgFun.test]</code></pre>
 </body>
 </html>

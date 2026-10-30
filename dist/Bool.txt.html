@@ -35,10 +35,10 @@ Agda.Builtin.Bool.Bool:
     Bool
     type variables:  []
       constructors:
-        r#false (0 arg(s))
-        r#true (0 arg(s))
+        false (0 arg(s))
+        true (0 arg(s))
 
-Bool.Ֆ_Ֆ2227Ֆ_:
+Bool._∧_:
   constant declaration:
     type variables: []
     type: (Agda.Builtin.Bool.Bool{0}) → (Agda.
@@ -57,7 +57,7 @@ Bool.testBool:
   constant declaration:
     type variables: []
     type: Agda.Builtin.Bool.Bool{0}
-    body: Bool.Ֆ_Ֆ2227Ֆ_ Agda.Builtin.Bool.Bool{0}{1}
+    body: Bool._∧_ Agda.Builtin.Bool.Bool{0}{1}
             Agda.Builtin.Bool.Bool{0}{0}
 
 Bool.bool2Nat:
@@ -158,7 +158,7 @@ Bool.bool2Nat:
                                                                                                                                              Nat.Nat{0}{0})))))))))))))))))))))))))))))))))))))))))
               λ&lt;[]&gt; Agda.Builtin.Nat.Nat{0}{0}
 
-Agda.Builtin.Nat.Ֆ_Ֆplus_:
+Agda.Builtin.Nat._+_:
   constant declaration:
     type variables: []
     type: (Agda.Builtin.Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → Agda.
@@ -277,7 +277,7 @@ Bool.test:
   constant declaration:
     type variables: []
     type: Agda.Builtin.Nat.Nat{0}
-    body: Agda.Builtin.Nat.Ֆ_Ֆplus_ (Bool.bool2Nat (Bool.testBool))
+    body: Agda.Builtin.Nat._+_ (Bool.bool2Nat (Bool.testBool))
             (Bool.testIte)
 
 Bool.not:

@@ -36,25 +36,28 @@ Exp.Exp:
     type variables:  [V]
       constructors:
         Plus (2 arg(s))
+          V : □
           _ : Exp.Exp{0} @0
           _ : Exp.Exp{0} @0
         Int (1 arg(s))
+          V : □
           _ : Agda.Builtin.Nat.Nat{0}
         Var (1 arg(s))
+          V : □
           _ : @0
 
 Exp.exampleExp:
   constant declaration:
     type variables: []
     type: Exp.Exp{0} (Agda.Builtin.Nat.Nat{0})
-    body: Exp.Exp{0}{0}
-            (Exp.Exp{0}{1}
+    body: Exp.Exp{0}{0} □
+            (Exp.Exp{0}{1} □
                (Agda.Builtin.Nat.Nat{0}{1}
                   (Agda.Builtin.Nat.Nat{0}{1}
                      (Agda.Builtin.Nat.Nat{0}{1}
                         (Agda.Builtin.Nat.Nat{0}{1}
                            (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}))))))
-            (Exp.Exp{0}{2}
+            (Exp.Exp{0}{2} □
                (Agda.Builtin.Nat.Nat{0}{1}
                   (Agda.Builtin.Nat.Nat{0}{1}
                      (Agda.Builtin.Nat.Nat{0}{1}
@@ -130,7 +133,7 @@ Exp.exampleExp:
                                                                                                                               Builtin.
                                                                                                                               Nat.Nat{0}{0}))))))))))))))))))))))))))))))))))))))
 
-Agda.Builtin.Nat.Ֆ_Ֆplus_:
+Agda.Builtin.Nat._+_:
   constant declaration:
     type variables: []
     type: (Agda.Builtin.Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → Agda.
@@ -150,8 +153,8 @@ Exp.eval:
                                                                Nat.Nat{0}
     body: μrec [0] :=
             0: λ _ _ _ →
-                 case&lt;Exp.Exp{0},0&gt; @0 of
-                   λ&lt;[_, _]&gt; Agda.Builtin.Nat.Ֆ_Ֆplus_ (@5 □ @3 @1) (@5 □ @3 @0)
+                 case&lt;Exp.Exp{0},1&gt; @0 of
+                   λ&lt;[_, _]&gt; Agda.Builtin.Nat._+_ (@5 □ @3 @1) (@5 □ @3 @0)
                    λ&lt;[_]&gt; @0
                    λ&lt;[_]&gt; @2 @0
 
@@ -177,7 +180,7 @@ Exp.GExp:
         plus (2 arg(s))
           _ : Exp.GExp{0}
           _ : Exp.GExp{0}
-        r#if (4 arg(s))
+        if (4 arg(s))
           A : □
           _ : Exp.GExp{0}
           _ : Exp.GExp{0}
@@ -195,7 +198,7 @@ Exp.geval:
                    λ&lt;[_]&gt; @0
                    λ&lt;[_]&gt; @0
                    λ&lt;[_]&gt; @2 @0
-                   λ&lt;[_, _]&gt; Agda.Builtin.Nat.Ֆ_Ֆplus_ (@5 □ @3 @1) (@5 □ @3 @0)
+                   λ&lt;[_, _]&gt; Agda.Builtin.Nat._+_ (@5 □ @3 @1) (@5 □ @3 @0)
                    λ&lt;[_, _, _, _]&gt;
                      λ _ _ _ _ _ _ →
                        case&lt;Exp.Bool{0},0&gt; @3 of
@@ -212,21 +215,21 @@ Exp.test:
   constant declaration:
     type variables: []
     type: Agda.Builtin.Nat.Nat{0}
-    body: Agda.Builtin.Nat.Ֆ_Ֆplus_
-            (Agda.Builtin.Nat.Ֆ_Ֆplus_
-               (Agda.Builtin.Nat.Ֆ_Ֆplus_ (Exp.eval □ (λ _ → @0) (Exp.exampleExp))
+    body: Agda.Builtin.Nat._+_
+            (Agda.Builtin.Nat._+_
+               (Agda.Builtin.Nat._+_ (Exp.eval □ (λ _ → @0) (Exp.exampleExp))
                   (Exp.eval □
                      (λ _ →
-                        Agda.Builtin.Nat.Ֆ_Ֆplus_ @0
+                        Agda.Builtin.Nat._+_ @0
                           (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}))
-                     (Exp.Exp{0}{0}
-                        (Exp.Exp{0}{1}
+                     (Exp.Exp{0}{0} □
+                        (Exp.Exp{0}{1} □
                            (Agda.Builtin.Nat.Nat{0}{1}
                               (Agda.Builtin.Nat.Nat{0}{1}
                                  (Agda.Builtin.Nat.Nat{0}{1}
                                     (Agda.Builtin.Nat.Nat{0}{1}
                                        (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}))))))
-                        (Exp.Exp{0}{2}
+                        (Exp.Exp{0}{2} □
                            (Agda.Builtin.Nat.Nat{0}{1}
                               (Agda.Builtin.Nat.Nat{0}{1}
                                  (Agda.Builtin.Nat.Nat{0}{1}
@@ -397,7 +400,7 @@ Exp.test:
                                                                                                                                        Nat.Nat{0}{0})))))))))))))))))))))))))))))))))))))))))
             (Exp.geval □
                (λ _ →
-                  Agda.Builtin.Nat.Ֆ_Ֆplus_ @0
+                  Agda.Builtin.Nat._+_ @0
                     (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}))
                (Exp.GExp{0}{3}
                   (Exp.GExp{0}{0}

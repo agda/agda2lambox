@@ -23,7 +23,7 @@ From Agda2Lambox      Require Import CheckWF Eval.
 Import ListNotations.
 
 Definition env : global_env :=
-  [(((MPfile [&quot;Prim&quot;%bs], &quot;\1366\&amp;30\1366\8467&quot;%bs), true),
+  [(((MPfile [&quot;Prim&quot;%bs], &quot;0\8467&quot;%bs), true),
     ConstantDecl {| cst_body := Some tBox; cst_type := ([], TBox) |});
    (((MPfile [&quot;Prim&quot;%bs], &quot;test&quot;%bs), true),
     ConstantDecl
@@ -504,6 +504,6 @@ Compute @check_wf_glob eflags (ExAst.trans_env env).
 Definition prog1 : program :=
   (ExAst.trans_env env, tConst (MPfile [&quot;Prim&quot;%bs], &quot;test&quot;%bs)).
 
-Compute eval_program prog1.</code></pre>
+Compute show_program prog1.</code></pre>
 </body>
 </html>

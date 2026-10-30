@@ -27,7 +27,7 @@ Agda.Builtin.Nat.Nat:
         zero (0 arg(s))
         suc (1 arg(s))
 
-Agda.Builtin.Nat.Ֆ_Ֆsub_:
+Agda.Builtin.Nat._-_:
   constant declaration:
     body: μrec [0] :=
             0: λ _ _ →
@@ -46,7 +46,7 @@ StrictLet.countdown:
                    λ&lt;[]&gt; @1
                    λ&lt;[_]&gt;
                      @3 (Agda.Builtin.Nat.Nat{0}{1} @2)
-                       (Agda.Builtin.Nat.Ֆ_Ֆsub_ @1
+                       (Agda.Builtin.Nat._-_ @1
                           (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}))
 
 StrictLet.test:

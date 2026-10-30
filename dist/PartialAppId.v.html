@@ -23,46 +23,43 @@ From Agda2Lambox      Require Import CheckWF Eval.
 Import ListNotations.
 
 Definition env : global_env :=
-  [(((MPfile [&quot;PartialAppId&quot;%bs], &quot;test&quot;%bs), true),
+  [(((MPfile [&quot;PartialAppId&quot;%bs], &quot;id&quot;%bs), true),
+    ConstantDecl
+      {| cst_body := Some (tLambda nAnon (tLambda nAnon (tRel 0)));
+         cst_type :=
+           ([nNamed &quot;A&quot;%bs], TArr TBox (TArr (TVar 0) (TVar 0))) |});
+   (((MPfile [&quot;PartialAppId&quot;%bs], &quot;test&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
              (tApp
                 (tApp
-                   (tConst
-                      (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                       &quot;\1366_\1366plus_&quot;%bs))
+                   (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                    (tApp
                       (tApp
-                         (tConst
-                            (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                             &quot;\1366_\1366plus_&quot;%bs))
+                         (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                          (tApp
                             (tApp
-                               (tConst
-                                  (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                   &quot;\1366_\1366plus_&quot;%bs))
+                               (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                                (tApp
                                   (tApp
-                                     (tConst
-                                        (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                         &quot;\1366_\1366plus_&quot;%bs))
+                                     (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                                      (tApp
                                         (tApp
                                            (tConst
                                               (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                               &quot;\1366_\1366plus_&quot;%bs))
+                                               &quot;_+_&quot;%bs))
                                            (tApp
                                               (tApp
                                                  (tConst
                                                     (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                                     &quot;\1366_\1366plus_&quot;%bs))
+                                                     &quot;_+_&quot;%bs))
                                                  (tApp
                                                     (tApp
                                                        (tConst
                                                           (MPfile
                                                              [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                                           &quot;\1366_\1366plus_&quot;%bs))
+                                                           &quot;_+_&quot;%bs))
                                                        (tConst
                                                           (MPfile [&quot;PartialAppId&quot;%bs],
                                                            &quot;testIdd&quot;%bs)))
@@ -580,9 +577,7 @@ Definition env : global_env :=
            Some
              (tApp
                 (tConst (MPfile [&quot;PartialAppId&quot;%bs], &quot;idF&quot;%bs))
-                (tConst
-                   (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                    &quot;\1366_\1366plus_&quot;%bs)));
+                (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs)));
          cst_type :=
            ([],
             TInd
@@ -1515,14 +1510,10 @@ Definition env : global_env :=
                       nAnon
                       (tApp
                          (tApp
-                            (tConst
-                               (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                &quot;\1366_\1366plus_&quot;%bs))
+                            (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                             (tApp
                                (tApp
-                                  (tConst
-                                     (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                      &quot;\1366_\1366plus_&quot;%bs))
+                                  (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                                   (tRel 2))
                                (tRel 1)))
                          (tRel 0)))));
@@ -1555,9 +1546,7 @@ Definition env : global_env :=
                 (tApp
                    (tApp
                       (tApp (tLambda nAnon (tLambda nAnon (tRel 0))) tBox)
-                      (tConst
-                         (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                          &quot;\1366_\1366plus_&quot;%bs)))
+                      (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs)))
                    (tApp
                       (tConstruct
                          {| inductive_mind :=
@@ -3779,14 +3768,12 @@ Definition env : global_env :=
            ([nNamed &quot;A&quot;%bs],
             TArr
               TBox (TArr (TArr (TVar 0) (TVar 0)) (TArr (TVar 0) (TVar 0)))) |});
-   (((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-      &quot;\1366_\1366plus_&quot;%bs),
-     true),
+   (((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
              (tFix
-                [{| dname := nNamed &quot;\1366_\1366plus_&quot;%bs;
+                [{| dname := nNamed &quot;_+_&quot;%bs;
                     dbody :=
                       tLambda
                         nAnon
@@ -3855,6 +3842,6 @@ Definition prog1 : program :=
   (ExAst.trans_env env,
    tConst (MPfile [&quot;PartialAppId&quot;%bs], &quot;test&quot;%bs)).
 
-Compute eval_program prog1.</code></pre>
+Compute show_program prog1.</code></pre>
 </body>
 </html>

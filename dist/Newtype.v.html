@@ -31,10 +31,12 @@ Definition env : global_env :=
                 (tApp
                    (tApp (tConst (MPfile [&quot;Newtype&quot;%bs], &quot;k&quot;%bs)) tBox)
                    (tApp
-                      (tConstruct
-                         {| inductive_mind := (MPfile [&quot;Newtype&quot;%bs], &quot;Newtype&quot;%bs);
-                            inductive_ind := 0 |}
-                         0 [])
+                      (tApp
+                         (tConstruct
+                            {| inductive_mind := (MPfile [&quot;Newtype&quot;%bs], &quot;Newtype&quot;%bs);
+                               inductive_ind := 0 |}
+                            0 [])
+                         tBox)
                       (tApp
                          (tConstruct
                             {| inductive_mind :=
@@ -493,7 +495,7 @@ Definition env : global_env :=
                       (tCase
                          ({| inductive_mind := (MPfile [&quot;Newtype&quot;%bs], &quot;Newtype&quot;%bs);
                              inductive_ind := 0 |},
-                          0)
+                          1)
                          (tRel 1) [([nAnon], tRel 0)]))));
          cst_type :=
            ([nNamed &quot;A&quot;%bs],
@@ -514,11 +516,13 @@ Definition env : global_env :=
                     (TVar 0)))) |});
    (((MPfile [&quot;Newtype&quot;%bs], &quot;Newtype&quot;%bs), true),
     InductiveDecl
-      {| ind_finite := Finite; ind_npars := 0;
+      {| ind_finite := Finite; ind_npars := 1;
          ind_bodies :=
            [{| ind_name := &quot;Newtype&quot;%bs; ind_propositional := false;
                ind_kelim := IntoAny;
-               ind_ctors := [((&quot;mk&quot;%bs, [(nAnon, TVar 0)]), 1)]; ind_projs := [];
+               ind_ctors :=
+                 [((&quot;mk&quot;%bs, [(nNamed &quot;A&quot;%bs, TBox); (nAnon, TVar 0)]), 1)];
+               ind_projs := [];
                ind_type_vars :=
                  [{| tvar_name := nNamed &quot;A&quot;%bs; tvar_is_logical := false;
                      tvar_is_arity := true; tvar_is_sort := true |}] |}] |});
@@ -551,6 +555,6 @@ Compute @check_wf_glob eflags (ExAst.trans_env env).
 Definition prog1 : program :=
   (ExAst.trans_env env, tConst (MPfile [&quot;Newtype&quot;%bs], &quot;test&quot;%bs)).
 
-Compute eval_program prog1.</code></pre>
+Compute show_program prog1.</code></pre>
 </body>
 </html>

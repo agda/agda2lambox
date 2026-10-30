@@ -62,7 +62,7 @@ PointFree.toNat:
     type: (PointFree.Foo{0}) → Agda.Builtin.Nat.Nat{0}
     body: λ _ → case&lt;PointFree.Foo{0},0&gt; @0 of λ&lt;[_]&gt; @0
 
-Agda.Builtin.Nat.Ֆ_Ֆplus_:
+Agda.Builtin.Nat._+_:
   constant declaration:
     type variables: []
     type: (Agda.Builtin.Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → Agda.
@@ -78,8 +78,8 @@ PointFree.test:
   constant declaration:
     type variables: []
     type: Agda.Builtin.Nat.Nat{0}
-    body: Agda.Builtin.Nat.Ֆ_Ֆplus_
-            (Agda.Builtin.Nat.Ֆ_Ֆplus_
+    body: Agda.Builtin.Nat._+_
+            (Agda.Builtin.Nat._+_
                (PointFree.toNat
                   (PointFree.f
                      (Agda.Builtin.Nat.Nat{0}{1}

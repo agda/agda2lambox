@@ -270,9 +270,87 @@
 <span id="cb1-192"><a href="#cb1-192" aria-hidden="true"></a>                                                                                                                                                                                                                                                                                                                                               <span class="pp">Nat_Builtin_Agda_Nat::</span>zero(</span>
 <span id="cb1-193"><a href="#cb1-193" aria-hidden="true"></a>                                                                                                                                                                                                                                                                                                                                                 PhantomData)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))</span>
 <span id="cb1-194"><a href="#cb1-194" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-195"><a href="#cb1-195" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-196"><a href="#cb1-196" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb1-197"><a href="#cb1-197" aria-hidden="true"></a>  <span class="pp">println!</span>(<span class="st">&quot;{:?}&quot;</span><span class="op">,</span> <span class="pp">Program::</span>new()<span class="op">.</span>Identity_test())<span class="op">;</span></span>
-<span id="cb1-198"><a href="#cb1-198" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb1-195"><a href="#cb1-195" aria-hidden="true"></a></span>
+<span id="cb1-196"><a href="#cb1-196" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Identity_id0H(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> ()<span class="op">,</span> x2<span class="op">:</span> ()) <span class="op">-&gt;</span> () <span class="op">{</span></span>
+<span id="cb1-197"><a href="#cb1-197" aria-hidden="true"></a>  x2</span>
+<span id="cb1-198"><a href="#cb1-198" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-199"><a href="#cb1-199" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Identity_id0H__curried(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(()) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(()) <span class="op">-&gt;</span> () <span class="op">{</span></span>
+<span id="cb1-200"><a href="#cb1-200" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x<span class="op">|</span> <span class="op">{</span></span>
+<span id="cb1-201"><a href="#cb1-201" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x2<span class="op">|</span> <span class="op">{</span></span>
+<span id="cb1-202"><a href="#cb1-202" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>Identity_id0H(</span>
+<span id="cb1-203"><a href="#cb1-203" aria-hidden="true"></a>        x<span class="op">,</span></span>
+<span id="cb1-204"><a href="#cb1-204" aria-hidden="true"></a>        x2)</span>
+<span id="cb1-205"><a href="#cb1-205" aria-hidden="true"></a>    <span class="op">}</span>)</span>
+<span id="cb1-206"><a href="#cb1-206" aria-hidden="true"></a>  <span class="op">}</span>)</span>
+<span id="cb1-207"><a href="#cb1-207" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-208"><a href="#cb1-208" aria-hidden="true"></a></span>
+<span id="cb1-209"><a href="#cb1-209" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Identity_idH<span class="op">&lt;</span>A<span class="op">:</span> <span class="bu">Copy</span><span class="op">&gt;</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> ()<span class="op">,</span> x2<span class="op">:</span> A) <span class="op">-&gt;</span> A <span class="op">{</span></span>
+<span id="cb1-210"><a href="#cb1-210" aria-hidden="true"></a>  x2</span>
+<span id="cb1-211"><a href="#cb1-211" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-212"><a href="#cb1-212" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Identity_idH__curried<span class="op">&lt;</span>A<span class="op">:</span> <span class="bu">Copy</span><span class="op">&gt;</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(()) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(A) <span class="op">-&gt;</span> A <span class="op">{</span></span>
+<span id="cb1-213"><a href="#cb1-213" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x<span class="op">|</span> <span class="op">{</span></span>
+<span id="cb1-214"><a href="#cb1-214" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x2<span class="op">|</span> <span class="op">{</span></span>
+<span id="cb1-215"><a href="#cb1-215" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>Identity_idH(</span>
+<span id="cb1-216"><a href="#cb1-216" aria-hidden="true"></a>        x<span class="op">,</span></span>
+<span id="cb1-217"><a href="#cb1-217" aria-hidden="true"></a>        x2)</span>
+<span id="cb1-218"><a href="#cb1-218" aria-hidden="true"></a>    <span class="op">}</span>)</span>
+<span id="cb1-219"><a href="#cb1-219" aria-hidden="true"></a>  <span class="op">}</span>)</span>
+<span id="cb1-220"><a href="#cb1-220" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-221"><a href="#cb1-221" aria-hidden="true"></a></span>
+<span id="cb1-222"><a href="#cb1-222" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Identity_id0ՖՖ0027e8_ՖՖ0027e9_(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> ()<span class="op">,</span> x2<span class="op">:</span> ()) <span class="op">-&gt;</span> () <span class="op">{</span></span>
+<span id="cb1-223"><a href="#cb1-223" aria-hidden="true"></a>  x2</span>
+<span id="cb1-224"><a href="#cb1-224" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-225"><a href="#cb1-225" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Identity_id0ՖՖ0027e8_ՖՖ0027e9___curried(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(()) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(()) <span class="op">-&gt;</span> () <span class="op">{</span></span>
+<span id="cb1-226"><a href="#cb1-226" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x<span class="op">|</span> <span class="op">{</span></span>
+<span id="cb1-227"><a href="#cb1-227" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x2<span class="op">|</span> <span class="op">{</span></span>
+<span id="cb1-228"><a href="#cb1-228" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>Identity_id0ՖՖ0027e8_ՖՖ0027e9_(</span>
+<span id="cb1-229"><a href="#cb1-229" aria-hidden="true"></a>        x<span class="op">,</span></span>
+<span id="cb1-230"><a href="#cb1-230" aria-hidden="true"></a>        x2)</span>
+<span id="cb1-231"><a href="#cb1-231" aria-hidden="true"></a>    <span class="op">}</span>)</span>
+<span id="cb1-232"><a href="#cb1-232" aria-hidden="true"></a>  <span class="op">}</span>)</span>
+<span id="cb1-233"><a href="#cb1-233" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-234"><a href="#cb1-234" aria-hidden="true"></a></span>
+<span id="cb1-235"><a href="#cb1-235" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Identity_idՖՖ0027e8_ՖՖ0027e9_<span class="op">&lt;</span>A<span class="op">:</span> <span class="bu">Copy</span><span class="op">&gt;</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> ()<span class="op">,</span> x2<span class="op">:</span> A) <span class="op">-&gt;</span> A <span class="op">{</span></span>
+<span id="cb1-236"><a href="#cb1-236" aria-hidden="true"></a>  x2</span>
+<span id="cb1-237"><a href="#cb1-237" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-238"><a href="#cb1-238" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Identity_idՖՖ0027e8_ՖՖ0027e9___curried<span class="op">&lt;</span>A<span class="op">:</span> <span class="bu">Copy</span><span class="op">&gt;</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(()) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(A) <span class="op">-&gt;</span> A <span class="op">{</span></span>
+<span id="cb1-239"><a href="#cb1-239" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x<span class="op">|</span> <span class="op">{</span></span>
+<span id="cb1-240"><a href="#cb1-240" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x2<span class="op">|</span> <span class="op">{</span></span>
+<span id="cb1-241"><a href="#cb1-241" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>Identity_idՖՖ0027e8_ՖՖ0027e9_(</span>
+<span id="cb1-242"><a href="#cb1-242" aria-hidden="true"></a>        x<span class="op">,</span></span>
+<span id="cb1-243"><a href="#cb1-243" aria-hidden="true"></a>        x2)</span>
+<span id="cb1-244"><a href="#cb1-244" aria-hidden="true"></a>    <span class="op">}</span>)</span>
+<span id="cb1-245"><a href="#cb1-245" aria-hidden="true"></a>  <span class="op">}</span>)</span>
+<span id="cb1-246"><a href="#cb1-246" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-247"><a href="#cb1-247" aria-hidden="true"></a></span>
+<span id="cb1-248"><a href="#cb1-248" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Identity_id0(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> ()<span class="op">,</span> x2<span class="op">:</span> ()) <span class="op">-&gt;</span> () <span class="op">{</span></span>
+<span id="cb1-249"><a href="#cb1-249" aria-hidden="true"></a>  x2</span>
+<span id="cb1-250"><a href="#cb1-250" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-251"><a href="#cb1-251" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Identity_id0__curried(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(()) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(()) <span class="op">-&gt;</span> () <span class="op">{</span></span>
+<span id="cb1-252"><a href="#cb1-252" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x<span class="op">|</span> <span class="op">{</span></span>
+<span id="cb1-253"><a href="#cb1-253" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x2<span class="op">|</span> <span class="op">{</span></span>
+<span id="cb1-254"><a href="#cb1-254" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>Identity_id0(</span>
+<span id="cb1-255"><a href="#cb1-255" aria-hidden="true"></a>        x<span class="op">,</span></span>
+<span id="cb1-256"><a href="#cb1-256" aria-hidden="true"></a>        x2)</span>
+<span id="cb1-257"><a href="#cb1-257" aria-hidden="true"></a>    <span class="op">}</span>)</span>
+<span id="cb1-258"><a href="#cb1-258" aria-hidden="true"></a>  <span class="op">}</span>)</span>
+<span id="cb1-259"><a href="#cb1-259" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-260"><a href="#cb1-260" aria-hidden="true"></a></span>
+<span id="cb1-261"><a href="#cb1-261" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Identity_id<span class="op">&lt;</span>A<span class="op">:</span> <span class="bu">Copy</span><span class="op">&gt;</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> ()<span class="op">,</span> x2<span class="op">:</span> A) <span class="op">-&gt;</span> A <span class="op">{</span></span>
+<span id="cb1-262"><a href="#cb1-262" aria-hidden="true"></a>  x2</span>
+<span id="cb1-263"><a href="#cb1-263" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-264"><a href="#cb1-264" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Identity_id__curried<span class="op">&lt;</span>A<span class="op">:</span> <span class="bu">Copy</span><span class="op">&gt;</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(()) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(A) <span class="op">-&gt;</span> A <span class="op">{</span></span>
+<span id="cb1-265"><a href="#cb1-265" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x<span class="op">|</span> <span class="op">{</span></span>
+<span id="cb1-266"><a href="#cb1-266" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x2<span class="op">|</span> <span class="op">{</span></span>
+<span id="cb1-267"><a href="#cb1-267" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>Identity_id(</span>
+<span id="cb1-268"><a href="#cb1-268" aria-hidden="true"></a>        x<span class="op">,</span></span>
+<span id="cb1-269"><a href="#cb1-269" aria-hidden="true"></a>        x2)</span>
+<span id="cb1-270"><a href="#cb1-270" aria-hidden="true"></a>    <span class="op">}</span>)</span>
+<span id="cb1-271"><a href="#cb1-271" aria-hidden="true"></a>  <span class="op">}</span>)</span>
+<span id="cb1-272"><a href="#cb1-272" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-273"><a href="#cb1-273" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-274"><a href="#cb1-274" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb1-275"><a href="#cb1-275" aria-hidden="true"></a>  <span class="pp">println!</span>(<span class="st">&quot;{:?}&quot;</span><span class="op">,</span> <span class="pp">Program::</span>new()<span class="op">.</span>Identity_test())<span class="op">;</span></span>
+<span id="cb1-276"><a href="#cb1-276" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
 </body>
 </html>

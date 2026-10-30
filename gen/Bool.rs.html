@@ -97,8 +97,8 @@
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true"></a></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true"></a><span class="at">#[</span>derive<span class="at">(</span><span class="bu">Debug</span><span class="op">,</span> <span class="bu">Clone</span><span class="at">)]</span></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">enum</span> Bool_Builtin_Agda_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true"></a>  rՖhshfalse(PhantomData<span class="op">&lt;&amp;</span><span class="ot">&#39;a</span> ()<span class="op">&gt;</span>)<span class="op">,</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true"></a>  rՖhshtrue(PhantomData<span class="op">&lt;&amp;</span><span class="ot">&#39;a</span> ()<span class="op">&gt;</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true"></a>  <span class="an">r#</span>false(PhantomData<span class="op">&lt;&amp;</span><span class="ot">&#39;a</span> ()<span class="op">&gt;</span>)<span class="op">,</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true"></a>  <span class="an">r#</span>true(PhantomData<span class="op">&lt;&amp;</span><span class="ot">&#39;a</span> ()<span class="op">&gt;</span>)</span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true"></a><span class="op">}</span></span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true"></a></span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">struct</span> Program <span class="op">{</span></span>
@@ -121,33 +121,33 @@
 <span id="cb1-43"><a href="#cb1-43" aria-hidden="true"></a><span class="op">}</span></span>
 <span id="cb1-44"><a href="#cb1-44" aria-hidden="true"></a></span>
 <span id="cb1-45"><a href="#cb1-45" aria-hidden="true"></a></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Bool_Ֆ_Ֆ2227Ֆ_(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Bool_Builtin_Agda_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;,</span> x2<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Bool_Builtin_Agda_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Bool_Builtin_Agda_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Bool_Ֆ_ՖՖ002227_(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Bool_Builtin_Agda_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;,</span> x2<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Bool_Builtin_Agda_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Bool_Builtin_Agda_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb1-47"><a href="#cb1-47" aria-hidden="true"></a>  <span class="kw">let</span> x3 <span class="op">=</span></span>
 <span id="cb1-48"><a href="#cb1-48" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true"></a>      <span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshfalse(</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true"></a>      <span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>false(</span>
 <span id="cb1-50"><a href="#cb1-50" aria-hidden="true"></a>        PhantomData))<span class="op">;</span></span>
 <span id="cb1-51"><a href="#cb1-51" aria-hidden="true"></a>  <span class="kw">match</span> x <span class="op">{</span></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshfalse(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>false(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-53"><a href="#cb1-53" aria-hidden="true"></a>      x3</span>
 <span id="cb1-54"><a href="#cb1-54" aria-hidden="true"></a>    <span class="op">},</span></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshtrue(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>true(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-56"><a href="#cb1-56" aria-hidden="true"></a>      <span class="kw">match</span> x2 <span class="op">{</span></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true"></a>        <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshfalse(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true"></a>        <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>false(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-58"><a href="#cb1-58" aria-hidden="true"></a>          x3</span>
 <span id="cb1-59"><a href="#cb1-59" aria-hidden="true"></a>        <span class="op">},</span></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true"></a>        <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshtrue(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true"></a>        <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>true(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-61"><a href="#cb1-61" aria-hidden="true"></a>          <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true"></a>            <span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshtrue(</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true"></a>            <span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>true(</span>
 <span id="cb1-63"><a href="#cb1-63" aria-hidden="true"></a>              PhantomData))</span>
 <span id="cb1-64"><a href="#cb1-64" aria-hidden="true"></a>        <span class="op">},</span></span>
 <span id="cb1-65"><a href="#cb1-65" aria-hidden="true"></a>      <span class="op">}</span></span>
 <span id="cb1-66"><a href="#cb1-66" aria-hidden="true"></a>    <span class="op">},</span></span>
 <span id="cb1-67"><a href="#cb1-67" aria-hidden="true"></a>  <span class="op">}</span></span>
 <span id="cb1-68"><a href="#cb1-68" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Bool_Ֆ_Ֆ2227Ֆ___curried(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> Bool_Builtin_Agda_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> Bool_Builtin_Agda_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Bool_Builtin_Agda_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Bool_Ֆ_ՖՖ002227___curried(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> Bool_Builtin_Agda_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> Bool_Builtin_Agda_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Bool_Builtin_Agda_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb1-70"><a href="#cb1-70" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x<span class="op">|</span> <span class="op">{</span></span>
 <span id="cb1-71"><a href="#cb1-71" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x2<span class="op">|</span> <span class="op">{</span></span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>Bool_Ֆ_Ֆ2227Ֆ_(</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>Bool_Ֆ_ՖՖ002227_(</span>
 <span id="cb1-73"><a href="#cb1-73" aria-hidden="true"></a>        x<span class="op">,</span></span>
 <span id="cb1-74"><a href="#cb1-74" aria-hidden="true"></a>        x2)</span>
 <span id="cb1-75"><a href="#cb1-75" aria-hidden="true"></a>    <span class="op">}</span>)</span>
@@ -155,18 +155,18 @@
 <span id="cb1-77"><a href="#cb1-77" aria-hidden="true"></a><span class="op">}</span></span>
 <span id="cb1-78"><a href="#cb1-78" aria-hidden="true"></a></span>
 <span id="cb1-79"><a href="#cb1-79" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Bool_testBool(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Bool_Builtin_Agda_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb1-80"><a href="#cb1-80" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>Bool_Ֆ_Ֆ2227Ֆ_(</span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>Bool_Ֆ_ՖՖ002227_(</span>
 <span id="cb1-81"><a href="#cb1-81" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-82"><a href="#cb1-82" aria-hidden="true"></a>      <span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshtrue(</span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true"></a>      <span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>true(</span>
 <span id="cb1-83"><a href="#cb1-83" aria-hidden="true"></a>        PhantomData))<span class="op">,</span></span>
 <span id="cb1-84"><a href="#cb1-84" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-85"><a href="#cb1-85" aria-hidden="true"></a>      <span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshfalse(</span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true"></a>      <span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>false(</span>
 <span id="cb1-86"><a href="#cb1-86" aria-hidden="true"></a>        PhantomData)))</span>
 <span id="cb1-87"><a href="#cb1-87" aria-hidden="true"></a><span class="op">}</span></span>
 <span id="cb1-88"><a href="#cb1-88" aria-hidden="true"></a></span>
 <span id="cb1-89"><a href="#cb1-89" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Bool_bool2Nat(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Bool_Builtin_Agda_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb1-90"><a href="#cb1-90" aria-hidden="true"></a>  <span class="kw">match</span> x <span class="op">{</span></span>
-<span id="cb1-91"><a href="#cb1-91" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshfalse(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>false(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-92"><a href="#cb1-92" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>alloc(</span>
 <span id="cb1-93"><a href="#cb1-93" aria-hidden="true"></a>        <span class="pp">Nat_Builtin_Agda_Nat::</span>suc(</span>
 <span id="cb1-94"><a href="#cb1-94" aria-hidden="true"></a>          PhantomData<span class="op">,</span></span>
@@ -297,7 +297,7 @@
 <span id="cb1-219"><a href="#cb1-219" aria-hidden="true"></a>                                                                                                                                                                                <span class="pp">Nat_Builtin_Agda_Nat::</span>zero(</span>
 <span id="cb1-220"><a href="#cb1-220" aria-hidden="true"></a>                                                                                                                                                                                  PhantomData))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))</span>
 <span id="cb1-221"><a href="#cb1-221" aria-hidden="true"></a>    <span class="op">},</span></span>
-<span id="cb1-222"><a href="#cb1-222" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshtrue(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-222"><a href="#cb1-222" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>true(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-223"><a href="#cb1-223" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>alloc(</span>
 <span id="cb1-224"><a href="#cb1-224" aria-hidden="true"></a>        <span class="pp">Nat_Builtin_Agda_Nat::</span>zero(</span>
 <span id="cb1-225"><a href="#cb1-225" aria-hidden="true"></a>          PhantomData))</span>
@@ -334,10 +334,10 @@
 <span id="cb1-256"><a href="#cb1-256" aria-hidden="true"></a></span>
 <span id="cb1-257"><a href="#cb1-257" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Bool_if_then_else_<span class="op">&lt;</span>A<span class="op">:</span> <span class="bu">Copy</span><span class="op">&gt;</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> ()<span class="op">,</span> x2<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Bool_Builtin_Agda_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;,</span> x3<span class="op">:</span> A<span class="op">,</span> x4<span class="op">:</span> A) <span class="op">-&gt;</span> A <span class="op">{</span></span>
 <span id="cb1-258"><a href="#cb1-258" aria-hidden="true"></a>  <span class="kw">match</span> x2 <span class="op">{</span></span>
-<span id="cb1-259"><a href="#cb1-259" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshfalse(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-259"><a href="#cb1-259" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>false(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-260"><a href="#cb1-260" aria-hidden="true"></a>      x4</span>
 <span id="cb1-261"><a href="#cb1-261" aria-hidden="true"></a>    <span class="op">},</span></span>
-<span id="cb1-262"><a href="#cb1-262" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshtrue(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-262"><a href="#cb1-262" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>true(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-263"><a href="#cb1-263" aria-hidden="true"></a>      x3</span>
 <span id="cb1-264"><a href="#cb1-264" aria-hidden="true"></a>    <span class="op">},</span></span>
 <span id="cb1-265"><a href="#cb1-265" aria-hidden="true"></a>  <span class="op">}</span></span>
@@ -362,7 +362,7 @@
 <span id="cb1-284"><a href="#cb1-284" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>Bool_if_then_else_(</span>
 <span id="cb1-285"><a href="#cb1-285" aria-hidden="true"></a>    ()<span class="op">,</span></span>
 <span id="cb1-286"><a href="#cb1-286" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-287"><a href="#cb1-287" aria-hidden="true"></a>      <span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshtrue(</span>
+<span id="cb1-287"><a href="#cb1-287" aria-hidden="true"></a>      <span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>true(</span>
 <span id="cb1-288"><a href="#cb1-288" aria-hidden="true"></a>        PhantomData))<span class="op">,</span></span>
 <span id="cb1-289"><a href="#cb1-289" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>alloc(</span>
 <span id="cb1-290"><a href="#cb1-290" aria-hidden="true"></a>      <span class="pp">Nat_Builtin_Agda_Nat::</span>suc(</span>
@@ -507,14 +507,14 @@
 <span id="cb1-429"><a href="#cb1-429" aria-hidden="true"></a></span>
 <span id="cb1-430"><a href="#cb1-430" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Bool_not(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Bool_Builtin_Agda_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Bool_Builtin_Agda_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb1-431"><a href="#cb1-431" aria-hidden="true"></a>  <span class="kw">match</span> x <span class="op">{</span></span>
-<span id="cb1-432"><a href="#cb1-432" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshfalse(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-432"><a href="#cb1-432" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>false(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-433"><a href="#cb1-433" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-434"><a href="#cb1-434" aria-hidden="true"></a>        <span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshtrue(</span>
+<span id="cb1-434"><a href="#cb1-434" aria-hidden="true"></a>        <span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>true(</span>
 <span id="cb1-435"><a href="#cb1-435" aria-hidden="true"></a>          PhantomData))</span>
 <span id="cb1-436"><a href="#cb1-436" aria-hidden="true"></a>    <span class="op">},</span></span>
-<span id="cb1-437"><a href="#cb1-437" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshtrue(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-437"><a href="#cb1-437" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>true(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-438"><a href="#cb1-438" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-439"><a href="#cb1-439" aria-hidden="true"></a>        <span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshfalse(</span>
+<span id="cb1-439"><a href="#cb1-439" aria-hidden="true"></a>        <span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>false(</span>
 <span id="cb1-440"><a href="#cb1-440" aria-hidden="true"></a>          PhantomData))</span>
 <span id="cb1-441"><a href="#cb1-441" aria-hidden="true"></a>    <span class="op">},</span></span>
 <span id="cb1-442"><a href="#cb1-442" aria-hidden="true"></a>  <span class="op">}</span></span>
@@ -528,7 +528,7 @@
 <span id="cb1-450"><a href="#cb1-450" aria-hidden="true"></a></span>
 <span id="cb1-451"><a href="#cb1-451" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Bool_tt(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Bool_Builtin_Agda_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb1-452"><a href="#cb1-452" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-453"><a href="#cb1-453" aria-hidden="true"></a>    <span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshtrue(</span>
+<span id="cb1-453"><a href="#cb1-453" aria-hidden="true"></a>    <span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>true(</span>
 <span id="cb1-454"><a href="#cb1-454" aria-hidden="true"></a>      PhantomData))</span>
 <span id="cb1-455"><a href="#cb1-455" aria-hidden="true"></a><span class="op">}</span></span>
 <span id="cb1-456"><a href="#cb1-456" aria-hidden="true"></a><span class="op">}</span></span>

@@ -30,7 +30,7 @@ Agda.Builtin.Nat.Nat:
         suc (1 arg(s))
           n : Agda.Builtin.Nat.Nat{0}
 
-Agda.Builtin.Nat.Ֆ_Ֆplus_:
+Agda.Builtin.Nat._+_:
   constant declaration:
     type variables: []
     type: (Agda.Builtin.Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → Agda.
@@ -48,13 +48,13 @@ EtaExpansion.add:
     type: (Agda.Builtin.Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → Agda.
                                                                   Builtin.
                                                                   Nat.Nat{0}
-    body: Agda.Builtin.Nat.Ֆ_Ֆplus_
+    body: Agda.Builtin.Nat._+_
 
 EtaExpansion.add2l:
   constant declaration:
     type variables: []
     type: (Agda.Builtin.Nat.Nat{0}) → Agda.Builtin.Nat.Nat{0}
-    body: Agda.Builtin.Nat.Ֆ_Ֆplus_
+    body: Agda.Builtin.Nat._+_
             (Agda.Builtin.Nat.Nat{0}{1}
                (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}))
 
@@ -63,15 +63,15 @@ Agda.Builtin.Bool.Bool:
     Bool
     type variables:  []
       constructors:
-        r#false (0 arg(s))
-        r#true (0 arg(s))
+        false (0 arg(s))
+        true (0 arg(s))
 
 EtaExpansion.add2r:
   constant declaration:
     type variables: []
     type: (Agda.Builtin.Nat.Nat{0}) → Agda.Builtin.Nat.Nat{0}
     body: λ _ →
-            Agda.Builtin.Nat.Ֆ_Ֆplus_ @0
+            Agda.Builtin.Nat._+_ @0
               (Agda.Builtin.Nat.Nat{0}{1}
                  (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}))
 
@@ -83,8 +83,7 @@ EtaExpansion.add3:
                                        Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → Agda.
                                                                                  Builtin.
                                                                                  Nat.Nat{0}
-    body: λ _ _ →
-            Agda.Builtin.Nat.Ֆ_Ֆplus_ (Agda.Builtin.Nat.Ֆ_Ֆplus_ @1 @0)
+    body: λ _ _ → Agda.Builtin.Nat._+_ (Agda.Builtin.Nat._+_ @1 @0)
 
 EtaExpansion.maybeAddL:
   constant declaration:
@@ -95,7 +94,7 @@ EtaExpansion.maybeAddL:
     body: λ _ →
             case&lt;Agda.Builtin.Bool.Bool{0},0&gt; @0 of
               λ&lt;[]&gt;
-                Agda.Builtin.Nat.Ֆ_Ֆplus_
+                Agda.Builtin.Nat._+_
                   (Agda.Builtin.Nat.Nat{0}{1}
                      (Agda.Builtin.Nat.Nat{0}{1}
                         (Agda.Builtin.Nat.Nat{0}{1}
@@ -108,7 +107,7 @@ EtaExpansion.maybeAddL:
                                              (Agda.Builtin.Nat.Nat{0}{1}
                                                 Agda.Builtin.Nat.Nat{0}{0}))))))))))
               λ&lt;[]&gt;
-                Agda.Builtin.Nat.Ֆ_Ֆplus_
+                Agda.Builtin.Nat._+_
                   (Agda.Builtin.Nat.Nat{0}{1}
                      (Agda.Builtin.Nat.Nat{0}{1}
                         (Agda.Builtin.Nat.Nat{0}{1}
@@ -204,7 +203,7 @@ EtaExpansion.maybeAddLb:
     body: λ _ →
             case&lt;Agda.Builtin.Bool.Bool{0},0&gt; @0 of
               λ&lt;[]&gt;
-                Agda.Builtin.Nat.Ֆ_Ֆplus_
+                Agda.Builtin.Nat._+_
                   (Agda.Builtin.Nat.Nat{0}{1}
                      (Agda.Builtin.Nat.Nat{0}{1}
                         (Agda.Builtin.Nat.Nat{0}{1}
@@ -217,7 +216,7 @@ EtaExpansion.maybeAddLb:
                                              (Agda.Builtin.Nat.Nat{0}{1}
                                                 Agda.Builtin.Nat.Nat{0}{0}))))))))))
               λ&lt;[]&gt;
-                Agda.Builtin.Nat.Ֆ_Ֆplus_
+                Agda.Builtin.Nat._+_
                   (Agda.Builtin.Nat.Nat{0}{1}
                      (Agda.Builtin.Nat.Nat{0}{1}
                         (Agda.Builtin.Nat.Nat{0}{1}
@@ -314,7 +313,7 @@ EtaExpansion.maybeAddR:
             case&lt;Agda.Builtin.Bool.Bool{0},0&gt; @0 of
               λ&lt;[]&gt;
                 λ _ →
-                  Agda.Builtin.Nat.Ֆ_Ֆplus_ @0
+                  Agda.Builtin.Nat._+_ @0
                     (Agda.Builtin.Nat.Nat{0}{1}
                        (Agda.Builtin.Nat.Nat{0}{1}
                           (Agda.Builtin.Nat.Nat{0}{1}
@@ -328,7 +327,7 @@ EtaExpansion.maybeAddR:
                                                   Agda.Builtin.Nat.Nat{0}{0}))))))))))
               λ&lt;[]&gt;
                 λ _ →
-                  Agda.Builtin.Nat.Ֆ_Ֆplus_ @0
+                  Agda.Builtin.Nat._+_ @0
                     (Agda.Builtin.Nat.Nat{0}{1}
                        (Agda.Builtin.Nat.Nat{0}{1}
                           (Agda.Builtin.Nat.Nat{0}{1}
@@ -427,7 +426,7 @@ EtaExpansion.maybeAddRb:
             case&lt;Agda.Builtin.Bool.Bool{0},0&gt; @0 of
               λ&lt;[]&gt;
                 λ _ →
-                  Agda.Builtin.Nat.Ֆ_Ֆplus_ @0
+                  Agda.Builtin.Nat._+_ @0
                     (Agda.Builtin.Nat.Nat{0}{1}
                        (Agda.Builtin.Nat.Nat{0}{1}
                           (Agda.Builtin.Nat.Nat{0}{1}
@@ -441,7 +440,7 @@ EtaExpansion.maybeAddRb:
                                                   Agda.Builtin.Nat.Nat{0}{0}))))))))))
               λ&lt;[]&gt;
                 λ _ →
-                  Agda.Builtin.Nat.Ֆ_Ֆplus_ @0
+                  Agda.Builtin.Nat._+_ @0
                     (Agda.Builtin.Nat.Nat{0}{1}
                        (Agda.Builtin.Nat.Nat{0}{1}
                           (Agda.Builtin.Nat.Nat{0}{1}
@@ -530,7 +529,7 @@ EtaExpansion.maybeAddRb:
                                                                                                                                             Builtin.
                                                                                                                                             Nat.Nat{0}{0}))))))))))))))))))))))))))))))))))))))))
 
-Agda.Builtin.Nat.Ֆ_Ֆmult_:
+Agda.Builtin.Nat._*_:
   constant declaration:
     type variables: []
     type: (Agda.Builtin.Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → Agda.
@@ -540,7 +539,7 @@ Agda.Builtin.Nat.Ֆ_Ֆmult_:
             0: λ _ _ →
                  case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @1 of
                    λ&lt;[]&gt; Agda.Builtin.Nat.Nat{0}{0}
-                   λ&lt;[_]&gt; Agda.Builtin.Nat.Ֆ_Ֆplus_ @1 (@3 @0 @1)
+                   λ&lt;[_]&gt; Agda.Builtin.Nat._+_ @1 (@3 @0 @1)
 
 EtaExpansion.maybeAdd:
   constant declaration:
@@ -552,8 +551,8 @@ EtaExpansion.maybeAdd:
                                                                                    Nat.Nat{0}
     body: λ _ →
             case&lt;Agda.Builtin.Bool.Bool{0},0&gt; @0 of
-              λ&lt;[]&gt; Agda.Builtin.Nat.Ֆ_Ֆmult_
-              λ&lt;[]&gt; Agda.Builtin.Nat.Ֆ_Ֆplus_
+              λ&lt;[]&gt; Agda.Builtin.Nat._*_
+              λ&lt;[]&gt; Agda.Builtin.Nat._+_
 
 EtaExpansion.maybeAdd3:
   constant declaration:
@@ -567,8 +566,8 @@ EtaExpansion.maybeAdd3:
             case&lt;Agda.Builtin.Bool.Bool{0},0&gt; @1 of
               λ&lt;[]&gt;
                 λ _ →
-                  Agda.Builtin.Nat.Ֆ_Ֆplus_ @0
-                    (Agda.Builtin.Nat.Ֆ_Ֆplus_
+                  Agda.Builtin.Nat._+_ @0
+                    (Agda.Builtin.Nat._+_
                        (Agda.Builtin.Nat.Nat{0}{1}
                           (Agda.Builtin.Nat.Nat{0}{1}
                              (Agda.Builtin.Nat.Nat{0}{1}
@@ -583,8 +582,8 @@ EtaExpansion.maybeAdd3:
                        @1)
               λ&lt;[]&gt;
                 λ _ →
-                  Agda.Builtin.Nat.Ֆ_Ֆplus_ @0
-                    (Agda.Builtin.Nat.Ֆ_Ֆplus_
+                  Agda.Builtin.Nat._+_ @0
+                    (Agda.Builtin.Nat._+_
                        (Agda.Builtin.Nat.Nat{0}{1}
                           (Agda.Builtin.Nat.Nat{0}{1}
                              (Agda.Builtin.Nat.Nat{0}{1}
@@ -687,8 +686,8 @@ EtaExpansion.maybeAdd3b:
     body: λ _ _ _ →
             case&lt;Agda.Builtin.Bool.Bool{0},0&gt; @2 of
               λ&lt;[]&gt;
-                Agda.Builtin.Nat.Ֆ_Ֆplus_ @0
-                  (Agda.Builtin.Nat.Ֆ_Ֆplus_
+                Agda.Builtin.Nat._+_ @0
+                  (Agda.Builtin.Nat._+_
                      (Agda.Builtin.Nat.Nat{0}{1}
                         (Agda.Builtin.Nat.Nat{0}{1}
                            (Agda.Builtin.Nat.Nat{0}{1}
@@ -702,8 +701,8 @@ EtaExpansion.maybeAdd3b:
                                                    Agda.Builtin.Nat.Nat{0}{0}))))))))))
                      @1)
               λ&lt;[]&gt;
-                Agda.Builtin.Nat.Ֆ_Ֆplus_ @0
-                  (Agda.Builtin.Nat.Ֆ_Ֆplus_
+                Agda.Builtin.Nat._+_ @0
+                  (Agda.Builtin.Nat._+_
                      (Agda.Builtin.Nat.Nat{0}{1}
                         (Agda.Builtin.Nat.Nat{0}{1}
                            (Agda.Builtin.Nat.Nat{0}{1}
@@ -799,7 +798,9 @@ EtaExpansion.Maybe:
     type variables:  [A]
       constructors:
         nothing (0 arg(s))
+          A : □
         just (1 arg(s))
+          A : □
           _ : @0
 
 EtaExpansion.maybeInc:
@@ -809,9 +810,9 @@ EtaExpansion.maybeInc:
                                                              Builtin.
                                                              Nat.Nat{0}) → Agda.Builtin.Nat.Nat{0}
     body: λ _ _ →
-            case&lt;EtaExpansion.Maybe{0},0&gt; @1 of
+            case&lt;EtaExpansion.Maybe{0},1&gt; @1 of
               λ&lt;[]&gt; @0
-              λ&lt;[_]&gt; Agda.Builtin.Nat.Ֆ_Ֆplus_ @1 @0
+              λ&lt;[_]&gt; Agda.Builtin.Nat._+_ @1 @0
 
 EtaExpansion.maybeAddM:
   constant declaration:
@@ -824,10 +825,9 @@ EtaExpansion.maybeAddM:
                                                                                           Builtin.
                                                                                           Nat.Nat{0}
     body: λ _ _ _ →
-            case&lt;EtaExpansion.Maybe{0},0&gt; @2 of
-              λ&lt;[]&gt; Agda.Builtin.Nat.Ֆ_Ֆplus_ @1 @0
-              λ&lt;[_]&gt;
-                Agda.Builtin.Nat.Ֆ_Ֆplus_ (Agda.Builtin.Nat.Ֆ_Ֆplus_ @2 @1) @0
+            case&lt;EtaExpansion.Maybe{0},1&gt; @2 of
+              λ&lt;[]&gt; Agda.Builtin.Nat._+_ @1 @0
+              λ&lt;[_]&gt; Agda.Builtin.Nat._+_ (Agda.Builtin.Nat._+_ @2 @1) @0
 
 EtaExpansion.maybeIncInc:
   constant declaration:
@@ -840,14 +840,14 @@ EtaExpansion.maybeIncInc:
                                                                                       Builtin.
                                                                                       Nat.Nat{0}
     body: λ _ _ →
-            case&lt;EtaExpansion.Maybe{0},0&gt; @1 of
+            case&lt;EtaExpansion.Maybe{0},1&gt; @1 of
               λ&lt;[]&gt; @0
               λ&lt;[_]&gt;
-                case&lt;EtaExpansion.Maybe{0},0&gt; @0 of
+                case&lt;EtaExpansion.Maybe{0},1&gt; @0 of
                   λ&lt;[]&gt;
-                    Agda.Builtin.Nat.Ֆ_Ֆplus_ @1
+                    Agda.Builtin.Nat._+_ @1
                       (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0})
-                  λ&lt;[_]&gt; Agda.Builtin.Nat.Ֆ_Ֆplus_ @2 @0
+                  λ&lt;[_]&gt; Agda.Builtin.Nat._+_ @2 @0
 
 EtaExpansion.maybeIncInc2:
   constant declaration:
@@ -862,35 +862,34 @@ EtaExpansion.maybeIncInc2:
                                                                                                      Builtin.
                                                                                                      Nat.Nat{0}
     body: λ _ _ _ →
-            case&lt;EtaExpansion.Maybe{0},0&gt; @2 of
-              λ&lt;[]&gt; Agda.Builtin.Nat.Ֆ_Ֆplus_ @1 @0
+            case&lt;EtaExpansion.Maybe{0},1&gt; @2 of
+              λ&lt;[]&gt; Agda.Builtin.Nat._+_ @1 @0
               λ&lt;[_]&gt;
-                case&lt;EtaExpansion.Maybe{0},0&gt; @0 of
+                case&lt;EtaExpansion.Maybe{0},1&gt; @0 of
                   λ&lt;[]&gt;
-                    Agda.Builtin.Nat.Ֆ_Ֆplus_ (Agda.Builtin.Nat.Ֆ_Ֆplus_ @2 @1)
+                    Agda.Builtin.Nat._+_ (Agda.Builtin.Nat._+_ @2 @1)
                       (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0})
-                  λ&lt;[_]&gt;
-                    Agda.Builtin.Nat.Ֆ_Ֆplus_ (Agda.Builtin.Nat.Ֆ_Ֆplus_ @3 @2) @0
+                  λ&lt;[_]&gt; Agda.Builtin.Nat._+_ (Agda.Builtin.Nat._+_ @3 @2) @0
 
 EtaExpansion.test:
   constant declaration:
     type variables: []
     type: Agda.Builtin.Nat.Nat{0}
-    body: Agda.Builtin.Nat.Ֆ_Ֆplus_
-            (Agda.Builtin.Nat.Ֆ_Ֆplus_
-               (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                  (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                     (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                        (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                           (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                              (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                                 (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                                    (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                                       (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                                          (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                                             (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                                                (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                                                   (Agda.Builtin.Nat.Ֆ_Ֆplus_
+    body: Agda.Builtin.Nat._+_
+            (Agda.Builtin.Nat._+_
+               (Agda.Builtin.Nat._+_
+                  (Agda.Builtin.Nat._+_
+                     (Agda.Builtin.Nat._+_
+                        (Agda.Builtin.Nat._+_
+                           (Agda.Builtin.Nat._+_
+                              (Agda.Builtin.Nat._+_
+                                 (Agda.Builtin.Nat._+_
+                                    (Agda.Builtin.Nat._+_
+                                       (Agda.Builtin.Nat._+_
+                                          (Agda.Builtin.Nat._+_
+                                             (Agda.Builtin.Nat._+_
+                                                (Agda.Builtin.Nat._+_
+                                                   (Agda.Builtin.Nat._+_
                                                       (EtaExpansion.add
                                                          (Agda.Builtin.Nat.Nat{0}{1}
                                                             (Agda.Builtin.Nat.Nat{0}{1}
@@ -1503,7 +1502,7 @@ EtaExpansion.test:
                            (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0})
                            (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0})))
                      (EtaExpansion.maybeInc
-                        (EtaExpansion.Maybe{0}{1}
+                        (EtaExpansion.Maybe{0}{1} □
                            (Agda.Builtin.Nat.Nat{0}{1}
                               (Agda.Builtin.Nat.Nat{0}{1}
                                  (Agda.Builtin.Nat.Nat{0}{1}
@@ -1598,7 +1597,7 @@ EtaExpansion.test:
                         (Agda.Builtin.Nat.Nat{0}{1}
                            (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}))))
                   (EtaExpansion.maybeAddM
-                     (EtaExpansion.Maybe{0}{1}
+                     (EtaExpansion.Maybe{0}{1} □
                         (Agda.Builtin.Nat.Nat{0}{1}
                            (Agda.Builtin.Nat.Nat{0}{1}
                               (Agda.Builtin.Nat.Nat{0}{1}
@@ -1691,8 +1690,8 @@ EtaExpansion.test:
                      (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0})
                      (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0})))
                (EtaExpansion.maybeIncInc
-                  (EtaExpansion.Maybe{0}{1}
-                     (EtaExpansion.Maybe{0}{1}
+                  (EtaExpansion.Maybe{0}{1} □
+                     (EtaExpansion.Maybe{0}{1} □
                         (Agda.Builtin.Nat.Nat{0}{1}
                            (Agda.Builtin.Nat.Nat{0}{1}
                               (Agda.Builtin.Nat.Nat{0}{1}
@@ -1785,8 +1784,8 @@ EtaExpansion.test:
                   (Agda.Builtin.Nat.Nat{0}{1}
                      (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}))))
             (EtaExpansion.maybeIncInc2
-               (EtaExpansion.Maybe{0}{1}
-                  (EtaExpansion.Maybe{0}{1}
+               (EtaExpansion.Maybe{0}{1} □
+                  (EtaExpansion.Maybe{0}{1} □
                      (Agda.Builtin.Nat.Nat{0}{1}
                         (Agda.Builtin.Nat.Nat{0}{1}
                            (Agda.Builtin.Nat.Nat{0}{1}

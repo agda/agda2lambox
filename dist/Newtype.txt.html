@@ -36,20 +36,21 @@ Newtype.Newtype:
     type variables:  [A]
       constructors:
         mk (1 arg(s))
+          A : □
           _ : @0
 
 Newtype.k:
   constant declaration:
     type variables: [A]
     type: □ → Newtype.Newtype{0} @0 → Newtype.Newtype{0} @0 → @0
-    body: λ _ _ _ → case&lt;Newtype.Newtype{0},0&gt; @1 of λ&lt;[_]&gt; @0
+    body: λ _ _ _ → case&lt;Newtype.Newtype{0},1&gt; @1 of λ&lt;[_]&gt; @0
 
 Newtype.test:
   constant declaration:
     type variables: []
     type: Agda.Builtin.Nat.Nat{0}
     body: Newtype.k □
-            (Newtype.Newtype{0}{0}
+            (Newtype.Newtype{0}{0} □
                (Agda.Builtin.Nat.Nat{0}{1}
                   (Agda.Builtin.Nat.Nat{0}{1}
                      (Agda.Builtin.Nat.Nat{0}{1}

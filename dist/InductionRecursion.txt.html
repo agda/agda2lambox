@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>InductionRecursion.txt</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+</head>
+<body>
+<pre><code>LamBox.Empty:
+  mutual inductive(s):
+    Empty
+      constructors:
+
+Agda.Builtin.Nat.Nat:
+  mutual inductive(s):
+    Nat
+      constructors:
+        zero (0 arg(s))
+        suc (1 arg(s))
+
+InductionRecursion.List:
+  mutual inductive(s):
+    List
+      constructors:
+        [] (0 arg(s))
+        _∷_ (2 arg(s))
+
+InductionRecursion.Valid:
+  mutual inductive(s):
+    Valid
+      constructors: mk (3 arg(s))
+
+Agda.Builtin.Nat._+_:
+  constant declaration:
+    body: μrec [0] :=
+            0: λ _ _ →
+                 case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @1 of
+                   λ&lt;[]&gt; @0
+                   λ&lt;[_]&gt; Agda.Builtin.Nat.Nat{0}{1} (@3 @0 @1)
+
+InductionRecursion.step:
+  constant declaration:
+    body: λ _ _ →
+            λ _ _ _ →
+              case&lt;InductionRecursion.Valid{0},0&gt; @0 of
+                λ&lt;[_, _, _]&gt; Agda.Builtin.Nat._+_ @1 @0
+              @1
+              @0
+
+InductionRecursion.Trace:
+  mutual inductive(s):
+    Trace
+      constructors:
+        [] (0 arg(s))
+        _∷_⊣_ (4 arg(s))
+
+InductionRecursion.run:
+  constant declaration:
+    body: μrec [0] :=
+            0: λ _ → @1 □
+            1: λ _ _ →
+                 case&lt;InductionRecursion.Trace{0},0&gt; @0 of
+                   λ&lt;[]&gt; Agda.Builtin.Nat.Nat{0}{0}
+                   λ&lt;[_, _, _, _]&gt; InductionRecursion.step □ (@7 @3 @1) @0
+
+InductionRecursion.test:
+  constant declaration:
+    body: InductionRecursion.run □
+            (InductionRecursion.Trace{0}{1}
+               (InductionRecursion.List{0}{1} □ □
+                  (InductionRecursion.List{0}{0} □))
+               □
+               (InductionRecursion.Trace{0}{1} (InductionRecursion.List{0}{0} □) □
+                  InductionRecursion.Trace{0}{0}
+                  (InductionRecursion.Valid{0}{0} □
+                     (InductionRecursion.run □ InductionRecursion.Trace{0}{0})
+                     (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0})))
+               (InductionRecursion.Valid{0}{0} □
+                  (InductionRecursion.run □
+                     (InductionRecursion.Trace{0}{1} (InductionRecursion.List{0}{0} □) □
+                        InductionRecursion.Trace{0}{0}
+                        (InductionRecursion.Valid{0}{0} □
+                           (InductionRecursion.run □ InductionRecursion.Trace{0}{0})
+                           (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}))))
+                  (Agda.Builtin.Nat.Nat{0}{1}
+                     (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}))))
+
+InductionRecursion..extendedlambda1:
+  constant declaration:
+    body: μrec [1] :=
+            0: λ _ → @1 □
+            1: λ _ _ →
+                 case&lt;InductionRecursion.Trace{0},0&gt; @0 of
+                   λ&lt;[]&gt; Agda.Builtin.Nat.Nat{0}{0}
+                   λ&lt;[_, _, _, _]&gt; InductionRecursion.step □ (@7 @3 @1) @0
+
+InductionRecursion.Act:
+  mutual inductive(s):
+    Act
+      constructors: inc (0 arg(s))
+main program: [InductionRecursion.test]</code></pre>
+</body>
+</html>

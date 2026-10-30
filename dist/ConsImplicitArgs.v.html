@@ -92,19 +92,13 @@ Definition env : global_env :=
            Some
              (tApp
                 (tApp
-                   (tConst
-                      (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                       &quot;\1366_\1366plus_&quot;%bs))
+                   (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                    (tApp
                       (tApp
-                         (tConst
-                            (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                             &quot;\1366_\1366plus_&quot;%bs))
+                         (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                          (tApp
                             (tApp
-                               (tConst
-                                  (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                   &quot;\1366_\1366plus_&quot;%bs))
+                               (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                                (tApp
                                   (tConst (MPfile [&quot;ConsImplicitArgs&quot;%bs], &quot;fooToNat&quot;%bs)) tBox))
                             (tApp
@@ -571,13 +565,14 @@ Definition env : global_env :=
                     inductive_ind := 0 |})) |});
    (((MPfile [&quot;ConsImplicitArgs&quot;%bs], &quot;FooRA&quot;%bs), true),
     InductiveDecl
-      {| ind_finite := Finite; ind_npars := 0;
+      {| ind_finite := Finite; ind_npars := 1;
          ind_bodies :=
            [{| ind_name := &quot;FooRA&quot;%bs; ind_propositional := false;
                ind_kelim := IntoAny;
                ind_ctors :=
                  [((&quot;foo&quot;%bs,
-                    [(nNamed &quot;getBar&quot;%bs,
+                    [(nNamed &quot;A&quot;%bs, TBox);
+                     (nNamed &quot;getBar&quot;%bs,
                       TApp
                         (TApp
                            (TInd
@@ -594,10 +589,11 @@ Definition env : global_env :=
                      tvar_is_arity := true; tvar_is_sort := true |}] |}] |});
    (((MPfile [&quot;ConsImplicitArgs&quot;%bs], &quot;BarRA&quot;%bs), true),
     InductiveDecl
-      {| ind_finite := Finite; ind_npars := 0;
+      {| ind_finite := Finite; ind_npars := 1;
          ind_bodies :=
            [{| ind_name := &quot;BarRA&quot;%bs; ind_propositional := false;
-               ind_kelim := IntoAny; ind_ctors := [((&quot;bar&quot;%bs, []), 0)];
+               ind_kelim := IntoAny;
+               ind_ctors := [((&quot;bar&quot;%bs, [(nNamed &quot;A&quot;%bs, TBox)]), 0)];
                ind_projs := [];
                ind_type_vars :=
                  [{| tvar_name := nNamed &quot;\8467&quot;%bs; tvar_is_logical := true;
@@ -1072,15 +1068,19 @@ Definition env : global_env :=
       {| cst_body :=
            Some
              (tApp
-                (tConstruct
-                   {| inductive_mind := (MPfile [&quot;ConsImplicitArgs&quot;%bs], &quot;FooA&quot;%bs);
-                      inductive_ind := 0 |}
-                   0 [])
                 (tApp
                    (tConstruct
-                      {| inductive_mind := (MPfile [&quot;ConsImplicitArgs&quot;%bs], &quot;BarA&quot;%bs);
+                      {| inductive_mind := (MPfile [&quot;ConsImplicitArgs&quot;%bs], &quot;FooA&quot;%bs);
                          inductive_ind := 0 |}
                       0 [])
+                   tBox)
+                (tApp
+                   (tApp
+                      (tConstruct
+                         {| inductive_mind := (MPfile [&quot;ConsImplicitArgs&quot;%bs], &quot;BarA&quot;%bs);
+                            inductive_ind := 0 |}
+                         0 [])
+                      tBox)
                    (tApp
                       (tConstruct
                          {| inductive_mind :=
@@ -1534,13 +1534,13 @@ Definition env : global_env :=
                 (tCase
                    ({| inductive_mind := (MPfile [&quot;ConsImplicitArgs&quot;%bs], &quot;FooA&quot;%bs);
                        inductive_ind := 0 |},
-                    0)
+                    1)
                    (tRel 0)
                    [([nAnon],
                      tCase
                        ({| inductive_mind := (MPfile [&quot;ConsImplicitArgs&quot;%bs], &quot;BarA&quot;%bs);
                            inductive_ind := 0 |},
-                        0)
+                        1)
                        (tRel 0) [([nAnon], tRel 0)])]));
          cst_type :=
            ([],
@@ -1561,13 +1561,14 @@ Definition env : global_env :=
                     inductive_ind := 0 |})) |});
    (((MPfile [&quot;ConsImplicitArgs&quot;%bs], &quot;FooA&quot;%bs), true),
     InductiveDecl
-      {| ind_finite := Finite; ind_npars := 0;
+      {| ind_finite := Finite; ind_npars := 1;
          ind_bodies :=
            [{| ind_name := &quot;FooA&quot;%bs; ind_propositional := false;
                ind_kelim := IntoAny;
                ind_ctors :=
                  [((&quot;foo&quot;%bs,
-                    [(nAnon,
+                    [(nNamed &quot;A&quot;%bs, TBox);
+                     (nAnon,
                       TApp
                         (TApp
                            (TInd
@@ -1584,24 +1585,24 @@ Definition env : global_env :=
                      tvar_is_arity := true; tvar_is_sort := true |}] |}] |});
    (((MPfile [&quot;ConsImplicitArgs&quot;%bs], &quot;BarA&quot;%bs), true),
     InductiveDecl
-      {| ind_finite := Finite; ind_npars := 0;
+      {| ind_finite := Finite; ind_npars := 1;
          ind_bodies :=
            [{| ind_name := &quot;BarA&quot;%bs; ind_propositional := false;
                ind_kelim := IntoAny;
-               ind_ctors := [((&quot;bar&quot;%bs, [(nAnon, TVar 1)]), 1)]; ind_projs := [];
+               ind_ctors :=
+                 [((&quot;bar&quot;%bs, [(nNamed &quot;A&quot;%bs, TBox); (nAnon, TVar 1)]), 1)];
+               ind_projs := [];
                ind_type_vars :=
                  [{| tvar_name := nNamed &quot;\8467&quot;%bs; tvar_is_logical := true;
                      tvar_is_arity := false; tvar_is_sort := false |};
                   {| tvar_name := nNamed &quot;A&quot;%bs; tvar_is_logical := false;
                      tvar_is_arity := true; tvar_is_sort := true |}] |}] |});
-   (((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-      &quot;\1366_\1366plus_&quot;%bs),
-     true),
+   (((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
              (tFix
-                [{| dname := nNamed &quot;\1366_\1366plus_&quot;%bs;
+                [{| dname := nNamed &quot;_+_&quot;%bs;
                     dbody :=
                       tLambda
                         nAnon
@@ -2133,6 +2134,6 @@ Definition prog1 : program :=
   (ExAst.trans_env env,
    tConst (MPfile [&quot;ConsImplicitArgs&quot;%bs], &quot;test&quot;%bs)).
 
-Compute eval_program prog1.</code></pre>
+Compute show_program prog1.</code></pre>
 </body>
 </html>

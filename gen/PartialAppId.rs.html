@@ -1354,9 +1354,22 @@
 <span id="cb1-1276"><a href="#cb1-1276" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>PartialAppId_testIdF()))(</span>
 <span id="cb1-1277"><a href="#cb1-1277" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>PartialAppId_testIdF3())</span>
 <span id="cb1-1278"><a href="#cb1-1278" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-1279"><a href="#cb1-1279" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-1280"><a href="#cb1-1280" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb1-1281"><a href="#cb1-1281" aria-hidden="true"></a>  <span class="pp">println!</span>(<span class="st">&quot;{:?}&quot;</span><span class="op">,</span> <span class="pp">Program::</span>new()<span class="op">.</span>PartialAppId_test())<span class="op">;</span></span>
-<span id="cb1-1282"><a href="#cb1-1282" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb1-1279"><a href="#cb1-1279" aria-hidden="true"></a></span>
+<span id="cb1-1280"><a href="#cb1-1280" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> PartialAppId_id<span class="op">&lt;</span>A<span class="op">:</span> <span class="bu">Copy</span><span class="op">&gt;</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> ()<span class="op">,</span> x2<span class="op">:</span> A) <span class="op">-&gt;</span> A <span class="op">{</span></span>
+<span id="cb1-1281"><a href="#cb1-1281" aria-hidden="true"></a>  x2</span>
+<span id="cb1-1282"><a href="#cb1-1282" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-1283"><a href="#cb1-1283" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> PartialAppId_id__curried<span class="op">&lt;</span>A<span class="op">:</span> <span class="bu">Copy</span><span class="op">&gt;</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(()) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(A) <span class="op">-&gt;</span> A <span class="op">{</span></span>
+<span id="cb1-1284"><a href="#cb1-1284" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x<span class="op">|</span> <span class="op">{</span></span>
+<span id="cb1-1285"><a href="#cb1-1285" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x2<span class="op">|</span> <span class="op">{</span></span>
+<span id="cb1-1286"><a href="#cb1-1286" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>PartialAppId_id(</span>
+<span id="cb1-1287"><a href="#cb1-1287" aria-hidden="true"></a>        x<span class="op">,</span></span>
+<span id="cb1-1288"><a href="#cb1-1288" aria-hidden="true"></a>        x2)</span>
+<span id="cb1-1289"><a href="#cb1-1289" aria-hidden="true"></a>    <span class="op">}</span>)</span>
+<span id="cb1-1290"><a href="#cb1-1290" aria-hidden="true"></a>  <span class="op">}</span>)</span>
+<span id="cb1-1291"><a href="#cb1-1291" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-1292"><a href="#cb1-1292" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-1293"><a href="#cb1-1293" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb1-1294"><a href="#cb1-1294" aria-hidden="true"></a>  <span class="pp">println!</span>(<span class="st">&quot;{:?}&quot;</span><span class="op">,</span> <span class="pp">Program::</span>new()<span class="op">.</span>PartialAppId_test())<span class="op">;</span></span>
+<span id="cb1-1295"><a href="#cb1-1295" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
 </body>
 </html>

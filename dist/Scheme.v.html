@@ -38,7 +38,7 @@ Definition env : global_env :=
                               ({| inductive_mind :=
                                     (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
                                   inductive_ind := 0 |},
-                               0)
+                               1)
                               (tRel 0)
                               [([],
                                 tConstruct
@@ -84,7 +84,7 @@ Definition env : global_env :=
                 (tCase
                    ({| inductive_mind := (MPfile [&quot;Scheme&quot;%bs], &quot;\931&quot;%bs);
                        inductive_ind := 0 |},
-                    0)
+                    1)
                    (tRel 0) [([nAnon; nAnon], tRel 1)]));
          cst_type :=
            ([nNamed &quot;A&quot;%bs; nNamed &quot;B&quot;%bs],
@@ -120,7 +120,7 @@ Definition env : global_env :=
                      inductive_ind := 0 |})
                TBox)
             (TVar 0))));
-   (((MPfile [&quot;Scheme&quot;%bs], &quot;ListAlias\1366\&amp;27\1366&quot;%bs), true),
+   (((MPfile [&quot;Scheme&quot;%bs], &quot;ListAlias&#39;&quot;%bs), true),
     TypeAliasDecl
       (Some
          ([{| tvar_name := nAnon; tvar_is_logical := false;
@@ -155,14 +155,14 @@ Definition env : global_env :=
                       (tCase
                          ({| inductive_mind := (MPfile [&quot;Scheme&quot;%bs], &quot;\931&quot;%bs);
                              inductive_ind := 0 |},
-                          0)
+                          1)
                          (tRel 0)
                          [([nAnon; nAnon],
                            tCase
                              ({| inductive_mind :=
                                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
                                  inductive_ind := 0 |},
-                              0)
+                              1)
                              (tRel 1)
                              [([],
                                tCase
@@ -190,17 +190,21 @@ Definition env : global_env :=
            Some
              (tApp
                 (tApp
-                   (tConstruct
-                      {| inductive_mind := (MPfile [&quot;Scheme&quot;%bs], &quot;\931&quot;%bs);
-                         inductive_ind := 0 |}
-                      0 [])
+                   (tApp
+                      (tConstruct
+                         {| inductive_mind := (MPfile [&quot;Scheme&quot;%bs], &quot;\931&quot;%bs);
+                            inductive_ind := 0 |}
+                         0 [])
+                      tBox)
                    (tApp
                       (tApp
-                         (tConstruct
-                            {| inductive_mind :=
-                                 (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
-                               inductive_ind := 0 |}
-                            1 [])
+                         (tApp
+                            (tConstruct
+                               {| inductive_mind :=
+                                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
+                                  inductive_ind := 0 |}
+                               1 [])
+                            tBox)
                          (tApp
                             (tConstruct
                                {| inductive_mind :=
@@ -645,11 +649,13 @@ Definition env : global_env :=
                                                                                                                                                                0 |}
                                                                                                                                                           0
                                                                                                                                                           []))))))))))))))))))))))))))))))))))))))))))))
-                      (tConstruct
-                         {| inductive_mind :=
-                              (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
-                            inductive_ind := 0 |}
-                         0 [])))
+                      (tApp
+                         (tConstruct
+                            {| inductive_mind :=
+                                 (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
+                               inductive_ind := 0 |}
+                            0 [])
+                         tBox)))
                 tBox);
          cst_type :=
            ([],
@@ -670,7 +676,7 @@ Definition env : global_env :=
               tvar_is_arity := false; tvar_is_sort := false |}],
           TApp
             (TApp
-               (TConst (MPfile [&quot;Scheme&quot;%bs], &quot;\931\1366subsyntax&quot;%bs))
+               (TConst (MPfile [&quot;Scheme&quot;%bs], &quot;\931-syntax&quot;%bs))
                (TApp
                   (TApp
                      (TInd
@@ -680,7 +686,7 @@ Definition env : global_env :=
                      TBox)
                   (TVar 0)))
             TBox)));
-   (((MPfile [&quot;Scheme&quot;%bs], &quot;\931\1366subsyntax&quot;%bs), true),
+   (((MPfile [&quot;Scheme&quot;%bs], &quot;\931-syntax&quot;%bs), true),
     TypeAliasDecl
       (Some
          ([{| tvar_name := nNamed &quot;A&quot;%bs; tvar_is_logical := false;
@@ -696,13 +702,14 @@ Definition env : global_env :=
             TBox)));
    (((MPfile [&quot;Scheme&quot;%bs], &quot;\931&quot;%bs), true),
     InductiveDecl
-      {| ind_finite := Finite; ind_npars := 0;
+      {| ind_finite := Finite; ind_npars := 1;
          ind_bodies :=
            [{| ind_name := &quot;\931&quot;%bs; ind_propositional := false;
                ind_kelim := IntoAny;
                ind_ctors :=
-                 [((&quot;\1366_\1366\&amp;2c\1366_&quot;%bs,
-                    [(nNamed &quot;fst&quot;%bs, TVar 0); (nNamed &quot;snd&quot;%bs, TBox)]),
+                 [((&quot;_,_&quot;%bs,
+                    [(nNamed &quot;A&quot;%bs, TBox); (nNamed &quot;fst&quot;%bs, TVar 0);
+                     (nNamed &quot;snd&quot;%bs, TBox)]),
                    2)];
                ind_projs := [];
                ind_type_vars :=
@@ -712,14 +719,14 @@ Definition env : global_env :=
                      tvar_is_arity := true; tvar_is_sort := false |}] |}] |});
    (((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs), true),
     InductiveDecl
-      {| ind_finite := Finite; ind_npars := 0;
+      {| ind_finite := Finite; ind_npars := 1;
          ind_bodies :=
            [{| ind_name := &quot;List&quot;%bs; ind_propositional := false;
                ind_kelim := IntoAny;
                ind_ctors :=
-                 [((&quot;\1366\&amp;5b\1366\1366\&amp;5d\1366&quot;%bs, []), 0);
-                  ((&quot;\1366_\1366cons_&quot;%bs,
-                    [(nNamed &quot;x&quot;%bs, TVar 1);
+                 [((&quot;[]&quot;%bs, [(nNamed &quot;A&quot;%bs, TBox)]), 0);
+                  ((&quot;_\8759_&quot;%bs,
+                    [(nNamed &quot;A&quot;%bs, TBox); (nNamed &quot;x&quot;%bs, TVar 1);
                      (nNamed &quot;xs&quot;%bs,
                       TApp
                         (TApp
@@ -767,6 +774,6 @@ Compute @check_wf_glob eflags (ExAst.trans_env env).
 Definition prog1 : program :=
   (ExAst.trans_env env, tConst (MPfile [&quot;Scheme&quot;%bs], &quot;test&quot;%bs)).
 
-Compute eval_program prog1.</code></pre>
+Compute show_program prog1.</code></pre>
 </body>
 </html>

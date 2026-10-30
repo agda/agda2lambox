@@ -36,7 +36,7 @@ Definition env : global_env :=
                  {| inductive_mind :=
                       (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
                     inductive_ind := 0 |})) |});
-   (((MPfile [&quot;ErasedFields&quot;%bs], &quot;\1366_\1366plusFoo_&quot;%bs), true),
+   (((MPfile [&quot;ErasedFields&quot;%bs], &quot;_+Foo_&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
@@ -52,9 +52,7 @@ Definition env : global_env :=
                             0 [])
                          (tApp
                             (tApp
-                               (tConst
-                                  (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                   &quot;\1366_\1366plus_&quot;%bs))
+                               (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                                (tApp
                                   (tConst (MPfile [&quot;ErasedFields&quot;%bs; &quot;Foo&quot;%bs], &quot;foo&quot;%bs))
                                   (tRel 1)))
@@ -96,7 +94,7 @@ Definition env : global_env :=
                  {| inductive_mind :=
                       (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
                     inductive_ind := 0 |})) |});
-   (((MPfile [&quot;ErasedFields&quot;%bs], &quot;\1366_\1366plusBar_&quot;%bs), true),
+   (((MPfile [&quot;ErasedFields&quot;%bs], &quot;_+Bar_&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
@@ -125,8 +123,7 @@ Definition env : global_env :=
                                  (tApp
                                     (tApp
                                        (tConst
-                                          (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                           &quot;\1366_\1366plus_&quot;%bs))
+                                          (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                                        (tRel 3))
                                     (tRel 1)))
                               tBox)])])));
@@ -149,19 +146,13 @@ Definition env : global_env :=
            Some
              (tApp
                 (tApp
-                   (tConst
-                      (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                       &quot;\1366_\1366plus_&quot;%bs))
+                   (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                    (tApp
                       (tApp
-                         (tConst
-                            (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                             &quot;\1366_\1366plus_&quot;%bs))
+                         (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                          (tApp
                             (tApp
-                               (tConst
-                                  (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                   &quot;\1366_\1366plus_&quot;%bs))
+                               (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                                (tConst (MPfile [&quot;ErasedFields&quot;%bs], &quot;testFoo&quot;%bs)))
                             (tConst (MPfile [&quot;ErasedFields&quot;%bs], &quot;testBar&quot;%bs))))
                       (tApp
@@ -1108,9 +1099,7 @@ Definition env : global_env :=
                          0 [])
                       (tApp
                          (tApp
-                            (tConst
-                               (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                &quot;\1366_\1366plus_&quot;%bs))
+                            (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                             (tApp
                                (tConstruct
                                   {| inductive_mind :=
@@ -1552,9 +1541,7 @@ Definition env : global_env :=
            Some
              (tApp
                 (tApp
-                   (tConst
-                      (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                       &quot;\1366_\1366plus_&quot;%bs))
+                   (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                    (tApp
                       (tConstruct
                          {| inductive_mind :=
@@ -1922,14 +1909,12 @@ Definition env : global_env :=
               {| inductive_mind :=
                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
                  inductive_ind := 0 |}) |});
-   (((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-      &quot;\1366_\1366plus_&quot;%bs),
-     true),
+   (((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
              (tFix
-                [{| dname := nNamed &quot;\1366_\1366plus_&quot;%bs;
+                [{| dname := nNamed &quot;_+_&quot;%bs;
                     dbody :=
                       tLambda
                         nAnon
@@ -2035,6 +2020,6 @@ Definition prog1 : program :=
   (ExAst.trans_env env,
    tConst (MPfile [&quot;ErasedFields&quot;%bs], &quot;test&quot;%bs)).
 
-Compute eval_program prog1.</code></pre>
+Compute show_program prog1.</code></pre>
 </body>
 </html>

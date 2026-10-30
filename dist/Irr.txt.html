@@ -31,22 +31,22 @@ Irr.Vec:
   mutual inductive(s):
     Vec
       constructors:
-        Ֆ5bՖՖ5dՖ (0 arg(s))
-        Ֆ_Ֆcons_ (3 arg(s))
+        [] (0 arg(s))
+        _∷_ (3 arg(s))
 
 Irr.map:
   constant declaration:
     body: μrec [0] :=
             0: λ _ _ _ _ _ →
-                 case&lt;Irr.Vec{0},0&gt; @0 of
-                   λ&lt;[]&gt; Irr.Vec{0}{0}
-                   λ&lt;[_, _, _]&gt; Irr.Vec{0}{1} □ (@4 @1) (@8 □ □ □ @4 @0)
+                 case&lt;Irr.Vec{0},1&gt; @0 of
+                   λ&lt;[]&gt; Irr.Vec{0}{0} □
+                   λ&lt;[_, _, _]&gt; Irr.Vec{0}{1} □ □ (@4 @1) (@8 □ □ □ @4 @0)
 
 Irr.xs:
   constant declaration:
-    body: Irr.Vec{0}{1} □
+    body: Irr.Vec{0}{1} □ □
             (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0})
-            (Irr.Vec{0}{1} □ Agda.Builtin.Nat.Nat{0}{0} Irr.Vec{0}{0})
+            (Irr.Vec{0}{1} □ □ Agda.Builtin.Nat.Nat{0}{0} (Irr.Vec{0}{0} □))
 
 Irr.test:
   constant declaration:

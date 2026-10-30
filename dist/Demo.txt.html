@@ -24,8 +24,8 @@ Demo.Bool:
   mutual inductive(s):
     Bool
       constructors:
-        r#false (0 arg(s))
-        r#true (0 arg(s))
+        false (0 arg(s))
+        true (0 arg(s))
 
 Demo.List:
   mutual inductive(s):
@@ -36,10 +36,10 @@ Demo.List:
 
 Demo.test:
   constant declaration:
-    body: Demo.List{0}{1} Demo.Bool{0}{1}
-            (Demo.List{0}{1} Demo.Bool{0}{0}
-               (Demo.List{0}{1} Demo.Bool{0}{1}
-                  (Demo.List{0}{1} Demo.Bool{0}{0} Demo.List{0}{0})))
+    body: Demo.List{0}{1} □ Demo.Bool{0}{1}
+            (Demo.List{0}{1} □ Demo.Bool{0}{0}
+               (Demo.List{0}{1} □ Demo.Bool{0}{1}
+                  (Demo.List{0}{1} □ Demo.Bool{0}{0} (Demo.List{0}{0} □))))
 
 Demo.or:
   constant declaration:

@@ -31,17 +31,17 @@ Agda.Builtin.List.List:
   mutual inductive(s):
     List
       constructors:
-        Ֆ5bՖՖ5dՖ (0 arg(s))
-        Ֆ_Ֆcons_ (2 arg(s))
+        [] (0 arg(s))
+        _∷_ (2 arg(s))
 
-Unicode.sՖ21d2ՖoՖ2081Ֆ:
+Unicode.s⇒o₁:
   constant declaration:
     body: λ _ →
-            Agda.Builtin.List.List{0}{1}
+            Agda.Builtin.List.List{0}{1} □
               (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0})
-              Agda.Builtin.List.List{0}{0}
+              (Agda.Builtin.List.List{0}{0} □)
 
-Unicode.test: constant declaration: body: Unicode.sՖ21d2ՖoՖ2081Ֆ □
+Unicode.test: constant declaration: body: Unicode.s⇒o₁ □
 main program: [Unicode.test]</code></pre>
 </body>
 </html>

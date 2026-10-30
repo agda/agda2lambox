@@ -36,11 +36,15 @@ Either.Either:
     type variables:  [A, B]
       constructors:
         Left (1 arg(s))
+          A : □
+          B : □
           _ : @0
         Right (1 arg(s))
+          A : □
+          B : □
           _ : @1
 
-Agda.Builtin.Nat.Ֆ_Ֆplus_:
+Agda.Builtin.Nat._+_:
   constant declaration:
     type variables: []
     type: (Agda.Builtin.Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → Agda.
@@ -57,7 +61,7 @@ Either.fromEitherAB:
     type variables: [A, B]
     type: □ → □ → @0 → Either.Either{0} @0 @1 → @0
     body: λ _ _ _ _ →
-            case&lt;Either.Either{0},0&gt; @0 of
+            case&lt;Either.Either{0},2&gt; @0 of
               λ&lt;[_]&gt; @0
               λ&lt;[_]&gt; @2
 
@@ -66,7 +70,7 @@ Either.fromEither:
     type variables: [A, B]
     type: □ → @0 → □ → Either.Either{0} @0 @1 → @0
     body: λ _ _ _ _ →
-            case&lt;Either.Either{0},0&gt; @0 of
+            case&lt;Either.Either{0},2&gt; @0 of
               λ&lt;[_]&gt; @0
               λ&lt;[_]&gt; @3
 
@@ -76,21 +80,23 @@ Either.OnlyLeft:
     type variables:  [A, B]
       constructors:
         Left (1 arg(s))
+          A : □
+          B : □
           _ : @0
 
 Either.fromOnlyLeft:
   constant declaration:
     type variables: [A, B]
     type: □ → □ → Either.OnlyLeft{0} @0 @1 → @0
-    body: λ _ _ _ → case&lt;Either.OnlyLeft{0},0&gt; @0 of λ&lt;[_]&gt; @0
+    body: λ _ _ _ → case&lt;Either.OnlyLeft{0},2&gt; @0 of λ&lt;[_]&gt; @0
 
 Either.fromOnlyLeft2:
   constant declaration:
     type variables: [A, B, C]
     type: □ → □ → □ → Either.OnlyLeft{0} (Either.OnlyLeft{0} @0 @1) @2 → @0
     body: λ _ _ _ _ →
-            case&lt;Either.OnlyLeft{0},0&gt; @0 of
-              λ&lt;[_]&gt; case&lt;Either.OnlyLeft{0},0&gt; @0 of λ&lt;[_]&gt; @0
+            case&lt;Either.OnlyLeft{0},2&gt; @0 of
+              λ&lt;[_]&gt; case&lt;Either.OnlyLeft{0},2&gt; @0 of λ&lt;[_]&gt; @0
 
 Either.OnlyLeftR:
   mutual inductive(s):
@@ -98,13 +104,15 @@ Either.OnlyLeftR:
     type variables:  [A, B]
       constructors:
         constructor (1 arg(s))
+          A : □
+          B : □
           left : @0
 
 Either.OnlyLeftR.left:
   constant declaration:
     type variables: [A, B]
     type: Either.OnlyLeftR{0} @0 @1 → @0
-    body: λ _ → case&lt;Either.OnlyLeftR{0},0&gt; @0 of λ&lt;[_]&gt; @0
+    body: λ _ → case&lt;Either.OnlyLeftR{0},2&gt; @0 of λ&lt;[_]&gt; @0
 
 Either.fromOnlyLeftR2:
   constant declaration:
@@ -116,10 +124,10 @@ Either.test:
   constant declaration:
     type variables: []
     type: Agda.Builtin.Nat.Nat{0}
-    body: Agda.Builtin.Nat.Ֆ_Ֆplus_
-            (Agda.Builtin.Nat.Ֆ_Ֆplus_
-               (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                  (Agda.Builtin.Nat.Ֆ_Ֆplus_
+    body: Agda.Builtin.Nat._+_
+            (Agda.Builtin.Nat._+_
+               (Agda.Builtin.Nat._+_
+                  (Agda.Builtin.Nat._+_
                      (Either.fromEitherAB □ □
                         (Agda.Builtin.Nat.Nat{0}{1}
                            (Agda.Builtin.Nat.Nat{0}{1}
@@ -216,9 +224,9 @@ Either.test:
                                                                                                                                                       Agda.
                                                                                                                                                       Builtin.
                                                                                                                                                       Nat.Nat{0}{0}))))))))))))))))))))))))))))))))))))))))))
-                        (Either.Either{0}{0} Agda.Builtin.Nat.Nat{0}{0}))
+                        (Either.Either{0}{0} □ □ Agda.Builtin.Nat.Nat{0}{0}))
                      (Either.fromEither □ Agda.Builtin.Nat.Nat{0}{0} □
-                        (Either.Either{0}{1}
+                        (Either.Either{0}{1} □ □
                            (Agda.Builtin.Nat.Nat{0}{1}
                               (Agda.Builtin.Nat.Nat{0}{1}
                                  (Agda.Builtin.Nat.Nat{0}{1}
@@ -317,13 +325,13 @@ Either.test:
                                                                                                                                                          Builtin.
                                                                                                                                                          Nat.Nat{0}{0})))))))))))))))))))))))))))))))))))))))))))))
                   (Either.fromOnlyLeft □ □
-                     (Either.OnlyLeft{0}{0} Agda.Builtin.Nat.Nat{0}{0})))
+                     (Either.OnlyLeft{0}{0} □ □ Agda.Builtin.Nat.Nat{0}{0})))
                (Either.fromOnlyLeft2 □ □ □
-                  (Either.OnlyLeft{0}{0}
-                     (Either.OnlyLeft{0}{0} Agda.Builtin.Nat.Nat{0}{0}))))
+                  (Either.OnlyLeft{0}{0} □ □
+                     (Either.OnlyLeft{0}{0} □ □ Agda.Builtin.Nat.Nat{0}{0}))))
             (Either.fromOnlyLeftR2 □ □ □
-               (Either.OnlyLeftR{0}{0}
-                  (Either.OnlyLeftR{0}{0}
+               (Either.OnlyLeftR{0}{0} □ □
+                  (Either.OnlyLeftR{0}{0} □ □
                      (Agda.Builtin.Nat.Nat{0}{1}
                         (Agda.Builtin.Nat.Nat{0}{1}
                            (Agda.Builtin.Nat.Nat{0}{1}

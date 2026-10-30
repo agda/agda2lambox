@@ -125,12 +125,12 @@ TypeAliases.testAlias:
                                                                                                                                        Builtin.
                                                                                                                                        Nat.Nat{0}{0})))))))))))))))))))))))))))))))))))))))))
 
-TypeAliases.ℕՖtoℕ:
+TypeAliases.ℕ→ℕ:
   type alias:
     type variables: []
     type: TypeAliases.ℕ → TypeAliases.ℕ
 
-Agda.Builtin.Nat.Ֆ_Ֆplus_:
+Agda.Builtin.Nat._+_:
   constant declaration:
     type variables: []
     type: (Agda.Builtin.Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → Agda.
@@ -145,9 +145,9 @@ Agda.Builtin.Nat.Ֆ_Ֆplus_:
 TypeAliases.incr:
   constant declaration:
     type variables: []
-    type: TypeAliases.ℕՖtoℕ
+    type: TypeAliases.ℕ→ℕ
     body: λ _ →
-            Agda.Builtin.Nat.Ֆ_Ֆplus_ @0
+            Agda.Builtin.Nat._+_ @0
               (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0})
 
 TypeAliases.testAliasF:
@@ -244,9 +244,9 @@ TypeAliases.test:
   constant declaration:
     type variables: []
     type: Agda.Builtin.Nat.Nat{0}
-    body: Agda.Builtin.Nat.Ֆ_Ֆplus_
-            (Agda.Builtin.Nat.Ֆ_Ֆplus_
-               (Agda.Builtin.Nat.Ֆ_Ֆplus_ (TypeAliases.testAlias)
+    body: Agda.Builtin.Nat._+_
+            (Agda.Builtin.Nat._+_
+               (Agda.Builtin.Nat._+_ (TypeAliases.testAlias)
                   (TypeAliases.testAliasF))
                (λ _ _ → @0 □
                   (Agda.Builtin.Nat.Nat{0}{1}
@@ -436,10 +436,22 @@ TypeAliases.Const:
     type variables: [_, _]
     type: @0
 
+TypeAliases.idK:
+  constant declaration:
+    type variables: [A]
+    type: □ → TypeAliases.Const @0 @0 → TypeAliases.Const @0 @0
+    body: λ _ _ → @0
+
 TypeAliases.Id:
   type alias:
     type variables: [_]
     type: @0
+
+TypeAliases.id:
+  constant declaration:
+    type variables: [A]
+    type: □ → TypeAliases.Id @0 → TypeAliases.Id @0
+    body: λ _ _ → @0
 main program: [TypeAliases.test]</code></pre>
 </body>
 </html>

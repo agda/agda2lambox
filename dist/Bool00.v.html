@@ -29,19 +29,13 @@ Definition env : global_env :=
            Some
              (tApp
                 (tApp
-                   (tConst
-                      (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                       &quot;\1366_\1366plus_&quot;%bs))
+                   (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                    (tApp
                       (tApp
-                         (tConst
-                            (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                             &quot;\1366_\1366plus_&quot;%bs))
+                         (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                          (tApp
                             (tApp
-                               (tConst
-                                  (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                   &quot;\1366_\1366plus_&quot;%bs))
+                               (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                                (tApp
                                   (tConst (MPfile [&quot;Bool00&quot;%bs], &quot;bool2Nat&quot;%bs))
                                   (tConst (MPfile [&quot;Bool00&quot;%bs], &quot;testBool&quot;%bs))))
@@ -1569,15 +1563,15 @@ Definition env : global_env :=
            Some
              (tApp
                 (tApp
-                   (tConst (MPfile [&quot;Bool00&quot;%bs], &quot;\1366_\1366\&amp;2227\1366_&quot;%bs))
-                   (tConst (MPfile [&quot;Bool00&quot;%bs], &quot;r\1366hshtrue&quot;%bs)))
-                (tConst (MPfile [&quot;Bool00&quot;%bs], &quot;r\1366hshfalse&quot;%bs)));
+                   (tConst (MPfile [&quot;Bool00&quot;%bs], &quot;_\8743_&quot;%bs))
+                   (tConst (MPfile [&quot;Bool00&quot;%bs], &quot;r#true&quot;%bs)))
+                (tConst (MPfile [&quot;Bool00&quot;%bs], &quot;r#false&quot;%bs)));
          cst_type :=
            ([],
             TInd
               {| inductive_mind := (MPfile [&quot;Bool00&quot;%bs], &quot;Bool&quot;%bs);
                  inductive_ind := 0 |}) |});
-   (((MPfile [&quot;Bool00&quot;%bs], &quot;r\1366hshfalse&quot;%bs), true),
+   (((MPfile [&quot;Bool00&quot;%bs], &quot;r#false&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
@@ -1590,7 +1584,7 @@ Definition env : global_env :=
             TInd
               {| inductive_mind := (MPfile [&quot;Bool00&quot;%bs], &quot;Bool&quot;%bs);
                  inductive_ind := 0 |}) |});
-   (((MPfile [&quot;Bool00&quot;%bs], &quot;r\1366hshtrue&quot;%bs), true),
+   (((MPfile [&quot;Bool00&quot;%bs], &quot;r#true&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
@@ -1603,7 +1597,7 @@ Definition env : global_env :=
             TInd
               {| inductive_mind := (MPfile [&quot;Bool00&quot;%bs], &quot;Bool&quot;%bs);
                  inductive_ind := 0 |}) |});
-   (((MPfile [&quot;Bool00&quot;%bs], &quot;\1366_\1366\&amp;2227\1366_&quot;%bs), true),
+   (((MPfile [&quot;Bool00&quot;%bs], &quot;_\8743_&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
@@ -1654,16 +1648,14 @@ Definition env : global_env :=
          ind_bodies :=
            [{| ind_name := &quot;Bool&quot;%bs; ind_propositional := false;
                ind_kelim := IntoAny;
-               ind_ctors := [((&quot;r#false&quot;%bs, []), 0); ((&quot;r#true&quot;%bs, []), 0)];
+               ind_ctors := [((&quot;false&quot;%bs, []), 0); ((&quot;true&quot;%bs, []), 0)];
                ind_projs := []; ind_type_vars := [] |}] |});
-   (((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-      &quot;\1366_\1366plus_&quot;%bs),
-     true),
+   (((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
              (tFix
-                [{| dname := nNamed &quot;\1366_\1366plus_&quot;%bs;
+                [{| dname := nNamed &quot;_+_&quot;%bs;
                     dbody :=
                       tLambda
                         nAnon
@@ -1731,6 +1723,6 @@ Compute @check_wf_glob eflags (ExAst.trans_env env).
 Definition prog1 : program :=
   (ExAst.trans_env env, tConst (MPfile [&quot;Bool00&quot;%bs], &quot;test&quot;%bs)).
 
-Compute eval_program prog1.</code></pre>
+Compute show_program prog1.</code></pre>
 </body>
 </html>

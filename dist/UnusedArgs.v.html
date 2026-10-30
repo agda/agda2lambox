@@ -23,15 +23,32 @@ From Agda2Lambox      Require Import CheckWF Eval.
 Import ListNotations.
 
 Definition env : global_env :=
-  [(((MPfile [&quot;UnusedArgs&quot;%bs], &quot;test&quot;%bs), true),
+  [(((MPfile [&quot;UnusedArgs&quot;%bs], &quot;constNat&quot;%bs), true),
+    ConstantDecl
+      {| cst_body := Some (tLambda nAnon (tLambda nAnon (tRel 1)));
+         cst_type :=
+           ([],
+            TArr
+              (TInd
+                 {| inductive_mind :=
+                      (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                    inductive_ind := 0 |})
+              (TArr
+                 (TInd
+                    {| inductive_mind :=
+                         (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                       inductive_ind := 0 |})
+                 (TInd
+                    {| inductive_mind :=
+                         (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                       inductive_ind := 0 |}))) |});
+   (((MPfile [&quot;UnusedArgs&quot;%bs], &quot;test&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
              (tApp
                 (tApp
-                   (tConst
-                      (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                       &quot;\1366_\1366plus_&quot;%bs))
+                   (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                    (tApp
                       (tApp
                          (tLambda nAnon (tLambda nAnon (tRel 1)))
@@ -912,14 +929,12 @@ Definition env : global_env :=
               {| inductive_mind :=
                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
                  inductive_ind := 0 |}) |});
-   (((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-      &quot;\1366_\1366plus_&quot;%bs),
-     true),
+   (((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
              (tFix
-                [{| dname := nNamed &quot;\1366_\1366plus_&quot;%bs;
+                [{| dname := nNamed &quot;_+_&quot;%bs;
                     dbody :=
                       tLambda
                         nAnon
@@ -1438,6 +1453,6 @@ Definition prog1 : program :=
   (ExAst.trans_env env,
    tConst (MPfile [&quot;UnusedArgs&quot;%bs], &quot;test&quot;%bs)).
 
-Compute eval_program prog1.</code></pre>
+Compute show_program prog1.</code></pre>
 </body>
 </html>

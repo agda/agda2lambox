@@ -84,39 +84,39 @@
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a>  <span class="op">|</span> <span class="dt">Suc</span> <span class="dt">Nat</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a><span class="kw">type</span> <span class="dt">Maybe</span> <span class="fu">a</span> <span class="fu">a2</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a>  <span class="op">=</span> <span class="dt">Nothing</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a>  <span class="op">|</span> <span class="dt">Just</span> <span class="fu">a2</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a>  <span class="op">=</span> <span class="dt">Nothing</span> ()</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a>  <span class="op">|</span> <span class="dt">Just</span> () <span class="fu">a2</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a><span class="fu">nat_Builtin_Agda__UU000556__UU000556plus_</span> : <span class="dt">Nat</span> <span class="op">-&gt;</span> <span class="dt">Nat</span> <span class="op">-&gt;</span> <span class="dt">Nat</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true"></a><span class="fu">nat_Builtin_Agda__UU000556__UU000556plus_</span> <span class="fu">x</span> <span class="fu">x2</span> <span class="op">=</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a><span class="fu">nat_Builtin_Agda___UU2b_</span> : <span class="dt">Nat</span> <span class="op">-&gt;</span> <span class="dt">Nat</span> <span class="op">-&gt;</span> <span class="dt">Nat</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true"></a><span class="fu">nat_Builtin_Agda___UU2b_</span> <span class="fu">x</span> <span class="fu">x2</span> <span class="op">=</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true"></a>  <span class="cf">case</span> <span class="fu">x</span> <span class="cf">of</span></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true"></a>    <span class="dt">Zero</span> <span class="op">-&gt;</span></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true"></a>      <span class="fu">x2</span></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true"></a>    <span class="dt">Suc</span> <span class="fu">x3</span> <span class="op">-&gt;</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true"></a>      <span class="dt">Suc</span> (<span class="fu">nat_Builtin_Agda__UU000556__UU000556plus_</span> <span class="fu">x3</span> <span class="fu">x2</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true"></a>      <span class="dt">Suc</span> (<span class="fu">nat_Builtin_Agda___UU2b_</span> <span class="fu">x3</span> <span class="fu">x2</span>)</span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true"></a></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true"></a><span class="fu">maybe_m0</span> : <span class="dt">Maybe</span> () <span class="dt">Nat</span></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true"></a><span class="fu">maybe_m0</span> <span class="op">=</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true"></a>  <span class="dt">Nothing</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true"></a>  <span class="dt">Nothing</span> ()</span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true"></a></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true"></a><span class="fu">maybe_m1</span> : <span class="dt">Maybe</span> () <span class="dt">Nat</span></span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true"></a><span class="fu">maybe_m1</span> <span class="op">=</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true"></a>  <span class="dt">Just</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> <span class="dt">Zero</span>))))))</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true"></a>  <span class="dt">Just</span> () (<span class="dt">Suc</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> <span class="dt">Zero</span>))))))</span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true"></a></span>
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true"></a><span class="fu">maybe_fromMaybeNat</span> : <span class="dt">Maybe</span> () <span class="dt">Nat</span> <span class="op">-&gt;</span> <span class="dt">Nat</span></span>
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true"></a><span class="fu">maybe_fromMaybeNat</span> <span class="fu">x</span> <span class="op">=</span></span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true"></a>  <span class="cf">case</span> <span class="fu">x</span> <span class="cf">of</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true"></a>    <span class="dt">Nothing</span> <span class="op">-&gt;</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true"></a>    <span class="dt">Nothing</span> <span class="fu">_</span> <span class="op">-&gt;</span></span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true"></a>      <span class="dt">Suc</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> <span class="dt">Zero</span>)))))</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true"></a>    <span class="dt">Just</span> <span class="fu">x2</span> <span class="op">-&gt;</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true"></a>    <span class="dt">Just</span> <span class="fu">_</span> <span class="fu">x2</span> <span class="op">-&gt;</span></span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true"></a>      <span class="fu">x2</span></span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true"></a></span>
 <span id="cb1-36"><a href="#cb1-36" aria-hidden="true"></a><span class="fu">maybe_fromMaybe</span> : () <span class="op">-&gt;</span> () <span class="op">-&gt;</span> <span class="fu">a</span> <span class="op">-&gt;</span> <span class="dt">Maybe</span> () <span class="fu">a</span> <span class="op">-&gt;</span> <span class="fu">a</span></span>
 <span id="cb1-37"><a href="#cb1-37" aria-hidden="true"></a><span class="fu">maybe_fromMaybe</span> <span class="fu">x</span> <span class="fu">x2</span> <span class="fu">x3</span> <span class="fu">x4</span> <span class="op">=</span></span>
 <span id="cb1-38"><a href="#cb1-38" aria-hidden="true"></a>  <span class="cf">case</span> <span class="fu">x4</span> <span class="cf">of</span></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true"></a>    <span class="dt">Nothing</span> <span class="op">-&gt;</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true"></a>    <span class="dt">Nothing</span> <span class="fu">_</span> <span class="op">-&gt;</span></span>
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true"></a>      <span class="fu">x3</span></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true"></a>    <span class="dt">Just</span> <span class="fu">x5</span> <span class="op">-&gt;</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true"></a>    <span class="dt">Just</span> <span class="fu">_</span> <span class="fu">x5</span> <span class="op">-&gt;</span></span>
 <span id="cb1-42"><a href="#cb1-42" aria-hidden="true"></a>      <span class="fu">x5</span></span>
 <span id="cb1-43"><a href="#cb1-43" aria-hidden="true"></a></span>
 <span id="cb1-44"><a href="#cb1-44" aria-hidden="true"></a><span class="fu">maybe_toNat</span> : <span class="dt">Maybe</span> () <span class="dt">Nat</span> <span class="op">-&gt;</span> <span class="dt">Nat</span></span>
@@ -125,6 +125,10 @@
 <span id="cb1-47"><a href="#cb1-47" aria-hidden="true"></a></span>
 <span id="cb1-48"><a href="#cb1-48" aria-hidden="true"></a><span class="fu">maybe_test</span> : <span class="dt">Nat</span></span>
 <span id="cb1-49"><a href="#cb1-49" aria-hidden="true"></a><span class="fu">maybe_test</span> <span class="op">=</span></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true"></a>  <span class="fu">nat_Builtin_Agda__UU000556__UU000556plus_</span> (<span class="fu">nat_Builtin_Agda__UU000556__UU000556plus_</span> (<span class="fu">nat_Builtin_Agda__UU000556__UU000556plus_</span> (<span class="fu">nat_Builtin_Agda__UU000556__UU000556plus_</span> (<span class="fu">nat_Builtin_Agda__UU000556__UU000556plus_</span> (<span class="fu">nat_Builtin_Agda__UU000556__UU000556plus_</span> (<span class="fu">maybe_toNat</span> ((\<span class="fu">x</span> <span class="fu">x2</span> <span class="fu">x3</span> <span class="op">-&gt;</span> <span class="fu">x3</span>) () () (<span class="dt">Just</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> <span class="dt">Zero</span>))))))))) (<span class="fu">maybe_toNat</span> ((\<span class="fu">x</span> <span class="fu">x2</span> <span class="fu">x3</span> <span class="op">-&gt;</span> <span class="fu">x3</span>) () () <span class="fu">maybe_m1</span>))) (<span class="fu">maybe_fromMaybeNat</span> <span class="dt">Nothing</span>)) (<span class="fu">maybe_fromMaybeNat</span> <span class="fu">maybe_m0</span>)) (<span class="fu">maybe_fromMaybeNat</span> <span class="fu">maybe_m1</span>)) (<span class="fu">maybe_fromMaybe</span> () () (<span class="dt">Suc</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> <span class="dt">Zero</span>)))))) <span class="fu">maybe_m0</span>)) (<span class="fu">maybe_fromMaybe</span> () () <span class="dt">Zero</span> <span class="fu">maybe_m1</span>)</span></code></pre></div>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true"></a>  <span class="fu">nat_Builtin_Agda___UU2b_</span> (<span class="fu">nat_Builtin_Agda___UU2b_</span> (<span class="fu">nat_Builtin_Agda___UU2b_</span> (<span class="fu">nat_Builtin_Agda___UU2b_</span> (<span class="fu">nat_Builtin_Agda___UU2b_</span> (<span class="fu">nat_Builtin_Agda___UU2b_</span> (<span class="fu">maybe_toNat</span> ((\<span class="fu">x</span> <span class="fu">x2</span> <span class="fu">x3</span> <span class="op">-&gt;</span> <span class="fu">x3</span>) () () (<span class="dt">Just</span> () (<span class="dt">Suc</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> <span class="dt">Zero</span>))))))))) (<span class="fu">maybe_toNat</span> ((\<span class="fu">x</span> <span class="fu">x2</span> <span class="fu">x3</span> <span class="op">-&gt;</span> <span class="fu">x3</span>) () () <span class="fu">maybe_m1</span>))) (<span class="fu">maybe_fromMaybeNat</span> (<span class="dt">Nothing</span> ()))) (<span class="fu">maybe_fromMaybeNat</span> <span class="fu">maybe_m0</span>)) (<span class="fu">maybe_fromMaybeNat</span> <span class="fu">maybe_m1</span>)) (<span class="fu">maybe_fromMaybe</span> () () (<span class="dt">Suc</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> <span class="dt">Zero</span>)))))) <span class="fu">maybe_m0</span>)) (<span class="fu">maybe_fromMaybe</span> () () <span class="dt">Zero</span> <span class="fu">maybe_m1</span>)</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true"></a><span class="fu">maybe_idMaybe</span> : () <span class="op">-&gt;</span> () <span class="op">-&gt;</span> <span class="dt">Maybe</span> () <span class="fu">a</span> <span class="op">-&gt;</span> <span class="dt">Maybe</span> () <span class="fu">a</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true"></a><span class="fu">maybe_idMaybe</span> <span class="fu">x</span> <span class="fu">x2</span> <span class="fu">x3</span> <span class="op">=</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true"></a>  <span class="fu">x3</span></span></code></pre></div>
 </body>
 </html>

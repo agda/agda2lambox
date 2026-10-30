@@ -36,7 +36,7 @@ Definition env : global_env :=
             TInd
               {| inductive_mind := (MPfile [&quot;Where&quot;%bs], &quot;II&quot;%bs);
                  inductive_ind := 0 |}) |});
-   (((MPfile [&quot;Where&quot;%bs], &quot;ii\1366\&amp;27\1366&quot;%bs), true),
+   (((MPfile [&quot;Where&quot;%bs], &quot;ii&#39;&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
@@ -49,7 +49,7 @@ Definition env : global_env :=
             TInd
               {| inductive_mind := (MPfile [&quot;Where&quot;%bs], &quot;II&quot;%bs);
                  inductive_ind := 0 |}) |});
-   (((MPfile [&quot;Where&quot;%bs], &quot;II\1366toII\1366\&amp;27\1366&quot;%bs), true),
+   (((MPfile [&quot;Where&quot;%bs], &quot;II\8594II&#39;&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
@@ -79,9 +79,7 @@ Definition env : global_env :=
               (TInd
                  {| inductive_mind := (MPfile [&quot;Where&quot;%bs], &quot;II&quot;%bs);
                     inductive_ind := 0 |})) |});
-   (((MPfile [&quot;Where&quot;%bs],
-      &quot;II\1366toII\1366\&amp;27\1366\1366\&amp;27\1366&quot;%bs),
-     true),
+   (((MPfile [&quot;Where&quot;%bs], &quot;II\8594II&#39;&#39;&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
@@ -119,9 +117,7 @@ Definition env : global_env :=
               (TInd
                  {| inductive_mind := (MPfile [&quot;Where&quot;%bs], &quot;II&quot;%bs);
                     inductive_ind := 0 |})) |});
-   (((MPfile [&quot;Where&quot;%bs],
-      &quot;II\1366toII\1366\&amp;27\1366\1366\&amp;27\1366\1366\&amp;27\1366&quot;%bs),
-     true),
+   (((MPfile [&quot;Where&quot;%bs], &quot;II\8594II&#39;&#39;&#39;&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
@@ -149,7 +145,7 @@ Definition env : global_env :=
                                       inductive_ind := 0 |}
                                    0 [])])))
                       (tRel 0))
-                   (tApp (tConst (MPfile [&quot;Where&quot;%bs], &quot;II\1366toII&quot;%bs)) (tRel 0))));
+                   (tApp (tConst (MPfile [&quot;Where&quot;%bs], &quot;II\8594II&quot;%bs)) (tRel 0))));
          cst_type :=
            ([],
             TArr
@@ -167,7 +163,7 @@ Definition env : global_env :=
             TInd
               {| inductive_mind := (MPfile [&quot;Where&quot;%bs], &quot;I&quot;%bs);
                  inductive_ind := 0 |}) |});
-   (((MPfile [&quot;Where&quot;%bs], &quot;I\1366toII&quot;%bs), true),
+   (((MPfile [&quot;Where&quot;%bs], &quot;I\8594II&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
@@ -186,7 +182,7 @@ Definition env : global_env :=
               (TInd
                  {| inductive_mind := (MPfile [&quot;Where&quot;%bs], &quot;II&quot;%bs);
                     inductive_ind := 0 |})) |});
-   (((MPfile [&quot;Where&quot;%bs], &quot;II\1366toI&quot;%bs), true),
+   (((MPfile [&quot;Where&quot;%bs], &quot;II\8594I&quot;%bs), true),
     ConstantDecl
       {| cst_body := Some tBox;
          cst_type :=
@@ -203,33 +199,24 @@ Definition env : global_env :=
       {| ind_finite := Finite; ind_npars := 0;
          ind_bodies :=
            [{| ind_name := &quot;I&quot;%bs; ind_propositional := false;
-               ind_kelim := IntoAny;
-               ind_ctors := [((&quot;\1366\&amp;25c7\1366&quot;%bs, []), 0)]; ind_projs := [];
-               ind_type_vars := [] |}] |});
+               ind_kelim := IntoAny; ind_ctors := [((&quot;\9671&quot;%bs, []), 0)];
+               ind_projs := []; ind_type_vars := [] |}] |});
    (((MPfile [&quot;Where&quot;%bs], &quot;test&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
              (tApp
                 (tApp
-                   (tConst
-                      (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                       &quot;\1366_\1366plus_&quot;%bs))
+                   (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                    (tApp
                       (tApp
-                         (tConst
-                            (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                             &quot;\1366_\1366plus_&quot;%bs))
+                         (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                          (tApp
                             (tApp
-                               (tConst
-                                  (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                   &quot;\1366_\1366plus_&quot;%bs))
+                               (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                                (tApp
                                   (tApp
-                                     (tConst
-                                        (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                         &quot;\1366_\1366plus_&quot;%bs))
+                                     (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                                      (tConst (MPfile [&quot;Where&quot;%bs], &quot;testII&quot;%bs)))
                                   (tConst (MPfile [&quot;Where&quot;%bs], &quot;testI&quot;%bs))))
                             (tConst (MPfile [&quot;Where&quot;%bs], &quot;f&quot;%bs))))
@@ -444,7 +431,7 @@ Definition env : global_env :=
    (((MPfile [&quot;Where&quot;%bs], &quot;h&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
-           Some (tConst (MPfile [&quot;Where&quot;%bs; &quot;\1366_&quot;%bs], &quot;go&quot;%bs));
+           Some (tConst (MPfile [&quot;Where&quot;%bs; &quot;_94&quot;%bs], &quot;go&quot;%bs));
          cst_type :=
            ([],
             TArr
@@ -456,7 +443,7 @@ Definition env : global_env :=
                  {| inductive_mind :=
                       (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
                     inductive_ind := 0 |})) |});
-   (((MPfile [&quot;Where&quot;%bs; &quot;\1366_&quot;%bs], &quot;go&quot;%bs), true),
+   (((MPfile [&quot;Where&quot;%bs; &quot;_94&quot;%bs], &quot;go&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
@@ -902,7 +889,7 @@ Definition env : global_env :=
    (((MPfile [&quot;Where&quot;%bs], &quot;g&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
-           Some (tConst (MPfile [&quot;Where&quot;%bs; &quot;\1366_&quot;%bs], &quot;go&quot;%bs));
+           Some (tConst (MPfile [&quot;Where&quot;%bs; &quot;_84&quot;%bs], &quot;go&quot;%bs));
          cst_type :=
            ([],
             TArr
@@ -914,7 +901,7 @@ Definition env : global_env :=
                  {| inductive_mind :=
                       (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
                     inductive_ind := 0 |})) |});
-   (((MPfile [&quot;Where&quot;%bs; &quot;\1366_&quot;%bs], &quot;go&quot;%bs), true),
+   (((MPfile [&quot;Where&quot;%bs; &quot;_84&quot;%bs], &quot;go&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
@@ -967,7 +954,7 @@ Definition env : global_env :=
       {| cst_body :=
            Some
              (tApp
-                (tConst (MPfile [&quot;Where&quot;%bs; &quot;\1366_&quot;%bs], &quot;go&quot;%bs))
+                (tConst (MPfile [&quot;Where&quot;%bs; &quot;_74&quot;%bs], &quot;go&quot;%bs))
                 (tApp
                    (tConstruct
                       {| inductive_mind :=
@@ -1152,7 +1139,7 @@ Definition env : global_env :=
               {| inductive_mind :=
                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
                  inductive_ind := 0 |}) |});
-   (((MPfile [&quot;Where&quot;%bs; &quot;\1366_&quot;%bs], &quot;go&quot;%bs), true),
+   (((MPfile [&quot;Where&quot;%bs; &quot;_74&quot;%bs], &quot;go&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
@@ -2217,7 +2204,7 @@ Definition env : global_env :=
                                                                                                                                                                                                      [])))))))))))))))))))))))))))))))))))))))))));
                                                                     ([], tRel 0)])])])])))))))
                                   (tRel 0))
-                               (tApp (tConst (MPfile [&quot;Where&quot;%bs], &quot;II\1366toII&quot;%bs)) (tRel 0)))
+                               (tApp (tConst (MPfile [&quot;Where&quot;%bs], &quot;II\8594II&quot;%bs)) (tRel 0)))
                             (tApp
                                (tLambda
                                   nAnon
@@ -2282,7 +2269,7 @@ Definition env : global_env :=
                                             inductive_ind := 0 |}
                                          0 [])])))
                             (tRel 0))
-                         (tApp (tConst (MPfile [&quot;Where&quot;%bs], &quot;II\1366toII&quot;%bs)) (tRel 0)))))
+                         (tApp (tConst (MPfile [&quot;Where&quot;%bs], &quot;II\8594II&quot;%bs)) (tRel 0)))))
                 (tConstruct
                    {| inductive_mind := (MPfile [&quot;Where&quot;%bs], &quot;II&quot;%bs);
                       inductive_ind := 0 |}
@@ -2293,7 +2280,7 @@ Definition env : global_env :=
               {| inductive_mind :=
                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
                  inductive_ind := 0 |}) |});
-   (((MPfile [&quot;Where&quot;%bs], &quot;II\1366toII&quot;%bs), true),
+   (((MPfile [&quot;Where&quot;%bs], &quot;II\8594II&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
@@ -2329,18 +2316,14 @@ Definition env : global_env :=
          ind_bodies :=
            [{| ind_name := &quot;II&quot;%bs; ind_propositional := false;
                ind_kelim := IntoAny;
-               ind_ctors :=
-                 [((&quot;\1366\&amp;25c7\1366&quot;%bs, []), 0);
-                  ((&quot;\1366\&amp;25c6\1366&quot;%bs, []), 0)];
+               ind_ctors := [((&quot;\9671&quot;%bs, []), 0); ((&quot;\9670&quot;%bs, []), 0)];
                ind_projs := []; ind_type_vars := [] |}] |});
-   (((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-      &quot;\1366_\1366plus_&quot;%bs),
-     true),
+   (((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
              (tFix
-                [{| dname := nNamed &quot;\1366_\1366plus_&quot;%bs;
+                [{| dname := nNamed &quot;_+_&quot;%bs;
                     dbody :=
                       tLambda
                         nAnon
@@ -2408,6 +2391,6 @@ Compute @check_wf_glob eflags (ExAst.trans_env env).
 Definition prog1 : program :=
   (ExAst.trans_env env, tConst (MPfile [&quot;Where&quot;%bs], &quot;test&quot;%bs)).
 
-Compute eval_program prog1.</code></pre>
+Compute show_program prog1.</code></pre>
 </body>
 </html>

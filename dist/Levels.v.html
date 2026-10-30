@@ -25,40 +25,49 @@ Import ListNotations.
 Definition env : global_env :=
   [(((MPfile [&quot;Levels&quot;%bs], &quot;mkLevel&quot;%bs), true),
     ConstantDecl {| cst_body := Some tBox; cst_type := ([], TBox) |});
+   (((MPfile [&quot;Levels&quot;%bs], &quot;constLvl&quot;%bs), true),
+    ConstantDecl
+      {| cst_body :=
+           Some (tLambda nAnon (tLambda nAnon (tLambda nAnon (tRel 1))));
+         cst_type :=
+           ([nNamed &quot;A&quot;%bs],
+            TArr TBox (TArr (TVar 0) (TArr TBox (TVar 0)))) |});
+   (((MPfile [&quot;Levels&quot;%bs], &quot;const&quot;%bs), true),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tLambda
+                nAnon (tLambda nAnon (tLambda nAnon (tLambda nAnon (tRel 1)))));
+         cst_type :=
+           ([nNamed &quot;A&quot;%bs; nNamed &quot;B&quot;%bs],
+            TArr
+              TBox (TArr TBox (TArr (TVar 0) (TArr (TVar 1) (TVar 0))))) |});
    (((MPfile [&quot;Levels&quot;%bs], &quot;test&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
              (tApp
                 (tApp
-                   (tConst
-                      (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                       &quot;\1366_\1366plus_&quot;%bs))
+                   (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                    (tApp
                       (tApp
-                         (tConst
-                            (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                             &quot;\1366_\1366plus_&quot;%bs))
+                         (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                          (tApp
                             (tApp
-                               (tConst
-                                  (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                   &quot;\1366_\1366plus_&quot;%bs))
+                               (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                                (tApp
                                   (tApp
-                                     (tConst
-                                        (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                         &quot;\1366_\1366plus_&quot;%bs))
+                                     (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                                      (tApp
                                         (tApp
                                            (tConst
                                               (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                               &quot;\1366_\1366plus_&quot;%bs))
+                                               &quot;_+_&quot;%bs))
                                            (tApp
                                               (tApp
                                                  (tConst
                                                     (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                                     &quot;\1366_\1366plus_&quot;%bs))
+                                                     &quot;_+_&quot;%bs))
                                                  (tApp
                                                     (tConst (MPfile [&quot;Levels&quot;%bs], &quot;testLevel&quot;%bs))
                                                     tBox))
@@ -78,15 +87,14 @@ Definition env : global_env :=
     ConstantDecl
       {| cst_body :=
            Some
-             (tApp
-                (tConst (MPfile [&quot;Levels&quot;%bs; &quot;\1366_&quot;%bs], &quot;toNat&quot;%bs)) tBox);
+             (tApp (tConst (MPfile [&quot;Levels&quot;%bs; &quot;_50&quot;%bs], &quot;toNat&quot;%bs)) tBox);
          cst_type :=
            ([],
             TInd
               {| inductive_mind :=
                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
                  inductive_ind := 0 |}) |});
-   (((MPfile [&quot;Levels&quot;%bs; &quot;\1366_&quot;%bs], &quot;toNat&quot;%bs), true),
+   (((MPfile [&quot;Levels&quot;%bs; &quot;_50&quot;%bs], &quot;toNat&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
@@ -1892,7 +1900,7 @@ Definition env : global_env :=
                    {| inductive_mind := (MPfile [&quot;Levels&quot;%bs], &quot;SomeLvl&quot;%bs);
                       inductive_ind := 0 |}
                    0 [])
-                (tConst (MPfile [&quot;Levels&quot;%bs], &quot;\1366\&amp;30\1366\8467&quot;%bs)));
+                (tConst (MPfile [&quot;Levels&quot;%bs], &quot;0\8467&quot;%bs)));
          cst_type :=
            ([],
             TInd
@@ -1906,7 +1914,7 @@ Definition env : global_env :=
                ind_kelim := IntoAny;
                ind_ctors := [((&quot;this&quot;%bs, [(nNamed &quot;\8467&quot;%bs, TBox)]), 1)];
                ind_projs := []; ind_type_vars := [] |}] |});
-   (((MPfile [&quot;Levels&quot;%bs], &quot;\1366\&amp;30\1366\8467&quot;%bs), true),
+   (((MPfile [&quot;Levels&quot;%bs], &quot;0\8467&quot;%bs), true),
     ConstantDecl {| cst_body := Some tBox; cst_type := ([], TBox) |});
    (((MPfile [&quot;Levels&quot;%bs; &quot;SomeLvl&quot;%bs], &quot;\8467&quot;%bs), true),
     ConstantDecl {| cst_body := Some tBox; cst_type := ([], TBox) |});
@@ -2360,14 +2368,12 @@ Definition env : global_env :=
                  {| inductive_mind :=
                       (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
                     inductive_ind := 0 |})) |});
-   (((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-      &quot;\1366_\1366plus_&quot;%bs),
-     true),
+   (((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
              (tFix
-                [{| dname := nNamed &quot;\1366_\1366plus_&quot;%bs;
+                [{| dname := nNamed &quot;_+_&quot;%bs;
                     dbody :=
                       tLambda
                         nAnon
@@ -2885,6 +2891,6 @@ Compute @check_wf_glob eflags (ExAst.trans_env env).
 Definition prog1 : program :=
   (ExAst.trans_env env, tConst (MPfile [&quot;Levels&quot;%bs], &quot;test&quot;%bs)).
 
-Compute eval_program prog1.</code></pre>
+Compute show_program prog1.</code></pre>
 </body>
 </html>

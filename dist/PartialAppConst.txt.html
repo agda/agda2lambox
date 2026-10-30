@@ -30,7 +30,7 @@ Agda.Builtin.Nat.Nat:
         suc (1 arg(s))
           n : Agda.Builtin.Nat.Nat{0}
 
-Agda.Builtin.Nat.Ֆ_Ֆplus_:
+Agda.Builtin.Nat._+_:
   constant declaration:
     type variables: []
     type: (Agda.Builtin.Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → Agda.
@@ -51,7 +51,7 @@ PartialAppConst.add3:
                                                                                  Builtin.
                                                                                  Nat.Nat{0}
     body: λ _ _ _ →
-            Agda.Builtin.Nat.Ֆ_Ֆplus_ (Agda.Builtin.Nat.Ֆ_Ֆplus_ @2 @1) @0
+            Agda.Builtin.Nat._+_ (Agda.Builtin.Nat._+_ @2 @1) @0
 
 PartialAppConst.add2:
   constant declaration:
@@ -61,7 +61,7 @@ PartialAppConst.add2:
                                        Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → Agda.
                                                                                  Builtin.
                                                                                  Nat.Nat{0}
-    body: λ _ _ _ → Agda.Builtin.Nat.Ֆ_Ֆplus_ @2 @1
+    body: λ _ _ _ → Agda.Builtin.Nat._+_ @2 @1
 
 PartialAppConst.testConst:
   constant declaration:
@@ -264,8 +264,14 @@ PartialAppConst.test:
   constant declaration:
     type variables: []
     type: Agda.Builtin.Nat.Nat{0}
-    body: Agda.Builtin.Nat.Ֆ_Ֆplus_ (PartialAppConst.testConst)
+    body: Agda.Builtin.Nat._+_ (PartialAppConst.testConst)
             (PartialAppConst.testIte)
+
+PartialAppConst.const:
+  constant declaration:
+    type variables: [A]
+    type: □ → @0 → @0 → @0
+    body: λ _ _ _ → @1
 main program: [PartialAppConst.test]</code></pre>
 </body>
 </html>

@@ -31,10 +31,10 @@ rust.List:
   mutual inductive(s):
     List
       constructors:
-        Ֆ5bՖՖ5dՖ (0 arg(s))
-        Ֆ_Ֆ3aՖՖ3aՖ_ (2 arg(s))
+        [] (0 arg(s))
+        _::_ (2 arg(s))
 
-Agda.Builtin.Nat.Ֆ_Ֆplus_:
+Agda.Builtin.Nat._+_:
   constant declaration:
     body: μrec [0] :=
             0: λ _ _ →
@@ -46,19 +46,19 @@ rust.map:
   constant declaration:
     body: μrec [0] :=
             0: λ _ _ _ _ →
-                 case&lt;rust.List{0},0&gt; @0 of
-                   λ&lt;[]&gt; rust.List{0}{0}
-                   λ&lt;[_, _]&gt; rust.List{0}{1} (@3 @1) (@6 □ □ @3 @0)
+                 case&lt;rust.List{0},1&gt; @0 of
+                   λ&lt;[]&gt; rust.List{0}{0} □
+                   λ&lt;[_, _]&gt; rust.List{0}{1} □ (@3 @1) (@6 □ □ @3 @0)
 
 rust.testIdd:
   constant declaration:
     body: rust.map □ □
-            (Agda.Builtin.Nat.Ֆ_Ֆplus_
+            (Agda.Builtin.Nat._+_
                (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}))
-            (rust.List{0}{1}
+            (rust.List{0}{1} □
                (Agda.Builtin.Nat.Nat{0}{1}
                   (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}))
-               rust.List{0}{0})
+               (rust.List{0}{0} □))
 
 rust.test: constant declaration: body: rust.testIdd
 main program: [rust.test]</code></pre>

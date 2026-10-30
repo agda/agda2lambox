@@ -498,9 +498,25 @@
 <span id="cb1-420"><a href="#cb1-420" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>PartialAppConst_testConst())(</span>
 <span id="cb1-421"><a href="#cb1-421" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>PartialAppConst_testIte())</span>
 <span id="cb1-422"><a href="#cb1-422" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-423"><a href="#cb1-423" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-424"><a href="#cb1-424" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb1-425"><a href="#cb1-425" aria-hidden="true"></a>  <span class="pp">println!</span>(<span class="st">&quot;{:?}&quot;</span><span class="op">,</span> <span class="pp">Program::</span>new()<span class="op">.</span>PartialAppConst_test())<span class="op">;</span></span>
-<span id="cb1-426"><a href="#cb1-426" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb1-423"><a href="#cb1-423" aria-hidden="true"></a></span>
+<span id="cb1-424"><a href="#cb1-424" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> PartialAppConst_r#const<span class="op">&lt;</span>A<span class="op">:</span> <span class="bu">Copy</span><span class="op">&gt;</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> ()<span class="op">,</span> x2<span class="op">:</span> A<span class="op">,</span> x3<span class="op">:</span> A) <span class="op">-&gt;</span> A <span class="op">{</span></span>
+<span id="cb1-425"><a href="#cb1-425" aria-hidden="true"></a>  x2</span>
+<span id="cb1-426"><a href="#cb1-426" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-427"><a href="#cb1-427" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> PartialAppConst_r#const__curried<span class="op">&lt;</span>A<span class="op">:</span> <span class="bu">Copy</span><span class="op">&gt;</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(()) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(A) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(A) <span class="op">-&gt;</span> A <span class="op">{</span></span>
+<span id="cb1-428"><a href="#cb1-428" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x<span class="op">|</span> <span class="op">{</span></span>
+<span id="cb1-429"><a href="#cb1-429" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x2<span class="op">|</span> <span class="op">{</span></span>
+<span id="cb1-430"><a href="#cb1-430" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x3<span class="op">|</span> <span class="op">{</span></span>
+<span id="cb1-431"><a href="#cb1-431" aria-hidden="true"></a>        <span class="kw">self</span><span class="op">.</span>PartialAppConst_r#const(</span>
+<span id="cb1-432"><a href="#cb1-432" aria-hidden="true"></a>          x<span class="op">,</span></span>
+<span id="cb1-433"><a href="#cb1-433" aria-hidden="true"></a>          x2<span class="op">,</span></span>
+<span id="cb1-434"><a href="#cb1-434" aria-hidden="true"></a>          x3)</span>
+<span id="cb1-435"><a href="#cb1-435" aria-hidden="true"></a>      <span class="op">}</span>)</span>
+<span id="cb1-436"><a href="#cb1-436" aria-hidden="true"></a>    <span class="op">}</span>)</span>
+<span id="cb1-437"><a href="#cb1-437" aria-hidden="true"></a>  <span class="op">}</span>)</span>
+<span id="cb1-438"><a href="#cb1-438" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-439"><a href="#cb1-439" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-440"><a href="#cb1-440" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb1-441"><a href="#cb1-441" aria-hidden="true"></a>  <span class="pp">println!</span>(<span class="st">&quot;{:?}&quot;</span><span class="op">,</span> <span class="pp">Program::</span>new()<span class="op">.</span>PartialAppConst_test())<span class="op">;</span></span>
+<span id="cb1-442"><a href="#cb1-442" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
 </body>
 </html>

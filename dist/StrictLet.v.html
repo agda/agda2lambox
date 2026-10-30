@@ -91,8 +91,7 @@ Definition env : global_declarations :=
                                   (tApp
                                      (tApp
                                         (tConst
-                                           (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                            &quot;\1366_\1366sub_&quot;%bs))
+                                           (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_-_&quot;%bs))
                                         (tRel 1))
                                      (tApp
                                         (tConstruct
@@ -109,13 +108,12 @@ Definition env : global_declarations :=
                                            0 []))))]));
                     rarg := 0 |}]
                 0) |});
-   ((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-     &quot;\1366_\1366sub_&quot;%bs),
+   ((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_-_&quot;%bs),
     ConstantDecl
       {| cst_body :=
            Some
              (tFix
-                [{| dname := nNamed &quot;\1366_\1366sub_&quot;%bs;
+                [{| dname := nNamed &quot;_-_&quot;%bs;
                     dbody :=
                       tLambda
                         nAnon
@@ -166,6 +164,6 @@ Compute @check_wf_glob eflags env.
 Definition prog1 : program :=
   (env, tConst (MPfile [&quot;StrictLet&quot;%bs], &quot;test&quot;%bs)).
 
-Compute eval_program prog1.</code></pre>
+Compute show_program prog1.</code></pre>
 </body>
 </html>

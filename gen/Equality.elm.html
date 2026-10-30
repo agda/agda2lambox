@@ -83,8 +83,8 @@
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>  <span class="op">=</span> <span class="dt">Zero</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a>  <span class="op">|</span> <span class="dt">Suc</span> <span class="dt">Nat</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a><span class="fu">equality__UU000556__UU00055624_UU000556_</span> : () <span class="op">-&gt;</span> () <span class="op">-&gt;</span> () <span class="op">-&gt;</span> () <span class="op">-&gt;</span> (<span class="fu">a</span> <span class="op">-&gt;</span> <span class="fu">a2</span>) <span class="op">-&gt;</span> <span class="fu">a</span> <span class="op">-&gt;</span> <span class="fu">a2</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a><span class="fu">equality__UU000556__UU00055624_UU000556_</span> <span class="fu">x</span> <span class="fu">x2</span> <span class="fu">x3</span> <span class="fu">x4</span> <span class="fu">x5</span> <span class="fu">x6</span> <span class="op">=</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a><span class="fu">equality___UU24_</span> : () <span class="op">-&gt;</span> () <span class="op">-&gt;</span> () <span class="op">-&gt;</span> () <span class="op">-&gt;</span> (<span class="fu">a</span> <span class="op">-&gt;</span> <span class="fu">a2</span>) <span class="op">-&gt;</span> <span class="fu">a</span> <span class="op">-&gt;</span> <span class="fu">a2</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a><span class="fu">equality___UU24_</span> <span class="fu">x</span> <span class="fu">x2</span> <span class="fu">x3</span> <span class="fu">x4</span> <span class="fu">x5</span> <span class="fu">x6</span> <span class="op">=</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a>  <span class="fu">x5</span> <span class="fu">x6</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a><span class="fu">equality_add</span> : <span class="dt">Nat</span> <span class="op">-&gt;</span> <span class="dt">Nat</span> <span class="op">-&gt;</span> <span class="dt">Nat</span></span>
@@ -97,53 +97,57 @@
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true"></a></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true"></a><span class="fu">equality_test</span> : <span class="dt">Nat</span></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true"></a><span class="fu">equality_test</span> <span class="op">=</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true"></a>  <span class="fu">equality__UU000556__UU00055624_UU000556_</span> () () () () ((\<span class="fu">x</span> <span class="fu">x2</span> <span class="fu">x3</span> <span class="op">-&gt;</span> <span class="fu">x</span>) (<span class="fu">equality_add</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> <span class="dt">Zero</span>)) <span class="dt">Zero</span>) (<span class="dt">Suc</span> (<span class="fu">equality_add</span> (<span class="dt">Suc</span> <span class="dt">Zero</span>) <span class="dt">Zero</span>))) ()</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true"></a>  <span class="fu">equality___UU24_</span> () () () () ((\<span class="fu">x</span> <span class="fu">x2</span> <span class="fu">x3</span> <span class="op">-&gt;</span> <span class="fu">x</span>) (<span class="fu">equality_add</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> <span class="dt">Zero</span>)) <span class="dt">Zero</span>) (<span class="dt">Suc</span> (<span class="fu">equality_add</span> (<span class="dt">Suc</span> <span class="dt">Zero</span>) <span class="dt">Zero</span>))) ()</span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true"></a><span class="fu">equality_eqLevel</span> : ()</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true"></a><span class="fu">equality_eqLevel</span> <span class="op">=</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true"></a>  ()</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true"></a><span class="fu">equality_toNat</span> : <span class="fu">a</span> <span class="op">-&gt;</span> () <span class="op">-&gt;</span> () <span class="op">-&gt;</span> <span class="fu">a</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true"></a><span class="fu">equality_toNat</span> <span class="fu">x</span> <span class="fu">x2</span> <span class="fu">x3</span> <span class="op">=</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true"></a>  <span class="fu">x</span></span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true"></a><span class="fu">equality_suc_UU000556subleft_UU000556subadd</span> : ()</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true"></a><span class="fu">equality_suc_UU000556subleft_UU000556subadd</span> <span class="op">=</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true"></a><span class="fu">equality_eqLevel</span> : ()</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true"></a><span class="fu">equality_eqLevel</span> <span class="op">=</span></span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true"></a>  ()</span>
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true"></a><span class="fu">equality_add_UU000556subleft_UU000556subid</span> : <span class="fu">a</span> <span class="op">-&gt;</span> ()</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true"></a><span class="fu">equality_add_UU000556subleft_UU000556subid</span> <span class="fu">x</span> <span class="op">=</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true"></a><span class="fu">equality_suc_UU2dleft_UU2dadd</span> : ()</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true"></a><span class="fu">equality_suc_UU2dleft_UU2dadd</span> <span class="op">=</span></span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true"></a>  ()</span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true"></a></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true"></a><span class="fu">equality_subst</span> : () <span class="op">-&gt;</span> () <span class="op">-&gt;</span> () <span class="op">-&gt;</span> () <span class="op">-&gt;</span> () <span class="op">-&gt;</span> <span class="fu">a</span> <span class="op">-&gt;</span> <span class="fu">a</span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true"></a><span class="fu">equality_subst</span> <span class="fu">x</span> <span class="fu">x2</span> <span class="fu">x3</span> <span class="fu">x4</span> <span class="fu">x5</span> <span class="fu">x6</span> <span class="op">=</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true"></a>  <span class="fu">x6</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true"></a><span class="fu">equality_add_UU2dleft_UU2did</span> : ()</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true"></a><span class="fu">equality_add_UU2dleft_UU2did</span> <span class="op">=</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true"></a>  ()</span>
 <span id="cb1-39"><a href="#cb1-39" aria-hidden="true"></a></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true"></a><span class="fu">equality_trans</span> : ()</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true"></a><span class="fu">equality_trans</span> <span class="op">=</span></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true"></a>  ()</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true"></a><span class="fu">equality_subst</span> : () <span class="op">-&gt;</span> () <span class="op">-&gt;</span> () <span class="op">-&gt;</span> () <span class="op">-&gt;</span> () <span class="op">-&gt;</span> <span class="fu">a</span> <span class="op">-&gt;</span> <span class="fu">a</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true"></a><span class="fu">equality_subst</span> <span class="fu">x</span> <span class="fu">x2</span> <span class="fu">x3</span> <span class="fu">x4</span> <span class="fu">x5</span> <span class="fu">x6</span> <span class="op">=</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true"></a>  <span class="fu">x6</span></span>
 <span id="cb1-43"><a href="#cb1-43" aria-hidden="true"></a></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true"></a><span class="fu">equality_eqTwo</span> : ()</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true"></a><span class="fu">equality_eqTwo</span> <span class="op">=</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true"></a><span class="fu">equality_trans</span> : ()</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true"></a><span class="fu">equality_trans</span> <span class="op">=</span></span>
 <span id="cb1-46"><a href="#cb1-46" aria-hidden="true"></a>  ()</span>
 <span id="cb1-47"><a href="#cb1-47" aria-hidden="true"></a></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true"></a><span class="fu">equality__UU000556__UU0005562218_UU000556_</span> : () <span class="op">-&gt;</span> () <span class="op">-&gt;</span> () <span class="op">-&gt;</span> () <span class="op">-&gt;</span> () <span class="op">-&gt;</span> () <span class="op">-&gt;</span> (<span class="fu">a</span> <span class="op">-&gt;</span> <span class="fu">a3</span>) <span class="op">-&gt;</span> (<span class="fu">a2</span> <span class="op">-&gt;</span> <span class="fu">a</span>) <span class="op">-&gt;</span> <span class="fu">a2</span> <span class="op">-&gt;</span> <span class="fu">a3</span></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true"></a><span class="fu">equality__UU000556__UU0005562218_UU000556_</span> <span class="fu">x</span> <span class="fu">x2</span> <span class="fu">x3</span> <span class="fu">x4</span> <span class="fu">x5</span> <span class="fu">x6</span> <span class="fu">x7</span> <span class="fu">x8</span> <span class="fu">x9</span> <span class="op">=</span></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true"></a>  <span class="fu">x7</span> (<span class="fu">x8</span> <span class="fu">x9</span>)</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true"></a><span class="fu">equality_eqTwo</span> : ()</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true"></a><span class="fu">equality_eqTwo</span> <span class="op">=</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true"></a>  ()</span>
 <span id="cb1-51"><a href="#cb1-51" aria-hidden="true"></a></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true"></a><span class="fu">equality_sym</span> : ()</span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true"></a><span class="fu">equality_sym</span> <span class="op">=</span></span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true"></a>  ()</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true"></a><span class="fu">equality___UU002218_</span> : () <span class="op">-&gt;</span> () <span class="op">-&gt;</span> () <span class="op">-&gt;</span> () <span class="op">-&gt;</span> () <span class="op">-&gt;</span> () <span class="op">-&gt;</span> (<span class="fu">a</span> <span class="op">-&gt;</span> <span class="fu">a3</span>) <span class="op">-&gt;</span> (<span class="fu">a2</span> <span class="op">-&gt;</span> <span class="fu">a</span>) <span class="op">-&gt;</span> <span class="fu">a2</span> <span class="op">-&gt;</span> <span class="fu">a3</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true"></a><span class="fu">equality___UU002218_</span> <span class="fu">x</span> <span class="fu">x2</span> <span class="fu">x3</span> <span class="fu">x4</span> <span class="fu">x5</span> <span class="fu">x6</span> <span class="fu">x7</span> <span class="fu">x8</span> <span class="fu">x9</span> <span class="op">=</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true"></a>  <span class="fu">x7</span> (<span class="fu">x8</span> <span class="fu">x9</span>)</span>
 <span id="cb1-55"><a href="#cb1-55" aria-hidden="true"></a></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true"></a><span class="fu">equality_eqOne</span> : ()</span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true"></a><span class="fu">equality_eqOne</span> <span class="op">=</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true"></a><span class="fu">equality_sym</span> : ()</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true"></a><span class="fu">equality_sym</span> <span class="op">=</span></span>
 <span id="cb1-58"><a href="#cb1-58" aria-hidden="true"></a>  ()</span>
 <span id="cb1-59"><a href="#cb1-59" aria-hidden="true"></a></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true"></a><span class="fu">equality_cong</span> : ()</span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true"></a><span class="fu">equality_cong</span> <span class="op">=</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true"></a><span class="fu">equality_eqOne</span> : ()</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true"></a><span class="fu">equality_eqOne</span> <span class="op">=</span></span>
 <span id="cb1-62"><a href="#cb1-62" aria-hidden="true"></a>  ()</span>
 <span id="cb1-63"><a href="#cb1-63" aria-hidden="true"></a></span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true"></a><span class="fu">equality_eqzero</span> : ()</span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true"></a><span class="fu">equality_eqzero</span> <span class="op">=</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true"></a><span class="fu">equality_cong</span> : ()</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true"></a><span class="fu">equality_cong</span> <span class="op">=</span></span>
 <span id="cb1-66"><a href="#cb1-66" aria-hidden="true"></a>  ()</span>
 <span id="cb1-67"><a href="#cb1-67" aria-hidden="true"></a></span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true"></a><span class="kw">type</span> _<span class="dt">UU000556__UU0005562261_UU000556_</span></span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true"></a>  <span class="op">=</span> <span class="dt">Refl</span></span></code></pre></div>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true"></a><span class="fu">equality_eqzero</span> : ()</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true"></a><span class="fu">equality_eqzero</span> <span class="op">=</span></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true"></a>  ()</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true"></a></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true"></a><span class="kw">type</span> __<span class="dt">UU002261_</span> <span class="fu">a</span></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true"></a>  <span class="op">=</span> <span class="dt">Refl</span> ()</span></code></pre></div>
 </body>
 </html>

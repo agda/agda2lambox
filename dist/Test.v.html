@@ -53,7 +53,7 @@ Definition env : global_env :=
               (TInd
                  {| inductive_mind := (MPfile [&quot;Test&quot;%bs], &quot;Bool&quot;%bs);
                     inductive_ind := 0 |})) |});
-   (((MPfile [&quot;Test&quot;%bs], &quot;not\1366\&amp;27\1366&quot;%bs), true),
+   (((MPfile [&quot;Test&quot;%bs], &quot;not&#39;&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
@@ -89,7 +89,7 @@ Definition env : global_env :=
          ind_bodies :=
            [{| ind_name := &quot;Bool&quot;%bs; ind_propositional := false;
                ind_kelim := IntoAny;
-               ind_ctors := [((&quot;r#true&quot;%bs, []), 0); ((&quot;r#false&quot;%bs, []), 0)];
+               ind_ctors := [((&quot;true&quot;%bs, []), 0); ((&quot;false&quot;%bs, []), 0)];
                ind_projs := []; ind_type_vars := [] |}] |});
    (((MPfile [&quot;Test&quot;%bs], &quot;test&quot;%bs), true),
     ConstantDecl
@@ -104,10 +104,12 @@ Definition env : global_env :=
                          inductive_ind := 0 |}
                       0 []))
                 (tApp
-                   (tConstruct
-                      {| inductive_mind := (MPfile [&quot;Test&quot;%bs; &quot;\1366_&quot;%bs], &quot;Maybe&quot;%bs);
-                         inductive_ind := 0 |}
-                      1 [])
+                   (tApp
+                      (tConstruct
+                         {| inductive_mind := (MPfile [&quot;Test&quot;%bs; &quot;_20&quot;%bs], &quot;Maybe&quot;%bs);
+                            inductive_ind := 0 |}
+                         1 [])
+                      tBox)
                    (tApp
                       (tConstruct
                          {| inductive_mind :=
@@ -564,9 +566,9 @@ Definition env : global_env :=
                                   nAnon
                                   (tCase
                                      ({| inductive_mind :=
-                                           (MPfile [&quot;Test&quot;%bs; &quot;\1366_&quot;%bs], &quot;Maybe&quot;%bs);
+                                           (MPfile [&quot;Test&quot;%bs; &quot;_20&quot;%bs], &quot;Maybe&quot;%bs);
                                          inductive_ind := 0 |},
-                                      0)
+                                      1)
                                      (tRel 0) [([], tRel 1); ([nAnon], tRel 0)]))))
                          (tRel 1))
                       (tRel 0))));
@@ -579,18 +581,19 @@ Definition env : global_env :=
                  (TArr
                     (TApp
                        (TInd
-                          {| inductive_mind := (MPfile [&quot;Test&quot;%bs; &quot;\1366_&quot;%bs], &quot;Maybe&quot;%bs);
+                          {| inductive_mind := (MPfile [&quot;Test&quot;%bs; &quot;_20&quot;%bs], &quot;Maybe&quot;%bs);
                              inductive_ind := 0 |})
                        (TVar 0))
                     (TVar 0)))) |});
-   (((MPfile [&quot;Test&quot;%bs; &quot;\1366_&quot;%bs], &quot;Maybe&quot;%bs), true),
+   (((MPfile [&quot;Test&quot;%bs; &quot;_20&quot;%bs], &quot;Maybe&quot;%bs), true),
     InductiveDecl
-      {| ind_finite := Finite; ind_npars := 0;
+      {| ind_finite := Finite; ind_npars := 1;
          ind_bodies :=
            [{| ind_name := &quot;Maybe&quot;%bs; ind_propositional := false;
                ind_kelim := IntoAny;
                ind_ctors :=
-                 [((&quot;nothing&quot;%bs, []), 0); ((&quot;just&quot;%bs, [(nAnon, TVar 0)]), 1)];
+                 [((&quot;nothing&quot;%bs, [(nNamed &quot;a&quot;%bs, TBox)]), 0);
+                  ((&quot;just&quot;%bs, [(nNamed &quot;a&quot;%bs, TBox); (nAnon, TVar 0)]), 1)];
                ind_projs := [];
                ind_type_vars :=
                  [{| tvar_name := nNamed &quot;a&quot;%bs; tvar_is_logical := false;
@@ -624,6 +627,6 @@ Compute @check_wf_glob eflags (ExAst.trans_env env).
 Definition prog1 : program :=
   (ExAst.trans_env env, tConst (MPfile [&quot;Test&quot;%bs], &quot;test&quot;%bs)).
 
-Compute eval_program prog1.</code></pre>
+Compute show_program prog1.</code></pre>
 </body>
 </html>

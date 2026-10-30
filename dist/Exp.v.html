@@ -29,19 +29,13 @@ Definition env : global_env :=
            Some
              (tApp
                 (tApp
-                   (tConst
-                      (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                       &quot;\1366_\1366plus_&quot;%bs))
+                   (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                    (tApp
                       (tApp
-                         (tConst
-                            (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                             &quot;\1366_\1366plus_&quot;%bs))
+                         (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                          (tApp
                             (tApp
-                               (tConst
-                                  (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                   &quot;\1366_\1366plus_&quot;%bs))
+                               (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                                (tApp
                                   (tApp
                                      (tApp (tConst (MPfile [&quot;Exp&quot;%bs], &quot;eval&quot;%bs)) tBox)
@@ -56,7 +50,7 @@ Definition env : global_env :=
                                         (tApp
                                            (tConst
                                               (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                               &quot;\1366_\1366plus_&quot;%bs))
+                                               &quot;_+_&quot;%bs))
                                            (tRel 0))
                                         (tApp
                                            (tConstruct
@@ -73,15 +67,19 @@ Definition env : global_env :=
                                               0 [])))))
                                (tApp
                                   (tApp
-                                     (tConstruct
-                                        {| inductive_mind := (MPfile [&quot;Exp&quot;%bs], &quot;Exp&quot;%bs);
-                                           inductive_ind := 0 |}
-                                        0 [])
                                      (tApp
                                         (tConstruct
                                            {| inductive_mind := (MPfile [&quot;Exp&quot;%bs], &quot;Exp&quot;%bs);
                                               inductive_ind := 0 |}
-                                           1 [])
+                                           0 [])
+                                        tBox)
+                                     (tApp
+                                        (tApp
+                                           (tConstruct
+                                              {| inductive_mind := (MPfile [&quot;Exp&quot;%bs], &quot;Exp&quot;%bs);
+                                                 inductive_ind := 0 |}
+                                              1 [])
+                                           tBox)
                                         (tApp
                                            (tConstruct
                                               {| inductive_mind :=
@@ -130,10 +128,12 @@ Definition env : global_env :=
                                                              inductive_ind := 0 |}
                                                           0 []))))))))
                                   (tApp
-                                     (tConstruct
-                                        {| inductive_mind := (MPfile [&quot;Exp&quot;%bs], &quot;Exp&quot;%bs);
-                                           inductive_ind := 0 |}
-                                        2 [])
+                                     (tApp
+                                        (tConstruct
+                                           {| inductive_mind := (MPfile [&quot;Exp&quot;%bs], &quot;Exp&quot;%bs);
+                                              inductive_ind := 0 |}
+                                           2 [])
+                                        tBox)
                                      (tApp
                                         (tConstruct
                                            {| inductive_mind :=
@@ -995,9 +995,7 @@ Definition env : global_env :=
                          nAnon
                          (tApp
                             (tApp
-                               (tConst
-                                  (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                   &quot;\1366_\1366plus_&quot;%bs))
+                               (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                                (tRel 0))
                             (tApp
                                (tConstruct
@@ -1466,8 +1464,7 @@ Definition env : global_env :=
                                    tApp
                                      (tApp
                                         (tConst
-                                           (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                            &quot;\1366_\1366plus_&quot;%bs))
+                                           (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                                         (tApp (tApp (tApp (tRel 5) tBox) (tRel 3)) (tRel 1)))
                                      (tApp (tApp (tApp (tRel 5) tBox) (tRel 3)) (tRel 0)));
                                   ([nAnon; nAnon; nAnon; nAnon],
@@ -1574,7 +1571,7 @@ Definition env : global_env :=
                         {| inductive_mind := (MPfile [&quot;Exp&quot;%bs], &quot;GExp&quot;%bs);
                            inductive_ind := 0 |})]),
                    2);
-                  ((&quot;r#if&quot;%bs,
+                  ((&quot;if&quot;%bs,
                     [(nNamed &quot;A&quot;%bs, TBox);
                      (nAnon,
                       TInd
@@ -1614,14 +1611,13 @@ Definition env : global_env :=
                               (tCase
                                  ({| inductive_mind := (MPfile [&quot;Exp&quot;%bs], &quot;Exp&quot;%bs);
                                      inductive_ind := 0 |},
-                                  0)
+                                  1)
                                  (tRel 0)
                                  [([nAnon; nAnon],
                                    tApp
                                      (tApp
                                         (tConst
-                                           (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                            &quot;\1366_\1366plus_&quot;%bs))
+                                           (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                                         (tApp (tApp (tApp (tRel 5) tBox) (tRel 3)) (tRel 1)))
                                      (tApp (tApp (tApp (tRel 5) tBox) (tRel 3)) (tRel 0)));
                                   ([nAnon], tRel 0); ([nAnon], tApp (tRel 2) (tRel 0))])));
@@ -1648,14 +1644,12 @@ Definition env : global_env :=
                        {| inductive_mind :=
                             (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
                           inductive_ind := 0 |})))) |});
-   (((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-      &quot;\1366_\1366plus_&quot;%bs),
-     true),
+   (((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
              (tFix
-                [{| dname := nNamed &quot;\1366_\1366plus_&quot;%bs;
+                [{| dname := nNamed &quot;_+_&quot;%bs;
                     dbody :=
                       tLambda
                         nAnon
@@ -1700,15 +1694,19 @@ Definition env : global_env :=
            Some
              (tApp
                 (tApp
-                   (tConstruct
-                      {| inductive_mind := (MPfile [&quot;Exp&quot;%bs], &quot;Exp&quot;%bs);
-                         inductive_ind := 0 |}
-                      0 [])
                    (tApp
                       (tConstruct
                          {| inductive_mind := (MPfile [&quot;Exp&quot;%bs], &quot;Exp&quot;%bs);
                             inductive_ind := 0 |}
-                         1 [])
+                         0 [])
+                      tBox)
+                   (tApp
+                      (tApp
+                         (tConstruct
+                            {| inductive_mind := (MPfile [&quot;Exp&quot;%bs], &quot;Exp&quot;%bs);
+                               inductive_ind := 0 |}
+                            1 [])
+                         tBox)
                       (tApp
                          (tConstruct
                             {| inductive_mind :=
@@ -1745,10 +1743,12 @@ Definition env : global_env :=
                                            inductive_ind := 0 |}
                                         0 []))))))))
                 (tApp
-                   (tConstruct
-                      {| inductive_mind := (MPfile [&quot;Exp&quot;%bs], &quot;Exp&quot;%bs);
-                         inductive_ind := 0 |}
-                      2 [])
+                   (tApp
+                      (tConstruct
+                         {| inductive_mind := (MPfile [&quot;Exp&quot;%bs], &quot;Exp&quot;%bs);
+                            inductive_ind := 0 |}
+                         2 [])
+                      tBox)
                    (tApp
                       (tConstruct
                          {| inductive_mind :=
@@ -2133,13 +2133,14 @@ Definition env : global_env :=
                     inductive_ind := 0 |})) |});
    (((MPfile [&quot;Exp&quot;%bs], &quot;Exp&quot;%bs), true),
     InductiveDecl
-      {| ind_finite := Finite; ind_npars := 0;
+      {| ind_finite := Finite; ind_npars := 1;
          ind_bodies :=
            [{| ind_name := &quot;Exp&quot;%bs; ind_propositional := false;
                ind_kelim := IntoAny;
                ind_ctors :=
                  [((&quot;Plus&quot;%bs,
-                    [(nAnon,
+                    [(nNamed &quot;V&quot;%bs, TBox);
+                     (nAnon,
                       TApp
                         (TInd
                            {| inductive_mind := (MPfile [&quot;Exp&quot;%bs], &quot;Exp&quot;%bs);
@@ -2153,13 +2154,14 @@ Definition env : global_env :=
                         (TVar 0))]),
                    2);
                   ((&quot;Int&quot;%bs,
-                    [(nAnon,
+                    [(nNamed &quot;V&quot;%bs, TBox);
+                     (nAnon,
                       TInd
                         {| inductive_mind :=
                              (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
                            inductive_ind := 0 |})]),
                    1);
-                  ((&quot;Var&quot;%bs, [(nAnon, TVar 0)]), 1)];
+                  ((&quot;Var&quot;%bs, [(nNamed &quot;V&quot;%bs, TBox); (nAnon, TVar 0)]), 1)];
                ind_projs := [];
                ind_type_vars :=
                  [{| tvar_name := nNamed &quot;V&quot;%bs; tvar_is_logical := false;
@@ -2193,6 +2195,6 @@ Compute @check_wf_glob eflags (ExAst.trans_env env).
 Definition prog1 : program :=
   (ExAst.trans_env env, tConst (MPfile [&quot;Exp&quot;%bs], &quot;test&quot;%bs)).
 
-Compute eval_program prog1.</code></pre>
+Compute show_program prog1.</code></pre>
 </body>
 </html>

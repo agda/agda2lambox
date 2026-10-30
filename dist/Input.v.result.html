@@ -17,51 +17,7 @@
 <body>
 <pre><code>     = true
      : bool
-     = exceptionMonad.Ret
-         (compile.TConstruct
-            {|
-              inductive_mind := (MPfile [&quot;Input&quot;%bs], &quot;Export&quot;%bs);
-              inductive_ind := 0
-            |} 0
-            (compile.tcons
-               (compile.TLambda nAnon
-                  (compile.TLambda nAnon
-                     (compile.TCase
-                        {|
-                          inductive_mind := (MPfile [&quot;Input&quot;%bs], &quot;Bool&quot;%bs);
-                          inductive_ind := 0
-                        |} (compile.TRel 1)
-                        (compile.bcons []
-                           (compile.TConstruct
-                              {|
-                                inductive_mind :=
-                                  (MPfile [&quot;Input&quot;%bs], &quot;Bool&quot;%bs);
-                                inductive_ind := 0
-                              |} 0 compile.tnil)
-                           (compile.bcons [] (compile.TRel 0) compile.bnil)))))
-               (compile.tcons
-                  (compile.TLambda nAnon
-                     (compile.TCase
-                        {|
-                          inductive_mind := (MPfile [&quot;Input&quot;%bs], &quot;Bool&quot;%bs);
-                          inductive_ind := 0
-                        |} (compile.TRel 0)
-                        (compile.bcons []
-                           (compile.TConstruct
-                              {|
-                                inductive_mind :=
-                                  (MPfile [&quot;Input&quot;%bs], &quot;Bool&quot;%bs);
-                                inductive_ind := 0
-                              |} 1 compile.tnil)
-                           (compile.bcons []
-                              (compile.TConstruct
-                                 {|
-                                   inductive_mind :=
-                                     (MPfile [&quot;Input&quot;%bs], &quot;Bool&quot;%bs);
-                                   inductive_ind := 0
-                                 |} 0 compile.tnil)
-                              compile.bnil))))
-                  compile.tnil)))
-     : exceptionMonad.exception compile.Term</code></pre>
+     = &quot;constructor &lt;function&gt; &lt;function&gt;&quot;%bs
+     : string</code></pre>
 </body>
 </html>

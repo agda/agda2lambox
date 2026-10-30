@@ -15,24 +15,48 @@
   </style>
 </head>
 <body>
+<pre><code>ERROR </code></pre>
+<hr />
 <pre><code>[1m[33mwarning[0m[1m:[0m no edition set: defaulting to the 2015 edition while the latest is 2024
 [1m[32m   Compiling[0m main v0.0.0 (/home/runner/work/agda2lambox/agda2lambox/test/gen/rust)
-[0m[1m[38;5;9merror[E0599][0m[0m[1m: no method named `Prelude_test` found for struct `Program` in the current scope[0m
-[0m   [0m[0m[1m[38;5;12m--&gt; [0m[0mPrelude.rs:981:35[0m
+[0m[1m[38;5;9merror[0m[0m[1m: missing parameters for function definition[0m
+[0m   [0m[0m[1m[38;5;12m--&gt; [0m[0mPrelude.rs:827:17[0m
 [0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m43[0m[0m  [0m[0m[1m[38;5;12m|[0m[0m [0m[0mpub struct Program {[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m------------------[0m[0m [0m[0m[1m[38;5;12mmethod `Prelude_test` not found for this struct[0m
+[0m[1m[38;5;12m827[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mpub fn Prelude_r#mod(&amp;&#39;a self, x: &amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;, x2: &amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;) -&gt; &amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt; {[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m                 [0m[0m[1m[38;5;9m^[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;14mhelp[0m[0m: add a parameter list[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m827[0m[0m [0m[0m[1m[38;5;12m| [0m[0mpub fn Prelude_r[0m[0m[38;5;10m()[0m[0m#mod(&amp;&#39;a self, x: &amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;, x2: &amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;) -&gt; &amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt; {[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m                 [0m[0m[38;5;10m++[0m
+
+[0m[1m[38;5;9merror[0m[0m[1m: expected one of `-&gt;`, `&lt;`, `where`, or `{`, found `#`[0m
+[0m    [0m[0m[1m[38;5;12m--&gt; [0m[0mPrelude.rs:827:17[0m
+[0m     [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m47[0m[0m   [0m[0m[1m[38;5;12m|[0m[0m [0m[0mimpl&lt;&#39;a&gt; Program {[0m
+[0m     [0m[0m[1m[38;5;12m|[0m[0m                  [0m[0m[1m[38;5;12m-[0m[0m [0m[0m[1m[38;5;12mwhile parsing this item list starting here[0m
 [0m[1m[38;5;12m...[0m
-[0m[1m[38;5;12m981[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m  println!(&quot;{:?}&quot;, Program::new().Prelude_test());[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m                                   [0m[0m[1m[38;5;9m^^^^^^^^^^^^[0m
-[0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;14mhelp[0m[0m: there is a method `Prelude_testPrelude` with a similar name, but with different arguments[0m
-[0m   [0m[0m[1m[38;5;12m--&gt; [0m[0mPrelude.rs:230:1[0m
-[0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m230[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mpub fn Prelude_testPrelude(&amp;&#39;a self, x: &amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;) -&gt; &amp;&#39;a List_Builtin_Agda_List&lt;&#39;a&gt; {[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;14m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[0m[1m[38;5;12m827[0m[0m  [0m[0m[1m[38;5;12m|[0m[0m [0m[0mpub fn Prelude_r#mod(&amp;&#39;a self, x: &amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;, x2: &amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;) -&gt; &amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt; {[0m
+[0m     [0m[0m[1m[38;5;12m|[0m[0m                 [0m[0m[1m[38;5;9m^[0m[0m [0m[0m[1m[38;5;9mexpected one of `-&gt;`, `&lt;`, `where`, or `{`[0m
+[0m[1m[38;5;12m...[0m
+[0m[1m[38;5;12m1075[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m}[0m
+[0m     [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m-[0m[0m [0m[0m[1m[38;5;12mthe item list ends here[0m
+
+[0m[1m[38;5;9merror[E0599][0m[0m[1m: no method named `Prelude_test` found for struct `Program` in the current scope[0m
+[0m    [0m[0m[1m[38;5;12m--&gt; [0m[0mPrelude.rs:1077:35[0m
+[0m     [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m43[0m[0m   [0m[0m[1m[38;5;12m|[0m[0m [0m[0mpub struct Program {[0m
+[0m     [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m------------------[0m[0m [0m[0m[1m[38;5;12mmethod `Prelude_test` not found for this struct[0m
+[0m[1m[38;5;12m...[0m
+[0m[1m[38;5;12m1077[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m  println!(&quot;{:?}&quot;, Program::new().Prelude_test());[0m
+[0m     [0m[0m[1m[38;5;12m|[0m[0m                                   [0m[0m[1m[38;5;9m^^^^^^^^^^^^[0m
+[0m     [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;14mhelp[0m[0m: there is a method `Prelude_testՖՖ002032` with a similar name[0m
+[0m     [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m1077[0m[0m [0m[0m[1m[38;5;12m| [0m[0m  println!(&quot;{:?}&quot;, Program::new().[0m[0m[38;5;10mPrelude_testՖՖ002032[0m[0m());[0m
+[0m     [0m[0m[1m[38;5;12m|[0m[0m                                   [0m[0m[38;5;10m~~~~~~~~~~~~~~~~~~~~[0m
 
 [0m[1mFor more information about this error, try `rustc --explain E0599`.[0m
-[1m[31merror[0m[1m:[0m could not compile `main` (bin &quot;Prelude&quot;) due to 1 previous error</code></pre>
+[1m[31merror[0m[1m:[0m could not compile `main` (bin &quot;Prelude&quot;) due to 3 previous errors</code></pre>
 </body>
 </html>

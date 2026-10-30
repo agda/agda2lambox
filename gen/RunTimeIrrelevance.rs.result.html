@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>RunTimeIrrelevance.rs.result</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+</head>
+<body>
+<pre><code>ERROR </code></pre>
+<hr />
+<pre><code>[1m[33mwarning[0m[1m:[0m no edition set: defaulting to the 2015 edition while the latest is 2024
+[1m[32m   Compiling[0m main v0.0.0 (/home/runner/work/agda2lambox/agda2lambox/test/gen/rust)
+[0m[1m[38;5;9merror[E0308][0m[0m[1m: mismatched types[0m
+[0m    [0m[0m[1m[38;5;12m--&gt; [0m[0mRunTimeIrrelevance.rs:1534:3[0m
+[0m     [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m1533[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mpub fn ErasedRecParam_RunTimeIrrelevance_xՖՖ002261y(&amp;&#39;a self) -&gt; &amp;&#39;a dyn Fn(()) -&gt; &amp;&#39;a dyn Fn(&amp;&#39;a RunTimeIrrelevance_ErasedRecParam&lt;&#39;a, ()&gt;) -&gt; ([0m[0m[1m[38;5;12m...[0m
+[0m     [0m[0m[1m[38;5;12m|[0m[0m                                                                  [0m[0m[1m[38;5;12m---------------------------------------------------------------------------------[0m[0m [0m[0m[1m[38;5;12mexpected `&amp;&#39;a (dyn Fn(()) -&gt; &amp;&#39;a (dyn Fn(&amp;&#39;a RunTimeIrrelevance_ErasedRecParam&lt;&#39;a, ()&gt;) + &#39;a) + &#39;a)` because of return type[0m
+[0m[1m[38;5;12m1534[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m  ()[0m
+[0m     [0m[0m[1m[38;5;12m|[0m[0m   [0m[0m[1m[38;5;9m^^[0m[0m [0m[0m[1m[38;5;9mexpected `&amp;dyn Fn(()) -&gt; &amp;dyn Fn(&amp;...)`, found `()`[0m
+[0m     [0m[0m[1m[38;5;12m|[0m
+[0m     [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: expected reference `[0m[0m[1m[35m&amp;&#39;a (dyn Fn(()) -&gt; &amp;&#39;a (dyn Fn(&amp;&#39;a RunTimeIrrelevance_ErasedRecParam&lt;&#39;a, ()&gt;) + &#39;a) + &#39;a)[0m[0m`[0m
+[0m                found unit type `[0m[0m[1m[35m()[0m[0m`[0m
+
+[0m[1m[38;5;9merror[E0283][0m[0m[1m: type annotations needed[0m
+[0m    [0m[0m[1m[38;5;12m--&gt; [0m[0mRunTimeIrrelevance.rs:1546:10[0m
+[0m     [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m1546[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m    self.ErasedRecParam_RunTimeIrrelevance_y([0m
+[0m     [0m[0m[1m[38;5;12m|[0m[0m          [0m[0m[1m[38;5;9m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[0m [0m[0m[1m[38;5;9mcannot infer type of the type parameter `x` declared on the method `ErasedRecParam_RunTimeIrrelevance_y`[0m
+[0m     [0m[0m[1m[38;5;12m|[0m
+[0m     [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: cannot satisfy `_: Copy`[0m
+[0m[1m[38;5;10mnote[0m[0m: required by a bound in `Program::ErasedRecParam_RunTimeIrrelevance_y`[0m
+[0m    [0m[0m[1m[38;5;12m--&gt; [0m[0mRunTimeIrrelevance.rs:1537:47[0m
+[0m     [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m1537[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mpub fn ErasedRecParam_RunTimeIrrelevance_y&lt;x: Copy&gt;(&amp;&#39;a self, x: &amp;&#39;a RunTimeIrrelevance_ErasedRecParam&lt;&#39;a, ()&gt;) -&gt; &amp;&#39;a Nat_Builtin_Agda_N[0m[0m[1m[38;5;12m...[0m
+[0m     [0m[0m[1m[38;5;12m|[0m[0m                                               [0m[0m[1m[38;5;10m^^^^[0m[0m [0m[0m[1m[38;5;10mrequired by this bound in `Program::ErasedRecParam_RunTimeIrrelevance_y`[0m
+[0m[1m[38;5;14mhelp[0m[0m: consider specifying the generic argument[0m
+[0m     [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m1546[0m[0m [0m[0m[1m[38;5;12m| [0m[0m    self.ErasedRecParam_RunTimeIrrelevance_y[0m[0m[38;5;10m::&lt;x&gt;[0m[0m([0m
+[0m     [0m[0m[1m[38;5;12m|[0m[0m                                             [0m[0m[38;5;10m+++++[0m
+
+[0m[1m[38;5;9merror[E0308][0m[0m[1m: mismatched types[0m
+[0m    [0m[0m[1m[38;5;12m--&gt; [0m[0mRunTimeIrrelevance.rs:1552:3[0m
+[0m     [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m1551[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mpub fn ErasedField_RunTimeIrrelevance_xՖՖ0022610(&amp;&#39;a self) -&gt; &amp;&#39;a dyn Fn(&amp;&#39;a RunTimeIrrelevance_ErasedField&lt;&#39;a&gt;) -&gt; () {[0m
+[0m     [0m[0m[1m[38;5;12m|[0m[0m                                                               [0m[0m[1m[38;5;12m--------------------------------------------------------[0m[0m [0m[0m[1m[38;5;12mexpected `&amp;&#39;a (dyn Fn(&amp;&#39;a RunTimeIrrelevance_ErasedField&lt;&#39;a&gt;) + &#39;a)` because of return type[0m
+[0m[1m[38;5;12m1552[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m  ()[0m
+[0m     [0m[0m[1m[38;5;12m|[0m[0m   [0m[0m[1m[38;5;9m^^[0m[0m [0m[0m[1m[38;5;9mexpected `&amp;dyn Fn(&amp;...)`, found `()`[0m
+[0m     [0m[0m[1m[38;5;12m|[0m
+[0m     [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: expected reference `[0m[0m[1m[35m&amp;&#39;a (dyn Fn(&amp;&#39;a RunTimeIrrelevance_ErasedField&lt;&#39;a&gt;) + &#39;a)[0m[0m`[0m
+[0m                found unit type `[0m[0m[1m[35m()[0m[0m`[0m
+
+[0m[1m[38;5;9merror[E0308][0m[0m[1m: mismatched types[0m
+[0m    [0m[0m[1m[38;5;12m--&gt; [0m[0mRunTimeIrrelevance.rs:1570:3[0m
+[0m     [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m1569[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mpub fn RunTimeIrrelevance_ErasedRec(&amp;&#39;a self) -&gt; &amp;&#39;a dyn Fn(&amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;) -&gt; &amp;&#39;a dyn Fn(&amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;) -&gt; ([0m[0m[1m[38;5;12m...[0m
+[0m     [0m[0m[1m[38;5;12m|[0m[0m                                                  [0m[0m[1m[38;5;12m------------------------------------------------------------------------------------------[0m[0m [0m[0m[1m[38;5;12mexpected `&amp;&#39;a (dyn Fn(&amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;) -&gt; &amp;&#39;a (dyn Fn(&amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;) + &#39;a) + &#39;a)` because of return type[0m
+[0m[1m[38;5;12m1570[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m  ()[0m
+[0m     [0m[0m[1m[38;5;12m|[0m[0m   [0m[0m[1m[38;5;9m^^[0m[0m [0m[0m[1m[38;5;9mexpected `&amp;dyn Fn(&amp;...) -&gt; ...`, found `()`[0m
+[0m     [0m[0m[1m[38;5;12m|[0m
+[0m     [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: expected reference `[0m[0m[1m[35m&amp;&#39;a (dyn Fn(&amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;) -&gt; &amp;&#39;a (dyn Fn(&amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;) + &#39;a) + &#39;a)[0m[0m`[0m
+[0m                found unit type `[0m[0m[1m[35m()[0m[0m`[0m
+
+[0m[1m[38;5;9merror[E0308][0m[0m[1m: mismatched types[0m
+[0m    [0m[0m[1m[38;5;12m--&gt; [0m[0mRunTimeIrrelevance.rs:1574:3[0m
+[0m     [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m1573[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mpub fn ErasedRec_RunTimeIrrelevance_xՖՖ002261y(&amp;&#39;a self) -&gt; &amp;&#39;a dyn Fn(()) -&gt; &amp;&#39;a dyn Fn(()) -&gt; &amp;&#39;a dyn Fn(()) -&gt; () {[0m
+[0m     [0m[0m[1m[38;5;12m|[0m[0m                                                             [0m[0m[1m[38;5;12m--------------------------------------------------------[0m[0m [0m[0m[1m[38;5;12mexpected `&amp;&#39;a (dyn Fn(()) -&gt; &amp;&#39;a (dyn Fn(()) -&gt; &amp;&#39;a (dyn Fn(()) + &#39;a) + &#39;a) + &#39;a)` because of return type[0m
+[0m[1m[38;5;12m1574[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m  ()[0m
+[0m     [0m[0m[1m[38;5;12m|[0m[0m   [0m[0m[1m[38;5;9m^^[0m[0m [0m[0m[1m[38;5;9mexpected `&amp;dyn Fn(()) -&gt; &amp;dyn Fn(()) -&gt; &amp;...`, found `()`[0m
+[0m     [0m[0m[1m[38;5;12m|[0m
+[0m     [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: expected reference `[0m[0m[1m[35m&amp;&#39;a (dyn Fn(()) -&gt; &amp;&#39;a (dyn Fn(()) -&gt; &amp;&#39;a (dyn Fn(()) + &#39;a) + &#39;a) + &#39;a)[0m[0m`[0m
+[0m                found unit type `[0m[0m[1m[35m()[0m[0m`[0m
+
+[0m[1m[38;5;9merror[E0308][0m[0m[1m: mismatched types[0m
+[0m    [0m[0m[1m[38;5;12m--&gt; [0m[0mRunTimeIrrelevance.rs:1578:3[0m
+[0m     [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m1577[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mpub fn ErasedModule_RunTimeIrrelevance_Ֆ_ՖՖ002264_(&amp;&#39;a self) -&gt; &amp;&#39;a dyn Fn(&amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;) -&gt; &amp;&#39;a dyn Fn(&amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;) -&gt; ([0m[0m[1m[38;5;12m...[0m
+[0m     [0m[0m[1m[38;5;12m|[0m[0m                                                                 [0m[0m[1m[38;5;12m------------------------------------------------------------------------------------------[0m[0m [0m[0m[1m[38;5;12mexpected `&amp;&#39;a (dyn Fn(&amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;) -&gt; &amp;&#39;a (dyn Fn(&amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;) + &#39;a) + &#39;a)` because of return type[0m
+[0m[1m[38;5;12m1578[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m  ()[0m
+[0m     [0m[0m[1m[38;5;12m|[0m[0m   [0m[0m[1m[38;5;9m^^[0m[0m [0m[0m[1m[38;5;9mexpected `&amp;dyn Fn(&amp;...) -&gt; ...`, found `()`[0m
+[0m     [0m[0m[1m[38;5;12m|[0m
+[0m     [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: expected reference `[0m[0m[1m[35m&amp;&#39;a (dyn Fn(&amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;) -&gt; &amp;&#39;a (dyn Fn(&amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;) + &#39;a) + &#39;a)[0m[0m`[0m
+[0m                found unit type `[0m[0m[1m[35m()[0m[0m`[0m
+
+[0m[1m[38;5;9merror[E0308][0m[0m[1m: mismatched types[0m
+[0m    [0m[0m[1m[38;5;12m--&gt; [0m[0mRunTimeIrrelevance.rs:1582:3[0m
+[0m     [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m1581[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mpub fn ErasedModule_RunTimeIrrelevance_Ֆ_ՖՖ002261_(&amp;&#39;a self) -&gt; &amp;&#39;a dyn Fn(&amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;) -&gt; &amp;&#39;a dyn Fn(&amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;) -&gt; ([0m[0m[1m[38;5;12m...[0m
+[0m     [0m[0m[1m[38;5;12m|[0m[0m                                                                 [0m[0m[1m[38;5;12m------------------------------------------------------------------------------------------[0m[0m [0m[0m[1m[38;5;12mexpected `&amp;&#39;a (dyn Fn(&amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;) -&gt; &amp;&#39;a (dyn Fn(&amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;) + &#39;a) + &#39;a)` because of return type[0m
+[0m[1m[38;5;12m1582[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m  ()[0m
+[0m     [0m[0m[1m[38;5;12m|[0m[0m   [0m[0m[1m[38;5;9m^^[0m[0m [0m[0m[1m[38;5;9mexpected `&amp;dyn Fn(&amp;...) -&gt; ...`, found `()`[0m
+[0m     [0m[0m[1m[38;5;12m|[0m
+[0m     [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: expected reference `[0m[0m[1m[35m&amp;&#39;a (dyn Fn(&amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;) -&gt; &amp;&#39;a (dyn Fn(&amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;) + &#39;a) + &#39;a)[0m[0m`[0m
+[0m                found unit type `[0m[0m[1m[35m()[0m[0m`[0m
+
+[0m[1m[38;5;9merror[E0308][0m[0m[1m: mismatched types[0m
+[0m    [0m[0m[1m[38;5;12m--&gt; [0m[0mRunTimeIrrelevance.rs:1586:3[0m
+[0m     [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m1585[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mpub fn RunTimeIrrelevance_erasedFun(&amp;&#39;a self) -&gt; &amp;&#39;a dyn Fn(&amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;) -&gt; &amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt; {[0m
+[0m     [0m[0m[1m[38;5;12m|[0m[0m                                                  [0m[0m[1m[38;5;12m------------------------------------------------------------------------[0m[0m [0m[0m[1m[38;5;12mexpected `&amp;&#39;a (dyn Fn(&amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;) -&gt; &amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt; + &#39;a)` because of return type[0m
+[0m[1m[38;5;12m1586[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m  ()[0m
+[0m     [0m[0m[1m[38;5;12m|[0m[0m   [0m[0m[1m[38;5;9m^^[0m[0m [0m[0m[1m[38;5;9mexpected `&amp;dyn Fn(&amp;...) -&gt; ...`, found `()`[0m
+[0m     [0m[0m[1m[38;5;12m|[0m
+[0m     [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: expected reference `[0m[0m[1m[35m&amp;&#39;a (dyn Fn(&amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt;) -&gt; &amp;&#39;a Nat_Builtin_Agda_Nat&lt;&#39;a&gt; + &#39;a)[0m[0m`[0m
+[0m                found unit type `[0m[0m[1m[35m()[0m[0m`[0m
+
+[0m[1mSome errors have detailed explanations: E0283, E0308.[0m
+[0m[1mFor more information about an error, try `rustc --explain E0283`.[0m
+[1m[31merror[0m[1m:[0m could not compile `main` (bin &quot;RunTimeIrrelevance&quot;) due to 8 previous errors</code></pre>
+</body>
+</html>

@@ -17,29 +17,7 @@
 <body>
 <pre><code>     = true
      : bool
-     = exceptionMonad.Ret
-         (compile.TLambda nAnon
-            (compile.TApp
-               (compile.TApp
-                  (compile.TApp
-                     (compile.TApp
-                        (compile.TConst
-                           (MPfile [&quot;Prelude&quot;%bs], &quot;appendTR&quot;%bs))
-                        compile.TProof)
-                     compile.TProof)
-                  (compile.TApp
-                     (compile.TApp
-                        (compile.TApp
-                           (compile.TConst
-                              (MPfile [&quot;Prelude&quot;%bs], &quot;reverse&quot;%bs))
-                           compile.TProof)
-                        compile.TProof)
-                     (compile.TApp
-                        (compile.TConst (MPfile [&quot;Prelude&quot;%bs], &quot;range&quot;%bs))
-                        (compile.TRel 0))))
-               (compile.TApp
-                  (compile.TConst (MPfile [&quot;Prelude&quot;%bs], &quot;invrange&quot;%bs))
-                  (compile.TRel 0))))
-     : exceptionMonad.exception compile.Term</code></pre>
+     = &quot;42&quot;%bs
+     : string</code></pre>
 </body>
 </html>

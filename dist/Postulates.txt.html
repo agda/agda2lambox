@@ -239,7 +239,7 @@ Postulates.getTestMax:
     type: Agda.Builtin.Nat.Nat{0}
     body: Postulates.testMax
 
-Agda.Builtin.Nat.Ֆ_Ֆplus_:
+Agda.Builtin.Nat._+_:
   constant declaration:
     type variables: []
     type: (Agda.Builtin.Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → Agda.
@@ -255,7 +255,7 @@ Postulates.test:
   constant declaration:
     type variables: []
     type: Agda.Builtin.Nat.Nat{0}
-    body: Agda.Builtin.Nat.Ֆ_Ֆplus_ (Postulates.testMax)
+    body: Agda.Builtin.Nat._+_ (Postulates.testMax)
             (Postulates.getTestMax)
 
 Postulates.Key:

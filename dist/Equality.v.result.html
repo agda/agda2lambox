@@ -17,30 +17,7 @@
 <body>
 <pre><code>     = true
      : bool
-     = exceptionMonad.Ret
-         (compile.TConstruct
-            {|
-              inductive_mind :=
-                (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-              inductive_ind := 0
-            |} 1
-            (compile.tcons
-               (compile.TConstruct
-                  {|
-                    inductive_mind :=
-                      (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                    inductive_ind := 0
-                  |} 1
-                  (compile.tcons
-                     (compile.TConstruct
-                        {|
-                          inductive_mind :=
-                            (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                             &quot;Nat&quot;%bs);
-                          inductive_ind := 0
-                        |} 0 compile.tnil)
-                     compile.tnil))
-               compile.tnil))
-     : exceptionMonad.exception compile.Term</code></pre>
+     = &quot;2&quot;%bs
+     : string</code></pre>
 </body>
 </html>

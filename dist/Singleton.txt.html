@@ -36,6 +36,7 @@ Singleton.The:
     type variables:  [ℓ, A]
       constructors:
         the (1 arg(s))
+          A : □
           a : @1
 
 Singleton.test:
@@ -130,7 +131,7 @@ Singleton.test:
                                                                                                                                           Agda.
                                                                                                                                           Builtin.
                                                                                                                                           Nat.Nat{0}{0}))))))))))))))))))))))))))))))))))))))))))
-            (Singleton.The{0}{0}
+            (Singleton.The{0}{0} □
                (Agda.Builtin.Nat.Nat{0}{1}
                   (Agda.Builtin.Nat.Nat{0}{1}
                      (Agda.Builtin.Nat.Nat{0}{1}
@@ -220,6 +221,14 @@ Singleton.test:
                                                                                                                                              Agda.
                                                                                                                                              Builtin.
                                                                                                                                              Nat.Nat{0}{0})))))))))))))))))))))))))))))))))))))))))))
+
+Singleton.toNat:
+  constant declaration:
+    type variables: []
+    type: (Agda.Builtin.Nat.Nat{0}) → Singleton.The{0} □ (Agda.
+                                                          Builtin.
+                                                          Nat.Nat{0}) → Agda.Builtin.Nat.Nat{0}
+    body: λ _ _ → @1
 main program: [Singleton.test]</code></pre>
 </body>
 </html>

@@ -113,8 +113,8 @@ Definition env : global_declarations :=
            [{| ind_name := &quot;Bool&quot;%bs; ind_propositional := false;
                ind_kelim := IntoAny;
                ind_ctors :=
-                 [{| cstr_name := &quot;r#false&quot;%bs; cstr_nargs := 0 |};
-                  {| cstr_name := &quot;r#true&quot;%bs; cstr_nargs := 0 |}];
+                 [{| cstr_name := &quot;false&quot;%bs; cstr_nargs := 0 |};
+                  {| cstr_name := &quot;true&quot;%bs; cstr_nargs := 0 |}];
                ind_projs := [] |}] |});
    ((MPfile [&quot;LamBox&quot;%bs], &quot;Empty&quot;%bs),
     InductiveDecl
@@ -128,6 +128,6 @@ Compute @check_wf_glob eflags env.
 Definition prog1 : program :=
   (env, tConst (MPfile [&quot;Input&quot;%bs], &quot;test&quot;%bs)).
 
-Compute eval_program prog1.</code></pre>
+Compute show_program prog1.</code></pre>
 </body>
 </html>

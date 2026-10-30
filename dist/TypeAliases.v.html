@@ -23,12 +23,37 @@ From Agda2Lambox      Require Import CheckWF Eval.
 Import ListNotations.
 
 Definition env : global_env :=
-  [(((MPfile [&quot;TypeAliases&quot;%bs], &quot;Id&quot;%bs), true),
+  [(((MPfile [&quot;TypeAliases&quot;%bs], &quot;id&quot;%bs), true),
+    ConstantDecl
+      {| cst_body := Some (tLambda nAnon (tLambda nAnon (tRel 0)));
+         cst_type :=
+           ([nNamed &quot;A&quot;%bs],
+            TArr
+              TBox
+              (TArr
+                 (TApp (TConst (MPfile [&quot;TypeAliases&quot;%bs], &quot;Id&quot;%bs)) (TVar 0))
+                 (TApp
+                    (TConst (MPfile [&quot;TypeAliases&quot;%bs], &quot;Id&quot;%bs)) (TVar 0)))) |});
+   (((MPfile [&quot;TypeAliases&quot;%bs], &quot;Id&quot;%bs), true),
     TypeAliasDecl
       (Some
          ([{| tvar_name := nAnon; tvar_is_logical := false;
               tvar_is_arity := true; tvar_is_sort := true |}],
           TVar 0)));
+   (((MPfile [&quot;TypeAliases&quot;%bs], &quot;idK&quot;%bs), true),
+    ConstantDecl
+      {| cst_body := Some (tLambda nAnon (tLambda nAnon (tRel 0)));
+         cst_type :=
+           ([nNamed &quot;A&quot;%bs],
+            TArr
+              TBox
+              (TArr
+                 (TApp
+                    (TApp (TConst (MPfile [&quot;TypeAliases&quot;%bs], &quot;Const&quot;%bs)) (TVar 0))
+                    (TVar 0))
+                 (TApp
+                    (TApp (TConst (MPfile [&quot;TypeAliases&quot;%bs], &quot;Const&quot;%bs)) (TVar 0))
+                    (TVar 0)))) |});
    (((MPfile [&quot;TypeAliases&quot;%bs], &quot;Const&quot;%bs), true),
     TypeAliasDecl
       (Some
@@ -43,19 +68,13 @@ Definition env : global_env :=
            Some
              (tApp
                 (tApp
-                   (tConst
-                      (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                       &quot;\1366_\1366plus_&quot;%bs))
+                   (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                    (tApp
                       (tApp
-                         (tConst
-                            (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                             &quot;\1366_\1366plus_&quot;%bs))
+                         (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                          (tApp
                             (tApp
-                               (tConst
-                                  (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                   &quot;\1366_\1366plus_&quot;%bs))
+                               (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                                (tConst (MPfile [&quot;TypeAliases&quot;%bs], &quot;testAlias&quot;%bs)))
                             (tConst (MPfile [&quot;TypeAliases&quot;%bs], &quot;testAliasF&quot;%bs))))
                       (tApp
@@ -1374,9 +1393,7 @@ Definition env : global_env :=
                 nAnon
                 (tApp
                    (tApp
-                      (tConst
-                         (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                          &quot;\1366_\1366plus_&quot;%bs))
+                      (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                       (tRel 0))
                    (tApp
                       (tConstruct
@@ -1390,16 +1407,13 @@ Definition env : global_env :=
                             inductive_ind := 0 |}
                          0 []))));
          cst_type :=
-           ([],
-            TConst (MPfile [&quot;TypeAliases&quot;%bs], &quot;\8469\1366to\8469&quot;%bs)) |});
-   (((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-      &quot;\1366_\1366plus_&quot;%bs),
-     true),
+           ([], TConst (MPfile [&quot;TypeAliases&quot;%bs], &quot;\8469\8594\8469&quot;%bs)) |});
+   (((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
              (tFix
-                [{| dname := nNamed &quot;\1366_\1366plus_&quot;%bs;
+                [{| dname := nNamed &quot;_+_&quot;%bs;
                     dbody :=
                       tLambda
                         nAnon
@@ -1438,7 +1452,7 @@ Definition env : global_env :=
                     {| inductive_mind :=
                          (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
                        inductive_ind := 0 |}))) |});
-   (((MPfile [&quot;TypeAliases&quot;%bs], &quot;\8469\1366to\8469&quot;%bs), true),
+   (((MPfile [&quot;TypeAliases&quot;%bs], &quot;\8469\8594\8469&quot;%bs), true),
     TypeAliasDecl
       (Some
          ([],
@@ -1909,6 +1923,6 @@ Definition prog1 : program :=
   (ExAst.trans_env env,
    tConst (MPfile [&quot;TypeAliases&quot;%bs], &quot;test&quot;%bs)).
 
-Compute eval_program prog1.</code></pre>
+Compute show_program prog1.</code></pre>
 </body>
 </html>

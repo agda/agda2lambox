@@ -91,8 +91,8 @@
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true"></a></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true"></a><span class="at">#[</span>derive<span class="at">(</span><span class="bu">Debug</span><span class="op">,</span> <span class="bu">Clone</span><span class="at">)]</span></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">enum</span> Bool_Builtin_Agda_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true"></a>  rՖhshfalse(PhantomData<span class="op">&lt;&amp;</span><span class="ot">&#39;a</span> ()<span class="op">&gt;</span>)<span class="op">,</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true"></a>  rՖhshtrue(PhantomData<span class="op">&lt;&amp;</span><span class="ot">&#39;a</span> ()<span class="op">&gt;</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true"></a>  <span class="an">r#</span>false(PhantomData<span class="op">&lt;&amp;</span><span class="ot">&#39;a</span> ()<span class="op">&gt;</span>)<span class="op">,</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true"></a>  <span class="an">r#</span>true(PhantomData<span class="op">&lt;&amp;</span><span class="ot">&#39;a</span> ()<span class="op">&gt;</span>)</span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true"></a><span class="op">}</span></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true"></a></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true"></a><span class="at">#[</span>derive<span class="at">(</span><span class="bu">Debug</span><span class="op">,</span> <span class="bu">Clone</span><span class="at">)]</span></span>
@@ -103,8 +103,8 @@
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true"></a></span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true"></a><span class="at">#[</span>derive<span class="at">(</span><span class="bu">Debug</span><span class="op">,</span> <span class="bu">Clone</span><span class="at">)]</span></span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">enum</span> Maybe_Builtin_Agda_Maybe<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">,</span> a<span class="op">,</span> A<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true"></a>  just(PhantomData<span class="op">&lt;&amp;</span><span class="ot">&#39;a</span> (a<span class="op">,</span> A)<span class="op">&gt;,</span> A)<span class="op">,</span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true"></a>  nothing(PhantomData<span class="op">&lt;&amp;</span><span class="ot">&#39;a</span> (a<span class="op">,</span> A)<span class="op">&gt;</span>)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true"></a>  just(PhantomData<span class="op">&lt;&amp;</span><span class="ot">&#39;a</span> (a<span class="op">,</span> A)<span class="op">&gt;,</span> ()<span class="op">,</span> A)<span class="op">,</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true"></a>  nothing(PhantomData<span class="op">&lt;&amp;</span><span class="ot">&#39;a</span> (a<span class="op">,</span> A)<span class="op">&gt;,</span> ())</span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true"></a><span class="op">}</span></span>
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true"></a></span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">struct</span> Program <span class="op">{</span></span>
@@ -172,10 +172,10 @@
 <span id="cb1-94"><a href="#cb1-94" aria-hidden="true"></a></span>
 <span id="cb1-95"><a href="#cb1-95" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> MultiArgFun_exB(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Bool_Builtin_Agda_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb1-96"><a href="#cb1-96" aria-hidden="true"></a>  <span class="kw">match</span> x <span class="op">{</span></span>
-<span id="cb1-97"><a href="#cb1-97" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshfalse(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>false(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-98"><a href="#cb1-98" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>Nat_Builtin_Agda_Ֆ_Ֆmult_()</span>
 <span id="cb1-99"><a href="#cb1-99" aria-hidden="true"></a>    <span class="op">},</span></span>
-<span id="cb1-100"><a href="#cb1-100" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshtrue(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>true(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-101"><a href="#cb1-101" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>Nat_Builtin_Agda_Ֆ_Ֆplus_()</span>
 <span id="cb1-102"><a href="#cb1-102" aria-hidden="true"></a>    <span class="op">},</span></span>
 <span id="cb1-103"><a href="#cb1-103" aria-hidden="true"></a>  <span class="op">}</span></span>
@@ -189,10 +189,10 @@
 <span id="cb1-111"><a href="#cb1-111" aria-hidden="true"></a></span>
 <span id="cb1-112"><a href="#cb1-112" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> MultiArgFun_exB2(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> ()<span class="op">,</span> x2<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Bool_Builtin_Agda_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb1-113"><a href="#cb1-113" aria-hidden="true"></a>  <span class="kw">match</span> x2 <span class="op">{</span></span>
-<span id="cb1-114"><a href="#cb1-114" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshfalse(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>false(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-115"><a href="#cb1-115" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>Nat_Builtin_Agda_Ֆ_Ֆmult_()</span>
 <span id="cb1-116"><a href="#cb1-116" aria-hidden="true"></a>    <span class="op">},</span></span>
-<span id="cb1-117"><a href="#cb1-117" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshtrue(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>true(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-118"><a href="#cb1-118" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>Nat_Builtin_Agda_Ֆ_Ֆplus_()</span>
 <span id="cb1-119"><a href="#cb1-119" aria-hidden="true"></a>    <span class="op">},</span></span>
 <span id="cb1-120"><a href="#cb1-120" aria-hidden="true"></a>  <span class="op">}</span></span>
@@ -209,10 +209,10 @@
 <span id="cb1-131"><a href="#cb1-131" aria-hidden="true"></a></span>
 <span id="cb1-132"><a href="#cb1-132" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> MultiArgFun_exB3(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Bool_Builtin_Agda_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;,</span> x2<span class="op">:</span> ()) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb1-133"><a href="#cb1-133" aria-hidden="true"></a>  <span class="kw">match</span> x <span class="op">{</span></span>
-<span id="cb1-134"><a href="#cb1-134" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshfalse(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-134"><a href="#cb1-134" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>false(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-135"><a href="#cb1-135" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>Nat_Builtin_Agda_Ֆ_Ֆmult_()</span>
 <span id="cb1-136"><a href="#cb1-136" aria-hidden="true"></a>    <span class="op">},</span></span>
-<span id="cb1-137"><a href="#cb1-137" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshtrue(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-137"><a href="#cb1-137" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>true(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-138"><a href="#cb1-138" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>Nat_Builtin_Agda_Ֆ_Ֆplus_()</span>
 <span id="cb1-139"><a href="#cb1-139" aria-hidden="true"></a>    <span class="op">},</span></span>
 <span id="cb1-140"><a href="#cb1-140" aria-hidden="true"></a>  <span class="op">}</span></span>
@@ -229,11 +229,11 @@
 <span id="cb1-151"><a href="#cb1-151" aria-hidden="true"></a></span>
 <span id="cb1-152"><a href="#cb1-152" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> MultiArgFun_exB4(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Bool_Builtin_Agda_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;,</span> x2<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;,</span> x3<span class="op">:</span> ()) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb1-153"><a href="#cb1-153" aria-hidden="true"></a>  <span class="kw">match</span> x <span class="op">{</span></span>
-<span id="cb1-154"><a href="#cb1-154" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshfalse(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-154"><a href="#cb1-154" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>false(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-155"><a href="#cb1-155" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>Nat_Builtin_Agda_Ֆ_Ֆmult_()(</span>
 <span id="cb1-156"><a href="#cb1-156" aria-hidden="true"></a>        x2)</span>
 <span id="cb1-157"><a href="#cb1-157" aria-hidden="true"></a>    <span class="op">},</span></span>
-<span id="cb1-158"><a href="#cb1-158" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshtrue(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-158"><a href="#cb1-158" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>true(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-159"><a href="#cb1-159" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>Nat_Builtin_Agda_Ֆ_Ֆplus_()(</span>
 <span id="cb1-160"><a href="#cb1-160" aria-hidden="true"></a>        x2)</span>
 <span id="cb1-161"><a href="#cb1-161" aria-hidden="true"></a>    <span class="op">},</span></span>
@@ -254,12 +254,12 @@
 <span id="cb1-176"><a href="#cb1-176" aria-hidden="true"></a></span>
 <span id="cb1-177"><a href="#cb1-177" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> MultiArgFun_exB5(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Bool_Builtin_Agda_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;,</span> x2<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;,</span> x3<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;,</span> x4<span class="op">:</span> ()) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb1-178"><a href="#cb1-178" aria-hidden="true"></a>  <span class="kw">match</span> x <span class="op">{</span></span>
-<span id="cb1-179"><a href="#cb1-179" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshfalse(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-179"><a href="#cb1-179" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>false(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-180"><a href="#cb1-180" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>Nat_Builtin_Agda_Ֆ_Ֆmult_()(</span>
 <span id="cb1-181"><a href="#cb1-181" aria-hidden="true"></a>        x2)(</span>
 <span id="cb1-182"><a href="#cb1-182" aria-hidden="true"></a>        x3)</span>
 <span id="cb1-183"><a href="#cb1-183" aria-hidden="true"></a>    <span class="op">},</span></span>
-<span id="cb1-184"><a href="#cb1-184" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshtrue(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-184"><a href="#cb1-184" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>true(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-185"><a href="#cb1-185" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>Nat_Builtin_Agda_Ֆ_Ֆplus_()(</span>
 <span id="cb1-186"><a href="#cb1-186" aria-hidden="true"></a>        x2)(</span>
 <span id="cb1-187"><a href="#cb1-187" aria-hidden="true"></a>        x3)</span>
@@ -284,10 +284,10 @@
 <span id="cb1-206"><a href="#cb1-206" aria-hidden="true"></a></span>
 <span id="cb1-207"><a href="#cb1-207" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> MultiArgFun_exH2(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> ()<span class="op">,</span> x2<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Bool_Builtin_Agda_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb1-208"><a href="#cb1-208" aria-hidden="true"></a>  <span class="kw">match</span> x2 <span class="op">{</span></span>
-<span id="cb1-209"><a href="#cb1-209" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshfalse(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-209"><a href="#cb1-209" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>false(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-210"><a href="#cb1-210" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>Nat_Builtin_Agda_Ֆ_Ֆmult_()</span>
 <span id="cb1-211"><a href="#cb1-211" aria-hidden="true"></a>    <span class="op">},</span></span>
-<span id="cb1-212"><a href="#cb1-212" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshtrue(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-212"><a href="#cb1-212" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>true(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-213"><a href="#cb1-213" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>Nat_Builtin_Agda_Ֆ_Ֆplus_()</span>
 <span id="cb1-214"><a href="#cb1-214" aria-hidden="true"></a>    <span class="op">},</span></span>
 <span id="cb1-215"><a href="#cb1-215" aria-hidden="true"></a>  <span class="op">}</span></span>
@@ -304,10 +304,10 @@
 <span id="cb1-226"><a href="#cb1-226" aria-hidden="true"></a></span>
 <span id="cb1-227"><a href="#cb1-227" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> MultiArgFun_exH3(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Bool_Builtin_Agda_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;,</span> x2<span class="op">:</span> ()) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb1-228"><a href="#cb1-228" aria-hidden="true"></a>  <span class="kw">match</span> x <span class="op">{</span></span>
-<span id="cb1-229"><a href="#cb1-229" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshfalse(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-229"><a href="#cb1-229" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>false(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-230"><a href="#cb1-230" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>Nat_Builtin_Agda_Ֆ_Ֆmult_()</span>
 <span id="cb1-231"><a href="#cb1-231" aria-hidden="true"></a>    <span class="op">},</span></span>
-<span id="cb1-232"><a href="#cb1-232" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshtrue(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-232"><a href="#cb1-232" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>true(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-233"><a href="#cb1-233" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>Nat_Builtin_Agda_Ֆ_Ֆplus_()</span>
 <span id="cb1-234"><a href="#cb1-234" aria-hidden="true"></a>    <span class="op">},</span></span>
 <span id="cb1-235"><a href="#cb1-235" aria-hidden="true"></a>  <span class="op">}</span></span>
@@ -324,11 +324,11 @@
 <span id="cb1-246"><a href="#cb1-246" aria-hidden="true"></a></span>
 <span id="cb1-247"><a href="#cb1-247" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> MultiArgFun_exH4(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Bool_Builtin_Agda_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;,</span> x2<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;,</span> x3<span class="op">:</span> ()) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb1-248"><a href="#cb1-248" aria-hidden="true"></a>  <span class="kw">match</span> x <span class="op">{</span></span>
-<span id="cb1-249"><a href="#cb1-249" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshfalse(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-249"><a href="#cb1-249" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>false(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-250"><a href="#cb1-250" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>Nat_Builtin_Agda_Ֆ_Ֆmult_()(</span>
 <span id="cb1-251"><a href="#cb1-251" aria-hidden="true"></a>        x2)</span>
 <span id="cb1-252"><a href="#cb1-252" aria-hidden="true"></a>    <span class="op">},</span></span>
-<span id="cb1-253"><a href="#cb1-253" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshtrue(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-253"><a href="#cb1-253" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>true(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-254"><a href="#cb1-254" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>Nat_Builtin_Agda_Ֆ_Ֆplus_()(</span>
 <span id="cb1-255"><a href="#cb1-255" aria-hidden="true"></a>        x2)</span>
 <span id="cb1-256"><a href="#cb1-256" aria-hidden="true"></a>    <span class="op">},</span></span>
@@ -349,12 +349,12 @@
 <span id="cb1-271"><a href="#cb1-271" aria-hidden="true"></a></span>
 <span id="cb1-272"><a href="#cb1-272" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> MultiArgFun_exH5(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Bool_Builtin_Agda_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;,</span> x2<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;,</span> x3<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;,</span> x4<span class="op">:</span> ()) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb1-273"><a href="#cb1-273" aria-hidden="true"></a>  <span class="kw">match</span> x <span class="op">{</span></span>
-<span id="cb1-274"><a href="#cb1-274" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshfalse(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-274"><a href="#cb1-274" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>false(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-275"><a href="#cb1-275" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>Nat_Builtin_Agda_Ֆ_Ֆmult_()(</span>
 <span id="cb1-276"><a href="#cb1-276" aria-hidden="true"></a>        x2)(</span>
 <span id="cb1-277"><a href="#cb1-277" aria-hidden="true"></a>        x3)</span>
 <span id="cb1-278"><a href="#cb1-278" aria-hidden="true"></a>    <span class="op">},</span></span>
-<span id="cb1-279"><a href="#cb1-279" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshtrue(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-279"><a href="#cb1-279" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>true(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-280"><a href="#cb1-280" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>Nat_Builtin_Agda_Ֆ_Ֆplus_()(</span>
 <span id="cb1-281"><a href="#cb1-281" aria-hidden="true"></a>        x2)(</span>
 <span id="cb1-282"><a href="#cb1-282" aria-hidden="true"></a>        x3)</span>
@@ -1260,7 +1260,7 @@
 <span id="cb1-1182"><a href="#cb1-1182" aria-hidden="true"></a>                            <span class="kw">self</span><span class="op">.</span>Nat_Builtin_Agda_Ֆ_Ֆplus_()(</span>
 <span id="cb1-1183"><a href="#cb1-1183" aria-hidden="true"></a>                              <span class="kw">self</span><span class="op">.</span>MultiArgFun_exB(</span>
 <span id="cb1-1184"><a href="#cb1-1184" aria-hidden="true"></a>                                <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-1185"><a href="#cb1-1185" aria-hidden="true"></a>                                  <span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshtrue(</span>
+<span id="cb1-1185"><a href="#cb1-1185" aria-hidden="true"></a>                                  <span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>true(</span>
 <span id="cb1-1186"><a href="#cb1-1186" aria-hidden="true"></a>                                    PhantomData)))(</span>
 <span id="cb1-1187"><a href="#cb1-1187" aria-hidden="true"></a>                                <span class="kw">self</span><span class="op">.</span>alloc(</span>
 <span id="cb1-1188"><a href="#cb1-1188" aria-hidden="true"></a>                                  <span class="pp">Nat_Builtin_Agda_Nat::</span>suc(</span>
@@ -1397,7 +1397,7 @@
 <span id="cb1-1319"><a href="#cb1-1319" aria-hidden="true"></a>                              <span class="kw">self</span><span class="op">.</span>MultiArgFun_exB2(</span>
 <span id="cb1-1320"><a href="#cb1-1320" aria-hidden="true"></a>                                ()<span class="op">,</span></span>
 <span id="cb1-1321"><a href="#cb1-1321" aria-hidden="true"></a>                                <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-1322"><a href="#cb1-1322" aria-hidden="true"></a>                                  <span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshtrue(</span>
+<span id="cb1-1322"><a href="#cb1-1322" aria-hidden="true"></a>                                  <span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>true(</span>
 <span id="cb1-1323"><a href="#cb1-1323" aria-hidden="true"></a>                                    PhantomData)))(</span>
 <span id="cb1-1324"><a href="#cb1-1324" aria-hidden="true"></a>                                <span class="kw">self</span><span class="op">.</span>alloc(</span>
 <span id="cb1-1325"><a href="#cb1-1325" aria-hidden="true"></a>                                  <span class="pp">Nat_Builtin_Agda_Nat::</span>suc(</span>
@@ -1533,7 +1533,7 @@
 <span id="cb1-1455"><a href="#cb1-1455" aria-hidden="true"></a>                                            PhantomData)))))))))(</span>
 <span id="cb1-1456"><a href="#cb1-1456" aria-hidden="true"></a>                            <span class="kw">self</span><span class="op">.</span>MultiArgFun_exB3(</span>
 <span id="cb1-1457"><a href="#cb1-1457" aria-hidden="true"></a>                              <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-1458"><a href="#cb1-1458" aria-hidden="true"></a>                                <span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshtrue(</span>
+<span id="cb1-1458"><a href="#cb1-1458" aria-hidden="true"></a>                                <span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>true(</span>
 <span id="cb1-1459"><a href="#cb1-1459" aria-hidden="true"></a>                                  PhantomData))<span class="op">,</span></span>
 <span id="cb1-1460"><a href="#cb1-1460" aria-hidden="true"></a>                              ())(</span>
 <span id="cb1-1461"><a href="#cb1-1461" aria-hidden="true"></a>                              <span class="kw">self</span><span class="op">.</span>alloc(</span>
@@ -1670,7 +1670,7 @@
 <span id="cb1-1592"><a href="#cb1-1592" aria-hidden="true"></a>                                          PhantomData)))))))))(</span>
 <span id="cb1-1593"><a href="#cb1-1593" aria-hidden="true"></a>                          <span class="kw">self</span><span class="op">.</span>MultiArgFun_exB4(</span>
 <span id="cb1-1594"><a href="#cb1-1594" aria-hidden="true"></a>                            <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-1595"><a href="#cb1-1595" aria-hidden="true"></a>                              <span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshfalse(</span>
+<span id="cb1-1595"><a href="#cb1-1595" aria-hidden="true"></a>                              <span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>false(</span>
 <span id="cb1-1596"><a href="#cb1-1596" aria-hidden="true"></a>                                PhantomData))<span class="op">,</span></span>
 <span id="cb1-1597"><a href="#cb1-1597" aria-hidden="true"></a>                            <span class="kw">self</span><span class="op">.</span>alloc(</span>
 <span id="cb1-1598"><a href="#cb1-1598" aria-hidden="true"></a>                              <span class="pp">Nat_Builtin_Agda_Nat::</span>suc(</span>
@@ -1750,7 +1750,7 @@
 <span id="cb1-1672"><a href="#cb1-1672" aria-hidden="true"></a>                                        PhantomData)))))))))(</span>
 <span id="cb1-1673"><a href="#cb1-1673" aria-hidden="true"></a>                        <span class="kw">self</span><span class="op">.</span>MultiArgFun_exB5(</span>
 <span id="cb1-1674"><a href="#cb1-1674" aria-hidden="true"></a>                          <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-1675"><a href="#cb1-1675" aria-hidden="true"></a>                            <span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshtrue(</span>
+<span id="cb1-1675"><a href="#cb1-1675" aria-hidden="true"></a>                            <span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>true(</span>
 <span id="cb1-1676"><a href="#cb1-1676" aria-hidden="true"></a>                              PhantomData))<span class="op">,</span></span>
 <span id="cb1-1677"><a href="#cb1-1677" aria-hidden="true"></a>                          <span class="kw">self</span><span class="op">.</span>alloc(</span>
 <span id="cb1-1678"><a href="#cb1-1678" aria-hidden="true"></a>                            <span class="pp">Nat_Builtin_Agda_Nat::</span>suc(</span>
@@ -1888,7 +1888,7 @@
 <span id="cb1-1810"><a href="#cb1-1810" aria-hidden="true"></a>                      <span class="kw">self</span><span class="op">.</span>MultiArgFun_exH2(</span>
 <span id="cb1-1811"><a href="#cb1-1811" aria-hidden="true"></a>                        ()<span class="op">,</span></span>
 <span id="cb1-1812"><a href="#cb1-1812" aria-hidden="true"></a>                        <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-1813"><a href="#cb1-1813" aria-hidden="true"></a>                          <span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshtrue(</span>
+<span id="cb1-1813"><a href="#cb1-1813" aria-hidden="true"></a>                          <span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>true(</span>
 <span id="cb1-1814"><a href="#cb1-1814" aria-hidden="true"></a>                            PhantomData)))(</span>
 <span id="cb1-1815"><a href="#cb1-1815" aria-hidden="true"></a>                        <span class="kw">self</span><span class="op">.</span>alloc(</span>
 <span id="cb1-1816"><a href="#cb1-1816" aria-hidden="true"></a>                          <span class="pp">Nat_Builtin_Agda_Nat::</span>suc(</span>
@@ -2024,7 +2024,7 @@
 <span id="cb1-1946"><a href="#cb1-1946" aria-hidden="true"></a>                                    PhantomData)))))))))(</span>
 <span id="cb1-1947"><a href="#cb1-1947" aria-hidden="true"></a>                    <span class="kw">self</span><span class="op">.</span>MultiArgFun_exH3(</span>
 <span id="cb1-1948"><a href="#cb1-1948" aria-hidden="true"></a>                      <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-1949"><a href="#cb1-1949" aria-hidden="true"></a>                        <span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshtrue(</span>
+<span id="cb1-1949"><a href="#cb1-1949" aria-hidden="true"></a>                        <span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>true(</span>
 <span id="cb1-1950"><a href="#cb1-1950" aria-hidden="true"></a>                          PhantomData))<span class="op">,</span></span>
 <span id="cb1-1951"><a href="#cb1-1951" aria-hidden="true"></a>                      ())(</span>
 <span id="cb1-1952"><a href="#cb1-1952" aria-hidden="true"></a>                      <span class="kw">self</span><span class="op">.</span>alloc(</span>
@@ -2161,7 +2161,7 @@
 <span id="cb1-2083"><a href="#cb1-2083" aria-hidden="true"></a>                                  PhantomData)))))))))(</span>
 <span id="cb1-2084"><a href="#cb1-2084" aria-hidden="true"></a>                  <span class="kw">self</span><span class="op">.</span>MultiArgFun_exH4(</span>
 <span id="cb1-2085"><a href="#cb1-2085" aria-hidden="true"></a>                    <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-2086"><a href="#cb1-2086" aria-hidden="true"></a>                      <span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshtrue(</span>
+<span id="cb1-2086"><a href="#cb1-2086" aria-hidden="true"></a>                      <span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>true(</span>
 <span id="cb1-2087"><a href="#cb1-2087" aria-hidden="true"></a>                        PhantomData))<span class="op">,</span></span>
 <span id="cb1-2088"><a href="#cb1-2088" aria-hidden="true"></a>                    <span class="kw">self</span><span class="op">.</span>alloc(</span>
 <span id="cb1-2089"><a href="#cb1-2089" aria-hidden="true"></a>                      <span class="pp">Nat_Builtin_Agda_Nat::</span>suc(</span>
@@ -2298,7 +2298,7 @@
 <span id="cb1-2220"><a href="#cb1-2220" aria-hidden="true"></a>                                PhantomData)))))))))(</span>
 <span id="cb1-2221"><a href="#cb1-2221" aria-hidden="true"></a>                <span class="kw">self</span><span class="op">.</span>MultiArgFun_exH5(</span>
 <span id="cb1-2222"><a href="#cb1-2222" aria-hidden="true"></a>                  <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-2223"><a href="#cb1-2223" aria-hidden="true"></a>                    <span class="pp">Bool_Builtin_Agda_Bool::</span>rՖhshtrue(</span>
+<span id="cb1-2223"><a href="#cb1-2223" aria-hidden="true"></a>                    <span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>true(</span>
 <span id="cb1-2224"><a href="#cb1-2224" aria-hidden="true"></a>                      PhantomData))<span class="op">,</span></span>
 <span id="cb1-2225"><a href="#cb1-2225" aria-hidden="true"></a>                  <span class="kw">self</span><span class="op">.</span>alloc(</span>
 <span id="cb1-2226"><a href="#cb1-2226" aria-hidden="true"></a>                    <span class="pp">Nat_Builtin_Agda_Nat::</span>suc(</span>
@@ -2443,10 +2443,10 @@
 <span id="cb1-2365"><a href="#cb1-2365" aria-hidden="true"></a></span>
 <span id="cb1-2366"><a href="#cb1-2366" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> MultiArgFun_exM(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Maybe_Builtin_Agda_Maybe<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">,</span> ()<span class="op">,</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb1-2367"><a href="#cb1-2367" aria-hidden="true"></a>  <span class="kw">match</span> x <span class="op">{</span></span>
-<span id="cb1-2368"><a href="#cb1-2368" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Maybe_Builtin_Agda_Maybe::</span>just(_<span class="op">,</span> x2) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-2368"><a href="#cb1-2368" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Maybe_Builtin_Agda_Maybe::</span>just(_<span class="op">,</span> _<span class="op">,</span> x2) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-2369"><a href="#cb1-2369" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>Nat_Builtin_Agda_Ֆ_Ֆplus_()</span>
 <span id="cb1-2370"><a href="#cb1-2370" aria-hidden="true"></a>    <span class="op">},</span></span>
-<span id="cb1-2371"><a href="#cb1-2371" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Maybe_Builtin_Agda_Maybe::</span>nothing(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-2371"><a href="#cb1-2371" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Maybe_Builtin_Agda_Maybe::</span>nothing(_<span class="op">,</span> _) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-2372"><a href="#cb1-2372" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>Nat_Builtin_Agda_Ֆ_Ֆmult_()</span>
 <span id="cb1-2373"><a href="#cb1-2373" aria-hidden="true"></a>    <span class="op">},</span></span>
 <span id="cb1-2374"><a href="#cb1-2374" aria-hidden="true"></a>  <span class="op">}</span></span>

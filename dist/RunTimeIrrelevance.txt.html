@@ -36,7 +36,7 @@ RunTimeIrrelevance.erasedFunArg:
     type: (Agda.Builtin.Nat.Nat{0}) → □ → Agda.Builtin.Nat.Nat{0}
     body: λ _ _ → Agda.Builtin.Nat.Nat{0}{1} @1
 
-Agda.Builtin.Nat.Ֆ_Ֆplus_:
+Agda.Builtin.Nat._+_:
   constant declaration:
     type variables: []
     type: (Agda.Builtin.Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → Agda.
@@ -154,7 +154,7 @@ RunTimeIrrelevance.ErasedField:
       constructors:
         constructor (2 arg(s))
           x : Agda.Builtin.Nat.Nat{0}
-          xՖ2261Ֆ0 : □
+          x≡0 : □
 
 RunTimeIrrelevance.succ:
   constant declaration:
@@ -171,7 +171,7 @@ RunTimeIrrelevance.ErasedRecParam:
       constructors:
         constructor (2 arg(s))
           y : Agda.Builtin.Nat.Nat{0}
-          xՖ2261Ֆy : □
+          x≡y : □
 
 RunTimeIrrelevance.erasedRecParam:
   constant declaration:
@@ -343,20 +343,26 @@ RunTimeIrrelevance.sumBST:
                                                                                      Builtin.
                                                                                      Nat.Nat{0}
     body: μrec [0] :=
-            0: λ _ _ → RunTimeIrrelevance.Ֆdotextendedlambda0 @1 @0
+            0: λ _ _ → @2 @1 @0
+            1: λ _ _ _ →
+                 case&lt;RunTimeIrrelevance.BST{0},0&gt; @0 of
+                   λ&lt;[_]&gt; Agda.Builtin.Nat.Nat{0}{0}
+                   λ&lt;[_, _, _]&gt;
+                     Agda.Builtin.Nat._+_ (Agda.Builtin.Nat._+_ @2 (@7 @5 @2 @1))
+                       (@7 @2 @4 @0)
 
 RunTimeIrrelevance.test:
   constant declaration:
     type variables: []
     type: Agda.Builtin.Nat.Nat{0}
-    body: Agda.Builtin.Nat.Ֆ_Ֆplus_
-            (Agda.Builtin.Nat.Ֆ_Ֆplus_
-               (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                  (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                     (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                        (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                           (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                              (Agda.Builtin.Nat.Ֆ_Ֆplus_
+    body: Agda.Builtin.Nat._+_
+            (Agda.Builtin.Nat._+_
+               (Agda.Builtin.Nat._+_
+                  (Agda.Builtin.Nat._+_
+                     (Agda.Builtin.Nat._+_
+                        (Agda.Builtin.Nat._+_
+                           (Agda.Builtin.Nat._+_
+                              (Agda.Builtin.Nat._+_
                                  (RunTimeIrrelevance.erasedFunArg Agda.Builtin.Nat.Nat{0}{0} □)
                                  (RunTimeIrrelevance.erasedHigherOrderFunArg □
                                     (λ _ →
@@ -460,7 +466,7 @@ RunTimeIrrelevance.test:
                                                                                                                                                               Builtin.
                                                                                                                                                               Nat.Nat{0}{0}))))))))))))))))))))))))))))))))))))))))))
                               (RunTimeIrrelevance.erasedRec □ □ □))
-                           (Agda.Builtin.Nat.Ֆ_Ֆplus_
+                           (Agda.Builtin.Nat._+_
                               (RunTimeIrrelevance.succ
                                  (RunTimeIrrelevance.ErasedField{0}{0} Agda.Builtin.Nat.Nat{0}{0}
                                     □))
@@ -763,7 +769,7 @@ RunTimeIrrelevance.test:
                                                                                                                                                          Nat.Nat{0}{0}))))))))))))))))))))))))))))))))))))))))))
                            □)))
                   (RunTimeIrrelevance.erasedData □))
-               (Agda.Builtin.Nat.Ֆ_Ֆplus_
+               (Agda.Builtin.Nat._+_
                   (RunTimeIrrelevance.erasedClause
                      (RunTimeIrrelevance.ErasedCon{0}{0}
                         (Agda.Builtin.Nat.Nat{0}{1}
@@ -981,7 +987,24 @@ RunTimeIrrelevance.test:
                      (RunTimeIrrelevance.BST{0}{0} □)
                      (RunTimeIrrelevance.BST{0}{0} □))))
 
-RunTimeIrrelevance.Ֆ2264ՖՖsubrefl:
+RunTimeIrrelevance..extendedlambda0:
+  constant declaration:
+    type variables: []
+    type: (Agda.Builtin.Nat.Nat{0}) → (Agda.
+                                       Builtin.
+                                       Nat.Nat{0}) → RunTimeIrrelevance.BST{0} □ □ → Agda.
+                                                                                     Builtin.
+                                                                                     Nat.Nat{0}
+    body: μrec [1] :=
+            0: λ _ _ → @2 @1 @0
+            1: λ _ _ _ →
+                 case&lt;RunTimeIrrelevance.BST{0},0&gt; @0 of
+                   λ&lt;[_]&gt; Agda.Builtin.Nat.Nat{0}{0}
+                   λ&lt;[_, _, _]&gt;
+                     Agda.Builtin.Nat._+_ (Agda.Builtin.Nat._+_ @2 (@7 @5 @2 @1))
+                       (@7 @2 @4 @0)
+
+RunTimeIrrelevance.≤-refl:
   constant declaration:
     type variables: []
     type: (Agda.Builtin.Nat.Nat{0}) → □
@@ -999,7 +1022,7 @@ RunTimeIrrelevance.ErasedData:
     type: □
     body: □
 
-RunTimeIrrelevance.ErasedRecParam.xՖ2261Ֆy:
+RunTimeIrrelevance.ErasedRecParam.x≡y:
   constant declaration:
     type variables: []
     type: □ → RunTimeIrrelevance.ErasedRecParam{0} □ → □
@@ -1014,7 +1037,7 @@ RunTimeIrrelevance.ErasedRecParam.y:
     body: λ _ →
             case&lt;RunTimeIrrelevance.ErasedRecParam{0},0&gt; @0 of λ&lt;[_, _]&gt; @1
 
-RunTimeIrrelevance.ErasedField.xՖ2261Ֆ0:
+RunTimeIrrelevance.ErasedField.x≡0:
   constant declaration:
     type variables: []
     type: (RunTimeIrrelevance.ErasedField{0}) → □
@@ -1033,19 +1056,19 @@ RunTimeIrrelevance.ErasedRec:
     type: (Agda.Builtin.Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → □
     body: □
 
-RunTimeIrrelevance.ErasedRec.xՖ2261Ֆy:
+RunTimeIrrelevance.ErasedRec.x≡y:
   constant declaration:
     type variables: []
     type: □ → □ → □ → □
     body: □
 
-RunTimeIrrelevance.ErasedModule.Ֆ_Ֆ2264Ֆ_:
+RunTimeIrrelevance.ErasedModule._≤_:
   constant declaration:
     type variables: []
     type: (Agda.Builtin.Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → □
     body: □
 
-RunTimeIrrelevance.ErasedModule.Ֆ_Ֆ2261Ֆ_:
+RunTimeIrrelevance.ErasedModule._≡_:
   constant declaration:
     type variables: []
     type: (Agda.Builtin.Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → □

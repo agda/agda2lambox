@@ -30,7 +30,7 @@ Agda.Builtin.Nat.Nat:
         suc (1 arg(s))
           n : Agda.Builtin.Nat.Nat{0}
 
-Agda.Builtin.Nat.Ֆ_Ֆplus_:
+Agda.Builtin.Nat._+_:
   constant declaration:
     type variables: []
     type: (Agda.Builtin.Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → Agda.
@@ -47,7 +47,7 @@ OpenModule.M.add40:
     type variables: []
     type: (Agda.Builtin.Nat.Nat{0}) → Agda.Builtin.Nat.Nat{0}
     body: λ _ →
-            Agda.Builtin.Nat.Ֆ_Ֆplus_
+            Agda.Builtin.Nat._+_
               (Agda.Builtin.Nat.Nat{0}{1}
                  (Agda.Builtin.Nat.Nat{0}{1}
                     (Agda.Builtin.Nat.Nat{0}{1}
@@ -158,10 +158,10 @@ OpenModule.test:
   constant declaration:
     type variables: []
     type: Agda.Builtin.Nat.Nat{0}
-    body: Agda.Builtin.Nat.Ֆ_Ֆplus_
-            (Agda.Builtin.Nat.Ֆ_Ֆplus_
-               (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                  (Agda.Builtin.Nat.Ֆ_Ֆplus_
+    body: Agda.Builtin.Nat._+_
+            (Agda.Builtin.Nat._+_
+               (Agda.Builtin.Nat._+_
+                  (Agda.Builtin.Nat._+_
                      (OpenModule.M.add40
                         (Agda.Builtin.Nat.Nat{0}{1}
                            (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0})))

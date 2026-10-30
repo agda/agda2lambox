@@ -83,31 +83,31 @@
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>  <span class="op">=</span> <span class="dt">Zero</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a>  <span class="op">|</span> <span class="dt">Suc</span> <span class="dt">Nat</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a><span class="kw">type</span> <span class="dt">List</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a>  <span class="op">=</span> _<span class="dt">UU0005565b_UU000556_UU0005565d_UU000556</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a>  <span class="op">|</span> _<span class="dt">UU000556__UU0005563a_UU000556_UU0005563a_UU000556_</span> <span class="dt">Nat</span> <span class="dt">List</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a><span class="kw">type</span> <span class="dt">List</span> <span class="fu">a</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a>  <span class="op">=</span> _<span class="dt">UU5b_UU5d</span> ()</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a>  <span class="op">|</span> __<span class="dt">UU3a_UU3a_</span> () <span class="fu">a</span> (<span class="dt">List</span> <span class="fu">a</span>)</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a><span class="fu">nat_Builtin_Agda__UU000556__UU000556plus_</span> : <span class="dt">Nat</span> <span class="op">-&gt;</span> <span class="dt">Nat</span> <span class="op">-&gt;</span> <span class="dt">Nat</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true"></a><span class="fu">nat_Builtin_Agda__UU000556__UU000556plus_</span> <span class="fu">x</span> <span class="fu">x2</span> <span class="op">=</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a><span class="fu">nat_Builtin_Agda___UU2b_</span> : <span class="dt">Nat</span> <span class="op">-&gt;</span> <span class="dt">Nat</span> <span class="op">-&gt;</span> <span class="dt">Nat</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true"></a><span class="fu">nat_Builtin_Agda___UU2b_</span> <span class="fu">x</span> <span class="fu">x2</span> <span class="op">=</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true"></a>  <span class="cf">case</span> <span class="fu">x</span> <span class="cf">of</span></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true"></a>    <span class="dt">Zero</span> <span class="op">-&gt;</span></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true"></a>      <span class="fu">x2</span></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true"></a>    <span class="dt">Suc</span> <span class="fu">x3</span> <span class="op">-&gt;</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true"></a>      <span class="dt">Suc</span> (<span class="fu">nat_Builtin_Agda__UU000556__UU000556plus_</span> <span class="fu">x3</span> <span class="fu">x2</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true"></a>      <span class="dt">Suc</span> (<span class="fu">nat_Builtin_Agda___UU2b_</span> <span class="fu">x3</span> <span class="fu">x2</span>)</span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true"></a><span class="fu">rust_map</span> : () <span class="op">-&gt;</span> () <span class="op">-&gt;</span> (<span class="dt">Nat</span> <span class="op">-&gt;</span> <span class="dt">Nat</span>) <span class="op">-&gt;</span> <span class="dt">List</span> <span class="op">-&gt;</span> <span class="dt">List</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true"></a><span class="fu">rust_map</span> : () <span class="op">-&gt;</span> () <span class="op">-&gt;</span> (<span class="fu">a</span> <span class="op">-&gt;</span> <span class="fu">a2</span>) <span class="op">-&gt;</span> <span class="dt">List</span> <span class="fu">a</span> <span class="op">-&gt;</span> <span class="dt">List</span> <span class="fu">a2</span></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true"></a><span class="fu">rust_map</span> <span class="fu">x</span> <span class="fu">x2</span> <span class="fu">x3</span> <span class="fu">x4</span> <span class="op">=</span></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true"></a>  <span class="cf">case</span> <span class="fu">x4</span> <span class="cf">of</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true"></a>    _<span class="dt">UU0005565b_UU000556_UU0005565d_UU000556</span> <span class="op">-&gt;</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true"></a>      _<span class="dt">UU0005565b_UU000556_UU0005565d_UU000556</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true"></a>    _<span class="dt">UU000556__UU0005563a_UU000556_UU0005563a_UU000556_</span> <span class="fu">x5</span> <span class="fu">x6</span> <span class="op">-&gt;</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true"></a>      _<span class="dt">UU000556__UU0005563a_UU000556_UU0005563a_UU000556_</span> (<span class="fu">x3</span> <span class="fu">x5</span>) (<span class="fu">rust_map</span> () () <span class="fu">x3</span> <span class="fu">x6</span>)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true"></a>    _<span class="dt">UU5b_UU5d</span> <span class="fu">_</span> <span class="op">-&gt;</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true"></a>      _<span class="dt">UU5b_UU5d</span> ()</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true"></a>    __<span class="dt">UU3a_UU3a_</span> <span class="fu">_</span> <span class="fu">x5</span> <span class="fu">x6</span> <span class="op">-&gt;</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true"></a>      __<span class="dt">UU3a_UU3a_</span> () (<span class="fu">x3</span> <span class="fu">x5</span>) (<span class="fu">rust_map</span> () () <span class="fu">x3</span> <span class="fu">x6</span>)</span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true"></a><span class="fu">rust_testIdd</span> : <span class="dt">List</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true"></a><span class="fu">rust_testIdd</span> : <span class="dt">List</span> <span class="dt">Nat</span></span>
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true"></a><span class="fu">rust_testIdd</span> <span class="op">=</span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true"></a>  <span class="fu">rust_map</span> () () (<span class="fu">nat_Builtin_Agda__UU000556__UU000556plus_</span> (<span class="dt">Suc</span> <span class="dt">Zero</span>)) (_<span class="dt">UU000556__UU0005563a_UU000556_UU0005563a_UU000556_</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> <span class="dt">Zero</span>)) _<span class="dt">UU0005565b_UU000556_UU0005565d_UU000556</span>)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true"></a>  <span class="fu">rust_map</span> () () (<span class="fu">nat_Builtin_Agda___UU2b_</span> (<span class="dt">Suc</span> <span class="dt">Zero</span>)) (__<span class="dt">UU3a_UU3a_</span> () (<span class="dt">Suc</span> (<span class="dt">Suc</span> <span class="dt">Zero</span>)) (_<span class="dt">UU5b_UU5d</span> ()))</span>
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true"></a><span class="fu">rust_test</span> : <span class="dt">List</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true"></a><span class="fu">rust_test</span> : <span class="dt">List</span> <span class="dt">Nat</span></span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true"></a><span class="fu">rust_test</span> <span class="op">=</span></span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true"></a>  <span class="fu">rust_testIdd</span></span></code></pre></div>
 </body>

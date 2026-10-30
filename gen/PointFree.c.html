@@ -82,15 +82,15 @@
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&quot;PointFree.h&quot;</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a><span class="kw">extern</span> <span class="kw">struct</span> thread_info *make_tinfo(<span class="dt">void</span>);</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a><span class="kw">extern</span> value f_case_102(<span class="kw">struct</span> thread_info *, value);</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a><span class="kw">extern</span> value _UU000556__UU000556plus__uncurried_101(<span class="kw">struct</span> thread_info *, value, value);</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a><span class="kw">extern</span> value __UU2b__uncurried_101(<span class="kw">struct</span> thread_info *, value, value);</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a><span class="kw">extern</span> value body(<span class="kw">struct</span> thread_info *);</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a>value f_case_102(<span class="kw">struct</span> thread_info *, value);</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a>value _UU000556__UU000556plus__uncurried_101(<span class="kw">struct</span> thread_info *, value, value);</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a>value __UU2b__uncurried_101(<span class="kw">struct</span> thread_info *, value, value);</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a>value body(<span class="kw">struct</span> thread_info *);</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a><span class="dt">unsigned</span> <span class="dt">long</span> <span class="dt">long</span> <span class="dt">const</span> body_info_249[<span class="dv">2</span>] = { <span class="dv">86</span><span class="bu">LL</span>, <span class="dv">0</span><span class="bu">LL</span>, };</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true"></a><span class="dt">unsigned</span> <span class="dt">long</span> <span class="dt">long</span> <span class="dt">const</span> _UU000556__UU000556plus__uncurried_info_248[<span class="dv">4</span>] = {</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true"></a>  <span class="dv">0</span><span class="bu">LL</span>, <span class="dv">2</span><span class="bu">LL</span>, <span class="dv">0</span><span class="bu">LL</span>, <span class="dv">1</span><span class="bu">LL</span>, };</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true"></a><span class="dt">unsigned</span> <span class="dt">long</span> <span class="dt">long</span> <span class="dt">const</span> __UU2b__uncurried_info_248[<span class="dv">4</span>] = { <span class="dv">0</span><span class="bu">LL</span>, <span class="dv">2</span><span class="bu">LL</span>, <span class="dv">0</span><span class="bu">LL</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true"></a>  <span class="dv">1</span><span class="bu">LL</span>, };</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true"></a></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true"></a><span class="dt">unsigned</span> <span class="dt">long</span> <span class="dt">long</span> <span class="dt">const</span> f_case_info_247[<span class="dv">3</span>] = { <span class="dv">0</span><span class="bu">LL</span>, <span class="dv">1</span><span class="bu">LL</span>, <span class="dv">0</span><span class="bu">LL</span>, };</span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true"></a></span>
@@ -127,7 +127,7 @@
 <span id="cb1-49"><a href="#cb1-49" aria-hidden="true"></a>  }</span>
 <span id="cb1-50"><a href="#cb1-50" aria-hidden="true"></a>}</span>
 <span id="cb1-51"><a href="#cb1-51" aria-hidden="true"></a></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true"></a>value _UU000556__UU000556plus__uncurried_101(<span class="kw">struct</span> thread_info *$tinfo, value $anon_104, value $anon_105)</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true"></a>value __UU2b__uncurried_101(<span class="kw">struct</span> thread_info *$tinfo, value $anon_104, value $anon_105)</span>
 <span id="cb1-53"><a href="#cb1-53" aria-hidden="true"></a>{</span>
 <span id="cb1-54"><a href="#cb1-54" aria-hidden="true"></a>  <span class="kw">struct</span> stack_frame frame;</span>
 <span id="cb1-55"><a href="#cb1-55" aria-hidden="true"></a>  value root[<span class="dv">2</span>];</span>
@@ -154,7 +154,7 @@
 <span id="cb1-76"><a href="#cb1-76" aria-hidden="true"></a>        (*$tinfo).limit = $limit;</span>
 <span id="cb1-77"><a href="#cb1-77" aria-hidden="true"></a>        <span class="co">/*skip*/</span>;</span>
 <span id="cb1-78"><a href="#cb1-78" aria-hidden="true"></a>        $y_107 =</span>
-<span id="cb1-79"><a href="#cb1-79" aria-hidden="true"></a>          ((value (*)(<span class="kw">struct</span> thread_info *, value, value)) _UU000556__UU000556plus__uncurried_101)</span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true"></a>          ((value (*)(<span class="kw">struct</span> thread_info *, value, value)) __UU2b__uncurried_101)</span>
 <span id="cb1-80"><a href="#cb1-80" aria-hidden="true"></a>          ($tinfo, $anon_104, $anon_106);</span>
 <span id="cb1-81"><a href="#cb1-81" aria-hidden="true"></a>        $alloc = (*$tinfo).alloc;</span>
 <span id="cb1-82"><a href="#cb1-82" aria-hidden="true"></a>        $limit = (*$tinfo).limit;</span>
@@ -714,7 +714,7 @@
 <span id="cb1-636"><a href="#cb1-636" aria-hidden="true"></a>  (*$tinfo).limit = $limit;</span>
 <span id="cb1-637"><a href="#cb1-637" aria-hidden="true"></a>  <span class="co">/*skip*/</span>;</span>
 <span id="cb1-638"><a href="#cb1-638" aria-hidden="true"></a>  $y_202 =</span>
-<span id="cb1-639"><a href="#cb1-639" aria-hidden="true"></a>    ((value (*)(<span class="kw">struct</span> thread_info *, value, value)) _UU000556__UU000556plus__uncurried_101)</span>
+<span id="cb1-639"><a href="#cb1-639" aria-hidden="true"></a>    ((value (*)(<span class="kw">struct</span> thread_info *, value, value)) __UU2b__uncurried_101)</span>
 <span id="cb1-640"><a href="#cb1-640" aria-hidden="true"></a>    ($tinfo, $y_201, $y_158);</span>
 <span id="cb1-641"><a href="#cb1-641" aria-hidden="true"></a>  $alloc = (*$tinfo).alloc;</span>
 <span id="cb1-642"><a href="#cb1-642" aria-hidden="true"></a>  $limit = (*$tinfo).limit;</span>
@@ -904,7 +904,7 @@
 <span id="cb1-826"><a href="#cb1-826" aria-hidden="true"></a>  (*$tinfo).limit = $limit;</span>
 <span id="cb1-827"><a href="#cb1-827" aria-hidden="true"></a>  <span class="co">/*skip*/</span>;</span>
 <span id="cb1-828"><a href="#cb1-828" aria-hidden="true"></a>  $PointFreedtest_246 =</span>
-<span id="cb1-829"><a href="#cb1-829" aria-hidden="true"></a>    ((value (*)(<span class="kw">struct</span> thread_info *, value, value)) _UU000556__UU000556plus__uncurried_101)</span>
+<span id="cb1-829"><a href="#cb1-829" aria-hidden="true"></a>    ((value (*)(<span class="kw">struct</span> thread_info *, value, value)) __UU2b__uncurried_101)</span>
 <span id="cb1-830"><a href="#cb1-830" aria-hidden="true"></a>    ($tinfo, $y_245, $y_202);</span>
 <span id="cb1-831"><a href="#cb1-831" aria-hidden="true"></a>  $alloc = (*$tinfo).alloc;</span>
 <span id="cb1-832"><a href="#cb1-832" aria-hidden="true"></a>  $limit = (*$tinfo).limit;</span>

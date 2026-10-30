@@ -38,38 +38,46 @@ Definition env : global_declarations :=
            Some
              (tApp
                 (tApp
-                   (tConstruct
-                      {| inductive_mind := (MPfile [&quot;With&quot;%bs], &quot;List&quot;%bs);
-                         inductive_ind := 0 |}
-                      1 [])
+                   (tApp
+                      (tConstruct
+                         {| inductive_mind := (MPfile [&quot;With&quot;%bs], &quot;List&quot;%bs);
+                            inductive_ind := 0 |}
+                         1 [])
+                      tBox)
                    (tConstruct
                       {| inductive_mind := (MPfile [&quot;With&quot;%bs], &quot;Bool&quot;%bs);
                          inductive_ind := 0 |}
                       0 []))
                 (tApp
                    (tApp
-                      (tConstruct
-                         {| inductive_mind := (MPfile [&quot;With&quot;%bs], &quot;List&quot;%bs);
-                            inductive_ind := 0 |}
-                         1 [])
+                      (tApp
+                         (tConstruct
+                            {| inductive_mind := (MPfile [&quot;With&quot;%bs], &quot;List&quot;%bs);
+                               inductive_ind := 0 |}
+                            1 [])
+                         tBox)
                       (tConstruct
                          {| inductive_mind := (MPfile [&quot;With&quot;%bs], &quot;Bool&quot;%bs);
                             inductive_ind := 0 |}
                          1 []))
                    (tApp
                       (tApp
-                         (tConstruct
-                            {| inductive_mind := (MPfile [&quot;With&quot;%bs], &quot;List&quot;%bs);
-                               inductive_ind := 0 |}
-                            1 [])
+                         (tApp
+                            (tConstruct
+                               {| inductive_mind := (MPfile [&quot;With&quot;%bs], &quot;List&quot;%bs);
+                                  inductive_ind := 0 |}
+                               1 [])
+                            tBox)
                          (tConstruct
                             {| inductive_mind := (MPfile [&quot;With&quot;%bs], &quot;Bool&quot;%bs);
                                inductive_ind := 0 |}
                             0 []))
-                      (tConstruct
-                         {| inductive_mind := (MPfile [&quot;With&quot;%bs], &quot;List&quot;%bs);
-                            inductive_ind := 0 |}
-                         0 [])))) |});
+                      (tApp
+                         (tConstruct
+                            {| inductive_mind := (MPfile [&quot;With&quot;%bs], &quot;List&quot;%bs);
+                               inductive_ind := 0 |}
+                            0 [])
+                         tBox)))) |});
    ((MPfile [&quot;With&quot;%bs], &quot;filter&quot;%bs),
     ConstantDecl
       {| cst_body :=
@@ -86,13 +94,15 @@ Definition env : global_declarations :=
                               (tCase
                                  ({| inductive_mind := (MPfile [&quot;With&quot;%bs], &quot;List&quot;%bs);
                                      inductive_ind := 0 |},
-                                  0)
+                                  1)
                                  (tRel 0)
                                  [([],
-                                   tConstruct
-                                     {| inductive_mind := (MPfile [&quot;With&quot;%bs], &quot;List&quot;%bs);
-                                        inductive_ind := 0 |}
-                                     0 []);
+                                   tApp
+                                     (tConstruct
+                                        {| inductive_mind := (MPfile [&quot;With&quot;%bs], &quot;List&quot;%bs);
+                                           inductive_ind := 0 |}
+                                        0 [])
+                                     tBox);
                                   ([nAnon; nAnon],
                                    tApp
                                      (tApp
@@ -125,14 +135,16 @@ Definition env : global_declarations :=
                                                                     ([],
                                                                      tApp
                                                                        (tApp
-                                                                          (tConstruct
-                                                                             {| inductive_mind :=
-                                                                                  (MPfile
-                                                                                     [&quot;With&quot;%bs],
-                                                                                   &quot;List&quot;%bs);
-                                                                                inductive_ind :=
-                                                                                  0 |}
-                                                                             1 [])
+                                                                          (tApp
+                                                                             (tConstruct
+                                                                                {| inductive_mind :=
+                                                                                     (MPfile
+                                                                                        [&quot;With&quot;%bs],
+                                                                                      &quot;List&quot;%bs);
+                                                                                   inductive_ind :=
+                                                                                     0 |}
+                                                                                1 [])
+                                                                             tBox)
                                                                           (tRel 2))
                                                                        (tApp
                                                                           (tApp
@@ -148,15 +160,13 @@ Definition env : global_declarations :=
                 0) |});
    ((MPfile [&quot;With&quot;%bs], &quot;List&quot;%bs),
     InductiveDecl
-      {| ind_finite := Finite; ind_npars := 0;
+      {| ind_finite := Finite; ind_npars := 1;
          ind_bodies :=
            [{| ind_name := &quot;List&quot;%bs; ind_propositional := false;
                ind_kelim := IntoAny;
                ind_ctors :=
-                 [{| cstr_name := &quot;\1366\&amp;5b\1366\1366\&amp;5d\1366&quot;%bs;
-                     cstr_nargs := 0 |};
-                  {| cstr_name := &quot;\1366_\1366\&amp;3a\1366\1366\&amp;3a\1366_&quot;%bs;
-                     cstr_nargs := 2 |}];
+                 [{| cstr_name := &quot;[]&quot;%bs; cstr_nargs := 0 |};
+                  {| cstr_name := &quot;_::_&quot;%bs; cstr_nargs := 2 |}];
                ind_projs := [] |}] |});
    ((MPfile [&quot;With&quot;%bs], &quot;Bool&quot;%bs),
     InductiveDecl
@@ -165,8 +175,8 @@ Definition env : global_declarations :=
            [{| ind_name := &quot;Bool&quot;%bs; ind_propositional := false;
                ind_kelim := IntoAny;
                ind_ctors :=
-                 [{| cstr_name := &quot;r#false&quot;%bs; cstr_nargs := 0 |};
-                  {| cstr_name := &quot;r#true&quot;%bs; cstr_nargs := 0 |}];
+                 [{| cstr_name := &quot;false&quot;%bs; cstr_nargs := 0 |};
+                  {| cstr_name := &quot;true&quot;%bs; cstr_nargs := 0 |}];
                ind_projs := [] |}] |});
    ((MPfile [&quot;LamBox&quot;%bs], &quot;Empty&quot;%bs),
     InductiveDecl
@@ -180,6 +190,6 @@ Compute @check_wf_glob eflags env.
 Definition prog1 : program :=
   (env, tConst (MPfile [&quot;With&quot;%bs], &quot;test&quot;%bs)).
 
-Compute eval_program prog1.</code></pre>
+Compute show_program prog1.</code></pre>
 </body>
 </html>

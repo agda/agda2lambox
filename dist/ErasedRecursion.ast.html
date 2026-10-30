@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>ErasedRecursion.ast</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+</head>
+<body>
+<pre><code>(Untyped ((((MPfile (&quot;ErasedRecursion&quot;)) &quot;const&quot;) (ConstantDecl (constant_body (Some (tLambda nAnon (tLambda nAnon (tRel 1))))))) (((MPfile (&quot;ErasedRecursion&quot;)) &quot;test&quot;) (ConstantDecl (constant_body (Some (tApp (tConst ((MPfile (&quot;ErasedRecursion&quot;)) &quot;pred&quot;)) (tApp (tConstruct (inductive ((MPfile (&quot;Agda&quot; &quot;Builtin&quot; &quot;Nat&quot;)) &quot;Nat&quot;) 0) 1 ()) (tApp (tConstruct (inductive ((MPfile (&quot;Agda&quot; &quot;Builtin&quot; &quot;Nat&quot;)) &quot;Nat&quot;) 0) 1 ()) (tApp (tConstruct (inductive ((MPfile (&quot;Agda&quot; &quot;Builtin&quot; &quot;Nat&quot;)) &quot;Nat&quot;) 0) 1 ()) (tConstruct (inductive ((MPfile (&quot;Agda&quot; &quot;Builtin&quot; &quot;Nat&quot;)) &quot;Nat&quot;) 0) 0 ()))))))))) (((MPfile (&quot;ErasedRecursion&quot;)) &quot;pred&quot;) (ConstantDecl (constant_body (Some (tConst ((MPfile (&quot;ErasedRecursion&quot;)) &quot;.extendedlambda0&quot;)))))) (((MPfile (&quot;ErasedRecursion&quot;)) &quot;.extendedlambda0&quot;) (ConstantDecl (constant_body (Some (tLambda nAnon (tCase ((inductive ((MPfile (&quot;Agda&quot; &quot;Builtin&quot; &quot;Nat&quot;)) &quot;Nat&quot;) 0) 0) (tRel 0) ((() (tConstruct (inductive ((MPfile (&quot;Agda&quot; &quot;Builtin&quot; &quot;Nat&quot;)) &quot;Nat&quot;) 0) 0 ())) ((nAnon) (tApp (tApp (tLambda nAnon (tLambda nAnon (tRel 1))) (tRel 0)) tBox))))))))) (((MPfile (&quot;Agda&quot; &quot;Builtin&quot; &quot;Nat&quot;)) &quot;Nat&quot;) (InductiveDecl (mutual_inductive_body Finite 0 ((one_inductive_body &quot;Nat&quot; false IntoAny ((constructor_body &quot;zero&quot; 0) (constructor_body &quot;suc&quot; 1)) ()))))) (((MPfile (&quot;LamBox&quot;)) &quot;Empty&quot;) (InductiveDecl (mutual_inductive_body Finite 0 ((one_inductive_body &quot;Empty&quot; false IntoAny () ())))))) (Some (tConst ((MPfile (&quot;ErasedRecursion&quot;)) &quot;test&quot;))))</code></pre>
+</body>
+</html>

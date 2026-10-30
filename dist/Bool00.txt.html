@@ -30,7 +30,7 @@ Agda.Builtin.Nat.Nat:
         suc (1 arg(s))
           n : Agda.Builtin.Nat.Nat{0}
 
-Agda.Builtin.Nat.Ֆ_Ֆplus_:
+Agda.Builtin.Nat._+_:
   constant declaration:
     type variables: []
     type: (Agda.Builtin.Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → Agda.
@@ -47,10 +47,10 @@ Bool00.Bool:
     Bool
     type variables:  []
       constructors:
-        r#false (0 arg(s))
-        r#true (0 arg(s))
+        false (0 arg(s))
+        true (0 arg(s))
 
-Bool00.Ֆ_Ֆ2227Ֆ_:
+Bool00._∧_:
   constant declaration:
     type variables: []
     type: (Bool00.Bool{0}) → (Bool00.Bool{0}) → Bool00.Bool{0}
@@ -63,13 +63,13 @@ Bool00.Ֆ_Ֆ2227Ֆ_:
                      λ&lt;[]&gt; @0
                      λ&lt;[]&gt; Bool00.Bool{0}{1}
 
-Bool00.rՖhshtrue:
+Bool00.r#true:
   constant declaration:
     type variables: []
     type: Bool00.Bool{0}
     body: Bool00.Bool{0}{1}
 
-Bool00.rՖhshfalse:
+Bool00.r#false:
   constant declaration:
     type variables: []
     type: Bool00.Bool{0}
@@ -79,7 +79,7 @@ Bool00.testBool:
   constant declaration:
     type variables: []
     type: Bool00.Bool{0}
-    body: Bool00.Ֆ_Ֆ2227Ֆ_ (Bool00.rՖhshtrue) (Bool00.rՖhshfalse)
+    body: Bool00._∧_ (Bool00.r#true) (Bool00.r#false)
 
 Bool00.bool2Nat:
   constant declaration:
@@ -307,9 +307,9 @@ Bool00.test:
   constant declaration:
     type variables: []
     type: Agda.Builtin.Nat.Nat{0}
-    body: Agda.Builtin.Nat.Ֆ_Ֆplus_
-            (Agda.Builtin.Nat.Ֆ_Ֆplus_
-               (Agda.Builtin.Nat.Ֆ_Ֆplus_ (Bool00.bool2Nat (Bool00.testBool))
+    body: Agda.Builtin.Nat._+_
+            (Agda.Builtin.Nat._+_
+               (Agda.Builtin.Nat._+_ (Bool00.bool2Nat (Bool00.testBool))
                   (Bool00.bool2Nat
                      (Bool00.isZero
                         (Agda.Builtin.Nat.Nat{0}{1}

@@ -17,12 +17,7 @@
 <body>
 <pre><code>     = true
      : bool
-     = exceptionMonad.Ret
-         (compile.TConstruct
-            {|
-              inductive_mind := (MPfile [&quot;OddEven&quot;%bs], &quot;Bool&quot;%bs);
-              inductive_ind := 0
-            |} 0 compile.tnil)
-     : exceptionMonad.exception compile.Term</code></pre>
+     = &quot;false&quot;%bs
+     : string</code></pre>
 </body>
 </html>

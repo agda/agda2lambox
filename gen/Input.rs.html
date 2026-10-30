@@ -91,8 +91,8 @@
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true"></a></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true"></a><span class="at">#[</span>derive<span class="at">(</span><span class="bu">Debug</span><span class="op">,</span> <span class="bu">Clone</span><span class="at">)]</span></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">enum</span> Input_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true"></a>  rՖhshfalse(PhantomData<span class="op">&lt;&amp;</span><span class="ot">&#39;a</span> ()<span class="op">&gt;</span>)<span class="op">,</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true"></a>  rՖhshtrue(PhantomData<span class="op">&lt;&amp;</span><span class="ot">&#39;a</span> ()<span class="op">&gt;</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true"></a>  <span class="an">r#</span>false(PhantomData<span class="op">&lt;&amp;</span><span class="ot">&#39;a</span> ()<span class="op">&gt;</span>)<span class="op">,</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true"></a>  <span class="an">r#</span>true(PhantomData<span class="op">&lt;&amp;</span><span class="ot">&#39;a</span> ()<span class="op">&gt;</span>)</span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true"></a><span class="op">}</span></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true"></a></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true"></a><span class="at">#[</span>derive<span class="at">(</span><span class="bu">Debug</span><span class="op">,</span> <span class="bu">Clone</span><span class="at">)]</span></span>
@@ -122,12 +122,12 @@
 <span id="cb1-44"><a href="#cb1-44" aria-hidden="true"></a></span>
 <span id="cb1-45"><a href="#cb1-45" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Input_and(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Input_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;,</span> x2<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Input_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Input_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb1-46"><a href="#cb1-46" aria-hidden="true"></a>  <span class="kw">match</span> x <span class="op">{</span></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Input_Bool::</span>rՖhshfalse(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Input_Bool::</span><span class="an">r#</span>false(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-48"><a href="#cb1-48" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true"></a>        <span class="pp">Input_Bool::</span>rՖhshfalse(</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true"></a>        <span class="pp">Input_Bool::</span><span class="an">r#</span>false(</span>
 <span id="cb1-50"><a href="#cb1-50" aria-hidden="true"></a>          PhantomData))</span>
 <span id="cb1-51"><a href="#cb1-51" aria-hidden="true"></a>    <span class="op">},</span></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Input_Bool::</span>rՖhshtrue(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Input_Bool::</span><span class="an">r#</span>true(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-53"><a href="#cb1-53" aria-hidden="true"></a>      x2</span>
 <span id="cb1-54"><a href="#cb1-54" aria-hidden="true"></a>    <span class="op">},</span></span>
 <span id="cb1-55"><a href="#cb1-55" aria-hidden="true"></a>  <span class="op">}</span></span>
@@ -144,14 +144,14 @@
 <span id="cb1-66"><a href="#cb1-66" aria-hidden="true"></a></span>
 <span id="cb1-67"><a href="#cb1-67" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Input_not(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Input_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Input_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb1-68"><a href="#cb1-68" aria-hidden="true"></a>  <span class="kw">match</span> x <span class="op">{</span></span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Input_Bool::</span>rՖhshfalse(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Input_Bool::</span><span class="an">r#</span>false(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-70"><a href="#cb1-70" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true"></a>        <span class="pp">Input_Bool::</span>rՖhshtrue(</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true"></a>        <span class="pp">Input_Bool::</span><span class="an">r#</span>true(</span>
 <span id="cb1-72"><a href="#cb1-72" aria-hidden="true"></a>          PhantomData))</span>
 <span id="cb1-73"><a href="#cb1-73" aria-hidden="true"></a>    <span class="op">},</span></span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Input_Bool::</span>rՖhshtrue(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Input_Bool::</span><span class="an">r#</span>true(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-75"><a href="#cb1-75" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-76"><a href="#cb1-76" aria-hidden="true"></a>        <span class="pp">Input_Bool::</span>rՖhshfalse(</span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true"></a>        <span class="pp">Input_Bool::</span><span class="an">r#</span>false(</span>
 <span id="cb1-77"><a href="#cb1-77" aria-hidden="true"></a>          PhantomData))</span>
 <span id="cb1-78"><a href="#cb1-78" aria-hidden="true"></a>    <span class="op">},</span></span>
 <span id="cb1-79"><a href="#cb1-79" aria-hidden="true"></a>  <span class="op">}</span></span>

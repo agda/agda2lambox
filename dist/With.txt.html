@@ -24,27 +24,27 @@ With.Bool:
   mutual inductive(s):
     Bool
       constructors:
-        r#false (0 arg(s))
-        r#true (0 arg(s))
+        false (0 arg(s))
+        true (0 arg(s))
 
 With.List:
   mutual inductive(s):
     List
       constructors:
-        Ֆ5bՖՖ5dՖ (0 arg(s))
-        Ֆ_Ֆ3aՖՖ3aՖ_ (2 arg(s))
+        [] (0 arg(s))
+        _::_ (2 arg(s))
 
 With.filter:
   constant declaration:
     body: μrec [0] :=
             0: λ _ _ _ →
-                 case&lt;With.List{0},0&gt; @0 of
-                   λ&lt;[]&gt; With.List{0}{0}
+                 case&lt;With.List{0},1&gt; @0 of
+                   λ&lt;[]&gt; With.List{0}{0} □
                    λ&lt;[_, _]&gt;
                      λ _ _ _ _ _ →
                        case&lt;With.Bool{0},0&gt; @1 of
                          λ&lt;[]&gt; @10 □ @3 @0
-                         λ&lt;[]&gt; With.List{0}{1} @2 (@10 □ @3 @0)
+                         λ&lt;[]&gt; With.List{0}{1} □ @2 (@10 □ @3 @0)
                        @4
                        @3
                        @1
@@ -53,9 +53,9 @@ With.filter:
 
 With.xs:
   constant declaration:
-    body: With.List{0}{1} With.Bool{0}{0}
-            (With.List{0}{1} With.Bool{0}{1}
-               (With.List{0}{1} With.Bool{0}{0} With.List{0}{0}))
+    body: With.List{0}{1} □ With.Bool{0}{0}
+            (With.List{0}{1} □ With.Bool{0}{1}
+               (With.List{0}{1} □ With.Bool{0}{0} (With.List{0}{0} □)))
 
 With.test:
   constant declaration: body: With.filter □ (λ _ → @0) (With.xs)

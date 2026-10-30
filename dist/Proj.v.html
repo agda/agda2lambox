@@ -32,7 +32,7 @@ Definition env : global_declarations :=
                 (tCase
                    ({| inductive_mind := (MPfile [&quot;Proj&quot;%bs], &quot;Pair&quot;%bs);
                        inductive_ind := 0 |},
-                    0)
+                    2)
                    (tRel 0) [([nAnon; nAnon], tRel 1)])) |});
    ((MPfile [&quot;Proj&quot;%bs], &quot;test&quot;%bs),
     ConstantDecl
@@ -47,10 +47,14 @@ Definition env : global_declarations :=
            Some
              (tApp
                 (tApp
-                   (tConstruct
-                      {| inductive_mind := (MPfile [&quot;Proj&quot;%bs], &quot;Pair&quot;%bs);
-                         inductive_ind := 0 |}
-                      0 [])
+                   (tApp
+                      (tApp
+                         (tConstruct
+                            {| inductive_mind := (MPfile [&quot;Proj&quot;%bs], &quot;Pair&quot;%bs);
+                               inductive_ind := 0 |}
+                            0 [])
+                         tBox)
+                      tBox)
                    (tConstruct
                       {| inductive_mind := (MPfile [&quot;Proj&quot;%bs], &quot;Bool&quot;%bs);
                          inductive_ind := 0 |}
@@ -66,8 +70,8 @@ Definition env : global_declarations :=
            [{| ind_name := &quot;Bool&quot;%bs; ind_propositional := false;
                ind_kelim := IntoAny;
                ind_ctors :=
-                 [{| cstr_name := &quot;r#false&quot;%bs; cstr_nargs := 0 |};
-                  {| cstr_name := &quot;r#true&quot;%bs; cstr_nargs := 0 |}];
+                 [{| cstr_name := &quot;false&quot;%bs; cstr_nargs := 0 |};
+                  {| cstr_name := &quot;true&quot;%bs; cstr_nargs := 0 |}];
                ind_projs := [] |}] |});
    ((MPfile [&quot;Proj&quot;%bs; &quot;Pair&quot;%bs], &quot;snd&quot;%bs),
     ConstantDecl
@@ -78,16 +82,15 @@ Definition env : global_declarations :=
                 (tCase
                    ({| inductive_mind := (MPfile [&quot;Proj&quot;%bs], &quot;Pair&quot;%bs);
                        inductive_ind := 0 |},
-                    0)
+                    2)
                    (tRel 0) [([nAnon; nAnon], tRel 0)])) |});
    ((MPfile [&quot;Proj&quot;%bs], &quot;Pair&quot;%bs),
     InductiveDecl
-      {| ind_finite := Finite; ind_npars := 0;
+      {| ind_finite := Finite; ind_npars := 2;
          ind_bodies :=
            [{| ind_name := &quot;Pair&quot;%bs; ind_propositional := false;
                ind_kelim := IntoAny;
-               ind_ctors :=
-                 [{| cstr_name := &quot;\1366_\1366\&amp;2c\1366_&quot;%bs; cstr_nargs := 2 |}];
+               ind_ctors := [{| cstr_name := &quot;_,_&quot;%bs; cstr_nargs := 2 |}];
                ind_projs := [] |}] |});
    ((MPfile [&quot;LamBox&quot;%bs], &quot;Empty&quot;%bs),
     InductiveDecl
@@ -101,6 +104,6 @@ Compute @check_wf_glob eflags env.
 Definition prog1 : program :=
   (env, tConst (MPfile [&quot;Proj&quot;%bs], &quot;test&quot;%bs)).
 
-Compute eval_program prog1.</code></pre>
+Compute show_program prog1.</code></pre>
 </body>
 </html>

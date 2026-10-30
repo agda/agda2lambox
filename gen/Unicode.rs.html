@@ -96,9 +96,9 @@
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true"></a><span class="op">}</span></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true"></a></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true"></a><span class="at">#[</span>derive<span class="at">(</span><span class="bu">Debug</span><span class="op">,</span> <span class="bu">Clone</span><span class="at">)]</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">enum</span> List_Builtin_Agda_List<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true"></a>  Ֆ5bՖՖ5dՖ(PhantomData<span class="op">&lt;&amp;</span><span class="ot">&#39;a</span> ()<span class="op">&gt;</span>)<span class="op">,</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true"></a>  Ֆ_Ֆcons_(PhantomData<span class="op">&lt;&amp;</span><span class="ot">&#39;a</span> ()<span class="op">&gt;,</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;,</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> List_Builtin_Agda_List<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">enum</span> List_Builtin_Agda_List<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">,</span> a<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true"></a>  ՖՖ5bՖՖ5d(PhantomData<span class="op">&lt;&amp;</span><span class="ot">&#39;a</span> a<span class="op">&gt;,</span> ())<span class="op">,</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true"></a>  Ֆ_Ֆcons_(PhantomData<span class="op">&lt;&amp;</span><span class="ot">&#39;a</span> a<span class="op">&gt;,</span> ()<span class="op">,</span> a<span class="op">,</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> List_Builtin_Agda_List<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">,</span> a<span class="op">&gt;</span>)</span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true"></a><span class="op">}</span></span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true"></a></span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">struct</span> Program <span class="op">{</span></span>
@@ -121,34 +121,36 @@
 <span id="cb1-43"><a href="#cb1-43" aria-hidden="true"></a><span class="op">}</span></span>
 <span id="cb1-44"><a href="#cb1-44" aria-hidden="true"></a></span>
 <span id="cb1-45"><a href="#cb1-45" aria-hidden="true"></a></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Unicode_sՖ21d2ՖoՖ2081Ֆ(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> ()) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> List_Builtin_Agda_List<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Unicode_sՖՖ0021d2oՖՖ002081(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> ()) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> List_Builtin_Agda_List<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">,</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;&gt;</span> <span class="op">{</span></span>
 <span id="cb1-47"><a href="#cb1-47" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>alloc(</span>
 <span id="cb1-48"><a href="#cb1-48" aria-hidden="true"></a>    <span class="pp">List_Builtin_Agda_List::</span>Ֆ_Ֆcons_(</span>
 <span id="cb1-49"><a href="#cb1-49" aria-hidden="true"></a>      PhantomData<span class="op">,</span></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true"></a>        <span class="pp">Nat_Builtin_Agda_Nat::</span>suc(</span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true"></a>          PhantomData<span class="op">,</span></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true"></a>          <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true"></a>            <span class="pp">Nat_Builtin_Agda_Nat::</span>zero(</span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true"></a>              PhantomData))))<span class="op">,</span></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true"></a>        <span class="pp">List_Builtin_Agda_List::</span>Ֆ5bՖՖ5dՖ(</span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true"></a>          PhantomData))))</span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Unicode_sՖ21d2ՖoՖ2081Ֆ__curried(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(()) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> List_Builtin_Agda_List<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x<span class="op">|</span> <span class="op">{</span></span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>Unicode_sՖ21d2ՖoՖ2081Ֆ(</span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true"></a>      x)</span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true"></a>  <span class="op">}</span>)</span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true"></a></span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Unicode_test(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> List_Builtin_Agda_List<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>Unicode_sՖ21d2ՖoՖ2081Ֆ(</span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true"></a>    ())</span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb1-73"><a href="#cb1-73" aria-hidden="true"></a>  <span class="pp">println!</span>(<span class="st">&quot;{:?}&quot;</span><span class="op">,</span> <span class="pp">Program::</span>new()<span class="op">.</span>Unicode_test())<span class="op">;</span></span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true"></a>      ()<span class="op">,</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>alloc(</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true"></a>        <span class="pp">Nat_Builtin_Agda_Nat::</span>suc(</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true"></a>          PhantomData<span class="op">,</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true"></a>          <span class="kw">self</span><span class="op">.</span>alloc(</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true"></a>            <span class="pp">Nat_Builtin_Agda_Nat::</span>zero(</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true"></a>              PhantomData))))<span class="op">,</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>alloc(</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true"></a>        <span class="pp">List_Builtin_Agda_List::</span>ՖՖ5bՖՖ5d(</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true"></a>          PhantomData<span class="op">,</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true"></a>          ()))))</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Unicode_sՖՖ0021d2oՖՖ002081__curried(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(()) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> List_Builtin_Agda_List<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">,</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;&gt;</span> <span class="op">{</span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x<span class="op">|</span> <span class="op">{</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>Unicode_sՖՖ0021d2oՖՖ002081(</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true"></a>      x)</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true"></a>  <span class="op">}</span>)</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true"></a></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Unicode_test(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> List_Builtin_Agda_List<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">,</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;&gt;</span> <span class="op">{</span></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>Unicode_sՖՖ0021d2oՖՖ002081(</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true"></a>    ())</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true"></a>  <span class="pp">println!</span>(<span class="st">&quot;{:?}&quot;</span><span class="op">,</span> <span class="pp">Program::</span>new()<span class="op">.</span>Unicode_test())<span class="op">;</span></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
 </body>
 </html>

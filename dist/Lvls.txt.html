@@ -120,7 +120,7 @@ Lvls.testLevel:
 
 Lvls.testMkLevel: constant declaration: body: Lvls.testLevel □
 
-Agda.Builtin.Nat.Ֆ_Ֆplus_:
+Agda.Builtin.Nat._+_:
   constant declaration:
     body: μrec [0] :=
             0: λ _ _ →
@@ -315,7 +315,7 @@ Lvls.testConst:
 
 Lvls.SomeLvl.ℓ: constant declaration: body: □
 
-Lvls.Ֆ30Ֆℓ: constant declaration: body: □
+Lvls.0ℓ: constant declaration: body: □
 
 Lvls.SomeLvl:
   mutual inductive(s):
@@ -323,7 +323,7 @@ Lvls.SomeLvl:
       constructors: this (1 arg(s))
 
 Lvls.someLvl:
-  constant declaration: body: Lvls.SomeLvl{0}{0} (Lvls.Ֆ30Ֆℓ)
+  constant declaration: body: Lvls.SomeLvl{0}{0} (Lvls.0ℓ)
 
 Lvls.testConstLvl2:
   constant declaration:
@@ -417,7 +417,7 @@ Lvls.testConstLvl2:
                                                                                                                                           Nat.Nat{0}{0}))))))))))))))))))))))))))))))))))))))))))
             (Lvls.SomeLvl.ℓ (Lvls.someLvl))
 
-Lvls.Ֆ_.toNat:
+Lvls._50.toNat:
   constant declaration:
     body: λ _ →
             Agda.Builtin.Nat.Nat{0}{1}
@@ -508,17 +508,19 @@ Lvls.Ֆ_.toNat:
                                                                                                                                          Builtin.
                                                                                                                                          Nat.Nat{0}{0})))))))))))))))))))))))))))))))))))))))))
 
-Lvls.testWhere: constant declaration: body: Lvls.Ֆ_.toNat □
+Lvls.testWhere: constant declaration: body: Lvls._50.toNat □
 
 Lvls.test:
   constant declaration:
-    body: Agda.Builtin.Nat.Ֆ_Ֆplus_
-            (Agda.Builtin.Nat.Ֆ_Ֆplus_
-               (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                  (Agda.Builtin.Nat.Ֆ_Ֆplus_ (Lvls.testMkLevel) (Lvls.testSomeLvl))
+    body: Agda.Builtin.Nat._+_
+            (Agda.Builtin.Nat._+_
+               (Agda.Builtin.Nat._+_
+                  (Agda.Builtin.Nat._+_ (Lvls.testMkLevel) (Lvls.testSomeLvl))
                   (Lvls.testConst))
                (Lvls.testConstLvl2))
             (Lvls.testWhere)
+
+Lvls.const: constant declaration: body: λ _ _ _ _ → @1
 
 Lvls.testConstLvl:
   constant declaration:
@@ -611,6 +613,8 @@ Lvls.testConstLvl:
                                                                                                                                           Builtin.
                                                                                                                                           Nat.Nat{0}{0}))))))))))))))))))))))))))))))))))))))))))
             (Lvls.SomeLvl.ℓ (Lvls.someLvl))
+
+Lvls.constLvl: constant declaration: body: λ _ _ _ → @1
 
 Lvls.mkLevel: constant declaration: body: □
 main program: [Lvls.test]</code></pre>

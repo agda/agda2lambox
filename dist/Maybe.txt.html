@@ -36,10 +36,12 @@ Maybe.Maybe:
     type variables:  [a, A]
       constructors:
         Nothing (0 arg(s))
+          A : □
         Just (1 arg(s))
+          A : □
           _ : @1
 
-Agda.Builtin.Nat.Ֆ_Ֆplus_:
+Agda.Builtin.Nat._+_:
   constant declaration:
     type variables: []
     type: (Agda.Builtin.Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → Agda.
@@ -55,13 +57,13 @@ Maybe.m0:
   constant declaration:
     type variables: []
     type: Maybe.Maybe{0} □ (Agda.Builtin.Nat.Nat{0})
-    body: Maybe.Maybe{0}{0}
+    body: Maybe.Maybe{0}{0} □
 
 Maybe.m1:
   constant declaration:
     type variables: []
     type: Maybe.Maybe{0} □ (Agda.Builtin.Nat.Nat{0})
-    body: Maybe.Maybe{0}{1}
+    body: Maybe.Maybe{0}{1} □
             (Agda.Builtin.Nat.Nat{0}{1}
                (Agda.Builtin.Nat.Nat{0}{1}
                   (Agda.Builtin.Nat.Nat{0}{1}
@@ -76,7 +78,7 @@ Maybe.fromMaybeNat:
                                                        Builtin.
                                                        Nat.Nat{0}
     body: λ _ →
-            case&lt;Maybe.Maybe{0},0&gt; @0 of
+            case&lt;Maybe.Maybe{0},1&gt; @0 of
               λ&lt;[]&gt;
                 Agda.Builtin.Nat.Nat{0}{1}
                   (Agda.Builtin.Nat.Nat{0}{1}
@@ -91,7 +93,7 @@ Maybe.fromMaybe:
     type variables: [A]
     type: □ → □ → @0 → Maybe.Maybe{0} □ @0 → @0
     body: λ _ _ _ _ →
-            case&lt;Maybe.Maybe{0},0&gt; @0 of
+            case&lt;Maybe.Maybe{0},1&gt; @0 of
               λ&lt;[]&gt; @1
               λ&lt;[_]&gt; @0
 
@@ -107,15 +109,15 @@ Maybe.test:
   constant declaration:
     type variables: []
     type: Agda.Builtin.Nat.Nat{0}
-    body: Agda.Builtin.Nat.Ֆ_Ֆplus_
-            (Agda.Builtin.Nat.Ֆ_Ֆplus_
-               (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                  (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                     (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                        (Agda.Builtin.Nat.Ֆ_Ֆplus_
+    body: Agda.Builtin.Nat._+_
+            (Agda.Builtin.Nat._+_
+               (Agda.Builtin.Nat._+_
+                  (Agda.Builtin.Nat._+_
+                     (Agda.Builtin.Nat._+_
+                        (Agda.Builtin.Nat._+_
                            (Maybe.toNat
                               (λ _ _ _ → @0 □ □
-                                 (Maybe.Maybe{0}{1}
+                                 (Maybe.Maybe{0}{1} □
                                     (Agda.Builtin.Nat.Nat{0}{1}
                                        (Agda.Builtin.Nat.Nat{0}{1}
                                           (Agda.Builtin.Nat.Nat{0}{1}
@@ -124,7 +126,7 @@ Maybe.test:
                                                    (Agda.Builtin.Nat.Nat{0}{1}
                                                       Agda.Builtin.Nat.Nat{0}{0})))))))))
                            (Maybe.toNat (λ _ _ _ → @0 □ □ (Maybe.m1))))
-                        (Maybe.fromMaybeNat Maybe.Maybe{0}{0}))
+                        (Maybe.fromMaybeNat (Maybe.Maybe{0}{0} □)))
                      (Maybe.fromMaybeNat (Maybe.m0)))
                   (Maybe.fromMaybeNat (Maybe.m1)))
                (Maybe.fromMaybe □ □
@@ -136,6 +138,12 @@ Maybe.test:
                                  (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}))))))
                   (Maybe.m0)))
             (Maybe.fromMaybe □ □ Agda.Builtin.Nat.Nat{0}{0} (Maybe.m1))
+
+Maybe.idMaybe:
+  constant declaration:
+    type variables: [A]
+    type: □ → □ → Maybe.Maybe{0} □ @0 → Maybe.Maybe{0} □ @0
+    body: λ _ _ _ → @0
 main program: [Maybe.test]</code></pre>
 </body>
 </html>

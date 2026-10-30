@@ -714,9 +714,41 @@
 <span id="cb1-636"><a href="#cb1-636" aria-hidden="true"></a>        <span class="pp">Nat_Builtin_Agda_Nat::</span>zero(</span>
 <span id="cb1-637"><a href="#cb1-637" aria-hidden="true"></a>          PhantomData))))</span>
 <span id="cb1-638"><a href="#cb1-638" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-639"><a href="#cb1-639" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-640"><a href="#cb1-640" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb1-641"><a href="#cb1-641" aria-hidden="true"></a>  <span class="pp">println!</span>(<span class="st">&quot;{:?}&quot;</span><span class="op">,</span> <span class="pp">Program::</span>new()<span class="op">.</span>Curry_test())<span class="op">;</span></span>
-<span id="cb1-642"><a href="#cb1-642" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb1-639"><a href="#cb1-639" aria-hidden="true"></a></span>
+<span id="cb1-640"><a href="#cb1-640" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Curry_k<span class="op">&lt;</span>A<span class="op">:</span> <span class="bu">Copy</span><span class="op">,</span> B<span class="op">:</span> <span class="bu">Copy</span><span class="op">&gt;</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> ()<span class="op">,</span> x2<span class="op">:</span> ()<span class="op">,</span> x3<span class="op">:</span> A<span class="op">,</span> x4<span class="op">:</span> B) <span class="op">-&gt;</span> A <span class="op">{</span></span>
+<span id="cb1-641"><a href="#cb1-641" aria-hidden="true"></a>  x3</span>
+<span id="cb1-642"><a href="#cb1-642" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-643"><a href="#cb1-643" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Curry_k__curried<span class="op">&lt;</span>A<span class="op">:</span> <span class="bu">Copy</span><span class="op">,</span> B<span class="op">:</span> <span class="bu">Copy</span><span class="op">&gt;</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(()) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(()) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(A) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(B) <span class="op">-&gt;</span> A <span class="op">{</span></span>
+<span id="cb1-644"><a href="#cb1-644" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x<span class="op">|</span> <span class="op">{</span></span>
+<span id="cb1-645"><a href="#cb1-645" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x2<span class="op">|</span> <span class="op">{</span></span>
+<span id="cb1-646"><a href="#cb1-646" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x3<span class="op">|</span> <span class="op">{</span></span>
+<span id="cb1-647"><a href="#cb1-647" aria-hidden="true"></a>        <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x4<span class="op">|</span> <span class="op">{</span></span>
+<span id="cb1-648"><a href="#cb1-648" aria-hidden="true"></a>          <span class="kw">self</span><span class="op">.</span>Curry_k(</span>
+<span id="cb1-649"><a href="#cb1-649" aria-hidden="true"></a>            x<span class="op">,</span></span>
+<span id="cb1-650"><a href="#cb1-650" aria-hidden="true"></a>            x2<span class="op">,</span></span>
+<span id="cb1-651"><a href="#cb1-651" aria-hidden="true"></a>            x3<span class="op">,</span></span>
+<span id="cb1-652"><a href="#cb1-652" aria-hidden="true"></a>            x4)</span>
+<span id="cb1-653"><a href="#cb1-653" aria-hidden="true"></a>        <span class="op">}</span>)</span>
+<span id="cb1-654"><a href="#cb1-654" aria-hidden="true"></a>      <span class="op">}</span>)</span>
+<span id="cb1-655"><a href="#cb1-655" aria-hidden="true"></a>    <span class="op">}</span>)</span>
+<span id="cb1-656"><a href="#cb1-656" aria-hidden="true"></a>  <span class="op">}</span>)</span>
+<span id="cb1-657"><a href="#cb1-657" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-658"><a href="#cb1-658" aria-hidden="true"></a></span>
+<span id="cb1-659"><a href="#cb1-659" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Curry_id<span class="op">&lt;</span>A<span class="op">:</span> <span class="bu">Copy</span><span class="op">&gt;</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> ()<span class="op">,</span> x2<span class="op">:</span> A) <span class="op">-&gt;</span> A <span class="op">{</span></span>
+<span id="cb1-660"><a href="#cb1-660" aria-hidden="true"></a>  x2</span>
+<span id="cb1-661"><a href="#cb1-661" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-662"><a href="#cb1-662" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Curry_id__curried<span class="op">&lt;</span>A<span class="op">:</span> <span class="bu">Copy</span><span class="op">&gt;</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(()) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(A) <span class="op">-&gt;</span> A <span class="op">{</span></span>
+<span id="cb1-663"><a href="#cb1-663" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x<span class="op">|</span> <span class="op">{</span></span>
+<span id="cb1-664"><a href="#cb1-664" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x2<span class="op">|</span> <span class="op">{</span></span>
+<span id="cb1-665"><a href="#cb1-665" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>Curry_id(</span>
+<span id="cb1-666"><a href="#cb1-666" aria-hidden="true"></a>        x<span class="op">,</span></span>
+<span id="cb1-667"><a href="#cb1-667" aria-hidden="true"></a>        x2)</span>
+<span id="cb1-668"><a href="#cb1-668" aria-hidden="true"></a>    <span class="op">}</span>)</span>
+<span id="cb1-669"><a href="#cb1-669" aria-hidden="true"></a>  <span class="op">}</span>)</span>
+<span id="cb1-670"><a href="#cb1-670" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-671"><a href="#cb1-671" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-672"><a href="#cb1-672" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb1-673"><a href="#cb1-673" aria-hidden="true"></a>  <span class="pp">println!</span>(<span class="st">&quot;{:?}&quot;</span><span class="op">,</span> <span class="pp">Program::</span>new()<span class="op">.</span>Curry_test())<span class="op">;</span></span>
+<span id="cb1-674"><a href="#cb1-674" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
 </body>
 </html>

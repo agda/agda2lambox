@@ -23,7 +23,34 @@ From Agda2Lambox      Require Import CheckWF Eval.
 Import ListNotations.
 
 Definition env : global_env :=
-  [(((MPfile [&quot;Identity&quot;%bs], &quot;test&quot;%bs), true),
+  [(((MPfile [&quot;Identity&quot;%bs], &quot;id&quot;%bs), true),
+    ConstantDecl
+      {| cst_body := Some (tLambda nAnon (tLambda nAnon (tRel 0)));
+         cst_type :=
+           ([nNamed &quot;A&quot;%bs], TArr TBox (TArr (TVar 0) (TVar 0))) |});
+   (((MPfile [&quot;Identity&quot;%bs], &quot;id0&quot;%bs), true),
+    ConstantDecl
+      {| cst_body := Some (tLambda nAnon (tLambda nAnon (tRel 0)));
+         cst_type := ([], TArr TBox (TArr TAny TAny)) |});
+   (((MPfile [&quot;Identity&quot;%bs], &quot;id\10216_\10217_&quot;%bs), true),
+    ConstantDecl
+      {| cst_body := Some (tLambda nAnon (tLambda nAnon (tRel 0)));
+         cst_type :=
+           ([nNamed &quot;A&quot;%bs], TArr TBox (TArr (TVar 0) (TVar 0))) |});
+   (((MPfile [&quot;Identity&quot;%bs], &quot;id0\10216_\10217_&quot;%bs), true),
+    ConstantDecl
+      {| cst_body := Some (tLambda nAnon (tLambda nAnon (tRel 0)));
+         cst_type := ([], TArr TBox (TArr TAny TAny)) |});
+   (((MPfile [&quot;Identity&quot;%bs], &quot;idH&quot;%bs), true),
+    ConstantDecl
+      {| cst_body := Some (tLambda nAnon (tLambda nAnon (tRel 0)));
+         cst_type :=
+           ([nNamed &quot;A&quot;%bs], TArr TBox (TArr (TVar 0) (TVar 0))) |});
+   (((MPfile [&quot;Identity&quot;%bs], &quot;id0H&quot;%bs), true),
+    ConstantDecl
+      {| cst_body := Some (tLambda nAnon (tLambda nAnon (tRel 0)));
+         cst_type := ([], TArr TBox (TArr TAny TAny)) |});
+   (((MPfile [&quot;Identity&quot;%bs], &quot;test&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
@@ -524,6 +551,6 @@ Compute @check_wf_glob eflags (ExAst.trans_env env).
 Definition prog1 : program :=
   (ExAst.trans_env env, tConst (MPfile [&quot;Identity&quot;%bs], &quot;test&quot;%bs)).
 
-Compute eval_program prog1.</code></pre>
+Compute show_program prog1.</code></pre>
 </body>
 </html>

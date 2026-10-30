@@ -137,7 +137,7 @@ ConsImplicitArgs.fooToNat:
                                                                                                                                          Builtin.
                                                                                                                                          Nat.Nat{0}{0})))))))))))))))))))))))))))))))))))))))))
 
-Agda.Builtin.Nat.Ֆ_Ֆplus_:
+Agda.Builtin.Nat._+_:
   constant declaration:
     type variables: []
     type: (Agda.Builtin.Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → Agda.
@@ -155,6 +155,7 @@ ConsImplicitArgs.BarA:
     type variables:  [ℓ, A]
       constructors:
         bar (1 arg(s))
+          A : □
           _ : @1
 
 ConsImplicitArgs.FooA:
@@ -163,6 +164,7 @@ ConsImplicitArgs.FooA:
     type variables:  [ℓ, A]
       constructors:
         foo (1 arg(s))
+          A : □
           _ : ConsImplicitArgs.BarA{0} □ @1
 
 ConsImplicitArgs.fooAToNat:
@@ -172,15 +174,15 @@ ConsImplicitArgs.fooAToNat:
                                                                  Builtin.
                                                                  Nat.Nat{0}
     body: λ _ →
-            case&lt;ConsImplicitArgs.FooA{0},0&gt; @0 of
-              λ&lt;[_]&gt; case&lt;ConsImplicitArgs.BarA{0},0&gt; @0 of λ&lt;[_]&gt; @0
+            case&lt;ConsImplicitArgs.FooA{0},1&gt; @0 of
+              λ&lt;[_]&gt; case&lt;ConsImplicitArgs.BarA{0},1&gt; @0 of λ&lt;[_]&gt; @0
 
 ConsImplicitArgs.testFooA:
   constant declaration:
     type variables: []
     type: ConsImplicitArgs.FooA{0} □ (Agda.Builtin.Nat.Nat{0})
-    body: ConsImplicitArgs.FooA{0}{0}
-            (ConsImplicitArgs.BarA{0}{0}
+    body: ConsImplicitArgs.FooA{0}{0} □
+            (ConsImplicitArgs.BarA{0}{0} □
                (Agda.Builtin.Nat.Nat{0}{1}
                   (Agda.Builtin.Nat.Nat{0}{1}
                      (Agda.Builtin.Nat.Nat{0}{1}
@@ -382,7 +384,9 @@ ConsImplicitArgs.BarRA:
   mutual inductive(s):
     BarRA
     type variables:  [ℓ, A]
-      constructors: bar (0 arg(s))
+      constructors:
+        bar (0 arg(s))
+          A : □
 
 ConsImplicitArgs.FooRA:
   mutual inductive(s):
@@ -390,6 +394,7 @@ ConsImplicitArgs.FooRA:
     type variables:  [ℓ, A]
       constructors:
         foo (1 arg(s))
+          A : □
           getBar : ConsImplicitArgs.BarRA{0} □ @1
 
 ConsImplicitArgs.fooRAToNat:
@@ -491,9 +496,9 @@ ConsImplicitArgs.test:
   constant declaration:
     type variables: []
     type: Agda.Builtin.Nat.Nat{0}
-    body: Agda.Builtin.Nat.Ֆ_Ֆplus_
-            (Agda.Builtin.Nat.Ֆ_Ֆplus_
-               (Agda.Builtin.Nat.Ֆ_Ֆplus_ (ConsImplicitArgs.fooToNat □)
+    body: Agda.Builtin.Nat._+_
+            (Agda.Builtin.Nat._+_
+               (Agda.Builtin.Nat._+_ (ConsImplicitArgs.fooToNat □)
                   (ConsImplicitArgs.fooAToNat (ConsImplicitArgs.testFooA)))
                (ConsImplicitArgs.fooRToNat □))
             (ConsImplicitArgs.fooRAToNat □)

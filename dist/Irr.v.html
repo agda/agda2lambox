@@ -49,10 +49,12 @@ Definition env : global_declarations :=
              (tApp
                 (tApp
                    (tApp
-                      (tConstruct
-                         {| inductive_mind := (MPfile [&quot;Irr&quot;%bs], &quot;Vec&quot;%bs);
-                            inductive_ind := 0 |}
-                         1 [])
+                      (tApp
+                         (tConstruct
+                            {| inductive_mind := (MPfile [&quot;Irr&quot;%bs], &quot;Vec&quot;%bs);
+                               inductive_ind := 0 |}
+                            1 [])
+                         tBox)
                       tBox)
                    (tApp
                       (tConstruct
@@ -68,20 +70,24 @@ Definition env : global_declarations :=
                 (tApp
                    (tApp
                       (tApp
-                         (tConstruct
-                            {| inductive_mind := (MPfile [&quot;Irr&quot;%bs], &quot;Vec&quot;%bs);
-                               inductive_ind := 0 |}
-                            1 [])
+                         (tApp
+                            (tConstruct
+                               {| inductive_mind := (MPfile [&quot;Irr&quot;%bs], &quot;Vec&quot;%bs);
+                                  inductive_ind := 0 |}
+                               1 [])
+                            tBox)
                          tBox)
                       (tConstruct
                          {| inductive_mind :=
                               (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
                             inductive_ind := 0 |}
                          0 []))
-                   (tConstruct
-                      {| inductive_mind := (MPfile [&quot;Irr&quot;%bs], &quot;Vec&quot;%bs);
-                         inductive_ind := 0 |}
-                      0 []))) |});
+                   (tApp
+                      (tConstruct
+                         {| inductive_mind := (MPfile [&quot;Irr&quot;%bs], &quot;Vec&quot;%bs);
+                            inductive_ind := 0 |}
+                         0 [])
+                      tBox))) |});
    ((MPfile [&quot;Irr&quot;%bs], &quot;map&quot;%bs),
     ConstantDecl
       {| cst_body :=
@@ -102,22 +108,26 @@ Definition env : global_declarations :=
                                     (tCase
                                        ({| inductive_mind := (MPfile [&quot;Irr&quot;%bs], &quot;Vec&quot;%bs);
                                            inductive_ind := 0 |},
-                                        0)
+                                        1)
                                        (tRel 0)
                                        [([],
-                                         tConstruct
-                                           {| inductive_mind := (MPfile [&quot;Irr&quot;%bs], &quot;Vec&quot;%bs);
-                                              inductive_ind := 0 |}
-                                           0 []);
+                                         tApp
+                                           (tConstruct
+                                              {| inductive_mind := (MPfile [&quot;Irr&quot;%bs], &quot;Vec&quot;%bs);
+                                                 inductive_ind := 0 |}
+                                              0 [])
+                                           tBox);
                                         ([nAnon; nAnon; nAnon],
                                          tApp
                                            (tApp
                                               (tApp
-                                                 (tConstruct
-                                                    {| inductive_mind :=
-                                                         (MPfile [&quot;Irr&quot;%bs], &quot;Vec&quot;%bs);
-                                                       inductive_ind := 0 |}
-                                                    1 [])
+                                                 (tApp
+                                                    (tConstruct
+                                                       {| inductive_mind :=
+                                                            (MPfile [&quot;Irr&quot;%bs], &quot;Vec&quot;%bs);
+                                                          inductive_ind := 0 |}
+                                                       1 [])
+                                                    tBox)
                                                  tBox)
                                               (tApp (tRel 4) (tRel 1)))
                                            (tApp
@@ -129,14 +139,13 @@ Definition env : global_declarations :=
                 0) |});
    ((MPfile [&quot;Irr&quot;%bs], &quot;Vec&quot;%bs),
     InductiveDecl
-      {| ind_finite := Finite; ind_npars := 0;
+      {| ind_finite := Finite; ind_npars := 1;
          ind_bodies :=
            [{| ind_name := &quot;Vec&quot;%bs; ind_propositional := false;
                ind_kelim := IntoAny;
                ind_ctors :=
-                 [{| cstr_name := &quot;\1366\&amp;5b\1366\1366\&amp;5d\1366&quot;%bs;
-                     cstr_nargs := 0 |};
-                  {| cstr_name := &quot;\1366_\1366cons_&quot;%bs; cstr_nargs := 3 |}];
+                 [{| cstr_name := &quot;[]&quot;%bs; cstr_nargs := 0 |};
+                  {| cstr_name := &quot;_\8759_&quot;%bs; cstr_nargs := 3 |}];
                ind_projs := [] |}] |});
    ((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs),
     InductiveDecl
@@ -160,6 +169,6 @@ Compute @check_wf_glob eflags env.
 Definition prog1 : program :=
   (env, tConst (MPfile [&quot;Irr&quot;%bs], &quot;test&quot;%bs)).
 
-Compute eval_program prog1.</code></pre>
+Compute show_program prog1.</code></pre>
 </body>
 </html>

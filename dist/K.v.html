@@ -23,7 +23,14 @@ From Agda2Lambox     Require Import CheckWF Eval.
 Import ListNotations.
 
 Definition env : global_declarations :=
-  [((MPfile [&quot;K&quot;%bs], &quot;test&quot;%bs),
+  [((MPfile [&quot;K&quot;%bs], &quot;K&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tLambda
+                nAnon
+                (tLambda nAnon (tLambda nAnon (tLambda nAnon (tRel 1))))) |});
+   ((MPfile [&quot;K&quot;%bs], &quot;test&quot;%bs),
     ConstantDecl
       {| cst_body :=
            Some
@@ -494,6 +501,6 @@ Compute @check_wf_glob eflags env.
 Definition prog1 : program :=
   (env, tConst (MPfile [&quot;K&quot;%bs], &quot;test&quot;%bs)).
 
-Compute eval_program prog1.</code></pre>
+Compute show_program prog1.</code></pre>
 </body>
 </html>

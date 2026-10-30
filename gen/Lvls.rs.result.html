@@ -15,8 +15,33 @@
   </style>
 </head>
 <body>
+<pre><code>ERROR </code></pre>
+<hr />
 <pre><code>[1m[33mwarning[0m[1m:[0m no edition set: defaulting to the 2015 edition while the latest is 2024
 [1m[32m   Compiling[0m main v0.0.0 (/home/runner/work/agda2lambox/agda2lambox/test/gen/rust)
+[0m[1m[38;5;9merror[0m[0m[1m: missing parameters for function definition[0m
+[0m   [0m[0m[1m[38;5;12m--&gt; [0m[0mLvls.rs:805:14[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m805[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mpub fn Lvls_r#const&lt;a: Copy&gt;(&amp;&#39;a self, x: (), x2: (), x3: a, x4: ()) -&gt; a {[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m              [0m[0m[1m[38;5;9m^[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;14mhelp[0m[0m: add a parameter list[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m805[0m[0m [0m[0m[1m[38;5;12m| [0m[0mpub fn Lvls_r[0m[0m[38;5;10m()[0m[0m#const&lt;a: Copy&gt;(&amp;&#39;a self, x: (), x2: (), x3: a, x4: ()) -&gt; a {[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m              [0m[0m[38;5;10m++[0m
+
+[0m[1m[38;5;9merror[0m[0m[1m: expected one of `-&gt;`, `&lt;`, `where`, or `{`, found `#`[0m
+[0m   [0m[0m[1m[38;5;12m--&gt; [0m[0mLvls.rs:805:14[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m29[0m[0m  [0m[0m[1m[38;5;12m|[0m[0m [0m[0mimpl&lt;&#39;a&gt; Program {[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m                  [0m[0m[1m[38;5;12m-[0m[0m [0m[0m[1m[38;5;12mwhile parsing this item list starting here[0m
+[0m[1m[38;5;12m...[0m
+[0m[1m[38;5;12m805[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mpub fn Lvls_r#const&lt;a: Copy&gt;(&amp;&#39;a self, x: (), x2: (), x3: a, x4: ()) -&gt; a {[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m              [0m[0m[1m[38;5;9m^[0m[0m [0m[0m[1m[38;5;9mexpected one of `-&gt;`, `&lt;`, `where`, or `{`[0m
+[0m[1m[38;5;12m...[0m
+[0m[1m[38;5;12m982[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m}[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m-[0m[0m [0m[0m[1m[38;5;12mthe item list ends here[0m
+
 [0m[1m[33mwarning[0m[0m[1m: identifier contains a non normalized (NFKC) character: &#39;ℓ&#39;[0m
 [0m   [0m[0m[1m[38;5;12m--&gt; [0m[0mLvls.rs:494:8[0m
 [0m    [0m[0m[1m[38;5;12m|[0m
@@ -29,7 +54,7 @@
 [0m[1m[33mwarning[0m[0m[1m: identifier contains a non normalized (NFKC) character: &#39;ℓ&#39;[0m
 [0m   [0m[0m[1m[38;5;12m--&gt; [0m[0mLvls.rs:498:8[0m
 [0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m498[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mpub fn Lvls_Ֆ30Ֆℓ(&amp;&#39;a self) -&gt; () {[0m
+[0m[1m[38;5;12m498[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mpub fn Lvls_ՖՖ30ℓ(&amp;&#39;a self) -&gt; () {[0m
 [0m    [0m[0m[1m[38;5;12m|[0m[0m        [0m[0m[1m[33m^^^^^^^^^^[0m
 [0m    [0m[0m[1m[38;5;12m|[0m
 [0m    [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: this character is included in the Not_NFKC Unicode general security profile[0m
@@ -44,18 +69,8 @@
 [0m[1m[38;5;12m647[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m...[0m[0m                        self.Lvls_someLvl()))[0m
 [0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|_______________________________________________-[0m[0m [0m[0m[1m[38;5;12mcall expression requires function[0m
 
-[0m[1m[38;5;9merror[E0618][0m[0m[1m: expected function, found `()`[0m
-[0m   [0m[0m[1m[38;5;12m--&gt; [0m[0mLvls.rs:940:311[0m
-[0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m940[0m[0m [0m[0m[1m[38;5;12m|[0m[0m   [0m[0m[1m[38;5;12m...[0m[0m)))))))))))))))))))))(self.SomeLvl_Lvls_ℓ()([0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m                            [0m[0m[1m[38;5;12m-[0m[0m[1m[38;5;9m^^^^^^^^^^^^^^^^^^^^[0m[0m[1m[38;5;12m-[0m[0m [0m[0m[1m[38;5;12mhelp: consider using a semicolon here to finish the statement: `;`[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m __________________________|[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m941[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m...[0m[0m                        self.Lvls_someLvl()))[0m
-[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m|_______________________________________________-[0m[0m [0m[0m[1m[38;5;12mcall expression requires function[0m
-
 [0m[1mFor more information about this error, try `rustc --explain E0618`.[0m
 [1m[33mwarning[0m[1m:[0m `main` (bin &quot;Lvls&quot;) generated 2 warnings
-[1m[31merror[0m[1m:[0m could not compile `main` (bin &quot;Lvls&quot;) due to 2 previous errors; 2 warnings emitted</code></pre>
+[1m[31merror[0m[1m:[0m could not compile `main` (bin &quot;Lvls&quot;) due to 3 previous errors; 2 warnings emitted</code></pre>
 </body>
 </html>

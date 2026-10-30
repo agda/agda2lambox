@@ -15,8 +15,33 @@
   </style>
 </head>
 <body>
+<pre><code>ERROR </code></pre>
+<hr />
 <pre><code>[1m[33mwarning[0m[1m:[0m no edition set: defaulting to the 2015 edition while the latest is 2024
 [1m[32m   Compiling[0m main v0.0.0 (/home/runner/work/agda2lambox/agda2lambox/test/gen/rust)
+[0m[1m[38;5;9merror[0m[0m[1m: missing parameters for function definition[0m
+[0m   [0m[0m[1m[38;5;12m--&gt; [0m[0mLevels.rs:949:16[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m949[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mpub fn Levels_r#const&lt;A: Copy, B: Copy&gt;(&amp;&#39;a self, x: (), x2: (), x3: A, x4: B) -&gt; A {[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m                [0m[0m[1m[38;5;9m^[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;14mhelp[0m[0m: add a parameter list[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m949[0m[0m [0m[0m[1m[38;5;12m| [0m[0mpub fn Levels_r[0m[0m[38;5;10m()[0m[0m#const&lt;A: Copy, B: Copy&gt;(&amp;&#39;a self, x: (), x2: (), x3: A, x4: B) -&gt; A {[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m                [0m[0m[38;5;10m++[0m
+
+[0m[1m[38;5;9merror[0m[0m[1m: expected one of `-&gt;`, `&lt;`, `where`, or `{`, found `#`[0m
+[0m   [0m[0m[1m[38;5;12m--&gt; [0m[0mLevels.rs:949:16[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m29[0m[0m  [0m[0m[1m[38;5;12m|[0m[0m [0m[0mimpl&lt;&#39;a&gt; Program {[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m                  [0m[0m[1m[38;5;12m-[0m[0m [0m[0m[1m[38;5;12mwhile parsing this item list starting here[0m
+[0m[1m[38;5;12m...[0m
+[0m[1m[38;5;12m949[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mpub fn Levels_r#const&lt;A: Copy, B: Copy&gt;(&amp;&#39;a self, x: (), x2: (), x3: A, x4: B) -&gt; A {[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m                [0m[0m[1m[38;5;9m^[0m[0m [0m[0m[1m[38;5;9mexpected one of `-&gt;`, `&lt;`, `where`, or `{`[0m
+[0m[1m[38;5;12m...[0m
+[0m[1m[38;5;12m987[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m}[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m-[0m[0m [0m[0m[1m[38;5;12mthe item list ends here[0m
+
 [0m[1m[33mwarning[0m[0m[1m: identifier contains a non normalized (NFKC) character: &#39;ℓ&#39;[0m
 [0m   [0m[0m[1m[38;5;12m--&gt; [0m[0mLevels.rs:352:8[0m
 [0m    [0m[0m[1m[38;5;12m|[0m
@@ -29,7 +54,7 @@
 [0m[1m[33mwarning[0m[0m[1m: identifier contains a non normalized (NFKC) character: &#39;ℓ&#39;[0m
 [0m   [0m[0m[1m[38;5;12m--&gt; [0m[0mLevels.rs:356:8[0m
 [0m    [0m[0m[1m[38;5;12m|[0m
-[0m[1m[38;5;12m356[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mpub fn Levels_Ֆ30Ֆℓ(&amp;&#39;a self) -&gt; () {[0m
+[0m[1m[38;5;12m356[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mpub fn Levels_ՖՖ30ℓ(&amp;&#39;a self) -&gt; () {[0m
 [0m    [0m[0m[1m[38;5;12m|[0m[0m        [0m[0m[1m[33m^^^^^^^^^^^^[0m
 [0m    [0m[0m[1m[38;5;12m|[0m
 [0m    [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: this character is included in the Not_NFKC Unicode general security profile[0m
@@ -56,6 +81,6 @@
 
 [0m[1mFor more information about this error, try `rustc --explain E0618`.[0m
 [1m[33mwarning[0m[1m:[0m `main` (bin &quot;Levels&quot;) generated 2 warnings
-[1m[31merror[0m[1m:[0m could not compile `main` (bin &quot;Levels&quot;) due to 2 previous errors; 2 warnings emitted</code></pre>
+[1m[31merror[0m[1m:[0m could not compile `main` (bin &quot;Levels&quot;) due to 4 previous errors; 2 warnings emitted</code></pre>
 </body>
 </html>

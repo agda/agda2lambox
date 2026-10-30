@@ -30,7 +30,7 @@ Agda.Builtin.Nat.Nat:
         suc (1 arg(s))
           n : Agda.Builtin.Nat.Nat{0}
 
-Agda.Builtin.Nat.Ֆ_Ֆplus_:
+Agda.Builtin.Nat._+_:
   constant declaration:
     type variables: []
     type: (Agda.Builtin.Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → Agda.
@@ -52,7 +52,7 @@ PartialAppSwap.testSwapAdd:
   constant declaration:
     type variables: []
     type: Agda.Builtin.Nat.Nat{0}
-    body: PartialAppSwap.swapF □ □ (Agda.Builtin.Nat.Ֆ_Ֆplus_)
+    body: PartialAppSwap.swapF □ □ (Agda.Builtin.Nat._+_)
             (Agda.Builtin.Nat.Nat{0}{1}
                (Agda.Builtin.Nat.Nat{0}{1}
                   (Agda.Builtin.Nat.Nat{0}{1}
@@ -142,7 +142,7 @@ PartialAppSwap.testSwapAdd2:
     type variables: []
     type: (Agda.Builtin.Nat.Nat{0}) → Agda.Builtin.Nat.Nat{0}
     body: λ _ →
-            PartialAppSwap.swapF □ □ (Agda.Builtin.Nat.Ֆ_Ֆplus_) @0
+            PartialAppSwap.swapF □ □ (Agda.Builtin.Nat._+_) @0
               (Agda.Builtin.Nat.Nat{0}{1}
                  (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}))
 
@@ -151,7 +151,7 @@ PartialAppSwap.testSwapSwap:
     type variables: []
     type: Agda.Builtin.Nat.Nat{0}
     body: PartialAppSwap.swapF □ □
-            (PartialAppSwap.swapF □ □ (Agda.Builtin.Nat.Ֆ_Ֆplus_))
+            (PartialAppSwap.swapF □ □ (Agda.Builtin.Nat._+_))
             (Agda.Builtin.Nat.Nat{0}{1}
                (Agda.Builtin.Nat.Nat{0}{1}
                   (Agda.Builtin.Nat.Nat{0}{1}
@@ -244,8 +244,7 @@ PartialAppSwap.add3:
                                        Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → Agda.
                                                                                  Builtin.
                                                                                  Nat.Nat{0}
-    body: λ _ _ →
-            Agda.Builtin.Nat.Ֆ_Ֆplus_ (Agda.Builtin.Nat.Ֆ_Ֆplus_ @1 @0)
+    body: λ _ _ → Agda.Builtin.Nat._+_ (Agda.Builtin.Nat._+_ @1 @0)
 
 PartialAppSwap.testSwapAdd3:
   constant declaration:
@@ -430,10 +429,10 @@ PartialAppSwap.test:
   constant declaration:
     type variables: []
     type: Agda.Builtin.Nat.Nat{0}
-    body: Agda.Builtin.Nat.Ֆ_Ֆplus_
-            (Agda.Builtin.Nat.Ֆ_Ֆplus_
-               (Agda.Builtin.Nat.Ֆ_Ֆplus_
-                  (Agda.Builtin.Nat.Ֆ_Ֆplus_ (PartialAppSwap.testSwapAdd)
+    body: Agda.Builtin.Nat._+_
+            (Agda.Builtin.Nat._+_
+               (Agda.Builtin.Nat._+_
+                  (Agda.Builtin.Nat._+_ (PartialAppSwap.testSwapAdd)
                      (PartialAppSwap.testSwapAdd2
                         (Agda.Builtin.Nat.Nat{0}{1}
                            (Agda.Builtin.Nat.Nat{0}{1}

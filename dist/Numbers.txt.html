@@ -120,7 +120,7 @@ Numbers.answer:
                                                                                                                                        Builtin.
                                                                                                                                        Nat.Nat{0}{0})))))))))))))))))))))))))))))))))))))))))
 
-Agda.Builtin.Nat.Ֆ_Ֆplus_:
+Agda.Builtin.Nat._+_:
   constant declaration:
     type variables: []
     type: (Agda.Builtin.Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → Agda.
@@ -136,7 +136,7 @@ Numbers.add_answer:
   constant declaration:
     type variables: []
     type: (Agda.Builtin.Nat.Nat{0}) → Agda.Builtin.Nat.Nat{0}
-    body: λ _ → Agda.Builtin.Nat.Ֆ_Ֆplus_ @0 (Numbers.answer)
+    body: λ _ → Agda.Builtin.Nat._+_ @0 (Numbers.answer)
 
 Numbers.add:
   constant declaration:
@@ -144,7 +144,7 @@ Numbers.add:
     type: (Agda.Builtin.Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → Agda.
                                                                   Builtin.
                                                                   Nat.Nat{0}
-    body: λ _ _ → Agda.Builtin.Nat.Ֆ_Ֆplus_ @1 @0
+    body: λ _ _ → Agda.Builtin.Nat._+_ @1 @0
 
 Numbers.add3:
   constant declaration:
@@ -155,7 +155,7 @@ Numbers.add3:
                                                                                  Builtin.
                                                                                  Nat.Nat{0}
     body: λ _ _ _ →
-            Agda.Builtin.Nat.Ֆ_Ֆplus_ (Agda.Builtin.Nat.Ֆ_Ֆplus_ @2 @1) @0
+            Agda.Builtin.Nat._+_ (Agda.Builtin.Nat._+_ @2 @1) @0
 
 Numbers.add3b:
   constant declaration:
@@ -181,7 +181,7 @@ Numbers.suc:
     type variables: []
     type: (Agda.Builtin.Nat.Nat{0}) → Agda.Builtin.Nat.Nat{0}
     body: λ _ →
-            Agda.Builtin.Nat.Ֆ_Ֆplus_ @0
+            Agda.Builtin.Nat._+_ @0
               (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0})
 main program: [Numbers.test]</code></pre>
 </body>

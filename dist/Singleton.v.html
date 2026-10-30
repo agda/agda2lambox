@@ -23,7 +23,32 @@ From Agda2Lambox      Require Import CheckWF Eval.
 Import ListNotations.
 
 Definition env : global_env :=
-  [(((MPfile [&quot;Singleton&quot;%bs], &quot;test&quot;%bs), true),
+  [(((MPfile [&quot;Singleton&quot;%bs], &quot;toNat&quot;%bs), true),
+    ConstantDecl
+      {| cst_body := Some (tLambda nAnon (tLambda nAnon (tRel 1)));
+         cst_type :=
+           ([],
+            TArr
+              (TInd
+                 {| inductive_mind :=
+                      (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                    inductive_ind := 0 |})
+              (TArr
+                 (TApp
+                    (TApp
+                       (TInd
+                          {| inductive_mind := (MPfile [&quot;Singleton&quot;%bs], &quot;The&quot;%bs);
+                             inductive_ind := 0 |})
+                       TBox)
+                    (TInd
+                       {| inductive_mind :=
+                            (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                          inductive_ind := 0 |}))
+                 (TInd
+                    {| inductive_mind :=
+                         (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                       inductive_ind := 0 |}))) |});
+   (((MPfile [&quot;Singleton&quot;%bs], &quot;test&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
@@ -463,10 +488,12 @@ Definition env : global_env :=
                                                                                                                                                     0
                                                                                                                                                     []))))))))))))))))))))))))))))))))))))))))))))
                 (tApp
-                   (tConstruct
-                      {| inductive_mind := (MPfile [&quot;Singleton&quot;%bs], &quot;The&quot;%bs);
-                         inductive_ind := 0 |}
-                      0 [])
+                   (tApp
+                      (tConstruct
+                         {| inductive_mind := (MPfile [&quot;Singleton&quot;%bs], &quot;The&quot;%bs);
+                            inductive_ind := 0 |}
+                         0 [])
+                      tBox)
                    (tApp
                       (tConstruct
                          {| inductive_mind :=
@@ -907,11 +934,13 @@ Definition env : global_env :=
                  inductive_ind := 0 |}) |});
    (((MPfile [&quot;Singleton&quot;%bs], &quot;The&quot;%bs), true),
     InductiveDecl
-      {| ind_finite := Finite; ind_npars := 0;
+      {| ind_finite := Finite; ind_npars := 1;
          ind_bodies :=
            [{| ind_name := &quot;The&quot;%bs; ind_propositional := false;
                ind_kelim := IntoAny;
-               ind_ctors := [((&quot;the&quot;%bs, [(nNamed &quot;a&quot;%bs, TVar 1)]), 1)];
+               ind_ctors :=
+                 [((&quot;the&quot;%bs, [(nNamed &quot;A&quot;%bs, TBox); (nNamed &quot;a&quot;%bs, TVar 1)]),
+                   1)];
                ind_projs := [];
                ind_type_vars :=
                  [{| tvar_name := nNamed &quot;\8467&quot;%bs; tvar_is_logical := true;
@@ -947,6 +976,6 @@ Compute @check_wf_glob eflags (ExAst.trans_env env).
 Definition prog1 : program :=
   (ExAst.trans_env env, tConst (MPfile [&quot;Singleton&quot;%bs], &quot;test&quot;%bs)).
 
-Compute eval_program prog1.</code></pre>
+Compute show_program prog1.</code></pre>
 </body>
 </html>

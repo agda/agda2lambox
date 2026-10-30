@@ -57,24 +57,16 @@ Definition env : global_env :=
            Some
              (tApp
                 (tApp
-                   (tConst
-                      (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                       &quot;\1366_\1366plus_&quot;%bs))
+                   (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                    (tApp
                       (tApp
-                         (tConst
-                            (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                             &quot;\1366_\1366plus_&quot;%bs))
+                         (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                          (tApp
                             (tApp
-                               (tConst
-                                  (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                   &quot;\1366_\1366plus_&quot;%bs))
+                               (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                                (tApp
                                   (tApp
-                                     (tConst
-                                        (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                         &quot;\1366_\1366plus_&quot;%bs))
+                                     (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                                      (tApp
                                         (tApp
                                            (tApp
@@ -561,11 +553,15 @@ Definition env : global_env :=
                                                                                                                                                                             0
                                                                                                                                                                             []))))))))))))))))))))))))))))))))))))))))))))
                                         (tApp
-                                           (tConstruct
-                                              {| inductive_mind :=
-                                                   (MPfile [&quot;Either&quot;%bs], &quot;Either&quot;%bs);
-                                                 inductive_ind := 0 |}
-                                              0 [])
+                                           (tApp
+                                              (tApp
+                                                 (tConstruct
+                                                    {| inductive_mind :=
+                                                         (MPfile [&quot;Either&quot;%bs], &quot;Either&quot;%bs);
+                                                       inductive_ind := 0 |}
+                                                    0 [])
+                                                 tBox)
+                                              tBox)
                                            (tConstruct
                                               {| inductive_mind :=
                                                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
@@ -585,10 +581,15 @@ Definition env : global_env :=
                                               0 []))
                                         tBox)
                                      (tApp
-                                        (tConstruct
-                                           {| inductive_mind := (MPfile [&quot;Either&quot;%bs], &quot;Either&quot;%bs);
-                                              inductive_ind := 0 |}
-                                           1 [])
+                                        (tApp
+                                           (tApp
+                                              (tConstruct
+                                                 {| inductive_mind :=
+                                                      (MPfile [&quot;Either&quot;%bs], &quot;Either&quot;%bs);
+                                                    inductive_ind := 0 |}
+                                                 1 [])
+                                              tBox)
+                                           tBox)
                                         (tApp
                                            (tConstruct
                                               {| inductive_mind :=
@@ -1067,10 +1068,15 @@ Definition env : global_env :=
                                   (tApp (tConst (MPfile [&quot;Either&quot;%bs], &quot;fromOnlyLeft&quot;%bs)) tBox)
                                   tBox)
                                (tApp
-                                  (tConstruct
-                                     {| inductive_mind := (MPfile [&quot;Either&quot;%bs], &quot;OnlyLeft&quot;%bs);
-                                        inductive_ind := 0 |}
-                                     0 [])
+                                  (tApp
+                                     (tApp
+                                        (tConstruct
+                                           {| inductive_mind :=
+                                                (MPfile [&quot;Either&quot;%bs], &quot;OnlyLeft&quot;%bs);
+                                              inductive_ind := 0 |}
+                                           0 [])
+                                        tBox)
+                                     tBox)
                                   (tConstruct
                                      {| inductive_mind :=
                                           (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
@@ -1083,15 +1089,23 @@ Definition env : global_env :=
                                tBox)
                             tBox)
                          (tApp
-                            (tConstruct
-                               {| inductive_mind := (MPfile [&quot;Either&quot;%bs], &quot;OnlyLeft&quot;%bs);
-                                  inductive_ind := 0 |}
-                               0 [])
                             (tApp
-                               (tConstruct
-                                  {| inductive_mind := (MPfile [&quot;Either&quot;%bs], &quot;OnlyLeft&quot;%bs);
-                                     inductive_ind := 0 |}
-                                  0 [])
+                               (tApp
+                                  (tConstruct
+                                     {| inductive_mind := (MPfile [&quot;Either&quot;%bs], &quot;OnlyLeft&quot;%bs);
+                                        inductive_ind := 0 |}
+                                     0 [])
+                                  tBox)
+                               tBox)
+                            (tApp
+                               (tApp
+                                  (tApp
+                                     (tConstruct
+                                        {| inductive_mind := (MPfile [&quot;Either&quot;%bs], &quot;OnlyLeft&quot;%bs);
+                                           inductive_ind := 0 |}
+                                        0 [])
+                                     tBox)
+                                  tBox)
                                (tConstruct
                                   {| inductive_mind :=
                                        (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
@@ -1104,15 +1118,23 @@ Definition env : global_env :=
                          tBox)
                       tBox)
                    (tApp
-                      (tConstruct
-                         {| inductive_mind := (MPfile [&quot;Either&quot;%bs], &quot;OnlyLeftR&quot;%bs);
-                            inductive_ind := 0 |}
-                         0 [])
                       (tApp
-                         (tConstruct
-                            {| inductive_mind := (MPfile [&quot;Either&quot;%bs], &quot;OnlyLeftR&quot;%bs);
-                               inductive_ind := 0 |}
-                            0 [])
+                         (tApp
+                            (tConstruct
+                               {| inductive_mind := (MPfile [&quot;Either&quot;%bs], &quot;OnlyLeftR&quot;%bs);
+                                  inductive_ind := 0 |}
+                               0 [])
+                            tBox)
+                         tBox)
+                      (tApp
+                         (tApp
+                            (tApp
+                               (tConstruct
+                                  {| inductive_mind := (MPfile [&quot;Either&quot;%bs], &quot;OnlyLeftR&quot;%bs);
+                                     inductive_ind := 0 |}
+                                  0 [])
+                               tBox)
+                            tBox)
                          (tApp
                             (tConstruct
                                {| inductive_mind :=
@@ -1612,7 +1634,7 @@ Definition env : global_env :=
                 (tCase
                    ({| inductive_mind := (MPfile [&quot;Either&quot;%bs], &quot;OnlyLeftR&quot;%bs);
                        inductive_ind := 0 |},
-                    0)
+                    2)
                    (tRel 0) [([nAnon], tRel 0)]));
          cst_type :=
            ([nNamed &quot;A&quot;%bs; nNamed &quot;B&quot;%bs],
@@ -1627,12 +1649,15 @@ Definition env : global_env :=
               (TVar 0)) |});
    (((MPfile [&quot;Either&quot;%bs], &quot;OnlyLeftR&quot;%bs), true),
     InductiveDecl
-      {| ind_finite := Finite; ind_npars := 0;
+      {| ind_finite := Finite; ind_npars := 2;
          ind_bodies :=
            [{| ind_name := &quot;OnlyLeftR&quot;%bs; ind_propositional := false;
                ind_kelim := IntoAny;
                ind_ctors :=
-                 [((&quot;constructor&quot;%bs, [(nNamed &quot;left&quot;%bs, TVar 0)]), 1)];
+                 [((&quot;constructor&quot;%bs,
+                    [(nNamed &quot;A&quot;%bs, TBox); (nNamed &quot;B&quot;%bs, TBox);
+                     (nNamed &quot;left&quot;%bs, TVar 0)]),
+                   1)];
                ind_projs := [];
                ind_type_vars :=
                  [{| tvar_name := nNamed &quot;A&quot;%bs; tvar_is_logical := false;
@@ -1654,13 +1679,13 @@ Definition env : global_env :=
                          (tCase
                             ({| inductive_mind := (MPfile [&quot;Either&quot;%bs], &quot;OnlyLeft&quot;%bs);
                                 inductive_ind := 0 |},
-                             0)
+                             2)
                             (tRel 0)
                             [([nAnon],
                               tCase
                                 ({| inductive_mind := (MPfile [&quot;Either&quot;%bs], &quot;OnlyLeft&quot;%bs);
                                     inductive_ind := 0 |},
-                                 0)
+                                 2)
                                 (tRel 0) [([nAnon], tRel 0)])])))));
          cst_type :=
            ([nNamed &quot;A&quot;%bs; nNamed &quot;B&quot;%bs; nNamed &quot;C&quot;%bs],
@@ -1698,7 +1723,7 @@ Definition env : global_env :=
                       (tCase
                          ({| inductive_mind := (MPfile [&quot;Either&quot;%bs], &quot;OnlyLeft&quot;%bs);
                              inductive_ind := 0 |},
-                          0)
+                          2)
                          (tRel 0) [([nAnon], tRel 0)]))));
          cst_type :=
            ([nNamed &quot;A&quot;%bs; nNamed &quot;B&quot;%bs],
@@ -1717,11 +1742,14 @@ Definition env : global_env :=
                     (TVar 0)))) |});
    (((MPfile [&quot;Either&quot;%bs], &quot;OnlyLeft&quot;%bs), true),
     InductiveDecl
-      {| ind_finite := Finite; ind_npars := 0;
+      {| ind_finite := Finite; ind_npars := 2;
          ind_bodies :=
            [{| ind_name := &quot;OnlyLeft&quot;%bs; ind_propositional := false;
                ind_kelim := IntoAny;
-               ind_ctors := [((&quot;Left&quot;%bs, [(nAnon, TVar 0)]), 1)];
+               ind_ctors :=
+                 [((&quot;Left&quot;%bs,
+                    [(nNamed &quot;A&quot;%bs, TBox); (nNamed &quot;B&quot;%bs, TBox); (nAnon, TVar 0)]),
+                   1)];
                ind_projs := [];
                ind_type_vars :=
                  [{| tvar_name := nNamed &quot;A&quot;%bs; tvar_is_logical := false;
@@ -1743,7 +1771,7 @@ Definition env : global_env :=
                          (tCase
                             ({| inductive_mind := (MPfile [&quot;Either&quot;%bs], &quot;Either&quot;%bs);
                                 inductive_ind := 0 |},
-                             0)
+                             2)
                             (tRel 0) [([nAnon], tRel 0); ([nAnon], tRel 3)])))));
          cst_type :=
            ([nNamed &quot;A&quot;%bs; nNamed &quot;B&quot;%bs],
@@ -1777,7 +1805,7 @@ Definition env : global_env :=
                          (tCase
                             ({| inductive_mind := (MPfile [&quot;Either&quot;%bs], &quot;Either&quot;%bs);
                                 inductive_ind := 0 |},
-                             0)
+                             2)
                             (tRel 0) [([nAnon], tRel 0); ([nAnon], tRel 2)])))));
          cst_type :=
            ([nNamed &quot;A&quot;%bs; nNamed &quot;B&quot;%bs],
@@ -1796,14 +1824,12 @@ Definition env : global_env :=
                              (TVar 0))
                           (TVar 1))
                        (TVar 0))))) |});
-   (((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-      &quot;\1366_\1366plus_&quot;%bs),
-     true),
+   (((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
              (tFix
-                [{| dname := nNamed &quot;\1366_\1366plus_&quot;%bs;
+                [{| dname := nNamed &quot;_+_&quot;%bs;
                     dbody :=
                       tLambda
                         nAnon
@@ -1844,13 +1870,17 @@ Definition env : global_env :=
                        inductive_ind := 0 |}))) |});
    (((MPfile [&quot;Either&quot;%bs], &quot;Either&quot;%bs), true),
     InductiveDecl
-      {| ind_finite := Finite; ind_npars := 0;
+      {| ind_finite := Finite; ind_npars := 2;
          ind_bodies :=
            [{| ind_name := &quot;Either&quot;%bs; ind_propositional := false;
                ind_kelim := IntoAny;
                ind_ctors :=
-                 [((&quot;Left&quot;%bs, [(nAnon, TVar 0)]), 1);
-                  ((&quot;Right&quot;%bs, [(nAnon, TVar 1)]), 1)];
+                 [((&quot;Left&quot;%bs,
+                    [(nNamed &quot;A&quot;%bs, TBox); (nNamed &quot;B&quot;%bs, TBox); (nAnon, TVar 0)]),
+                   1);
+                  ((&quot;Right&quot;%bs,
+                    [(nNamed &quot;A&quot;%bs, TBox); (nNamed &quot;B&quot;%bs, TBox); (nAnon, TVar 1)]),
+                   1)];
                ind_projs := [];
                ind_type_vars :=
                  [{| tvar_name := nNamed &quot;A&quot;%bs; tvar_is_logical := false;
@@ -1886,6 +1916,6 @@ Compute @check_wf_glob eflags (ExAst.trans_env env).
 Definition prog1 : program :=
   (ExAst.trans_env env, tConst (MPfile [&quot;Either&quot;%bs], &quot;test&quot;%bs)).
 
-Compute eval_program prog1.</code></pre>
+Compute show_program prog1.</code></pre>
 </body>
 </html>

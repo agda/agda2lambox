@@ -38,7 +38,7 @@ Definition env : global_env :=
                       (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
                     inductive_ind := 0 |})) |});
    (((MPfile [&quot;RunTimeIrrelevance&quot;%bs; &quot;ErasedModule&quot;%bs],
-      &quot;\1366_\1366\&amp;2261\1366_&quot;%bs),
+      &quot;_\8801_&quot;%bs),
      true),
     ConstantDecl
       {| cst_body := Some tBox;
@@ -56,7 +56,7 @@ Definition env : global_env :=
                        inductive_ind := 0 |})
                  TBox)) |});
    (((MPfile [&quot;RunTimeIrrelevance&quot;%bs; &quot;ErasedModule&quot;%bs],
-      &quot;\1366_\1366\&amp;2264\1366_&quot;%bs),
+      &quot;_\8804_&quot;%bs),
      true),
     ConstantDecl
       {| cst_body := Some tBox;
@@ -73,8 +73,7 @@ Definition env : global_env :=
                          (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
                        inductive_ind := 0 |})
                  TBox)) |});
-   (((MPfile [&quot;RunTimeIrrelevance&quot;%bs; &quot;ErasedRec&quot;%bs],
-      &quot;x\1366\&amp;2261\1366y&quot;%bs),
+   (((MPfile [&quot;RunTimeIrrelevance&quot;%bs; &quot;ErasedRec&quot;%bs], &quot;x\8801y&quot;%bs),
      true),
     ConstantDecl
       {| cst_body := Some tBox;
@@ -120,7 +119,7 @@ Definition env : global_env :=
                       (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
                     inductive_ind := 0 |})) |});
    (((MPfile [&quot;RunTimeIrrelevance&quot;%bs; &quot;ErasedField&quot;%bs],
-      &quot;x\1366\&amp;2261\1366\&amp;0&quot;%bs),
+      &quot;x\8801\&amp;0&quot;%bs),
      true),
     ConstantDecl
       {| cst_body := Some tBox;
@@ -159,7 +158,7 @@ Definition env : global_env :=
                       (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
                     inductive_ind := 0 |})) |});
    (((MPfile [&quot;RunTimeIrrelevance&quot;%bs; &quot;ErasedRecParam&quot;%bs],
-      &quot;x\1366\&amp;2261\1366y&quot;%bs),
+      &quot;x\8801y&quot;%bs),
      true),
     ConstantDecl
       {| cst_body := Some tBox;
@@ -188,9 +187,7 @@ Definition env : global_env :=
                       (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
                     inductive_ind := 0 |})
               TBox) |});
-   (((MPfile [&quot;RunTimeIrrelevance&quot;%bs],
-      &quot;\1366\&amp;2264\1366\1366subrefl&quot;%bs),
-     true),
+   (((MPfile [&quot;RunTimeIrrelevance&quot;%bs], &quot;\8804-refl&quot;%bs), true),
     ConstantDecl
       {| cst_body := None;
          cst_type :=
@@ -201,53 +198,114 @@ Definition env : global_env :=
                       (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
                     inductive_ind := 0 |})
               TBox) |});
+   (((MPfile [&quot;RunTimeIrrelevance&quot;%bs], &quot;.extendedlambda0&quot;%bs), true),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tFix
+                [{| dname := nNamed &quot;sumBST&quot;%bs;
+                    dbody :=
+                      tLambda
+                        nAnon (tLambda nAnon (tApp (tApp (tRel 2) (tRel 1)) (tRel 0)));
+                    rarg := 0 |};
+                 {| dname := nNamed &quot;.extendedlambda0&quot;%bs;
+                    dbody :=
+                      tLambda
+                        nAnon
+                        (tLambda
+                           nAnon
+                           (tLambda
+                              nAnon
+                              (tCase
+                                 ({| inductive_mind := (MPfile [&quot;RunTimeIrrelevance&quot;%bs], &quot;BST&quot;%bs);
+                                     inductive_ind := 0 |},
+                                  0)
+                                 (tRel 0)
+                                 [([nAnon],
+                                   tConstruct
+                                     {| inductive_mind :=
+                                          (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                        inductive_ind := 0 |}
+                                     0 []);
+                                  ([nAnon; nAnon; nAnon],
+                                   tApp
+                                     (tApp
+                                        (tConst
+                                           (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
+                                        (tApp
+                                           (tApp
+                                              (tConst
+                                                 (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
+                                                  &quot;_+_&quot;%bs))
+                                              (tRel 2))
+                                           (tApp
+                                              (tApp (tApp (tRel 7) (tRel 5)) (tRel 2)) (tRel 1))))
+                                     (tApp (tApp (tApp (tRel 7) (tRel 2)) (tRel 4)) (tRel 0)))])));
+                    rarg := 0 |}]
+                1);
+         cst_type :=
+           ([],
+            TArr
+              (TInd
+                 {| inductive_mind :=
+                      (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                    inductive_ind := 0 |})
+              (TArr
+                 (TInd
+                    {| inductive_mind :=
+                         (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                       inductive_ind := 0 |})
+                 (TArr
+                    (TApp
+                       (TApp
+                          (TInd
+                             {| inductive_mind := (MPfile [&quot;RunTimeIrrelevance&quot;%bs], &quot;BST&quot;%bs);
+                                inductive_ind := 0 |})
+                          TBox)
+                       TBox)
+                    (TInd
+                       {| inductive_mind :=
+                            (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                          inductive_ind := 0 |})))) |});
    (((MPfile [&quot;RunTimeIrrelevance&quot;%bs], &quot;test&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
              (tApp
                 (tApp
-                   (tConst
-                      (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                       &quot;\1366_\1366plus_&quot;%bs))
+                   (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                    (tApp
                       (tApp
-                         (tConst
-                            (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                             &quot;\1366_\1366plus_&quot;%bs))
+                         (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                          (tApp
                             (tApp
-                               (tConst
-                                  (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                   &quot;\1366_\1366plus_&quot;%bs))
+                               (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                                (tApp
                                   (tApp
-                                     (tConst
-                                        (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                         &quot;\1366_\1366plus_&quot;%bs))
+                                     (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                                      (tApp
                                         (tApp
                                            (tConst
                                               (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                               &quot;\1366_\1366plus_&quot;%bs))
+                                               &quot;_+_&quot;%bs))
                                            (tApp
                                               (tApp
                                                  (tConst
                                                     (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                                     &quot;\1366_\1366plus_&quot;%bs))
+                                                     &quot;_+_&quot;%bs))
                                                  (tApp
                                                     (tApp
                                                        (tConst
                                                           (MPfile
                                                              [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                                           &quot;\1366_\1366plus_&quot;%bs))
+                                                           &quot;_+_&quot;%bs))
                                                        (tApp
                                                           (tApp
                                                              (tConst
                                                                 (MPfile
                                                                    [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs;
                                                                     &quot;Nat&quot;%bs],
-                                                                 &quot;\1366_\1366plus_&quot;%bs))
+                                                                 &quot;_+_&quot;%bs))
                                                              (tApp
                                                                 (tApp
                                                                    (tConst
@@ -765,7 +823,7 @@ Definition env : global_env :=
                                                  (tApp
                                                     (tConst
                                                        (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                                        &quot;\1366_\1366plus_&quot;%bs))
+                                                        &quot;_+_&quot;%bs))
                                                     (tApp
                                                        (tConst
                                                           (MPfile [&quot;RunTimeIrrelevance&quot;%bs],
@@ -2262,9 +2320,7 @@ Definition env : global_env :=
                                tBox)))
                       (tApp
                          (tApp
-                            (tConst
-                               (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                &quot;\1366_\1366plus_&quot;%bs))
+                            (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                             (tApp
                                (tConst (MPfile [&quot;RunTimeIrrelevance&quot;%bs], &quot;erasedClause&quot;%bs))
                                (tApp
@@ -3583,16 +3639,41 @@ Definition env : global_env :=
                 [{| dname := nNamed &quot;sumBST&quot;%bs;
                     dbody :=
                       tLambda
+                        nAnon (tLambda nAnon (tApp (tApp (tRel 2) (tRel 1)) (tRel 0)));
+                    rarg := 0 |};
+                 {| dname := nNamed &quot;.extendedlambda0&quot;%bs;
+                    dbody :=
+                      tLambda
                         nAnon
                         (tLambda
                            nAnon
-                           (tApp
-                              (tApp
-                                 (tConst
-                                    (MPfile [&quot;RunTimeIrrelevance&quot;%bs],
-                                     &quot;\1366dotextendedlambda0&quot;%bs))
-                                 (tRel 1))
-                              (tRel 0)));
+                           (tLambda
+                              nAnon
+                              (tCase
+                                 ({| inductive_mind := (MPfile [&quot;RunTimeIrrelevance&quot;%bs], &quot;BST&quot;%bs);
+                                     inductive_ind := 0 |},
+                                  0)
+                                 (tRel 0)
+                                 [([nAnon],
+                                   tConstruct
+                                     {| inductive_mind :=
+                                          (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                        inductive_ind := 0 |}
+                                     0 []);
+                                  ([nAnon; nAnon; nAnon],
+                                   tApp
+                                     (tApp
+                                        (tConst
+                                           (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
+                                        (tApp
+                                           (tApp
+                                              (tConst
+                                                 (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
+                                                  &quot;_+_&quot;%bs))
+                                              (tRel 2))
+                                           (tApp
+                                              (tApp (tApp (tRel 7) (tRel 5)) (tRel 2)) (tRel 1))))
+                                     (tApp (tApp (tApp (tRel 7) (tRel 2)) (tRel 4)) (tRel 0)))])));
                     rarg := 0 |}]
                 0);
          cst_type :=
@@ -4259,7 +4340,7 @@ Definition env : global_env :=
                         {| inductive_mind :=
                              (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
                            inductive_ind := 0 |});
-                     (nNamed &quot;x\1366\&amp;2261\1366y&quot;%bs, TBox)]),
+                     (nNamed &quot;x\8801y&quot;%bs, TBox)]),
                    2)];
                ind_projs := [];
                ind_type_vars :=
@@ -4309,7 +4390,7 @@ Definition env : global_env :=
                         {| inductive_mind :=
                              (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
                            inductive_ind := 0 |});
-                     (nNamed &quot;x\1366\&amp;2261\1366\&amp;0&quot;%bs, TBox)]),
+                     (nNamed &quot;x\8801\&amp;0&quot;%bs, TBox)]),
                    2)];
                ind_projs := []; ind_type_vars := [] |}] |});
    (((MPfile [&quot;RunTimeIrrelevance&quot;%bs], &quot;erasedRec&quot;%bs), true),
@@ -4803,14 +4884,12 @@ Definition env : global_env :=
                     {| inductive_mind :=
                          (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
                        inductive_ind := 0 |}))) |});
-   (((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-      &quot;\1366_\1366plus_&quot;%bs),
-     true),
+   (((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
              (tFix
-                [{| dname := nNamed &quot;\1366_\1366plus_&quot;%bs;
+                [{| dname := nNamed &quot;_+_&quot;%bs;
                     dbody :=
                       tLambda
                         nAnon
@@ -4907,6 +4986,6 @@ Definition prog1 : program :=
   (ExAst.trans_env env,
    tConst (MPfile [&quot;RunTimeIrrelevance&quot;%bs], &quot;test&quot;%bs)).
 
-Compute eval_program prog1.</code></pre>
+Compute show_program prog1.</code></pre>
 </body>
 </html>

@@ -23,12 +23,12 @@ From Agda2Lambox      Require Import CheckWF Eval.
 Import ListNotations.
 
 Definition env : global_env :=
-  [(((MPfile [&quot;List&quot;%bs], &quot;\1366_\1366plus\1366plus_&quot;%bs), true),
+  [(((MPfile [&quot;List&quot;%bs], &quot;_++_&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
              (tFix
-                [{| dname := nNamed &quot;\1366_\1366plus\1366plus_&quot;%bs;
+                [{| dname := nNamed &quot;_++_&quot;%bs;
                     dbody :=
                       tLambda
                         nAnon
@@ -40,18 +40,20 @@ Definition env : global_env :=
                                  ({| inductive_mind :=
                                        (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
                                      inductive_ind := 0 |},
-                                  0)
+                                  1)
                                  (tRel 1)
                                  [([], tRel 0);
                                   ([nAnon; nAnon],
                                    tApp
                                      (tApp
-                                        (tConstruct
-                                           {| inductive_mind :=
-                                                (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
-                                                 &quot;List&quot;%bs);
-                                              inductive_ind := 0 |}
-                                           1 [])
+                                        (tApp
+                                           (tConstruct
+                                              {| inductive_mind :=
+                                                   (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
+                                                    &quot;List&quot;%bs);
+                                                 inductive_ind := 0 |}
+                                              1 [])
+                                           tBox)
                                         (tRel 1))
                                      (tApp (tApp (tApp (tRel 5) tBox) (tRel 0)) (tRel 2)))])));
                     rarg := 0 |}]
@@ -92,24 +94,16 @@ Definition env : global_env :=
            Some
              (tApp
                 (tApp
-                   (tConst
-                      (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                       &quot;\1366_\1366plus_&quot;%bs))
+                   (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                    (tApp
                       (tApp
-                         (tConst
-                            (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                             &quot;\1366_\1366plus_&quot;%bs))
+                         (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                          (tApp
                             (tApp
-                               (tConst
-                                  (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                   &quot;\1366_\1366plus_&quot;%bs))
+                               (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                                (tApp
                                   (tApp
-                                     (tConst
-                                        (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                         &quot;\1366_\1366plus_&quot;%bs))
+                                     (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                                      (tApp
                                         (tConstruct
                                            {| inductive_mind :=
@@ -135,12 +129,14 @@ Definition env : global_env :=
                                (tConst (MPfile [&quot;List&quot;%bs], &quot;sum&quot;%bs))
                                (tApp
                                   (tApp
-                                     (tConstruct
-                                        {| inductive_mind :=
-                                             (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
-                                              &quot;List&quot;%bs);
-                                           inductive_ind := 0 |}
-                                        1 [])
+                                     (tApp
+                                        (tConstruct
+                                           {| inductive_mind :=
+                                                (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
+                                                 &quot;List&quot;%bs);
+                                              inductive_ind := 0 |}
+                                           1 [])
+                                        tBox)
                                      (tApp
                                         (tConstruct
                                            {| inductive_mind :=
@@ -215,12 +211,14 @@ Definition env : global_env :=
                                                                 0 []))))))))))
                                   (tApp
                                      (tApp
-                                        (tConstruct
-                                           {| inductive_mind :=
-                                                (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
-                                                 &quot;List&quot;%bs);
-                                              inductive_ind := 0 |}
-                                           1 [])
+                                        (tApp
+                                           (tConstruct
+                                              {| inductive_mind :=
+                                                   (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
+                                                    &quot;List&quot;%bs);
+                                                 inductive_ind := 0 |}
+                                              1 [])
+                                           tBox)
                                         (tApp
                                            (tConstruct
                                               {| inductive_mind :=
@@ -241,12 +239,14 @@ Definition env : global_env :=
                                                        &quot;Nat&quot;%bs);
                                                     inductive_ind := 0 |}
                                                  0 []))))
-                                     (tConstruct
-                                        {| inductive_mind :=
-                                             (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
-                                              &quot;List&quot;%bs);
-                                           inductive_ind := 0 |}
-                                        0 []))))))
+                                     (tApp
+                                        (tConstruct
+                                           {| inductive_mind :=
+                                                (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
+                                                 &quot;List&quot;%bs);
+                                              inductive_ind := 0 |}
+                                           0 [])
+                                        tBox))))))
                       (tApp
                          (tConst (MPfile [&quot;List&quot;%bs], &quot;sum&quot;%bs))
                          (tApp
@@ -263,11 +263,14 @@ Definition env : global_env :=
                                      (tRel 0))))
                             (tApp
                                (tApp
-                                  (tConstruct
-                                     {| inductive_mind :=
-                                          (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
-                                        inductive_ind := 0 |}
-                                     1 [])
+                                  (tApp
+                                     (tConstruct
+                                        {| inductive_mind :=
+                                             (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
+                                              &quot;List&quot;%bs);
+                                           inductive_ind := 0 |}
+                                        1 [])
+                                     tBox)
                                   (tApp
                                      (tConstruct
                                         {| inductive_mind :=
@@ -330,12 +333,14 @@ Definition env : global_env :=
                                                           0 [])))))))))
                                (tApp
                                   (tApp
-                                     (tConstruct
-                                        {| inductive_mind :=
-                                             (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
-                                              &quot;List&quot;%bs);
-                                           inductive_ind := 0 |}
-                                        1 [])
+                                     (tApp
+                                        (tConstruct
+                                           {| inductive_mind :=
+                                                (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
+                                                 &quot;List&quot;%bs);
+                                              inductive_ind := 0 |}
+                                           1 [])
+                                        tBox)
                                      (tApp
                                         (tConstruct
                                            {| inductive_mind :=
@@ -349,11 +354,14 @@ Definition env : global_env :=
                                                  &quot;Nat&quot;%bs);
                                               inductive_ind := 0 |}
                                            0 [])))
-                                  (tConstruct
-                                     {| inductive_mind :=
-                                          (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
-                                        inductive_ind := 0 |}
-                                     0 [])))))))
+                                  (tApp
+                                     (tConstruct
+                                        {| inductive_mind :=
+                                             (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
+                                              &quot;List&quot;%bs);
+                                           inductive_ind := 0 |}
+                                        0 [])
+                                     tBox)))))))
                 (tApp
                    (tConst (MPfile [&quot;List&quot;%bs], &quot;sum&quot;%bs))
                    (tApp
@@ -362,16 +370,16 @@ Definition env : global_env :=
                             (tApp
                                (tApp (tApp (tConst (MPfile [&quot;List&quot;%bs], &quot;zipWith&quot;%bs)) tBox) tBox)
                                tBox)
-                            (tConst
-                               (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                &quot;\1366_\1366plus_&quot;%bs)))
+                            (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs)))
                          (tApp
                             (tApp
-                               (tConstruct
-                                  {| inductive_mind :=
-                                       (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
-                                     inductive_ind := 0 |}
-                                  1 [])
+                               (tApp
+                                  (tConstruct
+                                     {| inductive_mind :=
+                                          (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
+                                        inductive_ind := 0 |}
+                                     1 [])
+                                  tBox)
                                (tApp
                                   (tConstruct
                                      {| inductive_mind :=
@@ -411,18 +419,22 @@ Definition env : global_env :=
                                                        &quot;Nat&quot;%bs);
                                                     inductive_ind := 0 |}
                                                  0 [])))))))
-                            (tConstruct
-                               {| inductive_mind :=
-                                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
-                                  inductive_ind := 0 |}
-                               0 [])))
+                            (tApp
+                               (tConstruct
+                                  {| inductive_mind :=
+                                       (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
+                                     inductive_ind := 0 |}
+                                  0 [])
+                               tBox)))
                       (tApp
                          (tApp
-                            (tConstruct
-                               {| inductive_mind :=
-                                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
-                                  inductive_ind := 0 |}
-                               1 [])
+                            (tApp
+                               (tConstruct
+                                  {| inductive_mind :=
+                                       (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
+                                     inductive_ind := 0 |}
+                                  1 [])
+                               tBox)
                             (tApp
                                (tConstruct
                                   {| inductive_mind :=
@@ -461,11 +473,13 @@ Definition env : global_env :=
                                                     &quot;Nat&quot;%bs);
                                                  inductive_ind := 0 |}
                                               0 [])))))))
-                         (tConstruct
-                            {| inductive_mind :=
-                                 (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
-                               inductive_ind := 0 |}
-                            0 [])))));
+                         (tApp
+                            (tConstruct
+                               {| inductive_mind :=
+                                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
+                                  inductive_ind := 0 |}
+                               0 [])
+                            tBox)))));
          cst_type :=
            ([],
             TInd
@@ -496,41 +510,48 @@ Definition env : global_env :=
                                                 (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
                                                  &quot;List&quot;%bs);
                                               inductive_ind := 0 |},
-                                           0)
+                                           1)
                                           (tRel 1)
                                           [([],
-                                            tConstruct
-                                              {| inductive_mind :=
-                                                   (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
-                                                    &quot;List&quot;%bs);
-                                                 inductive_ind := 0 |}
-                                              0 []);
+                                            tApp
+                                              (tConstruct
+                                                 {| inductive_mind :=
+                                                      (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
+                                                       &quot;List&quot;%bs);
+                                                    inductive_ind := 0 |}
+                                                 0 [])
+                                              tBox);
                                            ([nAnon; nAnon],
                                             tCase
                                               ({| inductive_mind :=
                                                     (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
                                                      &quot;List&quot;%bs);
                                                   inductive_ind := 0 |},
-                                               0)
+                                               1)
                                               (tRel 2)
                                               [([],
-                                                tConstruct
-                                                  {| inductive_mind :=
-                                                       (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
-                                                        &quot;List&quot;%bs);
-                                                     inductive_ind := 0 |}
-                                                  0 []);
+                                                tApp
+                                                  (tConstruct
+                                                     {| inductive_mind :=
+                                                          (MPfile
+                                                             [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
+                                                           &quot;List&quot;%bs);
+                                                        inductive_ind := 0 |}
+                                                     0 [])
+                                                  tBox);
                                                ([nAnon; nAnon],
                                                 tApp
                                                   (tApp
-                                                     (tConstruct
-                                                        {| inductive_mind :=
-                                                             (MPfile
-                                                                [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs;
-                                                                 &quot;List&quot;%bs],
-                                                              &quot;List&quot;%bs);
-                                                           inductive_ind := 0 |}
-                                                        1 [])
+                                                     (tApp
+                                                        (tConstruct
+                                                           {| inductive_mind :=
+                                                                (MPfile
+                                                                   [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs;
+                                                                    &quot;List&quot;%bs],
+                                                                 &quot;List&quot;%bs);
+                                                              inductive_ind := 0 |}
+                                                           1 [])
+                                                        tBox)
                                                      (tApp (tApp (tRel 6) (tRel 3)) (tRel 1)))
                                                   (tApp
                                                      (tApp
@@ -598,24 +619,28 @@ Definition env : global_env :=
                                     ({| inductive_mind :=
                                           (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
                                         inductive_ind := 0 |},
-                                     0)
+                                     1)
                                     (tRel 0)
                                     [([],
-                                      tConstruct
-                                        {| inductive_mind :=
-                                             (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
-                                              &quot;List&quot;%bs);
-                                           inductive_ind := 0 |}
-                                        0 []);
+                                      tApp
+                                        (tConstruct
+                                           {| inductive_mind :=
+                                                (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
+                                                 &quot;List&quot;%bs);
+                                              inductive_ind := 0 |}
+                                           0 [])
+                                        tBox);
                                      ([nAnon; nAnon],
                                       tApp
                                         (tApp
-                                           (tConstruct
-                                              {| inductive_mind :=
-                                                   (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
-                                                    &quot;List&quot;%bs);
-                                                 inductive_ind := 0 |}
-                                              1 [])
+                                           (tApp
+                                              (tConstruct
+                                                 {| inductive_mind :=
+                                                      (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
+                                                       &quot;List&quot;%bs);
+                                                    inductive_ind := 0 |}
+                                                 1 [])
+                                              tBox)
                                            (tApp (tRel 3) (tRel 1)))
                                         (tApp
                                            (tApp (tApp (tApp (tRel 6) tBox) tBox) (tRel 3))
@@ -655,11 +680,13 @@ Definition env : global_env :=
                 (tConst (MPfile [&quot;List&quot;%bs], &quot;sum&quot;%bs))
                 (tApp
                    (tApp
-                      (tConstruct
-                         {| inductive_mind :=
-                              (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
-                            inductive_ind := 0 |}
-                         1 [])
+                      (tApp
+                         (tConstruct
+                            {| inductive_mind :=
+                                 (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
+                               inductive_ind := 0 |}
+                            1 [])
+                         tBox)
                       (tApp
                          (tConstruct
                             {| inductive_mind :=
@@ -685,11 +712,13 @@ Definition env : global_env :=
                                   0 [])))))
                    (tApp
                       (tApp
-                         (tConstruct
-                            {| inductive_mind :=
-                                 (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
-                               inductive_ind := 0 |}
-                            1 [])
+                         (tApp
+                            (tConstruct
+                               {| inductive_mind :=
+                                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
+                                  inductive_ind := 0 |}
+                               1 [])
+                            tBox)
                          (tApp
                             (tConstruct
                                {| inductive_mind :=
@@ -741,11 +770,13 @@ Definition env : global_env :=
                                                        &quot;Nat&quot;%bs);
                                                     inductive_ind := 0 |}
                                                  0 [])))))))))
-                      (tConstruct
-                         {| inductive_mind :=
-                              (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
-                            inductive_ind := 0 |}
-                         0 []))));
+                      (tApp
+                         (tConstruct
+                            {| inductive_mind :=
+                                 (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
+                               inductive_ind := 0 |}
+                            0 [])
+                         tBox))));
          cst_type :=
            ([],
             TInd
@@ -765,7 +796,7 @@ Definition env : global_env :=
                            ({| inductive_mind :=
                                  (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
                                inductive_ind := 0 |},
-                            0)
+                            1)
                            (tRel 0)
                            [([],
                              tConstruct
@@ -776,9 +807,7 @@ Definition env : global_env :=
                             ([nAnon; nAnon],
                              tApp
                                (tApp
-                                  (tConst
-                                     (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                      &quot;\1366_\1366plus_&quot;%bs))
+                                  (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                                   (tRel 1))
                                (tApp (tRel 3) (tRel 0)))]);
                     rarg := 0 |}]
@@ -801,14 +830,12 @@ Definition env : global_env :=
                  {| inductive_mind :=
                       (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
                     inductive_ind := 0 |})) |});
-   (((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-      &quot;\1366_\1366plus_&quot;%bs),
-     true),
+   (((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
              (tFix
-                [{| dname := nNamed &quot;\1366_\1366plus_&quot;%bs;
+                [{| dname := nNamed &quot;_+_&quot;%bs;
                     dbody :=
                       tLambda
                         nAnon
@@ -849,14 +876,14 @@ Definition env : global_env :=
                        inductive_ind := 0 |}))) |});
    (((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs), true),
     InductiveDecl
-      {| ind_finite := Finite; ind_npars := 0;
+      {| ind_finite := Finite; ind_npars := 1;
          ind_bodies :=
            [{| ind_name := &quot;List&quot;%bs; ind_propositional := false;
                ind_kelim := IntoAny;
                ind_ctors :=
-                 [((&quot;\1366\&amp;5b\1366\1366\&amp;5d\1366&quot;%bs, []), 0);
-                  ((&quot;\1366_\1366cons_&quot;%bs,
-                    [(nNamed &quot;x&quot;%bs, TVar 1);
+                 [((&quot;[]&quot;%bs, [(nNamed &quot;A&quot;%bs, TBox)]), 0);
+                  ((&quot;_\8759_&quot;%bs,
+                    [(nNamed &quot;A&quot;%bs, TBox); (nNamed &quot;x&quot;%bs, TVar 1);
                      (nNamed &quot;xs&quot;%bs,
                       TApp
                         (TApp
@@ -902,6 +929,6 @@ Compute @check_wf_glob eflags (ExAst.trans_env env).
 Definition prog1 : program :=
   (ExAst.trans_env env, tConst (MPfile [&quot;List&quot;%bs], &quot;test&quot;%bs)).
 
-Compute eval_program prog1.</code></pre>
+Compute show_program prog1.</code></pre>
 </body>
 </html>

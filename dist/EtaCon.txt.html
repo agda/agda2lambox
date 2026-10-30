@@ -31,18 +31,18 @@ Agda.Builtin.List.List:
   mutual inductive(s):
     List
       constructors:
-        Ֆ5bՖՖ5dՖ (0 arg(s))
-        Ֆ_Ֆcons_ (2 arg(s))
+        [] (0 arg(s))
+        _∷_ (2 arg(s))
 
 EtaCon.cons:
   constant declaration:
-    body: λ _ _ _ → Agda.Builtin.List.List{0}{1} @1 @0
+    body: λ _ _ _ → Agda.Builtin.List.List{0}{1} □ @1 @0
 
 EtaCon.example:
   constant declaration:
     body: EtaCon.cons □
             (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0})
-            Agda.Builtin.List.List{0}{0}
+            (Agda.Builtin.List.List{0}{0} □)
 
 EtaCon.addone:
   constant declaration: body: λ _ → Agda.Builtin.Nat.Nat{0}{1} @0

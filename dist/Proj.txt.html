@@ -23,28 +23,28 @@
 Proj.Pair:
   mutual inductive(s):
     Pair
-      constructors: Ֆ_Ֆ2cՖ_ (2 arg(s))
+      constructors: _,_ (2 arg(s))
 
 Proj.Pair.snd:
   constant declaration:
-    body: λ _ → case&lt;Proj.Pair{0},0&gt; @0 of λ&lt;[_, _]&gt; @0
+    body: λ _ → case&lt;Proj.Pair{0},2&gt; @0 of λ&lt;[_, _]&gt; @0
 
 Proj.Bool:
   mutual inductive(s):
     Bool
       constructors:
-        r#false (0 arg(s))
-        r#true (0 arg(s))
+        false (0 arg(s))
+        true (0 arg(s))
 
 Proj.pair:
   constant declaration:
-    body: Proj.Pair{0}{0} Proj.Bool{0}{1} Proj.Bool{0}{0}
+    body: Proj.Pair{0}{0} □ □ Proj.Bool{0}{1} Proj.Bool{0}{0}
 
 Proj.test: constant declaration: body: Proj.Pair.snd (Proj.pair)
 
 Proj.Pair.fst:
   constant declaration:
-    body: λ _ → case&lt;Proj.Pair{0},0&gt; @0 of λ&lt;[_, _]&gt; @1
+    body: λ _ → case&lt;Proj.Pair{0},2&gt; @0 of λ&lt;[_, _]&gt; @1
 main program: [Proj.test]</code></pre>
 </body>
 </html>

@@ -40,8 +40,10 @@ Agda.Builtin.List.List:
     List
     type variables:  [a, A]
       constructors:
-        Ֆ5bՖՖ5dՖ (0 arg(s))
-        Ֆ_Ֆcons_ (2 arg(s))
+        [] (0 arg(s))
+          A : □
+        _∷_ (2 arg(s))
+          A : □
           x : @1
           xs : Agda.Builtin.List.List{0} □ @1
 
@@ -50,11 +52,12 @@ Scheme.Σ:
     Σ
     type variables:  [A, B]
       constructors:
-        Ֆ_Ֆ2cՖ_ (2 arg(s))
+        _,_ (2 arg(s))
+          A : □
           fst : @0
           snd : □
 
-Scheme.ΣՖsubsyntax:
+Scheme.Σ-syntax:
   type alias:
     type variables: [A, B]
     type: Scheme.Σ{0} @0 □
@@ -62,14 +65,14 @@ Scheme.ΣՖsubsyntax:
 Scheme.Vec:
   type alias:
     type variables: [A, _]
-    type: Scheme.ΣՖsubsyntax (Agda.Builtin.List.List{0} □ @0) □
+    type: Scheme.Σ-syntax (Agda.Builtin.List.List{0} □ @0) □
 
 Scheme.testVec:
   constant declaration:
     type variables: []
     type: Scheme.Vec (Agda.Builtin.Nat.Nat{0}) 𝕋
-    body: Scheme.Σ{0}{0}
-            (Agda.Builtin.List.List{0}{1}
+    body: Scheme.Σ{0}{0} □
+            (Agda.Builtin.List.List{0}{1} □
                (Agda.Builtin.Nat.Nat{0}{1}
                   (Agda.Builtin.Nat.Nat{0}{1}
                      (Agda.Builtin.Nat.Nat{0}{1}
@@ -159,7 +162,7 @@ Scheme.testVec:
                                                                                                                                              Agda.
                                                                                                                                              Builtin.
                                                                                                                                              Nat.Nat{0}{0}))))))))))))))))))))))))))))))))))))))))))
-               Agda.Builtin.List.List{0}{0})
+               (Agda.Builtin.List.List{0}{0} □))
             □
 
 Scheme.head:
@@ -167,9 +170,9 @@ Scheme.head:
     type variables: [A]
     type: □ → (Agda.Builtin.Nat.Nat{0}) → Scheme.Vec @0 𝕋 → @0
     body: λ _ _ _ →
-            case&lt;Scheme.Σ{0},0&gt; @0 of
+            case&lt;Scheme.Σ{0},1&gt; @0 of
               λ&lt;[_, _]&gt;
-                case&lt;Agda.Builtin.List.List{0},0&gt; @1 of
+                case&lt;Agda.Builtin.List.List{0},1&gt; @1 of
                   λ&lt;[]&gt; case&lt;LamBox.Empty{0},0&gt; □ of
                   λ&lt;[_, _]&gt; @1
 
@@ -179,7 +182,7 @@ Scheme.test:
     type: Scheme.Bad 𝕋
     body: Scheme.head □ □ (Scheme.testVec)
 
-Scheme.ListAliasՖ27Ֆ:
+Scheme.ListAlias&#39;:
   type alias:
     type variables: [_]
     type: Agda.Builtin.List.List{0} □ @0
@@ -204,7 +207,7 @@ Scheme.Σ.fst:
   constant declaration:
     type variables: [A, B]
     type: Scheme.Σ{0} @0 □ → @0
-    body: λ _ → case&lt;Scheme.Σ{0},0&gt; @0 of λ&lt;[_, _]&gt; @1
+    body: λ _ → case&lt;Scheme.Σ{0},1&gt; @0 of λ&lt;[_, _]&gt; @1
 
 Scheme.Eq:
   constant declaration:
@@ -218,7 +221,7 @@ Scheme.length:
     type: □ → Agda.Builtin.List.List{0} □ @0 → Agda.Builtin.Nat.Nat{0}
     body: μrec [0] :=
             0: λ _ _ →
-                 case&lt;Agda.Builtin.List.List{0},0&gt; @0 of
+                 case&lt;Agda.Builtin.List.List{0},1&gt; @0 of
                    λ&lt;[]&gt; Agda.Builtin.Nat.Nat{0}{0}
                    λ&lt;[_, _]&gt; Agda.Builtin.Nat.Nat{0}{1} (@4 □ @0)
 main program: [Scheme.test]</code></pre>

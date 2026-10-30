@@ -23,12 +23,12 @@ From Agda2Lambox     Require Import CheckWF Eval.
 Import ListNotations.
 
 Definition env : global_declarations :=
-  [((MPfile [&quot;Equality&quot;%bs], &quot;\1366_\1366\&amp;2261\1366_&quot;%bs),
+  [((MPfile [&quot;Equality&quot;%bs], &quot;_\8801_&quot;%bs),
     InductiveDecl
-      {| ind_finite := Finite; ind_npars := 0;
+      {| ind_finite := Finite; ind_npars := 1;
          ind_bodies :=
-           [{| ind_name := &quot;\1366_\1366\&amp;2261\1366_&quot;%bs;
-               ind_propositional := false; ind_kelim := IntoAny;
+           [{| ind_name := &quot;_\8801_&quot;%bs; ind_propositional := false;
+               ind_kelim := IntoAny;
                ind_ctors := [{| cstr_name := &quot;refl&quot;%bs; cstr_nargs := 0 |}];
                ind_projs := [] |}] |});
    ((MPfile [&quot;Equality&quot;%bs], &quot;eqzero&quot;%bs),
@@ -39,7 +39,7 @@ Definition env : global_declarations :=
     ConstantDecl {| cst_body := Some tBox |});
    ((MPfile [&quot;Equality&quot;%bs], &quot;sym&quot;%bs),
     ConstantDecl {| cst_body := Some tBox |});
-   ((MPfile [&quot;Equality&quot;%bs], &quot;\1366_\1366\&amp;2218\1366_&quot;%bs),
+   ((MPfile [&quot;Equality&quot;%bs], &quot;_\8728_&quot;%bs),
     ConstantDecl
       {| cst_body :=
            Some
@@ -76,18 +76,16 @@ Definition env : global_declarations :=
                    (tLambda
                       nAnon
                       (tLambda nAnon (tLambda nAnon (tLambda nAnon (tRel 0))))))) |});
-   ((MPfile [&quot;Equality&quot;%bs], &quot;add\1366subleft\1366subid&quot;%bs),
-    ConstantDecl
-      {| cst_body :=
-           Some
-             (tFix
-                [{| dname := nNamed &quot;add\1366subleft\1366subid&quot;%bs;
-                    dbody := tLambda nAnon tBox; rarg := 0 |}]
-                0) |});
-   ((MPfile [&quot;Equality&quot;%bs], &quot;suc\1366subleft\1366subadd&quot;%bs),
+   ((MPfile [&quot;Equality&quot;%bs], &quot;add-left-id&quot;%bs),
+    ConstantDecl {| cst_body := Some tBox |});
+   ((MPfile [&quot;Equality&quot;%bs], &quot;suc-left-add&quot;%bs),
     ConstantDecl {| cst_body := Some tBox |});
    ((MPfile [&quot;Equality&quot;%bs], &quot;eqLevel&quot;%bs),
     ConstantDecl {| cst_body := Some tBox |});
+   ((MPfile [&quot;Equality&quot;%bs], &quot;toNat&quot;%bs),
+    ConstantDecl
+      {| cst_body :=
+           Some (tLambda nAnon (tLambda nAnon (tLambda nAnon (tRel 2)))) |});
    ((MPfile [&quot;Equality&quot;%bs], &quot;test&quot;%bs),
     ConstantDecl
       {| cst_body :=
@@ -96,10 +94,7 @@ Definition env : global_declarations :=
                 (tApp
                    (tApp
                       (tApp
-                         (tApp
-                            (tApp
-                               (tConst (MPfile [&quot;Equality&quot;%bs], &quot;\1366_\1366\&amp;24\1366_&quot;%bs)) tBox)
-                            tBox)
+                         (tApp (tApp (tConst (MPfile [&quot;Equality&quot;%bs], &quot;_$_&quot;%bs)) tBox) tBox)
                          tBox)
                       tBox)
                    (tApp
@@ -184,7 +179,7 @@ Definition env : global_declarations :=
                                   (tApp (tApp (tRel 3) (tRel 0)) (tRel 1)))]));
                     rarg := 0 |}]
                 0) |});
-   ((MPfile [&quot;Equality&quot;%bs], &quot;\1366_\1366\&amp;24\1366_&quot;%bs),
+   ((MPfile [&quot;Equality&quot;%bs], &quot;_$_&quot;%bs),
     ConstantDecl
       {| cst_body :=
            Some
@@ -219,6 +214,6 @@ Compute @check_wf_glob eflags env.
 Definition prog1 : program :=
   (env, tConst (MPfile [&quot;Equality&quot;%bs], &quot;test&quot;%bs)).
 
-Compute eval_program prog1.</code></pre>
+Compute show_program prog1.</code></pre>
 </body>
 </html>

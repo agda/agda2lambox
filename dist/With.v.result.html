@@ -17,25 +17,7 @@
 <body>
 <pre><code>     = true
      : bool
-     = exceptionMonad.Ret
-         (compile.TConstruct
-            {|
-              inductive_mind := (MPfile [&quot;With&quot;%bs], &quot;List&quot;%bs);
-              inductive_ind := 0
-            |} 1
-            (compile.tcons
-               (compile.TConstruct
-                  {|
-                    inductive_mind := (MPfile [&quot;With&quot;%bs], &quot;Bool&quot;%bs);
-                    inductive_ind := 0
-                  |} 1 compile.tnil)
-               (compile.tcons
-                  (compile.TConstruct
-                     {|
-                       inductive_mind := (MPfile [&quot;With&quot;%bs], &quot;List&quot;%bs);
-                       inductive_ind := 0
-                     |} 0 compile.tnil)
-                  compile.tnil)))
-     : exceptionMonad.exception compile.Term</code></pre>
+     = &quot;_::_ true []&quot;%bs
+     : string</code></pre>
 </body>
 </html>

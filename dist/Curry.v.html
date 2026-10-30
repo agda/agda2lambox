@@ -23,25 +23,34 @@ From Agda2Lambox      Require Import CheckWF Eval.
 Import ListNotations.
 
 Definition env : global_env :=
-  [(((MPfile [&quot;Curry&quot;%bs], &quot;test&quot;%bs), true),
+  [(((MPfile [&quot;Curry&quot;%bs], &quot;id&quot;%bs), true),
+    ConstantDecl
+      {| cst_body := Some (tLambda nAnon (tLambda nAnon (tRel 0)));
+         cst_type :=
+           ([nNamed &quot;A&quot;%bs], TArr TBox (TArr (TVar 0) (TVar 0))) |});
+   (((MPfile [&quot;Curry&quot;%bs], &quot;k&quot;%bs), true),
+    ConstantDecl
+      {| cst_body :=
+           Some
+             (tLambda
+                nAnon (tLambda nAnon (tLambda nAnon (tLambda nAnon (tRel 1)))));
+         cst_type :=
+           ([nNamed &quot;A&quot;%bs; nNamed &quot;B&quot;%bs],
+            TArr
+              TBox (TArr TBox (TArr (TVar 0) (TArr (TVar 1) (TVar 0))))) |});
+   (((MPfile [&quot;Curry&quot;%bs], &quot;test&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
              (tApp
                 (tApp
-                   (tConst
-                      (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                       &quot;\1366_\1366plus_&quot;%bs))
+                   (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                    (tApp
                       (tApp
-                         (tConst
-                            (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                             &quot;\1366_\1366plus_&quot;%bs))
+                         (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                          (tApp
                             (tApp
-                               (tConst
-                                  (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-                                   &quot;\1366_\1366plus_&quot;%bs))
+                               (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
                                (tApp
                                   (tApp (tLambda nAnon (tLambda nAnon (tRel 0))) tBox)
                                   (tApp
@@ -1897,14 +1906,12 @@ Definition env : global_env :=
            ([nNamed &quot;A&quot;%bs; nNamed &quot;B&quot;%bs],
             TArr
               TBox (TArr TBox (TArr (TVar 0) (TArr (TVar 1) (TVar 0))))) |});
-   (((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
-      &quot;\1366_\1366plus_&quot;%bs),
-     true),
+   (((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
              (tFix
-                [{| dname := nNamed &quot;\1366_\1366plus_&quot;%bs;
+                [{| dname := nNamed &quot;_+_&quot;%bs;
                     dbody :=
                       tLambda
                         nAnon
@@ -1980,6 +1987,6 @@ Compute @check_wf_glob eflags (ExAst.trans_env env).
 Definition prog1 : program :=
   (ExAst.trans_env env, tConst (MPfile [&quot;Curry&quot;%bs], &quot;test&quot;%bs)).
 
-Compute eval_program prog1.</code></pre>
+Compute show_program prog1.</code></pre>
 </body>
 </html>
