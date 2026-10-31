@@ -12,7 +12,6 @@ module Agda.Utils.EliminateDefaults where
 
 import Control.Monad
 import qualified Data.List as List
-import Control.Monad.IO.Class (liftIO)
 
 import Agda.Syntax.Treeless
 import Agda.TypeChecking.Monad

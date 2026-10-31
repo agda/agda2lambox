@@ -2,7 +2,6 @@
 -- | Definitions for λ□ identifiers, names and references.
 module LambdaBox.Names where
 
-import Agda.Syntax.Abstract.Name ( ModuleName(..), QName(..) )
 import Agda.Syntax.Common.Pretty
 
 -- | Identifiers.

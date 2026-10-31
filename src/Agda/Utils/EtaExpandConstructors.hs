@@ -8,8 +8,6 @@ import Agda.TypeChecking.Monad
 import Agda.TypeChecking.Substitute
 import Agda.TypeChecking.Datatypes
 import Agda.Compiler.Treeless.Subst () --instance only
-import Agda.Compiler.Backend
-import Control.Monad.IO.Class (MonadIO(liftIO))
 
 
 -- | Check whether a treeless term is a constructor applied to (many) terms.

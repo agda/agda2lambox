@@ -1,11 +1,10 @@
-{-# LANGUAGE NamedFieldPuns, DataKinds, OverloadedStrings #-}
+{-# LANGUAGE OverloadedStrings #-}
 -- | Convert Agda functions to λ□ constant declarations
 module Agda2Lambox.Compile.Function
   ( compileFunction
   ) where
 
-import Control.Monad ( forM, when, filterM, unless )
-import Control.Monad.IO.Class ( liftIO )
+import Control.Monad ( forM, filterM )
 import Data.Graph ( stronglyConnComp, SCC(..) )
 import Data.List ( elemIndex, find, sort )
 import Data.Map ( Map )
@@ -14,16 +13,16 @@ import Data.Maybe ( fromMaybe )
 import Data.Set ( Set )
 import Data.Set qualified as S
 
-import Agda.Syntax.Abstract.Name ( QName, qnameModule )
+import Agda.Syntax.Abstract.Name ( QName )
 import Agda.TypeChecking.Monad.Base hiding ( None )
 import Agda.TypeChecking.Pretty
 import Agda.Compiler.Backend ( getConstInfo, reportSDoc )
 import Agda.Syntax.Internal.Names ( namesIn )
 import Agda.Syntax.Common ( hasQuantityω )
-import Agda.Utils.Monad (guardWithError, whenM, ifNotM)
+import Agda.Utils.Monad (ifNotM)
 import Agda.Utils.Treeless ( alwaysInline, Erasure )
 
-import Agda.Utils ( treeless, pp, isRecordProjection, isPiTy, etaExpand, isFunction )
+import Agda.Utils ( treeless, isRecordProjection, isPiTy, etaExpand, isFunction )
 import Agda2Lambox.Compile.Target
 import Agda2Lambox.Compile.Utils
 import Agda2Lambox.Compile.Monad

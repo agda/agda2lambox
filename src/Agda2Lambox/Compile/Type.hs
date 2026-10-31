@@ -1,4 +1,4 @@
-{-# LANGUAGE LambdaCase, FlexibleInstances, MultiWayIf, NamedFieldPuns, OverloadedStrings #-}
+{-# LANGUAGE OverloadedStrings #-}
 module Agda2Lambox.Compile.Type where
 --   ( compileType
 --   , compileTopLevelType
@@ -7,23 +7,16 @@ module Agda2Lambox.Compile.Type where
 --   ) where
 
 
-import Control.Category ((>>>))
 import Control.Monad.Reader
-import Control.Monad ( mapM )
-import Data.List ( foldl' )
-import Data.Function ( (&) )
-import Data.Bifunctor ( second )
 import Data.Maybe ( isJust, mapMaybe )
-import Data.Function ( applyWhen )
 
 import Agda.Syntax.Common ( unArg, Arg (Arg) )
 import Agda.Syntax.Internal
-import Agda.TypeChecking.Substitute ( absBody, TelV (theCore), absApp )
-import Agda.TypeChecking.Telescope (telView, piApplyM)
+import Agda.TypeChecking.Substitute ( absBody, absApp )
 import Agda.TypeChecking.Monad.Base ( TCM, MonadTCM (liftTCM), Definition(..))
 import Agda.TypeChecking.Monad.Debug ( reportSDoc )
 import Agda.TypeChecking.Monad.Signature ( canonicalName )
-import Agda.TypeChecking.Telescope ( mustBePi, shouldBePi )
+import Agda.TypeChecking.Telescope ( shouldBePi )
 import Agda.TypeChecking.Pretty ( prettyTCM, (<+>) )
 import Agda.Utils.Monad ( ifM )
 import Agda.Utils ( unSpine1 )
@@ -31,7 +24,7 @@ import Agda.Utils ( unSpine1 )
 import qualified LambdaBox as LBox
 import Agda2Lambox.Compile.Utils
 import Agda2Lambox.Compile.Monad
-import Agda.Compiler.Backend (HasConstInfo(getConstInfo), Definition(Defn), AddContext (addContext))
+import Agda.Compiler.Backend (HasConstInfo(getConstInfo), AddContext (addContext))
 import Agda.Utils (isDataOrRecDef, getInductiveParams, isArity, maybeUnfoldCopy, isFunDef, isTypeAlias)
 import Agda.TypeChecking.Reduce ( reduce )
 

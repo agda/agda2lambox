@@ -1,4 +1,4 @@
-{-# LANGUAGE DerivingVia, GeneralizedNewtypeDeriving, OverloadedStrings, DeriveFunctor, DeriveTraversable, NamedFieldPuns #-}
+{-# LANGUAGE DerivingStrategies, GeneralizedNewtypeDeriving, OverloadedStrings, DeriveTraversable #-}
 -- | Compilation monad.
 module Agda2Lambox.Compile.Monad
   ( CompileM
@@ -17,10 +17,8 @@ module Agda2Lambox.Compile.Monad
 import Control.Monad ( unless )
 import Control.Monad.Reader
 import Control.Monad.State
-import Control.Monad.IO.Class ( MonadIO )
 import Data.Bifunctor ( bimap )
 import Data.Set ( Set )
-import Data.Set qualified as Set
 import Data.Set qualified as Set
 import Data.Map qualified as Map
 import Data.Maybe ( catMaybes )
@@ -28,9 +26,8 @@ import Data.Maybe ( catMaybes )
 import Agda.Syntax.Abstract (QName)
 import Agda.Compiler.Backend (getConstInfo, PureTCM, HasConstInfo, HasBuiltins, canonicalName)
 import Agda.TypeChecking.Monad (MonadDebug, MonadTrace, MonadAddContext)
-import Agda.TypeChecking.Monad.Debug (MonadDebug, reportSDoc)
+import Agda.TypeChecking.Monad.Debug (reportSDoc)
 import Agda.TypeChecking.Monad.Base hiding (initState)
-import Agda.Utils.List ( mcons )
 import Agda.Utils.Monad ( unlessM )
 import Agda.TypeChecking.Pretty
 import Control.Monad.Error.Class (MonadError)

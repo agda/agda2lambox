@@ -1,15 +1,10 @@
-{-# LANGUAGE FlexibleInstances, FlexibleContexts, OverloadedStrings #-}
-{-# LANGUAGE DataKinds, MonadComprehensions, GADTs #-}
+{-# LANGUAGE FlexibleInstances, OverloadedStrings, ExistentialQuantification #-}
 -- | Converting the LambdaBox AST to s-expressions
 module CodeGen.SExpr (ToSexp, prettySexp) where
 
-import Data.Bifunctor(bimap)
-import Data.List(intercalate)
 import Data.Maybe(listToMaybe)
 
-import Agda.Syntax.Common.Pretty
 import LambdaBox
-import Agda.Utils.Function (applyWhen)
 import Agda2Lambox.Compile.Target
 import Data.SExpresso.SExpr
 import Data.SExpresso.Print.Lazy
