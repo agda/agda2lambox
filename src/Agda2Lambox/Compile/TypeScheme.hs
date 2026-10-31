@@ -1,10 +1,7 @@
-{-# LANGUAGE DataKinds, NoNamedFieldPuns, OverloadedStrings #-}
+{-# LANGUAGE DataKinds, OverloadedStrings #-}
 module Agda2Lambox.Compile.TypeScheme where
 
-import Control.Monad.IO.Class ( liftIO )
-
 import Agda.Syntax.Internal
-import Agda.Syntax.Common
 import Agda.TypeChecking.Pretty
 import Agda.Compiler.Backend
 import Agda.TypeChecking.Telescope ( telView )
@@ -14,7 +11,6 @@ import Agda.TypeChecking.Functions ( etaExpandClause )
 import Agda.Utils ( isTypeAlias )
 import Agda2Lambox.Compile.Monad
 import Agda2Lambox.Compile.Target
-import Agda2Lambox.Compile.Utils
 import Agda2Lambox.Compile.Type
 import LambdaBox.Env
 import LambdaBox.Type qualified as LBox

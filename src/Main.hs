@@ -1,12 +1,11 @@
-{-# LANGUAGE DeriveGeneric, DeriveAnyClass, OverloadedStrings, GADTs #-}
+{-# LANGUAGE DeriveGeneric, DeriveAnyClass, OverloadedStrings, ExistentialQuantification #-}
 -- | The agda2lambox Agda backend
 module Main (main) where
 
-import Control.Monad ( unless, filterM, when )
+import Control.Monad ( filterM, when )
 import Control.Monad.IO.Class ( liftIO )
 import Control.DeepSeq ( NFData(rnf) )
 import Data.Function ( (&) )
-import Data.List ( elem )
 import Data.Maybe ( fromMaybe )
 import Data.Version ( showVersion )
 import Data.Text ( pack )
@@ -21,9 +20,7 @@ import Paths_agda2lambox ( version )
 import Agda.Compiler.Common
 import Agda.Compiler.Backend
 import Agda.Main ( runAgda )
-import Agda.Syntax.Internal ( clauseWhereModule )
-import Agda.Syntax.TopLevelModuleName ( TopLevelModuleName, moduleNameToFileName )
-import Agda.Syntax.Common.Pretty ( pretty, prettyShow )
+import Agda.Syntax.Common.Pretty ( prettyShow )
 
 import Agda.Utils ( pp, hasPragma )
 import Agda2Lambox.Compile.Target

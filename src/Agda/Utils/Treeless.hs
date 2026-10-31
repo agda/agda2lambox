@@ -1,4 +1,4 @@
-{-# LANGUAGE NamedFieldPuns, OverloadedStrings #-}
+{-# LANGUAGE OverloadedStrings #-}
 {- NOTE(flupe):
 
 Currently we inline the treeless pipeline from the Agda source.
@@ -45,10 +45,7 @@ import Agda.TypeChecking.Records (getRecordConstructor)
 import Agda.TypeChecking.Reduce
 import Agda.TypeChecking.Substitute
 
-import Agda.Compiler.Treeless.AsPatterns
-import Agda.Compiler.Treeless.Builtin
 import Agda.Compiler.Treeless.Identity
-import Agda.Compiler.Treeless.Simplify
 import Agda.Compiler.Treeless.Uncase
 import Agda.Compiler.Treeless.Unused
 import Agda.Compiler.Treeless.NormalizeNames
@@ -69,7 +66,6 @@ import Agda.Utils.EliminateDefaults
 import Agda.Utils.Erase
 import Agda.Utils.ThunkLets
 import Agda.Utils.EtaExpandConstructors
-import Agda.Utils.Simplify
 
 prettyPure :: P.Pretty a => a -> TCM Doc
 prettyPure = return . P.pretty

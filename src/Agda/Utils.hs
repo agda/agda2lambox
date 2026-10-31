@@ -1,12 +1,10 @@
-{-# LANGUAGE FlexibleContexts, OverloadedStrings, BangPatterns, NamedFieldPuns #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 -- | Agda utilities.
 module Agda.Utils where
 
-import Control.Applicative ( liftA2 )
-import Data.Bifunctor ( second )
 import Data.Functor ( (<&>) )
-import Data.Maybe ( isJust, isNothing, catMaybes, fromMaybe )
+import Data.Maybe ( isJust, catMaybes, fromMaybe )
 import Data.Text ( Text )
 
 import Agda.Compiler.Backend ( getUniqueCompilerPragma, PureTCM, HasConstInfo (getConstInfo) )
@@ -14,22 +12,13 @@ import Agda.Syntax.Abstract.Name
 import Agda.Syntax.Common ( defaultArg, namedThing, unArg )
 import Agda.Syntax.Internal
 import Agda.TypeChecking.Monad.Base hiding ( conArity )
-import Agda.TypeChecking.Datatypes ( getConstructorInfo, ConstructorInfo(..) )
 import Agda.TypeChecking.Substitute ( raise, TelV (theCore) )
 import Agda.Syntax.Common.Pretty
 import Agda.Syntax.Treeless
 
-import Agda.Compiler.ToTreeless                 qualified as TT
-import Agda.Compiler.Treeless.Builtin           qualified as TT
-import Agda.Compiler.Treeless.Erase             qualified as TT
-import Agda.Compiler.Treeless.Simplify          qualified as TT
-import Agda.Compiler.Treeless.Identity          qualified as TT
-import Agda.Compiler.Treeless.Uncase            qualified as TT
-import Agda.Compiler.Treeless.AsPatterns        qualified as TT
 import Agda.TypeChecking.Telescope (telView, telViewUpTo)
 import Agda.TypeChecking.Substitute (TelV(theTel))
 
-import Agda.Utils.EliminateDefaults qualified as TT
 import Agda.Utils.Treeless qualified as CustomTT
 import Agda.TypeChecking.Reduce (reduceDefCopy)
 

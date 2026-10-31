@@ -1,20 +1,13 @@
-{-# LANGUAGE NamedFieldPuns, DataKinds, OverloadedStrings, NondecreasingIndentation #-}
+{-# LANGUAGE OverloadedStrings, NondecreasingIndentation #-}
 module Agda2Lambox.Compile 
   ( compile
   ) where
 
-import Control.Monad.IO.Class ( liftIO )
-import Data.IORef
-
-import Control.Monad.State
-
 import Agda.Compiler.Backend
-import Agda.Syntax.Internal ( QName )
 import Agda.Syntax.Common (Arg(..), IsOpaque (TransparentDef))
 import Agda.Syntax.Common.Pretty ( prettyShow )
-import Agda.TypeChecking.Monad ( liftTCM, getConstInfo )
 import Agda.TypeChecking.Pretty
-import Agda.Utils.Monad ( ifM, ifNotM, orM )
+import Agda.Utils.Monad ( ifM, ifNotM )
 import Agda.Utils.SmallSet qualified as SmallSet
 
 import Agda.Utils ( isDataOrRecDef, isArity, getPragmaInfo )
@@ -22,7 +15,6 @@ import Agda.Utils ( isDataOrRecDef, isArity, getPragmaInfo )
 import Agda2Lambox.Compile.Monad
 import Agda2Lambox.Compile.Target
 import Agda2Lambox.Compile.Utils
-import Agda2Lambox.Compile.Term       ( compileTerm )
 import Agda2Lambox.Compile.Function   ( compileFunction )
 import Agda2Lambox.Compile.Inductive  ( compileInductive )
 import Agda2Lambox.Compile.TypeScheme ( compileTypeScheme )

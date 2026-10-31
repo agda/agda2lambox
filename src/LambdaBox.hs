@@ -1,4 +1,3 @@
-{-# LANGUAGE OverloadedStrings, DataKinds, GADTs #-}
 -- | Haskell encoding of the LambdaBox syntax.
 module LambdaBox
   ( module LambdaBox.Names

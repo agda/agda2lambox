@@ -8,7 +8,6 @@ module Agda2Lambox.Compile.Target
   , whenTyped
   ) where
 
-import Data.Foldable (Foldable(foldMap))
 import Control.DeepSeq ( NFData(rnf) )
 import Data.Kind ( Type )
 

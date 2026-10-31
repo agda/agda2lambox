@@ -1,8 +1,7 @@
-{-# LANGUAGE OverloadedStrings #-}
 -- | Test suite for agda2lambox using tasty
 module Main (main) where
 
-import Control.Monad (filterM, unless, when, forM)
+import Control.Monad (unless, when, forM)
 import System.Directory
 import System.FilePath
 import System.Process
@@ -12,7 +11,7 @@ import Data.Char (isSpace)
 import Data.List (sort, isSuffixOf, dropWhileEnd)
 
 import Test.Tasty (defaultMain, testGroup, TestTree)
-import Test.Tasty.HUnit (testCase, assertFailure, (@?=))
+import Test.Tasty.HUnit (testCase, assertFailure)
 
 main :: IO ()
 main = do

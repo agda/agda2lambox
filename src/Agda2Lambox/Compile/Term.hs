@@ -1,26 +1,19 @@
 module Agda2Lambox.Compile.Term (compileTerm) where
 
-import Control.Monad.Fail ( MonadFail )
-import Control.Monad.IO.Class (MonadIO)
-import Control.Monad.Reader.Class ( MonadReader, ask, asks )
 import Control.Monad.Reader ( ReaderT(runReaderT), local )
 import Control.Monad.Trans
-import Data.List ( elemIndex, foldl', singleton )
-import Data.Maybe ( fromMaybe, listToMaybe )
-import Data.Foldable ( foldrM )
+import Data.List ( elemIndex, singleton )
 import Data.Text qualified as Text ( unpack )
 
-import Agda.Compiler.Backend ( MonadTCState, HasOptions, canonicalName )
-import Agda.Compiler.Backend ( getConstInfo, theDef, pattern Datatype, dataMutual )
-import Agda.Syntax.Abstract.Name ( ModuleName(..), QName(..) )
+import Agda.Compiler.Backend ( canonicalName )
+import Agda.Syntax.Abstract.Name ( QName(..) )
 import Agda.Syntax.Builtin ( builtinNat, builtinZero, builtinSuc )
 import Agda.Syntax.Common ( Erased(..) )
 import Agda.Syntax.Common.Pretty
 import Agda.Syntax.Literal
 import Agda.Syntax.Treeless
   ( TTerm(..), TAlt(..), CaseInfo(..), CaseType(..), TPrim(..) )
-import Agda.TypeChecking.Datatypes ( getConstructorData, getConstructors )
-import Agda.TypeChecking.Monad.Base ( TCM , liftTCM, MonadTCEnv, MonadTCM )
+import Agda.TypeChecking.Monad.Base ( liftTCM )
 import Agda.TypeChecking.Monad.Builtin ( getBuiltinName_ )
 
 import LambdaBox.Names ( Name(..) )

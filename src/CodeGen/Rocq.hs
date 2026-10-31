@@ -1,9 +1,6 @@
-{-# LANGUAGE FlexibleInstances, FlexibleContexts, OverloadedStrings, DataKinds, MonadComprehensions #-}
+{-# LANGUAGE FlexibleInstances, FlexibleContexts, OverloadedStrings, DataKinds #-}
 -- | Generating Rocq code from our LambdaBox AST
 module CodeGen.Rocq (prettyRocq) where
-
-import Data.Bifunctor(bimap)
-import Data.List(intercalate)
 
 import Agda.Syntax.Common.Pretty
 import LambdaBox

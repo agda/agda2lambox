@@ -1,21 +1,16 @@
-{-# LANGUAGE NamedFieldPuns, FlexibleInstances #-}
+{-# LANGUAGE FlexibleInstances #-}
 module Agda2Lambox.Compile.Utils where
 
-import Control.Monad.State
-import Control.Monad.IO.Class ( liftIO )
 import Data.Functor ( (<&>) )
-import Data.List ( elemIndex, foldl' )
+import Data.List ( elemIndex )
 import Data.Maybe ( fromMaybe, listToMaybe, isJust )
 
 import Agda.Compiler.Backend
 import Agda.Syntax.Internal
-import Agda.Syntax.Abstract.Name
-import Agda.Syntax.Common.Pretty ( prettyShow, Doc )
+import Agda.Syntax.Common.Pretty ( prettyShow )
 import Agda.Syntax.Common ( usableModality, Arg(..), NameId(..) )
 import Agda.TypeChecking.Datatypes ( getConstructors, getConstructorData )
 import Agda.TypeChecking.Level ( isLevelType )
-import Agda.TypeChecking.Monad.SizedTypes ( isSizeType )
-import Agda.TypeChecking.Monad.Base ( TCM )
 import Agda.TypeChecking.Reduce ( reduce )
 import Agda.TypeChecking.Substitute ( TelV(TelV), theTel )
 import Agda.TypeChecking.Telescope ( telView, telViewUpTo, flattenTel )
