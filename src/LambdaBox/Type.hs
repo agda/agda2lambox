@@ -16,6 +16,11 @@ data Type
   | TInd Inductive
   | TConst KerName
 
+-- | Drop the first @n@ domains of a function type.
+dropArrows :: Int -> Type -> Type
+dropArrows n (TArr _ t) | n > 0 = dropArrows (n - 1) t
+dropArrows _ t = t
+
 instance Pretty Type where
   prettyPrec p = \case
     TBox         -> "□"

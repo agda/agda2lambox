@@ -14,14 +14,11 @@ import Data.Maybe ( fromMaybe )
 import Data.Set ( Set )
 import Data.Set qualified as S
 
-import Data.Foldable (toList)
 import Agda.Syntax.Abstract.Name ( QName, qnameModule )
 import Agda.TypeChecking.Monad.Base hiding ( None )
 import Agda.TypeChecking.Pretty
 import Agda.Compiler.Backend ( getConstInfo, reportSDoc )
-import Agda.Syntax.Internal (domName)
 import Agda.Syntax.Internal.Names ( namesIn )
-import Agda.Syntax.Common.Pretty ( prettyShow )
 import Agda.Syntax.Common ( hasQuantityω )
 import Agda.Utils.Monad (guardWithError, whenM, ifNotM)
 import Agda.Utils.Treeless ( alwaysInline, Erasure )
@@ -31,12 +28,12 @@ import Agda2Lambox.Compile.Target
 import Agda2Lambox.Compile.Utils
 import Agda2Lambox.Compile.Monad
 import Agda2Lambox.Compile.Term ( compileTerm )
-import Agda2Lambox.Compile.Type ( compileTopLevelType, compileType )
+import Agda2Lambox.Compile.Type ( compileTopLevelType )
 
 import LambdaBox qualified as LBox
 import LambdaBox.Env
 import Agda.TypeChecking.Telescope ( telViewUpTo )
-import Agda.TypeChecking.Substitute ( TelV(theCore, theTel) )
+import Agda.TypeChecking.Substitute ( TelV(..), telePi )
 
 
 -- | Convert a function body to a λ□ term.
@@ -107,16 +104,10 @@ compileFunction (t :: Target t) defn@Defn{defType} =
 
     -- if it is a (real) projection, drop the parameters from the type
     Just (recName, _) -> do
-      Record{recPars} <- fmap theDef $ liftTCM $ getConstInfo recName
-      projTel <- telViewUpTo recPars defType
-      projType <- theCore <$> telViewUpTo recPars defType
-      let names  = map domName $ toList $ theTel projTel
-          pnames = map (maybe LBox.Anon (LBox.Named . prettyShow)) names
-      (pnames,) <$> compileType recPars projType
-
-    -- TODO(flupe): ^ take care of projection-like functions
-    --                they should be eta-expanded somehow,
-    --                OR treated like projections
+      Defn{defType = recType, theDef = Record{recPars}} <- liftTCM $ getConstInfo recName
+      TelV pars _      <- telViewUpTo recPars recType
+      TelV _ projType  <- telViewUpTo recPars defType
+      fmap (LBox.dropArrows recPars) <$> compileTopLevelType (telePi pars projType)
 
   let builder :: LBox.Term -> Maybe (LBox.GlobalDecl t)
       builder = Just . ConstantDecl . ConstantBody typ . Just
