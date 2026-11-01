@@ -32,7 +32,6 @@ import Agda2Lambox.Compile ( compile )
 import CodeGen.Rocq ( prettyRocq  )
 import CodeGen.SExpr ( prettySexp )
 import LambdaBox.Env
-import LambdaBox.Names ( KerName )
 import Agda2Lambox.Compile.Monad ( runCompile, CompileEnv(..) )
 
 
@@ -47,10 +46,11 @@ data Options = forall t. Options
   { optOutDir   :: Maybe FilePath
   , optTarget   :: Target t
   , optOutputs  :: [Output]
+  , optLibrary  :: Bool
   }
 
 instance NFData Options where
-  rnf (Options m t o) = rnf m `seq` rnf t `seq` rnf o
+  rnf (Options m t o l) = rnf m `seq` rnf t `seq` rnf o `seq` rnf l
 
 -- | Setter for output directory option.
 outdirOpt :: Monad m => FilePath -> Options -> m Options
@@ -62,12 +62,16 @@ typedOpt opts = return opts { optTarget = ToTyped }
 rocqOpt :: Monad m => Options -> m Options
 rocqOpt opts = return opts { optOutputs = RocqOutput : optOutputs opts }
 
+libraryOpt :: Monad m => Options -> m Options
+libraryOpt opts = return opts { optLibrary = True }
+
 -- | Default backend options.
 defaultOptions :: Options
 defaultOptions  = Options
   { optOutDir   = Nothing
   , optTarget   = ToUntyped
   , optOutputs  = [AstOutput]
+  , optLibrary  = False
   }
 
 -- | Backend module environments.
@@ -92,6 +96,8 @@ agda2lambox = Backend backend
             "Compile to typed λ□ environments."
           , Option ['c'] ["rocq"] (NoArg rocqOpt)
             "Output a Rocq file."
+          , Option ['a'] ["export-all"] (NoArg libraryOpt)
+            "Compile every definition of the module, not only those reachable from a COMPILE pragma (to extract a library)."
           ]
       , isEnabled             = \ _ -> True
       , preCompile            = return
@@ -120,10 +126,14 @@ writeModule Options{..} menv IsMain m defs = do
   outDir   <- flip fromMaybe optOutDir <$> compileDir
   programs <- filterM hasPragma defs
 
-  -- get defs annotated with a COMPILE pragma
-  -- throw an error if none, when targetting untyped lbox
-  mains    <- getMain optTarget programs
-  env      <- runCompile CompileEnv $ compile optTarget defs
+  when (null programs && not optLibrary) $ genericError
+    "No main program specified. Please use a COMPILE pragma, or --export-all to extract a library."
+
+  -- only compile what is reachable from the programs, unless extracting a library
+  let roots = if optLibrary then defs else programs
+  env      <- runCompile CompileEnv $ compile optTarget roots
+
+  let mains = map qnameToKName programs
 
   liftIO $ createDirectoryIfMissing True outDir
 
@@ -143,8 +153,3 @@ writeModule Options{..} menv IsMain m defs = do
     putStrLn $ "Writing " <> fileName -<.> ".v"
     prettyRocq optTarget lboxMod <> "\n"
       & writeFile (fileName -<.> ".v")
-
-  where
-    getMain :: Target t -> [QName] -> TCM [KerName]
-    getMain ToUntyped [] = genericError "No main program specified. Please use a COMPILE pragma."
-    getMain _         qs = pure $ map qnameToKName qs
