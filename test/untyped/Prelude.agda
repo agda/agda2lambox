@@ -139,10 +139,10 @@ reverse l = reverseAux l []
 appendTR : List A -> List A -> List A
 appendTR l1 l2 = reverseAux (reverse l1) l2
 
-test′ : Nat
-test′ = length (appendTR (reverse (range n)) (invrange n))
+test : Nat
+test = length (appendTR (reverse (range n)) (invrange n))
   module _ where private n = 21
-{-# COMPILE AGDA2LAMBOX test′ #-}
+{-# COMPILE AGDA2LAMBOX test #-}
 
-_ : test′ ≡ 42
+_ : test ≡ 42
 _ = refl

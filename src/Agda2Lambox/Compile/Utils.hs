@@ -22,7 +22,9 @@ import Agda.TypeChecking.Telescope ( telView, telViewUpTo, flattenTel )
 import Agda.Utils.Monad ( orM, andM, filterM, forM )
 
 import Agda.Utils ( getInductiveParams, isDataOrRecDef, isArity, dataOrRecMutuals )
+import Agda.Utils.Erase ( Erasure(..) )
 import Agda2Lambox.Compile.Monad
+import Agda2Lambox.Compile.Target
 import LambdaBox qualified as LBox
 
 -- | Convert an Agda module name to its "equivalent" λ□ module path.
@@ -134,3 +136,11 @@ instance MayBeLogical a => MayBeLogical (Dom a) where
 instance MayBeLogical a => MayBeLogical (Arg a) where
   isLogical arg | not (usableModality arg) = pure True
   isLogical arg = isLogical $ unArg arg
+
+-- | What the treeless translation erases for each target:
+--   typed output keeps all values whose types it keeps.
+targetErasure :: Target t -> Erasure
+targetErasure ToUntyped = EraseAll
+targetErasure ToTyped   = EraseLogical \q -> do
+  Defn{defArgInfo, defType} <- getConstInfo q
+  isLogical $ Arg defArgInfo defType
