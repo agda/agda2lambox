@@ -11,7 +11,7 @@ import Data.Text ( Text )
 
 import Agda.Compiler.Backend ( getUniqueCompilerPragma, PureTCM, HasConstInfo (getConstInfo) )
 import Agda.Syntax.Abstract.Name
-import Agda.Syntax.Common ( defaultArg )
+import Agda.Syntax.Common ( defaultArg, namedThing, unArg )
 import Agda.Syntax.Internal
 import Agda.TypeChecking.Monad.Base hiding ( conArity )
 import Agda.TypeChecking.Datatypes ( getConstructorInfo, ConstructorInfo(..) )
@@ -113,6 +113,15 @@ isRecordProjection d
   = Just (recName, projOrig)
   | otherwise
   = Nothing
+
+-- | Whether a type-level function is compiled to a type alias:
+--   it has a single clause, whose patterns are variables.
+isTypeAlias :: Defn -> Bool
+isTypeAlias = \case
+  Function{funClauses = [cl]} ->
+    all (isVarP . namedThing . unArg) (namedClausePats cl) && isJust (clauseBody cl)
+  _ -> False
+  where isVarP = \case VarP{} -> True; _ -> False
 
 -- | Try to unfold a definition if introduced by module application.
 maybeUnfoldCopy

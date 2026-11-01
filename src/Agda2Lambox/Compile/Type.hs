@@ -32,7 +32,8 @@ import qualified LambdaBox as LBox
 import Agda2Lambox.Compile.Utils
 import Agda2Lambox.Compile.Monad
 import Agda.Compiler.Backend (HasConstInfo(getConstInfo), Definition(Defn), AddContext (addContext))
-import Agda.Utils (isDataOrRecDef, getInductiveParams, isArity, maybeUnfoldCopy)
+import Agda.Utils (isDataOrRecDef, getInductiveParams, isArity, maybeUnfoldCopy, isFunDef, isTypeAlias)
+import Agda.TypeChecking.Reduce ( reduce )
 
 
 -- | The kind of variables that are locally bound
@@ -190,19 +191,19 @@ compileTypeTerm t = do
         ([],) . foldl' LBox.TApp (LBox.TInd ind)
           <$> compileElims defType (take (getInductiveParams def) args)
 
+      -- a type-level function that is not an alias is compiled to its reduct, if any
+      else if isFunDef def && not (isTypeAlias def) then
+        liftTCM (reduce $ Def q es) >>= \case
+          Def q' _ | q' == q -> typeScheme q defType es
+          t'                 -> compileTypeTerm t'
+
       -- otherwise, it must have been compiled as a type scheme,
       -- and therefore is kept with all arguments.
 
       -- TODO(flupe): check whether indeed the fallback is always compiled to a typescheme.
       --              what about non-logical defs that are not arities or w/?
       -- TODO(flupe): possibly merge the logic with the above for datatypes
-      else do
-        q <- liftTCM $ canonicalName q
-        lift $ requireDef q
-        let ts = qnameToKName q
-        let args = mapMaybe isApplyElim es
-        ([],) . foldl' LBox.TApp (LBox.TConst ts)
-          <$> compileElims defType args
+      else typeScheme q defType es
 
     Pi dom codom -> do
       let domType   = unDom dom
@@ -225,3 +226,12 @@ compileTypeTerm t = do
         pure (name : vars, LBox.TArr LBox.TBox codomType')
 
     _ -> pure ([], LBox.TAny)
+
+-- | Compile the application of a type scheme, keeping all arguments.
+typeScheme :: QName -> Type -> Elims -> C ([LBox.Name], LBox.Type)
+typeScheme q defType es = do
+  q <- liftTCM $ canonicalName q
+  lift $ requireDef q
+  let args = mapMaybe isApplyElim es
+  ([],) . foldl' LBox.TApp (LBox.TConst $ qnameToKName q)
+    <$> compileElims defType args
