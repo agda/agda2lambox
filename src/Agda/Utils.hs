@@ -100,8 +100,8 @@ etaExpand = \case
 -- ** toTreeless custom pipeline
 
 -- | Convert compiled clauses to treeless syntax, and return it.
-treeless :: QName -> TCM (Maybe TTerm)
-treeless = CustomTT.toTreeless EagerEvaluation
+treeless :: CustomTT.Erasure -> QName -> TCM (Maybe TTerm)
+treeless er = CustomTT.toTreeless (EagerEvaluation, er)
   
 -- * projections
 

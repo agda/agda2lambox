@@ -19,6 +19,7 @@ executable agda2lambox
   main-is:             Main.hs
   other-modules:       Agda.Utils,
                        Agda.Utils.EliminateDefaults,
+                       Agda.Utils.Erase,
                        Agda.Utils.EtaExpandConstructors,
                        Agda.Utils.Simplify,
                        Agda.Utils.Treeless,

@@ -24,7 +24,7 @@ import Agda.Syntax.Internal.Names ( namesIn )
 import Agda.Syntax.Common.Pretty ( prettyShow )
 import Agda.Syntax.Common ( hasQuantityω )
 import Agda.Utils.Monad (guardWithError, whenM, ifNotM)
-import Agda.Utils.Treeless ( alwaysInline )
+import Agda.Utils.Treeless ( alwaysInline, Erasure )
 
 import Agda.Utils ( treeless, pp, isRecordProjection, isPiTy, etaExpand, isFunction )
 import Agda2Lambox.Compile.Target
@@ -40,9 +40,9 @@ import Agda.TypeChecking.Substitute ( TelV(theCore, theTel) )
 
 
 -- | Convert a function body to a λ□ term.
-compileFunctionBody :: [QName] -> Definition -> CompileM LBox.Term
-compileFunctionBody ms Defn{defName, defType} = do
-  Just t <- liftTCM $ treeless defName
+compileFunctionBody :: Erasure -> [QName] -> Definition -> CompileM LBox.Term
+compileFunctionBody er ms Defn{defName, defType} = do
+  Just t <- liftTCM $ treeless er defName
   reportSDoc "agda2lambox.compile.function" 10 $
     "treeless body:" <+> pretty t
   -- fixpoint bodies must always be lambdas, so η-expand recursive functions of
@@ -65,8 +65,8 @@ type MutualGraph = Map QName (Set QName)
 --
 -- NB: see the discussion on Agda issue #8111 on why @funMutuals@ is not enough,
 -- i.e. the positivity checker misses some calls on agruments it deems unused.
-recursiveGroup :: Definition -> TCM [QName]
-recursiveGroup Defn{defName, defMutual = block} =
+recursiveGroup :: Erasure -> Definition -> TCM [QName]
+recursiveGroup er Defn{defName, defMutual = block} =
   explore M.empty [defName] >>= pure . extractGroup
   where
   explore :: MutualGraph -> [QName] -> TCM MutualGraph
@@ -78,7 +78,7 @@ recursiveGroup Defn{defName, defMutual = block} =
     = calls q >>= \cs -> explore (M.insert q cs gr) (S.toList cs ++ qs)
 
   calls :: QName -> TCM (Set QName)
-  calls q = treeless q >>= \case
+  calls q = treeless er q >>= \case
     Nothing -> pure S.empty
     Just t  -> S.fromList <$> filterM inBlock (S.toList $ namesIn t)
 
@@ -96,7 +96,8 @@ recursiveGroup Defn{defName, defMutual = block} =
 compileFunction :: Target t -> Definition -> CompileM (Maybe (LBox.GlobalDecl t))
 compileFunction (t :: Target t) defn@Defn{defType} =
   ifNotM (liftTCM $ shouldCompileFunction defn) (pure Nothing) do
-  mnames <- liftTCM $ recursiveGroup defn
+  let er = targetErasure t
+  mnames <- liftTCM $ recursiveGroup er defn
   mdefs  <- liftTCM $ mapM getConstInfo mnames
   reportSDoc "agda2lambox.compile.function" 5 $
     "Recursive group:" <+> prettyTCM mnames
@@ -121,7 +122,7 @@ compileFunction (t :: Target t) defn@Defn{defType} =
       builder = Just . ConstantDecl . ConstantBody typ . Just
 
   -- if the function is not recursive, just compile the body
-  if null mdefs then builder <$> compileFunctionBody [] defn
+  if null mdefs then builder <$> compileFunctionBody er [] defn
 
   -- otherwise, take fixpoint
   else do
@@ -129,7 +130,7 @@ compileFunction (t :: Target t) defn@Defn{defType} =
 
     builder . flip LBox.LFix k <$>
       forM mdefs \def@Defn{defName} -> do
-        body <- compileFunctionBody mnames def >>= \case
+        body <- compileFunctionBody er mnames def >>= \case
           l@LBox.LLambda{} -> pure l
           LBox.LBox        -> pure $ LBox.LLambda LBox.Anon LBox.LBox
           _                -> genericError "Fixpoint body must be Lambda."

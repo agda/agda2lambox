@@ -16,7 +16,7 @@ module Agda.Utils.Treeless
   , compilerPass
   , compilerPipeline
   , CCConfig
-  , CCSubst(..)
+  , Erasure(..)
   , alwaysInline
   ) where
 
@@ -47,7 +47,6 @@ import Agda.TypeChecking.Substitute
 
 import Agda.Compiler.Treeless.AsPatterns
 import Agda.Compiler.Treeless.Builtin
-import Agda.Compiler.Treeless.Erase
 import Agda.Compiler.Treeless.Identity
 import Agda.Compiler.Treeless.Simplify
 import Agda.Compiler.Treeless.Uncase
@@ -67,6 +66,7 @@ import qualified Agda.Utils.SmallSet as SmallSet
 import Agda.Utils.Impossible
 
 import Agda.Utils.EliminateDefaults
+import Agda.Utils.Erase
 import Agda.Utils.ThunkLets
 import Agda.Utils.EtaExpandConstructors
 import Agda.Utils.Simplify
@@ -91,7 +91,7 @@ getCompiledClauses q = do
   CC.compileClauses' q translate cs mst
 
 -- ** Types of pipelines; different backends might use their own custom pipeline.
-type BuildPipeline = Int -> QName -> Pipeline
+type BuildPipeline = Erasure -> Int -> QName -> Pipeline
 
 data Pipeline = FixedPoint Int Pipeline
               | Sequential [Pipeline]
@@ -106,7 +106,6 @@ data CompilerPass = CompilerPass
 
 type CC        = ReaderT CCEnv TCM
 type CCContext = [Int]
-data CCSubst   = EraseUnused | IgnoreUnused deriving Eq
 
 -- | Environment for treeless conversion.
 data CCEnv = CCEnv
@@ -117,19 +116,19 @@ data CCEnv = CCEnv
     -- If an inner case has no catch-all clause, we use the one from its parent.
   , ccEvaluation  :: EvaluationStrategy
     -- ^ Which evaluation strategy does the backend assumes.
-  , ccSubstUnused :: CCSubst
-    -- ^ Whether to erase unused arguments.
+  , ccErasure     :: Erasure
+    -- ^ What to erase, e.g. unused arguments.
   }
 
-type CCConfig  = (EvaluationStrategy, CCSubst)
+type CCConfig  = (EvaluationStrategy, Erasure)
 
 -- | Initial environment for expression generation.
 initCCEnv :: CCConfig -> CCEnv
-initCCEnv (eval, su) = CCEnv
+initCCEnv (eval, er) = CCEnv
   { ccCxt         = []
   , ccCatchall    = Nothing
   , ccEvaluation  = eval
-  , ccSubstUnused = su
+  , ccErasure     = er
   }
 
 -- | Converts compiled clauses to treeless syntax.
@@ -143,8 +142,8 @@ toTreelessWith pl cfg q
   = ifM (alwaysInline q) (pure Nothing)
   $ Just <$> toTreelessWith' pl cfg q
 
-toTreeless :: EvaluationStrategy -> QName -> TCM (Maybe C.TTerm)
-toTreeless eval = toTreelessWith compilerPipeline (eval, EraseUnused)
+toTreeless :: CCConfig -> QName -> TCM (Maybe C.TTerm)
+toTreeless = toTreelessWith compilerPipeline
 
 toTreelessWith' :: BuildPipeline -> CCConfig -> QName -> TCM C.TTerm
 toTreelessWith' pl cfg q =
@@ -155,20 +154,20 @@ toTreelessWith' pl cfg q =
       -- functions, since that would risk inlining to fail.
     ccToTreelessWith pl cfg q cc
 
-toTreeless' :: EvaluationStrategy -> QName -> TCM C.TTerm
-toTreeless' eval = toTreelessWith' compilerPipeline (eval, EraseUnused)
+toTreeless' :: CCConfig -> QName -> TCM C.TTerm
+toTreeless' = toTreelessWith' compilerPipeline
 
 ccToTreelessWith :: BuildPipeline -> CCConfig -> QName -> CC.CompiledClauses -> TCM C.TTerm
-ccToTreelessWith pl cfg@(eval, su) q cc = do
+ccToTreelessWith pl cfg@(eval, er) q cc = do
   let pbody b = pbody' "" b
       pbody' suf b = sep [ text (prettyShow q ++ suf) <+> "=", nest 2 $ prettyPure b ]
   v <- ifM (alwaysInline q) (return 20) (return 0)
   reportSDoc "treeless.convert" (30 + v) $ "-- compiled clauses of" <+> prettyTCM q $$ nest 2 (prettyPure cc)
   body <- casetreeTop cfg cc
   reportSDoc "treeless.opt.converted" (30 + v) $ "-- converted" $$ pbody body
-  body <- runPipeline eval q (pl v q) body
+  body <- runPipeline eval q (pl er v q) body
   used <- usedArguments q body
-  when (su == EraseUnused && ArgUnused `elem` used) $
+  when (erasesUnused er && ArgUnused `elem` used) $
     reportSDoc "treeless.opt.unused" (30 + v) $
       "-- used args:" <+> hsep [ if u == ArgUsed then text [x] else "_" | (x, u) <- zip ['a'..] used ] $$
       pbody' "[stripped]" (stripUnusedArguments used body)
@@ -177,20 +176,20 @@ ccToTreelessWith pl cfg@(eval, su) q cc = do
   setCompiledArgUse q used
   return body
 
-ccToTreeless :: EvaluationStrategy -> QName -> CC.CompiledClauses -> TCM C.TTerm
-ccToTreeless eval = ccToTreelessWith compilerPipeline (eval, EraseUnused)
+ccToTreeless :: CCConfig -> QName -> CC.CompiledClauses -> TCM C.TTerm
+ccToTreeless = ccToTreelessWith compilerPipeline
 
 compilerPass :: String -> Int -> String -> (EvaluationStrategy -> TTerm -> TCM TTerm) -> Pipeline
 compilerPass tag v name code = SinglePass (CompilerPass tag v name code)
 
 compilerPipeline :: BuildPipeline
-compilerPipeline v q =
+compilerPipeline er v q =
   Sequential
 
     -- [ compilerPass "builtin" (30 + v) "builtin translation" $ const translateBuiltins
     [ FixedPoint 5 $ Sequential
       -- [ compilerPass "simpl"  (30 + v) "simplification"     $ const simplifyTTerm
-      [ compilerPass "erase"  (30 + v) "erasure"            $ eraseTerms q
+      [ compilerPass "erase"  (30 + v) "erasure"            $ eraseTerms er q
       , compilerPass "uncase" (30 + v) "uncase"             $ const caseToSeq
 
 
@@ -618,36 +617,41 @@ normaliseStatic v@(I.Def f es) = lift $ do
 normaliseStatic v = pure v
 
 -- | Does not require the name to refer to a function.
-cacheTreeless :: EvaluationStrategy -> QName -> TCM ()
-cacheTreeless eval q = do
+cacheTreeless :: CCConfig -> QName -> TCM ()
+cacheTreeless cfg q = do
   def <- theDef <$> getConstInfo q
   case def of
-    Function{} -> () <$ toTreeless' eval q
+    Function{} -> () <$ toTreeless' cfg q
     _          -> return ()
+
+-- | Whether unused arguments are erased.
+erasesUnused :: Erasure -> Bool
+erasesUnused = \case
+  EraseAll       -> True
+  EraseLogical{} -> False
 
 maybeInlineDef :: I.QName -> I.Args -> CC C.TTerm
 maybeInlineDef q vs = do
-  eval <- asks ccEvaluation
-  ifM (lift $ alwaysInline q) (doinline eval) $ do
-    lift $ cacheTreeless eval q
+  cfg <- asks \ e -> (ccEvaluation e, ccErasure e)
+  ifM (lift $ alwaysInline q) (doinline cfg) $ do
+    lift $ cacheTreeless cfg q
     def <- lift $ getConstInfo q
     case theDef def of
       fun@Function{}
-        | fun ^. funInline -> doinline eval
+        | fun ^. funInline -> doinline cfg
         | otherwise -> do
         -- If ArgUsage hasn't been computed yet, we assume all arguments are used.
         used <- lift $ fromMaybe [] <$> getCompiledArgUse q
-        su <- asks ccSubstUnused
         let substUsed arg used
-              | used == ArgUnused && su == EraseUnused
+              | used == ArgUnused && erasesUnused (snd cfg)
               = pure C.TErased
               | otherwise
               = substArg arg
         C.mkTApp (C.TDef q) <$> zipWithM substUsed vs (used ++ repeat ArgUsed)
       _ -> C.mkTApp (C.TDef q) <$> substArgs vs
   where
-    doinline eval = C.mkTApp <$> inline eval q <*> substArgs vs
-    inline eval q = lift $ toTreeless' eval q
+    doinline cfg = C.mkTApp <$> inline cfg q <*> substArgs vs
+    inline cfg q = lift $ toTreeless' cfg q
 
 substArgs :: [Arg I.Term] -> CC [C.TTerm]
 substArgs = traverse substArg

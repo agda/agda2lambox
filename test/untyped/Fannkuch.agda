@@ -16,7 +16,7 @@ open import Agda.Builtin.Maybe
 open import Agda.Builtin.List
 open import Agda.Builtin.Bool
 open import Agda.Builtin.Equality
-open import Prelude
+open import Prelude hiding (test)
 
 -- Reverse the first n elements of a list, keeping the rest
 
