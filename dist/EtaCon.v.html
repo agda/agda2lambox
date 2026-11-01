@@ -23,20 +23,7 @@ From Agda2Lambox     Require Import CheckWF Eval.
 Import ListNotations.
 
 Definition env : global_declarations :=
-  [((MPfile [&quot;EtaCon&quot;%bs], &quot;addone&quot;%bs),
-    ConstantDecl
-      {| cst_body :=
-           Some
-             (tLambda
-                nAnon
-                (tApp
-                   (tConstruct
-                      {| inductive_mind :=
-                           (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                         inductive_ind := 0 |}
-                      1 [])
-                   (tRel 0))) |});
-   ((MPfile [&quot;EtaCon&quot;%bs], &quot;example&quot;%bs),
+  [((MPfile [&quot;EtaCon&quot;%bs], &quot;test&quot;%bs),
     ConstantDecl
       {| cst_body :=
            Some
@@ -112,7 +99,7 @@ Definition env : global_declarations :=
 Compute @check_wf_glob eflags env.
 
 Definition prog1 : program :=
-  (env, tConst (MPfile [&quot;EtaCon&quot;%bs], &quot;example&quot;%bs)).
+  (env, tConst (MPfile [&quot;EtaCon&quot;%bs], &quot;test&quot;%bs)).
 
 Compute show_program prog1.</code></pre>
 </body>

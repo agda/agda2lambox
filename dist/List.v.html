@@ -23,72 +23,7 @@ From Agda2Lambox      Require Import CheckWF Eval.
 Import ListNotations.
 
 Definition env : global_env :=
-  [(((MPfile [&quot;List&quot;%bs], &quot;_++_&quot;%bs), true),
-    ConstantDecl
-      {| cst_body :=
-           Some
-             (tFix
-                [{| dname := nNamed &quot;_++_&quot;%bs;
-                    dbody :=
-                      tLambda
-                        nAnon
-                        (tLambda
-                           nAnon
-                           (tLambda
-                              nAnon
-                              (tCase
-                                 ({| inductive_mind :=
-                                       (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
-                                     inductive_ind := 0 |},
-                                  1)
-                                 (tRel 1)
-                                 [([], tRel 0);
-                                  ([nAnon; nAnon],
-                                   tApp
-                                     (tApp
-                                        (tApp
-                                           (tConstruct
-                                              {| inductive_mind :=
-                                                   (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
-                                                    &quot;List&quot;%bs);
-                                                 inductive_ind := 0 |}
-                                              1 [])
-                                           tBox)
-                                        (tRel 1))
-                                     (tApp (tApp (tApp (tRel 5) tBox) (tRel 0)) (tRel 2)))])));
-                    rarg := 0 |}]
-                0);
-         cst_type :=
-           ([nNamed &quot;A&quot;%bs],
-            TArr
-              TBox
-              (TArr
-                 (TApp
-                    (TApp
-                       (TInd
-                          {| inductive_mind :=
-                               (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
-                             inductive_ind := 0 |})
-                       TBox)
-                    (TVar 0))
-                 (TArr
-                    (TApp
-                       (TApp
-                          (TInd
-                             {| inductive_mind :=
-                                  (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
-                                inductive_ind := 0 |})
-                          TBox)
-                       (TVar 0))
-                    (TApp
-                       (TApp
-                          (TInd
-                             {| inductive_mind :=
-                                  (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
-                                inductive_ind := 0 |})
-                          TBox)
-                       (TVar 0))))) |});
-   (((MPfile [&quot;List&quot;%bs], &quot;test&quot;%bs), true),
+  [(((MPfile [&quot;List&quot;%bs], &quot;test&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some

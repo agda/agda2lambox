@@ -328,164 +328,7 @@
         unreachable
       end
     end)
-  (func (;3;) (type 1) (param i32)
-    (local i32 i32 i32)
-    local.get 0
-    i32.const 1
-    i32.and
-    i32.eqz
-    if  ;; label = @1
-      local.get 0
-      i32.load
-      i32.const 0
-      i32.eq
-      if  ;; label = @2
-        local.get 0
-        i32.const 4
-        i32.add
-        i32.load
-        local.set 1
-        local.get 1
-        i32.const 4
-        call_indirect (type 1)
-        global.get 3
-        if  ;; label = @3
-          return
-        end
-        global.get 2
-        local.set 2
-        global.get 0
-        i32.const 65536
-        i32.add
-        i32.const 65536
-        i32.div_s
-        memory.size
-        i32.ge_s
-        if  ;; label = @3
-          i32.const 1
-          memory.grow
-          i32.const -1
-          i32.eq
-          if  ;; label = @4
-            i32.const 1
-            global.set 3
-            return
-          end
-        end
-        global.get 0
-        global.set 1
-        global.get 1
-        i32.const 0
-        i32.store
-        global.get 0
-        i32.const 4
-        i32.add
-        global.set 0
-        global.get 1
-        i32.const 4
-        i32.add
-        local.get 2
-        i32.store
-        global.get 0
-        i32.const 4
-        i32.add
-        global.set 0
-        global.get 1
-        local.set 3
-        local.get 3
-        global.set 2
-        return
-      else
-        unreachable
-      end
-    else
-      unreachable
-    end)
-  (func (;4;) (type 1) (param i32)
-    (local i32 i32 i32 i32)
-    local.get 0
-    i32.const 1
-    i32.and
-    i32.eqz
-    if  ;; label = @1
-      local.get 0
-      i32.load
-      i32.const 0
-      i32.eq
-      if  ;; label = @2
-        local.get 0
-        i32.const 4
-        i32.add
-        i32.load
-        local.set 2
-        local.get 2
-        i32.const 3
-        call_indirect (type 1)
-        global.get 3
-        if  ;; label = @3
-          return
-        end
-        global.get 2
-        local.set 3
-        global.get 0
-        i32.const 65536
-        i32.add
-        i32.const 65536
-        i32.div_s
-        memory.size
-        i32.ge_s
-        if  ;; label = @3
-          i32.const 1
-          memory.grow
-          i32.const -1
-          i32.eq
-          if  ;; label = @4
-            i32.const 1
-            global.set 3
-            return
-          end
-        end
-        global.get 0
-        global.set 1
-        global.get 1
-        i32.const 0
-        i32.store
-        global.get 0
-        i32.const 4
-        i32.add
-        global.set 0
-        global.get 1
-        i32.const 4
-        i32.add
-        local.get 3
-        i32.store
-        global.get 0
-        i32.const 4
-        i32.add
-        global.set 0
-        global.get 1
-        local.set 4
-        local.get 4
-        global.set 2
-        return
-      else
-        unreachable
-      end
-    else
-      local.get 0
-      i32.const 1
-      i32.eq
-      if  ;; label = @2
-        i32.const 1
-        local.set 1
-        local.get 1
-        global.set 2
-        return
-      else
-        unreachable
-      end
-    end)
-  (table (;0;) 5 funcref)
+  (table (;0;) 3 funcref)
   (memory (;0;) 1 30000)
   (global (;0;) (mut i32) (i32.const 0))
   (global (;1;) (mut i32) (i32.const 0))
@@ -498,16 +341,12 @@
   (export &quot;main_function&quot; (func 0))
   (export &quot;_0__oddNat_101&quot; (func 1))
   (export &quot;_1__evenNat_102&quot; (func 2))
-  (export &quot;_2__oddNat_103&quot; (func 3))
-  (export &quot;_3__evenNat_104&quot; (func 4))
   (export &quot;out_of_mem&quot; (global 3))
   (export &quot;mem_ptr&quot; (global 0))
   (export &quot;result&quot; (global 2))
   (export &quot;memory&quot; (memory 0))
   (elem (;0;) (i32.const 0) func 0)
   (elem (;1;) (i32.const 1) func 1)
-  (elem (;2;) (i32.const 2) func 2)
-  (elem (;3;) (i32.const 3) func 3)
-  (elem (;4;) (i32.const 4) func 4))</code></pre>
+  (elem (;2;) (i32.const 2) func 2))</code></pre>
 </body>
 </html>

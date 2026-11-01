@@ -23,49 +23,7 @@ From Agda2Lambox     Require Import CheckWF Eval.
 Import ListNotations.
 
 Definition env : global_declarations :=
-  [((MPfile [&quot;InductionRecursion&quot;%bs], &quot;Act&quot;%bs),
-    InductiveDecl
-      {| ind_finite := Finite; ind_npars := 0;
-         ind_bodies :=
-           [{| ind_name := &quot;Act&quot;%bs; ind_propositional := false;
-               ind_kelim := IntoAny;
-               ind_ctors := [{| cstr_name := &quot;inc&quot;%bs; cstr_nargs := 0 |}];
-               ind_projs := [] |}] |});
-   ((MPfile [&quot;InductionRecursion&quot;%bs], &quot;.extendedlambda1&quot;%bs),
-    ConstantDecl
-      {| cst_body :=
-           Some
-             (tFix
-                [{| dname := nNamed &quot;run&quot;%bs;
-                    dbody := tLambda nAnon (tApp (tRel 1) tBox); rarg := 0 |};
-                 {| dname := nNamed &quot;.extendedlambda1&quot;%bs;
-                    dbody :=
-                      tLambda
-                        nAnon
-                        (tLambda
-                           nAnon
-                           (tCase
-                              ({| inductive_mind :=
-                                    (MPfile [&quot;InductionRecursion&quot;%bs], &quot;Trace&quot;%bs);
-                                  inductive_ind := 0 |},
-                               0)
-                              (tRel 0)
-                              [([],
-                                tConstruct
-                                  {| inductive_mind :=
-                                       (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                                     inductive_ind := 0 |}
-                                  0 []);
-                               ([nAnon; nAnon; nAnon; nAnon],
-                                tApp
-                                  (tApp
-                                     (tApp
-                                        (tConst (MPfile [&quot;InductionRecursion&quot;%bs], &quot;step&quot;%bs)) tBox)
-                                     (tApp (tApp (tRel 7) (tRel 3)) (tRel 1)))
-                                  (tRel 0))]));
-                    rarg := 0 |}]
-                1) |});
-   ((MPfile [&quot;InductionRecursion&quot;%bs], &quot;test&quot;%bs),
+  [((MPfile [&quot;InductionRecursion&quot;%bs], &quot;test&quot;%bs),
     ConstantDecl
       {| cst_body :=
            Some

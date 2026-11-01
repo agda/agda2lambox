@@ -731,75 +731,9 @@
 <span id="cb1-653"><a href="#cb1-653" aria-hidden="true"></a>                                                                                                                                                                                      PhantomData))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))<span class="op">,</span></span>
 <span id="cb1-654"><a href="#cb1-654" aria-hidden="true"></a>          ()))))</span>
 <span id="cb1-655"><a href="#cb1-655" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-656"><a href="#cb1-656" aria-hidden="true"></a></span>
-<span id="cb1-657"><a href="#cb1-657" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> ErasedFields_Ֆ_ՖplusBar_(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> ErasedFields_Bar<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;,</span> x2<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> ErasedFields_Bar<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> ErasedFields_Bar<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb1-658"><a href="#cb1-658" aria-hidden="true"></a>  <span class="kw">match</span> x <span class="op">{</span></span>
-<span id="cb1-659"><a href="#cb1-659" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">ErasedFields_Bar::</span>bar(_<span class="op">,</span> x3<span class="op">,</span> x4) <span class="op">=&gt;</span> <span class="op">{</span></span>
-<span id="cb1-660"><a href="#cb1-660" aria-hidden="true"></a>      <span class="kw">match</span> x2 <span class="op">{</span></span>
-<span id="cb1-661"><a href="#cb1-661" aria-hidden="true"></a>        <span class="op">&amp;</span><span class="pp">ErasedFields_Bar::</span>bar(_<span class="op">,</span> x5<span class="op">,</span> x6) <span class="op">=&gt;</span> <span class="op">{</span></span>
-<span id="cb1-662"><a href="#cb1-662" aria-hidden="true"></a>          <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-663"><a href="#cb1-663" aria-hidden="true"></a>            <span class="pp">ErasedFields_Bar::</span>bar(</span>
-<span id="cb1-664"><a href="#cb1-664" aria-hidden="true"></a>              PhantomData<span class="op">,</span></span>
-<span id="cb1-665"><a href="#cb1-665" aria-hidden="true"></a>              <span class="kw">self</span><span class="op">.</span>Nat_Builtin_Agda_Ֆ_Ֆplus_()(</span>
-<span id="cb1-666"><a href="#cb1-666" aria-hidden="true"></a>                x3)(</span>
-<span id="cb1-667"><a href="#cb1-667" aria-hidden="true"></a>                x5)<span class="op">,</span></span>
-<span id="cb1-668"><a href="#cb1-668" aria-hidden="true"></a>              ()))</span>
-<span id="cb1-669"><a href="#cb1-669" aria-hidden="true"></a>        <span class="op">},</span></span>
-<span id="cb1-670"><a href="#cb1-670" aria-hidden="true"></a>      <span class="op">}</span></span>
-<span id="cb1-671"><a href="#cb1-671" aria-hidden="true"></a>    <span class="op">},</span></span>
-<span id="cb1-672"><a href="#cb1-672" aria-hidden="true"></a>  <span class="op">}</span></span>
-<span id="cb1-673"><a href="#cb1-673" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-674"><a href="#cb1-674" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> ErasedFields_Ֆ_ՖplusBar___curried(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> ErasedFields_Bar<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> ErasedFields_Bar<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> ErasedFields_Bar<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb1-675"><a href="#cb1-675" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x<span class="op">|</span> <span class="op">{</span></span>
-<span id="cb1-676"><a href="#cb1-676" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x2<span class="op">|</span> <span class="op">{</span></span>
-<span id="cb1-677"><a href="#cb1-677" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>ErasedFields_Ֆ_ՖplusBar_(</span>
-<span id="cb1-678"><a href="#cb1-678" aria-hidden="true"></a>        x<span class="op">,</span></span>
-<span id="cb1-679"><a href="#cb1-679" aria-hidden="true"></a>        x2)</span>
-<span id="cb1-680"><a href="#cb1-680" aria-hidden="true"></a>    <span class="op">}</span>)</span>
-<span id="cb1-681"><a href="#cb1-681" aria-hidden="true"></a>  <span class="op">}</span>)</span>
-<span id="cb1-682"><a href="#cb1-682" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-683"><a href="#cb1-683" aria-hidden="true"></a></span>
-<span id="cb1-684"><a href="#cb1-684" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Foo_ErasedFields_foo(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> ErasedFields_Foo<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb1-685"><a href="#cb1-685" aria-hidden="true"></a>  <span class="kw">match</span> x <span class="op">{</span></span>
-<span id="cb1-686"><a href="#cb1-686" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">ErasedFields_Foo::</span>constructor(_<span class="op">,</span> x2<span class="op">,</span> x3) <span class="op">=&gt;</span> <span class="op">{</span></span>
-<span id="cb1-687"><a href="#cb1-687" aria-hidden="true"></a>      x2</span>
-<span id="cb1-688"><a href="#cb1-688" aria-hidden="true"></a>    <span class="op">},</span></span>
-<span id="cb1-689"><a href="#cb1-689" aria-hidden="true"></a>  <span class="op">}</span></span>
-<span id="cb1-690"><a href="#cb1-690" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-691"><a href="#cb1-691" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Foo_ErasedFields_foo__curried(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> ErasedFields_Foo<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb1-692"><a href="#cb1-692" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x<span class="op">|</span> <span class="op">{</span></span>
-<span id="cb1-693"><a href="#cb1-693" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>Foo_ErasedFields_foo(</span>
-<span id="cb1-694"><a href="#cb1-694" aria-hidden="true"></a>      x)</span>
-<span id="cb1-695"><a href="#cb1-695" aria-hidden="true"></a>  <span class="op">}</span>)</span>
-<span id="cb1-696"><a href="#cb1-696" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-697"><a href="#cb1-697" aria-hidden="true"></a></span>
-<span id="cb1-698"><a href="#cb1-698" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> ErasedFields_Ֆ_ՖplusFoo_(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> ErasedFields_Foo<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;,</span> x2<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> ErasedFields_Foo<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> ErasedFields_Foo<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb1-699"><a href="#cb1-699" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-700"><a href="#cb1-700" aria-hidden="true"></a>    <span class="pp">ErasedFields_Foo::</span>constructor(</span>
-<span id="cb1-701"><a href="#cb1-701" aria-hidden="true"></a>      PhantomData<span class="op">,</span></span>
-<span id="cb1-702"><a href="#cb1-702" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>Nat_Builtin_Agda_Ֆ_Ֆplus_()(</span>
-<span id="cb1-703"><a href="#cb1-703" aria-hidden="true"></a>        <span class="kw">self</span><span class="op">.</span>Foo_ErasedFields_foo(</span>
-<span id="cb1-704"><a href="#cb1-704" aria-hidden="true"></a>          x))(</span>
-<span id="cb1-705"><a href="#cb1-705" aria-hidden="true"></a>        <span class="kw">self</span><span class="op">.</span>Foo_ErasedFields_foo(</span>
-<span id="cb1-706"><a href="#cb1-706" aria-hidden="true"></a>          x2))<span class="op">,</span></span>
-<span id="cb1-707"><a href="#cb1-707" aria-hidden="true"></a>      ()))</span>
-<span id="cb1-708"><a href="#cb1-708" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-709"><a href="#cb1-709" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> ErasedFields_Ֆ_ՖplusFoo___curried(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> ErasedFields_Foo<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> ErasedFields_Foo<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> ErasedFields_Foo<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb1-710"><a href="#cb1-710" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x<span class="op">|</span> <span class="op">{</span></span>
-<span id="cb1-711"><a href="#cb1-711" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x2<span class="op">|</span> <span class="op">{</span></span>
-<span id="cb1-712"><a href="#cb1-712" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>ErasedFields_Ֆ_ՖplusFoo_(</span>
-<span id="cb1-713"><a href="#cb1-713" aria-hidden="true"></a>        x<span class="op">,</span></span>
-<span id="cb1-714"><a href="#cb1-714" aria-hidden="true"></a>        x2)</span>
-<span id="cb1-715"><a href="#cb1-715" aria-hidden="true"></a>    <span class="op">}</span>)</span>
-<span id="cb1-716"><a href="#cb1-716" aria-hidden="true"></a>  <span class="op">}</span>)</span>
-<span id="cb1-717"><a href="#cb1-717" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-718"><a href="#cb1-718" aria-hidden="true"></a></span>
-<span id="cb1-719"><a href="#cb1-719" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Foo_ErasedFields_bar(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> ErasedFields_Foo<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb1-720"><a href="#cb1-720" aria-hidden="true"></a>  ()</span>
-<span id="cb1-721"><a href="#cb1-721" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-722"><a href="#cb1-722" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-723"><a href="#cb1-723" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb1-724"><a href="#cb1-724" aria-hidden="true"></a>  <span class="pp">println!</span>(<span class="st">&quot;{:?}&quot;</span><span class="op">,</span> <span class="pp">Program::</span>new()<span class="op">.</span>ErasedFields_test())<span class="op">;</span></span>
-<span id="cb1-725"><a href="#cb1-725" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb1-656"><a href="#cb1-656" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-657"><a href="#cb1-657" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb1-658"><a href="#cb1-658" aria-hidden="true"></a>  <span class="pp">println!</span>(<span class="st">&quot;{:?}&quot;</span><span class="op">,</span> <span class="pp">Program::</span>new()<span class="op">.</span>ErasedFields_test())<span class="op">;</span></span>
+<span id="cb1-659"><a href="#cb1-659" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
 </body>
 </html>

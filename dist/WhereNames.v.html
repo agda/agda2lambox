@@ -23,39 +23,7 @@ From Agda2Lambox     Require Import CheckWF Eval.
 Import ListNotations.
 
 Definition env : global_declarations :=
-  [((MPfile [&quot;WhereNames&quot;%bs; &quot;_16&quot;%bs], &quot;.extendedlambda0&quot;%bs),
-    ConstantDecl
-      {| cst_body :=
-           Some
-             (tFix
-                [{| dname := nNamed &quot;go&quot;%bs;
-                    dbody := tLambda nAnon (tApp (tRel 1) (tRel 0)); rarg := 0 |};
-                 {| dname := nNamed &quot;.extendedlambda0&quot;%bs;
-                    dbody :=
-                      tLambda
-                        nAnon
-                        (tCase
-                           ({| inductive_mind := (MPfile [&quot;WhereNames&quot;%bs], &quot;List&quot;%bs);
-                               inductive_ind := 0 |},
-                            1)
-                           (tRel 0)
-                           [([],
-                             tConstruct
-                               {| inductive_mind :=
-                                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                                  inductive_ind := 0 |}
-                               0 []);
-                            ([nAnon; nAnon],
-                             tApp
-                               (tConstruct
-                                  {| inductive_mind :=
-                                       (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                                     inductive_ind := 0 |}
-                                  1 [])
-                               (tApp (tRel 4) (tRel 0)))]);
-                    rarg := 0 |}]
-                1) |});
-   ((MPfile [&quot;WhereNames&quot;%bs], &quot;test&quot;%bs),
+  [((MPfile [&quot;WhereNames&quot;%bs], &quot;test&quot;%bs),
     ConstantDecl
       {| cst_body :=
            Some

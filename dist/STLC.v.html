@@ -23,35 +23,7 @@ From Agda2Lambox     Require Import CheckWF Eval.
 Import ListNotations.
 
 Definition env : global_declarations :=
-  [((MPfile [&quot;STLC&quot;%bs], &quot;n&quot;%bs),
-    ConstantDecl {| cst_body := Some tBox |});
-   ((MPfile [&quot;STLC&quot;%bs], &quot;Type&quot;%bs),
-    InductiveDecl
-      {| ind_finite := Finite; ind_npars := 0;
-         ind_bodies :=
-           [{| ind_name := &quot;Type&quot;%bs; ind_propositional := false;
-               ind_kelim := IntoAny;
-               ind_ctors :=
-                 [{| cstr_name := &quot;\8469&quot;%bs; cstr_nargs := 0 |};
-                  {| cstr_name := &quot;_\8658_&quot;%bs; cstr_nargs := 2 |}];
-               ind_projs := [] |}] |});
-   ((MPfile [&quot;STLC&quot;%bs], &quot;\945&quot;%bs),
-    ConstantDecl {| cst_body := Some tBox |});
-   ((MPfile [&quot;STLC&quot;%bs], &quot;\946&quot;%bs),
-    ConstantDecl {| cst_body := Some tBox |});
-   ((MPfile [&quot;STLC&quot;%bs], &quot;Ctx&quot;%bs),
-    InductiveDecl
-      {| ind_finite := Finite; ind_npars := 0;
-         ind_bodies :=
-           [{| ind_name := &quot;Ctx&quot;%bs; ind_propositional := false;
-               ind_kelim := IntoAny;
-               ind_ctors :=
-                 [{| cstr_name := &quot;[]&quot;%bs; cstr_nargs := 0 |};
-                  {| cstr_name := &quot;_\9655_&quot;%bs; cstr_nargs := 3 |}];
-               ind_projs := [] |}] |});
-   ((MPfile [&quot;STLC&quot;%bs], &quot;\915&quot;%bs),
-    ConstantDecl {| cst_body := Some tBox |});
-   ((MPfile [&quot;STLC&quot;%bs], &quot;test&quot;%bs),
+  [((MPfile [&quot;STLC&quot;%bs], &quot;test&quot;%bs),
     ConstantDecl
       {| cst_body :=
            Some

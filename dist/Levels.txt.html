@@ -240,32 +240,6 @@ Levels.testSomeLvl:
     type: Agda.Builtin.Nat.Nat{0}
     body: Levels.lvlToNat □
 
-Levels.SomeLvl.ℓ:
-  constant declaration:
-    type variables: []
-    type: □
-    body: □
-
-Levels.0ℓ:
-  constant declaration:
-    type variables: []
-    type: □
-    body: □
-
-Levels.SomeLvl:
-  mutual inductive(s):
-    SomeLvl
-    type variables:  []
-      constructors:
-        this (1 arg(s))
-          ℓ : □
-
-Levels.someLvl:
-  constant declaration:
-    type variables: []
-    type: Levels.SomeLvl{0}
-    body: Levels.SomeLvl{0}{0} (Levels.0ℓ)
-
 Levels.testConstLvl:
   constant declaration:
     type variables: []
@@ -358,7 +332,7 @@ Levels.testConstLvl:
                                                                                                                                           Agda.
                                                                                                                                           Builtin.
                                                                                                                                           Nat.Nat{0}{0}))))))))))))))))))))))))))))))))))))))))))
-            (Levels.SomeLvl.ℓ (Levels.someLvl))
+            □
 
 Levels.testConst:
   constant declaration:
@@ -546,7 +520,7 @@ Levels.testConstLvl2:
                                                                                                                                           Agda.
                                                                                                                                           Builtin.
                                                                                                                                           Nat.Nat{0}{0}))))))))))))))))))))))))))))))))))))))))))
-            (Levels.SomeLvl.ℓ (Levels.someLvl))
+            □
 
 Levels._50.toNat:
   constant declaration:
@@ -662,24 +636,6 @@ Levels.test:
                   (Levels.testConst))
                (Levels.testConstLvl2))
             (Levels.testWhere)
-
-Levels.const:
-  constant declaration:
-    type variables: [A, B]
-    type: □ → □ → @0 → @1 → @0
-    body: λ _ _ _ _ → @1
-
-Levels.constLvl:
-  constant declaration:
-    type variables: [A]
-    type: □ → @0 → □ → @0
-    body: λ _ _ _ → @1
-
-Levels.mkLevel:
-  constant declaration:
-    type variables: []
-    type: □
-    body: □
 main program: [Levels.test]</code></pre>
 </body>
 </html>

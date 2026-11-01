@@ -203,14 +203,14 @@
 <span id="cb1-125"><a href="#cb1-125" aria-hidden="true"></a>  <span class="op">}</span>)</span>
 <span id="cb1-126"><a href="#cb1-126" aria-hidden="true"></a><span class="op">}</span></span>
 <span id="cb1-127"><a href="#cb1-127" aria-hidden="true"></a></span>
-<span id="cb1-128"><a href="#cb1-128" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> sig_Types_fst<span class="op">&lt;</span>A<span class="op">:</span> <span class="bu">Copy</span><span class="op">,</span> P<span class="op">:</span> <span class="bu">Copy</span><span class="op">&gt;</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Types_sig<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">,</span> A<span class="op">,</span> ()<span class="op">&gt;</span>) <span class="op">-&gt;</span> A <span class="op">{</span></span>
+<span id="cb1-128"><a href="#cb1-128" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> sig_Types_fst<span class="op">&lt;</span>A<span class="op">:</span> <span class="bu">Copy</span><span class="op">&gt;</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Types_sig<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">,</span> A<span class="op">,</span> ()<span class="op">&gt;</span>) <span class="op">-&gt;</span> A <span class="op">{</span></span>
 <span id="cb1-129"><a href="#cb1-129" aria-hidden="true"></a>  <span class="kw">match</span> x <span class="op">{</span></span>
 <span id="cb1-130"><a href="#cb1-130" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Types_sig::</span>exist(_<span class="op">,</span> _<span class="op">,</span> x2<span class="op">,</span> x3) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-131"><a href="#cb1-131" aria-hidden="true"></a>      x2</span>
 <span id="cb1-132"><a href="#cb1-132" aria-hidden="true"></a>    <span class="op">},</span></span>
 <span id="cb1-133"><a href="#cb1-133" aria-hidden="true"></a>  <span class="op">}</span></span>
 <span id="cb1-134"><a href="#cb1-134" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-135"><a href="#cb1-135" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> sig_Types_fst__curried<span class="op">&lt;</span>A<span class="op">:</span> <span class="bu">Copy</span><span class="op">,</span> P<span class="op">:</span> <span class="bu">Copy</span><span class="op">&gt;</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> Types_sig<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">,</span> A<span class="op">,</span> ()<span class="op">&gt;</span>) <span class="op">-&gt;</span> A <span class="op">{</span></span>
+<span id="cb1-135"><a href="#cb1-135" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> sig_Types_fst__curried<span class="op">&lt;</span>A<span class="op">:</span> <span class="bu">Copy</span><span class="op">&gt;</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> Types_sig<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">,</span> A<span class="op">,</span> ()<span class="op">&gt;</span>) <span class="op">-&gt;</span> A <span class="op">{</span></span>
 <span id="cb1-136"><a href="#cb1-136" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x<span class="op">|</span> <span class="op">{</span></span>
 <span id="cb1-137"><a href="#cb1-137" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>sig_Types_fst(</span>
 <span id="cb1-138"><a href="#cb1-138" aria-hidden="true"></a>      x)</span>
@@ -381,17 +381,9 @@
 <span id="cb1-303"><a href="#cb1-303" aria-hidden="true"></a>                  PhantomData<span class="op">,</span></span>
 <span id="cb1-304"><a href="#cb1-304" aria-hidden="true"></a>                  ()))))))))</span>
 <span id="cb1-305"><a href="#cb1-305" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-306"><a href="#cb1-306" aria-hidden="true"></a></span>
-<span id="cb1-307"><a href="#cb1-307" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Types_Top(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> () <span class="op">{</span></span>
-<span id="cb1-308"><a href="#cb1-308" aria-hidden="true"></a>  ()</span>
-<span id="cb1-309"><a href="#cb1-309" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-310"><a href="#cb1-310" aria-hidden="true"></a></span>
-<span id="cb1-311"><a href="#cb1-311" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> sig_Types_snd(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> () <span class="op">{</span></span>
-<span id="cb1-312"><a href="#cb1-312" aria-hidden="true"></a>  ()</span>
-<span id="cb1-313"><a href="#cb1-313" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-314"><a href="#cb1-314" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-315"><a href="#cb1-315" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb1-316"><a href="#cb1-316" aria-hidden="true"></a>  <span class="pp">println!</span>(<span class="st">&quot;{:?}&quot;</span><span class="op">,</span> <span class="pp">Program::</span>new()<span class="op">.</span>Types_test())<span class="op">;</span></span>
-<span id="cb1-317"><a href="#cb1-317" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb1-306"><a href="#cb1-306" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-307"><a href="#cb1-307" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb1-308"><a href="#cb1-308" aria-hidden="true"></a>  <span class="pp">println!</span>(<span class="st">&quot;{:?}&quot;</span><span class="op">,</span> <span class="pp">Program::</span>new()<span class="op">.</span>Types_test())<span class="op">;</span></span>
+<span id="cb1-309"><a href="#cb1-309" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
 </body>
 </html>

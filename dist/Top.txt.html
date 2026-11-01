@@ -21,6 +21,12 @@
     type variables:  []
       constructors:
 
+Top.Unit:
+  mutual inductive(s):
+    Unit
+    type variables:  []
+      constructors: tt (0 arg(s))
+
 Agda.Builtin.Nat.Nat:
   mutual inductive(s):
     Nat
@@ -30,11 +36,11 @@ Agda.Builtin.Nat.Nat:
         suc (1 arg(s))
           n : Agda.Builtin.Nat.Nat{0}
 
-Top.Unit:
-  mutual inductive(s):
-    Unit
-    type variables:  []
-      constructors: tt (0 arg(s))
+Top.idUnit:
+  constant declaration:
+    type variables: []
+    type: (Top.Unit{0}) → Top.Unit{0}
+    body: λ _ → Top.Unit{0}{0}
 
 Top.toNat:
   constant declaration:
@@ -133,13 +139,7 @@ Top.test:
   constant declaration:
     type variables: []
     type: Agda.Builtin.Nat.Nat{0}
-    body: Top.toNat □
-
-Top.idUnit:
-  constant declaration:
-    type variables: []
-    type: (Top.Unit{0}) → Top.Unit{0}
-    body: □
+    body: Top.toNat (Top.idUnit Top.Unit{0}{0})
 main program: [Top.test]</code></pre>
 </body>
 </html>

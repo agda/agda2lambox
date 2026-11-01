@@ -463,34 +463,9 @@
 <span id="cb1-385"><a href="#cb1-385" aria-hidden="true"></a>                PhantomData<span class="op">,</span></span>
 <span id="cb1-386"><a href="#cb1-386" aria-hidden="true"></a>                ())))))))</span>
 <span id="cb1-387"><a href="#cb1-387" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-388"><a href="#cb1-388" aria-hidden="true"></a></span>
-<span id="cb1-389"><a href="#cb1-389" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> List_Ֆ_ՖplusՖplus_<span class="op">&lt;</span>A<span class="op">:</span> <span class="bu">Copy</span><span class="op">&gt;</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(()) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> List_Builtin_Agda_List<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">,</span> ()<span class="op">,</span> A<span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> List_Builtin_Agda_List<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">,</span> ()<span class="op">,</span> A<span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> List_Builtin_Agda_List<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">,</span> ()<span class="op">,</span> A<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb1-390"><a href="#cb1-390" aria-hidden="true"></a>  <span class="kw">let</span> Ֆ_ՖplusՖplus_ <span class="op">=</span> <span class="kw">self</span><span class="op">.</span>alloc(<span class="pp">std::cell::Cell::</span>new(<span class="cn">None</span>))<span class="op">;</span></span>
-<span id="cb1-391"><a href="#cb1-391" aria-hidden="true"></a>  Ֆ_ՖplusՖplus_<span class="op">.</span>set(<span class="cn">Some</span>(</span>
-<span id="cb1-392"><a href="#cb1-392" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x<span class="op">|</span> <span class="op">{</span></span>
-<span id="cb1-393"><a href="#cb1-393" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x2<span class="op">|</span> <span class="op">{</span></span>
-<span id="cb1-394"><a href="#cb1-394" aria-hidden="true"></a>        <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x3<span class="op">|</span> <span class="op">{</span></span>
-<span id="cb1-395"><a href="#cb1-395" aria-hidden="true"></a>          <span class="kw">match</span> x2 <span class="op">{</span></span>
-<span id="cb1-396"><a href="#cb1-396" aria-hidden="true"></a>            <span class="op">&amp;</span><span class="pp">List_Builtin_Agda_List::</span>ՖՖ5bՖՖ5d(_<span class="op">,</span> _) <span class="op">=&gt;</span> <span class="op">{</span></span>
-<span id="cb1-397"><a href="#cb1-397" aria-hidden="true"></a>              x3</span>
-<span id="cb1-398"><a href="#cb1-398" aria-hidden="true"></a>            <span class="op">},</span></span>
-<span id="cb1-399"><a href="#cb1-399" aria-hidden="true"></a>            <span class="op">&amp;</span><span class="pp">List_Builtin_Agda_List::</span>Ֆ_Ֆcons_(_<span class="op">,</span> _<span class="op">,</span> x4<span class="op">,</span> x5) <span class="op">=&gt;</span> <span class="op">{</span></span>
-<span id="cb1-400"><a href="#cb1-400" aria-hidden="true"></a>              <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-401"><a href="#cb1-401" aria-hidden="true"></a>                <span class="pp">List_Builtin_Agda_List::</span>Ֆ_Ֆcons_(</span>
-<span id="cb1-402"><a href="#cb1-402" aria-hidden="true"></a>                  PhantomData<span class="op">,</span></span>
-<span id="cb1-403"><a href="#cb1-403" aria-hidden="true"></a>                  ()<span class="op">,</span></span>
-<span id="cb1-404"><a href="#cb1-404" aria-hidden="true"></a>                  x4<span class="op">,</span></span>
-<span id="cb1-405"><a href="#cb1-405" aria-hidden="true"></a>                  hint_app(hint_app(hint_app(Ֆ_ՖplusՖplus_<span class="op">.</span>get()<span class="op">.</span>unwrap())(()))(x5))(x3)))</span>
-<span id="cb1-406"><a href="#cb1-406" aria-hidden="true"></a>            <span class="op">},</span></span>
-<span id="cb1-407"><a href="#cb1-407" aria-hidden="true"></a>          <span class="op">}</span></span>
-<span id="cb1-408"><a href="#cb1-408" aria-hidden="true"></a>        <span class="op">}</span>)</span>
-<span id="cb1-409"><a href="#cb1-409" aria-hidden="true"></a>      <span class="op">}</span>)</span>
-<span id="cb1-410"><a href="#cb1-410" aria-hidden="true"></a>    <span class="op">}</span>)))<span class="op">;</span></span>
-<span id="cb1-411"><a href="#cb1-411" aria-hidden="true"></a>  Ֆ_ՖplusՖplus_<span class="op">.</span>get()<span class="op">.</span>unwrap()</span>
-<span id="cb1-412"><a href="#cb1-412" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-413"><a href="#cb1-413" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-414"><a href="#cb1-414" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb1-415"><a href="#cb1-415" aria-hidden="true"></a>  <span class="pp">println!</span>(<span class="st">&quot;{:?}&quot;</span><span class="op">,</span> <span class="pp">Program::</span>new()<span class="op">.</span>List_test())<span class="op">;</span></span>
-<span id="cb1-416"><a href="#cb1-416" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb1-388"><a href="#cb1-388" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-389"><a href="#cb1-389" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb1-390"><a href="#cb1-390" aria-hidden="true"></a>  <span class="pp">println!</span>(<span class="st">&quot;{:?}&quot;</span><span class="op">,</span> <span class="pp">Program::</span>new()<span class="op">.</span>List_test())<span class="op">;</span></span>
+<span id="cb1-391"><a href="#cb1-391" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
 </body>
 </html>

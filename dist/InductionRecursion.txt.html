@@ -93,20 +93,6 @@ InductionRecursion.test:
                            (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}))))
                   (Agda.Builtin.Nat.Nat{0}{1}
                      (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}))))
-
-InductionRecursion..extendedlambda1:
-  constant declaration:
-    body: μrec [1] :=
-            0: λ _ → @1 □
-            1: λ _ _ →
-                 case&lt;InductionRecursion.Trace{0},0&gt; @0 of
-                   λ&lt;[]&gt; Agda.Builtin.Nat.Nat{0}{0}
-                   λ&lt;[_, _, _, _]&gt; InductionRecursion.step □ (@7 @3 @1) @0
-
-InductionRecursion.Act:
-  mutual inductive(s):
-    Act
-      constructors: inc (0 arg(s))
 main program: [InductionRecursion.test]</code></pre>
 </body>
 </html>

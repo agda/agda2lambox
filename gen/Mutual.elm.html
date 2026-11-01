@@ -107,22 +107,6 @@
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true"></a></span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true"></a><span class="fu">mutual_test</span> : <span class="dt">Nat</span></span>
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true"></a><span class="fu">mutual_test</span> <span class="op">=</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true"></a>  <span class="fu">mutual_oddNat</span> (<span class="dt">Succ</span> <span class="dt">Zero</span>)</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true"></a></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true"></a><span class="fu">mutual_evenNat</span> : <span class="dt">Even</span> <span class="op">-&gt;</span> <span class="dt">Nat</span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true"></a><span class="fu">mutual_evenNat</span> <span class="op">=</span></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true"></a>  <span class="kw">let</span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true"></a>    <span class="fu">oddNat</span> <span class="fu">x</span> <span class="op">=</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true"></a>      <span class="cf">case</span> <span class="fu">x</span> <span class="cf">of</span></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true"></a>        <span class="dt">Succ</span> <span class="fu">x2</span> <span class="op">-&gt;</span></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true"></a>          <span class="dt">Succ</span> (<span class="fu">evenNat</span> <span class="fu">x2</span>)</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true"></a>    <span class="fu">evenNat</span> <span class="fu">x</span> <span class="op">=</span></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true"></a>      <span class="cf">case</span> <span class="fu">x</span> <span class="cf">of</span></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true"></a>        <span class="dt">Zero</span> <span class="op">-&gt;</span></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true"></a>          <span class="dt">Zero</span></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true"></a>        <span class="dt">Succ</span> <span class="fu">x2</span> <span class="op">-&gt;</span></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true"></a>          <span class="dt">Succ</span> (<span class="fu">oddNat</span> <span class="fu">x2</span>)</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true"></a>  <span class="kw">in</span></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true"></a>  <span class="fu">evenNat</span></span></code></pre></div>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true"></a>  <span class="fu">mutual_oddNat</span> (<span class="dt">Succ</span> <span class="dt">Zero</span>)</span></code></pre></div>
 </body>
 </html>

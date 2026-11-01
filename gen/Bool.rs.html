@@ -504,36 +504,9 @@
 <span id="cb1-426"><a href="#cb1-426" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>Bool_testBool()))(</span>
 <span id="cb1-427"><a href="#cb1-427" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>Bool_testIte())</span>
 <span id="cb1-428"><a href="#cb1-428" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-429"><a href="#cb1-429" aria-hidden="true"></a></span>
-<span id="cb1-430"><a href="#cb1-430" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Bool_not(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Bool_Builtin_Agda_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Bool_Builtin_Agda_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb1-431"><a href="#cb1-431" aria-hidden="true"></a>  <span class="kw">match</span> x <span class="op">{</span></span>
-<span id="cb1-432"><a href="#cb1-432" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>false(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
-<span id="cb1-433"><a href="#cb1-433" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-434"><a href="#cb1-434" aria-hidden="true"></a>        <span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>true(</span>
-<span id="cb1-435"><a href="#cb1-435" aria-hidden="true"></a>          PhantomData))</span>
-<span id="cb1-436"><a href="#cb1-436" aria-hidden="true"></a>    <span class="op">},</span></span>
-<span id="cb1-437"><a href="#cb1-437" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>true(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
-<span id="cb1-438"><a href="#cb1-438" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-439"><a href="#cb1-439" aria-hidden="true"></a>        <span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>false(</span>
-<span id="cb1-440"><a href="#cb1-440" aria-hidden="true"></a>          PhantomData))</span>
-<span id="cb1-441"><a href="#cb1-441" aria-hidden="true"></a>    <span class="op">},</span></span>
-<span id="cb1-442"><a href="#cb1-442" aria-hidden="true"></a>  <span class="op">}</span></span>
-<span id="cb1-443"><a href="#cb1-443" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-444"><a href="#cb1-444" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Bool_not__curried(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> Bool_Builtin_Agda_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Bool_Builtin_Agda_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb1-445"><a href="#cb1-445" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x<span class="op">|</span> <span class="op">{</span></span>
-<span id="cb1-446"><a href="#cb1-446" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>Bool_not(</span>
-<span id="cb1-447"><a href="#cb1-447" aria-hidden="true"></a>      x)</span>
-<span id="cb1-448"><a href="#cb1-448" aria-hidden="true"></a>  <span class="op">}</span>)</span>
-<span id="cb1-449"><a href="#cb1-449" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-450"><a href="#cb1-450" aria-hidden="true"></a></span>
-<span id="cb1-451"><a href="#cb1-451" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Bool_tt(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Bool_Builtin_Agda_Bool<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb1-452"><a href="#cb1-452" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-453"><a href="#cb1-453" aria-hidden="true"></a>    <span class="pp">Bool_Builtin_Agda_Bool::</span><span class="an">r#</span>true(</span>
-<span id="cb1-454"><a href="#cb1-454" aria-hidden="true"></a>      PhantomData))</span>
-<span id="cb1-455"><a href="#cb1-455" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-456"><a href="#cb1-456" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-457"><a href="#cb1-457" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb1-458"><a href="#cb1-458" aria-hidden="true"></a>  <span class="pp">println!</span>(<span class="st">&quot;{:?}&quot;</span><span class="op">,</span> <span class="pp">Program::</span>new()<span class="op">.</span>Bool_test())<span class="op">;</span></span>
-<span id="cb1-459"><a href="#cb1-459" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb1-429"><a href="#cb1-429" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-430"><a href="#cb1-430" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb1-431"><a href="#cb1-431" aria-hidden="true"></a>  <span class="pp">println!</span>(<span class="st">&quot;{:?}&quot;</span><span class="op">,</span> <span class="pp">Program::</span>new()<span class="op">.</span>Bool_test())<span class="op">;</span></span>
+<span id="cb1-432"><a href="#cb1-432" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
 </body>
 </html>

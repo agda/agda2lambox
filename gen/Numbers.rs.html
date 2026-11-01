@@ -359,26 +359,9 @@
 <span id="cb1-281"><a href="#cb1-281" aria-hidden="true"></a>        <span class="pp">Nat_Builtin_Agda_Nat::</span>zero(</span>
 <span id="cb1-282"><a href="#cb1-282" aria-hidden="true"></a>          PhantomData))))</span>
 <span id="cb1-283"><a href="#cb1-283" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-284"><a href="#cb1-284" aria-hidden="true"></a></span>
-<span id="cb1-285"><a href="#cb1-285" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Numbers_suc(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb1-286"><a href="#cb1-286" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>Nat_Builtin_Agda_Ֆ_Ֆplus_()(</span>
-<span id="cb1-287"><a href="#cb1-287" aria-hidden="true"></a>    x)(</span>
-<span id="cb1-288"><a href="#cb1-288" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-289"><a href="#cb1-289" aria-hidden="true"></a>      <span class="pp">Nat_Builtin_Agda_Nat::</span>suc(</span>
-<span id="cb1-290"><a href="#cb1-290" aria-hidden="true"></a>        PhantomData<span class="op">,</span></span>
-<span id="cb1-291"><a href="#cb1-291" aria-hidden="true"></a>        <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-292"><a href="#cb1-292" aria-hidden="true"></a>          <span class="pp">Nat_Builtin_Agda_Nat::</span>zero(</span>
-<span id="cb1-293"><a href="#cb1-293" aria-hidden="true"></a>            PhantomData)))))</span>
-<span id="cb1-294"><a href="#cb1-294" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-295"><a href="#cb1-295" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Numbers_suc__curried(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb1-296"><a href="#cb1-296" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x<span class="op">|</span> <span class="op">{</span></span>
-<span id="cb1-297"><a href="#cb1-297" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>Numbers_suc(</span>
-<span id="cb1-298"><a href="#cb1-298" aria-hidden="true"></a>      x)</span>
-<span id="cb1-299"><a href="#cb1-299" aria-hidden="true"></a>  <span class="op">}</span>)</span>
-<span id="cb1-300"><a href="#cb1-300" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-301"><a href="#cb1-301" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-302"><a href="#cb1-302" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb1-303"><a href="#cb1-303" aria-hidden="true"></a>  <span class="pp">println!</span>(<span class="st">&quot;{:?}&quot;</span><span class="op">,</span> <span class="pp">Program::</span>new()<span class="op">.</span>Numbers_test())<span class="op">;</span></span>
-<span id="cb1-304"><a href="#cb1-304" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb1-284"><a href="#cb1-284" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-285"><a href="#cb1-285" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb1-286"><a href="#cb1-286" aria-hidden="true"></a>  <span class="pp">println!</span>(<span class="st">&quot;{:?}&quot;</span><span class="op">,</span> <span class="pp">Program::</span>new()<span class="op">.</span>Numbers_test())<span class="op">;</span></span>
+<span id="cb1-287"><a href="#cb1-287" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
 </body>
 </html>

@@ -1760,36 +1760,9 @@
 <span id="cb1-1682"><a href="#cb1-1682" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>PartialAppM_testSumWithConst()))(</span>
 <span id="cb1-1683"><a href="#cb1-1683" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>PartialAppM_testSomeNat())</span>
 <span id="cb1-1684"><a href="#cb1-1684" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-1685"><a href="#cb1-1685" aria-hidden="true"></a></span>
-<span id="cb1-1686"><a href="#cb1-1686" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> SomeNat_PartialAppM_someNat(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> PartialAppM_SomeNat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb1-1687"><a href="#cb1-1687" aria-hidden="true"></a>  <span class="kw">match</span> x <span class="op">{</span></span>
-<span id="cb1-1688"><a href="#cb1-1688" aria-hidden="true"></a>    <span class="op">&amp;</span><span class="pp">PartialAppM_SomeNat::</span>ՖՖ60_(_<span class="op">,</span> x2) <span class="op">=&gt;</span> <span class="op">{</span></span>
-<span id="cb1-1689"><a href="#cb1-1689" aria-hidden="true"></a>      x2</span>
-<span id="cb1-1690"><a href="#cb1-1690" aria-hidden="true"></a>    <span class="op">},</span></span>
-<span id="cb1-1691"><a href="#cb1-1691" aria-hidden="true"></a>  <span class="op">}</span></span>
-<span id="cb1-1692"><a href="#cb1-1692" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-1693"><a href="#cb1-1693" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> SomeNat_PartialAppM_someNat__curried(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> PartialAppM_SomeNat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb1-1694"><a href="#cb1-1694" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x<span class="op">|</span> <span class="op">{</span></span>
-<span id="cb1-1695"><a href="#cb1-1695" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>SomeNat_PartialAppM_someNat(</span>
-<span id="cb1-1696"><a href="#cb1-1696" aria-hidden="true"></a>      x)</span>
-<span id="cb1-1697"><a href="#cb1-1697" aria-hidden="true"></a>  <span class="op">}</span>)</span>
-<span id="cb1-1698"><a href="#cb1-1698" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-1699"><a href="#cb1-1699" aria-hidden="true"></a></span>
-<span id="cb1-1700"><a href="#cb1-1700" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> PartialAppM_constNat(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;,</span> x2<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb1-1701"><a href="#cb1-1701" aria-hidden="true"></a>  x</span>
-<span id="cb1-1702"><a href="#cb1-1702" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-1703"><a href="#cb1-1703" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> PartialAppM_constNat__curried(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb1-1704"><a href="#cb1-1704" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x<span class="op">|</span> <span class="op">{</span></span>
-<span id="cb1-1705"><a href="#cb1-1705" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x2<span class="op">|</span> <span class="op">{</span></span>
-<span id="cb1-1706"><a href="#cb1-1706" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>PartialAppM_constNat(</span>
-<span id="cb1-1707"><a href="#cb1-1707" aria-hidden="true"></a>        x<span class="op">,</span></span>
-<span id="cb1-1708"><a href="#cb1-1708" aria-hidden="true"></a>        x2)</span>
-<span id="cb1-1709"><a href="#cb1-1709" aria-hidden="true"></a>    <span class="op">}</span>)</span>
-<span id="cb1-1710"><a href="#cb1-1710" aria-hidden="true"></a>  <span class="op">}</span>)</span>
-<span id="cb1-1711"><a href="#cb1-1711" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-1712"><a href="#cb1-1712" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-1713"><a href="#cb1-1713" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb1-1714"><a href="#cb1-1714" aria-hidden="true"></a>  <span class="pp">println!</span>(<span class="st">&quot;{:?}&quot;</span><span class="op">,</span> <span class="pp">Program::</span>new()<span class="op">.</span>PartialAppM_test())<span class="op">;</span></span>
-<span id="cb1-1715"><a href="#cb1-1715" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb1-1685"><a href="#cb1-1685" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-1686"><a href="#cb1-1686" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb1-1687"><a href="#cb1-1687" aria-hidden="true"></a>  <span class="pp">println!</span>(<span class="st">&quot;{:?}&quot;</span><span class="op">,</span> <span class="pp">Program::</span>new()<span class="op">.</span>PartialAppM_test())<span class="op">;</span></span>
+<span id="cb1-1688"><a href="#cb1-1688" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
 </body>
 </html>

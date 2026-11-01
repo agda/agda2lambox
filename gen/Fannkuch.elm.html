@@ -318,30 +318,6 @@
 <span id="cb1-240"><a href="#cb1-240" aria-hidden="true"></a></span>
 <span id="cb1-241"><a href="#cb1-241" aria-hidden="true"></a><span class="fu">fannkuch_test</span> : <span class="dt">Nat</span></span>
 <span id="cb1-242"><a href="#cb1-242" aria-hidden="true"></a><span class="fu">fannkuch_test</span> <span class="op">=</span></span>
-<span id="cb1-243"><a href="#cb1-243" aria-hidden="true"></a>  <span class="fu">fannkuch_fannkuchBench</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> <span class="dt">Zero</span>)))))</span>
-<span id="cb1-244"><a href="#cb1-244" aria-hidden="true"></a></span>
-<span id="cb1-245"><a href="#cb1-245" aria-hidden="true"></a><span class="fu">fannkuch_fannkuchLoopAux</span> : <span class="dt">Nat</span> <span class="op">-&gt;</span> <span class="dt">Maybe</span> (__<span class="dt">UU0000d7_</span> (<span class="dt">List</span> <span class="dt">Nat</span>) ()) <span class="op">-&gt;</span> <span class="dt">Nat</span></span>
-<span id="cb1-246"><a href="#cb1-246" aria-hidden="true"></a><span class="fu">fannkuch_fannkuchLoopAux</span> <span class="op">=</span></span>
-<span id="cb1-247"><a href="#cb1-247" aria-hidden="true"></a>  <span class="kw">let</span></span>
-<span id="cb1-248"><a href="#cb1-248" aria-hidden="true"></a>    <span class="fu">fannkuchLoop</span> <span class="fu">x</span> <span class="fu">x2</span> <span class="fu">x3</span> <span class="op">=</span></span>
-<span id="cb1-249"><a href="#cb1-249" aria-hidden="true"></a>      <span class="fu">fannkuchLoopAux</span> (<span class="fu">prelude_max</span> <span class="fu">x3</span> (<span class="fu">fannkuch_countFlips</span> <span class="fu">x</span>)) (<span class="fu">fannkuch_nextPerm</span> <span class="fu">x</span> <span class="fu">x2</span>)</span>
-<span id="cb1-250"><a href="#cb1-250" aria-hidden="true"></a>    <span class="fu">fannkuchLoopAux</span> <span class="fu">x</span> <span class="fu">x2</span> <span class="op">=</span></span>
-<span id="cb1-251"><a href="#cb1-251" aria-hidden="true"></a>      <span class="cf">case</span> <span class="fu">x2</span> <span class="cf">of</span></span>
-<span id="cb1-252"><a href="#cb1-252" aria-hidden="true"></a>        <span class="dt">Just</span> <span class="fu">_</span> <span class="fu">x3</span> <span class="op">-&gt;</span></span>
-<span id="cb1-253"><a href="#cb1-253" aria-hidden="true"></a>          <span class="cf">case</span> <span class="fu">x3</span> <span class="cf">of</span></span>
-<span id="cb1-254"><a href="#cb1-254" aria-hidden="true"></a>            __<span class="dt">UU2c_</span> <span class="fu">_</span> <span class="fu">_</span> <span class="fu">x4</span> <span class="fu">x5</span> <span class="op">-&gt;</span></span>
-<span id="cb1-255"><a href="#cb1-255" aria-hidden="true"></a>              <span class="fu">fannkuchLoop</span> <span class="fu">x4</span> <span class="fu">x5</span> <span class="fu">x</span></span>
-<span id="cb1-256"><a href="#cb1-256" aria-hidden="true"></a>        <span class="dt">Nothing</span> <span class="fu">_</span> <span class="op">-&gt;</span></span>
-<span id="cb1-257"><a href="#cb1-257" aria-hidden="true"></a>          <span class="fu">x</span></span>
-<span id="cb1-258"><a href="#cb1-258" aria-hidden="true"></a>  <span class="kw">in</span></span>
-<span id="cb1-259"><a href="#cb1-259" aria-hidden="true"></a>  <span class="fu">fannkuchLoopAux</span></span>
-<span id="cb1-260"><a href="#cb1-260" aria-hidden="true"></a></span>
-<span id="cb1-261"><a href="#cb1-261" aria-hidden="true"></a><span class="fu">prelude_findIndex</span> : () <span class="op">-&gt;</span> () <span class="op">-&gt;</span> (<span class="dt">Nat</span> <span class="op">-&gt;</span> <span class="fu">a</span> <span class="op">-&gt;</span> <span class="dt">Bool</span>) <span class="op">-&gt;</span> <span class="dt">List</span> <span class="fu">a</span> <span class="op">-&gt;</span> <span class="dt">Maybe</span> <span class="dt">Nat</span></span>
-<span id="cb1-262"><a href="#cb1-262" aria-hidden="true"></a><span class="fu">prelude_findIndex</span> <span class="fu">x</span> <span class="fu">x2</span> <span class="fu">x3</span> <span class="op">=</span></span>
-<span id="cb1-263"><a href="#cb1-263" aria-hidden="true"></a>  <span class="fu">prelude_findIndexAux</span> () () <span class="fu">x3</span> <span class="dt">Zero</span></span>
-<span id="cb1-264"><a href="#cb1-264" aria-hidden="true"></a></span>
-<span id="cb1-265"><a href="#cb1-265" aria-hidden="true"></a><span class="fu">fannkuch_findI</span> : <span class="dt">List</span> <span class="dt">Nat</span> <span class="op">-&gt;</span> <span class="dt">Maybe</span> <span class="dt">Nat</span></span>
-<span id="cb1-266"><a href="#cb1-266" aria-hidden="true"></a><span class="fu">fannkuch_findI</span> <span class="op">=</span></span>
-<span id="cb1-267"><a href="#cb1-267" aria-hidden="true"></a>  <span class="fu">prelude_findIndex</span> () () (\<span class="fu">x</span> <span class="fu">x2</span> <span class="op">-&gt;</span> <span class="fu">nat_Builtin_Agda___UU3c_</span> <span class="fu">x2</span> <span class="fu">x</span>)</span></code></pre></div>
+<span id="cb1-243"><a href="#cb1-243" aria-hidden="true"></a>  <span class="fu">fannkuch_fannkuchBench</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> (<span class="dt">Suc</span> <span class="dt">Zero</span>)))))</span></code></pre></div>
 </body>
 </html>

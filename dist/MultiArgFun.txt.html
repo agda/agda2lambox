@@ -1680,32 +1680,6 @@ MultiArgFun.test:
                   (MultiArgFun.w))
                (MultiArgFun.q))
             (MultiArgFun.r)
-
-Agda.Builtin.Maybe.Maybe:
-  mutual inductive(s):
-    Maybe
-    type variables:  [a, A]
-      constructors:
-        just (1 arg(s))
-          A : □
-          _ : @1
-        nothing (0 arg(s))
-          A : □
-
-MultiArgFun.exM:
-  constant declaration:
-    type variables: []
-    type: Agda.Builtin.Maybe.Maybe{0} □ (Agda.
-                                         Builtin.
-                                         Nat.Nat{0}) → (Agda.Builtin.Nat.Nat{0}) → (Agda.
-                                                                                    Builtin.
-                                                                                    Nat.Nat{0}) → Agda.
-                                                                                                  Builtin.
-                                                                                                  Nat.Nat{0}
-    body: λ _ →
-            case&lt;Agda.Builtin.Maybe.Maybe{0},1&gt; @0 of
-              λ&lt;[_]&gt; Agda.Builtin.Nat._+_
-              λ&lt;[]&gt; Agda.Builtin.Nat._*_
 main program: [MultiArgFun.test]</code></pre>
 </body>
 </html>

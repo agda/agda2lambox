@@ -23,46 +23,7 @@ From Agda2Lambox      Require Import CheckWF Eval.
 Import ListNotations.
 
 Definition env : global_env :=
-  [(((MPfile [&quot;TypeAliases&quot;%bs], &quot;id&quot;%bs), true),
-    ConstantDecl
-      {| cst_body := Some (tLambda nAnon (tLambda nAnon (tRel 0)));
-         cst_type :=
-           ([nNamed &quot;A&quot;%bs],
-            TArr
-              TBox
-              (TArr
-                 (TApp (TConst (MPfile [&quot;TypeAliases&quot;%bs], &quot;Id&quot;%bs)) (TVar 0))
-                 (TApp
-                    (TConst (MPfile [&quot;TypeAliases&quot;%bs], &quot;Id&quot;%bs)) (TVar 0)))) |});
-   (((MPfile [&quot;TypeAliases&quot;%bs], &quot;Id&quot;%bs), true),
-    TypeAliasDecl
-      (Some
-         ([{| tvar_name := nAnon; tvar_is_logical := false;
-              tvar_is_arity := true; tvar_is_sort := true |}],
-          TVar 0)));
-   (((MPfile [&quot;TypeAliases&quot;%bs], &quot;idK&quot;%bs), true),
-    ConstantDecl
-      {| cst_body := Some (tLambda nAnon (tLambda nAnon (tRel 0)));
-         cst_type :=
-           ([nNamed &quot;A&quot;%bs],
-            TArr
-              TBox
-              (TArr
-                 (TApp
-                    (TApp (TConst (MPfile [&quot;TypeAliases&quot;%bs], &quot;Const&quot;%bs)) (TVar 0))
-                    (TVar 0))
-                 (TApp
-                    (TApp (TConst (MPfile [&quot;TypeAliases&quot;%bs], &quot;Const&quot;%bs)) (TVar 0))
-                    (TVar 0)))) |});
-   (((MPfile [&quot;TypeAliases&quot;%bs], &quot;Const&quot;%bs), true),
-    TypeAliasDecl
-      (Some
-         ([{| tvar_name := nAnon; tvar_is_logical := false;
-              tvar_is_arity := true; tvar_is_sort := true |};
-           {| tvar_name := nAnon; tvar_is_logical := false;
-              tvar_is_arity := true; tvar_is_sort := true |}],
-          TVar 0)));
-   (((MPfile [&quot;TypeAliases&quot;%bs], &quot;test&quot;%bs), true),
+  [(((MPfile [&quot;TypeAliases&quot;%bs], &quot;test&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some

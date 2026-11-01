@@ -23,52 +23,7 @@ From Agda2Lambox     Require Import CheckWF Eval.
 Import ListNotations.
 
 Definition env : global_declarations :=
-  [((MPfile [&quot;Mutual&quot;%bs], &quot;evenNat&quot;%bs),
-    ConstantDecl
-      {| cst_body :=
-           Some
-             (tFix
-                [{| dname := nNamed &quot;oddNat&quot;%bs;
-                    dbody :=
-                      tLambda
-                        nAnon
-                        (tCase
-                           ({| inductive_mind := (MPfile [&quot;Mutual&quot;%bs], &quot;Odd&quot;%bs);
-                               inductive_ind := 0 |},
-                            0)
-                           (tRel 0)
-                           [([nAnon],
-                             tApp
-                               (tConstruct
-                                  {| inductive_mind := (MPfile [&quot;Mutual&quot;%bs], &quot;Nat&quot;%bs);
-                                     inductive_ind := 0 |}
-                                  1 [])
-                               (tApp (tRel 2) (tRel 0)))]);
-                    rarg := 0 |};
-                 {| dname := nNamed &quot;evenNat&quot;%bs;
-                    dbody :=
-                      tLambda
-                        nAnon
-                        (tCase
-                           ({| inductive_mind := (MPfile [&quot;Mutual&quot;%bs], &quot;Odd&quot;%bs);
-                               inductive_ind := 1 |},
-                            0)
-                           (tRel 0)
-                           [([],
-                             tConstruct
-                               {| inductive_mind := (MPfile [&quot;Mutual&quot;%bs], &quot;Nat&quot;%bs);
-                                  inductive_ind := 0 |}
-                               0 []);
-                            ([nAnon],
-                             tApp
-                               (tConstruct
-                                  {| inductive_mind := (MPfile [&quot;Mutual&quot;%bs], &quot;Nat&quot;%bs);
-                                     inductive_ind := 0 |}
-                                  1 [])
-                               (tApp (tRel 3) (tRel 0)))]);
-                    rarg := 0 |}]
-                1) |});
-   ((MPfile [&quot;Mutual&quot;%bs], &quot;test&quot;%bs),
+  [((MPfile [&quot;Mutual&quot;%bs], &quot;test&quot;%bs),
     ConstantDecl
       {| cst_body :=
            Some

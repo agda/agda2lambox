@@ -408,26 +408,9 @@
 <span id="cb1-330"><a href="#cb1-330" aria-hidden="true"></a>              <span class="pp">Nat_Builtin_Agda_Nat::</span>zero(</span>
 <span id="cb1-331"><a href="#cb1-331" aria-hidden="true"></a>                PhantomData)))))))</span>
 <span id="cb1-332"><a href="#cb1-332" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-333"><a href="#cb1-333" aria-hidden="true"></a></span>
-<span id="cb1-334"><a href="#cb1-334" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Product_fst<span class="op">&lt;</span>A<span class="op">:</span> <span class="bu">Copy</span><span class="op">,</span> B<span class="op">:</span> <span class="bu">Copy</span><span class="op">&gt;</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> ()<span class="op">,</span> x2<span class="op">:</span> ()<span class="op">,</span> x3<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Product_Ֆ_ՖՖ0000d7_<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">,</span> A<span class="op">,</span> B<span class="op">&gt;</span>) <span class="op">-&gt;</span> A <span class="op">{</span></span>
-<span id="cb1-335"><a href="#cb1-335" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>Ֆ_ՖՖ0000d7__Product_projՖՖ002081(</span>
-<span id="cb1-336"><a href="#cb1-336" aria-hidden="true"></a>    x3)</span>
-<span id="cb1-337"><a href="#cb1-337" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-338"><a href="#cb1-338" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Product_fst__curried<span class="op">&lt;</span>A<span class="op">:</span> <span class="bu">Copy</span><span class="op">,</span> B<span class="op">:</span> <span class="bu">Copy</span><span class="op">&gt;</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(()) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(()) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> Product_Ֆ_ՖՖ0000d7_<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">,</span> A<span class="op">,</span> B<span class="op">&gt;</span>) <span class="op">-&gt;</span> A <span class="op">{</span></span>
-<span id="cb1-339"><a href="#cb1-339" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x<span class="op">|</span> <span class="op">{</span></span>
-<span id="cb1-340"><a href="#cb1-340" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x2<span class="op">|</span> <span class="op">{</span></span>
-<span id="cb1-341"><a href="#cb1-341" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x3<span class="op">|</span> <span class="op">{</span></span>
-<span id="cb1-342"><a href="#cb1-342" aria-hidden="true"></a>        <span class="kw">self</span><span class="op">.</span>Product_fst(</span>
-<span id="cb1-343"><a href="#cb1-343" aria-hidden="true"></a>          x<span class="op">,</span></span>
-<span id="cb1-344"><a href="#cb1-344" aria-hidden="true"></a>          x2<span class="op">,</span></span>
-<span id="cb1-345"><a href="#cb1-345" aria-hidden="true"></a>          x3)</span>
-<span id="cb1-346"><a href="#cb1-346" aria-hidden="true"></a>      <span class="op">}</span>)</span>
-<span id="cb1-347"><a href="#cb1-347" aria-hidden="true"></a>    <span class="op">}</span>)</span>
-<span id="cb1-348"><a href="#cb1-348" aria-hidden="true"></a>  <span class="op">}</span>)</span>
-<span id="cb1-349"><a href="#cb1-349" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-350"><a href="#cb1-350" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-351"><a href="#cb1-351" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb1-352"><a href="#cb1-352" aria-hidden="true"></a>  <span class="pp">println!</span>(<span class="st">&quot;{:?}&quot;</span><span class="op">,</span> <span class="pp">Program::</span>new()<span class="op">.</span>Product_test())<span class="op">;</span></span>
-<span id="cb1-353"><a href="#cb1-353" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb1-333"><a href="#cb1-333" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-334"><a href="#cb1-334" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb1-335"><a href="#cb1-335" aria-hidden="true"></a>  <span class="pp">println!</span>(<span class="st">&quot;{:?}&quot;</span><span class="op">,</span> <span class="pp">Program::</span>new()<span class="op">.</span>Product_test())<span class="op">;</span></span>
+<span id="cb1-336"><a href="#cb1-336" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
 </body>
 </html>

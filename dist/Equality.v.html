@@ -23,70 +23,7 @@ From Agda2Lambox     Require Import CheckWF Eval.
 Import ListNotations.
 
 Definition env : global_declarations :=
-  [((MPfile [&quot;Equality&quot;%bs], &quot;_\8801_&quot;%bs),
-    InductiveDecl
-      {| ind_finite := Finite; ind_npars := 1;
-         ind_bodies :=
-           [{| ind_name := &quot;_\8801_&quot;%bs; ind_propositional := false;
-               ind_kelim := IntoAny;
-               ind_ctors := [{| cstr_name := &quot;refl&quot;%bs; cstr_nargs := 0 |}];
-               ind_projs := [] |}] |});
-   ((MPfile [&quot;Equality&quot;%bs], &quot;eqzero&quot;%bs),
-    ConstantDecl {| cst_body := Some tBox |});
-   ((MPfile [&quot;Equality&quot;%bs], &quot;cong&quot;%bs),
-    ConstantDecl {| cst_body := Some tBox |});
-   ((MPfile [&quot;Equality&quot;%bs], &quot;eqOne&quot;%bs),
-    ConstantDecl {| cst_body := Some tBox |});
-   ((MPfile [&quot;Equality&quot;%bs], &quot;sym&quot;%bs),
-    ConstantDecl {| cst_body := Some tBox |});
-   ((MPfile [&quot;Equality&quot;%bs], &quot;_\8728_&quot;%bs),
-    ConstantDecl
-      {| cst_body :=
-           Some
-             (tLambda
-                nAnon
-                (tLambda
-                   nAnon
-                   (tLambda
-                      nAnon
-                      (tLambda
-                         nAnon
-                         (tLambda
-                            nAnon
-                            (tLambda
-                               nAnon
-                               (tLambda
-                                  nAnon
-                                  (tLambda
-                                     nAnon
-                                     (tLambda
-                                        nAnon (tApp (tRel 2) (tApp (tRel 1) (tRel 0)))))))))))) |});
-   ((MPfile [&quot;Equality&quot;%bs], &quot;eqTwo&quot;%bs),
-    ConstantDecl {| cst_body := Some tBox |});
-   ((MPfile [&quot;Equality&quot;%bs], &quot;trans&quot;%bs),
-    ConstantDecl {| cst_body := Some tBox |});
-   ((MPfile [&quot;Equality&quot;%bs], &quot;subst&quot;%bs),
-    ConstantDecl
-      {| cst_body :=
-           Some
-             (tLambda
-                nAnon
-                (tLambda
-                   nAnon
-                   (tLambda
-                      nAnon
-                      (tLambda nAnon (tLambda nAnon (tLambda nAnon (tRel 0))))))) |});
-   ((MPfile [&quot;Equality&quot;%bs], &quot;add-left-id&quot;%bs),
-    ConstantDecl {| cst_body := Some tBox |});
-   ((MPfile [&quot;Equality&quot;%bs], &quot;suc-left-add&quot;%bs),
-    ConstantDecl {| cst_body := Some tBox |});
-   ((MPfile [&quot;Equality&quot;%bs], &quot;eqLevel&quot;%bs),
-    ConstantDecl {| cst_body := Some tBox |});
-   ((MPfile [&quot;Equality&quot;%bs], &quot;toNat&quot;%bs),
-    ConstantDecl
-      {| cst_body :=
-           Some (tLambda nAnon (tLambda nAnon (tLambda nAnon (tRel 2)))) |});
-   ((MPfile [&quot;Equality&quot;%bs], &quot;test&quot;%bs),
+  [((MPfile [&quot;Equality&quot;%bs], &quot;test&quot;%bs),
     ConstantDecl
       {| cst_body :=
            Some

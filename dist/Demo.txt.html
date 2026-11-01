@@ -40,43 +40,6 @@ Demo.test:
             (Demo.List{0}{1} □ Demo.Bool{0}{0}
                (Demo.List{0}{1} □ Demo.Bool{0}{1}
                   (Demo.List{0}{1} □ Demo.Bool{0}{0} (Demo.List{0}{0} □))))
-
-Demo.or:
-  constant declaration:
-    body: λ _ _ →
-            case&lt;Demo.Bool{0},0&gt; @1 of
-              λ&lt;[]&gt; @0
-              λ&lt;[]&gt; Demo.Bool{0}{1}
-
-Demo.and:
-  constant declaration:
-    body: λ _ _ →
-            case&lt;Demo.Bool{0},0&gt; @1 of
-              λ&lt;[]&gt; Demo.Bool{0}{0}
-              λ&lt;[]&gt; @0
-
-Demo.Nat:
-  mutual inductive(s):
-    Nat
-      constructors:
-        zero (0 arg(s))
-        suc (1 arg(s))
-
-Demo.add:
-  constant declaration:
-    body: μrec [0] :=
-            0: λ _ _ →
-                 case&lt;Demo.Nat{0},0&gt; @1 of
-                   λ&lt;[]&gt; @0
-                   λ&lt;[_]&gt; Demo.Nat{0}{1} (@3 @0 @1)
-
-Demo.times:
-  constant declaration:
-    body: μrec [0] :=
-            0: λ _ _ →
-                 case&lt;Demo.Nat{0},0&gt; @1 of
-                   λ&lt;[]&gt; Demo.Nat{0}{0}
-                   λ&lt;[_]&gt; Demo.add @1 (@3 @0 @1)
 main program: [Demo.test]</code></pre>
 </body>
 </html>

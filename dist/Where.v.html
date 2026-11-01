@@ -23,185 +23,7 @@ From Agda2Lambox      Require Import CheckWF Eval.
 Import ListNotations.
 
 Definition env : global_env :=
-  [(((MPfile [&quot;Where&quot;%bs], &quot;ii&quot;%bs), true),
-    ConstantDecl
-      {| cst_body :=
-           Some
-             (tConstruct
-                {| inductive_mind := (MPfile [&quot;Where&quot;%bs], &quot;II&quot;%bs);
-                   inductive_ind := 0 |}
-                0 []);
-         cst_type :=
-           ([],
-            TInd
-              {| inductive_mind := (MPfile [&quot;Where&quot;%bs], &quot;II&quot;%bs);
-                 inductive_ind := 0 |}) |});
-   (((MPfile [&quot;Where&quot;%bs], &quot;ii&#39;&quot;%bs), true),
-    ConstantDecl
-      {| cst_body :=
-           Some
-             (tConstruct
-                {| inductive_mind := (MPfile [&quot;Where&quot;%bs], &quot;II&quot;%bs);
-                   inductive_ind := 0 |}
-                1 []);
-         cst_type :=
-           ([],
-            TInd
-              {| inductive_mind := (MPfile [&quot;Where&quot;%bs], &quot;II&quot;%bs);
-                 inductive_ind := 0 |}) |});
-   (((MPfile [&quot;Where&quot;%bs], &quot;II\8594II&#39;&quot;%bs), true),
-    ConstantDecl
-      {| cst_body :=
-           Some
-             (tLambda
-                nAnon
-                (tCase
-                   ({| inductive_mind := (MPfile [&quot;Where&quot;%bs], &quot;II&quot;%bs);
-                       inductive_ind := 0 |},
-                    0)
-                   (tRel 0)
-                   [([],
-                     tConstruct
-                       {| inductive_mind := (MPfile [&quot;Where&quot;%bs], &quot;II&quot;%bs);
-                          inductive_ind := 0 |}
-                       1 []);
-                    ([],
-                     tConstruct
-                       {| inductive_mind := (MPfile [&quot;Where&quot;%bs], &quot;II&quot;%bs);
-                          inductive_ind := 0 |}
-                       0 [])]));
-         cst_type :=
-           ([],
-            TArr
-              (TInd
-                 {| inductive_mind := (MPfile [&quot;Where&quot;%bs], &quot;II&quot;%bs);
-                    inductive_ind := 0 |})
-              (TInd
-                 {| inductive_mind := (MPfile [&quot;Where&quot;%bs], &quot;II&quot;%bs);
-                    inductive_ind := 0 |})) |});
-   (((MPfile [&quot;Where&quot;%bs], &quot;II\8594II&#39;&#39;&quot;%bs), true),
-    ConstantDecl
-      {| cst_body :=
-           Some
-             (tLambda
-                nAnon
-                (tApp
-                   (tApp
-                      (tLambda
-                         nAnon
-                         (tLambda
-                            nAnon
-                            (tCase
-                               ({| inductive_mind := (MPfile [&quot;Where&quot;%bs], &quot;II&quot;%bs);
-                                   inductive_ind := 0 |},
-                                0)
-                               (tRel 0)
-                               [([],
-                                 tConstruct
-                                   {| inductive_mind := (MPfile [&quot;Where&quot;%bs], &quot;II&quot;%bs);
-                                      inductive_ind := 0 |}
-                                   1 []);
-                                ([],
-                                 tConstruct
-                                   {| inductive_mind := (MPfile [&quot;Where&quot;%bs], &quot;II&quot;%bs);
-                                      inductive_ind := 0 |}
-                                   0 [])])))
-                      (tRel 0))
-                   (tRel 0)));
-         cst_type :=
-           ([],
-            TArr
-              (TInd
-                 {| inductive_mind := (MPfile [&quot;Where&quot;%bs], &quot;II&quot;%bs);
-                    inductive_ind := 0 |})
-              (TInd
-                 {| inductive_mind := (MPfile [&quot;Where&quot;%bs], &quot;II&quot;%bs);
-                    inductive_ind := 0 |})) |});
-   (((MPfile [&quot;Where&quot;%bs], &quot;II\8594II&#39;&#39;&#39;&quot;%bs), true),
-    ConstantDecl
-      {| cst_body :=
-           Some
-             (tLambda
-                nAnon
-                (tApp
-                   (tApp
-                      (tLambda
-                         nAnon
-                         (tLambda
-                            nAnon
-                            (tCase
-                               ({| inductive_mind := (MPfile [&quot;Where&quot;%bs], &quot;II&quot;%bs);
-                                   inductive_ind := 0 |},
-                                0)
-                               (tRel 0)
-                               [([],
-                                 tConstruct
-                                   {| inductive_mind := (MPfile [&quot;Where&quot;%bs], &quot;II&quot;%bs);
-                                      inductive_ind := 0 |}
-                                   1 []);
-                                ([],
-                                 tConstruct
-                                   {| inductive_mind := (MPfile [&quot;Where&quot;%bs], &quot;II&quot;%bs);
-                                      inductive_ind := 0 |}
-                                   0 [])])))
-                      (tRel 0))
-                   (tApp (tConst (MPfile [&quot;Where&quot;%bs], &quot;II\8594II&quot;%bs)) (tRel 0))));
-         cst_type :=
-           ([],
-            TArr
-              (TInd
-                 {| inductive_mind := (MPfile [&quot;Where&quot;%bs], &quot;II&quot;%bs);
-                    inductive_ind := 0 |})
-              (TInd
-                 {| inductive_mind := (MPfile [&quot;Where&quot;%bs], &quot;II&quot;%bs);
-                    inductive_ind := 0 |})) |});
-   (((MPfile [&quot;Where&quot;%bs], &quot;i&quot;%bs), true),
-    ConstantDecl
-      {| cst_body := Some tBox;
-         cst_type :=
-           ([],
-            TInd
-              {| inductive_mind := (MPfile [&quot;Where&quot;%bs], &quot;I&quot;%bs);
-                 inductive_ind := 0 |}) |});
-   (((MPfile [&quot;Where&quot;%bs], &quot;I\8594II&quot;%bs), true),
-    ConstantDecl
-      {| cst_body :=
-           Some
-             (tLambda
-                nAnon
-                (tConstruct
-                   {| inductive_mind := (MPfile [&quot;Where&quot;%bs], &quot;II&quot;%bs);
-                      inductive_ind := 0 |}
-                   0 []));
-         cst_type :=
-           ([],
-            TArr
-              (TInd
-                 {| inductive_mind := (MPfile [&quot;Where&quot;%bs], &quot;I&quot;%bs);
-                    inductive_ind := 0 |})
-              (TInd
-                 {| inductive_mind := (MPfile [&quot;Where&quot;%bs], &quot;II&quot;%bs);
-                    inductive_ind := 0 |})) |});
-   (((MPfile [&quot;Where&quot;%bs], &quot;II\8594I&quot;%bs), true),
-    ConstantDecl
-      {| cst_body := Some tBox;
-         cst_type :=
-           ([],
-            TArr
-              (TInd
-                 {| inductive_mind := (MPfile [&quot;Where&quot;%bs], &quot;II&quot;%bs);
-                    inductive_ind := 0 |})
-              (TInd
-                 {| inductive_mind := (MPfile [&quot;Where&quot;%bs], &quot;I&quot;%bs);
-                    inductive_ind := 0 |})) |});
-   (((MPfile [&quot;Where&quot;%bs], &quot;I&quot;%bs), true),
-    InductiveDecl
-      {| ind_finite := Finite; ind_npars := 0;
-         ind_bodies :=
-           [{| ind_name := &quot;I&quot;%bs; ind_propositional := false;
-               ind_kelim := IntoAny; ind_ctors := [((&quot;\9671&quot;%bs, []), 0)];
-               ind_projs := []; ind_type_vars := [] |}] |});
-   (((MPfile [&quot;Where&quot;%bs], &quot;test&quot;%bs), true),
+  [(((MPfile [&quot;Where&quot;%bs], &quot;test&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
@@ -1626,13 +1448,23 @@ Definition env : global_env :=
                                                                                                                                                          0 |}
                                                                                                                                                     0
                                                                                                                                                     []))))))))))))))))))))))))))))))))))))))))))))
-                tBox);
+                (tConstruct
+                   {| inductive_mind := (MPfile [&quot;Where&quot;%bs], &quot;I&quot;%bs);
+                      inductive_ind := 0 |}
+                   0 []));
          cst_type :=
            ([],
             TInd
               {| inductive_mind :=
                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
                  inductive_ind := 0 |}) |});
+   (((MPfile [&quot;Where&quot;%bs], &quot;I&quot;%bs), true),
+    InductiveDecl
+      {| ind_finite := Finite; ind_npars := 0;
+         ind_bodies :=
+           [{| ind_name := &quot;I&quot;%bs; ind_propositional := false;
+               ind_kelim := IntoAny; ind_ctors := [((&quot;\9671&quot;%bs, []), 0)];
+               ind_projs := []; ind_type_vars := [] |}] |});
    (((MPfile [&quot;Where&quot;%bs], &quot;testII&quot;%bs), true),
     ConstantDecl
       {| cst_body :=

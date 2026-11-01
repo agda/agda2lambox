@@ -475,7 +475,18 @@ Definition env : global_env :=
                                                                                                                                                             0 |}
                                                                                                                                                        0
                                                                                                                                                        [])))))))))))))))))))))))))))))))))))))))))))))
-                tBox);
+                (tApp
+                   (tApp
+                      (tConstruct
+                         {| inductive_mind := (MPfile [&quot;Newtype&quot;%bs], &quot;Newtype&quot;%bs);
+                            inductive_ind := 0 |}
+                         0 [])
+                      tBox)
+                   (tConstruct
+                      {| inductive_mind :=
+                           (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                         inductive_ind := 0 |}
+                      0 [])));
          cst_type :=
            ([],
             TInd

@@ -23,32 +23,7 @@ From Agda2Lambox      Require Import CheckWF Eval.
 Import ListNotations.
 
 Definition env : global_env :=
-  [(((MPfile [&quot;Singleton&quot;%bs], &quot;toNat&quot;%bs), true),
-    ConstantDecl
-      {| cst_body := Some (tLambda nAnon (tLambda nAnon (tRel 1)));
-         cst_type :=
-           ([],
-            TArr
-              (TInd
-                 {| inductive_mind :=
-                      (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                    inductive_ind := 0 |})
-              (TArr
-                 (TApp
-                    (TApp
-                       (TInd
-                          {| inductive_mind := (MPfile [&quot;Singleton&quot;%bs], &quot;The&quot;%bs);
-                             inductive_ind := 0 |})
-                       TBox)
-                    (TInd
-                       {| inductive_mind :=
-                            (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                          inductive_ind := 0 |}))
-                 (TInd
-                    {| inductive_mind :=
-                         (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                       inductive_ind := 0 |}))) |});
-   (((MPfile [&quot;Singleton&quot;%bs], &quot;test&quot;%bs), true),
+  [(((MPfile [&quot;Singleton&quot;%bs], &quot;test&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some

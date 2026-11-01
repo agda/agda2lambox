@@ -148,32 +148,6 @@ Test.test:
                                                                                                                                              Agda.
                                                                                                                                              Builtin.
                                                                                                                                              Nat.Nat{0}{0})))))))))))))))))))))))))))))))))))))))))))
-
-Test.Bool:
-  mutual inductive(s):
-    Bool
-    type variables:  []
-      constructors:
-        true (0 arg(s))
-        false (0 arg(s))
-
-Test.not&#39;:
-  constant declaration:
-    type variables: []
-    type: (Test.Bool{0}) → Test.Bool{0}
-    body: λ _ →
-            case&lt;Test.Bool{0},0&gt; @0 of
-              λ&lt;[]&gt; Test.Bool{0}{1}
-              λ&lt;[]&gt; Test.Bool{0}{0}
-
-Test.not:
-  constant declaration:
-    type variables: []
-    type: (Test.Bool{0}) → Test.Bool{0}
-    body: λ _ →
-            case&lt;Test.Bool{0},0&gt; @0 of
-              λ&lt;[]&gt; Test.Bool{0}{1}
-              λ&lt;[]&gt; Test.Bool{0}{0}
 main program: [Test.test]</code></pre>
 </body>
 </html>

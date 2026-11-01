@@ -279,21 +279,6 @@ Bool.test:
     type: Agda.Builtin.Nat.Nat{0}
     body: Agda.Builtin.Nat._+_ (Bool.bool2Nat (Bool.testBool))
             (Bool.testIte)
-
-Bool.not:
-  constant declaration:
-    type variables: []
-    type: (Agda.Builtin.Bool.Bool{0}) → Agda.Builtin.Bool.Bool{0}
-    body: λ _ →
-            case&lt;Agda.Builtin.Bool.Bool{0},0&gt; @0 of
-              λ&lt;[]&gt; Agda.Builtin.Bool.Bool{0}{1}
-              λ&lt;[]&gt; Agda.Builtin.Bool.Bool{0}{0}
-
-Bool.tt:
-  constant declaration:
-    type variables: []
-    type: Agda.Builtin.Bool.Bool{0}
-    body: Agda.Builtin.Bool.Bool{0}{1}
 main program: [Bool.test]</code></pre>
 </body>
 </html>

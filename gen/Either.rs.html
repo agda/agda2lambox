@@ -743,26 +743,9 @@
 <span id="cb1-665"><a href="#cb1-665" aria-hidden="true"></a>                                                                                                                                                                                        <span class="pp">Nat_Builtin_Agda_Nat::</span>zero(</span>
 <span id="cb1-666"><a href="#cb1-666" aria-hidden="true"></a>                                                                                                                                                                                          PhantomData))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))</span>
 <span id="cb1-667"><a href="#cb1-667" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-668"><a href="#cb1-668" aria-hidden="true"></a></span>
-<span id="cb1-669"><a href="#cb1-669" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Either_fromOnlyLeftR<span class="op">&lt;</span>A<span class="op">:</span> <span class="bu">Copy</span><span class="op">,</span> B<span class="op">:</span> <span class="bu">Copy</span><span class="op">&gt;</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span><span class="op">,</span> x<span class="op">:</span> ()<span class="op">,</span> x2<span class="op">:</span> ()<span class="op">,</span> x3<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Either_OnlyLeftR<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">,</span> A<span class="op">,</span> B<span class="op">&gt;</span>) <span class="op">-&gt;</span> A <span class="op">{</span></span>
-<span id="cb1-670"><a href="#cb1-670" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>OnlyLeftR_Either_left(</span>
-<span id="cb1-671"><a href="#cb1-671" aria-hidden="true"></a>    x3)</span>
-<span id="cb1-672"><a href="#cb1-672" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-673"><a href="#cb1-673" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Either_fromOnlyLeftR__curried<span class="op">&lt;</span>A<span class="op">:</span> <span class="bu">Copy</span><span class="op">,</span> B<span class="op">:</span> <span class="bu">Copy</span><span class="op">&gt;</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(()) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(()) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> Either_OnlyLeftR<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">,</span> A<span class="op">,</span> B<span class="op">&gt;</span>) <span class="op">-&gt;</span> A <span class="op">{</span></span>
-<span id="cb1-674"><a href="#cb1-674" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x<span class="op">|</span> <span class="op">{</span></span>
-<span id="cb1-675"><a href="#cb1-675" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x2<span class="op">|</span> <span class="op">{</span></span>
-<span id="cb1-676"><a href="#cb1-676" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x3<span class="op">|</span> <span class="op">{</span></span>
-<span id="cb1-677"><a href="#cb1-677" aria-hidden="true"></a>        <span class="kw">self</span><span class="op">.</span>Either_fromOnlyLeftR(</span>
-<span id="cb1-678"><a href="#cb1-678" aria-hidden="true"></a>          x<span class="op">,</span></span>
-<span id="cb1-679"><a href="#cb1-679" aria-hidden="true"></a>          x2<span class="op">,</span></span>
-<span id="cb1-680"><a href="#cb1-680" aria-hidden="true"></a>          x3)</span>
-<span id="cb1-681"><a href="#cb1-681" aria-hidden="true"></a>      <span class="op">}</span>)</span>
-<span id="cb1-682"><a href="#cb1-682" aria-hidden="true"></a>    <span class="op">}</span>)</span>
-<span id="cb1-683"><a href="#cb1-683" aria-hidden="true"></a>  <span class="op">}</span>)</span>
-<span id="cb1-684"><a href="#cb1-684" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-685"><a href="#cb1-685" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-686"><a href="#cb1-686" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb1-687"><a href="#cb1-687" aria-hidden="true"></a>  <span class="pp">println!</span>(<span class="st">&quot;{:?}&quot;</span><span class="op">,</span> <span class="pp">Program::</span>new()<span class="op">.</span>Either_test())<span class="op">;</span></span>
-<span id="cb1-688"><a href="#cb1-688" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb1-668"><a href="#cb1-668" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-669"><a href="#cb1-669" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb1-670"><a href="#cb1-670" aria-hidden="true"></a>  <span class="pp">println!</span>(<span class="st">&quot;{:?}&quot;</span><span class="op">,</span> <span class="pp">Program::</span>new()<span class="op">.</span>Either_test())<span class="op">;</span></span>
+<span id="cb1-671"><a href="#cb1-671" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
 </body>
 </html>

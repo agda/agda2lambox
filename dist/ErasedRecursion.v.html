@@ -23,10 +23,7 @@ From Agda2Lambox     Require Import CheckWF Eval.
 Import ListNotations.
 
 Definition env : global_declarations :=
-  [((MPfile [&quot;ErasedRecursion&quot;%bs], &quot;const&quot;%bs),
-    ConstantDecl
-      {| cst_body := Some (tLambda nAnon (tLambda nAnon (tRel 1))) |});
-   ((MPfile [&quot;ErasedRecursion&quot;%bs], &quot;test&quot;%bs),
+  [((MPfile [&quot;ErasedRecursion&quot;%bs], &quot;test&quot;%bs),
     ConstantDecl
       {| cst_body :=
            Some

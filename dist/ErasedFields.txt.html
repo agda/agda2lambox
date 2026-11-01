@@ -389,38 +389,6 @@ ErasedFields.test:
                                                                                                                                                 Builtin.
                                                                                                                                                 Nat.Nat{0}{0}))))))))))))))))))))))))))))))))))))))))))
                   □))
-
-ErasedFields._+Bar_:
-  constant declaration:
-    type variables: []
-    type: (ErasedFields.Bar{0}) → (ErasedFields.Bar{0}) → ErasedFields.Bar{0}
-    body: λ _ _ →
-            case&lt;ErasedFields.Bar{0},0&gt; @1 of
-              λ&lt;[_, _]&gt;
-                case&lt;ErasedFields.Bar{0},0&gt; @2 of
-                  λ&lt;[_, _]&gt; ErasedFields.Bar{0}{0} (Agda.Builtin.Nat._+_ @3 @1) □
-
-ErasedFields.Foo.foo:
-  constant declaration:
-    type variables: []
-    type: (ErasedFields.Foo{0}) → Agda.Builtin.Nat.Nat{0}
-    body: λ _ → case&lt;ErasedFields.Foo{0},0&gt; @0 of λ&lt;[_, _]&gt; @1
-
-ErasedFields._+Foo_:
-  constant declaration:
-    type variables: []
-    type: (ErasedFields.Foo{0}) → (ErasedFields.Foo{0}) → ErasedFields.Foo{0}
-    body: λ _ _ →
-            ErasedFields.Foo{0}{0}
-              (Agda.Builtin.Nat._+_ (ErasedFields.Foo.foo @1)
-                 (ErasedFields.Foo.foo @0))
-              □
-
-ErasedFields.Foo.bar:
-  constant declaration:
-    type variables: []
-    type: (ErasedFields.Foo{0}) → Agda.Builtin.Nat.Nat{0}
-    body: □
 main program: [ErasedFields.test]</code></pre>
 </body>
 </html>

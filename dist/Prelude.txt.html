@@ -27,33 +27,6 @@ Agda.Builtin.Nat.Nat:
         zero (0 arg(s))
         suc (1 arg(s))
 
-Prelude._302.n:
-  constant declaration:
-    body: Agda.Builtin.Nat.Nat{0}{1}
-            (Agda.Builtin.Nat.Nat{0}{1}
-               (Agda.Builtin.Nat.Nat{0}{1}
-                  (Agda.Builtin.Nat.Nat{0}{1}
-                     (Agda.Builtin.Nat.Nat{0}{1}
-                        (Agda.Builtin.Nat.Nat{0}{1}
-                           (Agda.Builtin.Nat.Nat{0}{1}
-                              (Agda.Builtin.Nat.Nat{0}{1}
-                                 (Agda.Builtin.Nat.Nat{0}{1}
-                                    (Agda.Builtin.Nat.Nat{0}{1}
-                                       (Agda.Builtin.Nat.Nat{0}{1}
-                                          (Agda.Builtin.Nat.Nat{0}{1}
-                                             (Agda.Builtin.Nat.Nat{0}{1}
-                                                (Agda.Builtin.Nat.Nat{0}{1}
-                                                   (Agda.Builtin.Nat.Nat{0}{1}
-                                                      (Agda.Builtin.Nat.Nat{0}{1}
-                                                         (Agda.Builtin.Nat.Nat{0}{1}
-                                                            (Agda.Builtin.Nat.Nat{0}{1}
-                                                               (Agda.Builtin.Nat.Nat{0}{1}
-                                                                  (Agda.Builtin.Nat.Nat{0}{1}
-                                                                     (Agda.Builtin.Nat.Nat{0}{1}
-                                                                        Agda.
-                                                                        Builtin.
-                                                                        Nat.Nat{0}{0}))))))))))))))))))))
-
 Agda.Builtin.List.List:
   mutual inductive(s):
     List
@@ -120,240 +93,39 @@ Prelude.appendTR:
     body: λ _ _ _ _ →
             Prelude.reverseAux □ □ (Prelude.reverse □ □ @1) @0
 
-Prelude.test′:
+Prelude._302.n:
+  constant declaration:
+    body: Agda.Builtin.Nat.Nat{0}{1}
+            (Agda.Builtin.Nat.Nat{0}{1}
+               (Agda.Builtin.Nat.Nat{0}{1}
+                  (Agda.Builtin.Nat.Nat{0}{1}
+                     (Agda.Builtin.Nat.Nat{0}{1}
+                        (Agda.Builtin.Nat.Nat{0}{1}
+                           (Agda.Builtin.Nat.Nat{0}{1}
+                              (Agda.Builtin.Nat.Nat{0}{1}
+                                 (Agda.Builtin.Nat.Nat{0}{1}
+                                    (Agda.Builtin.Nat.Nat{0}{1}
+                                       (Agda.Builtin.Nat.Nat{0}{1}
+                                          (Agda.Builtin.Nat.Nat{0}{1}
+                                             (Agda.Builtin.Nat.Nat{0}{1}
+                                                (Agda.Builtin.Nat.Nat{0}{1}
+                                                   (Agda.Builtin.Nat.Nat{0}{1}
+                                                      (Agda.Builtin.Nat.Nat{0}{1}
+                                                         (Agda.Builtin.Nat.Nat{0}{1}
+                                                            (Agda.Builtin.Nat.Nat{0}{1}
+                                                               (Agda.Builtin.Nat.Nat{0}{1}
+                                                                  (Agda.Builtin.Nat.Nat{0}{1}
+                                                                     (Agda.Builtin.Nat.Nat{0}{1}
+                                                                        Agda.
+                                                                        Builtin.
+                                                                        Nat.Nat{0}{0}))))))))))))))))))))
+
+Prelude.test:
   constant declaration:
     body: Prelude.length □ □
             (Prelude.appendTR □ □
                (Prelude.reverse □ □ (Prelude.range (Prelude._302.n)))
                (Prelude.invrange (Prelude._302.n)))
-
-Agda.Builtin.Maybe.Maybe:
-  mutual inductive(s):
-    Maybe
-      constructors:
-        just (1 arg(s))
-        nothing (0 arg(s))
-
-Prelude.mapMaybe:
-  constant declaration:
-    body: λ _ _ _ _ →
-            case&lt;Agda.Builtin.Maybe.Maybe{0},1&gt; @0 of
-              λ&lt;[_]&gt; Agda.Builtin.Maybe.Maybe{0}{0} □ (@2 @0)
-              λ&lt;[]&gt; Agda.Builtin.Maybe.Maybe{0}{1} □
-
-Prelude.replicate:
-  constant declaration:
-    body: μrec [0] :=
-            0: λ _ _ _ _ →
-                 case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @1 of
-                   λ&lt;[]&gt; Agda.Builtin.List.List{0}{0} □
-                   λ&lt;[_]&gt; Agda.Builtin.List.List{0}{1} □ @1 (@5 □ □ @0 @1)
-
-Prelude.case_of_: constant declaration: body: λ _ _ _ _ _ _ → @0 @1
-
-Prelude.tail:
-  constant declaration:
-    body: λ _ _ _ →
-            case&lt;Agda.Builtin.List.List{0},1&gt; @0 of
-              λ&lt;[]&gt; Agda.Builtin.List.List{0}{0} □
-              λ&lt;[_, _]&gt; @0
-
-Agda.Builtin.Bool.Bool:
-  mutual inductive(s):
-    Bool
-      constructors:
-        false (0 arg(s))
-        true (0 arg(s))
-
-Prelude.if_then_else_:
-  constant declaration:
-    body: λ _ _ _ _ _ →
-            case&lt;Agda.Builtin.Bool.Bool{0},0&gt; @2 of
-              λ&lt;[]&gt; @0
-              λ&lt;[]&gt; @1
-
-Prelude.findIndexAux:
-  constant declaration:
-    body: μrec [0] :=
-            0: λ _ _ _ _ _ →
-                 case&lt;Agda.Builtin.List.List{0},1&gt; @0 of
-                   λ&lt;[]&gt; Agda.Builtin.Maybe.Maybe{0}{1} □
-                   λ&lt;[_, _]&gt;
-                     Prelude.if_then_else_ □ □ (@4 @3 @1)
-                       (Agda.Builtin.Maybe.Maybe{0}{0} □ @3)
-                       (@7 □ □ @4 (Agda.Builtin.Nat.Nat{0}{1} @3) @0)
-
-Prelude.findIndex:
-  constant declaration:
-    body: λ _ _ _ →
-            Prelude.findIndexAux □ □ @0 Agda.Builtin.Nat.Nat{0}{0}
-
-Prelude.updateAt:
-  constant declaration:
-    body: μrec [0] :=
-            0: λ _ _ _ _ _ →
-                 case&lt;Agda.Builtin.List.List{0},1&gt; @1 of
-                   λ&lt;[]&gt; Agda.Builtin.List.List{0}{0} □
-                   λ&lt;[_, _]&gt;
-                     case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @2 of
-                       λ&lt;[]&gt; Agda.Builtin.List.List{0}{1} □ (@4 @1) @0
-                       λ&lt;[_]&gt; Agda.Builtin.List.List{0}{1} □ @2 (@8 □ □ @5 @1 @0)
-
-Prelude.getAt:
-  constant declaration:
-    body: μrec [0] :=
-            0: λ _ _ →
-                 case&lt;Agda.Builtin.List.List{0},1&gt; @1 of
-                   λ&lt;[]&gt; Agda.Builtin.Nat.Nat{0}{0}
-                   λ&lt;[_, _]&gt;
-                     case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @2 of
-                       λ&lt;[]&gt; @1
-                       λ&lt;[_]&gt; @5 @1 @0
-
-Prelude.setAt:
-  constant declaration:
-    body: μrec [0] :=
-            0: λ _ _ _ _ _ →
-                 case&lt;Agda.Builtin.List.List{0},1&gt; @2 of
-                   λ&lt;[]&gt; Agda.Builtin.List.List{0}{0} □
-                   λ&lt;[_, _]&gt;
-                     case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @3 of
-                       λ&lt;[]&gt; Agda.Builtin.List.List{0}{1} □ @2 @0
-                       λ&lt;[_]&gt; Agda.Builtin.List.List{0}{1} □ @2 (@8 □ □ @1 @0 @3)
-
-Prelude._×_:
-  mutual inductive(s):
-    _×_
-      constructors: _,_ (2 arg(s))
-
-Prelude.splitAt:
-  constant declaration:
-    body: μrec [0] :=
-            0: λ _ _ _ _ →
-                 case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @1 of
-                   λ&lt;[]&gt; Prelude._×_{0}{0} □ □ (Agda.Builtin.List.List{0}{0} □) @0
-                   λ&lt;[_]&gt;
-                     case&lt;Agda.Builtin.List.List{0},1&gt; @1 of
-                       λ&lt;[]&gt;
-                         Prelude._×_{0}{0} □ □ (Agda.Builtin.List.List{0}{0} □)
-                           (Agda.Builtin.List.List{0}{0} □)
-                       λ&lt;[_, _]&gt;
-                         λ _ _ _ _ _ _ →
-                           case&lt;Prelude._×_{0},2&gt; @1 of
-                             λ&lt;[_, _]&gt;
-                               Prelude._×_{0}{0} □ □ (Agda.Builtin.List.List{0}{1} □ @2 @1) @0
-                           @6
-                           @5
-                           @2
-                           @0
-                           (@7 @6 □ @2 @0)
-                           @1
-
-Agda.Builtin.Nat._-_:
-  constant declaration:
-    body: μrec [0] :=
-            0: λ _ _ →
-                 case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @0 of
-                   λ&lt;[]&gt; @1
-                   λ&lt;[_]&gt;
-                     case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @2 of
-                       λ&lt;[]&gt; Agda.Builtin.Nat.Nat{0}{0}
-                       λ&lt;[_]&gt; @4 @0 @1
-
-Prelude.divmod:
-  constant declaration:
-    body: μrec [0] :=
-            0: λ _ _ _ →
-                 case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @2 of
-                   λ&lt;[]&gt; @0
-                   λ&lt;[_]&gt;
-                     case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @1 of
-                       λ&lt;[]&gt; @4 @0 @2 @2
-                       λ&lt;[_]&gt; @5 @1 @3 @0
-
-Prelude.mod:
-  constant declaration:
-    body: λ _ _ →
-            case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @0 of
-              λ&lt;[]&gt; @1
-              λ&lt;[_]&gt; Agda.Builtin.Nat._-_ @0 (Prelude.divmod @2 @0 @0)
-
-Prelude._×_.snd:
-  constant declaration:
-    body: λ _ → case&lt;Prelude._×_{0},2&gt; @0 of λ&lt;[_, _]&gt; @0
-
-Prelude._×_.fst:
-  constant declaration:
-    body: λ _ → case&lt;Prelude._×_{0},2&gt; @0 of λ&lt;[_, _]&gt; @1
-
-Prelude._++_:
-  constant declaration:
-    body: μrec [0] :=
-            0: λ _ _ _ _ →
-                 case&lt;Agda.Builtin.List.List{0},1&gt; @1 of
-                   λ&lt;[]&gt; @0
-                   λ&lt;[_, _]&gt; Agda.Builtin.List.List{0}{1} □ @1 (@6 □ □ @0 @2)
-
-Agda.Builtin.Nat._&lt;_:
-  constant declaration:
-    body: μrec [0] :=
-            0: λ _ _ →
-                 case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @0 of
-                   λ&lt;[]&gt; Agda.Builtin.Bool.Bool{0}{0}
-                   λ&lt;[_]&gt;
-                     case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @2 of
-                       λ&lt;[]&gt; Agda.Builtin.Bool.Bool{0}{1}
-                       λ&lt;[_]&gt; @4 @0 @1
-
-Prelude.max:
-  constant declaration:
-    body: λ _ _ →
-            Prelude.if_then_else_ □ □ (Agda.Builtin.Nat._&lt;_ @1 @0) @0 @1
-
-Agda.Builtin.Nat._+_:
-  constant declaration:
-    body: μrec [0] :=
-            0: λ _ _ →
-                 case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @1 of
-                   λ&lt;[]&gt; @0
-                   λ&lt;[_]&gt; Agda.Builtin.Nat.Nat{0}{1} (@3 @0 @1)
-
-Agda.Builtin.Nat._*_:
-  constant declaration:
-    body: μrec [0] :=
-            0: λ _ _ →
-                 case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @1 of
-                   λ&lt;[]&gt; Agda.Builtin.Nat.Nat{0}{0}
-                   λ&lt;[_]&gt; Agda.Builtin.Nat._+_ @1 (@3 @0 @1)
-
-Prelude.pow:
-  constant declaration:
-    body: μrec [0] :=
-            0: λ _ _ →
-                 case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @0 of
-                   λ&lt;[]&gt; Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}
-                   λ&lt;[_]&gt; Agda.Builtin.Nat._*_ @2 (@3 @2 @0)
-
-Prelude.pow2:
-  constant declaration:
-    body: λ _ →
-            Prelude.pow
-              (Agda.Builtin.Nat.Nat{0}{1}
-                 (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0}))
-              @0
-
-Prelude.double:
-  constant declaration:
-    body: μrec [0] :=
-            0: λ _ →
-                 case&lt;Agda.Builtin.Nat.Nat{0},0&gt; @0 of
-                   λ&lt;[]&gt; Agda.Builtin.Nat.Nat{0}{0}
-                   λ&lt;[_]&gt;
-                     Agda.Builtin.Nat.Nat{0}{1} (Agda.Builtin.Nat.Nat{0}{1} (@2 @0))
-
-Prelude.b: constant declaration: body: □
-
-Prelude.a: constant declaration: body: □
-main program: [Prelude.test′]</code></pre>
+main program: [Prelude.test]</code></pre>
 </body>
 </html>

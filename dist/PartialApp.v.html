@@ -23,47 +23,7 @@ From Agda2Lambox      Require Import CheckWF Eval.
 Import ListNotations.
 
 Definition env : global_env :=
-  [(((MPfile [&quot;PartialApp&quot;%bs], &quot;constNat&quot;%bs), true),
-    ConstantDecl
-      {| cst_body := Some (tLambda nAnon (tLambda nAnon (tRel 1)));
-         cst_type :=
-           ([],
-            TArr
-              (TInd
-                 {| inductive_mind :=
-                      (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                    inductive_ind := 0 |})
-              (TArr
-                 (TInd
-                    {| inductive_mind :=
-                         (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                       inductive_ind := 0 |})
-                 (TInd
-                    {| inductive_mind :=
-                         (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                       inductive_ind := 0 |}))) |});
-   (((MPfile [&quot;PartialApp&quot;%bs; &quot;SomeNat&quot;%bs], &quot;someNat&quot;%bs), true),
-    ConstantDecl
-      {| cst_body :=
-           Some
-             (tLambda
-                nAnon
-                (tCase
-                   ({| inductive_mind := (MPfile [&quot;PartialApp&quot;%bs], &quot;SomeNat&quot;%bs);
-                       inductive_ind := 0 |},
-                    0)
-                   (tRel 0) [([nAnon], tRel 0)]));
-         cst_type :=
-           ([],
-            TArr
-              (TInd
-                 {| inductive_mind := (MPfile [&quot;PartialApp&quot;%bs], &quot;SomeNat&quot;%bs);
-                    inductive_ind := 0 |})
-              (TInd
-                 {| inductive_mind :=
-                      (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                    inductive_ind := 0 |})) |});
-   (((MPfile [&quot;PartialApp&quot;%bs], &quot;test&quot;%bs), true),
+  [(((MPfile [&quot;PartialApp&quot;%bs], &quot;test&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some

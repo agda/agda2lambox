@@ -21,11 +21,6 @@
     type variables:  []
       constructors:
 
-Scheme.Bad:
-  type alias:
-    type variables: []
-    type: 𝕋
-
 Agda.Builtin.Nat.Nat:
   mutual inductive(s):
     Nat
@@ -179,51 +174,8 @@ Scheme.head:
 Scheme.test:
   constant declaration:
     type variables: []
-    type: Scheme.Bad 𝕋
-    body: Scheme.head □ □ (Scheme.testVec)
-
-Scheme.ListAlias&#39;:
-  type alias:
-    type variables: [_]
-    type: Agda.Builtin.List.List{0} □ @0
-
-Scheme.ListAlias:
-  type alias:
-    type variables: [_]
-    type: Agda.Builtin.List.List{0} □ @0
-
-Scheme.Arrow:
-  type alias:
-    type variables: [A, B]
-    type: @0 → @1
-
-Scheme.Σ.snd:
-  constant declaration:
-    type variables: []
-    type: □
-    body: □
-
-Scheme.Σ.fst:
-  constant declaration:
-    type variables: [A, B]
-    type: Scheme.Σ{0} @0 □ → @0
-    body: λ _ → case&lt;Scheme.Σ{0},1&gt; @0 of λ&lt;[_, _]&gt; @1
-
-Scheme.Eq:
-  constant declaration:
-    type variables: []
-    type: □
-    body: □
-
-Scheme.length:
-  constant declaration:
-    type variables: [A]
-    type: □ → Agda.Builtin.List.List{0} □ @0 → Agda.Builtin.Nat.Nat{0}
-    body: μrec [0] :=
-            0: λ _ _ →
-                 case&lt;Agda.Builtin.List.List{0},1&gt; @0 of
-                   λ&lt;[]&gt; Agda.Builtin.Nat.Nat{0}{0}
-                   λ&lt;[_, _]&gt; Agda.Builtin.Nat.Nat{0}{1} (@4 □ @0)
+    type: Agda.Builtin.Nat.Nat{0}
+    body: Scheme.head □ Agda.Builtin.Nat.Nat{0}{0} (Scheme.testVec)
 main program: [Scheme.test]</code></pre>
 </body>
 </html>

@@ -50,36 +50,6 @@ OddEven.test:
   constant declaration:
     body: OddEven.odd
             (OddEven.Nat{0}{1} (OddEven.Nat{0}{1} OddEven.Nat{0}{0}))
-
-OddEven.even:
-  constant declaration:
-    body: μrec [1] :=
-            0: λ _ →
-                 case&lt;OddEven.Nat{0},0&gt; @0 of
-                   λ&lt;[]&gt; OddEven.Bool{0}{0}
-                   λ&lt;[_]&gt; @2 @0
-            1: λ _ →
-                 case&lt;OddEven.Nat{0},0&gt; @0 of
-                   λ&lt;[]&gt; OddEven.Bool{0}{1}
-                   λ&lt;[_]&gt; @3 @0
-
-OddEven.double:
-  constant declaration:
-    body: μrec [0] :=
-            0: λ _ →
-                 case&lt;OddEven.Nat{0},0&gt; @0 of
-                   λ&lt;[]&gt; OddEven.Nat{0}{0}
-                   λ&lt;[_]&gt; OddEven.Nat{0}{1} (OddEven.Nat{0}{1} (@2 @0))
-
-OddEven.not:
-  constant declaration:
-    body: λ _ →
-            case&lt;OddEven.Bool{0},0&gt; @0 of
-              λ&lt;[]&gt; OddEven.Bool{0}{1}
-              λ&lt;[]&gt; OddEven.Bool{0}{0}
-
-OddEven.notnot:
-  constant declaration: body: λ _ → OddEven.not (OddEven.not @0)
 main program: [OddEven.test]</code></pre>
 </body>
 </html>

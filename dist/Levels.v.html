@@ -23,26 +23,7 @@ From Agda2Lambox      Require Import CheckWF Eval.
 Import ListNotations.
 
 Definition env : global_env :=
-  [(((MPfile [&quot;Levels&quot;%bs], &quot;mkLevel&quot;%bs), true),
-    ConstantDecl {| cst_body := Some tBox; cst_type := ([], TBox) |});
-   (((MPfile [&quot;Levels&quot;%bs], &quot;constLvl&quot;%bs), true),
-    ConstantDecl
-      {| cst_body :=
-           Some (tLambda nAnon (tLambda nAnon (tLambda nAnon (tRel 1))));
-         cst_type :=
-           ([nNamed &quot;A&quot;%bs],
-            TArr TBox (TArr (TVar 0) (TArr TBox (TVar 0)))) |});
-   (((MPfile [&quot;Levels&quot;%bs], &quot;const&quot;%bs), true),
-    ConstantDecl
-      {| cst_body :=
-           Some
-             (tLambda
-                nAnon (tLambda nAnon (tLambda nAnon (tLambda nAnon (tRel 1)))));
-         cst_type :=
-           ([nNamed &quot;A&quot;%bs; nNamed &quot;B&quot;%bs],
-            TArr
-              TBox (TArr TBox (TArr (TVar 0) (TArr (TVar 1) (TVar 0))))) |});
-   (((MPfile [&quot;Levels&quot;%bs], &quot;test&quot;%bs), true),
+  [(((MPfile [&quot;Levels&quot;%bs], &quot;test&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
@@ -978,9 +959,7 @@ Definition env : global_env :=
                                                                                                                                                          0 |}
                                                                                                                                                     0
                                                                                                                                                     []))))))))))))))))))))))))))))))))))))))))))))
-                (tApp
-                   (tConst (MPfile [&quot;Levels&quot;%bs; &quot;SomeLvl&quot;%bs], &quot;\8467&quot;%bs))
-                   (tConst (MPfile [&quot;Levels&quot;%bs], &quot;someLvl&quot;%bs))));
+                tBox);
          cst_type :=
            ([],
             TInd
@@ -1882,42 +1861,13 @@ Definition env : global_env :=
                                                                                                                                                          0 |}
                                                                                                                                                     0
                                                                                                                                                     []))))))))))))))))))))))))))))))))))))))))))))
-                (tApp
-                   (tConst (MPfile [&quot;Levels&quot;%bs; &quot;SomeLvl&quot;%bs], &quot;\8467&quot;%bs))
-                   (tConst (MPfile [&quot;Levels&quot;%bs], &quot;someLvl&quot;%bs))));
+                tBox);
          cst_type :=
            ([],
             TInd
               {| inductive_mind :=
                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
                  inductive_ind := 0 |}) |});
-   (((MPfile [&quot;Levels&quot;%bs], &quot;someLvl&quot;%bs), true),
-    ConstantDecl
-      {| cst_body :=
-           Some
-             (tApp
-                (tConstruct
-                   {| inductive_mind := (MPfile [&quot;Levels&quot;%bs], &quot;SomeLvl&quot;%bs);
-                      inductive_ind := 0 |}
-                   0 [])
-                (tConst (MPfile [&quot;Levels&quot;%bs], &quot;0\8467&quot;%bs)));
-         cst_type :=
-           ([],
-            TInd
-              {| inductive_mind := (MPfile [&quot;Levels&quot;%bs], &quot;SomeLvl&quot;%bs);
-                 inductive_ind := 0 |}) |});
-   (((MPfile [&quot;Levels&quot;%bs], &quot;SomeLvl&quot;%bs), true),
-    InductiveDecl
-      {| ind_finite := Finite; ind_npars := 0;
-         ind_bodies :=
-           [{| ind_name := &quot;SomeLvl&quot;%bs; ind_propositional := false;
-               ind_kelim := IntoAny;
-               ind_ctors := [((&quot;this&quot;%bs, [(nNamed &quot;\8467&quot;%bs, TBox)]), 1)];
-               ind_projs := []; ind_type_vars := [] |}] |});
-   (((MPfile [&quot;Levels&quot;%bs], &quot;0\8467&quot;%bs), true),
-    ConstantDecl {| cst_body := Some tBox; cst_type := ([], TBox) |});
-   (((MPfile [&quot;Levels&quot;%bs; &quot;SomeLvl&quot;%bs], &quot;\8467&quot;%bs), true),
-    ConstantDecl {| cst_body := Some tBox; cst_type := ([], TBox) |});
    (((MPfile [&quot;Levels&quot;%bs], &quot;testSomeLvl&quot;%bs), true),
     ConstantDecl
       {| cst_body :=

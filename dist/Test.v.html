@@ -23,75 +23,7 @@ From Agda2Lambox      Require Import CheckWF Eval.
 Import ListNotations.
 
 Definition env : global_env :=
-  [(((MPfile [&quot;Test&quot;%bs], &quot;not&quot;%bs), true),
-    ConstantDecl
-      {| cst_body :=
-           Some
-             (tLambda
-                nAnon
-                (tCase
-                   ({| inductive_mind := (MPfile [&quot;Test&quot;%bs], &quot;Bool&quot;%bs);
-                       inductive_ind := 0 |},
-                    0)
-                   (tRel 0)
-                   [([],
-                     tConstruct
-                       {| inductive_mind := (MPfile [&quot;Test&quot;%bs], &quot;Bool&quot;%bs);
-                          inductive_ind := 0 |}
-                       1 []);
-                    ([],
-                     tConstruct
-                       {| inductive_mind := (MPfile [&quot;Test&quot;%bs], &quot;Bool&quot;%bs);
-                          inductive_ind := 0 |}
-                       0 [])]));
-         cst_type :=
-           ([],
-            TArr
-              (TInd
-                 {| inductive_mind := (MPfile [&quot;Test&quot;%bs], &quot;Bool&quot;%bs);
-                    inductive_ind := 0 |})
-              (TInd
-                 {| inductive_mind := (MPfile [&quot;Test&quot;%bs], &quot;Bool&quot;%bs);
-                    inductive_ind := 0 |})) |});
-   (((MPfile [&quot;Test&quot;%bs], &quot;not&#39;&quot;%bs), true),
-    ConstantDecl
-      {| cst_body :=
-           Some
-             (tLambda
-                nAnon
-                (tCase
-                   ({| inductive_mind := (MPfile [&quot;Test&quot;%bs], &quot;Bool&quot;%bs);
-                       inductive_ind := 0 |},
-                    0)
-                   (tRel 0)
-                   [([],
-                     tConstruct
-                       {| inductive_mind := (MPfile [&quot;Test&quot;%bs], &quot;Bool&quot;%bs);
-                          inductive_ind := 0 |}
-                       1 []);
-                    ([],
-                     tConstruct
-                       {| inductive_mind := (MPfile [&quot;Test&quot;%bs], &quot;Bool&quot;%bs);
-                          inductive_ind := 0 |}
-                       0 [])]));
-         cst_type :=
-           ([],
-            TArr
-              (TInd
-                 {| inductive_mind := (MPfile [&quot;Test&quot;%bs], &quot;Bool&quot;%bs);
-                    inductive_ind := 0 |})
-              (TInd
-                 {| inductive_mind := (MPfile [&quot;Test&quot;%bs], &quot;Bool&quot;%bs);
-                    inductive_ind := 0 |})) |});
-   (((MPfile [&quot;Test&quot;%bs], &quot;Bool&quot;%bs), true),
-    InductiveDecl
-      {| ind_finite := Finite; ind_npars := 0;
-         ind_bodies :=
-           [{| ind_name := &quot;Bool&quot;%bs; ind_propositional := false;
-               ind_kelim := IntoAny;
-               ind_ctors := [((&quot;true&quot;%bs, []), 0); ((&quot;false&quot;%bs, []), 0)];
-               ind_projs := []; ind_type_vars := [] |}] |});
-   (((MPfile [&quot;Test&quot;%bs], &quot;test&quot;%bs), true),
+  [(((MPfile [&quot;Test&quot;%bs], &quot;test&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some

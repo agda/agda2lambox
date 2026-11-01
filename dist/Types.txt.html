@@ -87,7 +87,7 @@ Types.sig:
 
 Types.sig.fst:
   constant declaration:
-    type variables: [A, P]
+    type variables: [A]
     type: Types.sig{0} @0 □ → @0
     body: λ _ → case&lt;Types.sig{0},1&gt; @0 of λ&lt;[_, _]&gt; @1
 
@@ -194,18 +194,6 @@ Types.test:
                   (Agda.Builtin.List.List{0}{1} □
                      (Types.sig{0}{0} □ Agda.Builtin.Nat.Nat{0}{0} □)
                      (Agda.Builtin.List.List{0}{0} □))))
-
-Types.Top:
-  constant declaration:
-    type variables: []
-    type: □
-    body: □
-
-Types.sig.snd:
-  constant declaration:
-    type variables: []
-    type: □
-    body: □
 main program: [Types.test]</code></pre>
 </body>
 </html>

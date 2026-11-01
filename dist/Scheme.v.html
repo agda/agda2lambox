@@ -23,125 +23,25 @@ From Agda2Lambox      Require Import CheckWF Eval.
 Import ListNotations.
 
 Definition env : global_env :=
-  [(((MPfile [&quot;Scheme&quot;%bs], &quot;length&quot;%bs), true),
-    ConstantDecl
-      {| cst_body :=
-           Some
-             (tFix
-                [{| dname := nNamed &quot;length&quot;%bs;
-                    dbody :=
-                      tLambda
-                        nAnon
-                        (tLambda
-                           nAnon
-                           (tCase
-                              ({| inductive_mind :=
-                                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
-                                  inductive_ind := 0 |},
-                               1)
-                              (tRel 0)
-                              [([],
-                                tConstruct
-                                  {| inductive_mind :=
-                                       (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                                     inductive_ind := 0 |}
-                                  0 []);
-                               ([nAnon; nAnon],
-                                tApp
-                                  (tConstruct
-                                     {| inductive_mind :=
-                                          (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                                        inductive_ind := 0 |}
-                                     1 [])
-                                  (tApp (tApp (tRel 4) tBox) (tRel 0)))]));
-                    rarg := 0 |}]
-                0);
-         cst_type :=
-           ([nNamed &quot;A&quot;%bs],
-            TArr
-              TBox
-              (TArr
-                 (TApp
-                    (TApp
-                       (TInd
-                          {| inductive_mind :=
-                               (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
-                             inductive_ind := 0 |})
-                       TBox)
-                    (TVar 0))
-                 (TInd
-                    {| inductive_mind :=
-                         (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
-                       inductive_ind := 0 |}))) |});
-   (((MPfile [&quot;Scheme&quot;%bs], &quot;Eq&quot;%bs), true),
-    ConstantDecl {| cst_body := Some tBox; cst_type := ([], TBox) |});
-   (((MPfile [&quot;Scheme&quot;%bs; &quot;\931&quot;%bs], &quot;fst&quot;%bs), true),
-    ConstantDecl
-      {| cst_body :=
-           Some
-             (tLambda
-                nAnon
-                (tCase
-                   ({| inductive_mind := (MPfile [&quot;Scheme&quot;%bs], &quot;\931&quot;%bs);
-                       inductive_ind := 0 |},
-                    1)
-                   (tRel 0) [([nAnon; nAnon], tRel 1)]));
-         cst_type :=
-           ([nNamed &quot;A&quot;%bs; nNamed &quot;B&quot;%bs],
-            TArr
-              (TApp
-                 (TApp
-                    (TInd
-                       {| inductive_mind := (MPfile [&quot;Scheme&quot;%bs], &quot;\931&quot;%bs);
-                          inductive_ind := 0 |})
-                    (TVar 0))
-                 TBox)
-              (TVar 0)) |});
-   (((MPfile [&quot;Scheme&quot;%bs; &quot;\931&quot;%bs], &quot;snd&quot;%bs), true),
-    ConstantDecl {| cst_body := Some tBox; cst_type := ([], TBox) |});
-   (((MPfile [&quot;Scheme&quot;%bs], &quot;Arrow&quot;%bs), true),
-    TypeAliasDecl
-      (Some
-         ([{| tvar_name := nNamed &quot;A&quot;%bs; tvar_is_logical := false;
-              tvar_is_arity := true; tvar_is_sort := true |};
-           {| tvar_name := nNamed &quot;B&quot;%bs; tvar_is_logical := false;
-              tvar_is_arity := true; tvar_is_sort := true |}],
-          TArr (TVar 0) (TVar 1))));
-   (((MPfile [&quot;Scheme&quot;%bs], &quot;ListAlias&quot;%bs), true),
-    TypeAliasDecl
-      (Some
-         ([{| tvar_name := nAnon; tvar_is_logical := false;
-              tvar_is_arity := true; tvar_is_sort := true |}],
-          TApp
-            (TApp
-               (TInd
-                  {| inductive_mind :=
-                       (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
-                     inductive_ind := 0 |})
-               TBox)
-            (TVar 0))));
-   (((MPfile [&quot;Scheme&quot;%bs], &quot;ListAlias&#39;&quot;%bs), true),
-    TypeAliasDecl
-      (Some
-         ([{| tvar_name := nAnon; tvar_is_logical := false;
-              tvar_is_arity := true; tvar_is_sort := true |}],
-          TApp
-            (TApp
-               (TInd
-                  {| inductive_mind :=
-                       (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
-                     inductive_ind := 0 |})
-               TBox)
-            (TVar 0))));
-   (((MPfile [&quot;Scheme&quot;%bs], &quot;test&quot;%bs), true),
+  [(((MPfile [&quot;Scheme&quot;%bs], &quot;test&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
              (tApp
-                (tApp (tApp (tConst (MPfile [&quot;Scheme&quot;%bs], &quot;head&quot;%bs)) tBox) tBox)
+                (tApp
+                   (tApp (tConst (MPfile [&quot;Scheme&quot;%bs], &quot;head&quot;%bs)) tBox)
+                   (tConstruct
+                      {| inductive_mind :=
+                           (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                         inductive_ind := 0 |}
+                      0 []))
                 (tConst (MPfile [&quot;Scheme&quot;%bs], &quot;testVec&quot;%bs)));
          cst_type :=
-           ([], TApp (TConst (MPfile [&quot;Scheme&quot;%bs], &quot;Bad&quot;%bs)) TAny) |});
+           ([],
+            TInd
+              {| inductive_mind :=
+                   (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                 inductive_ind := 0 |}) |});
    (((MPfile [&quot;Scheme&quot;%bs], &quot;head&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
@@ -759,8 +659,6 @@ Definition env : global_env :=
                            inductive_ind := 0 |})]),
                    1)];
                ind_projs := []; ind_type_vars := [] |}] |});
-   (((MPfile [&quot;Scheme&quot;%bs], &quot;Bad&quot;%bs), true),
-    TypeAliasDecl (Some ([], TAny)));
    (((MPfile [&quot;LamBox&quot;%bs], &quot;Empty&quot;%bs), true),
     InductiveDecl
       {| ind_finite := Finite; ind_npars := 0;

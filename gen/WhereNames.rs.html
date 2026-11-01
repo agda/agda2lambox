@@ -235,35 +235,9 @@
 <span id="cb1-157"><a href="#cb1-157" aria-hidden="true"></a>                      PhantomData<span class="op">,</span></span>
 <span id="cb1-158"><a href="#cb1-158" aria-hidden="true"></a>                      ()))))))))))</span>
 <span id="cb1-159"><a href="#cb1-159" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-160"><a href="#cb1-160" aria-hidden="true"></a></span>
-<span id="cb1-161"><a href="#cb1-161" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Ֆ_16_WhereNames_Ֆdotextendedlambda0<span class="op">&lt;</span>a<span class="op">:</span> <span class="bu">Copy</span><span class="op">&gt;</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> WhereNames_List<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">,</span> a<span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb1-162"><a href="#cb1-162" aria-hidden="true"></a>  <span class="kw">let</span> go2 <span class="op">=</span> <span class="kw">self</span><span class="op">.</span>alloc(<span class="pp">std::cell::Cell::</span>new(<span class="cn">None</span>))<span class="op">;</span></span>
-<span id="cb1-163"><a href="#cb1-163" aria-hidden="true"></a>  <span class="kw">let</span> Ֆdotextendedlambda02 <span class="op">=</span> <span class="kw">self</span><span class="op">.</span>alloc(<span class="pp">std::cell::Cell::</span>new(<span class="cn">None</span>))<span class="op">;</span></span>
-<span id="cb1-164"><a href="#cb1-164" aria-hidden="true"></a>  go2<span class="op">.</span>set(<span class="cn">Some</span>(</span>
-<span id="cb1-165"><a href="#cb1-165" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x<span class="op">|</span> <span class="op">{</span></span>
-<span id="cb1-166"><a href="#cb1-166" aria-hidden="true"></a>      hint_app(Ֆdotextendedlambda02<span class="op">.</span>get()<span class="op">.</span>unwrap())(x)</span>
-<span id="cb1-167"><a href="#cb1-167" aria-hidden="true"></a>    <span class="op">}</span>)))<span class="op">;</span></span>
-<span id="cb1-168"><a href="#cb1-168" aria-hidden="true"></a>  Ֆdotextendedlambda02<span class="op">.</span>set(<span class="cn">Some</span>(</span>
-<span id="cb1-169"><a href="#cb1-169" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x<span class="op">|</span> <span class="op">{</span></span>
-<span id="cb1-170"><a href="#cb1-170" aria-hidden="true"></a>      <span class="kw">match</span> x <span class="op">{</span></span>
-<span id="cb1-171"><a href="#cb1-171" aria-hidden="true"></a>        <span class="op">&amp;</span><span class="pp">WhereNames_List::</span>ՖՖ5bՖՖ5d(_<span class="op">,</span> _) <span class="op">=&gt;</span> <span class="op">{</span></span>
-<span id="cb1-172"><a href="#cb1-172" aria-hidden="true"></a>          <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-173"><a href="#cb1-173" aria-hidden="true"></a>            <span class="pp">Nat_Builtin_Agda_Nat::</span>zero(</span>
-<span id="cb1-174"><a href="#cb1-174" aria-hidden="true"></a>              PhantomData))</span>
-<span id="cb1-175"><a href="#cb1-175" aria-hidden="true"></a>        <span class="op">},</span></span>
-<span id="cb1-176"><a href="#cb1-176" aria-hidden="true"></a>        <span class="op">&amp;</span><span class="pp">WhereNames_List::</span>Ֆ_Ֆcons_(_<span class="op">,</span> _<span class="op">,</span> x2<span class="op">,</span> x3) <span class="op">=&gt;</span> <span class="op">{</span></span>
-<span id="cb1-177"><a href="#cb1-177" aria-hidden="true"></a>          <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-178"><a href="#cb1-178" aria-hidden="true"></a>            <span class="pp">Nat_Builtin_Agda_Nat::</span>suc(</span>
-<span id="cb1-179"><a href="#cb1-179" aria-hidden="true"></a>              PhantomData<span class="op">,</span></span>
-<span id="cb1-180"><a href="#cb1-180" aria-hidden="true"></a>              hint_app(go2<span class="op">.</span>get()<span class="op">.</span>unwrap())(x3)))</span>
-<span id="cb1-181"><a href="#cb1-181" aria-hidden="true"></a>        <span class="op">},</span></span>
-<span id="cb1-182"><a href="#cb1-182" aria-hidden="true"></a>      <span class="op">}</span></span>
-<span id="cb1-183"><a href="#cb1-183" aria-hidden="true"></a>    <span class="op">}</span>)))<span class="op">;</span></span>
-<span id="cb1-184"><a href="#cb1-184" aria-hidden="true"></a>  Ֆdotextendedlambda02<span class="op">.</span>get()<span class="op">.</span>unwrap()</span>
-<span id="cb1-185"><a href="#cb1-185" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-186"><a href="#cb1-186" aria-hidden="true"></a><span class="op">}</span></span>
-<span id="cb1-187"><a href="#cb1-187" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb1-188"><a href="#cb1-188" aria-hidden="true"></a>  <span class="pp">println!</span>(<span class="st">&quot;{:?}&quot;</span><span class="op">,</span> <span class="pp">Program::</span>new()<span class="op">.</span>WhereNames_test())<span class="op">;</span></span>
-<span id="cb1-189"><a href="#cb1-189" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb1-160"><a href="#cb1-160" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb1-161"><a href="#cb1-161" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb1-162"><a href="#cb1-162" aria-hidden="true"></a>  <span class="pp">println!</span>(<span class="st">&quot;{:?}&quot;</span><span class="op">,</span> <span class="pp">Program::</span>new()<span class="op">.</span>WhereNames_test())<span class="op">;</span></span>
+<span id="cb1-163"><a href="#cb1-163" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
 </body>
 </html>

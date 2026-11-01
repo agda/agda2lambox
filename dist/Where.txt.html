@@ -200,6 +200,12 @@ Where.testII:
                  (Where.II→II @0))
             Where.II{0}{0}
 
+Where.I:
+  mutual inductive(s):
+    I
+    type variables:  []
+      constructors: ◇ (0 arg(s))
+
 Where.testI:
   constant declaration:
     type variables: []
@@ -292,7 +298,7 @@ Where.testI:
                                                                                                                                          Agda.
                                                                                                                                          Builtin.
                                                                                                                                          Nat.Nat{0}{0})))))))))))))))))))))))))))))))))))))))))
-            □
+            Where.I{0}{0}
 
 Where._74.go:
   constant declaration:
@@ -490,75 +496,6 @@ Where.test:
                                                                                  Builtin.
                                                                                  Nat.Nat{0}{0})))))))))))))))))))))))
             (Where.h Agda.Builtin.Nat.Nat{0}{0})
-
-Where.I:
-  mutual inductive(s):
-    I
-    type variables:  []
-      constructors: ◇ (0 arg(s))
-
-Where.II→I:
-  constant declaration:
-    type variables: []
-    type: (Where.II{0}) → Where.I{0}
-    body: □
-
-Where.I→II:
-  constant declaration:
-    type variables: []
-    type: (Where.I{0}) → Where.II{0}
-    body: λ _ → Where.II{0}{0}
-
-Where.i:
-  constant declaration:
-    type variables: []
-    type: Where.I{0}
-    body: □
-
-Where.II→II&#39;&#39;&#39;:
-  constant declaration:
-    type variables: []
-    type: (Where.II{0}) → Where.II{0}
-    body: λ _ →
-            λ _ _ →
-              case&lt;Where.II{0},0&gt; @0 of
-                λ&lt;[]&gt; Where.II{0}{1}
-                λ&lt;[]&gt; Where.II{0}{0}
-              @0
-              (Where.II→II @0)
-
-Where.II→II&#39;&#39;:
-  constant declaration:
-    type variables: []
-    type: (Where.II{0}) → Where.II{0}
-    body: λ _ →
-            λ _ _ →
-              case&lt;Where.II{0},0&gt; @0 of
-                λ&lt;[]&gt; Where.II{0}{1}
-                λ&lt;[]&gt; Where.II{0}{0}
-              @0
-              @0
-
-Where.II→II&#39;:
-  constant declaration:
-    type variables: []
-    type: (Where.II{0}) → Where.II{0}
-    body: λ _ →
-            case&lt;Where.II{0},0&gt; @0 of
-              λ&lt;[]&gt; Where.II{0}{1}
-              λ&lt;[]&gt; Where.II{0}{0}
-
-Where.ii&#39;:
-  constant declaration:
-    type variables: []
-    type: Where.II{0}
-    body: Where.II{0}{1}
-
-Where.ii:
-  constant declaration:
-    type variables: []
-    type: Where.II{0}
-    body: Where.II{0}{0}
 main program: [Where.test]</code></pre>
 </body>
 </html>

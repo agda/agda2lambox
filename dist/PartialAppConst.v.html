@@ -23,14 +23,7 @@ From Agda2Lambox      Require Import CheckWF Eval.
 Import ListNotations.
 
 Definition env : global_env :=
-  [(((MPfile [&quot;PartialAppConst&quot;%bs], &quot;const&quot;%bs), true),
-    ConstantDecl
-      {| cst_body :=
-           Some (tLambda nAnon (tLambda nAnon (tLambda nAnon (tRel 1))));
-         cst_type :=
-           ([nNamed &quot;A&quot;%bs],
-            TArr TBox (TArr (TVar 0) (TArr (TVar 0) (TVar 0)))) |});
-   (((MPfile [&quot;PartialAppConst&quot;%bs], &quot;test&quot;%bs), true),
+  [(((MPfile [&quot;PartialAppConst&quot;%bs], &quot;test&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some

@@ -38,14 +38,11 @@ EtaCon.cons:
   constant declaration:
     body: λ _ _ _ → Agda.Builtin.List.List{0}{1} □ @1 @0
 
-EtaCon.example:
+EtaCon.test:
   constant declaration:
     body: EtaCon.cons □
             (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0})
             (Agda.Builtin.List.List{0}{0} □)
-
-EtaCon.addone:
-  constant declaration: body: λ _ → Agda.Builtin.Nat.Nat{0}{1} @0
-main program: [EtaCon.example]</code></pre>
+main program: [EtaCon.test]</code></pre>
 </body>
 </html>

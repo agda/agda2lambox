@@ -23,57 +23,7 @@ From Agda2Lambox      Require Import CheckWF Eval.
 Import ListNotations.
 
 Definition env : global_env :=
-  [(((MPfile [&quot;Bool&quot;%bs], &quot;tt&quot;%bs), true),
-    ConstantDecl
-      {| cst_body :=
-           Some
-             (tConstruct
-                {| inductive_mind :=
-                     (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Bool&quot;%bs], &quot;Bool&quot;%bs);
-                   inductive_ind := 0 |}
-                1 []);
-         cst_type :=
-           ([],
-            TInd
-              {| inductive_mind :=
-                   (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Bool&quot;%bs], &quot;Bool&quot;%bs);
-                 inductive_ind := 0 |}) |});
-   (((MPfile [&quot;Bool&quot;%bs], &quot;not&quot;%bs), true),
-    ConstantDecl
-      {| cst_body :=
-           Some
-             (tLambda
-                nAnon
-                (tCase
-                   ({| inductive_mind :=
-                         (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Bool&quot;%bs], &quot;Bool&quot;%bs);
-                       inductive_ind := 0 |},
-                    0)
-                   (tRel 0)
-                   [([],
-                     tConstruct
-                       {| inductive_mind :=
-                            (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Bool&quot;%bs], &quot;Bool&quot;%bs);
-                          inductive_ind := 0 |}
-                       1 []);
-                    ([],
-                     tConstruct
-                       {| inductive_mind :=
-                            (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Bool&quot;%bs], &quot;Bool&quot;%bs);
-                          inductive_ind := 0 |}
-                       0 [])]));
-         cst_type :=
-           ([],
-            TArr
-              (TInd
-                 {| inductive_mind :=
-                      (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Bool&quot;%bs], &quot;Bool&quot;%bs);
-                    inductive_ind := 0 |})
-              (TInd
-                 {| inductive_mind :=
-                      (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Bool&quot;%bs], &quot;Bool&quot;%bs);
-                    inductive_ind := 0 |})) |});
-   (((MPfile [&quot;Bool&quot;%bs], &quot;test&quot;%bs), true),
+  [(((MPfile [&quot;Bool&quot;%bs], &quot;test&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some

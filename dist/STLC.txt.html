@@ -92,28 +92,6 @@ STLC.test:
                      (STLC._⊢_{0}{0} □ (STLC._∋_{0}{0} □ □ □))))
                (STLC._⊢_{0}{3}
                   (Agda.Builtin.Nat.Nat{0}{1} Agda.Builtin.Nat.Nat{0}{0})))
-
-STLC.Γ: constant declaration: body: □
-
-STLC.Ctx:
-  mutual inductive(s):
-    Ctx
-      constructors:
-        [] (0 arg(s))
-        _▷_ (3 arg(s))
-
-STLC.β: constant declaration: body: □
-
-STLC.α: constant declaration: body: □
-
-STLC.Type:
-  mutual inductive(s):
-    Type
-      constructors:
-        ℕ (0 arg(s))
-        _⇒_ (2 arg(s))
-
-STLC.n: constant declaration: body: □
 main program: [STLC.test]</code></pre>
 </body>
 </html>

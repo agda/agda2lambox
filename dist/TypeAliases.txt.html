@@ -430,28 +430,6 @@ TypeAliases.test:
                                                                                                                                              Agda.
                                                                                                                                              Builtin.
                                                                                                                                              Nat.Nat{0}{0})))))))))))))))))))))))))))))))))))))))))))
-
-TypeAliases.Const:
-  type alias:
-    type variables: [_, _]
-    type: @0
-
-TypeAliases.idK:
-  constant declaration:
-    type variables: [A]
-    type: □ → TypeAliases.Const @0 @0 → TypeAliases.Const @0 @0
-    body: λ _ _ → @0
-
-TypeAliases.Id:
-  type alias:
-    type variables: [_]
-    type: @0
-
-TypeAliases.id:
-  constant declaration:
-    type variables: [A]
-    type: □ → TypeAliases.Id @0 → TypeAliases.Id @0
-    body: λ _ _ → @0
 main program: [TypeAliases.test]</code></pre>
 </body>
 </html>
