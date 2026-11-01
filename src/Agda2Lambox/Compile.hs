@@ -32,6 +32,7 @@ import LambdaBox ( emptyName, emptyDecl )
 import LambdaBox.Names
 import LambdaBox.Env (GlobalEnv(..), GlobalDecl(..), ConstantBody(..))
 import LambdaBox.Term (Term(LBox))
+import LambdaBox.Type (Type(TBox))
 
 
 
@@ -61,12 +62,12 @@ compileDefinition target defn@Defn{..} = setCurrentRange defName do
 
   -- TODO: check that we indeed don't compile defs marked with @0
   --       especially record projections for erased fields
-  -- logical definitions are immediately compiled to □,
+  -- logical definitions are immediately compiled to □ (of type □),
   -- except constructors, which are compiled as part of their datatype
   ifM (case theDef of
          Constructor{} -> pure False
          _             -> liftTCM $ isLogical $ Arg defArgInfo defType)
-     (do typ <- whenTyped target $ compileTopLevelType defType
+     (do typ <- whenTyped target $ pure ([], TBox)
          pure $ Just $ ConstantDecl $ ConstantBody typ $ Just LBox) do
 
   case theDef of
@@ -74,8 +75,13 @@ compileDefinition target defn@Defn{..} = setCurrentRange defName do
     GeneralizableVar{} -> pure Nothing
 
     Axiom{} -> do
-      typ <- whenTyped target $ compileTopLevelType defType
-      pure $ Just $ ConstantDecl $ ConstantBody typ Nothing
+      isType <- liftTCM $ isArity defType
+      case target of
+        -- a postulated type is a type alias without definition
+        ToTyped | isType -> pure $ Just $ TypeAliasDecl Nothing
+        _ -> do
+          typ <- whenTyped target $ compileTopLevelType defType
+          pure $ Just $ ConstantDecl $ ConstantBody typ Nothing
 
     Constructor{conData} -> Nothing <$ requireDef conData
 
