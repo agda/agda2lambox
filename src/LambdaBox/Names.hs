@@ -7,7 +7,7 @@ import Agda.Syntax.Common.Pretty
 -- | Identifiers.
 type Ident = String
 
--- | Path to a directory, i.e. a list of directories.
+-- | Path to a directory, innermost component first.
 type DirPath = [Ident]
 
 -- | The module part of a kernel name.
@@ -38,7 +38,7 @@ data Name = Anon | Named Ident
 
 instance Pretty ModPath where
   pretty = \case
-    MPFile  dp      -> cat $ punctuate "." (map pretty dp)
+    MPFile  dp      -> cat $ punctuate "." (map pretty $ reverse dp)
     MPBound dp id i -> "MPBound??" -- NOTE: don't know what this corresponds to
     MPDot mp i      -> pretty mp <> "." <> pretty i
 
