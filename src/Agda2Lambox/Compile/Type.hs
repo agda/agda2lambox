@@ -226,5 +226,6 @@ typeScheme q defType es = do
   q <- liftTCM $ canonicalName q
   lift $ requireDef q
   let args = mapMaybe isApplyElim es
-  ([],) . foldl' LBox.TApp (LBox.TConst $ qnameToKName q)
+  kn <- qnameToKName q
+  ([],) . foldl' LBox.TApp (LBox.TConst kn)
     <$> compileElims defType args

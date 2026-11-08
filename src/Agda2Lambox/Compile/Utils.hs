@@ -6,7 +6,9 @@ import Data.List ( elemIndex )
 import Data.Maybe ( fromMaybe, listToMaybe, isJust )
 
 import Agda.Compiler.Backend
+import Agda.Compiler.Common qualified as CC
 import Agda.Syntax.Internal
+import Agda.Syntax.TopLevelModuleName ( moduleNameParts )
 import Agda.Syntax.Common.Pretty ( prettyShow )
 import Agda.Syntax.Common ( usableModality, Arg(..), NameId(..) )
 import Agda.TypeChecking.Datatypes ( getConstructors, getConstructorData )
@@ -22,9 +24,13 @@ import Agda2Lambox.Compile.Monad
 import Agda2Lambox.Compile.Target
 import LambdaBox qualified as LBox
 
--- | Convert an Agda module name to its "equivalent" λ□ module path.
-modNameToModPath :: ModuleName -> LBox.ModPath
-modNameToModPath = LBox.MPFile . map showPart . mnameToList
+-- | Convert an Agda module name to its λ□ module path:
+--   the file module as an 'MPFile', and each module nested in it as an 'MPDot'.
+modNameToModPath :: ReadTCState m => ModuleName -> m LBox.ModPath
+modNameToModPath m = do
+  top <- CC.topLevelModuleName m
+  let (file, nested) = splitAt (length $ moduleNameParts top) (map showPart $ mnameToList m)
+  pure $ foldl LBox.MPDot (LBox.MPFile $ reverse file) nested
   where
     -- anonymous modules are suffixed with their name id
     showPart :: Name -> String
@@ -33,11 +39,10 @@ modNameToModPath = LBox.MPFile . map showPart . mnameToList
       | otherwise                          = prettyShow x
 
 -- | Convert and Agda definition name to a λ□ kernel name.
-qnameToKName :: QName -> LBox.KerName
-qnameToKName qn =
-  LBox.KerName
-    (modNameToModPath $ qnameModule qn)
-    (qnameToIdent qn)
+qnameToKName :: ReadTCState m => QName -> m LBox.KerName
+qnameToKName qn = do
+  mp <- modNameToModPath (qnameModule qn)
+  pure $ LBox.KerName mp (qnameToIdent qn)
 
 domToName :: Dom' a b -> LBox.Name
 domToName = maybe LBox.Anon (LBox.Named . prettyShow) . domName
@@ -55,7 +60,8 @@ toInductive q = do
   names <- dataOrRecMutuals q
   let repr = fromMaybe q $ listToMaybe names
   let idx  = fromMaybe 0 $ elemIndex q names
-  pure $ LBox.Inductive (qnameToKName repr) idx
+  kn <- qnameToKName repr
+  pure $ LBox.Inductive kn idx
 
 -- | The parameters of a datatype/record that are λ□ parameters.
 inductivePars :: Definition -> TCM [Dom Type]
