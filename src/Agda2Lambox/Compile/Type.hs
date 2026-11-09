@@ -25,7 +25,7 @@ import qualified LambdaBox as LBox
 import Agda2Lambox.Compile.Utils
 import Agda2Lambox.Compile.Monad
 import Agda.Compiler.Backend (HasConstInfo(getConstInfo), AddContext (addContext))
-import Agda.Utils (isDataOrRecDef, getInductiveParams, isArity, maybeUnfoldCopy, isFunDef, isTypeAlias)
+import Agda.Utils (isDataOrRecDef, isArity, maybeUnfoldCopy, isFunDef, isTypeAlias)
 import Agda.TypeChecking.Reduce ( reduce )
 
 
@@ -128,9 +128,11 @@ compileElims ty (x:xs) = do
   (a, b) <- liftTCM $ shouldBePi ty
   -- b <- piApplyM ty x
   rest   <- compileElims (absApp b $ unArg x) xs
-  first  <- ifM (liftTCM $ isLogical a)
-              (pure LBox.TBox)
-              (fmap snd $ compileTypeTerm $ unArg x)
+  -- logical arguments are □, types are compiled, and any other argument is 𝕋
+  first  <- ifM (liftTCM $ isLogical a) (pure LBox.TBox) $
+            ifM (liftTCM $ isJust . isSort . unEl <$> reduce (unDom a))
+              (snd <$> compileTypeTerm (unArg x))
+              (pure LBox.TAny)
   pure (first : rest)
 
 getTypeVarInfo :: Dom Type -> TCM LBox.TypeVarInfo
@@ -176,13 +178,13 @@ compileTypeTerm t = do
       -- if this def is logical, we ignore it (and its arguments)
       if isLogicalDef then pure ([], LBox.TBox)
 
-      -- if it's an inductive, we only apply the parameters
+      -- an inductive is applied to its parameters and indices
       else if isDataOrRecDef def then do
         lift $ requireDef q
         ind <- liftTCM $ toInductive q
         let args = mapMaybe isApplyElim es
         ([],) . foldl' LBox.TApp (LBox.TInd ind)
-          <$> compileElims defType (take (getInductiveParams def) args)
+          <$> compileElims defType args
 
       -- a type-level function that is not an alias is compiled to its reduct, if any
       else if isFunDef def && not (isTypeAlias def) then
