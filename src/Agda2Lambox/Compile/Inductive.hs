@@ -13,7 +13,7 @@ import Agda.TypeChecking.Monad.Base hiding ( None )
 import Agda.TypeChecking.Datatypes ( ConstructorInfo(..), getConstructorInfo )
 import Agda.TypeChecking.Pretty
 import Agda.TypeChecking.Telescope ( telViewUpTo, piApplyM, teleArgs, telView, flattenTel )
-import Agda.TypeChecking.Substitute ( TelV(theTel) )
+import Agda.TypeChecking.Substitute ( TelV(..) )
 import Agda.Compiler.Backend ( getConstInfo, reportSDoc, AddContext (addContext))
 import Agda.Syntax.Common.Pretty ( prettyShow )
 import Agda.Syntax.Common ( Arg )
@@ -124,19 +124,21 @@ compileInductive' t pars defn = do
   cpars <- take pars <$> liftTCM (inductivePars defn)
   let pvars :: [Arg Term] = teleArgs params
 
-  addContext params do
-
-    tyvars <- whenTyped t $ forM (flattenTel params) \pdom -> do
-      let domType = unDom pdom
-      isParamLogical <- liftTCM $ isLogical pdom
-      isParamArity   <- liftTCM $ isArity domType
-      let isParamSort = isJust  $ isSort $ unEl domType
+  -- one type variable per parameter and per index, indices unnamed (as in Rocq)
+  TelV arity _ <- telView indType
+  tyvars <- whenTyped t $ addContext arity $
+    forM (zip [0..] $ flattenTel arity) \(i, dom) -> do
+      let domType = unDom dom
+      isVarLogical <- liftTCM $ isLogical dom
+      isVarArity   <- liftTCM $ isArity domType
       pure LBox.TypeVarInfo
-        { tvarName      = domToName pdom
-        , tvarIsLogical = isParamLogical
-        , tvarIsArity   = isParamArity
-        , tvarIsSort    = isParamSort
+        { tvarName      = if i < indPars then domToName dom else LBox.Anon
+        , tvarIsLogical = isVarLogical
+        , tvarIsArity   = isVarArity
+        , tvarIsSort    = isJust $ isSort $ unEl domType
         }
+
+  addContext params do
 
     ctors :: [LBox.ConstructorBody t] <-
 

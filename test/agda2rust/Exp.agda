@@ -38,12 +38,17 @@ geval env (if b l r) with geval env b
 ... | T = geval env l
 ... | F = geval env r
 
+fromBool : Bool → Nat
+fromBool T = 42
+fromBool F = 0
+
 test : Nat
 test = eval (λ x → x) exampleExp
      + eval (λ x → x + 1) (Plus (Int 5) (Var 36))
      + geval (λ x → x) (plus (nat 5) (var 37))
      + geval (λ x → x + 1) (plus (nat 5) (var 36))
+     + fromBool (geval (λ x → x) (bool T))
 {-# COMPILE AGDA2LAMBOX test #-}
 
-_ : test ≡ 168
+_ : test ≡ 210
 _ = refl
