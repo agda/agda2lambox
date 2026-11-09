@@ -90,9 +90,9 @@
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true"></a></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true"></a><span class="at">#[</span>derive<span class="at">(</span><span class="bu">Debug</span><span class="op">,</span> <span class="bu">Clone</span><span class="at">)]</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">enum</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">enum</span> Agda_Builtin_Nat_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true"></a>  zero(PhantomData<span class="op">&lt;&amp;</span><span class="ot">&#39;a</span> ()<span class="op">&gt;</span>)<span class="op">,</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true"></a>  suc(PhantomData<span class="op">&lt;&amp;</span><span class="ot">&#39;a</span> ()<span class="op">&gt;,</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true"></a>  suc(PhantomData<span class="op">&lt;&amp;</span><span class="ot">&#39;a</span> ()<span class="op">&gt;,</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Agda_Builtin_Nat_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>)</span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true"></a><span class="op">}</span></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true"></a></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">struct</span> Program <span class="op">{</span></span>
@@ -140,18 +140,18 @@
 <span id="cb1-62"><a href="#cb1-62" aria-hidden="true"></a>  <span class="op">}</span>)</span>
 <span id="cb1-63"><a href="#cb1-63" aria-hidden="true"></a><span class="op">}</span></span>
 <span id="cb1-64"><a href="#cb1-64" aria-hidden="true"></a></span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Equality_add(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Equality_add(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> Agda_Builtin_Nat_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">dyn</span> <span class="bu">Fn</span>(<span class="op">&amp;</span><span class="ot">&#39;a</span> Agda_Builtin_Nat_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Agda_Builtin_Nat_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb1-66"><a href="#cb1-66" aria-hidden="true"></a>  <span class="kw">let</span> add <span class="op">=</span> <span class="kw">self</span><span class="op">.</span>alloc(<span class="pp">std::cell::Cell::</span>new(<span class="cn">None</span>))<span class="op">;</span></span>
 <span id="cb1-67"><a href="#cb1-67" aria-hidden="true"></a>  add<span class="op">.</span>set(<span class="cn">Some</span>(</span>
 <span id="cb1-68"><a href="#cb1-68" aria-hidden="true"></a>    <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x<span class="op">|</span> <span class="op">{</span></span>
 <span id="cb1-69"><a href="#cb1-69" aria-hidden="true"></a>      <span class="kw">self</span><span class="op">.</span>closure(<span class="kw">move</span> <span class="op">|</span>x2<span class="op">|</span> <span class="op">{</span></span>
 <span id="cb1-70"><a href="#cb1-70" aria-hidden="true"></a>        <span class="kw">match</span> x <span class="op">{</span></span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true"></a>          <span class="op">&amp;</span><span class="pp">Nat_Builtin_Agda_Nat::</span>zero(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true"></a>          <span class="op">&amp;</span><span class="pp">Agda_Builtin_Nat_Nat::</span>zero(_) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-72"><a href="#cb1-72" aria-hidden="true"></a>            x2</span>
 <span id="cb1-73"><a href="#cb1-73" aria-hidden="true"></a>          <span class="op">},</span></span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true"></a>          <span class="op">&amp;</span><span class="pp">Nat_Builtin_Agda_Nat::</span>suc(_<span class="op">,</span> x3) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true"></a>          <span class="op">&amp;</span><span class="pp">Agda_Builtin_Nat_Nat::</span>suc(_<span class="op">,</span> x3) <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb1-75"><a href="#cb1-75" aria-hidden="true"></a>            <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-76"><a href="#cb1-76" aria-hidden="true"></a>              <span class="pp">Nat_Builtin_Agda_Nat::</span>suc(</span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true"></a>              <span class="pp">Agda_Builtin_Nat_Nat::</span>suc(</span>
 <span id="cb1-77"><a href="#cb1-77" aria-hidden="true"></a>                PhantomData<span class="op">,</span></span>
 <span id="cb1-78"><a href="#cb1-78" aria-hidden="true"></a>                hint_app(hint_app(add<span class="op">.</span>get()<span class="op">.</span>unwrap())(x3))(x2)))</span>
 <span id="cb1-79"><a href="#cb1-79" aria-hidden="true"></a>          <span class="op">},</span></span>
@@ -161,7 +161,7 @@
 <span id="cb1-83"><a href="#cb1-83" aria-hidden="true"></a>  add<span class="op">.</span>get()<span class="op">.</span>unwrap()</span>
 <span id="cb1-84"><a href="#cb1-84" aria-hidden="true"></a><span class="op">}</span></span>
 <span id="cb1-85"><a href="#cb1-85" aria-hidden="true"></a></span>
-<span id="cb1-86"><a href="#cb1-86" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Equality_test(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Nat_Builtin_Agda_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> Equality_test(<span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="kw">self</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Agda_Builtin_Nat_Nat<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb1-87"><a href="#cb1-87" aria-hidden="true"></a>  <span class="kw">self</span><span class="op">.</span>Equality_Ֆ_ՖՖ24_(</span>
 <span id="cb1-88"><a href="#cb1-88" aria-hidden="true"></a>    ()<span class="op">,</span></span>
 <span id="cb1-89"><a href="#cb1-89" aria-hidden="true"></a>    ()<span class="op">,</span></span>
@@ -175,28 +175,28 @@
 <span id="cb1-97"><a href="#cb1-97" aria-hidden="true"></a>                        <span class="op">}</span>)</span>
 <span id="cb1-98"><a href="#cb1-98" aria-hidden="true"></a>                      <span class="op">}</span>))(<span class="kw">self</span><span class="op">.</span>Equality_add()(</span>
 <span id="cb1-99"><a href="#cb1-99" aria-hidden="true"></a>                            <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-100"><a href="#cb1-100" aria-hidden="true"></a>                              <span class="pp">Nat_Builtin_Agda_Nat::</span>suc(</span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true"></a>                              <span class="pp">Agda_Builtin_Nat_Nat::</span>suc(</span>
 <span id="cb1-101"><a href="#cb1-101" aria-hidden="true"></a>                                PhantomData<span class="op">,</span></span>
 <span id="cb1-102"><a href="#cb1-102" aria-hidden="true"></a>                                <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-103"><a href="#cb1-103" aria-hidden="true"></a>                                  <span class="pp">Nat_Builtin_Agda_Nat::</span>suc(</span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true"></a>                                  <span class="pp">Agda_Builtin_Nat_Nat::</span>suc(</span>
 <span id="cb1-104"><a href="#cb1-104" aria-hidden="true"></a>                                    PhantomData<span class="op">,</span></span>
 <span id="cb1-105"><a href="#cb1-105" aria-hidden="true"></a>                                    <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-106"><a href="#cb1-106" aria-hidden="true"></a>                                      <span class="pp">Nat_Builtin_Agda_Nat::</span>zero(</span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true"></a>                                      <span class="pp">Agda_Builtin_Nat_Nat::</span>zero(</span>
 <span id="cb1-107"><a href="#cb1-107" aria-hidden="true"></a>                                        PhantomData)))))))(</span>
 <span id="cb1-108"><a href="#cb1-108" aria-hidden="true"></a>                            <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-109"><a href="#cb1-109" aria-hidden="true"></a>                              <span class="pp">Nat_Builtin_Agda_Nat::</span>zero(</span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true"></a>                              <span class="pp">Agda_Builtin_Nat_Nat::</span>zero(</span>
 <span id="cb1-110"><a href="#cb1-110" aria-hidden="true"></a>                                PhantomData)))))(<span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-111"><a href="#cb1-111" aria-hidden="true"></a>                                                   <span class="pp">Nat_Builtin_Agda_Nat::</span>suc(</span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true"></a>                                                   <span class="pp">Agda_Builtin_Nat_Nat::</span>suc(</span>
 <span id="cb1-112"><a href="#cb1-112" aria-hidden="true"></a>                                                     PhantomData<span class="op">,</span></span>
 <span id="cb1-113"><a href="#cb1-113" aria-hidden="true"></a>                                                     <span class="kw">self</span><span class="op">.</span>Equality_add()(</span>
 <span id="cb1-114"><a href="#cb1-114" aria-hidden="true"></a>                                                       <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-115"><a href="#cb1-115" aria-hidden="true"></a>                                                         <span class="pp">Nat_Builtin_Agda_Nat::</span>suc(</span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true"></a>                                                         <span class="pp">Agda_Builtin_Nat_Nat::</span>suc(</span>
 <span id="cb1-116"><a href="#cb1-116" aria-hidden="true"></a>                                                           PhantomData<span class="op">,</span></span>
 <span id="cb1-117"><a href="#cb1-117" aria-hidden="true"></a>                                                           <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-118"><a href="#cb1-118" aria-hidden="true"></a>                                                             <span class="pp">Nat_Builtin_Agda_Nat::</span>zero(</span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true"></a>                                                             <span class="pp">Agda_Builtin_Nat_Nat::</span>zero(</span>
 <span id="cb1-119"><a href="#cb1-119" aria-hidden="true"></a>                                                               PhantomData)))))(</span>
 <span id="cb1-120"><a href="#cb1-120" aria-hidden="true"></a>                                                       <span class="kw">self</span><span class="op">.</span>alloc(</span>
-<span id="cb1-121"><a href="#cb1-121" aria-hidden="true"></a>                                                         <span class="pp">Nat_Builtin_Agda_Nat::</span>zero(</span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true"></a>                                                         <span class="pp">Agda_Builtin_Nat_Nat::</span>zero(</span>
 <span id="cb1-122"><a href="#cb1-122" aria-hidden="true"></a>                                                           PhantomData))))))<span class="op">,</span></span>
 <span id="cb1-123"><a href="#cb1-123" aria-hidden="true"></a>    ())</span>
 <span id="cb1-124"><a href="#cb1-124" aria-hidden="true"></a><span class="op">}</span></span>

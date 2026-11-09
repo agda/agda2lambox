@@ -32,24 +32,24 @@ Definition env : global_declarations :=
                 (tApp
                    (tConstruct
                       {| inductive_mind :=
-                           (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                           (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs);
                          inductive_ind := 0 |}
                       1 [])
                    (tApp
                       (tConstruct
                          {| inductive_mind :=
-                              (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                              (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs);
                             inductive_ind := 0 |}
                          1 [])
                       (tApp
                          (tConstruct
                             {| inductive_mind :=
-                                 (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                 (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs);
                                inductive_ind := 0 |}
                             1 [])
                          (tConstruct
                             {| inductive_mind :=
-                                 (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                 (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs);
                                inductive_ind := 0 |}
                             0 []))))) |});
    ((MPfile [&quot;ErasedRecursion&quot;%bs], &quot;pred&quot;%bs),
@@ -66,21 +66,21 @@ Definition env : global_declarations :=
                 nAnon
                 (tCase
                    ({| inductive_mind :=
-                         (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                         (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs);
                        inductive_ind := 0 |},
                     0)
                    (tRel 0)
                    [([],
                      tConstruct
                        {| inductive_mind :=
-                            (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                            (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs);
                           inductive_ind := 0 |}
                        0 []);
                     ([nAnon],
                      tApp
                        (tApp (tLambda nAnon (tLambda nAnon (tRel 1))) (tRel 0))
                        tBox)])) |});
-   ((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs),
+   ((MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs),
     InductiveDecl
       {| ind_finite := Finite; ind_npars := 0;
          ind_bodies :=

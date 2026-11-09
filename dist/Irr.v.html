@@ -37,7 +37,7 @@ Definition env : global_declarations :=
                       (tApp
                          (tConstruct
                             {| inductive_mind :=
-                                 (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                 (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs);
                                inductive_ind := 0 |}
                             1 [])
                          (tRel 0))))
@@ -59,12 +59,12 @@ Definition env : global_declarations :=
                    (tApp
                       (tConstruct
                          {| inductive_mind :=
-                              (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                              (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs);
                             inductive_ind := 0 |}
                          1 [])
                       (tConstruct
                          {| inductive_mind :=
-                              (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                              (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs);
                             inductive_ind := 0 |}
                          0 [])))
                 (tApp
@@ -79,7 +79,7 @@ Definition env : global_declarations :=
                          tBox)
                       (tConstruct
                          {| inductive_mind :=
-                              (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                              (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs);
                             inductive_ind := 0 |}
                          0 []))
                    (tApp
@@ -147,7 +147,7 @@ Definition env : global_declarations :=
                  [{| cstr_name := &quot;[]&quot;%bs; cstr_nargs := 0 |};
                   {| cstr_name := &quot;_\8759_&quot;%bs; cstr_nargs := 3 |}];
                ind_projs := [] |}] |});
-   ((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs),
+   ((MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs),
     InductiveDecl
       {| ind_finite := Finite; ind_npars := 0;
          ind_bodies :=

@@ -42,12 +42,12 @@ Definition env : global_declarations :=
                          (tApp
                             (tConstruct
                                {| inductive_mind :=
-                                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                    (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs);
                                   inductive_ind := 0 |}
                                1 [])
                             (tConstruct
                                {| inductive_mind :=
-                                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                    (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs);
                                   inductive_ind := 0 |}
                                0 [])))
                       (tApp
@@ -61,18 +61,18 @@ Definition env : global_declarations :=
                             (tApp
                                (tConstruct
                                   {| inductive_mind :=
-                                       (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                       (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs);
                                      inductive_ind := 0 |}
                                   1 [])
                                (tApp
                                   (tConstruct
                                      {| inductive_mind :=
-                                          (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                          (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs);
                                         inductive_ind := 0 |}
                                      1 [])
                                   (tConstruct
                                      {| inductive_mind :=
-                                          (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                          (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs);
                                         inductive_ind := 0 |}
                                      0 []))))
                          (tApp
@@ -86,25 +86,25 @@ Definition env : global_declarations :=
                                (tApp
                                   (tConstruct
                                      {| inductive_mind :=
-                                          (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                          (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs);
                                         inductive_ind := 0 |}
                                      1 [])
                                   (tApp
                                      (tConstruct
                                         {| inductive_mind :=
-                                             (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                             (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs);
                                            inductive_ind := 0 |}
                                         1 [])
                                      (tApp
                                         (tConstruct
                                            {| inductive_mind :=
-                                                (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
+                                                (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs],
                                                  &quot;Nat&quot;%bs);
                                               inductive_ind := 0 |}
                                            1 [])
                                         (tConstruct
                                            {| inductive_mind :=
-                                                (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
+                                                (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs],
                                                  &quot;Nat&quot;%bs);
                                               inductive_ind := 0 |}
                                            0 [])))))
@@ -117,8 +117,9 @@ Definition env : global_declarations :=
    ((MPfile [&quot;WhereNames&quot;%bs], &quot;double&quot;%bs),
     ConstantDecl
       {| cst_body :=
-           Some (tConst (MPfile [&quot;WhereNames&quot;%bs; &quot;_28&quot;%bs], &quot;go&quot;%bs)) |});
-   ((MPfile [&quot;WhereNames&quot;%bs; &quot;_28&quot;%bs], &quot;go&quot;%bs),
+           Some
+             (tConst (MPdot (MPfile [&quot;WhereNames&quot;%bs]) &quot;_28&quot;%bs, &quot;go&quot;%bs)) |});
+   ((MPdot (MPfile [&quot;WhereNames&quot;%bs]) &quot;_28&quot;%bs, &quot;go&quot;%bs),
     ConstantDecl
       {| cst_body :=
            Some
@@ -126,10 +127,10 @@ Definition env : global_declarations :=
                 nAnon
                 (tApp
                    (tApp
-                      (tConst (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs))
+                      (tConst (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;_+_&quot;%bs))
                       (tRel 0))
                    (tRel 0))) |});
-   ((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;_+_&quot;%bs),
+   ((MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;_+_&quot;%bs),
     ConstantDecl
       {| cst_body :=
            Some
@@ -142,7 +143,7 @@ Definition env : global_declarations :=
                            nAnon
                            (tCase
                               ({| inductive_mind :=
-                                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                    (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs);
                                   inductive_ind := 0 |},
                                0)
                               (tRel 1)
@@ -151,7 +152,7 @@ Definition env : global_declarations :=
                                 tApp
                                   (tConstruct
                                      {| inductive_mind :=
-                                          (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                          (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs);
                                         inductive_ind := 0 |}
                                      1 [])
                                   (tApp (tApp (tRel 3) (tRel 0)) (tRel 1)))]));
@@ -160,8 +161,9 @@ Definition env : global_declarations :=
    ((MPfile [&quot;WhereNames&quot;%bs], &quot;length&quot;%bs),
     ConstantDecl
       {| cst_body :=
-           Some (tConst (MPfile [&quot;WhereNames&quot;%bs; &quot;_16&quot;%bs], &quot;go&quot;%bs)) |});
-   ((MPfile [&quot;WhereNames&quot;%bs; &quot;_16&quot;%bs], &quot;go&quot;%bs),
+           Some
+             (tConst (MPdot (MPfile [&quot;WhereNames&quot;%bs]) &quot;_16&quot;%bs, &quot;go&quot;%bs)) |});
+   ((MPdot (MPfile [&quot;WhereNames&quot;%bs]) &quot;_16&quot;%bs, &quot;go&quot;%bs),
     ConstantDecl
       {| cst_body :=
            Some
@@ -180,14 +182,14 @@ Definition env : global_declarations :=
                            [([],
                              tConstruct
                                {| inductive_mind :=
-                                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                    (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs);
                                   inductive_ind := 0 |}
                                0 []);
                             ([nAnon; nAnon],
                              tApp
                                (tConstruct
                                   {| inductive_mind :=
-                                       (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                       (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs);
                                      inductive_ind := 0 |}
                                   1 [])
                                (tApp (tRel 4) (tRel 0)))]);
@@ -203,7 +205,7 @@ Definition env : global_declarations :=
                  [{| cstr_name := &quot;[]&quot;%bs; cstr_nargs := 0 |};
                   {| cstr_name := &quot;_\8759_&quot;%bs; cstr_nargs := 2 |}];
                ind_projs := [] |}] |});
-   ((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs),
+   ((MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs),
     InductiveDecl
       {| ind_finite := Finite; ind_npars := 0;
          ind_bodies :=

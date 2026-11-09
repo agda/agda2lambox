@@ -87,8 +87,8 @@
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a>  <span class="op">=</span> _<span class="dt">UU5b_UU5d</span> ()</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a>  <span class="op">|</span> __<span class="dt">UU002237_</span> () <span class="fu">a</span> (<span class="dt">List</span> <span class="fu">a</span>)</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a>_<span class="dv">16</span>_<span class="dt">WhereNames_go</span> : <span class="dt">List</span> <span class="fu">a</span> <span class="op">-&gt;</span> <span class="dt">Nat</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true"></a>_<span class="dv">16</span>_<span class="dt">WhereNames_go</span> <span class="op">=</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a><span class="fu">whereNames__16_go</span> : <span class="dt">List</span> <span class="fu">a</span> <span class="op">-&gt;</span> <span class="dt">Nat</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true"></a><span class="fu">whereNames__16_go</span> <span class="op">=</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true"></a>  <span class="kw">let</span></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true"></a>    <span class="fu">go</span> <span class="fu">x</span> <span class="op">=</span></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true"></a>      _<span class="dt">UU2eextendedlambda0</span> <span class="fu">x</span></span>
@@ -103,23 +103,23 @@
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true"></a></span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true"></a><span class="fu">whereNames_length</span> : <span class="dt">List</span> <span class="fu">a</span> <span class="op">-&gt;</span> <span class="dt">Nat</span></span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true"></a><span class="fu">whereNames_length</span> <span class="op">=</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true"></a>  _<span class="dv">16</span>_<span class="dt">WhereNames_go</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true"></a>  <span class="fu">whereNames__16_go</span></span>
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true"></a></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true"></a><span class="fu">nat_Builtin_Agda___UU2b_</span> : <span class="dt">Nat</span> <span class="op">-&gt;</span> <span class="dt">Nat</span> <span class="op">-&gt;</span> <span class="dt">Nat</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true"></a><span class="fu">nat_Builtin_Agda___UU2b_</span> <span class="fu">x</span> <span class="fu">x2</span> <span class="op">=</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true"></a><span class="fu">agda_Builtin_Nat___UU2b_</span> : <span class="dt">Nat</span> <span class="op">-&gt;</span> <span class="dt">Nat</span> <span class="op">-&gt;</span> <span class="dt">Nat</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true"></a><span class="fu">agda_Builtin_Nat___UU2b_</span> <span class="fu">x</span> <span class="fu">x2</span> <span class="op">=</span></span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true"></a>  <span class="cf">case</span> <span class="fu">x</span> <span class="cf">of</span></span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true"></a>    <span class="dt">Zero</span> <span class="op">-&gt;</span></span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true"></a>      <span class="fu">x2</span></span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true"></a>    <span class="dt">Suc</span> <span class="fu">x3</span> <span class="op">-&gt;</span></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true"></a>      <span class="dt">Suc</span> (<span class="fu">nat_Builtin_Agda___UU2b_</span> <span class="fu">x3</span> <span class="fu">x2</span>)</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true"></a>      <span class="dt">Suc</span> (<span class="fu">agda_Builtin_Nat___UU2b_</span> <span class="fu">x3</span> <span class="fu">x2</span>)</span>
 <span id="cb1-37"><a href="#cb1-37" aria-hidden="true"></a></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true"></a>_<span class="dv">28</span>_<span class="dt">WhereNames_go</span> : <span class="dt">Nat</span> <span class="op">-&gt;</span> <span class="dt">Nat</span></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true"></a>_<span class="dv">28</span>_<span class="dt">WhereNames_go</span> <span class="fu">x</span> <span class="op">=</span></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true"></a>  <span class="fu">nat_Builtin_Agda___UU2b_</span> <span class="fu">x</span> <span class="fu">x</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true"></a><span class="fu">whereNames__28_go</span> : <span class="dt">Nat</span> <span class="op">-&gt;</span> <span class="dt">Nat</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true"></a><span class="fu">whereNames__28_go</span> <span class="fu">x</span> <span class="op">=</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true"></a>  <span class="fu">agda_Builtin_Nat___UU2b_</span> <span class="fu">x</span> <span class="fu">x</span></span>
 <span id="cb1-41"><a href="#cb1-41" aria-hidden="true"></a></span>
 <span id="cb1-42"><a href="#cb1-42" aria-hidden="true"></a><span class="fu">whereNames_double</span> : <span class="dt">Nat</span> <span class="op">-&gt;</span> <span class="dt">Nat</span></span>
 <span id="cb1-43"><a href="#cb1-43" aria-hidden="true"></a><span class="fu">whereNames_double</span> <span class="op">=</span></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true"></a>  _<span class="dv">28</span>_<span class="dt">WhereNames_go</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true"></a>  <span class="fu">whereNames__28_go</span></span>
 <span id="cb1-45"><a href="#cb1-45" aria-hidden="true"></a></span>
 <span id="cb1-46"><a href="#cb1-46" aria-hidden="true"></a><span class="fu">whereNames_test</span> : <span class="dt">Nat</span></span>
 <span id="cb1-47"><a href="#cb1-47" aria-hidden="true"></a><span class="fu">whereNames_test</span> <span class="op">=</span></span>

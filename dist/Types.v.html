@@ -37,17 +37,18 @@ Definition env : global_env :=
                          (tApp
                             (tConstruct
                                {| inductive_mind :=
-                                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                    (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs);
                                   inductive_ind := 0 |}
                                1 [])
                             (tApp
-                               (tConst (MPfile [&quot;Types&quot;%bs; &quot;sig&quot;%bs], &quot;fst&quot;%bs)) (tRel 0)))))
+                               (tConst (MPdot (MPfile [&quot;Types&quot;%bs]) &quot;sig&quot;%bs, &quot;fst&quot;%bs))
+                               (tRel 0)))))
                    (tApp
                       (tApp
                          (tApp
                             (tConstruct
                                {| inductive_mind :=
-                                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
+                                    (MPfile [&quot;List&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;List&quot;%bs);
                                   inductive_ind := 0 |}
                                1 [])
                             tBox)
@@ -62,33 +63,33 @@ Definition env : global_env :=
                                (tApp
                                   (tConstruct
                                      {| inductive_mind :=
-                                          (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                          (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs);
                                         inductive_ind := 0 |}
                                      1 [])
                                   (tApp
                                      (tConstruct
                                         {| inductive_mind :=
-                                             (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                             (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs);
                                            inductive_ind := 0 |}
                                         1 [])
                                      (tApp
                                         (tConstruct
                                            {| inductive_mind :=
-                                                (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
+                                                (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs],
                                                  &quot;Nat&quot;%bs);
                                               inductive_ind := 0 |}
                                            1 [])
                                         (tApp
                                            (tConstruct
                                               {| inductive_mind :=
-                                                   (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
+                                                   (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs],
                                                     &quot;Nat&quot;%bs);
                                                  inductive_ind := 0 |}
                                               1 [])
                                            (tApp
                                               (tConstruct
                                                  {| inductive_mind :=
-                                                      (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
+                                                      (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs],
                                                        &quot;Nat&quot;%bs);
                                                     inductive_ind := 0 |}
                                                  1 [])
@@ -96,7 +97,7 @@ Definition env : global_env :=
                                                  (tConstruct
                                                     {| inductive_mind :=
                                                          (MPfile
-                                                            [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
+                                                            [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs],
                                                           &quot;Nat&quot;%bs);
                                                        inductive_ind := 0 |}
                                                     1 [])
@@ -104,7 +105,7 @@ Definition env : global_env :=
                                                     (tConstruct
                                                        {| inductive_mind :=
                                                             (MPfile
-                                                               [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs],
+                                                               [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs],
                                                              &quot;Nat&quot;%bs);
                                                           inductive_ind := 0 |}
                                                        1 [])
@@ -112,8 +113,8 @@ Definition env : global_env :=
                                                        (tConstruct
                                                           {| inductive_mind :=
                                                                (MPfile
-                                                                  [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs;
-                                                                   &quot;Nat&quot;%bs],
+                                                                  [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs;
+                                                                   &quot;Agda&quot;%bs],
                                                                 &quot;Nat&quot;%bs);
                                                              inductive_ind := 0 |}
                                                           1 [])
@@ -121,8 +122,8 @@ Definition env : global_env :=
                                                           (tConstruct
                                                              {| inductive_mind :=
                                                                   (MPfile
-                                                                     [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs;
-                                                                      &quot;Nat&quot;%bs],
+                                                                     [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs;
+                                                                      &quot;Agda&quot;%bs],
                                                                    &quot;Nat&quot;%bs);
                                                                 inductive_ind := 0 |}
                                                              1 [])
@@ -130,8 +131,8 @@ Definition env : global_env :=
                                                              (tConstruct
                                                                 {| inductive_mind :=
                                                                      (MPfile
-                                                                        [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs;
-                                                                         &quot;Nat&quot;%bs],
+                                                                        [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs;
+                                                                         &quot;Agda&quot;%bs],
                                                                       &quot;Nat&quot;%bs);
                                                                    inductive_ind := 0 |}
                                                                 1 [])
@@ -139,8 +140,8 @@ Definition env : global_env :=
                                                                 (tConstruct
                                                                    {| inductive_mind :=
                                                                         (MPfile
-                                                                           [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs;
-                                                                            &quot;Nat&quot;%bs],
+                                                                           [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs;
+                                                                            &quot;Agda&quot;%bs],
                                                                          &quot;Nat&quot;%bs);
                                                                       inductive_ind := 0 |}
                                                                    1 [])
@@ -148,9 +149,9 @@ Definition env : global_env :=
                                                                    (tConstruct
                                                                       {| inductive_mind :=
                                                                            (MPfile
-                                                                              [&quot;Agda&quot;%bs;
+                                                                              [&quot;Nat&quot;%bs;
                                                                                &quot;Builtin&quot;%bs;
-                                                                               &quot;Nat&quot;%bs],
+                                                                               &quot;Agda&quot;%bs],
                                                                             &quot;Nat&quot;%bs);
                                                                          inductive_ind := 0 |}
                                                                       1 [])
@@ -158,9 +159,9 @@ Definition env : global_env :=
                                                                       (tConstruct
                                                                          {| inductive_mind :=
                                                                               (MPfile
-                                                                                 [&quot;Agda&quot;%bs;
+                                                                                 [&quot;Nat&quot;%bs;
                                                                                   &quot;Builtin&quot;%bs;
-                                                                                  &quot;Nat&quot;%bs],
+                                                                                  &quot;Agda&quot;%bs],
                                                                                &quot;Nat&quot;%bs);
                                                                             inductive_ind := 0 |}
                                                                          1 [])
@@ -168,9 +169,9 @@ Definition env : global_env :=
                                                                          (tConstruct
                                                                             {| inductive_mind :=
                                                                                  (MPfile
-                                                                                    [&quot;Agda&quot;%bs;
+                                                                                    [&quot;Nat&quot;%bs;
                                                                                      &quot;Builtin&quot;%bs;
-                                                                                     &quot;Nat&quot;%bs],
+                                                                                     &quot;Agda&quot;%bs],
                                                                                   &quot;Nat&quot;%bs);
                                                                                inductive_ind := 0 |}
                                                                             1 [])
@@ -178,9 +179,9 @@ Definition env : global_env :=
                                                                             (tConstruct
                                                                                {| inductive_mind :=
                                                                                     (MPfile
-                                                                                       [&quot;Agda&quot;%bs;
+                                                                                       [&quot;Nat&quot;%bs;
                                                                                         &quot;Builtin&quot;%bs;
-                                                                                        &quot;Nat&quot;%bs],
+                                                                                        &quot;Agda&quot;%bs],
                                                                                      &quot;Nat&quot;%bs);
                                                                                   inductive_ind :=
                                                                                     0 |}
@@ -189,9 +190,9 @@ Definition env : global_env :=
                                                                                (tConstruct
                                                                                   {| inductive_mind :=
                                                                                        (MPfile
-                                                                                          [&quot;Agda&quot;%bs;
+                                                                                          [&quot;Nat&quot;%bs;
                                                                                            &quot;Builtin&quot;%bs;
-                                                                                           &quot;Nat&quot;%bs],
+                                                                                           &quot;Agda&quot;%bs],
                                                                                         &quot;Nat&quot;%bs);
                                                                                      inductive_ind :=
                                                                                        0 |}
@@ -200,9 +201,9 @@ Definition env : global_env :=
                                                                                   (tConstruct
                                                                                      {| inductive_mind :=
                                                                                           (MPfile
-                                                                                             [&quot;Agda&quot;%bs;
+                                                                                             [&quot;Nat&quot;%bs;
                                                                                               &quot;Builtin&quot;%bs;
-                                                                                              &quot;Nat&quot;%bs],
+                                                                                              &quot;Agda&quot;%bs],
                                                                                            &quot;Nat&quot;%bs);
                                                                                         inductive_ind :=
                                                                                           0 |}
@@ -211,9 +212,9 @@ Definition env : global_env :=
                                                                                      (tConstruct
                                                                                         {| inductive_mind :=
                                                                                              (MPfile
-                                                                                                [&quot;Agda&quot;%bs;
+                                                                                                [&quot;Nat&quot;%bs;
                                                                                                  &quot;Builtin&quot;%bs;
-                                                                                                 &quot;Nat&quot;%bs],
+                                                                                                 &quot;Agda&quot;%bs],
                                                                                               &quot;Nat&quot;%bs);
                                                                                            inductive_ind :=
                                                                                              0 |}
@@ -222,9 +223,9 @@ Definition env : global_env :=
                                                                                         (tConstruct
                                                                                            {| inductive_mind :=
                                                                                                 (MPfile
-                                                                                                   [&quot;Agda&quot;%bs;
+                                                                                                   [&quot;Nat&quot;%bs;
                                                                                                     &quot;Builtin&quot;%bs;
-                                                                                                    &quot;Nat&quot;%bs],
+                                                                                                    &quot;Agda&quot;%bs],
                                                                                                  &quot;Nat&quot;%bs);
                                                                                               inductive_ind :=
                                                                                                 0 |}
@@ -233,9 +234,9 @@ Definition env : global_env :=
                                                                                            (tConstruct
                                                                                               {| inductive_mind :=
                                                                                                    (MPfile
-                                                                                                      [&quot;Agda&quot;%bs;
+                                                                                                      [&quot;Nat&quot;%bs;
                                                                                                        &quot;Builtin&quot;%bs;
-                                                                                                       &quot;Nat&quot;%bs],
+                                                                                                       &quot;Agda&quot;%bs],
                                                                                                     &quot;Nat&quot;%bs);
                                                                                                  inductive_ind :=
                                                                                                    0 |}
@@ -244,9 +245,9 @@ Definition env : global_env :=
                                                                                               (tConstruct
                                                                                                  {| inductive_mind :=
                                                                                                       (MPfile
-                                                                                                         [&quot;Agda&quot;%bs;
+                                                                                                         [&quot;Nat&quot;%bs;
                                                                                                           &quot;Builtin&quot;%bs;
-                                                                                                          &quot;Nat&quot;%bs],
+                                                                                                          &quot;Agda&quot;%bs],
                                                                                                        &quot;Nat&quot;%bs);
                                                                                                     inductive_ind :=
                                                                                                       0 |}
@@ -256,9 +257,9 @@ Definition env : global_env :=
                                                                                                  (tConstruct
                                                                                                     {| inductive_mind :=
                                                                                                          (MPfile
-                                                                                                            [&quot;Agda&quot;%bs;
+                                                                                                            [&quot;Nat&quot;%bs;
                                                                                                              &quot;Builtin&quot;%bs;
-                                                                                                             &quot;Nat&quot;%bs],
+                                                                                                             &quot;Agda&quot;%bs],
                                                                                                           &quot;Nat&quot;%bs);
                                                                                                        inductive_ind :=
                                                                                                          0 |}
@@ -268,9 +269,9 @@ Definition env : global_env :=
                                                                                                     (tConstruct
                                                                                                        {| inductive_mind :=
                                                                                                             (MPfile
-                                                                                                               [&quot;Agda&quot;%bs;
+                                                                                                               [&quot;Nat&quot;%bs;
                                                                                                                 &quot;Builtin&quot;%bs;
-                                                                                                                &quot;Nat&quot;%bs],
+                                                                                                                &quot;Agda&quot;%bs],
                                                                                                              &quot;Nat&quot;%bs);
                                                                                                           inductive_ind :=
                                                                                                             0 |}
@@ -280,9 +281,9 @@ Definition env : global_env :=
                                                                                                        (tConstruct
                                                                                                           {| inductive_mind :=
                                                                                                                (MPfile
-                                                                                                                  [&quot;Agda&quot;%bs;
+                                                                                                                  [&quot;Nat&quot;%bs;
                                                                                                                    &quot;Builtin&quot;%bs;
-                                                                                                                   &quot;Nat&quot;%bs],
+                                                                                                                   &quot;Agda&quot;%bs],
                                                                                                                 &quot;Nat&quot;%bs);
                                                                                                              inductive_ind :=
                                                                                                                0 |}
@@ -292,9 +293,9 @@ Definition env : global_env :=
                                                                                                           (tConstruct
                                                                                                              {| inductive_mind :=
                                                                                                                   (MPfile
-                                                                                                                     [&quot;Agda&quot;%bs;
+                                                                                                                     [&quot;Nat&quot;%bs;
                                                                                                                       &quot;Builtin&quot;%bs;
-                                                                                                                      &quot;Nat&quot;%bs],
+                                                                                                                      &quot;Agda&quot;%bs],
                                                                                                                    &quot;Nat&quot;%bs);
                                                                                                                 inductive_ind :=
                                                                                                                   0 |}
@@ -304,9 +305,9 @@ Definition env : global_env :=
                                                                                                              (tConstruct
                                                                                                                 {| inductive_mind :=
                                                                                                                      (MPfile
-                                                                                                                        [&quot;Agda&quot;%bs;
+                                                                                                                        [&quot;Nat&quot;%bs;
                                                                                                                          &quot;Builtin&quot;%bs;
-                                                                                                                         &quot;Nat&quot;%bs],
+                                                                                                                         &quot;Agda&quot;%bs],
                                                                                                                       &quot;Nat&quot;%bs);
                                                                                                                    inductive_ind :=
                                                                                                                      0 |}
@@ -316,9 +317,9 @@ Definition env : global_env :=
                                                                                                                 (tConstruct
                                                                                                                    {| inductive_mind :=
                                                                                                                         (MPfile
-                                                                                                                           [&quot;Agda&quot;%bs;
+                                                                                                                           [&quot;Nat&quot;%bs;
                                                                                                                             &quot;Builtin&quot;%bs;
-                                                                                                                            &quot;Nat&quot;%bs],
+                                                                                                                            &quot;Agda&quot;%bs],
                                                                                                                          &quot;Nat&quot;%bs);
                                                                                                                       inductive_ind :=
                                                                                                                         0 |}
@@ -328,9 +329,9 @@ Definition env : global_env :=
                                                                                                                    (tConstruct
                                                                                                                       {| inductive_mind :=
                                                                                                                            (MPfile
-                                                                                                                              [&quot;Agda&quot;%bs;
+                                                                                                                              [&quot;Nat&quot;%bs;
                                                                                                                                &quot;Builtin&quot;%bs;
-                                                                                                                               &quot;Nat&quot;%bs],
+                                                                                                                               &quot;Agda&quot;%bs],
                                                                                                                             &quot;Nat&quot;%bs);
                                                                                                                          inductive_ind :=
                                                                                                                            0 |}
@@ -340,9 +341,9 @@ Definition env : global_env :=
                                                                                                                       (tConstruct
                                                                                                                          {| inductive_mind :=
                                                                                                                               (MPfile
-                                                                                                                                 [&quot;Agda&quot;%bs;
+                                                                                                                                 [&quot;Nat&quot;%bs;
                                                                                                                                   &quot;Builtin&quot;%bs;
-                                                                                                                                  &quot;Nat&quot;%bs],
+                                                                                                                                  &quot;Agda&quot;%bs],
                                                                                                                                &quot;Nat&quot;%bs);
                                                                                                                             inductive_ind :=
                                                                                                                               0 |}
@@ -352,9 +353,9 @@ Definition env : global_env :=
                                                                                                                          (tConstruct
                                                                                                                             {| inductive_mind :=
                                                                                                                                  (MPfile
-                                                                                                                                    [&quot;Agda&quot;%bs;
+                                                                                                                                    [&quot;Nat&quot;%bs;
                                                                                                                                      &quot;Builtin&quot;%bs;
-                                                                                                                                     &quot;Nat&quot;%bs],
+                                                                                                                                     &quot;Agda&quot;%bs],
                                                                                                                                   &quot;Nat&quot;%bs);
                                                                                                                                inductive_ind :=
                                                                                                                                  0 |}
@@ -364,9 +365,9 @@ Definition env : global_env :=
                                                                                                                             (tConstruct
                                                                                                                                {| inductive_mind :=
                                                                                                                                     (MPfile
-                                                                                                                                       [&quot;Agda&quot;%bs;
+                                                                                                                                       [&quot;Nat&quot;%bs;
                                                                                                                                         &quot;Builtin&quot;%bs;
-                                                                                                                                        &quot;Nat&quot;%bs],
+                                                                                                                                        &quot;Agda&quot;%bs],
                                                                                                                                      &quot;Nat&quot;%bs);
                                                                                                                                   inductive_ind :=
                                                                                                                                     0 |}
@@ -376,9 +377,9 @@ Definition env : global_env :=
                                                                                                                                (tConstruct
                                                                                                                                   {| inductive_mind :=
                                                                                                                                        (MPfile
-                                                                                                                                          [&quot;Agda&quot;%bs;
+                                                                                                                                          [&quot;Nat&quot;%bs;
                                                                                                                                            &quot;Builtin&quot;%bs;
-                                                                                                                                           &quot;Nat&quot;%bs],
+                                                                                                                                           &quot;Agda&quot;%bs],
                                                                                                                                         &quot;Nat&quot;%bs);
                                                                                                                                      inductive_ind :=
                                                                                                                                        0 |}
@@ -388,9 +389,9 @@ Definition env : global_env :=
                                                                                                                                   (tConstruct
                                                                                                                                      {| inductive_mind :=
                                                                                                                                           (MPfile
-                                                                                                                                             [&quot;Agda&quot;%bs;
+                                                                                                                                             [&quot;Nat&quot;%bs;
                                                                                                                                               &quot;Builtin&quot;%bs;
-                                                                                                                                              &quot;Nat&quot;%bs],
+                                                                                                                                              &quot;Agda&quot;%bs],
                                                                                                                                            &quot;Nat&quot;%bs);
                                                                                                                                         inductive_ind :=
                                                                                                                                           0 |}
@@ -400,9 +401,9 @@ Definition env : global_env :=
                                                                                                                                      (tConstruct
                                                                                                                                         {| inductive_mind :=
                                                                                                                                              (MPfile
-                                                                                                                                                [&quot;Agda&quot;%bs;
+                                                                                                                                                [&quot;Nat&quot;%bs;
                                                                                                                                                  &quot;Builtin&quot;%bs;
-                                                                                                                                                 &quot;Nat&quot;%bs],
+                                                                                                                                                 &quot;Agda&quot;%bs],
                                                                                                                                               &quot;Nat&quot;%bs);
                                                                                                                                            inductive_ind :=
                                                                                                                                              0 |}
@@ -412,9 +413,9 @@ Definition env : global_env :=
                                                                                                                                         (tConstruct
                                                                                                                                            {| inductive_mind :=
                                                                                                                                                 (MPfile
-                                                                                                                                                   [&quot;Agda&quot;%bs;
+                                                                                                                                                   [&quot;Nat&quot;%bs;
                                                                                                                                                     &quot;Builtin&quot;%bs;
-                                                                                                                                                    &quot;Nat&quot;%bs],
+                                                                                                                                                    &quot;Agda&quot;%bs],
                                                                                                                                                  &quot;Nat&quot;%bs);
                                                                                                                                               inductive_ind :=
                                                                                                                                                 0 |}
@@ -424,9 +425,9 @@ Definition env : global_env :=
                                                                                                                                            (tConstruct
                                                                                                                                               {| inductive_mind :=
                                                                                                                                                    (MPfile
-                                                                                                                                                      [&quot;Agda&quot;%bs;
+                                                                                                                                                      [&quot;Nat&quot;%bs;
                                                                                                                                                        &quot;Builtin&quot;%bs;
-                                                                                                                                                       &quot;Nat&quot;%bs],
+                                                                                                                                                       &quot;Agda&quot;%bs],
                                                                                                                                                     &quot;Nat&quot;%bs);
                                                                                                                                                  inductive_ind :=
                                                                                                                                                    0 |}
@@ -436,9 +437,9 @@ Definition env : global_env :=
                                                                                                                                               (tConstruct
                                                                                                                                                  {| inductive_mind :=
                                                                                                                                                       (MPfile
-                                                                                                                                                         [&quot;Agda&quot;%bs;
+                                                                                                                                                         [&quot;Nat&quot;%bs;
                                                                                                                                                           &quot;Builtin&quot;%bs;
-                                                                                                                                                          &quot;Nat&quot;%bs],
+                                                                                                                                                          &quot;Agda&quot;%bs],
                                                                                                                                                        &quot;Nat&quot;%bs);
                                                                                                                                                     inductive_ind :=
                                                                                                                                                       0 |}
@@ -448,9 +449,9 @@ Definition env : global_env :=
                                                                                                                                                  (tConstruct
                                                                                                                                                     {| inductive_mind :=
                                                                                                                                                          (MPfile
-                                                                                                                                                            [&quot;Agda&quot;%bs;
+                                                                                                                                                            [&quot;Nat&quot;%bs;
                                                                                                                                                              &quot;Builtin&quot;%bs;
-                                                                                                                                                             &quot;Nat&quot;%bs],
+                                                                                                                                                             &quot;Agda&quot;%bs],
                                                                                                                                                           &quot;Nat&quot;%bs);
                                                                                                                                                        inductive_ind :=
                                                                                                                                                          0 |}
@@ -460,9 +461,9 @@ Definition env : global_env :=
                                                                                                                                                     (tConstruct
                                                                                                                                                        {| inductive_mind :=
                                                                                                                                                             (MPfile
-                                                                                                                                                               [&quot;Agda&quot;%bs;
+                                                                                                                                                               [&quot;Nat&quot;%bs;
                                                                                                                                                                 &quot;Builtin&quot;%bs;
-                                                                                                                                                                &quot;Nat&quot;%bs],
+                                                                                                                                                                &quot;Agda&quot;%bs],
                                                                                                                                                              &quot;Nat&quot;%bs);
                                                                                                                                                           inductive_ind :=
                                                                                                                                                             0 |}
@@ -472,9 +473,9 @@ Definition env : global_env :=
                                                                                                                                                        (tConstruct
                                                                                                                                                           {| inductive_mind :=
                                                                                                                                                                (MPfile
-                                                                                                                                                                  [&quot;Agda&quot;%bs;
+                                                                                                                                                                  [&quot;Nat&quot;%bs;
                                                                                                                                                                    &quot;Builtin&quot;%bs;
-                                                                                                                                                                   &quot;Nat&quot;%bs],
+                                                                                                                                                                   &quot;Agda&quot;%bs],
                                                                                                                                                                 &quot;Nat&quot;%bs);
                                                                                                                                                              inductive_ind :=
                                                                                                                                                                0 |}
@@ -484,9 +485,9 @@ Definition env : global_env :=
                                                                                                                                                           (tConstruct
                                                                                                                                                              {| inductive_mind :=
                                                                                                                                                                   (MPfile
-                                                                                                                                                                     [&quot;Agda&quot;%bs;
+                                                                                                                                                                     [&quot;Nat&quot;%bs;
                                                                                                                                                                       &quot;Builtin&quot;%bs;
-                                                                                                                                                                      &quot;Nat&quot;%bs],
+                                                                                                                                                                      &quot;Agda&quot;%bs],
                                                                                                                                                                    &quot;Nat&quot;%bs);
                                                                                                                                                                 inductive_ind :=
                                                                                                                                                                   0 |}
@@ -495,9 +496,9 @@ Definition env : global_env :=
                                                                                                                                                           (tConstruct
                                                                                                                                                              {| inductive_mind :=
                                                                                                                                                                   (MPfile
-                                                                                                                                                                     [&quot;Agda&quot;%bs;
+                                                                                                                                                                     [&quot;Nat&quot;%bs;
                                                                                                                                                                       &quot;Builtin&quot;%bs;
-                                                                                                                                                                      &quot;Nat&quot;%bs],
+                                                                                                                                                                      &quot;Agda&quot;%bs],
                                                                                                                                                                    &quot;Nat&quot;%bs);
                                                                                                                                                                 inductive_ind :=
                                                                                                                                                                   0 |}
@@ -509,7 +510,7 @@ Definition env : global_env :=
                             (tApp
                                (tConstruct
                                   {| inductive_mind :=
-                                       (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
+                                       (MPfile [&quot;List&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;List&quot;%bs);
                                      inductive_ind := 0 |}
                                   1 [])
                                tBox)
@@ -523,14 +524,14 @@ Definition env : global_env :=
                                      tBox)
                                   (tConstruct
                                      {| inductive_mind :=
-                                          (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                          (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs);
                                         inductive_ind := 0 |}
                                      0 []))
                                tBox))
                          (tApp
                             (tConstruct
                                {| inductive_mind :=
-                                    (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
+                                    (MPfile [&quot;List&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;List&quot;%bs);
                                   inductive_ind := 0 |}
                                0 [])
                             tBox)))));
@@ -538,9 +539,9 @@ Definition env : global_env :=
            ([],
             TInd
               {| inductive_mind :=
-                   (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                   (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs);
                  inductive_ind := 0 |}) |});
-   (((MPfile [&quot;Types&quot;%bs; &quot;sig&quot;%bs], &quot;fst&quot;%bs), true),
+   (((MPdot (MPfile [&quot;Types&quot;%bs]) &quot;sig&quot;%bs, &quot;fst&quot;%bs), true),
     ConstantDecl
       {| cst_body :=
            Some
@@ -587,14 +588,14 @@ Definition env : global_env :=
                 nAnon
                 (tCase
                    ({| inductive_mind :=
-                         (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
+                         (MPfile [&quot;List&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;List&quot;%bs);
                        inductive_ind := 0 |},
                     1)
                    (tRel 0)
                    [([],
                      tConstruct
                        {| inductive_mind :=
-                            (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                            (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs);
                           inductive_ind := 0 |}
                        0 []);
                     ([nAnon; nAnon], tRel 1)]));
@@ -605,16 +606,16 @@ Definition env : global_env :=
                  (TApp
                     (TInd
                        {| inductive_mind :=
-                            (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
+                            (MPfile [&quot;List&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;List&quot;%bs);
                           inductive_ind := 0 |})
                     TBox)
                  (TInd
                     {| inductive_mind :=
-                         (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                         (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs);
                        inductive_ind := 0 |}))
               (TInd
                  {| inductive_mind :=
-                      (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                      (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs);
                     inductive_ind := 0 |})) |});
    (((MPfile [&quot;Types&quot;%bs], &quot;map&quot;%bs), true),
     ConstantDecl
@@ -633,7 +634,7 @@ Definition env : global_env :=
                             (tApp
                                (tConstruct
                                   {| inductive_mind :=
-                                       (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
+                                       (MPfile [&quot;List&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;List&quot;%bs);
                                      inductive_ind := 0 |}
                                   0 [])
                                tBox))
@@ -648,7 +649,7 @@ Definition env : global_env :=
                                         (tApp
                                            (tConstruct
                                               {| inductive_mind :=
-                                                   (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
+                                                   (MPfile [&quot;List&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs],
                                                     &quot;List&quot;%bs);
                                                  inductive_ind := 0 |}
                                               1 [])
@@ -668,7 +669,7 @@ Definition env : global_env :=
                           (TApp
                              (TInd
                                 {| inductive_mind :=
-                                     (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
+                                     (MPfile [&quot;List&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;List&quot;%bs);
                                    inductive_ind := 0 |})
                              TBox)
                           (TVar 0))
@@ -676,7 +677,7 @@ Definition env : global_env :=
                           (TApp
                              (TInd
                                 {| inductive_mind :=
-                                     (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
+                                     (MPfile [&quot;List&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;List&quot;%bs);
                                    inductive_ind := 0 |})
                              TBox)
                           (TVar 1)))))) |});
@@ -699,7 +700,7 @@ Definition env : global_env :=
                                     nAnon
                                     (tCase
                                        ({| inductive_mind :=
-                                             (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs],
+                                             (MPfile [&quot;List&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs],
                                               &quot;List&quot;%bs);
                                            inductive_ind := 0 |},
                                         1)
@@ -731,7 +732,7 @@ Definition env : global_env :=
                                 (TApp
                                    (TInd
                                       {| inductive_mind :=
-                                           (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
+                                           (MPfile [&quot;List&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;List&quot;%bs);
                                          inductive_ind := 0 |})
                                    TBox)
                                 (TVar 0))
@@ -741,12 +742,12 @@ Definition env : global_env :=
                              (TApp
                                 (TInd
                                    {| inductive_mind :=
-                                        (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
+                                        (MPfile [&quot;List&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;List&quot;%bs);
                                       inductive_ind := 0 |})
                                 TBox)
                              (TVar 0))
                           (TVar 1)))))) |});
-   (((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs), true),
+   (((MPfile [&quot;List&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;List&quot;%bs), true),
     InductiveDecl
       {| ind_finite := Finite; ind_npars := 1;
          ind_bodies :=
@@ -761,7 +762,7 @@ Definition env : global_env :=
                         (TApp
                            (TInd
                               {| inductive_mind :=
-                                   (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
+                                   (MPfile [&quot;List&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;List&quot;%bs);
                                  inductive_ind := 0 |})
                            TBox)
                         (TVar 1))]),
@@ -772,7 +773,7 @@ Definition env : global_env :=
                      tvar_is_arity := false; tvar_is_sort := false |};
                   {| tvar_name := nNamed &quot;A&quot;%bs; tvar_is_logical := false;
                      tvar_is_arity := true; tvar_is_sort := true |}] |}] |});
-   (((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs), true),
+   (((MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs), true),
     InductiveDecl
       {| ind_finite := Finite; ind_npars := 0;
          ind_bodies :=
@@ -784,7 +785,7 @@ Definition env : global_env :=
                     [(nNamed &quot;n&quot;%bs,
                       TInd
                         {| inductive_mind :=
-                             (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                             (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs);
                            inductive_ind := 0 |})]),
                    1)];
                ind_projs := []; ind_type_vars := [] |}] |});

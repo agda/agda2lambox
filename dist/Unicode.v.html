@@ -40,29 +40,29 @@ Definition env : global_declarations :=
                       (tApp
                          (tConstruct
                             {| inductive_mind :=
-                                 (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
+                                 (MPfile [&quot;List&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;List&quot;%bs);
                                inductive_ind := 0 |}
                             1 [])
                          tBox)
                       (tApp
                          (tConstruct
                             {| inductive_mind :=
-                                 (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                 (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs);
                                inductive_ind := 0 |}
                             1 [])
                          (tConstruct
                             {| inductive_mind :=
-                                 (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs);
+                                 (MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs);
                                inductive_ind := 0 |}
                             0 [])))
                    (tApp
                       (tConstruct
                          {| inductive_mind :=
-                              (MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs);
+                              (MPfile [&quot;List&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;List&quot;%bs);
                             inductive_ind := 0 |}
                          0 [])
                       tBox))) |});
-   ((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;List&quot;%bs], &quot;List&quot;%bs),
+   ((MPfile [&quot;List&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;List&quot;%bs),
     InductiveDecl
       {| ind_finite := Finite; ind_npars := 1;
          ind_bodies :=
@@ -72,7 +72,7 @@ Definition env : global_declarations :=
                  [{| cstr_name := &quot;[]&quot;%bs; cstr_nargs := 0 |};
                   {| cstr_name := &quot;_\8759_&quot;%bs; cstr_nargs := 2 |}];
                ind_projs := [] |}] |});
-   ((MPfile [&quot;Agda&quot;%bs; &quot;Builtin&quot;%bs; &quot;Nat&quot;%bs], &quot;Nat&quot;%bs),
+   ((MPfile [&quot;Nat&quot;%bs; &quot;Builtin&quot;%bs; &quot;Agda&quot;%bs], &quot;Nat&quot;%bs),
     InductiveDecl
       {| ind_finite := Finite; ind_npars := 0;
          ind_bodies :=

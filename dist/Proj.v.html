@@ -28,7 +28,7 @@ Definition env : global_declarations :=
       {| cst_body :=
            Some
              (tApp
-                (tConst (MPfile [&quot;Proj&quot;%bs; &quot;Pair&quot;%bs], &quot;snd&quot;%bs))
+                (tConst (MPdot (MPfile [&quot;Proj&quot;%bs]) &quot;Pair&quot;%bs, &quot;snd&quot;%bs))
                 (tConst (MPfile [&quot;Proj&quot;%bs], &quot;pair&quot;%bs))) |});
    ((MPfile [&quot;Proj&quot;%bs], &quot;pair&quot;%bs),
     ConstantDecl
@@ -62,7 +62,7 @@ Definition env : global_declarations :=
                  [{| cstr_name := &quot;false&quot;%bs; cstr_nargs := 0 |};
                   {| cstr_name := &quot;true&quot;%bs; cstr_nargs := 0 |}];
                ind_projs := [] |}] |});
-   ((MPfile [&quot;Proj&quot;%bs; &quot;Pair&quot;%bs], &quot;snd&quot;%bs),
+   ((MPdot (MPfile [&quot;Proj&quot;%bs]) &quot;Pair&quot;%bs, &quot;snd&quot;%bs),
     ConstantDecl
       {| cst_body :=
            Some
