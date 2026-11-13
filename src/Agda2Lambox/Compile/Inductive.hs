@@ -129,7 +129,7 @@ compileInductive' t pars defn = do
   tyvars <- whenTyped t $ addContext arity $
     forM (zip [0..] $ flattenTel arity) \(i, dom) -> do
       let domType = unDom dom
-      isVarLogical <- liftTCM $ isLogical dom
+      isVarLogical <- liftTCM $ isLogical domType
       isVarArity   <- liftTCM $ isArity domType
       pure LBox.TypeVarInfo
         { tvarName      = if i < indPars then domToName dom else LBox.Anon
