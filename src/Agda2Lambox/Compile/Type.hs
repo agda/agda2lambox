@@ -1,11 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Agda2Lambox.Compile.Type where
---   ( compileType
---   , compileTopLevelType
---   , compileArgs
---   , getTypeVarInfo
---   ) where
-
 
 import Control.Monad.Reader
 import Data.Maybe ( isJust, mapMaybe )
@@ -18,7 +12,7 @@ import Agda.TypeChecking.Monad.Debug ( reportSDoc )
 import Agda.TypeChecking.Monad.Signature ( canonicalName )
 import Agda.TypeChecking.Telescope ( shouldBePi )
 import Agda.TypeChecking.Pretty ( prettyTCM, (<+>) )
-import Agda.Utils.Monad ( ifM )
+import Agda.Utils.Monad ( ifM, andM )
 import Agda.Utils ( unSpine1 )
 
 import qualified LambdaBox as LBox
@@ -117,8 +111,12 @@ compileType tvars ty = do
   liftTCM $ reportSDoc "agda2lambox.compile.type" 10 $ "With vars: " <+> prettyTCM tvars
   runC tvars $ compileTypeC ty
 
+-- | Compile a type that is not on the top-level spine, i.e. no new type variables.
+nested :: C a -> C a
+nested = local \e -> e { insertVars = False }
+
 compileTypeC :: Type -> C LBox.Type
-compileTypeC = local (\e -> e { insertVars = False }) . fmap snd . compileTopLevelTypeC
+compileTypeC = nested . fmap snd . compileTopLevelTypeC
 
 compileElims :: Type -> Args -> C [LBox.Type]
 compileElims _ [] = pure []
@@ -128,12 +126,14 @@ compileElims ty (x:xs) = do
   (a, b) <- liftTCM $ shouldBePi ty
   -- b <- piApplyM ty x
   rest   <- compileElims (absApp b $ unArg x) xs
-  -- logical arguments are □, types are compiled, and any other argument is 𝕋
-  first  <- ifM (liftTCM $ isLogical a) (pure LBox.TBox) $
-            ifM (liftTCM $ isJust . isSort . unEl <$> reduce (unDom a))
-              (snd <$> compileTypeTerm (unArg x))
-              (pure LBox.TAny)
+  -- types are compiled (even if erased), logical arguments are □, and any other argument is 𝕋
+  first  <- ifM (liftTCM $ isTypeArg $ unDom a)
+              (snd <$> nested (compileTypeTerm $ unArg x)) $
+            ifM (liftTCM $ isLogical a) (pure LBox.TBox) (pure LBox.TAny)
   pure (first : rest)
+  where
+  isTypeArg :: Type -> TCM Bool
+  isTypeArg ty = andM [ isJust . isSort . unEl <$> reduce ty, not <$> isLogical ty ]
 
 getTypeVarInfo :: Dom Type -> TCM LBox.TypeVarInfo
 getTypeVarInfo typ = do
@@ -192,6 +192,13 @@ compileTypeTerm t = do
           Def q' _ | q' == q -> typeScheme q defType es
           t'                 -> compileTypeTerm t'
 
+      -- a type alias is kept, unless it hides arrows of the top-level spine,
+      -- which determine type variables and dearging masks (e.g. @incr : Endo Nat@)
+      else if isTypeAlias def then
+        ifM (asks insertVars) (liftTCM $ reduce $ Def q es) (pure $ Def q es) >>= \case
+          t'@Pi{} -> compileTypeTerm t'
+          _       -> typeScheme q defType es
+
       -- otherwise, it must have been compiled as a type scheme,
       -- and therefore is kept with all arguments.
 
@@ -205,11 +212,11 @@ compileTypeTerm t = do
       let codomType = absBody codom
 
       domIsLogical <- liftTCM $ isLogical dom
-      domIsArity   <- liftTCM $ isArity domType
+      domIsTyVar   <- liftTCM $ andM [ isArity domType, not <$> isLogical domType ]
 
-      -- logical types and non-arities can never be lifted to type variables,
-      -- so we keep going
-      if domIsLogical || not domIsArity then do
+      -- only non-logical arities are lifted to type variables, irrespective of
+      -- their quantity, as in 'inductivePars'
+      if not domIsTyVar then do
         domType' <- if domIsLogical then pure LBox.TBox
                                     else compileTypeC domType
         (vars, codomType') <- underBinder dom $ compileTopLevelTypeC codomType

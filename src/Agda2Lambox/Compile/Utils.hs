@@ -66,11 +66,10 @@ toInductive q = do
 -- | The parameters of a datatype/record that are λ□ parameters.
 inductivePars :: Definition -> TCM [Dom Type]
 inductivePars Defn{theDef, defType} = do
-  let n = getInductiveParams theDef
-  params <- flattenTel . theTel <$> telViewUpTo n defType
+  TelV params _ <- telViewUpTo (getInductiveParams theDef) defType
   -- only consider type parameters (non-logical arities) which inform typing
   let isTypeParam ty = andM [ isArity ty, not <$> isLogical ty ]
-  addContext params $ filterM (isTypeParam . unDom) params
+  addContext params $ filterM (isTypeParam . unDom) (flattenTel params)
 
 -- | Number of parameters of the λ□ mutual block a datatype/record belongs to.
 toInductivePars :: QName -> TCM Int
