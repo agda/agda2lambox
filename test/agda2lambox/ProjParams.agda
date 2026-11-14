@@ -1,3 +1,4 @@
+{-# OPTIONS --no-projection-like #-}
 -- restoring projection-like parameters in typed λ□
 open import Agda.Builtin.Nat
 open import Agda.Builtin.Equality

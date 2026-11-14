@@ -20,8 +20,8 @@ import LambdaBox.Type qualified as LBox
  - - is an arity (i.e has type .. -> .. -> ... -> S where S is a sort)
 
  The strategy to compile a type scheme is the following:
- 1. ensure that it has a single clause
- 2. ensure that all the patterns in the clause simply bind variables
+ 1. ensure that it has a single clause;
+ 2. ensure that all the patterns in the clause simply bind variables;
  3. we eta-expand the body.
  -}
 
@@ -44,11 +44,10 @@ compileTypeScheme Defn{..} = do
       -- We eta-expand the clause to maximal arity by inserting variable patterns
       -- and applying the body to variables.
       -- This also lifts all lambdas from the body to variable patterns.
-      (nvars, cl) <- etaExpandClause cl
-
+      (_, cl) <- etaExpandClause cl
       let Just body = clauseBody cl
-
-      (_, res) <- addContext (KeepNames $ clauseTel cl) $ runCNoVars nvars $ compileTypeTerm body
+          tel = clauseTel cl
+      (_, res) <- addContext (KeepNames tel) $ runCNoVars (length tel) $ compileTypeTerm body
 
       pure $ TypeAliasDecl $ Just (tvarInfo, res)
 
