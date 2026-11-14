@@ -134,16 +134,34 @@ compileElims ty (x:xs) = do
   (a, b) <- liftTCM $ shouldBePi ty
   -- b <- piApplyM ty x
   rest   <- compileElims (absApp b $ unArg x) xs
-  -- types are compiled (even if erased)
-  -- type variables of a non-sort arity are compiled (other type families may be higher-kinded)
-  -- logical arguments are □, and any other argument is 𝕋
+  -- We compile:
+  --   * types (even if erased)
+  --   * type variables of a non-sort arity (other type families may be higher-kinded)
+  --   * type families given as a λ
+  --   * logical arguments to □
+  --   * any other argument to 𝕋
   first  <- ifM (liftTCM $ isTypeArg $ unDom a)
               (snd <$> nested (compileTypeTerm $ unArg x)) $
             typeVar (unDom a) (unArg x) >>= \case
               Just i  -> pure $ LBox.TVar i
-              Nothing -> ifM (liftTCM $ isLogical a) (pure LBox.TBox) (pure LBox.TAny)
+              Nothing -> ifM (liftTCM $ isLogical a) (pure LBox.TBox) (family (unDom a) (unArg x))
   pure (first : rest)
   where
+  -- a declaration drops the arguments of a family parameter (@b x@ ↦ @b@), so
+  -- @λ x → B@ stands for @B@ if that compiles without 𝕋 (it does not when @x@ is a type)
+  family :: Type -> Term -> C LBox.Type
+  family ty t = liftTCM (reduce $ unEl ty) >>= \case
+    Pi dom cod | Lam _ body <- t -> underBinder dom $ family (absBody cod) (absBody body)
+    Sort{} -> nested (compileTypeTerm t) <&> \(_, t') -> if hasAny t' then LBox.TAny else t'
+    _      -> pure LBox.TAny
+
+  hasAny :: LBox.Type -> Bool
+  hasAny = \case
+    LBox.TAny     -> True
+    LBox.TArr s t -> hasAny s || hasAny t
+    LBox.TApp s t -> hasAny s || hasAny t
+    _             -> False
+
   isTypeArg :: Type -> TCM Bool
   isTypeArg ty = andM [ isJust . isSort . unEl <$> reduce ty, not <$> isLogical ty ]
 
