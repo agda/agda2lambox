@@ -2,6 +2,7 @@
 --
 -- regression test: against issue peregrine-tool#99 (I-84, List used at two types)
 --
+{-# OPTIONS --no-projection-like #-}
 open import Agda.Builtin.Bool
 open import Agda.Builtin.List
 open import Agda.Builtin.Nat

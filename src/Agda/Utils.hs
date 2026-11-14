@@ -86,14 +86,11 @@ etaExpand = \case
 
 -- * projections
 
-isRecordProjection :: Defn -> Maybe (QName, QName)
-isRecordProjection d
-  | Function{..} <- d
-  , Right Projection{..} <- funProjection
-  , Just recName <- projProper
-  = Just (recName, projOrig)
-  | otherwise
-  = Nothing
+-- | How many parameters Agda drops from clauses/applications of projection(-like) functions.
+droppedParams :: Defn -> Int
+droppedParams = \case
+  Function{funProjection = Right Projection{projIndex}} -> projIndex - 1
+  _                                                     -> 0
 
 -- | Whether a type-level function is compiled to a type alias:
 --   it has a single clause, whose patterns are variables.

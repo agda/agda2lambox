@@ -1,6 +1,5 @@
 name: agda2lambox-tests
 include: . agda2lambox agda2rust agda2hs
 flags:
-  --no-projection-like
   --erasure
   --prop

@@ -25,7 +25,7 @@ import Agda.Syntax.Common ( hasQuantityω )
 import Agda.Utils.Monad ( ifM, ifNotM )
 import Agda.Utils.Treeless ( treeless )
 
-import Agda.Utils ( isRecordProjection, isPiTy, etaExpand, isFunction )
+import Agda.Utils ( droppedParams, isPiTy, etaExpand, isFunction )
 import Agda2Lambox.Compile.Target
 import Agda2Lambox.Compile.Utils
 import Agda2Lambox.Compile.Monad
@@ -35,8 +35,6 @@ import Agda2Lambox.Compile.Type ( compileTopLevelType )
 
 import LambdaBox qualified as LBox
 import LambdaBox.Env
-import Agda.TypeChecking.Telescope ( telViewUpTo )
-import Agda.TypeChecking.Substitute ( TelV(..), telePi )
 
 
 -- | Convert a function body to a λ□ term.
@@ -107,16 +105,9 @@ compileFunction (t :: Target t) defn@Defn{defType} =
   -- with □ for the arguments it erases from applications (c.f. 'eraseTerms')
   typ <- whenTyped t $ ifM (liftTCM $ isErasable $ defName defn) (pure ([], LBox.TBox)) do
     unused <- map (== ArgUnused) . fromMaybe [] <$> liftTCM (getCompiledArgUse $ defName defn)
-    case isRecordProjection (theDef defn) of
-      Nothing -> compileTopLevelType unused defType
-
-      -- if it is a (real) projection, drop the parameters from the type
-      Just (recName, _) -> do
-        Defn{defType = recType, theDef = Record{recPars}} <- liftTCM $ getConstInfo recName
-        TelV pars _      <- telViewUpTo recPars recType
-        TelV _ projType  <- telViewUpTo recPars defType
-        fmap (LBox.dropArrows recPars) <$>
-          compileTopLevelType (replicate recPars False ++ unused) (telePi pars projType)
+    -- a projection(-like) function takes no parameters, but they may occur in its type
+    let pars = droppedParams $ theDef defn
+    fmap (LBox.dropArrows pars) <$> compileTopLevelType (replicate pars False ++ unused) defType
 
   let builder :: LBox.Term -> Maybe (LBox.GlobalDecl t)
       builder = Just . ConstantDecl . ConstantBody typ . Just
