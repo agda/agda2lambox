@@ -5,16 +5,25 @@
 -- machinery of the treeless translation (`updateCatchall`) hoists the body of an
 -- overlapping clause above its case split, which is sound only under non-strict
 -- evaluation.
+--
+-- Strict bindings used at most once, and not under a λ, are substituted, so that
+-- they are only evaluated on the path that uses them, e.g. the branches of an
+-- inlined @if_then_else_@.
 module Agda.Utils.ThunkLets (thunkLets) where
+
+import Data.Monoid ( Any(..) )
 
 import Agda.Syntax.Treeless
 import Agda.TypeChecking.Substitute
-import Agda.Compiler.Treeless.Subst ( Occurs(..), occursIn )
+import Agda.Compiler.Treeless.Subst ( Occurs(..), UnderLambda(..), occursIn )
 
 -- | Rewrite non-strict @let x = u in b@ into @let x = λ _ → u in b[x □ / x]@.
 thunkLets :: TTerm -> TTerm
 thunkLets = \case
-  TLet Strict u b -> TLet Strict (go u) (go b)
+  TLet Strict u b
+    | linear b' -> applySubst ([go u] ++# idS) b'
+    | otherwise -> TLet Strict (go u) b'
+    where b' = go b
   TLet NonStrict u b
     -- do not thunk if @u@ is already a value or @b@ evaluates @x@ on every path
     | isValue u' || demands 0 b' -> TLet Strict u' b'
@@ -56,6 +65,10 @@ isValue = \case
 -- | Whether variable @0@ is used at most once.
 occursOnce :: TTerm -> Bool
 occursOnce b = case occursIn 0 b of Occurs n _ _ -> n <= 1
+
+-- | Whether variable @0@ is used at most once, and not under a λ.
+linear :: TTerm -> Bool
+linear b = case occursIn 0 b of Occurs n (UnderLambda l) _ -> n <= 1 && not (getAny l)
 
 -- | Whether cbv-evaluation of the term forces variable @i@ on every path.
 demands :: Int -> TTerm -> Bool
