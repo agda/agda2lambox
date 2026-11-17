@@ -75,7 +75,7 @@ jobs:
       uses: actions/checkout@v6
       with:
         repository: peregrine-project/peregrine-tool
-        ref: 8077cfd00489c01eb4142937f72848303d286c7a
+        ref: 3159596b664324a3595b14c93aa3f5dc590fafe8
         path: peregrine-tool
 
     - name: Restore OPAM cache
@@ -83,9 +83,9 @@ jobs:
       uses: actions/cache@v5
       with:
         path: "~/.opam"
+        # no fallback to the cache of another lock file: building over its packages
+        # fails (CompCert's extraction loads the installed CertiRocq's extraction.v)
         key: opam-${{matrix.ocaml}}-${{hashFiles('peregrine-tool/.github/rocq-peregrine.opam.locked')}}
-        restore-keys: |
-          opam-${{matrix.ocaml}}-
 
     - run: sudo apt-get update
     - name: Set up OCaml
@@ -117,6 +117,30 @@ jobs:
       uses: dtolnay/rust-toolchain@v1
       with:
         toolchain: 1.85.0
+
+    - name: Set up Koka
+      run: |
+        mkdir -p "$HOME/koka"
+        curl -sSfL --retry 5 https://github.com/koka-lang/koka/releases/download/v3.2.9/koka-v3.2.9-linux-x64.tar.gz | tar xz -C "$HOME/koka"
+        echo "$HOME/koka/bin" >> "$GITHUB_PATH"
+
+    - name: Set up .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x'
+
+    - name: Restore Lean toolchain
+      uses: actions/cache@v5
+      with:
+        path: "~/.elan"
+        key: elan-${{ hashFiles('test/show/lean/lean-toolchain') }}
+
+    - name: Set up Lean
+      run: |
+        [ -x "$HOME/.elan/bin/elan" ] || curl -sSf --retry 5 https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none --no-modify-path
+        echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+        "$HOME/.elan/bin/elan" toolchain install "$(cat test/show/lean/lean-toolchain)"
+        "$HOME/.elan/bin/elan" default "$(cat test/show/lean/lean-toolchain)"
 
     - name: Generate HTML
       run: |

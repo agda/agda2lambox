@@ -5,24 +5,25 @@ MAIN=Tests
 default: html
 
 gen:
-	@echo == Generating WASM/C/OCaml/Cakeml/Rust/Elm ==
+	@echo == Compiling to targets ==
 	mkdir -p gen/
 	./compile.sh
 
 run: # gen
 	@echo == Evaluating λ-box output ==
 	./runRocq.sh
-	@echo == Running Rust ==
+	@echo == Running targets ==
 	./runRust.sh
-	@echo == Running C/OCaml/WASM ==
 	./runNative.sh
+	@echo == Statistics ==
+	./stats.sh
 
 html: # gen run
 	@echo == Generating HTML ==
 	mkdir -p html/ && cp Agda.css html/ && cp favicon.ico html/
 	-cabal run -- agda2lambox --html --css=Agda.css $(MAIN).agda
 	./renderTranslations.sh
-	cp html/$(MAIN).html html/index.html
+	./renderStats.sh $(MAIN)
 
 clean:
 	rm -rf gen/ html/ dist/*.html dist/*.md gen/*/*.html gen/*/*.md

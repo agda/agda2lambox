@@ -23,7 +23,7 @@ agda2lambox [AGDAFLAGS] [--out-dir DIR] [--typed] [--rocq] [--export-all] FILE
 
 Only the definitions reachable from those marked with `{-# COMPILE AGDA2LAMBOX f #-}` get compiled; to extract a library instead, `--export-all` compiles the whole module.
 
-Then, use the [following tool][Peregrine] to further compile the generated `.ast` files to WASM, Rust, OCaml, C, and Elm.
+Then, use the [following tool][Peregrine] to further compile the generated `.ast` files to WASM, C, LLVM, OCaml, CakeML, Rust, Koka, Lean and F#.
 
 ## Setup
 

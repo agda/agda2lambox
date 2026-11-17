@@ -124,7 +124,7 @@ newtype GlobalEnv t = GlobalEnv [(KerName, GlobalDecl t)]
 -- | Generated module.
 data LBoxModule t = LBoxModule
   { lboxEnv  :: GlobalEnv t
-  , lboxMain :: [KerName] -- the definitions annotated by a COMPILE pragma
+  , lboxMain :: [Term] -- the programs running the definitions annotated by a COMPILE pragma
   }
 
 
@@ -181,5 +181,5 @@ instance Pretty (GlobalEnv t) where
 instance Pretty (LBoxModule t) where
   pretty LBoxModule{..} = vcat
     [ pretty lboxEnv
-    , flip foldMap (nonEmpty lboxMain) \kns -> "main program:" <+> pretty kns
+    , flip foldMap (nonEmpty lboxMain) \ts -> "main program:" <+> pretty ts
     ]

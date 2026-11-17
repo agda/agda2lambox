@@ -2,7 +2,7 @@
 module Agda2Lambox.Compile.Utils where
 
 import Data.Functor ( (<&>) )
-import Data.List ( elemIndex )
+import Data.List ( elemIndex, mapAccumL )
 import Data.Maybe ( fromMaybe, listToMaybe, isJust )
 
 import Agda.Compiler.Backend
@@ -91,6 +91,24 @@ toConApp qn es = do
   let es' = replicate pars LBox.LBox ++ es -- replace type parameters with □
   let idx = fromMaybe 0 $ qn `elemIndex` ctrs
   pure $ foldl' LBox.LApp (LBox.LConstruct ind idx []) es'
+
+-- | Apply the main program's (erased) module parameters.
+mainProgram :: QName -> TCM LBox.Term
+mainProgram q = do
+  kn <- qnameToKName q
+  es <- erasableParams =<< lookupSection (qnameModule q)
+  let r    = length $ filter not es
+      arg  = \j b -> if b then (j, LBox.LBox) else (j - 1, LBox.LRel j)
+      body = foldl' LBox.LApp (LBox.LConst kn)
+           $ snd
+           $ mapAccumL arg (r - 1) es
+  pure $ iterate (LBox.LLambda LBox.Anon) body !! r
+  where
+  erasableParams :: Telescope -> TCM [Bool]
+  erasableParams = \case
+    EmptyTel      -> pure []
+    ExtendTel d t -> (:) <$> orM [isLogical d, isArity (unDom d)]
+                         <*> underAbstraction d t erasableParams
 
 -- | Class for things that may be considered logical, and thus erased.
 -- See https://arxiv.org/pdf/2108.02995 for the precise definition.

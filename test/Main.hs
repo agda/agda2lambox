@@ -32,23 +32,21 @@ main = do
   createDirectoryIfMissing True buildDir
 
   -- Discover files
-  let testFolders :: [(String {-folder-}, Bool {-typed?-})]
-      testFolders = [ ("untyped", False)
-                    , ("typed", True)
-                    , ("agda2rust", True)
-                    ]
-  files <- forM testFolders \(d,t) -> (d,t,) <$> listAgdaBasenames d
+  let testFolders = ["agda2lambox", "agda2rust", "agda2hs"]
+  files <- forM testFolders \d -> (d,) <$> listAgdaBasenames d
 
   -- Create index file
   writeFile (testDir </> "Tests.agda")
      $ unlines
-     $ flip concatMap files \(d, _, fs) ->
+     $ flip concatMap files \(d, fs) ->
           ("-- " ++ d) : map (("open import " <>) . dropExtension) fs
 
   -- Create tests
+  let typedDir = buildDir </> "typed"
+      modes    = [(buildDir, ["--rocq"]), (typedDir, ["--typed", "--rocq"])]
   defaultMain $ testGroup "agda2lambox tests" $
-    flip map files \(d, t, fs) ->
-      testGroup d (mkAgdaTest peregrinePath buildDir d t <$> fs)
+    flip map files \(d, fs) -> testGroup d
+      [ mkAgdaTest peregrinePath out d flags f | f <- fs, (out, flags) <- modes ]
 
 
 -- List basenames of .agda files in a subdirectory (returns [] if dir missing)
@@ -65,15 +63,14 @@ listAgdaBasenames subdir = do
     endsWith suffix str = suffix `elem` words (reverse (take (length suffix) (reverse str)))
 
 
--- Create a test case for a single .agda file located in `subdir`.
--- subdir: "untyped" or "typed"; baseFile is the filename within that dir.
-mkAgdaTest :: Maybe FilePath -> FilePath -> FilePath -> Bool -> FilePath -> TestTree
-mkAgdaTest mperegrinePath buildDir subdir isTyped baseFile = testCase ("Test: " ++ (subdir </> baseFile)) $ do
+-- Create a test case in `buildDir` for a single .agda file located in `subdir`.
+mkAgdaTest :: Maybe FilePath -> FilePath -> FilePath -> [String] -> FilePath -> TestTree
+mkAgdaTest mperegrinePath buildDir subdir flags baseFile =
+  testCase (unwords $ "Test:" : (subdir </> baseFile) : flags) $ do
   let astTarget = buildDir </> baseFile -<.> ".ast"
 
   -- Step 1: Run agda2lambox on the file (run with cwd=subdir so Agda sees basename)
-  let typedFlag = ["--typed" | isTyped]
-      cp = (proc "agda2lambox" (typedFlag ++ ["--rocq", "-o", buildDir, baseFile]))
+  let cp = (proc "agda2lambox" (flags ++ ["-o", buildDir, baseFile]))
             { cwd = Just subdir }
   (exitCode, stdout, stderr) <- readCreateProcessWithExitCode cp ""
 

@@ -4,7 +4,6 @@
 extern value body(struct thread_info *);
 extern char __executable_start, etext;
 
-/* a closure pairs a code pointer with its environment */
 static int closure(value v) {
   if (Wosize_hd(Hd_val(v)) != 2) return 0;
   char *f = (char *) ((value *) v)[0];

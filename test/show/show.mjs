@@ -1,5 +1,3 @@
-// A block in Peregrine's WebAssembly is `[tag, arg₁ … argₙ]` and does not record
-// n, so the value is read following the shape of another target's value (argv[3]).
 import {readFileSync} from 'fs';
 
 const [file, guide] = process.argv.slice(2);
