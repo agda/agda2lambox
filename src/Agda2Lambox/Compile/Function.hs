@@ -25,7 +25,7 @@ import Agda.Syntax.Common ( hasQuantityω )
 import Agda.Utils.Monad ( ifM, ifNotM )
 import Agda.Utils.Treeless ( treeless )
 
-import Agda.Utils ( droppedParams, isPiTy, etaExpand, isFunction )
+import Agda.Utils ( droppedParams, isPiTy, etaExpand, isFunDef )
 import Agda2Lambox.Compile.Target
 import Agda2Lambox.Compile.Utils
 import Agda2Lambox.Compile.Monad
@@ -56,7 +56,6 @@ compileFunctionBody t ms Defn{defName, defType} = do
 --    ∙ the treeless translation does not always inline it
 shouldCompileFunction :: Target t -> Definition -> TCM Bool
 shouldCompileFunction t def@Defn{defName}
-  -- only non-erased
   | hasQuantityω def = isJust <$> treeless t defName
   | otherwise        = pure False
 
@@ -68,7 +67,7 @@ type MutualGraph = Map QName (Set QName)
 -- i.e. the positivity checker misses some calls on agruments it deems unused.
 recursiveGroup :: Target t -> Definition -> TCM [QName]
 recursiveGroup t Defn{defName, defMutual = block} =
-  explore M.empty [defName] >>= pure . extractGroup
+  extractGroup <$> explore M.empty [defName]
   where
   explore :: MutualGraph -> [QName] -> TCM MutualGraph
   explore gr [] = pure gr
@@ -84,9 +83,7 @@ recursiveGroup t Defn{defName, defMutual = block} =
     Just t  -> S.fromList <$> filterM inBlock (S.toList $ namesIn t)
 
   inBlock :: QName -> TCM Bool
-  inBlock q = do
-    def <- getConstInfo q
-    pure $ defMutual def == block && isFunction def
+  inBlock q = getConstInfo q <&> \def -> defMutual def == block && isFunDef (theDef def)
 
   extractGroup :: MutualGraph -> [QName]
   extractGroup g =
@@ -95,7 +92,7 @@ recursiveGroup t Defn{defName, defMutual = block} =
 
 -- | Convert a function definition to a λ□ declaration.
 compileFunction :: Target t -> Definition -> CompileM (Maybe (LBox.GlobalDecl t))
-compileFunction (t :: Target t) defn@Defn{defType} =
+compileFunction t defn@Defn{defType} =
   ifNotM (liftTCM $ shouldCompileFunction t defn) (pure Nothing) do
   mnames <- liftTCM $ recursiveGroup t defn
   mdefs  <- liftTCM $ mapM getConstInfo mnames
@@ -109,8 +106,7 @@ compileFunction (t :: Target t) defn@Defn{defType} =
     let pars = droppedParams $ theDef defn
     fmap (LBox.dropArrows pars) <$> compileTopLevelType (replicate pars False ++ unused) defType
 
-  let builder :: LBox.Term -> Maybe (LBox.GlobalDecl t)
-      builder = Just . ConstantDecl . ConstantBody typ . Just
+  let builder = Just . ConstantDecl . ConstantBody typ . Just
 
   -- if the function is not recursive, just compile the body
   if null mdefs then builder <$> compileFunctionBody t [] defn
@@ -125,8 +121,4 @@ compileFunction (t :: Target t) defn@Defn{defType} =
           l@LBox.LLambda{} -> pure l
           LBox.LBox        -> pure $ LBox.LLambda LBox.Anon LBox.LBox
           _                -> genericError "Fixpoint body must be Lambda."
-        return LBox.Def
-          { dName = qnameToName defName
-          , dBody = body
-          , dArgs = 0
-          }
+        pure $ LBox.Def (LBox.Named $ qnameToIdent defName) body 0

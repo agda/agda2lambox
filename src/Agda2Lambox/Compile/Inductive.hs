@@ -6,10 +6,9 @@ import Control.Monad.Reader ( liftIO )
 import Control.Monad ( forM, unless )
 import Data.Foldable ( toList )
 import Data.List.NonEmpty qualified as NEL
-import Data.Maybe ( isJust, fromMaybe )
+import Data.Maybe ( fromMaybe )
 
 import Agda.TypeChecking.Monad.Base hiding ( None )
-import Agda.TypeChecking.Datatypes ( ConstructorInfo(..), getConstructorInfo )
 import Agda.TypeChecking.Pretty
 import Agda.TypeChecking.Telescope ( telViewUpTo, piApplyM, teleArgs, telView, flattenTel )
 import Agda.TypeChecking.Substitute ( TelV(..) )
@@ -62,61 +61,24 @@ compileInductive t defn@Defn{defName} = do
   else do
     defs <- liftTCM $ mapM getConstInfo items
 
-    unless (all (isDataOrRecDef . theDef) defs) $
+    unless (all (defIsDataOrRecord . theDef) defs) $
       genericError "Mutually-defined datatypes/records *and* functions not supported."
 
     pars   <- liftTCM $ toInductivePars defName
     bodies <- forM defs $ compileInductive' t pars
 
     return $ Just $ LBox.InductiveDecl $ LBox.MutualInductive
-      { indFinite = LBox.Finite -- TODO(flupe)
+      { indFinite = LBox.Finite
       , indPars   = pars
       , indBodies = NEL.toList bodies
       }
 
-
-data InductiveBundle = Bundle
-  { indName :: QName
-  , indType :: Type
-  , indCons :: [QName]
-  , indPars :: Int
-  }
-
-instance PrettyTCM InductiveBundle where
-  prettyTCM Bundle{..} = hang "Bundle:" 2 $ vcat
-    [ "Name:" <+> prettyTCM indName
-    , "Type:" <+> prettyTCM indType
-    , "Cons:" <+> prettyTCM indCons
-    , "Pars:" <+> prettyTCM indPars
-    ]
-
--- | Gather the shared information for compiling inductives.
-getBundle :: Definition -> InductiveBundle
-getBundle defn@Defn{defName, defType, theDef} =
-  case theDef of
-    Datatype{dataPars, dataCons} ->
-      Bundle
-        { indName = defName
-        , indType = defType
-        , indCons = dataCons
-        , indPars = dataPars
-        }
-    Record{recPars} ->
-      Bundle
-        { indName = defName
-        , indType = defType
-        , indCons = [recCon theDef]
-        , indPars = recPars
-        }
-
 -- | Convert one datatype/record of a mutual block with @pars@ parameters.
-compileInductive' :: forall t. Target t -> Int -> Definition -> CompileM (LBox.OneInductiveBody t)
-compileInductive' t pars defn = do
-  let bundle@Bundle{..} = getBundle defn
+compileInductive' :: Target t -> Int -> Definition -> CompileM (LBox.OneInductiveBody t)
+compileInductive' t pars defn@Defn{defName, defType = indType, theDef} = do
+  let npars = getInductiveParams theDef
 
-  reportSDoc "agda2lambox.compile.inductive" 10 $ prettyTCM bundle
-
-  params <- theTel <$> telViewUpTo indPars indType
+  params <- theTel <$> telViewUpTo npars indType
 
   reportSDoc "agda2lambox.compile.inductive" 10 $
     "Inductive parameters:" <+> prettyTCM params
@@ -128,55 +90,38 @@ compileInductive' t pars defn = do
   TelV arity _ <- telView indType
   tyvars <- whenTyped t $ addContext arity $
     forM (zip [0..] $ flattenTel arity) \(i, dom) -> do
-      let domType = unDom dom
-      isVarLogical <- liftTCM $ isLogical domType
-      isVarArity   <- liftTCM $ isArity domType
-      pure LBox.TypeVarInfo
-        { tvarName      = if i < indPars then domToName dom else LBox.Anon
-        , tvarIsLogical = isVarLogical
-        , tvarIsArity   = isVarArity
-        , tvarIsSort    = isJust $ isSort $ unEl domType
-        }
+      tv <- liftTCM $ getTypeVarInfo dom
+      pure if i < npars then tv else tv { LBox.tvarName = LBox.Anon }
 
-  _ <- whenTyped t $ liftTCM $ computeErasedConstructorArgs indName
+  _ <- whenTyped t $ liftTCM $ computeErasedConstructorArgs defName
 
   addContext params do
-
-    ctors :: [LBox.ConstructorBody t] <-
-
-      forM indCons \cname -> do
-
+    ctors <- forM (defConstructors theDef) \cname -> do
+      reportSDoc "agda2lambox.compile.inductive" 10 $
+        "Compiling constructor:" <+> prettyTCM cname
+      arity <- liftTCM $ getConArity cname
+      reportSDoc "agda2lambox.compile.inductive" 10 $
+        "Constructor arity:" <+> prettyTCM arity
+      conTypeInfo <- whenTyped t do
+        theType <- liftTCM $ defType <$> getConstInfo cname
+        conType <- liftTCM $ theType `piApplyM` pvars
+        conTel  <- toList . theTel <$> telView conType
         reportSDoc "agda2lambox.compile.inductive" 10 $
-          "Compiling constructor:" <+> prettyTCM cname
-
-        arity <- liftTCM $ getConstructorInfo cname <&> \case
-          DataCon arity         -> arity
-          RecordCon _ _ arity _ -> arity
-
-        reportSDoc "agda2lambox.compile.inductive" 10 $
-          "Constructor arity:" <+> prettyTCM arity
-
-        conTypeInfo <- whenTyped t do
-          theType <- liftTCM $ defType <$> getConstInfo cname
-          conType <- liftTCM $ theType `piApplyM` pvars
-          conTel  <- toList . theTel <$> telView conType
-          reportSDoc "agda2lambox.compile.inductive" 10 $
-            "Constructor telescope:" <+> prettyTCM conTel
-          -- constructors take the block's □-params first
-          let parArgs = (, LBox.TBox) . domToName <$> cpars
-          erased <- liftTCM $ getErasedConArgs cname
-          (parArgs ++) <$> compileArgs indPars erased conTel
-
-        pure LBox.Constructor
-          { cstrName  = qnameToIdent cname
-          , cstrArgs  = arity
-          , cstrTypes = conTypeInfo
-          }
+          "Constructor telescope:" <+> prettyTCM conTel
+        -- constructors take the block's □-params first
+        let parArgs = (, LBox.TBox) . domToName <$> cpars
+        erased <- liftTCM $ getErasedConArgs cname
+        (parArgs ++) <$> compileArgs npars erased conTel
+      pure LBox.Constructor
+        { cstrName  = qnameToIdent cname
+        , cstrArgs  = arity
+        , cstrTypes = conTypeInfo
+        }
 
     pure LBox.OneInductive
-      { indName          = qnameToIdent indName
-      , indPropositional = False        -- TODO(flupe)
-      , indKElim         = LBox.IntoAny -- TODO(flupe)
+      { indName          = qnameToIdent defName
+      , indPropositional = False
+      , indKElim         = LBox.IntoAny
       , indCtors         = ctors
       , indProjs         = []
       , indTypeVars      = tyvars

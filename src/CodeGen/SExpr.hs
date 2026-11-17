@@ -46,13 +46,11 @@ instance ToSexp t (Sexpable t) where
   toSexp t (S x) = toSexp t x
 
 ctor :: Target t -> Text -> [Sexpable t] -> Exp
-ctor t n [] = SAtom (ANode n)
+ctor _ n [] = SAtom (ANode n)
 ctor t n xs = SList () (SAtom (ANode n) : map (toSexp t) xs)
 
-instance ToSexp t Atom         where toSexp _   = SAtom
-instance ToSexp t (Sexp Atom)  where toSexp _ d = d
-instance ToSexp t Int          where toSexp _ s = SAtom (AInt s)
-instance ToSexp t Bool         where toSexp _ s = SAtom (ABool s)
+instance ToSexp t Int  where toSexp _ s = SAtom (AInt s)
+instance ToSexp t Bool where toSexp _ s = SAtom (ABool s)
 
 instance {-# OVERLAPPING #-} ToSexp t String where
   toSexp _ s = SAtom (AString s)
@@ -75,9 +73,8 @@ instance ToSexp t Name where
 
 instance ToSexp t ModPath where
   toSexp t = \case
-    MPFile dp       -> ctor t "MPfile"  [S dp]
-    MPBound dp id i -> ctor t "MPbound" [S dp, S id, S i]
-    MPDot mp id     -> ctor t "MPdot"   [S mp, S id]
+    MPFile dp   -> ctor t "MPfile" [S dp]
+    MPDot mp id -> ctor t "MPdot"  [S mp, S id]
 
 instance ToSexp t KerName where
   toSexp t KerName{..} = toSexp t (kerModPath, kerName)
@@ -89,18 +86,7 @@ instance ToSexp t d => ToSexp t (Def d) where
   toSexp t Def{..} = ctor t "def" [S dName, S dBody, S dArgs]
 
 instance ToSexp t PrimValue where
-  toSexp t x = toSexp t (primTag x, primVal x)
-    where 
-      primTag = \case
-        PInt{}    -> ctor t "primInt" []
-        PFloat{}  -> ctor t "primFloat" []
-        PString{} -> ctor t "primString" []
-
-      primVal = \case
-        PInt   i  -> AString (show i)
-        PFloat f  -> AString (show f)
-        PString s -> AString s
-
+  toSexp _ (PString s) = SList () [SAtom (ANode "primString"), SAtom (AString s)]
 
 instance ToSexp t Term where
   toSexp t = \case
@@ -125,18 +111,8 @@ instance ToSexp t Type where
     TInd ind  -> ctor t "TInd"   [S ind]
     TConst kn -> ctor t "TConst" [S kn]
 
-instance ToSexp t RecursivityKind where
-  toSexp t = \case
-    Finite   -> ctor t "Finite"   []
-    CoFinite -> ctor t "CoFinite" []
-    BiFinite -> ctor t "BiFinite" []
-
-instance ToSexp t AllowedElims where
-  toSexp t = \case
-    IntoSProp        -> ctor t "IntoSProp"        []
-    IntoPropSProp    -> ctor t "IntoPropSProp"    []
-    IntoSetPropSProp -> ctor t "IntoSetPropSProp" []
-    IntoAny          -> ctor t "IntoAny"          []
+instance ToSexp t RecursivityKind where toSexp _ = SAtom . ANode . pack . show
+instance ToSexp t AllowedElims    where toSexp _ = SAtom . ANode . pack . show
 
 instance ToSexp t (ConstructorBody t) where
   toSexp t@ToUntyped Constructor{..} =
@@ -165,7 +141,7 @@ instance ToSexp t (OneInductiveBody t) where
       , S indPropositional
       , S indKElim
       ]
-      ++ -- NOTE(flupe): in the SExp format, order is important
+      ++ -- NB: in the SExp format, order is important
       case t of
         ToUntyped -> []
         ToTyped   -> [S $ getTyped indTypeVars]

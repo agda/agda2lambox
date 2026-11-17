@@ -1,6 +1,6 @@
-{-# LANGUAGE DataKinds, GADTs, FlexibleInstances #-}
+{-# LANGUAGE DataKinds, GADTs #-}
 -- | Compile targets for the backend
-module Agda2Lambox.Compile.Target 
+module Agda2Lambox.Compile.Target
   ( Typing(..)
   , Target(..)
   , WhenTyped(..)
@@ -25,22 +25,15 @@ data WhenTyped (t :: Typing) (a :: Type) :: Type where
   Some :: a -> WhenTyped Typed   a
 
 instance Functor (WhenTyped t) where
-  fmap f None     = None
+  fmap _ None     = None
   fmap f (Some x) = Some (f x)
 
-instance Applicative (WhenTyped Typed) where
-  pure = Some
-  Some f <*> Some x = Some (f x)
-
-instance Monad (WhenTyped Typed) where
-  Some x >>= f = f x
-
 instance Foldable (WhenTyped t) where
-  foldMap f None     = mempty
+  foldMap _ None     = mempty
   foldMap f (Some x) = f x
 
 -- | Retrieve a value when it's there for sure, in the typed setting.
-getTyped :: WhenTyped Typed a ->  a
+getTyped :: WhenTyped Typed a -> a
 getTyped (Some x) = x
 
 -- | Only perform a computation when targetting typed.

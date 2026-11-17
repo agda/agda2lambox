@@ -10,12 +10,6 @@ dist-newstyle
 *.glob
 *.aux
 *.d
-*.txt
-*.ast
-*.v
-*.elm
-*.rs
-*.wasm
 *.crashcoqide
 .direnv
 result

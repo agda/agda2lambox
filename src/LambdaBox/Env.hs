@@ -1,5 +1,5 @@
 {-# LANGUAGE DataKinds, GADTs, OverloadedStrings #-}
-{- | 
+{- |
 Module      : LambdaBox.Env
 Description : Lambda Box environments, identical for both targets.
 
@@ -10,12 +10,10 @@ Because we want to target both the untyped and typed-annotated variants
 of λ□, but would rather use a single unified global environment,
 we parametrize most definitions with a typing mode 'Agda2Lambox.Compile.Target.Typing'.
 
-This ensures that the typing information /is always there/ when targetting the 
+This ensures that the typing information /is always there/ when targetting the
 typed target, while also avoiding to do unnecessary work when type information is not required.
 -}
 module LambdaBox.Env where
-
-
 
 import Data.Kind ( Type )
 import Data.List.NonEmpty ( nonEmpty )
@@ -27,17 +25,19 @@ import LambdaBox.Term
 import LambdaBox.Type qualified as LBox
 import Agda2Lambox.Compile.Target
 
--- Allowed elimination target for a datatype.
+-- | Allowed elimination target for a datatype.
 data AllowedElims
   = IntoSProp
   | IntoPropSProp
   | IntoSetPropSProp
   | IntoAny
+  deriving Show
 
 data RecursivityKind
   = Finite   -- ^ Inductive datatype.
   | CoFinite -- ^ Coinductive datatype.
   | BiFinite -- ^ Non-recursive.
+  deriving Show
 
 -- | Constructor info in datatype declaration.
 data ConstructorBody t = Constructor
@@ -63,11 +63,11 @@ for the full explanation.
 
     Inhabitants of arities are called /type schemes/.
 
-* A type is /logical/ when it is a proposition (i.e. inhabitants are proofs) 
+* A type is /logical/ when it is a proposition (i.e. inhabitants are proofs)
   or when it is an /arity/ into @Prop@.
 
     * @P@ when @P : Prop@.
-    * @∀ (a₁ : A₁) ... (a_n : A_n) → Prop@ (i.e. inhabitants are propositional type schemes). 
+    * @∀ (a₁ : A₁) ... (a_n : A_n) → Prop@ (i.e. inhabitants are propositional type schemes).
 
 * A type is a sort when it is either @Prop@ or @Type@.
 

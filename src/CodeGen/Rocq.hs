@@ -1,4 +1,4 @@
-{-# LANGUAGE FlexibleInstances, FlexibleContexts, OverloadedStrings, DataKinds #-}
+{-# LANGUAGE FlexibleInstances, OverloadedStrings #-}
 -- | Generating Rocq code from our LambdaBox AST
 module CodeGen.Rocq (prettyRocq) where
 
@@ -15,26 +15,13 @@ class ToRocq t a where
   procqP = const procq
   {-# MINIMAL procq | procqP #-}
 
--- | Shorthand for untyped λ□ pretty-printer.
-uprocq :: ToRocq Untyped a => a -> Doc
-uprocq = procq ToUntyped
-
--- | Shorthand for typed λ□ pretty-printer.
-tprocq :: ToRocq Typed a => a -> Doc
-tprocq = procq ToTyped
-
 -- | Pretty-print a Rocq-printable term.
 prettyRocq :: ToRocq t a => Target t -> a -> String
 prettyRocq t = render . procq t
 
--- | Util to format Rocq constructor with the given arguments.
-ctor :: String -> [Doc] -> Doc
-ctor = ctorP 0
-{-# INLINE ctor #-}
-
 -- | Util to format Rocq constructor with the given arguments (and precedence).
 ctorP :: Int -> String -> [Doc] -> Doc
-ctorP p name []   = text name
+ctorP _ name []   = text name
 ctorP p name args = applyWhen (p >= 10) parens $ text name <?> fsep args
 
 -- | Util to format Rocq record value with the given fields.
@@ -49,9 +36,9 @@ instance ToRocq t Doc  where procq _ d = d
 instance ToRocq t Int  where procq _ s = pretty s
 instance ToRocq t Bool where procq _ v = if v then "true" else "false"
 
+-- | Strings are printed as Rocq bytestrings.
 instance {-# OVERLAPPING #-} ToRocq t String where
   procq _ s = text (show s) <> "%bs"
-  -- NOTE(flupe): "%bs" to make sure that we produce Rocq bytestrings
 
 instance ToRocq t a => ToRocq t (Maybe a) where
   procqP p t x = case x of
@@ -66,14 +53,13 @@ instance (ToRocq t a, ToRocq t b) => ToRocq t (a, b) where
 
 instance ToRocq t Name where
   procq t n = case n of
-    Anon    -> ctor "nAnon"  []
-    Named i -> ctor "nNamed" [procq t i]
+    Anon    -> ctorP 0 "nAnon"  []
+    Named i -> ctorP 0 "nNamed" [procq t i]
 
 instance ToRocq t ModPath where
   procqP p t mp = case mp of
-    MPFile dp       -> ctorP p "MPfile"  [procqP 10 t dp]
-    MPBound dp id i -> ctorP p "MPbound" [procqP 10 t dp, procqP 10 t id, procqP 10 t i]
-    MPDot mp id     -> ctorP p "MPdot"   [procqP 10 t mp, procqP 10 t id]
+    MPFile dp   -> ctorP p "MPfile" [procqP 10 t dp]
+    MPDot mp id -> ctorP p "MPdot"  [procqP 10 t mp, procqP 10 t id]
 
 instance ToRocq t KerName where
   procq t KerName{..} = procq t (kerModPath, kerName)
@@ -115,36 +101,25 @@ instance ToRocq t Type where
     TConst kn -> ctorP p "TConst" [procqP 10 t kn]
 
 instance ToRocq t PrimValue where
-  procqP p _ v = case v of
-    PString s -> ctorP p "EPrimitive.prim_string" [text (escapeQuote s) <> "%pstring"]
-    _ -> error "Primitive integers/floats are not supported by the Rocq printer."
-    where escapeQuote s = "\"" ++ concatMap (\c -> if c == '"' then "\"\"" else [c]) s ++ "\""
+  procqP p _ (PString s) =
+    ctorP p "EPrimitive.prim_string" [text escapedS <> "%pstring"]
+    where escapedS = "\"" ++ concatMap (\c -> if c == '"' then "\"\"" else [c]) s ++ "\""
 
-instance ToRocq t RecursivityKind where
-  procq _ rk = case rk of
-    Finite   -> ctor "Finite"   []
-    CoFinite -> ctor "CoFinite" []
-    BiFinite -> ctor "BiFinite" []
-
-instance ToRocq t AllowedElims where
-  procq t ae = case ae of
-    IntoSProp        -> ctor "IntoSProp"        []
-    IntoPropSProp    -> ctor "IntoPropSProp"    []
-    IntoSetPropSProp -> ctor "IntoSetPropSProp" []
-    IntoAny          -> ctor "IntoAny"          []
+instance ToRocq t RecursivityKind where procq _ = text . show
+instance ToRocq t AllowedElims    where procq _ = text . show
 
 instance ToRocq t (ConstructorBody t) where
-  procq ToUntyped Constructor{..} =
-    record [ ("cstr_name",  uprocq cstrName)
-           , ("cstr_nargs", uprocq cstrArgs)
+  procq t@ToUntyped Constructor{..} =
+    record [ ("cstr_name",  procq t cstrName)
+           , ("cstr_nargs", procq t cstrArgs)
            ]
 
-  procq ToTyped Constructor{..} =
-    tprocq ((cstrName, getTyped cstrTypes), cstrArgs)
+  procq t@ToTyped Constructor{..} =
+    procq t ((cstrName, getTyped cstrTypes), cstrArgs)
 
 instance ToRocq t (ProjectionBody t) where
-  procq ToUntyped Projection{..} = record [("proj_name",  uprocq projName)]
-  procq ToTyped   Projection{..} = tprocq (projName, getTyped projType)
+  procq t@ToUntyped Projection{..} = record [("proj_name",  procq t projName)]
+  procq t@ToTyped   Projection{..} = procq t (projName, getTyped projType)
 
 instance ToRocq t TypeVarInfo where
   procq t TypeVarInfo{..} =
@@ -176,7 +151,7 @@ instance ToRocq t (MutualInductiveBody t) where
            ]
 
 instance ToRocq t (ConstantBody t) where
-  procqP p t ConstantBody{..} =
+  procq t ConstantBody{..} =
     record $
       ("cst_body", procq t cstBody) :
       case t of
@@ -190,54 +165,41 @@ instance ToRocq t (GlobalDecl t) where
     TypeAliasDecl typ   -> ctorP p "TypeAliasDecl" [procqP 10 t typ]
 
 instance ToRocq t (GlobalEnv t) where
-  procq ToUntyped (GlobalEnv env) = uprocq env
-  procq ToTyped   (GlobalEnv env) = tprocq $ flip map env \(kn, decl) -> ((kn, True), decl)
+  procq t@ToUntyped (GlobalEnv env) = procq t env
+  procq t@ToTyped   (GlobalEnv env) = procq t $ flip map env \(kn, decl) -> ((kn, True), decl)
 
 instance ToRocq t (LBoxModule t) where
-  procq ToUntyped LBoxModule{..} = vsep
+  procq t LBoxModule{..} = vsep
     [ vcat
         [ "From Stdlib           Require Import List."
         , "From Stdlib           Require PrimString."
         , "Import PrimString.PStringNotations."
         , "From MetaRocq.Common  Require Import BasicAst Kernames Universes."
         , "From MetaRocq.Utils   Require Import bytestring."
-        , "From MetaRocq.Erasure Require Import EAst."
-        , "From Agda2Lambox     Require Import CheckWF Eval."
+        , typed "From MetaRocq.Erasure Require Import EAst."
+                "From MetaRocq.Erasure Require Import EAst ExAst."
+        , typed "From Agda2Lambox     Require Import CheckWF Eval."
+                "From Agda2Lambox      Require Import CheckWF Eval."
         , "Import ListNotations."
         ]
 
-    , hang "Definition env : global_declarations :=" 2 $
-        uprocq lboxEnv <> "."
+    , hang (typed "Definition env : global_declarations :=" "Definition env : global_env :=") 2 $
+        procq t lboxEnv <> "."
 
-    , "Compute @check_wf_glob eflags env."
+    , typed "Compute @check_wf_glob eflags env."
+            "Compute @check_wf_glob eflags (ExAst.trans_env env)."
 
-    , programs "env" lboxMain
+    , programs (typed "env" "ExAst.trans_env env") lboxMain
     ]
-
-  procq ToTyped LBoxModule{..} = vsep
-    [ vcat
-        [ "From Stdlib           Require Import List."
-        , "From Stdlib           Require PrimString."
-        , "Import PrimString.PStringNotations."
-        , "From MetaRocq.Common  Require Import BasicAst Kernames Universes."
-        , "From MetaRocq.Utils   Require Import bytestring."
-        , "From MetaRocq.Erasure Require Import EAst ExAst."
-        , "From Agda2Lambox      Require Import CheckWF Eval."
-        , "Import ListNotations."
-        ]
-
-    , hang "Definition env : global_env :=" 2 $ tprocq lboxEnv <> "."
-
-    , "Compute @check_wf_glob eflags (ExAst.trans_env env)."
-
-    , programs "ExAst.trans_env env" lboxMain
-    ]
+    where
+    typed :: Doc -> Doc -> Doc
+    typed u ty = case t of ToUntyped -> u; ToTyped -> ty
 
 -- | Evaluate each main program in the given untyped environment.
 programs :: Doc -> [Term] -> Doc
 programs env mains = vsep $ flip map (zip [1..] $ reverse mains) \(i :: Int, t) ->
   let progname = "prog" <> pretty i in vsep
   [ hang ("Definition " <> progname <> " : program :=") 2 $
-      uprocq (env, t) <> "."
+      procq ToUntyped (env, t) <> "."
   , "Compute show_program " <> progname <> "."
   ]

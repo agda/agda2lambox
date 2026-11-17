@@ -8,20 +8,19 @@ import Data.Maybe ( isJust, mapMaybe, fromMaybe )
 import Agda.Syntax.Common ( unArg, Arg (Arg) )
 import Agda.Syntax.Internal
 import Agda.TypeChecking.Substitute ( absBody, absApp )
-import Agda.TypeChecking.Monad.Base hiding ( initEnv )
+import Agda.TypeChecking.Monad.Base
 import Agda.TypeChecking.Monad.Debug ( reportSDoc )
 import Agda.TypeChecking.Monad.Signature ( canonicalName )
 import Agda.TypeChecking.Telescope ( shouldBePi )
 import Agda.TypeChecking.Pretty ( prettyTCM, (<+>) )
 import Agda.Utils.Monad ( ifM, andM, orM )
-import Agda.Utils ( unSpine1 )
 
 import qualified LambdaBox as LBox
 import Agda2Lambox.Compile.Utils
 import Agda2Lambox.Compile.Monad
 import Agda.Compiler.Backend (HasConstInfo(getConstInfo), AddContext (addContext))
-import Agda.Utils (isDataOrRecDef, isArity, maybeUnfoldCopy, isFunDef, isTypeAlias)
-import Agda.TypeChecking.Reduce ( reduce )
+import Agda.Utils (isArity, isFunDef, isTypeAlias, unSpine1, droppedParams)
+import Agda.TypeChecking.Reduce ( reduce, reduceDefCopy )
 import Agda.TypeChecking.CheckInternal ( infer )
 
 
@@ -43,21 +42,15 @@ data TypeEnv = TypeEnv
     -- ^ Which arrows of the top-level spine take arguments that Agda's erasure removes.
   }
 
--- | Initialize compilation environment with a given number of type variables.
-initEnv :: Int -> TypeEnv
-initEnv tvs = TypeEnv
+-- | Run a type compilation, given a number of type variables in scope.
+runC :: Int -> C a -> CompileM a
+runC tvs m = runReaderT m TypeEnv
   { typeVars   = tvs
   , boundVars  = tvs
   , boundTypes = reverse $ TypeVar <$> [0 .. tvs - 1]
   , insertVars = True
   , erasedArgs = []
   }
-
-runC :: Int -> C a -> CompileM a
-runC tvs m = runReaderT m (initEnv tvs)
-
-runCNoVars :: Int -> C a -> CompileM a
-runCNoVars tvs m = runReaderT m ((initEnv tvs) { insertVars = False })
 
 -- | Increment the number of locally-bound variables.
 --   Extend the context with the given type info.
@@ -108,14 +101,6 @@ compileTopLevelType erased ty = do
   liftTCM $ reportSDoc "agda2lambox.compile.type" 10 $ "Compiling top level type: " <+> prettyTCM ty
   runC 0 $ withErasedArgs erased $ compileTopLevelTypeC ty
 
--- | Compile a type, given a number of type variables in scope.
---   Will not introduce more type variables.
-compileType :: Int -> Type -> CompileM LBox.Type
-compileType tvars ty = do
-  liftTCM $ reportSDoc "agda2lambox.compile.type" 10 $ "Compiling type: " <+> prettyTCM ty
-  liftTCM $ reportSDoc "agda2lambox.compile.type" 10 $ "With vars: " <+> prettyTCM tvars
-  runC tvars $ compileTypeC ty
-
 -- | Compile a type that is not on the top-level spine, i.e. no new type variables.
 nested :: C a -> C a
 nested = local \e -> e { insertVars = False, erasedArgs = [] }
@@ -132,7 +117,6 @@ compileElims ty (x:xs) = do
   liftTCM $ reportSDoc "agda2lambox.compile.elims" 100 $ "Full elim type:" <+> prettyTCM ty
   liftTCM $ reportSDoc "agda2lambox.compile.elims" 100 $ "Current elim:" <+> prettyTCM x
   (a, b) <- liftTCM $ shouldBePi ty
-  -- b <- piApplyM ty x
   rest   <- compileElims (absApp b $ unArg x) xs
   -- We compile:
   --   * types (even if erased)
@@ -203,51 +187,46 @@ compileTypeTerm t = do
     Level{}    -> pure ([], LBox.TBox)
     DontCare{} -> pure ([], LBox.TBox)
 
-    Var n _ -> do
-      -- NOTE(flupe): I think we should distinguish b/w "other" and logical variables
-      (!! n) <$> asks boundTypes >>= \case
-        TypeVar n -> pure ([], LBox.TVar n)
-        Other     -> pure ([], LBox.TAny  )
+    Var n _ -> (!! n) <$> asks boundTypes <&> \case
+      TypeVar n -> ([], LBox.TVar n)
+      Other     -> ([], LBox.TAny  )
 
-    Def q es -> maybeUnfoldCopy q es compileTypeTerm \q es -> do
-      Defn{theDef = def, defType, defArgInfo, defName} <- liftTCM $ getConstInfo q
+    -- definitions introduced by module application are unfolded
+    Def q es -> reduceDefCopy q es >>= \case
+      YesReduction _ t' -> compileTypeTerm t'
+      NoReduction ()    -> do
+        Defn{theDef = def, defType, defArgInfo} <- liftTCM $ getConstInfo q
+        isLogicalDef <- liftTCM $ isLogical $ Arg defArgInfo defType
+        if
+          -- if this def is logical, we ignore it (and its arguments)
+          | isLogicalDef -> pure ([], LBox.TBox)
 
-      isLogicalDef <- liftTCM $ isLogical $ Arg defArgInfo defType
+          -- an inductive is applied to its parameters and indices,
+          -- unless Agda erases its values (e.g. unit-like records)
+          | defIsDataOrRecord def -> ifM (liftTCM $ erasable <$> headInfo q) (pure ([], LBox.TBox)) do
+            lift $ requireDef q
+            ind <- liftTCM $ toInductive q
+            ([],) . foldl' LBox.TApp (LBox.TInd ind)
+              <$> compileElims defType (mapMaybe isApplyElim es)
 
-      -- if this def is logical, we ignore it (and its arguments)
-      if isLogicalDef then pure ([], LBox.TBox)
+          -- a type-level function that is not an alias is compiled to its reduct,
+          -- if any, else to □ if Agda erases the values of all its clauses
+          | isFunDef def && not (isTypeAlias def) ->
+            liftTCM (reduce $ Def q es) >>= \case
+              Def q' _ | q' == q -> ifM (liftTCM $ erasable <$> headInfo q) (pure ([], LBox.TBox)) $
+                                      typeScheme q defType es
+              t'                 -> compileTypeTerm t'
 
-      -- an inductive is applied to its parameters and indices,
-      -- unless Agda erases its values (e.g. unit-like records)
-      else if isDataOrRecDef def then ifM (liftTCM $ erasable <$> headInfo q) (pure ([], LBox.TBox)) do
-        lift $ requireDef q
-        ind <- liftTCM $ toInductive q
-        let args = mapMaybe isApplyElim es
-        ([],) . foldl' LBox.TApp (LBox.TInd ind)
-          <$> compileElims defType args
+          -- a type alias is kept, unless it hides arrows of the top-level spine,
+          -- which determine type variables and dearging masks (e.g. @incr : Endo Nat@)
+          | isTypeAlias def ->
+            ifM (asks insertVars) (liftTCM $ reduce $ Def q es) (pure $ Def q es) >>= \case
+              t'@Pi{} -> compileTypeTerm t'
+              _       -> typeScheme q defType es
 
-      -- a type-level function that is not an alias is compiled to its reduct
-      -- if any, else to □ if Agda erases the values of all its clauses
-      else if isFunDef def && not (isTypeAlias def) then
-        liftTCM (reduce $ Def q es) >>= \case
-          Def q' _ | q' == q -> ifM (liftTCM $ erasable <$> headInfo q) (pure ([], LBox.TBox)) $
-                                  typeScheme q defType es
-          t'                 -> compileTypeTerm t'
-
-      -- a type alias is kept, unless it hides arrows of the top-level spine,
-      -- which determine type variables and dearging masks (e.g. @incr : Endo Nat@)
-      else if isTypeAlias def then
-        ifM (asks insertVars) (liftTCM $ reduce $ Def q es) (pure $ Def q es) >>= \case
-          t'@Pi{} -> compileTypeTerm t'
-          _       -> typeScheme q defType es
-
-      -- otherwise, it must have been compiled as a type scheme,
-      -- and therefore is kept with all arguments.
-
-      -- TODO(flupe): check whether indeed the fallback is always compiled to a typescheme.
-      --              what about non-logical defs that are not arities or w/?
-      -- TODO(flupe): possibly merge the logic with the above for datatypes
-      else typeScheme q defType es
+          -- otherwise, it must have been compiled as a type scheme,
+          -- and therefore is kept with all arguments.
+          | otherwise -> typeScheme q defType es
 
     Pi dom codom -> do
       let domType   = unDom dom
@@ -282,9 +261,8 @@ compileTypeTerm t = do
 
 -- | Restore the parameters of an application of a projection(-like) function.
 projectionParams :: QName -> Elims -> TCM Elims
-projectionParams q es = theDef <$> getConstInfo q >>= \case
-  Function{funProjection = Right Projection{projIndex}}
-    | npars <- projIndex - 1, npars > 0, Apply r : _ <- es ->
+projectionParams q es = droppedParams . theDef <$> getConstInfo q >>= \case
+  npars | npars > 0, Apply r : _ <- es ->
     unEl <$> (reduce =<< infer (unArg r)) <&> \case
       Def _ ps | Just pars <- allApplyElims (take npars ps), length pars == npars
         -> map Apply pars ++ es

@@ -1,21 +1,15 @@
-{-# LANGUAGE DerivingStrategies, GeneralizedNewtypeDeriving, OverloadedStrings, DeriveTraversable, FlexibleContexts #-}
+{-# LANGUAGE DerivingStrategies, GeneralizedNewtypeDeriving, OverloadedStrings, FlexibleContexts #-}
 -- | Compilation monad.
 module Agda2Lambox.Compile.Monad
   ( CompileM
-  , CompileEnv(..)
   , requireDef
   , runCompile
   , compileLoop
   , genericError
-  , genericDocError
-  , internalError
   , CompiledItem(..)
-  , ask
-  , asks
   ) where
 
 import Control.Monad ( unless )
-import Control.Monad.Reader
 import Control.Monad.State
 import Data.Bifunctor ( bimap )
 import Data.Set ( Set )
@@ -27,18 +21,11 @@ import Agda.Syntax.Abstract (QName)
 import Agda.Compiler.Backend (getConstInfo, PureTCM, HasConstInfo, HasBuiltins, canonicalName)
 import Agda.TypeChecking.Monad (MonadDebug, MonadTrace, MonadAddContext)
 import Agda.TypeChecking.Monad.Debug (reportSDoc)
-import Agda.TypeChecking.Monad.Base hiding (initState)
+import Agda.TypeChecking.Monad.Base
 import Agda.Utils.Monad ( unlessM )
 import Agda.TypeChecking.Pretty
 import Agda.Syntax.Common.Pretty qualified as P
 import Control.Monad.Error.Class (MonadError)
-
-import Data.Foldable (traverse_)
-
--- | Compilation Environment
-data CompileEnv = CompileEnv
-  {
-  }
 
 -- | Backend compilation state.
 data CompileState = CompileState
@@ -50,28 +37,16 @@ data CompileState = CompileState
     -- ^ (Locally) required definitions.
   }
 
--- Initial compile state.
-initState :: CompileState
-initState = CompileState
-  { seenDefs     = Set.empty
-  , compileStack = []
-  , requiredDefs = Set.empty
-  }
-
 -- | Backend compilation monad.
-newtype CompileM a = Compile (ReaderT CompileEnv (StateT CompileState TCM) a)
+newtype CompileM a = Compile (StateT CompileState TCM a)
   deriving newtype (Functor, Applicative, Monad)
   deriving newtype (MonadIO, MonadFail, MonadDebug, ReadTCState, MonadTrace)
   deriving newtype (MonadError TCErr, MonadTCEnv, MonadTCState, HasOptions, MonadTCM)
   deriving newtype (MonadAddContext, MonadReduce, HasConstInfo, HasBuiltins, MonadFileId, PureTCM)
-  deriving newtype (MonadReader CompileEnv)
 
 -- | Backend-specific errors.
-genericDocError :: MonadTCError m => Doc -> m a
-genericDocError = typeError . CustomBackendError "agda2lambox"
-
 genericError :: MonadTCError m => String -> m a
-genericError = genericDocError . P.text
+genericError = typeError . CustomBackendError "agda2lambox" . P.text
 
 -- | Require a definition to be compiled.
 requireDef :: QName -> CompileM ()
@@ -101,7 +76,6 @@ nextUnit = Compile $
     []   -> pure Nothing
     q:qs -> Just q <$ modify \ s -> s {compileStack = qs}
 
-
 -- | Record the required definitions of a compilation unit.
 trackDeps :: CompileM a -> CompileM (a, [QName])
 trackDeps (Compile c) = Compile do
@@ -111,8 +85,8 @@ trackDeps (Compile c) = Compile do
   pure (x, Set.toList deps)
 
 -- | Run a compile action in 'TCM'.
-runCompile :: CompileEnv -> CompileM a -> TCM a
-runCompile env (Compile c) = evalStateT (runReaderT c env) initState
+runCompile :: CompileM a -> TCM a
+runCompile (Compile c) = evalStateT c $ CompileState Set.empty [] Set.empty
 
 -- | Run the processing function as long as there are names to be compiled.
 --  Returns a list of compiled items, (topologically) sorted by dependency order.
@@ -123,16 +97,15 @@ compileLoop
   -> [QName] -- ^ Initial names to compile
   -> CompileM [CompiledItem a]
 compileLoop step names = do
-  traverse_ requireDef names
+  mapM_ requireDef names
   topoSort <$> loop
   where
   loop :: CompileM [CompiledItem (Maybe a)]
-  loop@(Compile unloop) = nextUnit >>= \case
+  loop = nextUnit >>= \case
     Nothing -> pure []
     Just q  -> do
-      (mr, deps) <- trackDeps . step =<< (liftTCM $ getConstInfo q)
+      (mr, deps) <- trackDeps . step =<< liftTCM (getConstInfo q)
       (CompiledItem q deps mr:) <$> loop
-
 
 -- * Compilation items and topological sort
 
@@ -141,7 +114,7 @@ data CompiledItem a = CompiledItem
   { itemName  :: QName
   , itemDeps  :: [QName]
   , itemValue :: a
-  } deriving (Functor, Foldable, Traversable)
+  }
 
 -- | Stateful monad for the topological sort.
 -- State contains the list of items that have been permanently inserted,
@@ -154,7 +127,7 @@ type TopoM a = State (Set QName, [CompiledItem a])
 -- (e.g constructors are skipped but force compilation of their datatype).
 -- In the end, we get a list of items that are effectively compiled.
 topoSort :: forall a. [CompiledItem (Maybe a)] -> [CompiledItem a]
-topoSort defs = snd $ execState (traverse (visit Set.empty) defs) (Set.empty, [])
+topoSort defs = snd $ execState (mapM_ (visit Set.empty) defs) (Set.empty, [])
   where
     items = Map.fromList $ map (\x -> (itemName x, x)) defs
 
@@ -168,13 +141,10 @@ topoSort defs = snd $ execState (traverse (visit Set.empty) defs) (Set.empty, []
       = modify $ bimap (Set.insert itemName) (item {itemValue = value}:)
       | otherwise = pure ()
 
+    -- NB: an item that is already temporarily marked means a cycle in the graph,
+    --     which should never happen; we then pick an arbitrary order.
     visit :: Set QName -> CompiledItem (Maybe a) -> TopoM a ()
-    visit temp item@CompiledItem{..} = do
-      -- NOTE(flupe): Visiting an item that has already been temporarily marked
-      --  means something went wrong and we have a cycle in the graph.
-      --  We could throw an error, but this should never happen.
-      --  Here, we continue and pick an arbitrary order.
+    visit temp item@CompiledItem{..} =
       unlessM ((Set.member itemName temp ||) <$> isMarked itemName) do
-        let deps = catMaybes $ (`Map.lookup` items) <$> itemDeps
-        traverse (visit (Set.insert itemName temp)) deps
+        mapM_ (visit (Set.insert itemName temp)) $ catMaybes $ (`Map.lookup` items) <$> itemDeps
         push item

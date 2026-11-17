@@ -1,4 +1,4 @@
-{-# LANGUAGE DeriveGeneric, DeriveAnyClass, OverloadedStrings, ExistentialQuantification #-}
+{-# LANGUAGE OverloadedStrings, ExistentialQuantification #-}
 -- | The agda2lambox Agda backend
 module Main (main) where
 
@@ -8,7 +8,6 @@ import Control.DeepSeq ( NFData(rnf) )
 import Data.Maybe ( fromMaybe )
 import Data.Version ( showVersion )
 import Data.Text ( pack )
-import GHC.Generics ( Generic )
 import Agda.Utils.GetOpt ( OptDescr(Option), ArgDescr(..) )
 import System.Directory ( createDirectoryIfMissing )
 import System.FilePath ( (</>), (-<.>) )
@@ -21,78 +20,49 @@ import Agda.Compiler.Backend
 import Agda.Main ( runAgda )
 import Agda.Syntax.Common.Pretty ( prettyShow )
 
-import Agda.Utils ( pp, hasPragma )
+import Agda.Utils ( hasPragma )
 import Agda2Lambox.Compile.Target
 import Agda2Lambox.Compile.Utils
 import Agda2Lambox.Compile ( compile )
-import CodeGen.Rocq ( prettyRocq  )
+import CodeGen.Rocq ( prettyRocq )
 import CodeGen.SExpr ( prettySexp )
 import LambdaBox.Env
-import Agda2Lambox.Compile.Monad ( runCompile, CompileEnv(..), genericError )
+import Agda2Lambox.Compile.Monad ( runCompile, genericError )
 
 
 main :: IO ()
 main = runAgda [agda2lambox]
 
-data Output = RocqOutput | AstOutput
-  deriving (Eq, Show, Generic, NFData)
-
 -- | Backend options.
 data Options = forall t. Options
-  { optOutDir   :: Maybe FilePath
-  , optTarget   :: Target t
-  , optOutputs  :: [Output]
-  , optLibrary  :: Bool
+  { optOutDir  :: Maybe FilePath
+  , optTarget  :: Target t
+  , optRocq    :: Bool
+  , optLibrary :: Bool
   }
 
 instance NFData Options where
-  rnf (Options m t o l) = rnf m `seq` rnf t `seq` rnf o `seq` rnf l
-
--- | Setter for output directory option.
-outdirOpt :: Monad m => FilePath -> Options -> m Options
-outdirOpt dir opts = return opts { optOutDir = Just dir }
-
-typedOpt :: Monad m => Options -> m Options
-typedOpt opts = return opts { optTarget = ToTyped }
-
-rocqOpt :: Monad m => Options -> m Options
-rocqOpt opts = return opts { optOutputs = RocqOutput : optOutputs opts }
-
-libraryOpt :: Monad m => Options -> m Options
-libraryOpt opts = return opts { optLibrary = True }
-
--- | Default backend options.
-defaultOptions :: Options
-defaultOptions  = Options
-  { optOutDir   = Nothing
-  , optTarget   = ToUntyped
-  , optOutputs  = [AstOutput]
-  , optLibrary  = False
-  }
-
--- | Backend module environments.
-type ModuleEnv = ()
-type ModuleRes = ()
+  rnf (Options m t r l) = rnf m `seq` rnf t `seq` rnf r `seq` rnf l
 
 -- | The agda2lambox backend.
 agda2lambox :: Backend
 agda2lambox = Backend backend
   where
-    backend :: Backend' Options Options ModuleEnv ModuleRes QName
+    backend :: Backend' Options Options () () QName
     backend = Backend'
       { backendName           = "agda2lambox"
       , backendInteractTop    = Nothing
       , backendInteractHole   = Nothing
       , backendVersion        = Just $ pack $ showVersion version
-      , options               = defaultOptions
+      , options               = Options Nothing ToUntyped False False
       , commandLineFlags      =
-          [ Option ['o'] ["out-dir"] (ReqArg outdirOpt "DIR")
+          [ Option ['o'] ["out-dir"] (ReqArg (\ dir o -> pure o{optOutDir = Just dir}) "DIR")
             "Write output files to DIR. (default: project root)"
-          , Option ['t'] ["typed"] (NoArg typedOpt)
+          , Option ['t'] ["typed"] (NoArg \ o -> pure o{optTarget = ToTyped})
             "Compile to typed λ□ environments."
-          , Option ['c'] ["rocq"] (NoArg rocqOpt)
+          , Option ['c'] ["rocq"] (NoArg \ o -> pure o{optRocq = True})
             "Output a Rocq file."
-          , Option ['a'] ["export-all"] (NoArg libraryOpt)
+          , Option ['a'] ["export-all"] (NoArg \ o -> pure o{optLibrary = True})
             "Compile every definition of the module, not only those reachable from a COMPILE pragma (to extract a library)."
           ]
       , isEnabled             = \ _ -> True
@@ -107,18 +77,13 @@ agda2lambox = Backend backend
 
 moduleSetup
   :: Options -> IsMain -> TopLevelModuleName -> Maybe FilePath
-  -> TCM (Recompile ModuleEnv ModuleRes)
-moduleSetup _ NotMain m _ = pure $ Skip ()
-moduleSetup _ IsMain m _ = do
-  setScope . iInsideScope =<< curIF
-  pure $ Recompile ()
+  -> TCM (Recompile () ())
+moduleSetup _ NotMain _ _ = pure $ Skip ()
+moduleSetup _ IsMain  _ _ = Recompile () <$ (setScope . iInsideScope =<< curIF)
 
-writeModule
-  :: Options -> ModuleEnv -> IsMain -> TopLevelModuleName
-  -> [QName]
-  -> TCM ModuleRes
-writeModule opts menv NotMain _ _   = pure ()
-writeModule Options{..} menv IsMain m defs = do
+writeModule :: Options -> () -> IsMain -> TopLevelModuleName -> [QName] -> TCM ()
+writeModule _ _ NotMain _ _ = pure ()
+writeModule Options{..} _ IsMain m defs = do
   outDir   <- flip fromMaybe optOutDir <$> compileDir
   programs <- filterM hasPragma defs
 
@@ -126,26 +91,18 @@ writeModule Options{..} menv IsMain m defs = do
     "No main program specified. Please use a COMPILE pragma, or --export-all to extract a library."
 
   -- only compile what is reachable from the programs, unless extracting a library
-  let roots = if optLibrary then defs else programs
-  env      <- runCompile CompileEnv $ compile optTarget roots
-
+  env   <- runCompile $ compile optTarget $ if optLibrary then defs else programs
   mains <- mapM mainProgram programs
 
-  liftIO $ createDirectoryIfMissing True outDir
-
-  let fileName = outDir </> prettyShow m
-  let lboxMod  = LBoxModule env mains
+  let lboxMod = LBoxModule env mains
+      out :: String -> (FilePath -> s -> IO ()) -> s -> IO ()
+      out ext w s = do
+        let f = (outDir </> prettyShow m) -<.> ext
+        putStrLn $ "Writing " <> f
+        w f s
 
   liftIO do
-    putStrLn $ "Writing " <> fileName -<.> ".txt"
-    pp lboxMod <> "\n" & writeFile (fileName -<.> ".txt")
-
-  when (AstOutput `elem` optOutputs) $ liftIO $ do
-    putStrLn $ "Writing " <> fileName -<.> ".ast"
-    prettySexp optTarget lboxMod <> "\n"
-      & LText.writeFile (fileName -<.> ".ast")
-
-  when (RocqOutput `elem` optOutputs) $ liftIO $ do
-    putStrLn $ "Writing " <> fileName -<.> ".v"
-    prettyRocq optTarget lboxMod <> "\n"
-      & writeFile (fileName -<.> ".v")
+    createDirectoryIfMissing True outDir
+    out ".txt" writeFile $ prettyShow lboxMod <> "\n"
+    out ".ast" LText.writeFile $ prettySexp optTarget lboxMod <> "\n"
+    when optRocq $ out ".v" writeFile $ prettyRocq optTarget lboxMod <> "\n"

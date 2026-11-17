@@ -1,5 +1,5 @@
 {-# LANGUAGE OverloadedStrings, NondecreasingIndentation #-}
-module Agda2Lambox.Compile 
+module Agda2Lambox.Compile
   ( compile
   ) where
 
@@ -10,7 +10,7 @@ import Agda.TypeChecking.Pretty
 import Agda.Utils.Monad ( ifM, ifNotM )
 import Agda.Utils.SmallSet qualified as SmallSet
 
-import Agda.Utils ( isDataOrRecDef, isArity, getPragmaInfo )
+import Agda.Utils ( isArity )
 
 import Agda2Lambox.Compile.Monad
 import Agda2Lambox.Compile.Target
@@ -20,48 +20,35 @@ import Agda2Lambox.Compile.Inductive  ( compileInductive )
 import Agda2Lambox.Compile.TypeScheme ( compileTypeScheme )
 import Agda2Lambox.Compile.Type       ( compileTopLevelType )
 
-import LambdaBox ( emptyName, emptyDecl )
-import LambdaBox.Names
-import LambdaBox.Env (GlobalEnv(..), GlobalDecl(..), ConstantBody(..))
-import LambdaBox.Term (Term(LBox))
-import LambdaBox.Type (Type(TBox))
-
+import LambdaBox
+  ( emptyName, emptyDecl, GlobalEnv(..), GlobalDecl(..), ConstantBody(..), Term(LBox), Type(TBox) )
 
 
 -- | Compile the given names into to a λ□ environment.
 compile :: Target t -> [QName] -> CompileM (GlobalEnv t)
 compile t qs = do
-  items <- compileLoop (compileDefinition t) qs
-  entries <- mapM itemToEntry items
+  items   <- compileLoop (compileDefinition t) qs
+  entries <- mapM (\ CompiledItem{..} -> (, itemValue) <$> qnameToKName itemName) items
   pure $ GlobalEnv $ entries ++ [(emptyName, emptyDecl t)]
-  where
-    itemToEntry :: CompiledItem (GlobalDecl t) -> CompileM (KerName, GlobalDecl t)
-    itemToEntry CompiledItem{..} = (, itemValue) <$> qnameToKName itemName
-
 
 compileDefinition :: Target t -> Definition -> CompileM (Maybe (GlobalDecl t))
 compileDefinition target defn@Defn{..} = setCurrentRange defName do
   reportSDoc "agda2lambox.compile" 1 $ "Compiling definition:" <+> prettyTCM defName
 
-  -- retrieve compile annotation written in COMPILE pragma
-  annotation <- liftTCM $ getPragmaInfo defName
-
-  reportSDoc "agda2lambox.compile" 1 $
-    "Definition is annotated as such:" <+> prettyTCM annotation
-
   -- we skip definitions introduced by module application
-
   if defCopy then pure Nothing else do
 
-  -- TODO: check that we indeed don't compile defs marked with @0
-  --       especially record projections for erased fields
-  -- logical definitions are immediately compiled to □ (of type □),
+  -- logical (and erased) definitions are immediately compiled to □ (of type □),
   -- except constructors, which are compiled as part of their datatype
   ifM (case theDef of
          Constructor{} -> pure False
          _             -> liftTCM $ isLogical $ Arg defArgInfo defType)
      (do typ <- whenTyped target $ pure ([], TBox)
          pure $ Just $ ConstantDecl $ ConstantBody typ $ Just LBox) do
+
+  let axiom = do
+        typ <- whenTyped target $ compileTopLevelType [] defType
+        pure $ Just $ ConstantDecl $ ConstantBody typ Nothing
 
   case theDef of
     PrimitiveSort{}    -> pure Nothing
@@ -72,21 +59,17 @@ compileDefinition target defn@Defn{..} = setCurrentRange defName do
       case target of
         -- a postulated type is a type alias without definition
         ToTyped | isType -> pure $ Just $ TypeAliasDecl Nothing
-        _ -> do
-          typ <- whenTyped target $ compileTopLevelType [] defType
-          pure $ Just $ ConstantDecl $ ConstantBody typ Nothing
+        _ -> axiom
 
     Constructor{conData} -> Nothing <$ requireDef conData
 
-    Function{} -> do
-      ifNotM (liftTCM $ isArity defType) (compileFunction target defn) do
-        -- it's a type scheme
-        case target of
-          ToUntyped -> pure Nothing
-          -- we only compile it with --typed
-          ToTyped   -> Just <$> compileTypeScheme defn
+    -- type schemes are only compiled with --typed
+    Function{} -> ifNotM (liftTCM $ isArity defType) (compileFunction target defn) $
+      case target of
+        ToUntyped -> pure Nothing
+        ToTyped   -> Just <$> compileTypeScheme defn
 
-    d | isDataOrRecDef d -> compileInductive target defn
+    d | defIsDataOrRecord d -> compileInductive target defn
 
     Primitive{..} -> do
       reportSDoc "agda2lambox.compile" 5 $
@@ -96,8 +79,7 @@ compileDefinition target defn@Defn{..} = setCurrentRange defName do
       if null primClauses then do
         -- we compile it as an axiom
         reportSDoc "agda2lambox.compile" 5 "Compiling it to an axiom."
-        typ <- whenTyped target $ compileTopLevelType [] defType
-        pure $ Just $ ConstantDecl $ ConstantBody typ Nothing
+        axiom
 
       -- otherwise, we attempt compiling it as a regular Agda function
       else do
@@ -111,7 +93,7 @@ compileDefinition target defn@Defn{..} = setCurrentRange defName do
                 , funCompiled   = primCompiled
                 , funSplitTree  = Nothing
                 , funTreeless   = Nothing
-                , funCovering   = [] -- NOTE(flupe): should we try computing this?
+                , funCovering   = []
                 , funInv        = primInv
                 , funMutual     = Just [defName]
                 , funProjection = Left NeverProjection
