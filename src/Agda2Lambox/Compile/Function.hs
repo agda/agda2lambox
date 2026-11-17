@@ -40,7 +40,7 @@ import LambdaBox.Env
 -- | Convert a function body to a λ□ term.
 compileFunctionBody :: Target t -> [QName] -> Definition -> CompileM LBox.Term
 compileFunctionBody t ms Defn{defName, defType} = do
-  Just body <- liftTCM $ treeless defName
+  Just body <- liftTCM $ treeless t defName
   reportSDoc "agda2lambox.compile.function" 10 $
     "treeless body:" <+> pretty body
   -- fixpoint bodies must always be lambdas, so η-expand recursive functions of
@@ -54,10 +54,10 @@ compileFunctionBody t ms Defn{defName, defType} = do
 -- | Whether to compile a function definition to λ□:
 --    ∙ it is non-erased
 --    ∙ the treeless translation does not always inline it
-shouldCompileFunction :: Definition -> TCM Bool
-shouldCompileFunction def@Defn{defName}
+shouldCompileFunction :: Target t -> Definition -> TCM Bool
+shouldCompileFunction t def@Defn{defName}
   -- only non-erased
-  | hasQuantityω def = isJust <$> treeless defName
+  | hasQuantityω def = isJust <$> treeless t defName
   | otherwise        = pure False
 
 type MutualGraph = Map QName (Set QName)
@@ -66,8 +66,8 @@ type MutualGraph = Map QName (Set QName)
 --
 -- NB: see the discussion on Agda issue #8111 on why @funMutuals@ is not enough,
 -- i.e. the positivity checker misses some calls on agruments it deems unused.
-recursiveGroup :: Definition -> TCM [QName]
-recursiveGroup Defn{defName, defMutual = block} =
+recursiveGroup :: Target t -> Definition -> TCM [QName]
+recursiveGroup t Defn{defName, defMutual = block} =
   explore M.empty [defName] >>= pure . extractGroup
   where
   explore :: MutualGraph -> [QName] -> TCM MutualGraph
@@ -79,7 +79,7 @@ recursiveGroup Defn{defName, defMutual = block} =
     = calls q >>= \cs -> explore (M.insert q cs gr) (S.toList cs ++ qs)
 
   calls :: QName -> TCM (Set QName)
-  calls q = treeless q >>= \case
+  calls q = treeless t q >>= \case
     Nothing -> pure S.empty
     Just t  -> S.fromList <$> filterM inBlock (S.toList $ namesIn t)
 
@@ -96,8 +96,8 @@ recursiveGroup Defn{defName, defMutual = block} =
 -- | Convert a function definition to a λ□ declaration.
 compileFunction :: Target t -> Definition -> CompileM (Maybe (LBox.GlobalDecl t))
 compileFunction (t :: Target t) defn@Defn{defType} =
-  ifNotM (liftTCM $ shouldCompileFunction defn) (pure Nothing) do
-  mnames <- liftTCM $ recursiveGroup defn
+  ifNotM (liftTCM $ shouldCompileFunction t defn) (pure Nothing) do
+  mnames <- liftTCM $ recursiveGroup t defn
   mdefs  <- liftTCM $ mapM getConstInfo mnames
   reportSDoc "agda2lambox.compile.function" 5 $
     "Recursive group:" <+> prettyTCM mnames

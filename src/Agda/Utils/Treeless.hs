@@ -4,9 +4,10 @@ module Agda.Utils.Treeless ( treeless ) where
 import Data.Map qualified as Map
 
 import Agda.Syntax.Abstract.Name ( QName )
+import Agda.Syntax.Internal ( namedClausePats )
 import Agda.Syntax.Builtin ( someBuiltin, builtinNatMinus, builtinNatDivSucAux, builtinNatModSucAux )
-import Agda.Syntax.Treeless ( TTerm, EvaluationStrategy(..) )
-import Agda.TypeChecking.Monad ( TCM, localTCState, modifyTCLens, stLocalBuiltins, stImportedBuiltins )
+import Agda.Syntax.Treeless ( TTerm(..), EvaluationStrategy(..), tUnreachable )
+import Agda.TypeChecking.Monad
 import Agda.Compiler.ToTreeless
 import Agda.Compiler.Treeless.Erase ( eraseTerms )
 import Agda.Compiler.Treeless.Identity ( detectIdentityFunctions )
@@ -18,15 +19,22 @@ import Agda.Utils.EliminateDefaults
 import Agda.Utils.EtaExpandConstructors
 import Agda.Utils.ThunkLets
 
+import Agda2Lambox.Compile.Target ( Target(..) )
+
 -- | Convert compiled clauses to treeless syntax, or 'Nothing' if inlined.
-treeless :: QName -> TCM (Maybe TTerm)
-treeless = toTreelessWith (EagerEvaluation, EraseUnused, pipeline)
+treeless :: Target t -> QName -> TCM (Maybe TTerm)
+treeless t = toTreelessWith (EagerEvaluation, EraseUnused, pipeline t)
 
 -- | Agda's default pipeline, but customized:
 --    - builtin-translation/@-pattern-recovery
 --    + λ□-specific transformations
-pipeline :: Int -> QName -> Pipeline
-pipeline v q = Sequential
+pipeline :: Target t -> Int -> QName -> Pipeline
+pipeline t v q
+  | ToTyped <- t
+  , isAbsurdLambdaName q
+  = compilerPass "absurd" (30 + v) "absurd lambda" \ _ _ -> absurdLambda q
+  | otherwise
+  = Sequential
   [ FixedPoint 5 $ Sequential
     [ compilerPass "simpl"  (30 + v) "simplification" simplify
     , compilerPass "erase"  (30 + v) "erasure" $ eraseTerms q
@@ -49,3 +57,9 @@ simplify eval t = localTCState do
   where
   hide m = foldr (Map.delete . someBuiltin) m
     [builtinNatMinus, builtinNatDivSucAux, builtinNatModSucAux]
+
+-- | An absurd lambda: a lambda per pattern with an unreachable body.
+absurdLambda :: QName -> TCM TTerm
+absurdLambda q = theDef <$> getConstInfo q >>= \case
+  Function{funClauses = cl : _} -> pure $ iterate TLam tUnreachable !! length (namedClausePats cl)
+  _ -> pure tUnreachable
