@@ -111,11 +111,13 @@ compileFunction t defn@Defn{defType} =
   -- if the function is not recursive, just compile the body
   if null mdefs then builder <$> compileFunctionBody t [] defn
 
-  -- otherwise, take fixpoint
+  -- otherwise, take fixpoint, η-expanded up to its recursive argument, as
+  -- MetaRocq's `expanded` requires of every `tFix` (and Peregrine assumes)
   else do
     let k = fromMaybe 0 $ elemIndex (defName defn) mnames
+        eta fix = LBox.LLambda LBox.Anon $ LBox.LApp fix (LBox.LRel 0)
 
-    builder . flip LBox.LFix k <$>
+    builder . eta . flip LBox.LFix k <$>
       forM mdefs \def@Defn{defName} -> do
         body <- compileFunctionBody t mnames def >>= \case
           l@LBox.LLambda{} -> pure l

@@ -16,12 +16,14 @@ data ModPath
     -- ^ toplevel libraries i.e. .vo files
   | MPDot ModPath Ident
     -- ^ submodules
+  deriving (Eq, Ord)
 
 -- | Absolute name of objects in the Rocq kernel.
 data KerName = KerName
   { kerModPath :: ModPath
   , kerName    :: Ident
   }
+  deriving (Eq, Ord)
 
 -- | Reference to an inductive datatype.
 data Inductive = Inductive
@@ -30,6 +32,7 @@ data Inductive = Inductive
   , indInd  :: Int
     -- ^ Which of those is the inductive we care about.
   }
+  deriving Eq
 
 -- | Names used in binders
 data Name = Anon | Named Ident

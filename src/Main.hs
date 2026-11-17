@@ -21,9 +21,11 @@ import Agda.Main ( runAgda )
 import Agda.Syntax.Common.Pretty ( prettyShow )
 
 import Agda.Utils ( hasPragma )
+import Agda.Utils.Treeless ( unfoldSelfProjections )
 import Agda2Lambox.Compile.Target
 import Agda2Lambox.Compile.Utils
 import Agda2Lambox.Compile ( compile )
+import Agda2Lambox.Compile.Expand ( expandModule )
 import CodeGen.Rocq ( prettyRocq )
 import CodeGen.SExpr ( prettySexp )
 import LambdaBox.Env
@@ -90,11 +92,13 @@ writeModule Options{..} _ IsMain m defs = do
   when (null programs && not optLibrary) $ genericError
     "No main program specified. Please use a COMPILE pragma, or --export-all to extract a library."
 
+  unfoldSelfProjections
+
   -- only compile what is reachable from the programs, unless extracting a library
   env   <- runCompile $ compile optTarget $ if optLibrary then defs else programs
   mains <- mapM mainProgram programs
 
-  let lboxMod = LBoxModule env mains
+  let lboxMod = expandModule $ LBoxModule env mains
       out :: String -> (FilePath -> s -> IO ()) -> s -> IO ()
       out ext w s = do
         let f = (outDir </> prettyShow m) -<.> ext

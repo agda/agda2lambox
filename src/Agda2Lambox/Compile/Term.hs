@@ -62,13 +62,10 @@ compileTermC = \case
   --   are computationally relevant.
   --   - they cannot be propositions.
   --   - they cannot be types.
-  TDef qn -> do
-    qn <- liftTCM $ canonicalName qn
-    TermEnv{mutuals, boundVars} <- ask
-    case qn `elemIndex` mutuals of
-      Nothing -> do lift $ requireDef qn
-                    LConst <$> qnameToKName qn
-      Just i  -> pure $ LRel  $ i + boundVars
+  -- an unapplied reference to the recursive group is η-expanded, as MetaRocq's `expanded` requires
+  TDef qn -> compileDef qn >>= \case
+    LRel i -> pure $ LLambda Anon $ LApp (LRel $ i + 1) (LRel 0)
+    t      -> pure t
 
   TCon q -> compileCon q []
 
@@ -76,6 +73,8 @@ compileTermC = \case
   TApp (TPrim PSeq) args -> compileTermC (last args)
 
   TApp (TCon q) args -> compileCon q args
+
+  TApp (TDef qn) es@(_:_) -> foldl' LApp <$> compileDef qn <*> traverse compileTermC es
 
   TApp u es -> do
     cu  <- compileTermC u
@@ -112,6 +111,15 @@ compileTermC = \case
     q <- liftTCM $ canonicalName q
     lift $ requireDef q
     lift . toConApp q =<< traverse compileTermC args
+
+compileDef :: QName -> C LBox.Term
+compileDef qn = do
+  qn <- liftTCM $ canonicalName qn
+  TermEnv{mutuals, boundVars} <- ask
+  case qn `elemIndex` mutuals of
+    Nothing -> do lift $ requireDef qn
+                  LConst <$> qnameToKName qn
+    Just i  -> pure $ LRel $ i + boundVars
 
 compileLit :: Literal -> C LBox.Term
 compileLit = \case

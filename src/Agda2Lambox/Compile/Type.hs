@@ -7,7 +7,7 @@ import Data.Maybe ( isJust, mapMaybe, fromMaybe )
 
 import Agda.Syntax.Common ( unArg, Arg (Arg) )
 import Agda.Syntax.Internal
-import Agda.TypeChecking.Substitute ( absBody, absApp )
+import Agda.TypeChecking.Substitute ( absBody, absApp, raise, apply )
 import Agda.TypeChecking.Monad.Base
 import Agda.TypeChecking.Monad.Debug ( reportSDoc )
 import Agda.TypeChecking.Monad.Signature ( canonicalName )
@@ -25,7 +25,8 @@ import Agda.TypeChecking.CheckInternal ( infer )
 
 
 -- | The kind of variables that are locally bound
-data VarType = TypeVar Int | Other
+--   ('Dropped' is a binder of a family argument, see 'compileElims').
+data VarType = TypeVar Int | Other | Dropped
 
 -- | λ□ type compilation environment.
 data TypeEnv = TypeEnv
@@ -56,9 +57,12 @@ runC tvs m = runReaderT m TypeEnv
 --   Extend the context with the given type info.
 --   The new variable is always considered 'Other'.
 underBinder :: Dom Type -> C a -> C a
-underBinder v = addContext v . local \e -> e
+underBinder = underBinderAs Other
+
+underBinderAs :: VarType -> Dom Type -> C a -> C a
+underBinderAs vt v = addContext v . local \e -> e
   { boundVars  = boundVars e + 1
-  , boundTypes = Other : boundTypes e
+  , boundTypes = vt : boundTypes e
   }
 
 -- | Increment the number of locally-bound variables.
@@ -131,20 +135,23 @@ compileElims ty (x:xs) = do
               Nothing -> ifM (liftTCM $ isLogical a) (pure LBox.TBox) (family (unDom a) (unArg x))
   pure (first : rest)
   where
-  -- a declaration drops the arguments of a family parameter (@b x@ ↦ @b@), so
-  -- @λ x → B@ stands for @B@ if that compiles without 𝕋 (it does not when @x@ is a type)
+  -- a declaration drops the arguments of a family parameter (@b x@ ↦ @b@), so @λ x → B@
+  -- (and @f@, as @λ x → f x@) stands for @B@ unless it depends on @x@, i.e. unless @x@ occurs
+  -- where λ□ types keep it (as a type, not as an index): @B@ then compiles to the same
+  -- with @x@ as 𝕋 and as □
   family :: Type -> Term -> C LBox.Type
-  family ty t = liftTCM (reduce $ unEl ty) >>= \case
-    Pi dom cod | Lam _ body <- t -> underBinder dom $ family (absBody cod) (absBody body)
-    Sort{} -> nested (compileTypeTerm t) <&> \(_, t') -> if hasAny t' then LBox.TAny else t'
-    _      -> pure LBox.TAny
+  family ty t = do
+    b  <- famBody Other ty t
+    b' <- famBody Dropped ty t
+    pure if b == b' then b else LBox.TAny
 
-  hasAny :: LBox.Type -> Bool
-  hasAny = \case
-    LBox.TAny     -> True
-    LBox.TArr s t -> hasAny s || hasAny t
-    LBox.TApp s t -> hasAny s || hasAny t
-    _             -> False
+  famBody :: VarType -> Type -> Term -> C LBox.Type
+  famBody vt a u = liftTCM (reduce $ unEl a) >>= \case
+    Pi dom cod -> underBinderAs vt dom $ famBody vt (absBody cod) case u of
+      Lam _ body -> absBody body
+      _          -> raise 1 u `apply` [Arg (domInfo dom) (var 0)]
+    Sort{}     -> snd <$> nested (compileTypeTerm u)
+    _          -> pure LBox.TAny
 
   isTypeArg :: Type -> TCM Bool
   isTypeArg ty = andM [ isJust . isSort . unEl <$> reduce ty, not <$> isLogical ty ]
@@ -156,7 +163,7 @@ compileElims ty (x:xs) = do
 
   tyVarIndex = \case
     TypeVar i -> Just i
-    Other     -> Nothing
+    _         -> Nothing
 
 getTypeVarInfo :: Dom Type -> TCM LBox.TypeVarInfo
 getTypeVarInfo typ = do
@@ -190,6 +197,7 @@ compileTypeTerm t = do
     Var n _ -> (!! n) <$> asks boundTypes <&> \case
       TypeVar n -> ([], LBox.TVar n)
       Other     -> ([], LBox.TAny  )
+      Dropped   -> ([], LBox.TBox  )
 
     -- definitions introduced by module application are unfolded
     Def q es -> reduceDefCopy q es >>= \case
@@ -197,6 +205,7 @@ compileTypeTerm t = do
       NoReduction ()    -> do
         Defn{theDef = def, defType, defArgInfo} <- liftTCM $ getConstInfo q
         isLogicalDef <- liftTCM $ isLogical $ Arg defArgInfo defType
+        scheme       <- liftTCM $ isArity defType
         if
           -- if this def is logical, we ignore it (and its arguments)
           | isLogicalDef -> pure ([], LBox.TBox)
@@ -209,6 +218,14 @@ compileTypeTerm t = do
             ([],) . foldl' LBox.TApp (LBox.TInd ind)
               <$> compileElims defType (mapMaybe isApplyElim es)
 
+          -- only type schemes are declared as types, so any other definition used as a type
+          -- (e.g. @if b then A else B@, @(P ∘ f) x@) is compiled to its reduct, if any,
+          -- else to □ if Agda erases the values of all its clauses, else to 𝕋
+          | not scheme -> liftTCM (reduce $ Def q es) >>= \case
+              Def q' _ | q' == q -> ([],) <$> ifM (liftTCM $ erasable <$> headInfo q)
+                                                  (pure LBox.TBox) (pure LBox.TAny)
+              t'                 -> compileTypeTerm t'
+
           -- a type-level function that is not an alias is compiled to its reduct,
           -- if any, else to □ if Agda erases the values of all its clauses
           | isFunDef def && not (isTypeAlias def) ->
@@ -217,9 +234,10 @@ compileTypeTerm t = do
                                       typeScheme q defType es
               t'                 -> compileTypeTerm t'
 
-          -- a type alias is kept, unless it hides arrows of the top-level spine,
-          -- which determine type variables and dearging masks (e.g. @incr : Endo Nat@)
-          | isTypeAlias def ->
+          -- a type alias is □ if Agda erases the values of its body (e.g. @¬ A@), and is kept
+          -- unless it hides arrows of the top-level spine, which determine type variables
+          -- and dearging masks (e.g. @incr : Endo Nat@)
+          | isTypeAlias def -> ifM (liftTCM $ erasable <$> headInfo q) (pure ([], LBox.TBox)) $
             ifM (asks insertVars) (liftTCM $ reduce $ Def q es) (pure $ Def q es) >>= \case
               t'@Pi{} -> compileTypeTerm t'
               _       -> typeScheme q defType es
