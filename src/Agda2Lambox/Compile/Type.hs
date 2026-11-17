@@ -2,7 +2,8 @@
 module Agda2Lambox.Compile.Type where
 
 import Control.Monad.Reader
-import Data.Maybe ( isJust, mapMaybe )
+import Data.List ( uncons )
+import Data.Maybe ( isJust, mapMaybe, fromMaybe )
 
 import Agda.Syntax.Common ( unArg, Arg (Arg) )
 import Agda.Syntax.Internal
@@ -37,6 +38,8 @@ data TypeEnv = TypeEnv
     -- Should be indexed using de Bruijn indices.
   , insertVars :: Bool
     -- ^ Whether new type variables can be inserted
+  , erasedArgs :: [Bool]
+    -- ^ Which arrows of the top-level spine take arguments that Agda's erasure removes.
   }
 
 -- | Initialize compilation environment with a given number of type variables.
@@ -46,6 +49,7 @@ initEnv tvs = TypeEnv
   , boundVars  = tvs
   , boundTypes = reverse $ TypeVar <$> [0 .. tvs - 1]
   , insertVars = True
+  , erasedArgs = []
   }
 
 runC :: Int -> C a -> CompileM a
@@ -80,28 +84,28 @@ underTypeVar b x = do
 type C a = ReaderT TypeEnv CompileM a
 
 
--- | Compile constructor arguments' types, given a set number of type variables.
-compileArgs :: Int -> [Dom Type] -> CompileM [(LBox.Name, LBox.Type)]
-compileArgs tvars = runC tvars . compileArgsC
+-- | Compile constructor arguments' types, given the type variables and the erasure mask.
+compileArgs :: Int -> [Bool] -> [Dom Type] -> CompileM [(LBox.Name, LBox.Type)]
+compileArgs tvars erased = runC tvars . compileArgsC (erased ++ repeat False)
   where
-  compileArgsC :: [Dom Type] -> C [(LBox.Name, LBox.Type)]
-  compileArgsC [] = pure []
-  compileArgsC (dom:args) = do
+  compileArgsC :: [Bool] -> [Dom Type] -> C [(LBox.Name, LBox.Type)]
+  compileArgsC _ [] = pure []
+  compileArgsC ~(e:es) (dom:args) = do
     let name = domToName dom
     liftTCM $ reportSDoc "agda2lambox.compile.arg" 100 $
       "Compiling arg: " <+> prettyTCM dom
-    typ <- ifM (liftTCM $ isLogical dom)
+    typ <- ifM ((e ||) <$> liftTCM (isLogical dom))
                  (pure LBox.TBox)
                  (compileTypeC $ unDom dom)
-    ((name, typ):) <$> underBinder dom (compileArgsC args)
+    ((name, typ):) <$> underBinder dom (compileArgsC es args)
 
 
--- | Compile a top-level type to λ□, lifting out type variables.
+-- | Compile a top-level type to λ□, lifting out type variables, given its erasure mask.
 -- See [Extracting functional programs from Coq, in Coq](https://arxiv.org/pdf/2108.02995).
-compileTopLevelType :: Type -> CompileM ([LBox.Name], LBox.Type)
-compileTopLevelType ty = do
+compileTopLevelType :: [Bool] -> Type -> CompileM ([LBox.Name], LBox.Type)
+compileTopLevelType erased ty = do
   liftTCM $ reportSDoc "agda2lambox.compile.type" 10 $ "Compiling top level type: " <+> prettyTCM ty
-  runC 0 $ compileTopLevelTypeC ty
+  runC 0 $ withErasedArgs erased $ compileTopLevelTypeC ty
 
 -- | Compile a type, given a number of type variables in scope.
 --   Will not introduce more type variables.
@@ -113,7 +117,10 @@ compileType tvars ty = do
 
 -- | Compile a type that is not on the top-level spine, i.e. no new type variables.
 nested :: C a -> C a
-nested = local \e -> e { insertVars = False }
+nested = local \e -> e { insertVars = False, erasedArgs = [] }
+
+withErasedArgs :: [Bool] -> C a -> C a
+withErasedArgs erased = local \e -> e { erasedArgs = erased }
 
 compileTypeC :: Type -> C LBox.Type
 compileTypeC = nested . fmap snd . compileTopLevelTypeC
@@ -178,8 +185,9 @@ compileTypeTerm t = do
       -- if this def is logical, we ignore it (and its arguments)
       if isLogicalDef then pure ([], LBox.TBox)
 
-      -- an inductive is applied to its parameters and indices
-      else if isDataOrRecDef def then do
+      -- an inductive is applied to its parameters and indices,
+      -- unless Agda erases its values (e.g. unit-like records)
+      else if isDataOrRecDef def then ifM (liftTCM $ isErasedData q) (pure ([], LBox.TBox)) do
         lift $ requireDef q
         ind <- liftTCM $ toInductive q
         let args = mapMaybe isApplyElim es
@@ -211,21 +219,31 @@ compileTypeTerm t = do
       let domType   = unDom dom
       let codomType = absBody codom
 
+      top <- asks insertVars
+      (erased, erasedRest) <- asks $ fromMaybe (False, []) . uncons . erasedArgs
       domIsLogical <- liftTCM $ isLogical dom
       domIsTyVar   <- liftTCM $ andM [ isArity domType, not <$> isLogical domType ]
 
       -- only non-logical arities are lifted to type variables, irrespective of
       -- their quantity, as in 'inductivePars'
-      if not domIsTyVar then do
-        domType' <- if domIsLogical then pure LBox.TBox
-                                    else compileTypeC domType
-        (vars, codomType') <- underBinder dom $ compileTopLevelTypeC codomType
+      (vars, ty) <- if not domIsTyVar then do
+        domType' <- if domIsLogical || erased then pure LBox.TBox
+                                              else compileTypeC domType
+        (vars, codomType') <- underBinder dom $ withErasedArgs erasedRest $
+          compileTopLevelTypeC codomType
         pure (vars, LBox.TArr domType' codomType')
 
       else do
-        (vars, codomType') <- underTypeVar dom $ compileTopLevelTypeC codomType
+        (vars, codomType') <- underTypeVar dom $ withErasedArgs erasedRest $
+          compileTopLevelTypeC codomType
         let name = domToName dom
         pure (name : vars, LBox.TArr LBox.TBox codomType')
+
+      -- Agda erases the values of nested function types into □ or out of an empty type
+      erasedPi <- if top then pure False else case ty of
+        LBox.TArr _ LBox.TBox -> pure True
+        _                     -> liftTCM $ isEmptyType domType
+      pure (vars, if erasedPi then LBox.TBox else ty)
 
     _ -> pure ([], LBox.TAny)
 

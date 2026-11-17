@@ -7,6 +7,7 @@ import Data.Maybe ( fromMaybe, listToMaybe, isJust )
 
 import Agda.Compiler.Backend
 import Agda.Compiler.Common qualified as CC
+import Agda.Compiler.Treeless.Erase ( isErasable )
 import Agda.Syntax.Internal
 import Agda.Syntax.TopLevelModuleName ( moduleNameParts )
 import Agda.Syntax.Common.Pretty ( prettyShow )
@@ -19,9 +20,7 @@ import Agda.TypeChecking.Telescope ( telView, telViewUpTo, flattenTel )
 import Agda.Utils.Monad ( orM, andM, filterM, forM )
 
 import Agda.Utils ( getInductiveParams, isDataOrRecDef, isArity, dataOrRecMutuals )
-import Agda.Utils.Erase ( Erasure(..) )
 import Agda2Lambox.Compile.Monad
-import Agda2Lambox.Compile.Target
 import LambdaBox qualified as LBox
 
 -- | Convert an Agda module name to its λ□ module path:
@@ -155,10 +154,20 @@ instance MayBeLogical a => MayBeLogical (Arg a) where
   isLogical arg | not (usableModality arg) = pure True
   isLogical arg = isLogical $ unArg arg
 
--- | What the treeless translation erases for each target:
---   typed output keeps all values whose types it keeps.
-targetErasure :: Target t -> Erasure
-targetErasure ToUntyped = EraseAll
-targetErasure ToTyped   = EraseLogical \q -> do
-  Defn{defArgInfo, defType} <- getConstInfo q
-  isLogical $ Arg defArgInfo defType
+-- * Erased types
+
+-- | Whether Agda's erasure replaces the values of a datatype or record by □.
+isErasedData :: QName -> TCM Bool
+isErasedData q = theDef <$> getConstInfo q >>= \case
+  Datatype{dataCons = []}    -> pure True
+  Datatype{dataCons = c : _} -> isErasable c
+  Record{recConHead}         -> isErasable $ conName recConHead
+  _                          -> pure False
+
+-- | Whether a type is a datatype without constructors.
+isEmptyType :: Type -> TCM Bool
+isEmptyType ty = reduce (unEl ty) >>= \case
+  Def q _ -> getConstInfo q <&> \case
+    Defn{theDef = Datatype{dataCons = []}} -> True
+    _                                      -> False
+  _ -> pure False

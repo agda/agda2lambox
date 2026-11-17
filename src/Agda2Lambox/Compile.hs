@@ -73,7 +73,7 @@ compileDefinition target defn@Defn{..} = setCurrentRange defName do
         -- a postulated type is a type alias without definition
         ToTyped | isType -> pure $ Just $ TypeAliasDecl Nothing
         _ -> do
-          typ <- whenTyped target $ compileTopLevelType defType
+          typ <- whenTyped target $ compileTopLevelType [] defType
           pure $ Just $ ConstantDecl $ ConstantBody typ Nothing
 
     Constructor{conData} -> Nothing <$ requireDef conData
@@ -96,7 +96,7 @@ compileDefinition target defn@Defn{..} = setCurrentRange defName do
       if null primClauses then do
         -- we compile it as an axiom
         reportSDoc "agda2lambox.compile" 5 "Compiling it to an axiom."
-        typ <- whenTyped target $ compileTopLevelType defType
+        typ <- whenTyped target $ compileTopLevelType [] defType
         pure $ Just $ ConstantDecl $ ConstantBody typ Nothing
 
       -- otherwise, we attempt compiling it as a regular Agda function
