@@ -3,7 +3,6 @@
 -- | Agda utilities.
 module Agda.Utils where
 
-import Data.Functor ( (<&>) )
 import Data.Maybe ( isJust, catMaybes, fromMaybe )
 import Data.Text ( Text )
 
@@ -19,7 +18,6 @@ import Agda.Syntax.Treeless
 import Agda.TypeChecking.Telescope (telView, telViewUpTo)
 import Agda.TypeChecking.Substitute (TelV(theTel))
 
-import Agda.Utils.Treeless qualified as CustomTT
 import Agda.TypeChecking.Reduce (reduceDefCopy)
 
 -- * Miscellaneous
@@ -86,12 +84,6 @@ etaExpand = \case
   t@TLam{} -> t
   t        -> TLam $ TApp (raise 1 t) [TVar 0]
 
--- ** toTreeless custom pipeline
-
--- | Convert compiled clauses to treeless syntax, and return it.
-treeless :: QName -> TCM (Maybe TTerm)
-treeless = CustomTT.toTreeless EagerEvaluation
-  
 -- * projections
 
 isRecordProjection :: Defn -> Maybe (QName, QName)

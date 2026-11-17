@@ -39,7 +39,7 @@ etaExpandConstructors t | Just (q, args) <- unSpineCon t = do
 etaExpandConstructors t = case t of
   TApp u v             -> TApp <$> etaExpandConstructors u <*> mapM etaExpandConstructors v
   TLam u               -> TLam <$> etaExpandConstructors u
-  TLet u v             -> TLet <$> etaExpandConstructors u <*> etaExpandConstructors v
+  TLet s u v           -> TLet s <$> etaExpandConstructors u <*> etaExpandConstructors v
   TCase k ci tdef alts -> TCase k ci <$> etaExpandConstructors tdef
                                      <*> mapM etaExpandAlt alts
   TCoerce u            -> TCoerce <$> etaExpandConstructors u

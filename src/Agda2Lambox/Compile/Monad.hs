@@ -1,4 +1,4 @@
-{-# LANGUAGE DerivingStrategies, GeneralizedNewtypeDeriving, OverloadedStrings, DeriveTraversable #-}
+{-# LANGUAGE DerivingStrategies, GeneralizedNewtypeDeriving, OverloadedStrings, DeriveTraversable, FlexibleContexts #-}
 -- | Compilation monad.
 module Agda2Lambox.Compile.Monad
   ( CompileM
@@ -30,6 +30,7 @@ import Agda.TypeChecking.Monad.Debug (reportSDoc)
 import Agda.TypeChecking.Monad.Base hiding (initState)
 import Agda.Utils.Monad ( unlessM )
 import Agda.TypeChecking.Pretty
+import Agda.Syntax.Common.Pretty qualified as P
 import Control.Monad.Error.Class (MonadError)
 
 import Data.Foldable (traverse_)
@@ -62,8 +63,15 @@ newtype CompileM a = Compile (ReaderT CompileEnv (StateT CompileState TCM) a)
   deriving newtype (Functor, Applicative, Monad)
   deriving newtype (MonadIO, MonadFail, MonadDebug, ReadTCState, MonadTrace)
   deriving newtype (MonadError TCErr, MonadTCEnv, MonadTCState, HasOptions, MonadTCM)
-  deriving newtype (MonadAddContext, MonadReduce, HasConstInfo, HasBuiltins, PureTCM)
+  deriving newtype (MonadAddContext, MonadReduce, HasConstInfo, HasBuiltins, MonadFileId, PureTCM)
   deriving newtype (MonadReader CompileEnv)
+
+-- | Backend-specific errors.
+genericDocError :: MonadTCError m => Doc -> m a
+genericDocError = typeError . CustomBackendError "agda2lambox"
+
+genericError :: MonadTCError m => String -> m a
+genericError = genericDocError . P.text
 
 -- | Require a definition to be compiled.
 requireDef :: QName -> CompileM ()

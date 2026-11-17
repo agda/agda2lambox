@@ -3,7 +3,6 @@ module Agda2Lambox.Compile.Type where
 
 import Control.Monad.Reader
 import Data.List ( uncons )
-import Data.Functor ( (<&>) )
 import Data.Maybe ( isJust, mapMaybe, fromMaybe )
 
 import Agda.Syntax.Common ( unArg, Arg (Arg) )

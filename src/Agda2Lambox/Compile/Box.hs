@@ -38,7 +38,7 @@ insertBoxes t = case tAppView t of
   _ -> case t of
     TApp f es       -> TApp <$> insertBoxes f <*> mapM insertBoxes es
     TLam b          -> TLam <$> insertBoxes b
-    TLet u b        -> TLet <$> insertBoxes u <*> insertBoxes b
+    TLet s u b      -> TLet s <$> insertBoxes u <*> insertBoxes b
     TCase x ct d bs -> TCase x ct <$> insertBoxes d <*> mapM insertBoxesAlt bs
     TCoerce u       -> TCoerce <$> insertBoxes u
     _               -> pure t
@@ -79,7 +79,7 @@ etaBoxes unused h es
                    raise missing (reverse vs) ++ map TVar (reverse [0 .. missing - 1])
   bind (e : es) vs
     | atomic e  = bind es (e : vs)
-    | otherwise = TLet e $ bind (raise 1 es) (TVar 0 : raise 1 vs)
+    | otherwise = TLet Strict e $ bind (raise 1 es) (TVar 0 : raise 1 vs)
 
   atomic = \case
     TVar{}   -> True

@@ -1,8 +1,8 @@
 {-
 NOTE(flupe):
-Taken straight from Agda source.
-There are two important differences:
+Adapted from Agda.Compiler.Treeless.EliminateDefaults, with three differences:
 - we also add branches for unreachable defaults (because we need all cases to be exhaustive)
+- we copy the default into every missing branch, instead of let-binding it
 - we sort the case alts according to the order of constructors for the given inductive
 -}
 
@@ -49,7 +49,7 @@ eliminateCaseDefaults = tr
       TCoerce a -> TCoerce <$> tr a
       TLam b    -> TLam <$> tr b
       TApp a bs -> TApp <$> tr a <*> mapM tr bs
-      TLet e b  -> TLet <$> tr e <*> tr b
+      TLet s e b -> TLet s <$> tr e <*> tr b
 
       t -> return t
 

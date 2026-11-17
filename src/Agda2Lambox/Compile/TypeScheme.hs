@@ -44,12 +44,9 @@ compileTypeScheme Defn{..} = do
       -- We eta-expand the clause to maximal arity by inserting variable patterns
       -- and applying the body to variables.
       -- This also lifts all lambdas from the body to variable patterns.
-      cl <- etaExpandClause cl
+      (nvars, cl) <- etaExpandClause cl
 
-      let
-        -- number of parameters introduced in the clause
-        nvars     = length $ namedClausePats cl
-        Just body = clauseBody cl
+      let Just body = clauseBody cl
 
       (_, res) <- addContext (KeepNames $ clauseTel cl) $ runCNoVars nvars $ compileTypeTerm body
 

@@ -121,8 +121,8 @@ compileTermC = \case
 
   TLit l -> compileLit l
 
-  TLet u v -> LLetIn Anon <$> compileTermC u
-                          <*> underBinder (compileTermC v)
+  TLet _ u v -> LLetIn Anon <$> compileTermC u
+                            <*> underBinder (compileTermC v)
 
   TCase n CaseInfo{..} dt talts ->
     case caseErased of
