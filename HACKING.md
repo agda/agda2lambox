@@ -123,5 +123,13 @@ backend is running on.
   The compilation loop and topological sort routine is implemented in
   `Agda2Lambox.Compile.Monad.compileLoop`.
 
+- `Agda2Lambox.Compile.Expand` then η-expands the applications that the λ□ environment
+  reveals as too short, as per MetaRocq's expectations:
+    * a constructor applied to fewer than all its parameters and fields;
+    * with `--typed`, a constant applied to fewer arguments than its dearging mask
+      or than its parameters of type □;
+    * a □ (or a function returning □) passed for a parameter of function type.
+  The fixpoints are η-expanded where `Agda2Lambox.Compile.Function` builds them.
+
 - Once we have the environment, we convert it to either Rocq or an S-expression
   for later consumption by the rest of the pipeline.

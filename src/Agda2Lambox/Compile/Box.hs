@@ -2,8 +2,6 @@
 --   but Agda keeps it in others, since it decides part of its erasure per definition.
 module Agda2Lambox.Compile.Box ( insertBoxes ) where
 
-import Data.List ( findIndices )
-
 import Agda.Compiler.Backend ( getConstInfo, getErasedConArgs, underAbstraction )
 import Agda.Compiler.Treeless.Erase ( computeErasedConstructorArgs )
 import Agda.Syntax.Common ( Arg(..) )
@@ -12,7 +10,7 @@ import Agda.Syntax.Treeless
 import Agda.TypeChecking.Datatypes ( getConstructorData )
 import Agda.TypeChecking.Monad.Base
 import Agda.TypeChecking.Monad.Signature ( getCompiledArgUse )
-import Agda.TypeChecking.Substitute ( raise, TelV(..) )
+import Agda.TypeChecking.Substitute ( TelV(..) )
 import Agda.TypeChecking.Telescope ( telViewPath )
 import Agda.Compiler.Treeless.Subst ()
 import Agda.Utils.Monad ( ifM )
@@ -23,7 +21,7 @@ import Agda2Lambox.Compile.Utils ( isLogical, isAbsurdFunType )
 
 -- | Insert □ for:
 --   * applications of logical definitions that Agda does not erase, e.g. projections into @Level@;
---   * erased constructor fields, e.g. forced ones bound by 'etaExpandConstructors';
+--   * erased constructor fields;
 --   * unused arguments, which Agda keeps in calls compiled before the callee's body;
 --
 -- Insert an absurd lambda instead of □ for:
@@ -35,9 +33,11 @@ insertBoxes :: TTerm -> TCM TTerm
 insertBoxes t = case tAppView t of
 
   (TDef f, es) -> ifM (isLogicalDef f) (pure TErased) do
-    unused <- maybe [] (findIndices (== ArgUnused)) <$> getCompiledArgUse f
+    unused <- maybe [] (map (== ArgUnused)) <$> getCompiledArgUse f
     absurd <- absurdArgs f
-    etaBoxes unused (TDef f) . zipWith3 arg (repeat False) absurd <$> mapM insertBoxes es
+    -- an unused parameter has type □, also where an absurd function would be passed
+    mkTApp (TDef f) . zipWith3 (\u a -> arg u (a && not u)) (unused ++ repeat False) absurd
+      <$> mapM insertBoxes es
 
   (TCon c, es) -> do
     erased <- erasedConArgs c
@@ -71,34 +71,3 @@ insertBoxes t = case tAppView t of
       computeErasedConstructorArgs =<< getConstructorData c
       getErasedConArgs c
     _ -> getErasedConArgs c
-
--- | Apply a head to arguments, with □ for the unused ones (given by position),
--- abstracting over the missing arguments up to the last unused one.
--- Non-atomic arguments are let-bound, so that they are still evaluated once.
-etaBoxes :: [Int] -> TTerm -> [TTerm] -> TTerm
-etaBoxes unused h es
-  | missing <= 0 = mkTApp h $ boxes es
-  | otherwise    = bind (boxes es) []
-  where
-  missing = maybe 0 (+ 1) (lastMaybe unused) - length es
-
-  boxes = zipWith (\i e -> if i `elem` unused then TErased else e) [0..]
-
-  -- @vs@ are the arguments bound so far, in the current scope
-  bind [] vs = iterate TLam body !! missing
-    where body = mkTApp (raise missing h) $ boxes $
-                   raise missing (reverse vs) ++ map TVar (reverse [0 .. missing - 1])
-  bind (e : es) vs
-    | atomic e  = bind es (e : vs)
-    | otherwise = TLet Strict e $ bind (raise 1 es) (TVar 0 : raise 1 vs)
-
-  atomic = \case
-    TVar{}   -> True
-    TDef{}   -> True
-    TCon{}   -> True
-    TPrim{}  -> True
-    TLit{}   -> True
-    TErased  -> True
-    TUnit    -> True
-    TSort    -> True
-    _        -> False

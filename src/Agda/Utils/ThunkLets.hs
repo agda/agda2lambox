@@ -23,13 +23,10 @@ import Agda.Utils ( descendM )
 -- | Rewrite non-strict @let x = u in b@ into @let x = λ _ → u in b[x □ / x]@.
 thunkLets :: TTerm -> TTerm
 thunkLets = \case
-  TLet Strict u b
-    | linear b' -> applySubst ([go u] ++# idS) b'
-    | otherwise -> TLet Strict (go u) b'
-    where b' = go b
+  TLet Strict u b -> strict (go u) (go b)
   TLet NonStrict u b
     -- do not thunk if @u@ is already a value or @b@ evaluates @x@ on every path
-    | isValue u' || demands 0 b' -> TLet Strict u' b'
+    | isValue u' || demands 0 b' -> strict u' b'
     -- if @b@ occurs at most once, substitute it away to avoid a spurious thunk
     | occursOnce b'              -> applySubst ([u'] ++# idS) b'
     | otherwise                  -> TLet Strict (TLam $ raise 1 u') (force 0 b')
@@ -40,6 +37,10 @@ thunkLets = \case
   t -> runIdentity $ descendM (Identity . go) t
   where
   go = thunkLets
+
+  strict u b
+    | linear b  = applySubst ([u] ++# idS) b
+    | otherwise = TLet Strict u b
 
 -- | Values, which are let-bound without a thunk.
 isValue :: TTerm -> Bool
