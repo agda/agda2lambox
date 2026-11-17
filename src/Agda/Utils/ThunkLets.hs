@@ -11,11 +11,14 @@
 -- inlined @if_then_else_@.
 module Agda.Utils.ThunkLets (thunkLets) where
 
+import Data.Functor.Identity ( Identity(..) )
 import Data.Monoid ( Any(..) )
 
 import Agda.Syntax.Treeless
 import Agda.TypeChecking.Substitute
 import Agda.Compiler.Treeless.Subst ( Occurs(..), UnderLambda(..), occursIn )
+
+import Agda.Utils ( descendM )
 
 -- | Rewrite non-strict @let x = u in b@ into @let x = λ _ → u in b[x □ / x]@.
 thunkLets :: TTerm -> TTerm
@@ -34,21 +37,11 @@ thunkLets = \case
     u' = go u
     b' = go b
 
-  TCoerce a          -> TCoerce (go a)
-  TLam b             -> TLam (go b)
-  TApp a bs          -> TApp (go a) (go <$> bs)
-  TCase sc ct d alts -> TCase sc ct (go d) (goAlt <$> alts)
-  t                  -> t
+  t -> runIdentity $ descendM (Identity . go) t
   where
   go = thunkLets
 
-  goAlt :: TAlt -> TAlt
-  goAlt = \case
-    TAGuard g b -> TAGuard (go g) (go b)
-    TACon q a b -> TACon q a (go b)
-    TALit l b   -> TALit l (go b)
-
--- | Do not not thunk let-bound values.
+-- | Values, which are let-bound without a thunk.
 isValue :: TTerm -> Bool
 isValue = \case
   TVar{}           -> True
@@ -74,7 +67,7 @@ linear b = case occursIn 0 b of Occurs n (UnderLambda l) _ -> n <= 1 && not (get
 demands :: Int -> TTerm -> Bool
 demands i = \case
   TApp (TPrim PSeq) es
-    -- seq's argument does not count, since agda2lambox drops it (c.f. issue #12)
+    -- seq's forced arguments do not count, since agda2lambox drops them
     | not (null es) -> go i (last es)
   TVar j            -> i == j
   TApp f es         -> go i f || any (go i) es
@@ -123,5 +116,3 @@ force i = \case
     TAGuard g b -> TAGuard (go i g) (go i b)
     TACon q a b -> TACon q a (go (i + a) b)
     TALit l b   -> TALit l (go i b)
-
-

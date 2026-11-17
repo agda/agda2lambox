@@ -5,6 +5,7 @@ on:
     paths:
       - 'src/**'
       - 'test/**'
+      - 'theories/**'
       - 'agda2lambox.cabal'
       - 'cabal.project'
       - 'Makefile'
@@ -13,6 +14,7 @@ on:
     paths:
       - 'src/**'
       - 'test/**'
+      - 'theories/**'
       - 'agda2lambox.cabal'
       - 'cabal.project'
       - 'Makefile'

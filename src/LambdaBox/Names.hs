@@ -14,8 +14,6 @@ type DirPath = [Ident]
 data ModPath
   = MPFile DirPath
     -- ^ toplevel libraries i.e. .vo files
-  | MPBound DirPath Ident Int -- NOTE(flupe): what is this
-    -- ^ parameters of functors
   | MPDot ModPath Ident
     -- ^ submodules
 
@@ -38,9 +36,8 @@ data Name = Anon | Named Ident
 
 instance Pretty ModPath where
   pretty = \case
-    MPFile  dp      -> cat $ punctuate "." (map pretty $ reverse dp)
-    MPBound dp id i -> "MPBound??" -- NOTE: don't know what this corresponds to
-    MPDot mp i      -> pretty mp <> "." <> pretty i
+    MPFile dp  -> cat $ punctuate "." (map pretty $ reverse dp)
+    MPDot mp i -> pretty mp <> "." <> pretty i
 
 instance Pretty KerName where
   pretty KerName{..} = pretty kerModPath <> "." <> text kerName

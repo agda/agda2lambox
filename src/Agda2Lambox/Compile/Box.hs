@@ -17,6 +17,7 @@ import Agda.TypeChecking.Telescope ( telViewPath )
 import Agda.Compiler.Treeless.Subst ()
 import Agda.Utils.Monad ( ifM )
 import Agda.Utils.List ( lastMaybe )
+import Agda.Utils ( droppedParams, descendM )
 
 import Agda2Lambox.Compile.Utils ( isLogical, isAbsurdFunType )
 
@@ -43,31 +44,18 @@ insertBoxes t = case tAppView t of
     absurd <- absurdArgs c
     mkTApp (TCon c) . zipWith3 arg (erased ++ repeat False) absurd <$> mapM insertBoxes es
 
-  _ -> case t of
-    TApp f es       -> TApp <$> insertBoxes f <*> mapM insertBoxes es
-    TLam b          -> TLam <$> insertBoxes b
-    TLet s u b      -> TLet s <$> insertBoxes u <*> insertBoxes b
-    TCase x ct d bs -> TCase x ct <$> insertBoxes d <*> mapM insertBoxesAlt bs
-    TCoerce u       -> TCoerce <$> insertBoxes u
-    _               -> pure t
+  _ -> descendM insertBoxes t
   where
-  insertBoxesAlt = \case
-    TACon c n b -> TACon c n <$> insertBoxes b
-    TALit l b   -> TALit l   <$> insertBoxes b
-    TAGuard g b -> TAGuard   <$> insertBoxes g <*> insertBoxes b
-
-  arg = \case
-    _    True _ -> TLam tUnreachable
-    True _    _ -> TErased
-    _    _    e -> e
+  arg _    True _ = TLam tUnreachable
+  arg True _    _ = TErased
+  arg _    _    e = e
 
   absurdArgs q = do
     Defn{defType, theDef} <- getConstInfo q
     TelV tel _ <- telViewPath defType
     let pars = case theDef of
-          Constructor{conPars}                                  -> conPars
-          Function{funProjection = Right Projection{projIndex}} -> projIndex - 1
-          _                                                     -> 0
+          Constructor{conPars} -> conPars
+          d                    -> droppedParams d
     (++ repeat False) . drop pars <$> go tel
     where
     go = \case

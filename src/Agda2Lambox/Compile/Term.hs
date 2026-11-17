@@ -1,6 +1,6 @@
 module Agda2Lambox.Compile.Term (compileTerm) where
 
-import Control.Monad.Reader ( ReaderT(runReaderT), local )
+import Control.Monad.Reader ( ReaderT(runReaderT), local, ask, asks )
 import Control.Monad.Trans
 import Data.List ( elemIndex, singleton )
 import Data.Text qualified as Text ( unpack )
@@ -16,8 +16,7 @@ import Agda.Syntax.Treeless
 import Agda.TypeChecking.Monad.Base ( liftTCM )
 import Agda.TypeChecking.Monad.Builtin ( getBuiltinName_ )
 
-import LambdaBox.Names ( Name(..) )
-import LambdaBox ( Term(..), emptyName )
+import LambdaBox ( Term(..), Name(..), emptyName )
 import LambdaBox qualified as LBox
 import Agda2Lambox.Compile.Utils
 import Agda2Lambox.Compile.Monad
@@ -34,52 +33,26 @@ data TermEnv = TermEnv
     -- ^ Amount of locally-bound variables.
   }
 
--- | Initial compilation environment.
--- No mutuals, no bound variables.
-initEnv :: TermEnv
-initEnv = TermEnv
-  { mutuals   = []
-  , boundVars = 0
-  }
-
 -- | Compilation monad.
 type C a = ReaderT TermEnv CompileM a
-
--- | Run a compilation unit in @TCM@, in the initial environment.
-runC :: C a -> CompileM a
-runC m = runReaderT m initEnv
 
 -- | Increase the number of locally-bound variables.
 underBinders :: Int -> C a -> C a
 underBinders n = local \e -> e { boundVars = boundVars e + n }
 
--- | Increment the number of locally-bound variables.
-underBinder :: C a -> C a
-underBinder = underBinders 1
-{-# INLINE underBinder #-}
-
--- | Set local mutual fixpoints.
-withMutuals :: [QName] -> C a -> C a
-withMutuals ms = local \e -> e { mutuals = reverse ms }
-
 -- * Term conversion
 
--- | Convert a treeless term to its λ□ equivalent.
-compileTerm
-  :: [QName]
-     -- ^ Local fixpoints.
-  -> TTerm
-  -> CompileM LBox.Term
-compileTerm ms = runC . withMutuals ms . compileTermC
+-- | Convert a treeless term to its λ□ equivalent, given the local fixpoints.
+compileTerm :: [QName] -> TTerm -> CompileM LBox.Term
+compileTerm ms = flip runReaderT (TermEnv (reverse ms) 0) . compileTermC
 
--- | Convert a treeless term to its λ□ equivalent.
 compileTermC :: TTerm -> C LBox.Term
 compileTermC = \case
 
   TVar  n -> do
     bound <- asks boundVars
-    if n < bound then pure $ LRel n
-                 else pure $ LBox -- a type variable
+    pure if n < bound then LRel n
+                      else LBox -- a type variable
 
   TPrim p -> genericError $ "primitives not supported: " <> show p
 
@@ -97,34 +70,26 @@ compileTermC = \case
                     LConst <$> qnameToKName qn
       Just i  -> pure $ LRel  $ i + boundVars
 
-  TCon q -> do
-    q <- liftTCM $ canonicalName q
-    lift $ requireDef q
-    lift $ toConApp q []
+  TCon q -> compileCon q []
 
-  -- TODO: maybe not ignore seq? (c.f. issue #12)
+  -- the arguments that seq forces are dropped
   TApp (TPrim PSeq) args -> compileTermC (last args)
 
-  TApp (TCon q) args -> do
-    q <- liftTCM $ canonicalName q
-    lift $ requireDef q
-    traverse compileTermC args
-      >>= lift . toConApp q
-  -- ^ For dealing with fully-applied constructors
+  TApp (TCon q) args -> compileCon q args
 
   TApp u es -> do
     cu  <- compileTermC u
     ces <- traverse compileTermC es
     pure $ foldl' LApp cu ces
 
-  TLam t -> underBinder $ LLambda Anon <$> compileTermC t
+  TLam t -> underBinders 1 $ LLambda Anon <$> compileTermC t
 
   TLit l -> compileLit l
 
   TLet _ u v -> LLetIn Anon <$> compileTermC u
-                            <*> underBinder (compileTermC v)
+                            <*> underBinders 1 (compileTermC v)
 
-  TCase n CaseInfo{..} dt talts ->
+  TCase n CaseInfo{..} _ talts ->
     case caseErased of
       Erased _    -> genericError "Erased matches not supported."
       NotErased _ -> do
@@ -135,18 +100,22 @@ compileTermC = \case
   TSort   -> return LBox
   TErased -> return LBox
 
-  TError terr -> return $ LCase (LBox.Inductive emptyName 0) 0 LBox []
-    -- ^ Unreachable clause.
-    --   We explicitely match on the empty type (for which we do not construct a proof),
-    --   so that later passes recognize that this is unreachable.
+  -- Unreachable clause.
+  -- We explicitely match on the empty type (for which we do not construct a proof),
+  -- so that later passes recognize that this is unreachable.
+  TError _ -> return $ LCase (LBox.Inductive emptyName 0) 0 LBox []
 
-  TCoerce tt  -> genericError "Coerces not supported."
+  TCoerce _ -> genericError "Coerces not supported."
+
+  where
+  compileCon q args = do
+    q <- liftTCM $ canonicalName q
+    lift $ requireDef q
+    lift . toConApp q =<< traverse compileTermC args
 
 compileLit :: Literal -> C LBox.Term
 compileLit = \case
 
-  -- TODO(flupe):
-  --   optionally attempt compiling this to an Int63 Primitive
   LitNat i -> do
     qn <- liftTCM $ getBuiltinName_ builtinNat
     qz <- liftTCM $ getBuiltinName_ builtinZero
@@ -171,22 +140,9 @@ compileCaseType = \case
       lift $ requireDef qn
       liftTCM $ (,) <$> toInductive qn <*> toInductivePars qn
 
--- TODO: flupe
---   literal patterns are a bit annoying.
---   3 -> body
---   should get compiled to:
---   succ n -> case n of
---     succ n -> case n of
---       succ n -> case n of
---         zero -> body
---   but how do we handle the generation of other branches?
---   perhaps there's already a treeless translation to prevent this
---   to inverstigate...
-
 compileAlt :: TAlt -> C ([LBox.Name], LBox.Term)
 compileAlt = \case
-  TACon{..}   -> let names = take aArity $ repeat LBox.Anon
-                 in (names,) <$> underBinders aArity (compileTermC aBody)
+  TACon{..} -> (replicate aArity Anon,) <$> underBinders aArity (compileTermC aBody)
 
   -- hardcoded support for zero nat literal pattern
   TALit (LitNat 0) body -> do
@@ -194,5 +150,5 @@ compileAlt = \case
     lift $ requireDef qn
     ([],) <$> compileTermC body
 
-  lit@TALit{..} -> genericError $ "Literal pattern not supported:" <> show lit
-  TAGuard{..}   -> genericError "case guards not supported"
+  lit@TALit{} -> genericError $ "Literal pattern not supported:" <> show lit
+  TAGuard{}   -> genericError "case guards not supported"

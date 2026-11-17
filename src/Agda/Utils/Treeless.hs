@@ -5,7 +5,6 @@ import Data.Map qualified as Map
 
 import Agda.Syntax.Abstract.Name ( QName )
 import Agda.Syntax.Internal ( namedClausePats )
-import Agda.Syntax.Builtin ( someBuiltin, builtinNatMinus, builtinNatDivSucAux, builtinNatModSucAux )
 import Agda.Syntax.Treeless ( TTerm(..), EvaluationStrategy(..), tUnreachable )
 import Agda.TypeChecking.Monad
 import Agda.Compiler.ToTreeless

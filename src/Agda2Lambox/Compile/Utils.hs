@@ -18,7 +18,7 @@ import Agda.TypeChecking.Substitute ( TelV(TelV) )
 import Agda.TypeChecking.Telescope ( telView, telViewUpTo, telViewPath, flattenTel )
 import Agda.Utils.Monad ( orM, andM, filterM, forM )
 
-import Agda.Utils ( getInductiveParams, isDataOrRecDef, isArity, dataOrRecMutuals )
+import Agda.Utils ( getInductiveParams, isArity, dataOrRecMutuals )
 import Agda2Lambox.Compile.Monad
 import LambdaBox qualified as LBox
 
@@ -45,12 +45,9 @@ qnameToKName qn = do
 domToName :: Dom' a b -> LBox.Name
 domToName = maybe LBox.Anon (LBox.Named . prettyShow) . domName
 
+-- NB: use of nameCanonical to handle renamed imports (c.f. Agda issue #4735)
 qnameToIdent :: QName -> LBox.Ident
 qnameToIdent = prettyShow . nameCanonical . qnameName
--- NB: use of nameCanonical to handle renamed imports (c.f. Agda issue #4735)
-
-qnameToName :: QName -> LBox.Name
-qnameToName = LBox.Named . qnameToIdent
 
 -- | Fetch the λ□ inductive associated with a @QName@.
 toInductive :: QName -> TCM LBox.Inductive
@@ -73,7 +70,7 @@ inductivePars Defn{theDef, defType} = do
 toInductivePars :: QName -> TCM Int
 toInductivePars q = do
   defs <- mapM getConstInfo . (q :) =<< dataOrRecMutuals q
-  pars <- forM (filter (isDataOrRecDef . theDef) defs) $ \d ->
+  pars <- forM (filter (defIsDataOrRecord . theDef) defs) $ \d ->
     length <$> inductivePars d
   -- keep the common prefix of all members of a mutual block
   return $ minimum pars

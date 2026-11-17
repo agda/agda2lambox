@@ -3,7 +3,6 @@
 An [Agda] backend to generate [MetaCoq] λ□ (LambdaBox) programs
 for further verified extraction to WASM or Rust using the [Peregrine] tool.
 The backend builds off Agda 2.9.0.
-Compatible with Coq 8.19.0, MetaCoq 1.3.1 and CertiCoq 0.9.
 
 [Agda]: https://github.com/agda/agda
 [MetaCoq]: https://metacoq.github.io/
@@ -24,23 +23,24 @@ agda2lambox [AGDAFLAGS] [--out-dir DIR] [--typed] [--rocq] [--export-all] FILE
 Only the definitions reachable from those marked with `{-# COMPILE AGDA2LAMBOX f #-}` get compiled; to extract a library instead, `--export-all` compiles the whole module.
 
 Then, use the [following tool][Peregrine] to further compile the generated `.ast` files to WASM, C, LLVM, OCaml, CakeML, Rust, Koka, Lean and F#.
+With `--rocq`, the backend also generates a `.v` file that checks the well-formedness of the λ□ program and evaluates it in Rocq, and `--typed` generates typed λ□ instead (which Peregrine needs for Rust and typed Koka).
+See [HACKING.md](HACKING.md) for an overview of the implementation.
 
-## Setup
+## Testing
 
-The backend generates `.v` and `.txt` files that contain the extracted λ□ environment.
-To check what's generated, setup CertiCoq and compile the minimal Coq prelude.
+The test modules live in `test/agda2lambox`, `test/agda2rust` and `test/agda2hs`; each defines an
+entry point `test`, marked with `{-# COMPILE AGDA2LAMBOX test #-}`, and states its expected value
+as `_ : test ≡ v`.
 
-```
-opam pin add certicoq 0.9+8.19
-coq_makefile -f _CoqProject -o CoqMakefile
-make -f CoqMakefile
-```
+- `make test` compiles every module to untyped and typed λ□ under `test/dist/`,
+  and validates both with `peregrine validate`.
+- `make gen` compiles λ□ to every Peregrine target under `test/gen/`.
+- `make run` evaluates λ□ in Rocq, runs every target's output, and tallies the results in `test/gen/stats.log`.
+- `make html` renders the test modules and all of their outputs as a website under `test/html/`.
 
-## Icebox
-
-Things that ought to be implemented, but not right now.
-
-- [ ] Caching of compiled modules.
+The last three are thin wrappers around [test/targets.sh](test/targets.sh), which lists the tools each target needs.
+Evaluating λ□ in Rocq needs the Rocq, MetaRocq and CertiRocq versions that Peregrine is built with
+(c.f. the pinned commit in [CI](.github/workflows/ci.yml)), as well as compiling the theories in `theories/` with `make coq`.
 
 ## References
 

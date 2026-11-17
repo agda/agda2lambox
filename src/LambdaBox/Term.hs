@@ -2,7 +2,6 @@
 -- | Definition of λ□ terms.
 module LambdaBox.Term where
 
-import Data.Int (Int64)
 import Data.Bifunctor (first)
 import Agda.Syntax.Common.Pretty
 import LambdaBox.Names
@@ -18,12 +17,8 @@ data Def t = Def
 -- | Mutual components of a fixpoint
 type MFixpoint = [Def Term]
 
--- | 
-data PrimValue
-  = PInt Int64
-      -- NOTE(flupe): ^ Should ensure they are restricted to Int63
-  | PFloat Int64
-  | PString String
+-- | Primitive values.
+newtype PrimValue = PString String
 
 -- | λ□ terms
 data Term
@@ -47,13 +42,10 @@ data Term
 
 
 instance Pretty t => Pretty (Def t) where
-  -- prettyPrec _ (Def s _ _) = pretty s
   prettyPrec _ (Def _ t _) = pretty t
 
 
 instance Pretty PrimValue where
-  pretty (PInt i)    = text $ show i
-  pretty (PFloat f)  = text $ show f
   pretty (PString f) = text $ show f
 
 
@@ -70,7 +62,7 @@ instance Pretty Term where
             getLams t = ([], t)
 
             (ns, t') = getLams t
-        in 
+        in
         mparens (p > 0) $
         hang ("λ" <+> sep (map pretty (n:ns)) <+> "→") 2 $ pretty t'
 
@@ -102,4 +94,3 @@ instance Pretty Term where
           vcat (zipWith (\i c -> pretty i <> ": " <> pretty c) ([0..] :: [Int]) ds)
 
       LPrim p -> pretty p
-        

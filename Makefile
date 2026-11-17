@@ -1,4 +1,5 @@
-.PHONY: default build install coq gen run html clean
+.PHONY: default build install test coq gen run html clean
+.NOTPARALLEL:
 .DELETE_ON_ERROR:
 
 SOURCES := agda2lambox.cabal $(wildcard cabal.project cabal.project.local) $(shell find src -name '*.hs')
@@ -23,29 +24,13 @@ coq:
 	make -f CoqMakefile
 
 gen: test
-	make -C test gen
+	test/targets.sh gen
 
 run: coq gen
-	make -C test run
+	test/targets.sh run
 
-html: coq test
-	make -C test html
+html: test
+	test/targets.sh html
 
 clean:
-	rm -rf test/Tests.agda test/dist/
-	make -C test clean
-
-%.ast:
-	agda2lambox -o build test/$*.agda
-
-%.wasm: %.ast
-	peregrine wasm -o demo/$@ build/$*.ast
-
-%.rs: %.typed
-	peregrine rust -o demo/$@ build/$*.ast
-
-%.v:
-	agda2lambox -o build --rocq test/$*.agda
-
-%.typed:
-	agda2lambox -o build --typed test/$*.agda
+	rm -rf test/Tests.agda test/dist test/gen test/html

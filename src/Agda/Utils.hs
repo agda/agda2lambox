@@ -3,60 +3,33 @@
 -- | Agda utilities.
 module Agda.Utils where
 
-import Data.Maybe ( isJust, catMaybes, fromMaybe )
-import Data.Text ( Text )
+import Data.Maybe ( isJust, fromMaybe )
 
-import Agda.Compiler.Backend ( getUniqueCompilerPragma, PureTCM, HasConstInfo (getConstInfo) )
+import Agda.Compiler.Backend ( getUniqueCompilerPragma, HasConstInfo (getConstInfo) )
 import Agda.Syntax.Abstract.Name
 import Agda.Syntax.Common ( defaultArg, namedThing, unArg )
 import Agda.Syntax.Internal
-import Agda.TypeChecking.Monad.Base hiding ( conArity )
-import Agda.TypeChecking.Substitute ( raise, TelV (theCore) )
-import Agda.Syntax.Common.Pretty
 import Agda.Syntax.Treeless
-
-import Agda.TypeChecking.Telescope (telView, telViewUpTo)
-import Agda.TypeChecking.Substitute (TelV(theTel))
-
-import Agda.TypeChecking.Reduce (reduceDefCopy)
+import Agda.TypeChecking.Monad.Base hiding ( conArity )
+import Agda.TypeChecking.Datatypes ( ConstructorInfo(..), getConstructorInfo )
+import Agda.TypeChecking.Substitute ( raise, TelV(..) )
+import Agda.TypeChecking.Telescope ( telView, telViewUpTo )
 
 -- * Miscellaneous
 
--- | Pragma string for the agda2lambox backend.
-agda2lamboxP :: Text
-agda2lamboxP = "AGDA2LAMBOX"
-
-pp :: Pretty a => a -> String
-pp = prettyShow
-
+-- | Whether a definition has an @AGDA2LAMBOX@ COMPILE pragma.
 hasPragma :: QName -> TCM Bool
-hasPragma qn = isJust <$> getUniqueCompilerPragma agda2lamboxP qn
-
--- | Retrieve the additional info to a COMPILE pragma, if any
-getPragmaInfo :: QName -> TCM (Maybe String)
-getPragmaInfo qn =
-  getUniqueCompilerPragma agda2lamboxP qn <&> \case
-    Nothing                      -> Nothing
-    Just (CompilerPragma _ info) -> Just info
+hasPragma qn = isJust <$> getUniqueCompilerPragma "AGDA2LAMBOX" qn
 
 -- | Check whether a definition is a function.
-isFunction :: Definition -> Bool
-isFunction Defn{..} | Function{} <- theDef = True
-isFunction _ = False
-
--- | Check whether a definition is a datatype/record.
-isDataDef, isRecDef, isFunDef, isDataOrRecDef :: Defn -> Bool
-isDataDef = \case Datatype{} -> True; _ -> False
-isRecDef  = \case Record{}   -> True; _ -> False
-isFunDef  = \case Function{} -> True; _ -> False
-isDataOrRecDef = liftA2 (||) isDataDef isRecDef
+isFunDef :: Defn -> Bool
+isFunDef = \case Function{} -> True; _ -> False
 
 dataOrRecDefMutuals :: Definition -> TCM [QName]
-dataOrRecDefMutuals d = do
-  case theDef d of
-    Datatype{dataMutual} -> pure $ fromMaybe [] dataMutual
-    Record  {recMutual}  -> pure $ fromMaybe [] recMutual
-    _                    -> internalError "Not a datatype or record"
+dataOrRecDefMutuals d = case theDef d of
+  Datatype{dataMutual} -> pure $ fromMaybe [] dataMutual
+  Record  {recMutual}  -> pure $ fromMaybe [] recMutual
+  _                    -> internalError "Not a datatype or record"
 
 dataOrRecMutuals :: QName -> TCM [QName]
 dataOrRecMutuals q = dataOrRecDefMutuals =<< getConstInfo q
@@ -65,14 +38,15 @@ getInductiveParams :: Defn -> Int
 getInductiveParams Datatype{dataPars} = dataPars
 getInductiveParams Record{recPars}    = recPars
 
--- TODO: consider erased things to be logical
---       so maybe take a Dom Type instead
+-- | Number of arguments of a constructor, excluding parameters.
+getConArity :: QName -> TCM Int
+getConArity q = getConstructorInfo q <&> \case
+  DataCon a         -> a
+  RecordCon _ _ a _ -> a
 
 -- | Whether a type is an arity.
 isArity :: Type -> TCM Bool
-isArity typ = do
-  tel <- telView typ
-  pure $ isJust $ isSort $ unEl $ theCore $ tel
+isArity = fmap (isJust . isSort . unEl . theCore) . telView
 
 -- | Whether a type is a Π type.
 isPiTy :: Type -> TCM Bool
@@ -83,6 +57,22 @@ etaExpand :: TTerm -> TTerm
 etaExpand = \case
   t@TLam{} -> t
   t        -> TLam $ TApp (raise 1 t) [TVar 0]
+
+-- | Apply a transformation to the immediate subterms of a treeless term.
+descendM :: Applicative m => (TTerm -> m TTerm) -> TTerm -> m TTerm
+descendM f = \case
+  TApp a bs          -> TApp <$> f a <*> traverse f bs
+  TLam b             -> TLam <$> f b
+  TLet s u b         -> TLet s <$> f u <*> f b
+  TCase sc ct d alts -> TCase sc ct <$> f d <*> traverse (descendAltM f) alts
+  TCoerce a          -> TCoerce <$> f a
+  t                  -> pure t
+
+descendAltM :: Applicative m => (TTerm -> m TTerm) -> TAlt -> m TAlt
+descendAltM f = \case
+  TACon c n b -> TACon c n <$> f b
+  TALit l b   -> TALit l <$> f b
+  TAGuard g b -> TAGuard <$> f g <*> f b
 
 -- * projections
 
@@ -100,46 +90,6 @@ isTypeAlias = \case
     all (isVarP . namedThing . unArg) (namedClausePats cl) && isJust (clauseBody cl)
   _ -> False
   where isVarP = \case VarP{} -> True; _ -> False
-
--- | Try to unfold a definition if introduced by module application.
-maybeUnfoldCopy
-  :: PureTCM m
-  => QName -- ^ Name of the definition.
-  -> Elims
-  -> (Term -> m a)
-  -- ^ Callback if the definition is indeed a copy.
-  -> (QName -> Elims -> m a)
-  -- ^ Callback if the definition isn't a copy.
-  -> m a
-maybeUnfoldCopy f es onTerm onDef =
-  reduceDefCopy f es >>= \case
-    NoReduction ()   -> onDef f es
-    YesReduction _ t -> onTerm t
-
--- | Remove all the names defined in where clauses from the list of names.
--- Assumes that the order is the one given by Agda, that is:
--- definitions in (possibly anonymous) modules coming from where clauses appear 
--- right after their parent function definition.
-filterOutWhere :: [QName] -> TCM [QName]
-filterOutWhere [] = pure []
-filterOutWhere (q:qs) = do
-  ws <- getWheres q
-  let qs' = dropWhile (isChild ws) qs
-  (q:) <$> filterOutWhere qs'
-
-  where
-  isChild :: [ModuleName] -> QName -> Bool
-  isChild ws r = any (r `isChildOfMod`) ws
-
-  isChildOfMod :: QName -> ModuleName -> Bool
-  isChildOfMod q mod = qnameModule q `isLeChildModuleOf` mod
-
-  getWheres :: QName -> TCM [ModuleName]
-  getWheres q = do
-    def <- getConstInfo q
-    pure case theDef def of
-      Function{..} -> catMaybes $ map clauseWhereModule funClauses
-      _            -> []
 
 -- | Unspines 1 layer of a term,
 -- transforming eventual projection elims into 'Def' projection applications.
