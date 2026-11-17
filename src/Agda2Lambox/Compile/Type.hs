@@ -3,12 +3,13 @@ module Agda2Lambox.Compile.Type where
 
 import Control.Monad.Reader
 import Data.List ( uncons )
+import Data.Functor ( (<&>) )
 import Data.Maybe ( isJust, mapMaybe, fromMaybe )
 
 import Agda.Syntax.Common ( unArg, Arg (Arg) )
 import Agda.Syntax.Internal
 import Agda.TypeChecking.Substitute ( absBody, absApp )
-import Agda.TypeChecking.Monad.Base ( TCM, MonadTCM (liftTCM), Definition(..))
+import Agda.TypeChecking.Monad.Base hiding ( initEnv )
 import Agda.TypeChecking.Monad.Debug ( reportSDoc )
 import Agda.TypeChecking.Monad.Signature ( canonicalName )
 import Agda.TypeChecking.Telescope ( shouldBePi )
@@ -22,6 +23,7 @@ import Agda2Lambox.Compile.Monad
 import Agda.Compiler.Backend (HasConstInfo(getConstInfo), AddContext (addContext))
 import Agda.Utils (isDataOrRecDef, isArity, maybeUnfoldCopy, isFunDef, isTypeAlias)
 import Agda.TypeChecking.Reduce ( reduce )
+import Agda.TypeChecking.CheckInternal ( infer )
 
 
 -- | The kind of variables that are locally bound
@@ -133,14 +135,27 @@ compileElims ty (x:xs) = do
   (a, b) <- liftTCM $ shouldBePi ty
   -- b <- piApplyM ty x
   rest   <- compileElims (absApp b $ unArg x) xs
-  -- types are compiled (even if erased), logical arguments are □, and any other argument is 𝕋
+  -- types are compiled (even if erased)
+  -- type variables of a non-sort arity are compiled (other type families may be higher-kinded)
+  -- logical arguments are □, and any other argument is 𝕋
   first  <- ifM (liftTCM $ isTypeArg $ unDom a)
               (snd <$> nested (compileTypeTerm $ unArg x)) $
-            ifM (liftTCM $ isLogical a) (pure LBox.TBox) (pure LBox.TAny)
+            typeVar (unDom a) (unArg x) >>= \case
+              Just i  -> pure $ LBox.TVar i
+              Nothing -> ifM (liftTCM $ isLogical a) (pure LBox.TBox) (pure LBox.TAny)
   pure (first : rest)
   where
   isTypeArg :: Type -> TCM Bool
   isTypeArg ty = andM [ isJust . isSort . unEl <$> reduce ty, not <$> isLogical ty ]
+
+  typeVar :: Type -> Term -> C (Maybe Int)
+  typeVar ty = \case
+    Var n [] -> ifM (liftTCM $ isArity ty) (asks $ tyVarIndex . (!! n) . boundTypes) (pure Nothing)
+    _        -> pure Nothing
+
+  tyVarIndex = \case
+    TypeVar i -> Just i
+    Other     -> Nothing
 
 getTypeVarInfo :: Dom Type -> TCM LBox.TypeVarInfo
 getTypeVarInfo typ = do
@@ -247,9 +262,21 @@ compileTypeTerm t = do
 
     _ -> pure ([], LBox.TAny)
 
--- | Compile the application of a type scheme, keeping all arguments.
+-- | Restore the parameters of an application of a projection(-like) function.
+projectionParams :: QName -> Elims -> TCM Elims
+projectionParams q es = theDef <$> getConstInfo q >>= \case
+  Function{funProjection = Right Projection{projIndex}}
+    | npars <- projIndex - 1, npars > 0, Apply r : _ <- es ->
+    unEl <$> (reduce =<< infer (unArg r)) <&> \case
+      Def _ ps | Just pars <- allApplyElims (take npars ps), length pars == npars
+        -> map Apply pars ++ es
+      _ -> es
+  _ -> pure es
+
+-- | Compile the application of a type scheme, restoring the parameters of a projection.
 typeScheme :: QName -> Type -> Elims -> C ([LBox.Name], LBox.Type)
 typeScheme q defType es = do
+  es <- liftTCM $ projectionParams q es
   q <- liftTCM $ canonicalName q
   lift $ requireDef q
   let args = mapMaybe isApplyElim es
