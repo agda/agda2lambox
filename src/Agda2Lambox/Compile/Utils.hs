@@ -1,7 +1,6 @@
 {-# LANGUAGE FlexibleInstances #-}
 module Agda2Lambox.Compile.Utils where
 
-import Data.Functor ( (<&>) )
 import Data.List ( elemIndex, mapAccumL )
 import Data.Maybe ( fromMaybe, listToMaybe, isJust )
 
@@ -15,7 +14,7 @@ import Agda.Syntax.Common ( usableModality, Arg(..), NameId(..) )
 import Agda.TypeChecking.Datatypes ( getConstructors, getConstructorData )
 import Agda.TypeChecking.Level ( isLevelType )
 import Agda.TypeChecking.Reduce ( reduce )
-import Agda.TypeChecking.Substitute ( TelV(TelV), theTel )
+import Agda.TypeChecking.Substitute ( TelV(TelV) )
 import Agda.TypeChecking.Telescope ( telView, telViewUpTo, flattenTel )
 import Agda.Utils.Monad ( orM, andM, filterM, forM )
 

@@ -4,7 +4,6 @@ module Agda2Lambox.Compile.Inductive (compileInductive) where
 
 import Control.Monad.Reader ( liftIO )
 import Control.Monad ( forM, unless )
-import Data.Functor ((<&>))
 import Data.Foldable ( toList )
 import Data.List.NonEmpty qualified as NEL
 import Data.Maybe ( isJust, fromMaybe )

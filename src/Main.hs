@@ -5,7 +5,6 @@ module Main (main) where
 import Control.Monad ( filterM, when )
 import Control.Monad.IO.Class ( liftIO )
 import Control.DeepSeq ( NFData(rnf) )
-import Data.Function ( (&) )
 import Data.Maybe ( fromMaybe )
 import Data.Version ( showVersion )
 import Data.Text ( pack )
@@ -29,7 +28,7 @@ import Agda2Lambox.Compile ( compile )
 import CodeGen.Rocq ( prettyRocq  )
 import CodeGen.SExpr ( prettySexp )
 import LambdaBox.Env
-import Agda2Lambox.Compile.Monad ( runCompile, CompileEnv(..) )
+import Agda2Lambox.Compile.Monad ( runCompile, CompileEnv(..), genericError )
 
 
 main :: IO ()

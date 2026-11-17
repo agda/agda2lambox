@@ -1,24 +1,26 @@
--- | Thunks `let` bindings that are not demanded on every path.
+-- | Makes non-strict `let` bindings strict, thunking those that are not
+-- demanded on every path.
 --
--- This is needed by *strict* backends such as agda2lambox, since some
--- compiler-generated let-bindings are assuming lazy/call-by-name semantics, e.g.
--- `updateCatchall` of the treeless pipeline hoists the body of an overlapping
--- clause above its case split, which is sound only under non-strict evaluation.
+-- This is needed by *strict* backends such as agda2lambox, since the catch-all
+-- machinery of the treeless translation (`updateCatchall`) hoists the body of an
+-- overlapping clause above its case split, which is sound only under non-strict
+-- evaluation.
 module Agda.Utils.ThunkLets (thunkLets) where
 
 import Agda.Syntax.Treeless
 import Agda.TypeChecking.Substitute
 import Agda.Compiler.Treeless.Subst ( Occurs(..), occursIn )
 
--- | Rewrite @let x = u in b@ into @let x = λ _ → u in b[x □ / x]@.
+-- | Rewrite non-strict @let x = u in b@ into @let x = λ _ → u in b[x □ / x]@.
 thunkLets :: TTerm -> TTerm
 thunkLets = \case
-  TLet u b
+  TLet Strict u b -> TLet Strict (go u) (go b)
+  TLet NonStrict u b
     -- do not thunk if @u@ is already a value or @b@ evaluates @x@ on every path
-    | isValue u' || demands 0 b' -> TLet u' b'
+    | isValue u' || demands 0 b' -> TLet Strict u' b'
     -- if @b@ occurs at most once, substitute it away to avoid a spurious thunk
     | occursOnce b'              -> applySubst ([u'] ++# idS) b'
-    | otherwise                  -> TLet (TLam $ raise 1 u') (force 0 b')
+    | otherwise                  -> TLet Strict (TLam $ raise 1 u') (force 0 b')
     where
     u' = go u
     b' = go b
@@ -63,7 +65,7 @@ demands i = \case
     | not (null es) -> go i (last es)
   TVar j            -> i == j
   TApp f es         -> go i f || any (go i) es
-  TLet u b          -> go i u || go (i + 1) b
+  TLet s u b        -> (s == Strict && go i u) || go (i + 1) b
   TCase sc _ d alts -> sc == i || (go i d && all (goAlt i) alts)
   TCoerce t         -> go i t
   TError{}          -> True -- unreachable
@@ -85,13 +87,13 @@ force i = \case
     | otherwise -> TVar j
   TApp (TVar j) es
     | i == j -> mkTApp (forced i) (go i <$> es)
-  TApp f es -> TApp (go i f) (go i <$> es)
-  TLet u b  -> TLet (go i u) (go (i + 1) b)
-  TLam b    -> TLam (go (i + 1) b)
-  TCoerce t -> TCoerce (go i t)
+  TApp f es  -> TApp (go i f) (go i <$> es)
+  TLet s u b -> TLet s (go i u) (go (i + 1) b)
+  TLam b     -> TLam (go (i + 1) b)
+  TCoerce t  -> TCoerce (go i t)
   TCase sc ct d alts
     -- cannot force case scrutinee variable: introduce fresh let-binding
-    | sc == i  -> TLet (forced i) $ go (i + 1) $
+    | sc == i  -> TLet Strict (forced i) $ go (i + 1) $
                     case raise 1 (TCase sc ct d alts) of
                       TCase _ ct' d' alts' -> TCase 0 ct' d' alts'
                       t -> t

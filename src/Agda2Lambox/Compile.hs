@@ -118,7 +118,7 @@ compileDefinition target defn@Defn{..} = setCurrentRange defName do
                 , funFlags      = SmallSet.empty
                 , funTerminates = Just True
                 , funExtLam     = Nothing
-                , funWith       = Nothing
+                , funWith       = NoWithFunction
                 , funIsKanOp    = Nothing
                 , funOpaque     = TransparentDef
                 }

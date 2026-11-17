@@ -2,7 +2,7 @@
 
 An [Agda] backend to generate [MetaCoq] λ□ (LambdaBox) programs
 for further verified extraction to WASM or Rust using the [Peregrine] tool.
-The backend builds off Agda 2.7.0.1.
+The backend builds off Agda 2.9.0.
 Compatible with Coq 8.19.0, MetaCoq 1.3.1 and CertiCoq 0.9.
 
 [Agda]: https://github.com/agda/agda

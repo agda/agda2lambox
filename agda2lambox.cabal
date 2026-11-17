@@ -42,7 +42,7 @@ executable agda2lambox
                        Paths_agda2lambox
   autogen-modules:     Paths_agda2lambox
   build-depends:       base       >= 4.20    && < 4.22,
-                       Agda       >= 2.8     && < 2.9,
+                       Agda       >= 2.9     && < 2.10,
                        deepseq    >= 1.5     && < 1.6,
                        sexpresso  >= 1.2.5   && < 1.3,
                        containers >= 0.7     && < 0.8,

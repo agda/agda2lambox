@@ -9,7 +9,7 @@ import Data.Graph ( stronglyConnComp, SCC(..) )
 import Data.List ( elemIndex, find, sort )
 import Data.Map ( Map )
 import Data.Map qualified as M
-import Data.Maybe ( fromMaybe )
+import Data.Maybe ( fromMaybe, isJust )
 import Data.Set ( Set )
 import Data.Set qualified as S
 
@@ -23,9 +23,9 @@ import Agda.TypeChecking.Monad.Signature ( getCompiledArgUse )
 import Agda.Syntax.Internal.Names ( namesIn )
 import Agda.Syntax.Common ( hasQuantityω )
 import Agda.Utils.Monad ( ifM, ifNotM )
-import Agda.Utils.Treeless ( alwaysInline )
+import Agda.Utils.Treeless ( treeless )
 
-import Agda.Utils ( treeless, isRecordProjection, isPiTy, etaExpand, isFunction )
+import Agda.Utils ( isRecordProjection, isPiTy, etaExpand, isFunction )
 import Agda2Lambox.Compile.Target
 import Agda2Lambox.Compile.Utils
 import Agda2Lambox.Compile.Monad
@@ -59,7 +59,7 @@ compileFunctionBody t ms Defn{defName, defType} = do
 shouldCompileFunction :: Definition -> TCM Bool
 shouldCompileFunction def@Defn{defName}
   -- only non-erased
-  | hasQuantityω def = not <$> alwaysInline defName
+  | hasQuantityω def = isJust <$> treeless defName
   | otherwise        = pure False
 
 type MutualGraph = Map QName (Set QName)
