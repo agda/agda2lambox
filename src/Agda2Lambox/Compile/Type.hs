@@ -13,7 +13,7 @@ import Agda.TypeChecking.Monad.Debug ( reportSDoc )
 import Agda.TypeChecking.Monad.Signature ( canonicalName )
 import Agda.TypeChecking.Telescope ( shouldBePi )
 import Agda.TypeChecking.Pretty ( prettyTCM, (<+>) )
-import Agda.Utils.Monad ( ifM, andM )
+import Agda.Utils.Monad ( ifM, andM, orM )
 import Agda.Utils ( unSpine1 )
 
 import qualified LambdaBox as LBox
@@ -95,7 +95,7 @@ compileArgs tvars erased = runC tvars . compileArgsC (erased ++ repeat False)
     let name = domToName dom
     liftTCM $ reportSDoc "agda2lambox.compile.arg" 100 $
       "Compiling arg: " <+> prettyTCM dom
-    typ <- ifM ((e ||) <$> liftTCM (isLogical dom))
+    typ <- ifM (liftTCM $ orM [isLogical dom, (e &&) . not <$> isAbsurdFunType dom])
                  (pure LBox.TBox)
                  (compileTypeC $ unDom dom)
     ((name, typ):) <$> underBinder dom (compileArgsC es args)
@@ -201,17 +201,19 @@ compileTypeTerm t = do
 
       -- an inductive is applied to its parameters and indices,
       -- unless Agda erases its values (e.g. unit-like records)
-      else if isDataOrRecDef def then ifM (liftTCM $ isErasedData q) (pure ([], LBox.TBox)) do
+      else if isDataOrRecDef def then ifM (liftTCM $ erasable <$> headInfo q) (pure ([], LBox.TBox)) do
         lift $ requireDef q
         ind <- liftTCM $ toInductive q
         let args = mapMaybe isApplyElim es
         ([],) . foldl' LBox.TApp (LBox.TInd ind)
           <$> compileElims defType args
 
-      -- a type-level function that is not an alias is compiled to its reduct, if any
+      -- a type-level function that is not an alias is compiled to its reduct
+      -- if any, else to □ if Agda erases the values of all its clauses
       else if isFunDef def && not (isTypeAlias def) then
         liftTCM (reduce $ Def q es) >>= \case
-          Def q' _ | q' == q -> typeScheme q defType es
+          Def q' _ | q' == q -> ifM (liftTCM $ erasable <$> headInfo q) (pure ([], LBox.TBox)) $
+                                  typeScheme q defType es
           t'                 -> compileTypeTerm t'
 
       -- a type alias is kept, unless it hides arrows of the top-level spine,
@@ -253,11 +255,10 @@ compileTypeTerm t = do
         let name = domToName dom
         pure (name : vars, LBox.TArr LBox.TBox codomType')
 
-      -- Agda erases the values of nested function types into □ or out of an empty type
-      erasedPi <- if top then pure False else case ty of
-        LBox.TArr _ LBox.TBox -> pure True
-        _                     -> liftTCM $ isEmptyType domType
-      pure (vars, if erasedPi then LBox.TBox else ty)
+      -- Agda erases the values of nested function types into □
+      pure (vars, case ty of
+        LBox.TArr _ LBox.TBox | not top -> LBox.TBox
+        _                               -> ty)
 
     _ -> pure ([], LBox.TAny)
 

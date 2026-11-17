@@ -15,7 +15,7 @@ import Agda.TypeChecking.Datatypes ( getConstructors, getConstructorData )
 import Agda.TypeChecking.Level ( isLevelType )
 import Agda.TypeChecking.Reduce ( reduce )
 import Agda.TypeChecking.Substitute ( TelV(TelV) )
-import Agda.TypeChecking.Telescope ( telView, telViewUpTo, flattenTel )
+import Agda.TypeChecking.Telescope ( telView, telViewUpTo, telViewPath, flattenTel )
 import Agda.Utils.Monad ( orM, andM, filterM, forM )
 
 import Agda.Utils ( getInductiveParams, isDataOrRecDef, isArity, dataOrRecMutuals )
@@ -155,18 +155,71 @@ instance MayBeLogical a => MayBeLogical (Arg a) where
 
 -- * Erased types
 
--- | Whether Agda's erasure replaces the values of a datatype or record by □.
-isErasedData :: QName -> TCM Bool
-isErasedData q = theDef <$> getConstInfo q >>= \case
-  Datatype{dataCons = []}    -> pure True
-  Datatype{dataCons = c : _} -> isErasable c
-  Record{recConHead}         -> isErasable $ conName recConHead
-  _                          -> pure False
+-- | How Agda's erasure treats the values of a type.
+--   (c.f. Agda.Compiler.Treeless.Erase.getTypeInfo)
+data TypeInfo = Empty | Erasable | NotErasable
+  deriving Eq
 
--- | Whether a type is a datatype without constructors.
-isEmptyType :: Type -> TCM Bool
-isEmptyType ty = reduce (unEl ty) >>= \case
-  Def q _ -> getConstInfo q <&> \case
-    Defn{theDef = Datatype{dataCons = []}} -> True
-    _                                      -> False
-  _ -> pure False
+erasable :: TypeInfo -> Bool
+erasable = (/= NotErasable)
+
+typeInfo :: Type -> TCM TypeInfo
+typeInfo = typeInfo' []
+
+typeInfo' :: [QName] -> Type -> TCM TypeInfo
+typeInfo' seen ty = do
+  TelV tel cod <- telViewPath ty
+  is <- domains tel
+  et <- addContext tel case unEl cod of
+    Def d _ -> headInfo' seen d
+    Sort{}  -> pure Erasable
+    _       -> pure NotErasable
+  pure if | Empty `elem` is -> Erasable
+          | null is         -> et
+          | et == Empty     -> Erasable
+          | otherwise       -> et
+  where
+  domains = \case
+    EmptyTel        -> pure []
+    ExtendTel a tel -> (:) <$> typeInfo' seen (unDom a) <*> underAbstraction a tel domains
+
+-- | How Agda's erasure treats the values of a type headed by a definition.
+headInfo :: QName -> TCM TypeInfo
+headInfo = headInfo' []
+
+headInfo' :: [QName] -> QName -> TCM TypeInfo
+headInfo' seen q
+  | q `elem` seen = pure Erasable
+  | otherwise = do
+    sizes <- mapM getBuiltinName' [builtinSize, builtinSizeLt]
+    if Just q `elem` sizes then pure Erasable else theDef <$> getConstInfo q >>= \case
+      Datatype{dataCons = []}    -> pure Empty
+      Datatype{dataCons = c : _} -> fromErasable <$> isErasable c
+      Record{recConHead}         -> fromErasable <$> isErasable (conName recConHead)
+      Function{funClauses}       -> foldr plus Empty <$> mapM clauseInfo funClauses
+      _                          -> pure NotErasable
+  where
+  fromErasable b = if b then Erasable else NotErasable
+
+  clauseInfo cl = case clauseBody cl of
+    Nothing -> pure Empty
+    Just b  -> addContext (clauseTel cl) $ typeInfo' (q : seen) (El __DUMMY_SORT__ b)
+
+  plus Empty       r            = r
+  plus  r           Empty       = r
+  plus  Erasable    r           = r
+  plus  r           Erasable    = r
+  plus  NotErasable NotErasable = NotErasable
+
+-- | Whether Agda erases the values of a function type due to an empty domain.
+isAbsurdFunType :: Dom Type -> TCM Bool
+isAbsurdFunType dom
+  | not (usableModality dom) = pure False
+  | otherwise = do
+    TelV tel cod <- telViewPath $ unDom dom
+    if null tel then pure False else andM
+      [ (== Erasable) <$> typeInfo (unDom dom)
+      , addContext tel $ (== NotErasable) <$> typeInfo cod
+      ]
+
+

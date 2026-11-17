@@ -4,36 +4,44 @@ module Agda2Lambox.Compile.Box ( insertBoxes ) where
 
 import Data.List ( findIndices )
 
-import Agda.Compiler.Backend ( getConstInfo, getErasedConArgs )
+import Agda.Compiler.Backend ( getConstInfo, getErasedConArgs, underAbstraction )
 import Agda.Compiler.Treeless.Erase ( computeErasedConstructorArgs )
 import Agda.Syntax.Common ( Arg(..) )
+import Agda.Syntax.Internal ( Tele(..) )
 import Agda.Syntax.Treeless
 import Agda.TypeChecking.Datatypes ( getConstructorData )
 import Agda.TypeChecking.Monad.Base
 import Agda.TypeChecking.Monad.Signature ( getCompiledArgUse )
-import Agda.TypeChecking.Substitute ( raise )
+import Agda.TypeChecking.Substitute ( raise, TelV(..) )
+import Agda.TypeChecking.Telescope ( telViewPath )
 import Agda.Compiler.Treeless.Subst ()
 import Agda.Utils.Monad ( ifM )
 import Agda.Utils.List ( lastMaybe )
 
-import Agda2Lambox.Compile.Utils ( isLogical )
+import Agda2Lambox.Compile.Utils ( isLogical, isAbsurdFunType )
 
 -- | Insert □ for:
 --   * applications of logical definitions that Agda does not erase, e.g. projections into @Level@;
 --   * erased constructor fields, e.g. forced ones bound by 'etaExpandConstructors';
 --   * unused arguments, which Agda keeps in calls compiled before the callee's body;
---   partial applications are η-expanded up to their last unused argument,
---   since Peregrine dearges a constant only where it is applied to all of them.
+--
+-- Insert an absurd lambda instead of □ for:
+--   * arguments/fields of a function type with empty domain
+--
+-- Partial applications are η-expanded up to their last unused argument,
+-- since Peregrine dearges a constant only where it is applied to all of them.
 insertBoxes :: TTerm -> TCM TTerm
 insertBoxes t = case tAppView t of
 
   (TDef f, es) -> ifM (isLogicalDef f) (pure TErased) do
     unused <- maybe [] (findIndices (== ArgUnused)) <$> getCompiledArgUse f
-    etaBoxes unused (TDef f) <$> mapM insertBoxes es
+    absurd <- absurdArgs f
+    etaBoxes unused (TDef f) . zipWith3 arg (repeat False) absurd <$> mapM insertBoxes es
 
   (TCon c, es) -> do
     erased <- erasedConArgs c
-    mkTApp (TCon c) . zipWith box (erased ++ repeat False) <$> mapM insertBoxes es
+    absurd <- absurdArgs c
+    mkTApp (TCon c) . zipWith3 arg (erased ++ repeat False) absurd <$> mapM insertBoxes es
 
   _ -> case t of
     TApp f es       -> TApp <$> insertBoxes f <*> mapM insertBoxes es
@@ -48,8 +56,23 @@ insertBoxes t = case tAppView t of
     TALit l b   -> TALit l   <$> insertBoxes b
     TAGuard g b -> TAGuard   <$> insertBoxes g <*> insertBoxes b
 
-  box True _ = TErased
-  box _    e = e
+  arg = \case
+    _    True _ -> TLam tUnreachable
+    True _    _ -> TErased
+    _    _    e -> e
+
+  absurdArgs q = do
+    Defn{defType, theDef} <- getConstInfo q
+    TelV tel _ <- telViewPath defType
+    let pars = case theDef of
+          Constructor{conPars}                                  -> conPars
+          Function{funProjection = Right Projection{projIndex}} -> projIndex - 1
+          _                                                     -> 0
+    (++ repeat False) . drop pars <$> go tel
+    where
+    go = \case
+      EmptyTel        -> pure []
+      ExtendTel a tel -> (:) <$> isAbsurdFunType a <*> underAbstraction a tel go
 
   isLogicalDef f = do
     Defn{defArgInfo, defType} <- getConstInfo f
