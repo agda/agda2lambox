@@ -14,7 +14,8 @@ import Agda.TypeChecking.Datatypes ( ConstructorInfo(..), getConstructorInfo )
 import Agda.TypeChecking.Pretty
 import Agda.TypeChecking.Telescope ( telViewUpTo, piApplyM, teleArgs, telView, flattenTel )
 import Agda.TypeChecking.Substitute ( TelV(..) )
-import Agda.Compiler.Backend ( getConstInfo, reportSDoc, AddContext (addContext))
+import Agda.Compiler.Backend ( getConstInfo, getErasedConArgs, reportSDoc, AddContext (addContext) )
+import Agda.Compiler.Treeless.Erase ( computeErasedConstructorArgs )
 import Agda.Syntax.Common.Pretty ( prettyShow )
 import Agda.Syntax.Common ( Arg )
 import Agda.Syntax.Internal
@@ -138,6 +139,8 @@ compileInductive' t pars defn = do
         , tvarIsSort    = isJust $ isSort $ unEl domType
         }
 
+  _ <- whenTyped t $ liftTCM $ computeErasedConstructorArgs indName
+
   addContext params do
 
     ctors :: [LBox.ConstructorBody t] <-
@@ -162,7 +165,8 @@ compileInductive' t pars defn = do
             "Constructor telescope:" <+> prettyTCM conTel
           -- constructors take the block's □-params first
           let parArgs = (, LBox.TBox) . domToName <$> cpars
-          (parArgs ++) <$> compileArgs indPars conTel
+          erased <- liftTCM $ getErasedConArgs cname
+          (parArgs ++) <$> compileArgs indPars erased conTel
 
         pure LBox.Constructor
           { cstrName  = qnameToIdent cname

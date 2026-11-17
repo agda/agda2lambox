@@ -17,15 +17,19 @@ import Agda.Syntax.Abstract.Name ( QName )
 import Agda.TypeChecking.Monad.Base hiding ( None )
 import Agda.TypeChecking.Pretty
 import Agda.Compiler.Backend ( getConstInfo, reportSDoc )
+import Agda.Compiler.Treeless.Erase ( isErasable )
+import Agda.Syntax.Treeless ( ArgUsage(..) )
+import Agda.TypeChecking.Monad.Signature ( getCompiledArgUse )
 import Agda.Syntax.Internal.Names ( namesIn )
 import Agda.Syntax.Common ( hasQuantityω )
-import Agda.Utils.Monad (ifNotM)
-import Agda.Utils.Treeless ( alwaysInline, Erasure )
+import Agda.Utils.Monad ( ifM, ifNotM )
+import Agda.Utils.Treeless ( alwaysInline )
 
 import Agda.Utils ( treeless, isRecordProjection, isPiTy, etaExpand, isFunction )
 import Agda2Lambox.Compile.Target
 import Agda2Lambox.Compile.Utils
 import Agda2Lambox.Compile.Monad
+import Agda2Lambox.Compile.Box ( insertBoxes )
 import Agda2Lambox.Compile.Term ( compileTerm )
 import Agda2Lambox.Compile.Type ( compileTopLevelType )
 
@@ -36,15 +40,18 @@ import Agda.TypeChecking.Substitute ( TelV(..), telePi )
 
 
 -- | Convert a function body to a λ□ term.
-compileFunctionBody :: Erasure -> [QName] -> Definition -> CompileM LBox.Term
-compileFunctionBody er ms Defn{defName, defType} = do
-  Just t <- liftTCM $ treeless er defName
+compileFunctionBody :: Target t -> [QName] -> Definition -> CompileM LBox.Term
+compileFunctionBody t ms Defn{defName, defType} = do
+  Just body <- liftTCM $ treeless defName
   reportSDoc "agda2lambox.compile.function" 10 $
-    "treeless body:" <+> pretty t
+    "treeless body:" <+> pretty body
   -- fixpoint bodies must always be lambdas, so η-expand recursive functions of
   -- function type, e.g. recursive pattern-lambdas that are not inlined by Agda
   isPi <- liftTCM $ isPiTy defType
-  compileTerm ms $ if not (null ms) && isPi then etaExpand t else t
+  let body' = if not (null ms) && isPi then etaExpand body else body
+  compileTerm ms =<< case t of
+    ToTyped   -> liftTCM $ insertBoxes body'
+    ToUntyped -> pure body'
 
 -- | Whether to compile a function definition to λ□:
 --    ∙ it is non-erased
@@ -61,8 +68,8 @@ type MutualGraph = Map QName (Set QName)
 --
 -- NB: see the discussion on Agda issue #8111 on why @funMutuals@ is not enough,
 -- i.e. the positivity checker misses some calls on agruments it deems unused.
-recursiveGroup :: Erasure -> Definition -> TCM [QName]
-recursiveGroup er Defn{defName, defMutual = block} =
+recursiveGroup :: Definition -> TCM [QName]
+recursiveGroup Defn{defName, defMutual = block} =
   explore M.empty [defName] >>= pure . extractGroup
   where
   explore :: MutualGraph -> [QName] -> TCM MutualGraph
@@ -74,7 +81,7 @@ recursiveGroup er Defn{defName, defMutual = block} =
     = calls q >>= \cs -> explore (M.insert q cs gr) (S.toList cs ++ qs)
 
   calls :: QName -> TCM (Set QName)
-  calls q = treeless er q >>= \case
+  calls q = treeless q >>= \case
     Nothing -> pure S.empty
     Just t  -> S.fromList <$> filterM inBlock (S.toList $ namesIn t)
 
@@ -92,27 +99,30 @@ recursiveGroup er Defn{defName, defMutual = block} =
 compileFunction :: Target t -> Definition -> CompileM (Maybe (LBox.GlobalDecl t))
 compileFunction (t :: Target t) defn@Defn{defType} =
   ifNotM (liftTCM $ shouldCompileFunction defn) (pure Nothing) do
-  let er = targetErasure t
-  mnames <- liftTCM $ recursiveGroup er defn
+  mnames <- liftTCM $ recursiveGroup defn
   mdefs  <- liftTCM $ mapM getConstInfo mnames
   reportSDoc "agda2lambox.compile.function" 5 $
     "Recursive group:" <+> prettyTCM mnames
-  -- (conditionally) compile type of function
-  typ <- whenTyped t $ case isRecordProjection (theDef defn) of
-    Nothing -> compileTopLevelType defType
+  -- (conditionally) compile type of function, which is □ when Agda erases its body,
+  -- with □ for the arguments it erases from applications (c.f. 'eraseTerms')
+  typ <- whenTyped t $ ifM (liftTCM $ isErasable $ defName defn) (pure ([], LBox.TBox)) do
+    unused <- map (== ArgUnused) . fromMaybe [] <$> liftTCM (getCompiledArgUse $ defName defn)
+    case isRecordProjection (theDef defn) of
+      Nothing -> compileTopLevelType unused defType
 
-    -- if it is a (real) projection, drop the parameters from the type
-    Just (recName, _) -> do
-      Defn{defType = recType, theDef = Record{recPars}} <- liftTCM $ getConstInfo recName
-      TelV pars _      <- telViewUpTo recPars recType
-      TelV _ projType  <- telViewUpTo recPars defType
-      fmap (LBox.dropArrows recPars) <$> compileTopLevelType (telePi pars projType)
+      -- if it is a (real) projection, drop the parameters from the type
+      Just (recName, _) -> do
+        Defn{defType = recType, theDef = Record{recPars}} <- liftTCM $ getConstInfo recName
+        TelV pars _      <- telViewUpTo recPars recType
+        TelV _ projType  <- telViewUpTo recPars defType
+        fmap (LBox.dropArrows recPars) <$>
+          compileTopLevelType (replicate recPars False ++ unused) (telePi pars projType)
 
   let builder :: LBox.Term -> Maybe (LBox.GlobalDecl t)
       builder = Just . ConstantDecl . ConstantBody typ . Just
 
   -- if the function is not recursive, just compile the body
-  if null mdefs then builder <$> compileFunctionBody er [] defn
+  if null mdefs then builder <$> compileFunctionBody t [] defn
 
   -- otherwise, take fixpoint
   else do
@@ -120,7 +130,7 @@ compileFunction (t :: Target t) defn@Defn{defType} =
 
     builder . flip LBox.LFix k <$>
       forM mdefs \def@Defn{defName} -> do
-        body <- compileFunctionBody er mnames def >>= \case
+        body <- compileFunctionBody t mnames def >>= \case
           l@LBox.LLambda{} -> pure l
           LBox.LBox        -> pure $ LBox.LLambda LBox.Anon LBox.LBox
           _                -> genericError "Fixpoint body must be Lambda."
