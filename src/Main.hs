@@ -130,7 +130,7 @@ writeModule Options{..} menv IsMain m defs = do
   let roots = if optLibrary then defs else programs
   env      <- runCompile CompileEnv $ compile optTarget roots
 
-  mains <- mapM qnameToKName programs
+  mains <- mapM mainProgram programs
 
   liftIO $ createDirectoryIfMissing True outDir
 

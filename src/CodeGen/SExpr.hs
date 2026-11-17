@@ -203,4 +203,4 @@ instance ToSexp t (GlobalEnv t) where
 instance ToSexp t (LBoxModule t) where
   toSexp t LBoxModule{..} =
     let n = case t of {ToUntyped -> "Untyped"; ToTyped -> "Typed"}
-    in ctor t n [S lboxEnv, S $ LConst <$> listToMaybe lboxMain]
+    in ctor t n [S lboxEnv, S $ listToMaybe lboxMain]

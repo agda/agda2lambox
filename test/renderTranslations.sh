@@ -1,8 +1,9 @@
 #!/bin/zsh
 
 # PRE:
-#   - path to generated λ-box files
+#   - path to generated λ-box files, untyped under dist/ and typed under dist/typed/
 BUILD_DIR=dist
+TYPED_DIR=$BUILD_DIR/typed
 #   - path to Peregrine compilation output
 GEN_DIR=gen
 # POST:
@@ -11,9 +12,10 @@ AGDA_HTML_DIR=html
 
 echo "Rendering translations..."
 
-# skip what earlier runs rendered, WASM binaries, and build directories
+# skip what earlier runs rendered, Rocq and WASM binaries, and build directories
 setopt extendedglob
-for f in $BUILD_DIR/*~*.(html|md)(.) $GEN_DIR/*/*~*.(html|md|wasm)(.); do
+for f in $BUILD_DIR/*~*.(html|md|vo|vok|vos|glob)(.) $TYPED_DIR/*~*.(html|md|vo|vok|vos|glob)(.) \
+         $GEN_DIR/*/*~*.(html|md|wasm)(.); do
 
   echo " * $f"
   ext=${f##*.}
@@ -21,13 +23,15 @@ for f in $BUILD_DIR/*~*.(html|md)(.) $GEN_DIR/*/*~*.(html|md|wasm)(.); do
 
   mdFn="$f".md
   lang=$(case $ext in
-    "ast") echo "";;
-    "txt") echo "";;
-    "v") echo "coq";; # alas, pandoc has no coq/rocq syntax-highlighting support
+    "txt") echo "agda";;
+    "ast"|"wat"|"sml"|"mlf") echo "scheme";; # S-expressions
+    "result"|"value") echo "scheme";; # mostly constructor trees
+    "v") echo "ocaml";;
     "rs") echo "rust";;
-    "sml") echo "ocaml";;
-    "mlf") echo "scheme";; # Malfunction
-    "result"|"value") echo "";;
+    "ll") echo "llvm";;
+    "fs") echo "fsharp";;
+    "kk") echo "kotlin";;
+    "lean") echo "haskell";;
     *) echo "$ext";;
   esac)
   : > $mdFn
@@ -36,101 +40,74 @@ for f in $BUILD_DIR/*~*.(html|md)(.) $GEN_DIR/*/*~*.(html|md|wasm)(.); do
   [[ $ext == "result" && -f $value ]] && \
     printf '```\n%s\n```\n\n---\n\n' "$(<$value)" >> $mdFn
   echo "\`\`\`$lang" >> $mdFn
-  sed '$a\' $f >> $mdFn # Peregrine's OCaml and CakeML output lacks a final newline
+  if [[ $ext == (sml|mlf) ]] && code=$(malfunction fmt < $f 2> /dev/null); then
+    print -r -- $code >> $mdFn
+  else
+    sed '$a\' $f >> $mdFn
+  fi
   echo "\`\`\`" >> $mdFn
 
   targetHtml="$f".html
-  pandoc --quiet -i "$mdFn" -o "$targetHtml" -s --highlight-style=tango
+  pandoc --quiet -i "$mdFn" -o "$targetHtml" -s --highlight-style=tango \
+    -V header-includes='<style>pre > code.sourceCode { white-space: pre-wrap }</style>'
 done
 
-mkdir -p "$AGDA_HTML_DIR/$BUILD_DIR" "$AGDA_HTML_DIR/$GEN_DIR"
+mkdir -p "$AGDA_HTML_DIR/$BUILD_DIR" "$AGDA_HTML_DIR/$TYPED_DIR"
 cp $BUILD_DIR/*.html "$AGDA_HTML_DIR/$BUILD_DIR"
-cp $GEN_DIR/**/*.html "$AGDA_HTML_DIR/$GEN_DIR"
+cp $TYPED_DIR/*.html "$AGDA_HTML_DIR/$TYPED_DIR"
+for d in $GEN_DIR/*(/N); do
+  mkdir -p "$AGDA_HTML_DIR/$d" && cp $d/*.html "$AGDA_HTML_DIR/$d"
+done
 
-for f in $BUILD_DIR/**/**.txt; do
+ARROW='<div style="font-size:50px;">&nbsp; ↪ &nbsp;</div>'
+# an option showing pane $1, labelled $2
+opt() {
+  print -rn "<option value=\"$1\">$2</option>"
+}
+# a pane with the rendering of file $2, then that of file $3 (its value) if given
+pane() {
+  print -rn "<div class=\"tabs__tab\" id=\"$1\" data-tab-info><embed src=\"$2.html\"/>${3:+$ARROW<embed src=\"$3.html\"/>}</div>"
+}
 
-  ext=${f##*.}
-  fn=${${f#"$BUILD_DIR"/}%."$ext"}
-
-  fTxt="$f"
-  fAst="$BUILD_DIR"/"$fn".ast
-  fCoq="$BUILD_DIR"/"$fn".v
-
-  fWasm="$GEN_DIR"/"$fn".wat
-  fWasmBin="$GEN_DIR"/"$fn".wasm
-  fC="$GEN_DIR"/"$fn".c
-  fOcaml="$GEN_DIR"/"$fn".mlf
-  fCakeml="$GEN_DIR"/"$fn".sml
-  fRust="$GEN_DIR"/"$fn".rs
-  fElm="$GEN_DIR"/"$fn".elm
-
+for f in $BUILD_DIR/*.txt; do
+  fn=${${f#$BUILD_DIR/}%.txt}
   sourceHtml=$AGDA_HTML_DIR/$(echo $fn | tr '/' '.').html
   [ ! -f $sourceHtml ] && \
     echo " No corresponding HTML for $f (should be at $sourceHtml)" && \
     exit 1
   echo " * $sourceHtml"
+
+  u=$BUILD_DIR/$fn t=$TYPED_DIR/$fn g=$GEN_DIR
+  opts=(
+    '<optgroup label="agda2lambox">'
+    "$(opt debug Debug)" "$(opt debugT 'Debug (typed)')" "$(opt ast 'λ&#9744;')" "$(opt astT 'λ&#9744; (typed)')"
+    "$(opt rocq Rocq)" "$(opt rocqT 'Rocq (typed)')"
+    '</optgroup><optgroup label="Peregrine">'
+    "$(opt wasm WASM)" "$(opt c C)" "$(opt llvm LLVM)" "$(opt ocaml OCaml)" "$(opt cakeml CakeML)"
+    "$(opt rust Rust)" "$(opt koka Koka)" "$(opt kokaT 'Koka (typed)')" "$(opt lean Lean)" "$(opt fsharp 'F#')"
+    '</optgroup>'
+  )
+  panes=(
+    "$(pane debug $u.txt)" "$(pane debugT $t.txt)"
+    "$(pane ast $u.ast)" "$(pane astT $t.ast)"
+    "$(pane rocq $u.v $u.v.result)" "$(pane rocqT $t.v $t.v.result)"
+    "$(pane wasm $g/wasm/$fn.wat $g/wasm/$fn.wasm.result)"
+    "$(pane c $g/c/$fn.c $g/c/$fn.c.result)"
+    "$(pane llvm $g/llvm/$fn.ll $g/llvm/$fn.ll.result)"
+    "$(pane ocaml $g/ocaml/$fn.mlf $g/ocaml/$fn.mlf.result)"
+    "$(pane cakeml $g/cakeml/$fn.sml $g/cakeml/$fn.sml.result)"
+    "$(pane rust $g/rust/$fn.rs $g/rust/$fn.rs.result)"
+    "$(pane koka $g/koka/$fn.kk $g/koka/$fn.kk.result)"
+    "$(pane kokaT $g/koka-typed/$fn.kk $g/koka-typed/$fn.kk.result)"
+    "$(pane lean $g/lean/$fn.lean $g/lean/$fn.lean.result)"
+    "$(pane fsharp $g/fsharp/$fn.fs $g/fsharp/$fn.fs.result)"
+  )
+  # the first option is selected initially
+  panes[1]=${panes[1]/tabs__tab/tabs__tab active}
   sed -i "s%class=\"Agda\"%class=\"split left Agda\"%g" $sourceHtml
-  newHtml="\
-<div class=\"split right\">\
-<div class=\"tabs\">\
-    <span data-tab-value=\"#in_1\">Debug</span>\
-    <span data-tab-value=\"#in_2\">λ\&\#9744;</span>\
-    <span data-tab-value=\"#in_3\">Rocq</span>\
-    <div style=\"font-size:50px;\">\&nbsp; ↪ \&nbsp;</div>\
-    <span data-tab-value=\"#out_1\">WASM</span>\
-    <span data-tab-value=\"#out_2\">C</span>\
-    <span data-tab-value=\"#out_3\">OCaml</span>\
-    <span data-tab-value=\"#out_4\">CakeML</span>\
-    <span data-tab-value=\"#out_5\">Rust</span>\
-    <span data-tab-value=\"#out_6\">Elm</span>\
-</div>\
-<div class=\"tab-content\">\
-    <div class=\"tabs__tab active\" id=\"in_1\" data-tab-info>\
-        <embed src=\"$fTxt.html\"/>\
-    </div>\
-    <div class=\"tabs__tab\" id=\"in_2\" data-tab-info>\
-        <embed src=\"$fAst.html\"/>\
-    </div>\
-    <div class=\"tabs__tab\" id=\"in_3\" data-tab-info>\
-        <embed src=\"$fCoq.html\"/>\
-        <div style=\"font-size:50px;\">\&nbsp; ↪ \&nbsp;</div>\
-        <embed src=\"$fCoq.result.html\"/>\
-    </div>\
-    <div class=\"tabs__tab\" id=\"out_1\" data-tab-info>\
-        <embed src=\"$fWasm.html\"/>\
-        <div style=\"font-size:50px;\">\&nbsp; ↪ \&nbsp;</div>\
-        <embed src=\"$fWasmBin.result.html\"/>\
-    </div>\
-    <div class=\"tabs__tab\" id=\"out_2\" data-tab-info>\
-        <embed src=\"$fC.html\"/>\
-        <div style=\"font-size:50px;\">\&nbsp; ↪ \&nbsp;</div>\
-        <embed src=\"$fC.result.html\"/>\
-    </div>\
-    <div class=\"tabs__tab\" id=\"out_3\" data-tab-info>\
-        <embed src=\"$fOcaml.html\"/>\
-        <div style=\"font-size:50px;\">\&nbsp; ↪ \&nbsp;</div>\
-        <embed src=\"$fOcaml.result.html\"/>\
-    </div>\
-    <div class=\"tabs__tab\" id=\"out_4\" data-tab-info>\
-        <embed src=\"$fCakeml.html\"/>\
-    </div>\
-    <div class=\"tabs__tab\" id=\"out_5\" data-tab-info>\
-        <embed src=\"$fRust.html\"/>\
-        <div style=\"font-size:50px;\">\&nbsp; ↪ \&nbsp;</div>\
-        <embed src=\"$fRust.result.html\"/>\
-    </div>\
-    <div class=\"tabs__tab\" id=\"out_6\" data-tab-info>\
-        <embed src=\"$fElm.html\"/>\
-    </div>\
-</div>\
-</div>\
-<script type="text/javascript">\
-  document.querySelectorAll('[data-tab-value]').forEach(tab => {tab.addEventListener('click', () => {\
-    document.querySelectorAll('[data-tab-info]').forEach(tabInfo => {tabInfo.classList.remove('active') });\
-    document.querySelector(tab.dataset.tabValue).classList.add('active');\
-  })})\
-</script>"
-  sed -i "s%</body>%$newHtml</body>%g" $sourceHtml
+  NEW="<div class=\"split right\"><select autocomplete=\"off\" onchange=\"\
+document.querySelectorAll('[data-tab-info]').forEach(t => t.classList.toggle('active', t.id == this.value))\
+\">${(j::)opts}</select><div class=\"tab-content\">${(j::)panes}</div></div>" perl -0pi -e 's{</body>}{$ENV{NEW}</body>}' $sourceHtml
 done
 
 echo "...done!"

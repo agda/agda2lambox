@@ -102,6 +102,7 @@ instance ToRocq t Term where
     LConstruct ind i es -> ctorP p "tConstruct" [procqP 10 t ind, procqP 10 t i, procqP 10 t es]
     LCase ind n u bs    -> ctorP p "tCase"      [procqP 10 t (ind, n), procqP 10 t u, procqP 10 t bs]
     LFix mf i           -> ctorP p "tFix"       [procqP 10 t mf, procqP 10 t i]
+    LPrim v             -> ctorP p "tPrim"      [procqP 10 t v]
 
 instance ToRocq t Type where
   procqP p t v = case v of
@@ -112,6 +113,12 @@ instance ToRocq t Type where
     TVar k    -> ctorP p "TVar"   [pretty k]
     TInd ind  -> ctorP p "TInd"   [procqP 10 t ind]
     TConst kn -> ctorP p "TConst" [procqP 10 t kn]
+
+instance ToRocq t PrimValue where
+  procqP p _ v = case v of
+    PString s -> ctorP p "EPrimitive.prim_string" [text (escapeQuote s) <> "%pstring"]
+    _ -> error "Primitive integers/floats are not supported by the Rocq printer."
+    where escapeQuote s = "\"" ++ concatMap (\c -> if c == '"' then "\"\"" else [c]) s ++ "\""
 
 instance ToRocq t RecursivityKind where
   procq _ rk = case rk of
@@ -190,6 +197,8 @@ instance ToRocq t (LBoxModule t) where
   procq ToUntyped LBoxModule{..} = vsep
     [ vcat
         [ "From Stdlib           Require Import List."
+        , "From Stdlib           Require PrimString."
+        , "Import PrimString.PStringNotations."
         , "From MetaRocq.Common  Require Import BasicAst Kernames Universes."
         , "From MetaRocq.Utils   Require Import bytestring."
         , "From MetaRocq.Erasure Require Import EAst."
@@ -208,6 +217,8 @@ instance ToRocq t (LBoxModule t) where
   procq ToTyped LBoxModule{..} = vsep
     [ vcat
         [ "From Stdlib           Require Import List."
+        , "From Stdlib           Require PrimString."
+        , "Import PrimString.PStringNotations."
         , "From MetaRocq.Common  Require Import BasicAst Kernames Universes."
         , "From MetaRocq.Utils   Require Import bytestring."
         , "From MetaRocq.Erasure Require Import EAst ExAst."
@@ -223,10 +234,10 @@ instance ToRocq t (LBoxModule t) where
     ]
 
 -- | Evaluate each main program in the given untyped environment.
-programs :: Doc -> [KerName] -> Doc
-programs env mains = vsep $ flip map (zip [1..] $ reverse mains) \(i :: Int, kn) ->
+programs :: Doc -> [Term] -> Doc
+programs env mains = vsep $ flip map (zip [1..] $ reverse mains) \(i :: Int, t) ->
   let progname = "prog" <> pretty i in vsep
   [ hang ("Definition " <> progname <> " : program :=") 2 $
-      uprocq (env, LConst kn) <> "."
+      uprocq (env, t) <> "."
   , "Compute show_program " <> progname <> "."
   ]

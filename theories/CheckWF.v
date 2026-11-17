@@ -12,8 +12,8 @@ Import Kernames.
 #[global] Set Equations Transparent.
 #[global] Set Equations With UIP.
 
-Definition inspect {A} (a : A) : {b | a = b} := exist _ a eq_refl.
-Notation "x 'eqn:' p" := (exist _ x p) (only parsing, at level 20).
+Definition inspect {A} (a : A) : {b | a = b} := @exist _ _ a eq_refl.
+Notation "x 'eqn:' p" := (@exist _ _ x p) (only parsing, at level 20).
 
 (*
 #[local] Obligation Tactic :=

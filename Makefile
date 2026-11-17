@@ -2,7 +2,7 @@
 .DELETE_ON_ERROR:
 
 SOURCES := agda2lambox.cabal $(wildcard cabal.project cabal.project.local) $(shell find src -name '*.hs')
-TEST_DIRS := test/untyped test/typed test/agda2rust
+TEST_DIRS := test/agda2lambox test/agda2rust test/agda2hs
 
 default: build
 
@@ -40,9 +40,6 @@ clean:
 
 %.wasm: %.ast
 	peregrine wasm -o demo/$@ build/$*.ast
-
-%.elm: %.typed
-	peregrine elm -o demo/$@ build/$*.ast
 
 %.rs: %.typed
 	peregrine rust -o demo/$@ build/$*.ast

@@ -82,11 +82,12 @@ instance Pretty Term where
 
       LApp u v ->
         mparens (p > 9) $
-        hang (pretty u) 2 (prettyPrec 10 v)
+        hang (prettyPrec 9 u) 2 (prettyPrec 10 v)
 
-      LConst s -> mparens (p > 0) $ pretty s
+      LConst s -> mparens (p > 9) $ pretty s
 
       LConstruct ind i es ->
+        mparens (p > 9 && not (null es)) $
         hang (pretty ind <> braces (pretty i)) 2 $
           sep $ map (prettyPrec 10) es
 
