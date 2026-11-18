@@ -299,7 +299,7 @@ html() {
   pane() {
     [[ $1 == $g ]] || { opts+="${g:+</optgroup>}<optgroup label=\"$1\">"; g=$1 }
     opts+="<option value=\"$2\">$3</option>"
-    panes+="<div class=\"tabs__tab\" id=\"$2\" data-tab-info><embed src=\"$4.html\"/>${5:+$ARROW<embed src=\"$5.html\"/>}</div>"
+    panes+="<div class=\"tabs__tab\" id=\"$2\" data-tab-info><embed data-src=\"$4.html\"/>${5:+$ARROW<embed data-src=\"$5.html\"/>}</div>"
     render $4
     [[ -n $5 ]] && render $5
   }
@@ -326,9 +326,10 @@ html() {
       pane $grp $t $l $src $d/$m.$e.result
     done
     # the first option is selected initially
-    panes[1]=${panes[1]/tabs__tab/tabs__tab active}
+    panes[1]=${${panes[1]/tabs__tab/tabs__tab active}//data-src=/src=}
     split html/$m.html "<select autocomplete=\"off\" onchange=\"\
-document.querySelectorAll('[data-tab-info]').forEach(t => t.classList.toggle('active', t.id == this.value))\
+document.querySelectorAll('[data-tab-info]').forEach(t => t.classList.toggle('active', t.id == this.value)\
+ && t.querySelectorAll('embed:not([src])').forEach(e => e.src = e.dataset.src))\
 \">${(j::)opts}</optgroup></select><div class=\"tab-content\">${(j::)panes}</div>"
   done
   cp html/Tests.html html/index.html
