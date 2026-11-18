@@ -42,43 +42,35 @@
 
 /* Translation code panes. */
 .split {
-  height: 100%;
-  width: 50%;
-  position: fixed;
-  z-index: 1;
-  overflow-block: auto;
+  margin: 0;
   box-sizing: border-box;
   padding-left: 20px;
   padding-right: 20px;
 }
-
-.left { left: 0 }
+body:has(> .split) {
+  display: flex;
+  height: 100vh;
+  margin: 0;
+}
+.left {
+  width: 50%;
+  max-width: 95%;
+  overflow: auto;
+  resize: horizontal;
+}
 .right {
-  right: 0;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
   border-left: 2px solid black;
-  overflow: hidden;
-  padding-bottom: 100px
 }
 
 /* Tabs */
+.right select { font-size: 20px; margin: 10px 0; align-self: flex-start; }
 [data-tab-info] { display: none; }
 .active[data-tab-info] { display: flex; }
-
-.tabs {
-    font-size: 25px;
-    display: flex;
-}
-.tabs span {
-    padding: 10px;
-    border: 1px solid;
-    margin-right: 10px;
-}
-.tabs span:hover {
-    background: rgb(55, 219, 46);
-    cursor: pointer;
-}
-
-.tab-content { height: 100%; }
+.tab-content { flex: 1; }
 .tabs__tab { height: 100%; }
 embed { height: 100%; width: 100%; }
 .code { white-space: pre-wrap; }
