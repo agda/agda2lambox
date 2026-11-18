@@ -356,42 +356,39 @@
 <span id="cb1-277"><a href="#cb1-277" aria-hidden="true"></a>    ConstantDecl</span>
 <span id="cb1-278"><a href="#cb1-278" aria-hidden="true"></a>      {| cst_body :=</span>
 <span id="cb1-279"><a href="#cb1-279" aria-hidden="true"></a>           <span class="dt">Some</span></span>
-<span id="cb1-280"><a href="#cb1-280" aria-hidden="true"></a>             (tApp</span>
-<span id="cb1-281"><a href="#cb1-281" aria-hidden="true"></a>                (tConstruct</span>
-<span id="cb1-282"><a href="#cb1-282" aria-hidden="true"></a>                   {| inductive_mind := (MPfile [<span class="st">&quot;TypeSynonyms&quot;</span>%bs], <span class="st">&quot;Nat&quot;</span>%bs);</span>
-<span id="cb1-283"><a href="#cb1-283" aria-hidden="true"></a>                      inductive_ind := <span class="dv">0</span> |}</span>
-<span id="cb1-284"><a href="#cb1-284" aria-hidden="true"></a>                   <span class="dv">1</span> [])</span>
-<span id="cb1-285"><a href="#cb1-285" aria-hidden="true"></a>                (tApp</span>
-<span id="cb1-286"><a href="#cb1-286" aria-hidden="true"></a>                   (tConstruct</span>
-<span id="cb1-287"><a href="#cb1-287" aria-hidden="true"></a>                      {| inductive_mind := (MPfile [<span class="st">&quot;TypeSynonyms&quot;</span>%bs], <span class="st">&quot;Nat&quot;</span>%bs);</span>
-<span id="cb1-288"><a href="#cb1-288" aria-hidden="true"></a>                         inductive_ind := <span class="dv">0</span> |}</span>
-<span id="cb1-289"><a href="#cb1-289" aria-hidden="true"></a>                      <span class="dv">1</span> [])</span>
-<span id="cb1-290"><a href="#cb1-290" aria-hidden="true"></a>                   (tConstruct</span>
-<span id="cb1-291"><a href="#cb1-291" aria-hidden="true"></a>                      {| inductive_mind := (MPfile [<span class="st">&quot;TypeSynonyms&quot;</span>%bs], <span class="st">&quot;Nat&quot;</span>%bs);</span>
-<span id="cb1-292"><a href="#cb1-292" aria-hidden="true"></a>                         inductive_ind := <span class="dv">0</span> |}</span>
-<span id="cb1-293"><a href="#cb1-293" aria-hidden="true"></a>                      <span class="dv">0</span> []))) |});</span>
-<span id="cb1-294"><a href="#cb1-294" aria-hidden="true"></a>   ((MPfile [<span class="st">&quot;TypeSynonyms&quot;</span>%bs], <span class="st">&quot;Nat&quot;</span>%bs),</span>
-<span id="cb1-295"><a href="#cb1-295" aria-hidden="true"></a>    InductiveDecl</span>
-<span id="cb1-296"><a href="#cb1-296" aria-hidden="true"></a>      {| ind_finite := Finite; ind_npars := <span class="dv">0</span>;</span>
-<span id="cb1-297"><a href="#cb1-297" aria-hidden="true"></a>         ind_bodies :=</span>
-<span id="cb1-298"><a href="#cb1-298" aria-hidden="true"></a>           [{| ind_name := <span class="st">&quot;Nat&quot;</span>%bs; ind_propositional := <span class="kw">false</span>;</span>
-<span id="cb1-299"><a href="#cb1-299" aria-hidden="true"></a>               ind_kelim := IntoAny;</span>
-<span id="cb1-300"><a href="#cb1-300" aria-hidden="true"></a>               ind_ctors :=</span>
-<span id="cb1-301"><a href="#cb1-301" aria-hidden="true"></a>                 [{| cstr_name := <span class="st">&quot;Zero&quot;</span>%bs; cstr_nargs := <span class="dv">0</span> |};</span>
-<span id="cb1-302"><a href="#cb1-302" aria-hidden="true"></a>                  {| cstr_name := <span class="st">&quot;Suc&quot;</span>%bs; cstr_nargs := <span class="dv">1</span> |}];</span>
-<span id="cb1-303"><a href="#cb1-303" aria-hidden="true"></a>               ind_projs := [] |}] |});</span>
-<span id="cb1-304"><a href="#cb1-304" aria-hidden="true"></a>   ((MPfile [<span class="st">&quot;LamBox&quot;</span>%bs], <span class="st">&quot;Empty&quot;</span>%bs),</span>
-<span id="cb1-305"><a href="#cb1-305" aria-hidden="true"></a>    InductiveDecl</span>
-<span id="cb1-306"><a href="#cb1-306" aria-hidden="true"></a>      {| ind_finite := Finite; ind_npars := <span class="dv">0</span>;</span>
-<span id="cb1-307"><a href="#cb1-307" aria-hidden="true"></a>         ind_bodies :=</span>
-<span id="cb1-308"><a href="#cb1-308" aria-hidden="true"></a>           [{| ind_name := <span class="st">&quot;Empty&quot;</span>%bs; ind_propositional := <span class="kw">false</span>;</span>
-<span id="cb1-309"><a href="#cb1-309" aria-hidden="true"></a>               ind_kelim := IntoAny; ind_ctors := []; ind_projs := [] |}] |})].</span>
-<span id="cb1-310"><a href="#cb1-310" aria-hidden="true"></a></span>
-<span id="cb1-311"><a href="#cb1-311" aria-hidden="true"></a>Compute @check_wf_glob eflags env.</span>
+<span id="cb1-280"><a href="#cb1-280" aria-hidden="true"></a>             (Nat.iter</span>
+<span id="cb1-281"><a href="#cb1-281" aria-hidden="true"></a>                <span class="dv">2</span></span>
+<span id="cb1-282"><a href="#cb1-282" aria-hidden="true"></a>                (tApp</span>
+<span id="cb1-283"><a href="#cb1-283" aria-hidden="true"></a>                   (tConstruct</span>
+<span id="cb1-284"><a href="#cb1-284" aria-hidden="true"></a>                      {| inductive_mind := (MPfile [<span class="st">&quot;TypeSynonyms&quot;</span>%bs], <span class="st">&quot;Nat&quot;</span>%bs);</span>
+<span id="cb1-285"><a href="#cb1-285" aria-hidden="true"></a>                         inductive_ind := <span class="dv">0</span> |}</span>
+<span id="cb1-286"><a href="#cb1-286" aria-hidden="true"></a>                      <span class="dv">1</span> []))</span>
+<span id="cb1-287"><a href="#cb1-287" aria-hidden="true"></a>                (tConstruct</span>
+<span id="cb1-288"><a href="#cb1-288" aria-hidden="true"></a>                   {| inductive_mind := (MPfile [<span class="st">&quot;TypeSynonyms&quot;</span>%bs], <span class="st">&quot;Nat&quot;</span>%bs);</span>
+<span id="cb1-289"><a href="#cb1-289" aria-hidden="true"></a>                      inductive_ind := <span class="dv">0</span> |}</span>
+<span id="cb1-290"><a href="#cb1-290" aria-hidden="true"></a>                   <span class="dv">0</span> [])) |});</span>
+<span id="cb1-291"><a href="#cb1-291" aria-hidden="true"></a>   ((MPfile [<span class="st">&quot;TypeSynonyms&quot;</span>%bs], <span class="st">&quot;Nat&quot;</span>%bs),</span>
+<span id="cb1-292"><a href="#cb1-292" aria-hidden="true"></a>    InductiveDecl</span>
+<span id="cb1-293"><a href="#cb1-293" aria-hidden="true"></a>      {| ind_finite := Finite; ind_npars := <span class="dv">0</span>;</span>
+<span id="cb1-294"><a href="#cb1-294" aria-hidden="true"></a>         ind_bodies :=</span>
+<span id="cb1-295"><a href="#cb1-295" aria-hidden="true"></a>           [{| ind_name := <span class="st">&quot;Nat&quot;</span>%bs; ind_propositional := <span class="kw">false</span>;</span>
+<span id="cb1-296"><a href="#cb1-296" aria-hidden="true"></a>               ind_kelim := IntoAny;</span>
+<span id="cb1-297"><a href="#cb1-297" aria-hidden="true"></a>               ind_ctors :=</span>
+<span id="cb1-298"><a href="#cb1-298" aria-hidden="true"></a>                 [{| cstr_name := <span class="st">&quot;Zero&quot;</span>%bs; cstr_nargs := <span class="dv">0</span> |};</span>
+<span id="cb1-299"><a href="#cb1-299" aria-hidden="true"></a>                  {| cstr_name := <span class="st">&quot;Suc&quot;</span>%bs; cstr_nargs := <span class="dv">1</span> |}];</span>
+<span id="cb1-300"><a href="#cb1-300" aria-hidden="true"></a>               ind_projs := [] |}] |});</span>
+<span id="cb1-301"><a href="#cb1-301" aria-hidden="true"></a>   ((MPfile [<span class="st">&quot;LamBox&quot;</span>%bs], <span class="st">&quot;Empty&quot;</span>%bs),</span>
+<span id="cb1-302"><a href="#cb1-302" aria-hidden="true"></a>    InductiveDecl</span>
+<span id="cb1-303"><a href="#cb1-303" aria-hidden="true"></a>      {| ind_finite := Finite; ind_npars := <span class="dv">0</span>;</span>
+<span id="cb1-304"><a href="#cb1-304" aria-hidden="true"></a>         ind_bodies :=</span>
+<span id="cb1-305"><a href="#cb1-305" aria-hidden="true"></a>           [{| ind_name := <span class="st">&quot;Empty&quot;</span>%bs; ind_propositional := <span class="kw">false</span>;</span>
+<span id="cb1-306"><a href="#cb1-306" aria-hidden="true"></a>               ind_kelim := IntoAny; ind_ctors := []; ind_projs := [] |}] |})].</span>
+<span id="cb1-307"><a href="#cb1-307" aria-hidden="true"></a></span>
+<span id="cb1-308"><a href="#cb1-308" aria-hidden="true"></a>Compute @check_wf_glob eflags env.</span>
+<span id="cb1-309"><a href="#cb1-309" aria-hidden="true"></a></span>
+<span id="cb1-310"><a href="#cb1-310" aria-hidden="true"></a>Definition prog1 : program :=</span>
+<span id="cb1-311"><a href="#cb1-311" aria-hidden="true"></a>  (env, tConst (MPfile [<span class="st">&quot;TypeSynonyms&quot;</span>%bs], <span class="st">&quot;test&quot;</span>%bs)).</span>
 <span id="cb1-312"><a href="#cb1-312" aria-hidden="true"></a></span>
-<span id="cb1-313"><a href="#cb1-313" aria-hidden="true"></a>Definition prog1 : program :=</span>
-<span id="cb1-314"><a href="#cb1-314" aria-hidden="true"></a>  (env, tConst (MPfile [<span class="st">&quot;TypeSynonyms&quot;</span>%bs], <span class="st">&quot;test&quot;</span>%bs)).</span>
-<span id="cb1-315"><a href="#cb1-315" aria-hidden="true"></a></span>
-<span id="cb1-316"><a href="#cb1-316" aria-hidden="true"></a>Compute show_program prog1.</span></code></pre></div>
+<span id="cb1-313"><a href="#cb1-313" aria-hidden="true"></a>Compute show_program prog1.</span></code></pre></div>
 </body>
 </html>

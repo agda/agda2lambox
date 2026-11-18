@@ -231,163 +231,159 @@
 <span id="cb1-152"><a href="#cb1-152" aria-hidden="true"></a>                                             (MPfile [<span class="st">&quot;Nat&quot;</span>%bs; <span class="st">&quot;Builtin&quot;</span>%bs; <span class="st">&quot;Agda&quot;</span>%bs], <span class="st">&quot;Nat&quot;</span>%bs);</span>
 <span id="cb1-153"><a href="#cb1-153" aria-hidden="true"></a>                                           inductive_ind := <span class="dv">0</span> |}</span>
 <span id="cb1-154"><a href="#cb1-154" aria-hidden="true"></a>                                        <span class="dv">0</span> []))))))</span>
-<span id="cb1-155"><a href="#cb1-155" aria-hidden="true"></a>                      (tApp</span>
-<span id="cb1-156"><a href="#cb1-156" aria-hidden="true"></a>                         (tConstruct</span>
-<span id="cb1-157"><a href="#cb1-157" aria-hidden="true"></a>                            {| inductive_mind :=</span>
-<span id="cb1-158"><a href="#cb1-158" aria-hidden="true"></a>                                 (MPfile [<span class="st">&quot;Nat&quot;</span>%bs; <span class="st">&quot;Builtin&quot;</span>%bs; <span class="st">&quot;Agda&quot;</span>%bs], <span class="st">&quot;Nat&quot;</span>%bs);</span>
-<span id="cb1-159"><a href="#cb1-159" aria-hidden="true"></a>                               inductive_ind := <span class="dv">0</span> |}</span>
-<span id="cb1-160"><a href="#cb1-160" aria-hidden="true"></a>                            <span class="dv">1</span> [])</span>
-<span id="cb1-161"><a href="#cb1-161" aria-hidden="true"></a>                         (tApp</span>
-<span id="cb1-162"><a href="#cb1-162" aria-hidden="true"></a>                            (tConstruct</span>
-<span id="cb1-163"><a href="#cb1-163" aria-hidden="true"></a>                               {| inductive_mind :=</span>
-<span id="cb1-164"><a href="#cb1-164" aria-hidden="true"></a>                                    (MPfile [<span class="st">&quot;Nat&quot;</span>%bs; <span class="st">&quot;Builtin&quot;</span>%bs; <span class="st">&quot;Agda&quot;</span>%bs], <span class="st">&quot;Nat&quot;</span>%bs);</span>
-<span id="cb1-165"><a href="#cb1-165" aria-hidden="true"></a>                                  inductive_ind := <span class="dv">0</span> |}</span>
-<span id="cb1-166"><a href="#cb1-166" aria-hidden="true"></a>                               <span class="dv">1</span> [])</span>
-<span id="cb1-167"><a href="#cb1-167" aria-hidden="true"></a>                            (tConstruct</span>
-<span id="cb1-168"><a href="#cb1-168" aria-hidden="true"></a>                               {| inductive_mind :=</span>
-<span id="cb1-169"><a href="#cb1-169" aria-hidden="true"></a>                                    (MPfile [<span class="st">&quot;Nat&quot;</span>%bs; <span class="st">&quot;Builtin&quot;</span>%bs; <span class="st">&quot;Agda&quot;</span>%bs], <span class="st">&quot;Nat&quot;</span>%bs);</span>
-<span id="cb1-170"><a href="#cb1-170" aria-hidden="true"></a>                                  inductive_ind := <span class="dv">0</span> |}</span>
-<span id="cb1-171"><a href="#cb1-171" aria-hidden="true"></a>                               <span class="dv">0</span> [])))))) |});</span>
-<span id="cb1-172"><a href="#cb1-172" aria-hidden="true"></a>   ((MPfile [<span class="st">&quot;InductionRecursion&quot;</span>%bs], <span class="st">&quot;run&quot;</span>%bs),</span>
-<span id="cb1-173"><a href="#cb1-173" aria-hidden="true"></a>    ConstantDecl</span>
-<span id="cb1-174"><a href="#cb1-174" aria-hidden="true"></a>      {| cst_body :=</span>
-<span id="cb1-175"><a href="#cb1-175" aria-hidden="true"></a>           <span class="dt">Some</span></span>
-<span id="cb1-176"><a href="#cb1-176" aria-hidden="true"></a>             (tLambda</span>
-<span id="cb1-177"><a href="#cb1-177" aria-hidden="true"></a>                nAnon</span>
-<span id="cb1-178"><a href="#cb1-178" aria-hidden="true"></a>                (tApp</span>
-<span id="cb1-179"><a href="#cb1-179" aria-hidden="true"></a>                   (tConst (MPfile [<span class="st">&quot;InductionRecursion&quot;</span>%bs], <span class="st">&quot;.extendedlambda1&quot;</span>%bs))</span>
-<span id="cb1-180"><a href="#cb1-180" aria-hidden="true"></a>                   tBox)) |});</span>
-<span id="cb1-181"><a href="#cb1-181" aria-hidden="true"></a>   ((MPfile [<span class="st">&quot;InductionRecursion&quot;</span>%bs], <span class="st">&quot;.extendedlambda1&quot;</span>%bs),</span>
-<span id="cb1-182"><a href="#cb1-182" aria-hidden="true"></a>    ConstantDecl</span>
-<span id="cb1-183"><a href="#cb1-183" aria-hidden="true"></a>      {| cst_body :=</span>
-<span id="cb1-184"><a href="#cb1-184" aria-hidden="true"></a>           <span class="dt">Some</span></span>
-<span id="cb1-185"><a href="#cb1-185" aria-hidden="true"></a>             (tLambda</span>
-<span id="cb1-186"><a href="#cb1-186" aria-hidden="true"></a>                nAnon</span>
-<span id="cb1-187"><a href="#cb1-187" aria-hidden="true"></a>                (tLambda</span>
-<span id="cb1-188"><a href="#cb1-188" aria-hidden="true"></a>                   nAnon</span>
-<span id="cb1-189"><a href="#cb1-189" aria-hidden="true"></a>                   (tCase</span>
-<span id="cb1-190"><a href="#cb1-190" aria-hidden="true"></a>                      ({| inductive_mind :=</span>
-<span id="cb1-191"><a href="#cb1-191" aria-hidden="true"></a>                            (MPfile [<span class="st">&quot;InductionRecursion&quot;</span>%bs], <span class="st">&quot;Trace&quot;</span>%bs);</span>
-<span id="cb1-192"><a href="#cb1-192" aria-hidden="true"></a>                          inductive_ind := <span class="dv">0</span> |},</span>
-<span id="cb1-193"><a href="#cb1-193" aria-hidden="true"></a>                       <span class="dv">0</span>)</span>
-<span id="cb1-194"><a href="#cb1-194" aria-hidden="true"></a>                      (tRel <span class="dv">0</span>)</span>
-<span id="cb1-195"><a href="#cb1-195" aria-hidden="true"></a>                      [([],</span>
-<span id="cb1-196"><a href="#cb1-196" aria-hidden="true"></a>                        tConstruct</span>
-<span id="cb1-197"><a href="#cb1-197" aria-hidden="true"></a>                          {| inductive_mind :=</span>
-<span id="cb1-198"><a href="#cb1-198" aria-hidden="true"></a>                               (MPfile [<span class="st">&quot;Nat&quot;</span>%bs; <span class="st">&quot;Builtin&quot;</span>%bs; <span class="st">&quot;Agda&quot;</span>%bs], <span class="st">&quot;Nat&quot;</span>%bs);</span>
-<span id="cb1-199"><a href="#cb1-199" aria-hidden="true"></a>                             inductive_ind := <span class="dv">0</span> |}</span>
-<span id="cb1-200"><a href="#cb1-200" aria-hidden="true"></a>                          <span class="dv">0</span> []);</span>
-<span id="cb1-201"><a href="#cb1-201" aria-hidden="true"></a>                       ([nAnon; nAnon; nAnon; nAnon],</span>
-<span id="cb1-202"><a href="#cb1-202" aria-hidden="true"></a>                        tApp</span>
-<span id="cb1-203"><a href="#cb1-203" aria-hidden="true"></a>                          (tApp</span>
-<span id="cb1-204"><a href="#cb1-204" aria-hidden="true"></a>                             (tApp (tConst (MPfile [<span class="st">&quot;InductionRecursion&quot;</span>%bs], <span class="st">&quot;step&quot;</span>%bs)) tBox)</span>
-<span id="cb1-205"><a href="#cb1-205" aria-hidden="true"></a>                             tBox)</span>
-<span id="cb1-206"><a href="#cb1-206" aria-hidden="true"></a>                          (tRel <span class="dv">0</span>))]))) |});</span>
-<span id="cb1-207"><a href="#cb1-207" aria-hidden="true"></a>   ((MPfile [<span class="st">&quot;InductionRecursion&quot;</span>%bs], <span class="st">&quot;Trace&quot;</span>%bs),</span>
-<span id="cb1-208"><a href="#cb1-208" aria-hidden="true"></a>    InductiveDecl</span>
-<span id="cb1-209"><a href="#cb1-209" aria-hidden="true"></a>      {| ind_finite := Finite; ind_npars := <span class="dv">0</span>;</span>
-<span id="cb1-210"><a href="#cb1-210" aria-hidden="true"></a>         ind_bodies :=</span>
-<span id="cb1-211"><a href="#cb1-211" aria-hidden="true"></a>           [{| ind_name := <span class="st">&quot;Trace&quot;</span>%bs; ind_propositional := <span class="kw">false</span>;</span>
-<span id="cb1-212"><a href="#cb1-212" aria-hidden="true"></a>               ind_kelim := IntoAny;</span>
-<span id="cb1-213"><a href="#cb1-213" aria-hidden="true"></a>               ind_ctors :=</span>
-<span id="cb1-214"><a href="#cb1-214" aria-hidden="true"></a>                 [{| cstr_name := <span class="st">&quot;[]&quot;</span>%bs; cstr_nargs := <span class="dv">0</span> |};</span>
-<span id="cb1-215"><a href="#cb1-215" aria-hidden="true"></a>                  {| cstr_name := <span class="st">&quot;_</span><span class="ch">\875</span><span class="st">9_</span><span class="ch">\886</span><span class="st">7_&quot;</span>%bs; cstr_nargs := <span class="dv">4</span> |}];</span>
-<span id="cb1-216"><a href="#cb1-216" aria-hidden="true"></a>               ind_projs := [] |}] |});</span>
-<span id="cb1-217"><a href="#cb1-217" aria-hidden="true"></a>   ((MPfile [<span class="st">&quot;InductionRecursion&quot;</span>%bs], <span class="st">&quot;step&quot;</span>%bs),</span>
-<span id="cb1-218"><a href="#cb1-218" aria-hidden="true"></a>    ConstantDecl</span>
-<span id="cb1-219"><a href="#cb1-219" aria-hidden="true"></a>      {| cst_body :=</span>
-<span id="cb1-220"><a href="#cb1-220" aria-hidden="true"></a>           <span class="dt">Some</span></span>
-<span id="cb1-221"><a href="#cb1-221" aria-hidden="true"></a>             (tLambda</span>
-<span id="cb1-222"><a href="#cb1-222" aria-hidden="true"></a>                nAnon</span>
-<span id="cb1-223"><a href="#cb1-223" aria-hidden="true"></a>                (tLambda</span>
-<span id="cb1-224"><a href="#cb1-224" aria-hidden="true"></a>                   nAnon</span>
-<span id="cb1-225"><a href="#cb1-225" aria-hidden="true"></a>                   (tLambda</span>
-<span id="cb1-226"><a href="#cb1-226" aria-hidden="true"></a>                      nAnon</span>
-<span id="cb1-227"><a href="#cb1-227" aria-hidden="true"></a>                      (tCase</span>
-<span id="cb1-228"><a href="#cb1-228" aria-hidden="true"></a>                         ({| inductive_mind :=</span>
-<span id="cb1-229"><a href="#cb1-229" aria-hidden="true"></a>                               (MPfile [<span class="st">&quot;InductionRecursion&quot;</span>%bs], <span class="st">&quot;Valid&quot;</span>%bs);</span>
-<span id="cb1-230"><a href="#cb1-230" aria-hidden="true"></a>                             inductive_ind := <span class="dv">0</span> |},</span>
-<span id="cb1-231"><a href="#cb1-231" aria-hidden="true"></a>                          <span class="dv">0</span>)</span>
-<span id="cb1-232"><a href="#cb1-232" aria-hidden="true"></a>                         (tRel <span class="dv">0</span>)</span>
-<span id="cb1-233"><a href="#cb1-233" aria-hidden="true"></a>                         [([nAnon; nAnon; nAnon],</span>
-<span id="cb1-234"><a href="#cb1-234" aria-hidden="true"></a>                           tApp</span>
-<span id="cb1-235"><a href="#cb1-235" aria-hidden="true"></a>                             (tApp</span>
-<span id="cb1-236"><a href="#cb1-236" aria-hidden="true"></a>                                (tConst (MPfile [<span class="st">&quot;Nat&quot;</span>%bs; <span class="st">&quot;Builtin&quot;</span>%bs; <span class="st">&quot;Agda&quot;</span>%bs], <span class="st">&quot;_+_&quot;</span>%bs))</span>
-<span id="cb1-237"><a href="#cb1-237" aria-hidden="true"></a>                                (tRel <span class="dv">1</span>))</span>
-<span id="cb1-238"><a href="#cb1-238" aria-hidden="true"></a>                             (tRel <span class="dv">0</span>))])))) |});</span>
-<span id="cb1-239"><a href="#cb1-239" aria-hidden="true"></a>   ((MPfile [<span class="st">&quot;Nat&quot;</span>%bs; <span class="st">&quot;Builtin&quot;</span>%bs; <span class="st">&quot;Agda&quot;</span>%bs], <span class="st">&quot;_+_&quot;</span>%bs),</span>
-<span id="cb1-240"><a href="#cb1-240" aria-hidden="true"></a>    ConstantDecl</span>
-<span id="cb1-241"><a href="#cb1-241" aria-hidden="true"></a>      {| cst_body :=</span>
-<span id="cb1-242"><a href="#cb1-242" aria-hidden="true"></a>           <span class="dt">Some</span></span>
-<span id="cb1-243"><a href="#cb1-243" aria-hidden="true"></a>             (tLambda</span>
-<span id="cb1-244"><a href="#cb1-244" aria-hidden="true"></a>                nAnon</span>
-<span id="cb1-245"><a href="#cb1-245" aria-hidden="true"></a>                (tApp</span>
-<span id="cb1-246"><a href="#cb1-246" aria-hidden="true"></a>                   (tFix</span>
-<span id="cb1-247"><a href="#cb1-247" aria-hidden="true"></a>                      [{| dname := nNamed <span class="st">&quot;_+_&quot;</span>%bs;</span>
-<span id="cb1-248"><a href="#cb1-248" aria-hidden="true"></a>                          dbody :=</span>
-<span id="cb1-249"><a href="#cb1-249" aria-hidden="true"></a>                            tLambda</span>
-<span id="cb1-250"><a href="#cb1-250" aria-hidden="true"></a>                              nAnon</span>
-<span id="cb1-251"><a href="#cb1-251" aria-hidden="true"></a>                              (tLambda</span>
-<span id="cb1-252"><a href="#cb1-252" aria-hidden="true"></a>                                 nAnon</span>
-<span id="cb1-253"><a href="#cb1-253" aria-hidden="true"></a>                                 (tCase</span>
-<span id="cb1-254"><a href="#cb1-254" aria-hidden="true"></a>                                    ({| inductive_mind :=</span>
-<span id="cb1-255"><a href="#cb1-255" aria-hidden="true"></a>                                          (MPfile [<span class="st">&quot;Nat&quot;</span>%bs; <span class="st">&quot;Builtin&quot;</span>%bs; <span class="st">&quot;Agda&quot;</span>%bs], <span class="st">&quot;Nat&quot;</span>%bs);</span>
-<span id="cb1-256"><a href="#cb1-256" aria-hidden="true"></a>                                        inductive_ind := <span class="dv">0</span> |},</span>
-<span id="cb1-257"><a href="#cb1-257" aria-hidden="true"></a>                                     <span class="dv">0</span>)</span>
-<span id="cb1-258"><a href="#cb1-258" aria-hidden="true"></a>                                    (tRel <span class="dv">1</span>)</span>
-<span id="cb1-259"><a href="#cb1-259" aria-hidden="true"></a>                                    [([], tRel <span class="dv">0</span>);</span>
-<span id="cb1-260"><a href="#cb1-260" aria-hidden="true"></a>                                     ([nAnon],</span>
-<span id="cb1-261"><a href="#cb1-261" aria-hidden="true"></a>                                      tApp</span>
-<span id="cb1-262"><a href="#cb1-262" aria-hidden="true"></a>                                        (tConstruct</span>
-<span id="cb1-263"><a href="#cb1-263" aria-hidden="true"></a>                                           {| inductive_mind :=</span>
-<span id="cb1-264"><a href="#cb1-264" aria-hidden="true"></a>                                                (MPfile [<span class="st">&quot;Nat&quot;</span>%bs; <span class="st">&quot;Builtin&quot;</span>%bs; <span class="st">&quot;Agda&quot;</span>%bs],</span>
-<span id="cb1-265"><a href="#cb1-265" aria-hidden="true"></a>                                                 <span class="st">&quot;Nat&quot;</span>%bs);</span>
-<span id="cb1-266"><a href="#cb1-266" aria-hidden="true"></a>                                              inductive_ind := <span class="dv">0</span> |}</span>
-<span id="cb1-267"><a href="#cb1-267" aria-hidden="true"></a>                                           <span class="dv">1</span> [])</span>
-<span id="cb1-268"><a href="#cb1-268" aria-hidden="true"></a>                                        (tApp (tApp (tRel <span class="dv">3</span>) (tRel <span class="dv">0</span>)) (tRel <span class="dv">1</span>)))]));</span>
-<span id="cb1-269"><a href="#cb1-269" aria-hidden="true"></a>                          rarg := <span class="dv">0</span> |}]</span>
-<span id="cb1-270"><a href="#cb1-270" aria-hidden="true"></a>                      <span class="dv">0</span>)</span>
-<span id="cb1-271"><a href="#cb1-271" aria-hidden="true"></a>                   (tRel <span class="dv">0</span>))) |});</span>
-<span id="cb1-272"><a href="#cb1-272" aria-hidden="true"></a>   ((MPfile [<span class="st">&quot;InductionRecursion&quot;</span>%bs], <span class="st">&quot;Valid&quot;</span>%bs),</span>
-<span id="cb1-273"><a href="#cb1-273" aria-hidden="true"></a>    InductiveDecl</span>
-<span id="cb1-274"><a href="#cb1-274" aria-hidden="true"></a>      {| ind_finite := Finite; ind_npars := <span class="dv">0</span>;</span>
-<span id="cb1-275"><a href="#cb1-275" aria-hidden="true"></a>         ind_bodies :=</span>
-<span id="cb1-276"><a href="#cb1-276" aria-hidden="true"></a>           [{| ind_name := <span class="st">&quot;Valid&quot;</span>%bs; ind_propositional := <span class="kw">false</span>;</span>
-<span id="cb1-277"><a href="#cb1-277" aria-hidden="true"></a>               ind_kelim := IntoAny;</span>
-<span id="cb1-278"><a href="#cb1-278" aria-hidden="true"></a>               ind_ctors := [{| cstr_name := <span class="st">&quot;mk&quot;</span>%bs; cstr_nargs := <span class="dv">3</span> |}];</span>
-<span id="cb1-279"><a href="#cb1-279" aria-hidden="true"></a>               ind_projs := [] |}] |});</span>
-<span id="cb1-280"><a href="#cb1-280" aria-hidden="true"></a>   ((MPfile [<span class="st">&quot;InductionRecursion&quot;</span>%bs], <span class="st">&quot;List&quot;</span>%bs),</span>
-<span id="cb1-281"><a href="#cb1-281" aria-hidden="true"></a>    InductiveDecl</span>
-<span id="cb1-282"><a href="#cb1-282" aria-hidden="true"></a>      {| ind_finite := Finite; ind_npars := <span class="dv">1</span>;</span>
-<span id="cb1-283"><a href="#cb1-283" aria-hidden="true"></a>         ind_bodies :=</span>
-<span id="cb1-284"><a href="#cb1-284" aria-hidden="true"></a>           [{| ind_name := <span class="st">&quot;List&quot;</span>%bs; ind_propositional := <span class="kw">false</span>;</span>
-<span id="cb1-285"><a href="#cb1-285" aria-hidden="true"></a>               ind_kelim := IntoAny;</span>
-<span id="cb1-286"><a href="#cb1-286" aria-hidden="true"></a>               ind_ctors :=</span>
-<span id="cb1-287"><a href="#cb1-287" aria-hidden="true"></a>                 [{| cstr_name := <span class="st">&quot;[]&quot;</span>%bs; cstr_nargs := <span class="dv">0</span> |};</span>
-<span id="cb1-288"><a href="#cb1-288" aria-hidden="true"></a>                  {| cstr_name := <span class="st">&quot;_</span><span class="ch">\875</span><span class="st">9_&quot;</span>%bs; cstr_nargs := <span class="dv">2</span> |}];</span>
-<span id="cb1-289"><a href="#cb1-289" aria-hidden="true"></a>               ind_projs := [] |}] |});</span>
-<span id="cb1-290"><a href="#cb1-290" aria-hidden="true"></a>   ((MPfile [<span class="st">&quot;Nat&quot;</span>%bs; <span class="st">&quot;Builtin&quot;</span>%bs; <span class="st">&quot;Agda&quot;</span>%bs], <span class="st">&quot;Nat&quot;</span>%bs),</span>
-<span id="cb1-291"><a href="#cb1-291" aria-hidden="true"></a>    InductiveDecl</span>
-<span id="cb1-292"><a href="#cb1-292" aria-hidden="true"></a>      {| ind_finite := Finite; ind_npars := <span class="dv">0</span>;</span>
-<span id="cb1-293"><a href="#cb1-293" aria-hidden="true"></a>         ind_bodies :=</span>
-<span id="cb1-294"><a href="#cb1-294" aria-hidden="true"></a>           [{| ind_name := <span class="st">&quot;Nat&quot;</span>%bs; ind_propositional := <span class="kw">false</span>;</span>
-<span id="cb1-295"><a href="#cb1-295" aria-hidden="true"></a>               ind_kelim := IntoAny;</span>
-<span id="cb1-296"><a href="#cb1-296" aria-hidden="true"></a>               ind_ctors :=</span>
-<span id="cb1-297"><a href="#cb1-297" aria-hidden="true"></a>                 [{| cstr_name := <span class="st">&quot;zero&quot;</span>%bs; cstr_nargs := <span class="dv">0</span> |};</span>
-<span id="cb1-298"><a href="#cb1-298" aria-hidden="true"></a>                  {| cstr_name := <span class="st">&quot;suc&quot;</span>%bs; cstr_nargs := <span class="dv">1</span> |}];</span>
-<span id="cb1-299"><a href="#cb1-299" aria-hidden="true"></a>               ind_projs := [] |}] |});</span>
-<span id="cb1-300"><a href="#cb1-300" aria-hidden="true"></a>   ((MPfile [<span class="st">&quot;LamBox&quot;</span>%bs], <span class="st">&quot;Empty&quot;</span>%bs),</span>
-<span id="cb1-301"><a href="#cb1-301" aria-hidden="true"></a>    InductiveDecl</span>
-<span id="cb1-302"><a href="#cb1-302" aria-hidden="true"></a>      {| ind_finite := Finite; ind_npars := <span class="dv">0</span>;</span>
-<span id="cb1-303"><a href="#cb1-303" aria-hidden="true"></a>         ind_bodies :=</span>
-<span id="cb1-304"><a href="#cb1-304" aria-hidden="true"></a>           [{| ind_name := <span class="st">&quot;Empty&quot;</span>%bs; ind_propositional := <span class="kw">false</span>;</span>
-<span id="cb1-305"><a href="#cb1-305" aria-hidden="true"></a>               ind_kelim := IntoAny; ind_ctors := []; ind_projs := [] |}] |})].</span>
-<span id="cb1-306"><a href="#cb1-306" aria-hidden="true"></a></span>
-<span id="cb1-307"><a href="#cb1-307" aria-hidden="true"></a>Compute @check_wf_glob eflags env.</span>
-<span id="cb1-308"><a href="#cb1-308" aria-hidden="true"></a></span>
-<span id="cb1-309"><a href="#cb1-309" aria-hidden="true"></a>Definition prog1 : program :=</span>
-<span id="cb1-310"><a href="#cb1-310" aria-hidden="true"></a>  (env, tConst (MPfile [<span class="st">&quot;InductionRecursion&quot;</span>%bs], <span class="st">&quot;test&quot;</span>%bs)).</span>
-<span id="cb1-311"><a href="#cb1-311" aria-hidden="true"></a></span>
-<span id="cb1-312"><a href="#cb1-312" aria-hidden="true"></a>Compute show_program prog1.</span></code></pre></div>
+<span id="cb1-155"><a href="#cb1-155" aria-hidden="true"></a>                      (Nat.iter</span>
+<span id="cb1-156"><a href="#cb1-156" aria-hidden="true"></a>                         <span class="dv">2</span></span>
+<span id="cb1-157"><a href="#cb1-157" aria-hidden="true"></a>                         (tApp</span>
+<span id="cb1-158"><a href="#cb1-158" aria-hidden="true"></a>                            (tConstruct</span>
+<span id="cb1-159"><a href="#cb1-159" aria-hidden="true"></a>                               {| inductive_mind :=</span>
+<span id="cb1-160"><a href="#cb1-160" aria-hidden="true"></a>                                    (MPfile [<span class="st">&quot;Nat&quot;</span>%bs; <span class="st">&quot;Builtin&quot;</span>%bs; <span class="st">&quot;Agda&quot;</span>%bs], <span class="st">&quot;Nat&quot;</span>%bs);</span>
+<span id="cb1-161"><a href="#cb1-161" aria-hidden="true"></a>                                  inductive_ind := <span class="dv">0</span> |}</span>
+<span id="cb1-162"><a href="#cb1-162" aria-hidden="true"></a>                               <span class="dv">1</span> []))</span>
+<span id="cb1-163"><a href="#cb1-163" aria-hidden="true"></a>                         (tConstruct</span>
+<span id="cb1-164"><a href="#cb1-164" aria-hidden="true"></a>                            {| inductive_mind :=</span>
+<span id="cb1-165"><a href="#cb1-165" aria-hidden="true"></a>                                 (MPfile [<span class="st">&quot;Nat&quot;</span>%bs; <span class="st">&quot;Builtin&quot;</span>%bs; <span class="st">&quot;Agda&quot;</span>%bs], <span class="st">&quot;Nat&quot;</span>%bs);</span>
+<span id="cb1-166"><a href="#cb1-166" aria-hidden="true"></a>                               inductive_ind := <span class="dv">0</span> |}</span>
+<span id="cb1-167"><a href="#cb1-167" aria-hidden="true"></a>                            <span class="dv">0</span> []))))) |});</span>
+<span id="cb1-168"><a href="#cb1-168" aria-hidden="true"></a>   ((MPfile [<span class="st">&quot;InductionRecursion&quot;</span>%bs], <span class="st">&quot;run&quot;</span>%bs),</span>
+<span id="cb1-169"><a href="#cb1-169" aria-hidden="true"></a>    ConstantDecl</span>
+<span id="cb1-170"><a href="#cb1-170" aria-hidden="true"></a>      {| cst_body :=</span>
+<span id="cb1-171"><a href="#cb1-171" aria-hidden="true"></a>           <span class="dt">Some</span></span>
+<span id="cb1-172"><a href="#cb1-172" aria-hidden="true"></a>             (tLambda</span>
+<span id="cb1-173"><a href="#cb1-173" aria-hidden="true"></a>                nAnon</span>
+<span id="cb1-174"><a href="#cb1-174" aria-hidden="true"></a>                (tApp</span>
+<span id="cb1-175"><a href="#cb1-175" aria-hidden="true"></a>                   (tConst (MPfile [<span class="st">&quot;InductionRecursion&quot;</span>%bs], <span class="st">&quot;.extendedlambda1&quot;</span>%bs))</span>
+<span id="cb1-176"><a href="#cb1-176" aria-hidden="true"></a>                   tBox)) |});</span>
+<span id="cb1-177"><a href="#cb1-177" aria-hidden="true"></a>   ((MPfile [<span class="st">&quot;InductionRecursion&quot;</span>%bs], <span class="st">&quot;.extendedlambda1&quot;</span>%bs),</span>
+<span id="cb1-178"><a href="#cb1-178" aria-hidden="true"></a>    ConstantDecl</span>
+<span id="cb1-179"><a href="#cb1-179" aria-hidden="true"></a>      {| cst_body :=</span>
+<span id="cb1-180"><a href="#cb1-180" aria-hidden="true"></a>           <span class="dt">Some</span></span>
+<span id="cb1-181"><a href="#cb1-181" aria-hidden="true"></a>             (tLambda</span>
+<span id="cb1-182"><a href="#cb1-182" aria-hidden="true"></a>                nAnon</span>
+<span id="cb1-183"><a href="#cb1-183" aria-hidden="true"></a>                (tLambda</span>
+<span id="cb1-184"><a href="#cb1-184" aria-hidden="true"></a>                   nAnon</span>
+<span id="cb1-185"><a href="#cb1-185" aria-hidden="true"></a>                   (tCase</span>
+<span id="cb1-186"><a href="#cb1-186" aria-hidden="true"></a>                      ({| inductive_mind :=</span>
+<span id="cb1-187"><a href="#cb1-187" aria-hidden="true"></a>                            (MPfile [<span class="st">&quot;InductionRecursion&quot;</span>%bs], <span class="st">&quot;Trace&quot;</span>%bs);</span>
+<span id="cb1-188"><a href="#cb1-188" aria-hidden="true"></a>                          inductive_ind := <span class="dv">0</span> |},</span>
+<span id="cb1-189"><a href="#cb1-189" aria-hidden="true"></a>                       <span class="dv">0</span>)</span>
+<span id="cb1-190"><a href="#cb1-190" aria-hidden="true"></a>                      (tRel <span class="dv">0</span>)</span>
+<span id="cb1-191"><a href="#cb1-191" aria-hidden="true"></a>                      [([],</span>
+<span id="cb1-192"><a href="#cb1-192" aria-hidden="true"></a>                        tConstruct</span>
+<span id="cb1-193"><a href="#cb1-193" aria-hidden="true"></a>                          {| inductive_mind :=</span>
+<span id="cb1-194"><a href="#cb1-194" aria-hidden="true"></a>                               (MPfile [<span class="st">&quot;Nat&quot;</span>%bs; <span class="st">&quot;Builtin&quot;</span>%bs; <span class="st">&quot;Agda&quot;</span>%bs], <span class="st">&quot;Nat&quot;</span>%bs);</span>
+<span id="cb1-195"><a href="#cb1-195" aria-hidden="true"></a>                             inductive_ind := <span class="dv">0</span> |}</span>
+<span id="cb1-196"><a href="#cb1-196" aria-hidden="true"></a>                          <span class="dv">0</span> []);</span>
+<span id="cb1-197"><a href="#cb1-197" aria-hidden="true"></a>                       ([nAnon; nAnon; nAnon; nAnon],</span>
+<span id="cb1-198"><a href="#cb1-198" aria-hidden="true"></a>                        tApp</span>
+<span id="cb1-199"><a href="#cb1-199" aria-hidden="true"></a>                          (tApp</span>
+<span id="cb1-200"><a href="#cb1-200" aria-hidden="true"></a>                             (tApp (tConst (MPfile [<span class="st">&quot;InductionRecursion&quot;</span>%bs], <span class="st">&quot;step&quot;</span>%bs)) tBox)</span>
+<span id="cb1-201"><a href="#cb1-201" aria-hidden="true"></a>                             tBox)</span>
+<span id="cb1-202"><a href="#cb1-202" aria-hidden="true"></a>                          (tRel <span class="dv">0</span>))]))) |});</span>
+<span id="cb1-203"><a href="#cb1-203" aria-hidden="true"></a>   ((MPfile [<span class="st">&quot;InductionRecursion&quot;</span>%bs], <span class="st">&quot;Trace&quot;</span>%bs),</span>
+<span id="cb1-204"><a href="#cb1-204" aria-hidden="true"></a>    InductiveDecl</span>
+<span id="cb1-205"><a href="#cb1-205" aria-hidden="true"></a>      {| ind_finite := Finite; ind_npars := <span class="dv">0</span>;</span>
+<span id="cb1-206"><a href="#cb1-206" aria-hidden="true"></a>         ind_bodies :=</span>
+<span id="cb1-207"><a href="#cb1-207" aria-hidden="true"></a>           [{| ind_name := <span class="st">&quot;Trace&quot;</span>%bs; ind_propositional := <span class="kw">false</span>;</span>
+<span id="cb1-208"><a href="#cb1-208" aria-hidden="true"></a>               ind_kelim := IntoAny;</span>
+<span id="cb1-209"><a href="#cb1-209" aria-hidden="true"></a>               ind_ctors :=</span>
+<span id="cb1-210"><a href="#cb1-210" aria-hidden="true"></a>                 [{| cstr_name := <span class="st">&quot;[]&quot;</span>%bs; cstr_nargs := <span class="dv">0</span> |};</span>
+<span id="cb1-211"><a href="#cb1-211" aria-hidden="true"></a>                  {| cstr_name := <span class="st">&quot;_</span><span class="ch">\875</span><span class="st">9_</span><span class="ch">\886</span><span class="st">7_&quot;</span>%bs; cstr_nargs := <span class="dv">4</span> |}];</span>
+<span id="cb1-212"><a href="#cb1-212" aria-hidden="true"></a>               ind_projs := [] |}] |});</span>
+<span id="cb1-213"><a href="#cb1-213" aria-hidden="true"></a>   ((MPfile [<span class="st">&quot;InductionRecursion&quot;</span>%bs], <span class="st">&quot;step&quot;</span>%bs),</span>
+<span id="cb1-214"><a href="#cb1-214" aria-hidden="true"></a>    ConstantDecl</span>
+<span id="cb1-215"><a href="#cb1-215" aria-hidden="true"></a>      {| cst_body :=</span>
+<span id="cb1-216"><a href="#cb1-216" aria-hidden="true"></a>           <span class="dt">Some</span></span>
+<span id="cb1-217"><a href="#cb1-217" aria-hidden="true"></a>             (tLambda</span>
+<span id="cb1-218"><a href="#cb1-218" aria-hidden="true"></a>                nAnon</span>
+<span id="cb1-219"><a href="#cb1-219" aria-hidden="true"></a>                (tLambda</span>
+<span id="cb1-220"><a href="#cb1-220" aria-hidden="true"></a>                   nAnon</span>
+<span id="cb1-221"><a href="#cb1-221" aria-hidden="true"></a>                   (tLambda</span>
+<span id="cb1-222"><a href="#cb1-222" aria-hidden="true"></a>                      nAnon</span>
+<span id="cb1-223"><a href="#cb1-223" aria-hidden="true"></a>                      (tCase</span>
+<span id="cb1-224"><a href="#cb1-224" aria-hidden="true"></a>                         ({| inductive_mind :=</span>
+<span id="cb1-225"><a href="#cb1-225" aria-hidden="true"></a>                               (MPfile [<span class="st">&quot;InductionRecursion&quot;</span>%bs], <span class="st">&quot;Valid&quot;</span>%bs);</span>
+<span id="cb1-226"><a href="#cb1-226" aria-hidden="true"></a>                             inductive_ind := <span class="dv">0</span> |},</span>
+<span id="cb1-227"><a href="#cb1-227" aria-hidden="true"></a>                          <span class="dv">0</span>)</span>
+<span id="cb1-228"><a href="#cb1-228" aria-hidden="true"></a>                         (tRel <span class="dv">0</span>)</span>
+<span id="cb1-229"><a href="#cb1-229" aria-hidden="true"></a>                         [([nAnon; nAnon; nAnon],</span>
+<span id="cb1-230"><a href="#cb1-230" aria-hidden="true"></a>                           tApp</span>
+<span id="cb1-231"><a href="#cb1-231" aria-hidden="true"></a>                             (tApp</span>
+<span id="cb1-232"><a href="#cb1-232" aria-hidden="true"></a>                                (tConst (MPfile [<span class="st">&quot;Nat&quot;</span>%bs; <span class="st">&quot;Builtin&quot;</span>%bs; <span class="st">&quot;Agda&quot;</span>%bs], <span class="st">&quot;_+_&quot;</span>%bs))</span>
+<span id="cb1-233"><a href="#cb1-233" aria-hidden="true"></a>                                (tRel <span class="dv">1</span>))</span>
+<span id="cb1-234"><a href="#cb1-234" aria-hidden="true"></a>                             (tRel <span class="dv">0</span>))])))) |});</span>
+<span id="cb1-235"><a href="#cb1-235" aria-hidden="true"></a>   ((MPfile [<span class="st">&quot;Nat&quot;</span>%bs; <span class="st">&quot;Builtin&quot;</span>%bs; <span class="st">&quot;Agda&quot;</span>%bs], <span class="st">&quot;_+_&quot;</span>%bs),</span>
+<span id="cb1-236"><a href="#cb1-236" aria-hidden="true"></a>    ConstantDecl</span>
+<span id="cb1-237"><a href="#cb1-237" aria-hidden="true"></a>      {| cst_body :=</span>
+<span id="cb1-238"><a href="#cb1-238" aria-hidden="true"></a>           <span class="dt">Some</span></span>
+<span id="cb1-239"><a href="#cb1-239" aria-hidden="true"></a>             (tLambda</span>
+<span id="cb1-240"><a href="#cb1-240" aria-hidden="true"></a>                nAnon</span>
+<span id="cb1-241"><a href="#cb1-241" aria-hidden="true"></a>                (tApp</span>
+<span id="cb1-242"><a href="#cb1-242" aria-hidden="true"></a>                   (tFix</span>
+<span id="cb1-243"><a href="#cb1-243" aria-hidden="true"></a>                      [{| dname := nNamed <span class="st">&quot;_+_&quot;</span>%bs;</span>
+<span id="cb1-244"><a href="#cb1-244" aria-hidden="true"></a>                          dbody :=</span>
+<span id="cb1-245"><a href="#cb1-245" aria-hidden="true"></a>                            tLambda</span>
+<span id="cb1-246"><a href="#cb1-246" aria-hidden="true"></a>                              nAnon</span>
+<span id="cb1-247"><a href="#cb1-247" aria-hidden="true"></a>                              (tLambda</span>
+<span id="cb1-248"><a href="#cb1-248" aria-hidden="true"></a>                                 nAnon</span>
+<span id="cb1-249"><a href="#cb1-249" aria-hidden="true"></a>                                 (tCase</span>
+<span id="cb1-250"><a href="#cb1-250" aria-hidden="true"></a>                                    ({| inductive_mind :=</span>
+<span id="cb1-251"><a href="#cb1-251" aria-hidden="true"></a>                                          (MPfile [<span class="st">&quot;Nat&quot;</span>%bs; <span class="st">&quot;Builtin&quot;</span>%bs; <span class="st">&quot;Agda&quot;</span>%bs], <span class="st">&quot;Nat&quot;</span>%bs);</span>
+<span id="cb1-252"><a href="#cb1-252" aria-hidden="true"></a>                                        inductive_ind := <span class="dv">0</span> |},</span>
+<span id="cb1-253"><a href="#cb1-253" aria-hidden="true"></a>                                     <span class="dv">0</span>)</span>
+<span id="cb1-254"><a href="#cb1-254" aria-hidden="true"></a>                                    (tRel <span class="dv">1</span>)</span>
+<span id="cb1-255"><a href="#cb1-255" aria-hidden="true"></a>                                    [([], tRel <span class="dv">0</span>);</span>
+<span id="cb1-256"><a href="#cb1-256" aria-hidden="true"></a>                                     ([nAnon],</span>
+<span id="cb1-257"><a href="#cb1-257" aria-hidden="true"></a>                                      tApp</span>
+<span id="cb1-258"><a href="#cb1-258" aria-hidden="true"></a>                                        (tConstruct</span>
+<span id="cb1-259"><a href="#cb1-259" aria-hidden="true"></a>                                           {| inductive_mind :=</span>
+<span id="cb1-260"><a href="#cb1-260" aria-hidden="true"></a>                                                (MPfile [<span class="st">&quot;Nat&quot;</span>%bs; <span class="st">&quot;Builtin&quot;</span>%bs; <span class="st">&quot;Agda&quot;</span>%bs],</span>
+<span id="cb1-261"><a href="#cb1-261" aria-hidden="true"></a>                                                 <span class="st">&quot;Nat&quot;</span>%bs);</span>
+<span id="cb1-262"><a href="#cb1-262" aria-hidden="true"></a>                                              inductive_ind := <span class="dv">0</span> |}</span>
+<span id="cb1-263"><a href="#cb1-263" aria-hidden="true"></a>                                           <span class="dv">1</span> [])</span>
+<span id="cb1-264"><a href="#cb1-264" aria-hidden="true"></a>                                        (tApp (tApp (tRel <span class="dv">3</span>) (tRel <span class="dv">0</span>)) (tRel <span class="dv">1</span>)))]));</span>
+<span id="cb1-265"><a href="#cb1-265" aria-hidden="true"></a>                          rarg := <span class="dv">0</span> |}]</span>
+<span id="cb1-266"><a href="#cb1-266" aria-hidden="true"></a>                      <span class="dv">0</span>)</span>
+<span id="cb1-267"><a href="#cb1-267" aria-hidden="true"></a>                   (tRel <span class="dv">0</span>))) |});</span>
+<span id="cb1-268"><a href="#cb1-268" aria-hidden="true"></a>   ((MPfile [<span class="st">&quot;InductionRecursion&quot;</span>%bs], <span class="st">&quot;Valid&quot;</span>%bs),</span>
+<span id="cb1-269"><a href="#cb1-269" aria-hidden="true"></a>    InductiveDecl</span>
+<span id="cb1-270"><a href="#cb1-270" aria-hidden="true"></a>      {| ind_finite := Finite; ind_npars := <span class="dv">0</span>;</span>
+<span id="cb1-271"><a href="#cb1-271" aria-hidden="true"></a>         ind_bodies :=</span>
+<span id="cb1-272"><a href="#cb1-272" aria-hidden="true"></a>           [{| ind_name := <span class="st">&quot;Valid&quot;</span>%bs; ind_propositional := <span class="kw">false</span>;</span>
+<span id="cb1-273"><a href="#cb1-273" aria-hidden="true"></a>               ind_kelim := IntoAny;</span>
+<span id="cb1-274"><a href="#cb1-274" aria-hidden="true"></a>               ind_ctors := [{| cstr_name := <span class="st">&quot;mk&quot;</span>%bs; cstr_nargs := <span class="dv">3</span> |}];</span>
+<span id="cb1-275"><a href="#cb1-275" aria-hidden="true"></a>               ind_projs := [] |}] |});</span>
+<span id="cb1-276"><a href="#cb1-276" aria-hidden="true"></a>   ((MPfile [<span class="st">&quot;InductionRecursion&quot;</span>%bs], <span class="st">&quot;List&quot;</span>%bs),</span>
+<span id="cb1-277"><a href="#cb1-277" aria-hidden="true"></a>    InductiveDecl</span>
+<span id="cb1-278"><a href="#cb1-278" aria-hidden="true"></a>      {| ind_finite := Finite; ind_npars := <span class="dv">1</span>;</span>
+<span id="cb1-279"><a href="#cb1-279" aria-hidden="true"></a>         ind_bodies :=</span>
+<span id="cb1-280"><a href="#cb1-280" aria-hidden="true"></a>           [{| ind_name := <span class="st">&quot;List&quot;</span>%bs; ind_propositional := <span class="kw">false</span>;</span>
+<span id="cb1-281"><a href="#cb1-281" aria-hidden="true"></a>               ind_kelim := IntoAny;</span>
+<span id="cb1-282"><a href="#cb1-282" aria-hidden="true"></a>               ind_ctors :=</span>
+<span id="cb1-283"><a href="#cb1-283" aria-hidden="true"></a>                 [{| cstr_name := <span class="st">&quot;[]&quot;</span>%bs; cstr_nargs := <span class="dv">0</span> |};</span>
+<span id="cb1-284"><a href="#cb1-284" aria-hidden="true"></a>                  {| cstr_name := <span class="st">&quot;_</span><span class="ch">\875</span><span class="st">9_&quot;</span>%bs; cstr_nargs := <span class="dv">2</span> |}];</span>
+<span id="cb1-285"><a href="#cb1-285" aria-hidden="true"></a>               ind_projs := [] |}] |});</span>
+<span id="cb1-286"><a href="#cb1-286" aria-hidden="true"></a>   ((MPfile [<span class="st">&quot;Nat&quot;</span>%bs; <span class="st">&quot;Builtin&quot;</span>%bs; <span class="st">&quot;Agda&quot;</span>%bs], <span class="st">&quot;Nat&quot;</span>%bs),</span>
+<span id="cb1-287"><a href="#cb1-287" aria-hidden="true"></a>    InductiveDecl</span>
+<span id="cb1-288"><a href="#cb1-288" aria-hidden="true"></a>      {| ind_finite := Finite; ind_npars := <span class="dv">0</span>;</span>
+<span id="cb1-289"><a href="#cb1-289" aria-hidden="true"></a>         ind_bodies :=</span>
+<span id="cb1-290"><a href="#cb1-290" aria-hidden="true"></a>           [{| ind_name := <span class="st">&quot;Nat&quot;</span>%bs; ind_propositional := <span class="kw">false</span>;</span>
+<span id="cb1-291"><a href="#cb1-291" aria-hidden="true"></a>               ind_kelim := IntoAny;</span>
+<span id="cb1-292"><a href="#cb1-292" aria-hidden="true"></a>               ind_ctors :=</span>
+<span id="cb1-293"><a href="#cb1-293" aria-hidden="true"></a>                 [{| cstr_name := <span class="st">&quot;zero&quot;</span>%bs; cstr_nargs := <span class="dv">0</span> |};</span>
+<span id="cb1-294"><a href="#cb1-294" aria-hidden="true"></a>                  {| cstr_name := <span class="st">&quot;suc&quot;</span>%bs; cstr_nargs := <span class="dv">1</span> |}];</span>
+<span id="cb1-295"><a href="#cb1-295" aria-hidden="true"></a>               ind_projs := [] |}] |});</span>
+<span id="cb1-296"><a href="#cb1-296" aria-hidden="true"></a>   ((MPfile [<span class="st">&quot;LamBox&quot;</span>%bs], <span class="st">&quot;Empty&quot;</span>%bs),</span>
+<span id="cb1-297"><a href="#cb1-297" aria-hidden="true"></a>    InductiveDecl</span>
+<span id="cb1-298"><a href="#cb1-298" aria-hidden="true"></a>      {| ind_finite := Finite; ind_npars := <span class="dv">0</span>;</span>
+<span id="cb1-299"><a href="#cb1-299" aria-hidden="true"></a>         ind_bodies :=</span>
+<span id="cb1-300"><a href="#cb1-300" aria-hidden="true"></a>           [{| ind_name := <span class="st">&quot;Empty&quot;</span>%bs; ind_propositional := <span class="kw">false</span>;</span>
+<span id="cb1-301"><a href="#cb1-301" aria-hidden="true"></a>               ind_kelim := IntoAny; ind_ctors := []; ind_projs := [] |}] |})].</span>
+<span id="cb1-302"><a href="#cb1-302" aria-hidden="true"></a></span>
+<span id="cb1-303"><a href="#cb1-303" aria-hidden="true"></a>Compute @check_wf_glob eflags env.</span>
+<span id="cb1-304"><a href="#cb1-304" aria-hidden="true"></a></span>
+<span id="cb1-305"><a href="#cb1-305" aria-hidden="true"></a>Definition prog1 : program :=</span>
+<span id="cb1-306"><a href="#cb1-306" aria-hidden="true"></a>  (env, tConst (MPfile [<span class="st">&quot;InductionRecursion&quot;</span>%bs], <span class="st">&quot;test&quot;</span>%bs)).</span>
+<span id="cb1-307"><a href="#cb1-307" aria-hidden="true"></a></span>
+<span id="cb1-308"><a href="#cb1-308" aria-hidden="true"></a>Compute show_program prog1.</span></code></pre></div>
 </body>
 </html>
