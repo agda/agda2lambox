@@ -74,10 +74,13 @@
     code span.vs { color: #4e9a06; } /* VerbatimString */
     code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
   </style>
-  <style>pre > code.sourceCode { white-space: pre-wrap }</style>
+  <style>pre > code.sourceCode { white-space: pre-wrap }
+  pre > code.sourceCode > span.chunk { display: block; line-height: inherit;
+    content-visibility: auto; contain-intrinsic-size: auto 125em }
+  .chunk > span { display: inline-block; line-height: 1.25 }</style>
 </head>
 <body>
-<div class="sourceCode" id="cb1"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a>(module</span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span class="chunk"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a>(module</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>  (type (<span class="co">;0;) (func))</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>  (type (<span class="co">;1;) (func (param i32)))</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>  (type (<span class="co">;2;) (func (param i32 i32)))</span></span>
@@ -177,7 +180,7 @@
 <span id="cb1-98"><a href="#cb1-98" aria-hidden="true"></a>  (type (<span class="co">;96;) (func (param i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32)))</span></span>
 <span id="cb1-99"><a href="#cb1-99" aria-hidden="true"></a>  (type (<span class="co">;97;) (func (param i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32)))</span></span>
 <span id="cb1-100"><a href="#cb1-100" aria-hidden="true"></a>  (type (<span class="co">;98;) (func (param i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32)))</span></span>
-<span id="cb1-101"><a href="#cb1-101" aria-hidden="true"></a>  (type (<span class="co">;99;) (func (param i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32)))</span></span>
+</span><span class="chunk"><span id="cb1-101"><a href="#cb1-101" aria-hidden="true"></a>  (type (<span class="co">;99;) (func (param i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32)))</span></span>
 <span id="cb1-102"><a href="#cb1-102" aria-hidden="true"></a>  (type (<span class="co">;100;) (func (param i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32)))</span></span>
 <span id="cb1-103"><a href="#cb1-103" aria-hidden="true"></a>  (func (<span class="co">;0;) (type 0)</span></span>
 <span id="cb1-104"><a href="#cb1-104" aria-hidden="true"></a>    (local i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32)</span>
@@ -277,7 +280,7 @@
 <span id="cb1-198"><a href="#cb1-198" aria-hidden="true"></a>    i32.store</span>
 <span id="cb1-199"><a href="#cb1-199" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-200"><a href="#cb1-200" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
-<span id="cb1-201"><a href="#cb1-201" aria-hidden="true"></a>    i32.add</span>
+</span><span class="chunk"><span id="cb1-201"><a href="#cb1-201" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-202"><a href="#cb1-202" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
 <span id="cb1-203"><a href="#cb1-203" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-204"><a href="#cb1-204" aria-hidden="true"></a>    local.set <span class="dv">4</span></span>
@@ -377,7 +380,7 @@
 <span id="cb1-298"><a href="#cb1-298" aria-hidden="true"></a>    i32.store</span>
 <span id="cb1-299"><a href="#cb1-299" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-300"><a href="#cb1-300" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
-<span id="cb1-301"><a href="#cb1-301" aria-hidden="true"></a>    i32.add</span>
+</span><span class="chunk"><span id="cb1-301"><a href="#cb1-301" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-302"><a href="#cb1-302" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
 <span id="cb1-303"><a href="#cb1-303" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-304"><a href="#cb1-304" aria-hidden="true"></a>    local.set <span class="dv">9</span></span>
@@ -477,7 +480,7 @@
 <span id="cb1-398"><a href="#cb1-398" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-399"><a href="#cb1-399" aria-hidden="true"></a>    i32.const <span class="dv">0</span></span>
 <span id="cb1-400"><a href="#cb1-400" aria-hidden="true"></a>    i32.store</span>
-<span id="cb1-401"><a href="#cb1-401" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
+</span><span class="chunk"><span id="cb1-401"><a href="#cb1-401" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-402"><a href="#cb1-402" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
 <span id="cb1-403"><a href="#cb1-403" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-404"><a href="#cb1-404" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
@@ -577,7 +580,7 @@
 <span id="cb1-498"><a href="#cb1-498" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
 <span id="cb1-499"><a href="#cb1-499" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-500"><a href="#cb1-500" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
-<span id="cb1-501"><a href="#cb1-501" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
+</span><span class="chunk"><span id="cb1-501"><a href="#cb1-501" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-502"><a href="#cb1-502" aria-hidden="true"></a>    local.set <span class="dv">19</span></span>
 <span id="cb1-503"><a href="#cb1-503" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-504"><a href="#cb1-504" aria-hidden="true"></a>    global.set <span class="dv">1</span></span>
@@ -677,7 +680,7 @@
 <span id="cb1-598"><a href="#cb1-598" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
 <span id="cb1-599"><a href="#cb1-599" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-600"><a href="#cb1-600" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
-<span id="cb1-601"><a href="#cb1-601" aria-hidden="true"></a>    i32.add</span>
+</span><span class="chunk"><span id="cb1-601"><a href="#cb1-601" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-602"><a href="#cb1-602" aria-hidden="true"></a>    local.get <span class="dv">20</span></span>
 <span id="cb1-603"><a href="#cb1-603" aria-hidden="true"></a>    i32.store</span>
 <span id="cb1-604"><a href="#cb1-604" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
@@ -777,7 +780,7 @@
 <span id="cb1-698"><a href="#cb1-698" aria-hidden="true"></a>    local.get <span class="dv">23</span></span>
 <span id="cb1-699"><a href="#cb1-699" aria-hidden="true"></a>    i32.store</span>
 <span id="cb1-700"><a href="#cb1-700" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
-<span id="cb1-701"><a href="#cb1-701" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
+</span><span class="chunk"><span id="cb1-701"><a href="#cb1-701" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
 <span id="cb1-702"><a href="#cb1-702" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-703"><a href="#cb1-703" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
 <span id="cb1-704"><a href="#cb1-704" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
@@ -877,7 +880,7 @@
 <span id="cb1-798"><a href="#cb1-798" aria-hidden="true"></a>    local.get <span class="dv">28</span></span>
 <span id="cb1-799"><a href="#cb1-799" aria-hidden="true"></a>    i32.store</span>
 <span id="cb1-800"><a href="#cb1-800" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
-<span id="cb1-801"><a href="#cb1-801" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
+</span><span class="chunk"><span id="cb1-801"><a href="#cb1-801" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
 <span id="cb1-802"><a href="#cb1-802" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-803"><a href="#cb1-803" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
 <span id="cb1-804"><a href="#cb1-804" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
@@ -977,7 +980,7 @@
 <span id="cb1-898"><a href="#cb1-898" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-899"><a href="#cb1-899" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
 <span id="cb1-900"><a href="#cb1-900" aria-hidden="true"></a>    i32.add</span>
-<span id="cb1-901"><a href="#cb1-901" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
+</span><span class="chunk"><span id="cb1-901"><a href="#cb1-901" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
 <span id="cb1-902"><a href="#cb1-902" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-903"><a href="#cb1-903" aria-hidden="true"></a>    i32.const <span class="dv">8</span></span>
 <span id="cb1-904"><a href="#cb1-904" aria-hidden="true"></a>    i32.add</span>
@@ -1077,7 +1080,7 @@
 <span id="cb1-998"><a href="#cb1-998" aria-hidden="true"></a>    local.set <span class="dv">42</span></span>
 <span id="cb1-999"><a href="#cb1-999" aria-hidden="true"></a>    i32.const <span class="dv">1</span></span>
 <span id="cb1-1000"><a href="#cb1-1000" aria-hidden="true"></a>    local.set <span class="dv">43</span></span>
-<span id="cb1-1001"><a href="#cb1-1001" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
+</span><span class="chunk"><span id="cb1-1001"><a href="#cb1-1001" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-1002"><a href="#cb1-1002" aria-hidden="true"></a>    global.set <span class="dv">1</span></span>
 <span id="cb1-1003"><a href="#cb1-1003" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-1004"><a href="#cb1-1004" aria-hidden="true"></a>    i32.const <span class="dv">0</span></span>
@@ -1177,7 +1180,7 @@
 <span id="cb1-1098"><a href="#cb1-1098" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-1099"><a href="#cb1-1099" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
 <span id="cb1-1100"><a href="#cb1-1100" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
-<span id="cb1-1101"><a href="#cb1-1101" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
+</span><span class="chunk"><span id="cb1-1101"><a href="#cb1-1101" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
 <span id="cb1-1102"><a href="#cb1-1102" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-1103"><a href="#cb1-1103" aria-hidden="true"></a>    local.get <span class="dv">48</span></span>
 <span id="cb1-1104"><a href="#cb1-1104" aria-hidden="true"></a>    i32.store</span>
@@ -1277,7 +1280,7 @@
 <span id="cb1-1198"><a href="#cb1-1198" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
 <span id="cb1-1199"><a href="#cb1-1199" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-1200"><a href="#cb1-1200" aria-hidden="true"></a>    local.set <span class="dv">54</span></span>
-<span id="cb1-1201"><a href="#cb1-1201" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
+</span><span class="chunk"><span id="cb1-1201"><a href="#cb1-1201" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-1202"><a href="#cb1-1202" aria-hidden="true"></a>    global.set <span class="dv">1</span></span>
 <span id="cb1-1203"><a href="#cb1-1203" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-1204"><a href="#cb1-1204" aria-hidden="true"></a>    i32.const <span class="dv">0</span></span>
@@ -1377,7 +1380,7 @@
 <span id="cb1-1298"><a href="#cb1-1298" aria-hidden="true"></a>        i32.const <span class="dv">1</span></span>
 <span id="cb1-1299"><a href="#cb1-1299" aria-hidden="true"></a>        global.set <span class="dv">3</span></span>
 <span id="cb1-1300"><a href="#cb1-1300" aria-hidden="true"></a>        return</span>
-<span id="cb1-1301"><a href="#cb1-1301" aria-hidden="true"></a>      end</span>
+</span><span class="chunk"><span id="cb1-1301"><a href="#cb1-1301" aria-hidden="true"></a>      end</span>
 <span id="cb1-1302"><a href="#cb1-1302" aria-hidden="true"></a>    end</span>
 <span id="cb1-1303"><a href="#cb1-1303" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-1304"><a href="#cb1-1304" aria-hidden="true"></a>    global.set <span class="dv">1</span></span>
@@ -1477,7 +1480,7 @@
 <span id="cb1-1398"><a href="#cb1-1398" aria-hidden="true"></a>    i32.store</span>
 <span id="cb1-1399"><a href="#cb1-1399" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-1400"><a href="#cb1-1400" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
-<span id="cb1-1401"><a href="#cb1-1401" aria-hidden="true"></a>    i32.add</span>
+</span><span class="chunk"><span id="cb1-1401"><a href="#cb1-1401" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-1402"><a href="#cb1-1402" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
 <span id="cb1-1403"><a href="#cb1-1403" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-1404"><a href="#cb1-1404" aria-hidden="true"></a>    local.set <span class="dv">67</span></span>
@@ -1577,7 +1580,7 @@
 <span id="cb1-1498"><a href="#cb1-1498" aria-hidden="true"></a>    i32.const <span class="dv">65536</span></span>
 <span id="cb1-1499"><a href="#cb1-1499" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-1500"><a href="#cb1-1500" aria-hidden="true"></a>    i32.const <span class="dv">65536</span></span>
-<span id="cb1-1501"><a href="#cb1-1501" aria-hidden="true"></a>    i32.div_s</span>
+</span><span class="chunk"><span id="cb1-1501"><a href="#cb1-1501" aria-hidden="true"></a>    i32.div_s</span>
 <span id="cb1-1502"><a href="#cb1-1502" aria-hidden="true"></a>    memory.size</span>
 <span id="cb1-1503"><a href="#cb1-1503" aria-hidden="true"></a>    i32.ge_s</span>
 <span id="cb1-1504"><a href="#cb1-1504" aria-hidden="true"></a>    <span class="kw">if</span>  <span class="co">;; label = @1</span></span>
@@ -1677,7 +1680,7 @@
 <span id="cb1-1598"><a href="#cb1-1598" aria-hidden="true"></a>    call_indirect (type <span class="dv">2</span>)</span>
 <span id="cb1-1599"><a href="#cb1-1599" aria-hidden="true"></a>    global.get <span class="dv">3</span></span>
 <span id="cb1-1600"><a href="#cb1-1600" aria-hidden="true"></a>    <span class="kw">if</span>  <span class="co">;; label = @1</span></span>
-<span id="cb1-1601"><a href="#cb1-1601" aria-hidden="true"></a>      return</span>
+</span><span class="chunk"><span id="cb1-1601"><a href="#cb1-1601" aria-hidden="true"></a>      return</span>
 <span id="cb1-1602"><a href="#cb1-1602" aria-hidden="true"></a>    end</span>
 <span id="cb1-1603"><a href="#cb1-1603" aria-hidden="true"></a>    global.get <span class="dv">2</span></span>
 <span id="cb1-1604"><a href="#cb1-1604" aria-hidden="true"></a>    local.set <span class="dv">80</span></span>
@@ -1777,7 +1780,7 @@
 <span id="cb1-1698"><a href="#cb1-1698" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
 <span id="cb1-1699"><a href="#cb1-1699" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-1700"><a href="#cb1-1700" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
-<span id="cb1-1701"><a href="#cb1-1701" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
+</span><span class="chunk"><span id="cb1-1701"><a href="#cb1-1701" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-1702"><a href="#cb1-1702" aria-hidden="true"></a>    local.set <span class="dv">85</span></span>
 <span id="cb1-1703"><a href="#cb1-1703" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-1704"><a href="#cb1-1704" aria-hidden="true"></a>    global.set <span class="dv">1</span></span>
@@ -1877,7 +1880,7 @@
 <span id="cb1-1798"><a href="#cb1-1798" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
 <span id="cb1-1799"><a href="#cb1-1799" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-1800"><a href="#cb1-1800" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
-<span id="cb1-1801"><a href="#cb1-1801" aria-hidden="true"></a>    i32.add</span>
+</span><span class="chunk"><span id="cb1-1801"><a href="#cb1-1801" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-1802"><a href="#cb1-1802" aria-hidden="true"></a>    local.get <span class="dv">51</span></span>
 <span id="cb1-1803"><a href="#cb1-1803" aria-hidden="true"></a>    i32.store</span>
 <span id="cb1-1804"><a href="#cb1-1804" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
@@ -1977,7 +1980,7 @@
 <span id="cb1-1898"><a href="#cb1-1898" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-1899"><a href="#cb1-1899" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
 <span id="cb1-1900"><a href="#cb1-1900" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
-<span id="cb1-1901"><a href="#cb1-1901" aria-hidden="true"></a>    local.set <span class="dv">94</span></span>
+</span><span class="chunk"><span id="cb1-1901"><a href="#cb1-1901" aria-hidden="true"></a>    local.set <span class="dv">94</span></span>
 <span id="cb1-1902"><a href="#cb1-1902" aria-hidden="true"></a>    i32.const <span class="dv">1</span></span>
 <span id="cb1-1903"><a href="#cb1-1903" aria-hidden="true"></a>    local.set <span class="dv">95</span></span>
 <span id="cb1-1904"><a href="#cb1-1904" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
@@ -2077,7 +2080,7 @@
 <span id="cb1-1998"><a href="#cb1-1998" aria-hidden="true"></a>    call_indirect (type <span class="dv">2</span>)</span>
 <span id="cb1-1999"><a href="#cb1-1999" aria-hidden="true"></a>    global.get <span class="dv">3</span></span>
 <span id="cb1-2000"><a href="#cb1-2000" aria-hidden="true"></a>    <span class="kw">if</span>  <span class="co">;; label = @1</span></span>
-<span id="cb1-2001"><a href="#cb1-2001" aria-hidden="true"></a>      return</span>
+</span><span class="chunk"><span id="cb1-2001"><a href="#cb1-2001" aria-hidden="true"></a>      return</span>
 <span id="cb1-2002"><a href="#cb1-2002" aria-hidden="true"></a>    end</span>
 <span id="cb1-2003"><a href="#cb1-2003" aria-hidden="true"></a>    global.get <span class="dv">2</span></span>
 <span id="cb1-2004"><a href="#cb1-2004" aria-hidden="true"></a>    local.set <span class="dv">102</span></span>
@@ -2177,7 +2180,7 @@
 <span id="cb1-2098"><a href="#cb1-2098" aria-hidden="true"></a>    call_indirect (type <span class="dv">1</span>)</span>
 <span id="cb1-2099"><a href="#cb1-2099" aria-hidden="true"></a>    global.get <span class="dv">3</span></span>
 <span id="cb1-2100"><a href="#cb1-2100" aria-hidden="true"></a>    <span class="kw">if</span>  <span class="co">;; label = @1</span></span>
-<span id="cb1-2101"><a href="#cb1-2101" aria-hidden="true"></a>      return</span>
+</span><span class="chunk"><span id="cb1-2101"><a href="#cb1-2101" aria-hidden="true"></a>      return</span>
 <span id="cb1-2102"><a href="#cb1-2102" aria-hidden="true"></a>    end</span>
 <span id="cb1-2103"><a href="#cb1-2103" aria-hidden="true"></a>    global.get <span class="dv">2</span></span>
 <span id="cb1-2104"><a href="#cb1-2104" aria-hidden="true"></a>    local.set <span class="dv">109</span></span>
@@ -2277,7 +2280,7 @@
 <span id="cb1-2198"><a href="#cb1-2198" aria-hidden="true"></a>    <span class="kw">if</span>  <span class="co">;; label = @1</span></span>
 <span id="cb1-2199"><a href="#cb1-2199" aria-hidden="true"></a>      return</span>
 <span id="cb1-2200"><a href="#cb1-2200" aria-hidden="true"></a>    end</span>
-<span id="cb1-2201"><a href="#cb1-2201" aria-hidden="true"></a>    global.get <span class="dv">2</span></span>
+</span><span class="chunk"><span id="cb1-2201"><a href="#cb1-2201" aria-hidden="true"></a>    global.get <span class="dv">2</span></span>
 <span id="cb1-2202"><a href="#cb1-2202" aria-hidden="true"></a>    local.set <span class="dv">123</span></span>
 <span id="cb1-2203"><a href="#cb1-2203" aria-hidden="true"></a>    local.get <span class="dv">123</span></span>
 <span id="cb1-2204"><a href="#cb1-2204" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
@@ -2377,7 +2380,7 @@
 <span id="cb1-2298"><a href="#cb1-2298" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-2299"><a href="#cb1-2299" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
 <span id="cb1-2300"><a href="#cb1-2300" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
-<span id="cb1-2301"><a href="#cb1-2301" aria-hidden="true"></a>    local.set <span class="dv">133</span></span>
+</span><span class="chunk"><span id="cb1-2301"><a href="#cb1-2301" aria-hidden="true"></a>    local.set <span class="dv">133</span></span>
 <span id="cb1-2302"><a href="#cb1-2302" aria-hidden="true"></a>    i32.const <span class="dv">1</span></span>
 <span id="cb1-2303"><a href="#cb1-2303" aria-hidden="true"></a>    local.set <span class="dv">134</span></span>
 <span id="cb1-2304"><a href="#cb1-2304" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
@@ -2477,7 +2480,7 @@
 <span id="cb1-2398"><a href="#cb1-2398" aria-hidden="true"></a>    i32.const <span class="dv">17</span></span>
 <span id="cb1-2399"><a href="#cb1-2399" aria-hidden="true"></a>    call_indirect (type <span class="dv">1</span>)</span>
 <span id="cb1-2400"><a href="#cb1-2400" aria-hidden="true"></a>    global.get <span class="dv">3</span></span>
-<span id="cb1-2401"><a href="#cb1-2401" aria-hidden="true"></a>    <span class="kw">if</span>  <span class="co">;; label = @1</span></span>
+</span><span class="chunk"><span id="cb1-2401"><a href="#cb1-2401" aria-hidden="true"></a>    <span class="kw">if</span>  <span class="co">;; label = @1</span></span>
 <span id="cb1-2402"><a href="#cb1-2402" aria-hidden="true"></a>      return</span>
 <span id="cb1-2403"><a href="#cb1-2403" aria-hidden="true"></a>    end</span>
 <span id="cb1-2404"><a href="#cb1-2404" aria-hidden="true"></a>    global.get <span class="dv">2</span></span>
@@ -2577,7 +2580,7 @@
 <span id="cb1-2498"><a href="#cb1-2498" aria-hidden="true"></a>      <span class="kw">if</span>  <span class="co">;; label = @2</span></span>
 <span id="cb1-2499"><a href="#cb1-2499" aria-hidden="true"></a>        i32.const <span class="dv">1</span></span>
 <span id="cb1-2500"><a href="#cb1-2500" aria-hidden="true"></a>        global.set <span class="dv">3</span></span>
-<span id="cb1-2501"><a href="#cb1-2501" aria-hidden="true"></a>        return</span>
+</span><span class="chunk"><span id="cb1-2501"><a href="#cb1-2501" aria-hidden="true"></a>        return</span>
 <span id="cb1-2502"><a href="#cb1-2502" aria-hidden="true"></a>      end</span>
 <span id="cb1-2503"><a href="#cb1-2503" aria-hidden="true"></a>    end</span>
 <span id="cb1-2504"><a href="#cb1-2504" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
@@ -2677,7 +2680,7 @@
 <span id="cb1-2598"><a href="#cb1-2598" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-2599"><a href="#cb1-2599" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
 <span id="cb1-2600"><a href="#cb1-2600" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
-<span id="cb1-2601"><a href="#cb1-2601" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
+</span><span class="chunk"><span id="cb1-2601"><a href="#cb1-2601" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
 <span id="cb1-2602"><a href="#cb1-2602" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-2603"><a href="#cb1-2603" aria-hidden="true"></a>    i32.const <span class="dv">110</span></span>
 <span id="cb1-2604"><a href="#cb1-2604" aria-hidden="true"></a>    i32.store</span>
@@ -2777,7 +2780,7 @@
 <span id="cb1-2698"><a href="#cb1-2698" aria-hidden="true"></a>    local.set <span class="dv">161</span></span>
 <span id="cb1-2699"><a href="#cb1-2699" aria-hidden="true"></a>    local.get <span class="dv">161</span></span>
 <span id="cb1-2700"><a href="#cb1-2700" aria-hidden="true"></a>    local.get <span class="dv">159</span></span>
-<span id="cb1-2701"><a href="#cb1-2701" aria-hidden="true"></a>    local.get <span class="dv">160</span></span>
+</span><span class="chunk"><span id="cb1-2701"><a href="#cb1-2701" aria-hidden="true"></a>    local.get <span class="dv">160</span></span>
 <span id="cb1-2702"><a href="#cb1-2702" aria-hidden="true"></a>    call_indirect (type <span class="dv">2</span>)</span>
 <span id="cb1-2703"><a href="#cb1-2703" aria-hidden="true"></a>    global.get <span class="dv">3</span></span>
 <span id="cb1-2704"><a href="#cb1-2704" aria-hidden="true"></a>    <span class="kw">if</span>  <span class="co">;; label = @1</span></span>
@@ -2877,7 +2880,7 @@
 <span id="cb1-2798"><a href="#cb1-2798" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
 <span id="cb1-2799"><a href="#cb1-2799" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-2800"><a href="#cb1-2800" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
-<span id="cb1-2801"><a href="#cb1-2801" aria-hidden="true"></a>    i32.add</span>
+</span><span class="chunk"><span id="cb1-2801"><a href="#cb1-2801" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-2802"><a href="#cb1-2802" aria-hidden="true"></a>    local.get <span class="dv">167</span></span>
 <span id="cb1-2803"><a href="#cb1-2803" aria-hidden="true"></a>    i32.store</span>
 <span id="cb1-2804"><a href="#cb1-2804" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
@@ -2977,7 +2980,7 @@
 <span id="cb1-2898"><a href="#cb1-2898" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
 <span id="cb1-2899"><a href="#cb1-2899" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-2900"><a href="#cb1-2900" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
-<span id="cb1-2901"><a href="#cb1-2901" aria-hidden="true"></a>    i32.add</span>
+</span><span class="chunk"><span id="cb1-2901"><a href="#cb1-2901" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-2902"><a href="#cb1-2902" aria-hidden="true"></a>    local.get <span class="dv">172</span></span>
 <span id="cb1-2903"><a href="#cb1-2903" aria-hidden="true"></a>    i32.store</span>
 <span id="cb1-2904"><a href="#cb1-2904" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
@@ -3077,7 +3080,7 @@
 <span id="cb1-2998"><a href="#cb1-2998" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
 <span id="cb1-2999"><a href="#cb1-2999" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-3000"><a href="#cb1-3000" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
-<span id="cb1-3001"><a href="#cb1-3001" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
+</span><span class="chunk"><span id="cb1-3001"><a href="#cb1-3001" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-3002"><a href="#cb1-3002" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
 <span id="cb1-3003"><a href="#cb1-3003" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-3004"><a href="#cb1-3004" aria-hidden="true"></a>    local.get <span class="dv">178</span></span>
@@ -3177,7 +3180,7 @@
 <span id="cb1-3098"><a href="#cb1-3098" aria-hidden="true"></a>    <span class="kw">if</span>  <span class="co">;; label = @1</span></span>
 <span id="cb1-3099"><a href="#cb1-3099" aria-hidden="true"></a>      return</span>
 <span id="cb1-3100"><a href="#cb1-3100" aria-hidden="true"></a>    end</span>
-<span id="cb1-3101"><a href="#cb1-3101" aria-hidden="true"></a>    global.get <span class="dv">2</span></span>
+</span><span class="chunk"><span id="cb1-3101"><a href="#cb1-3101" aria-hidden="true"></a>    global.get <span class="dv">2</span></span>
 <span id="cb1-3102"><a href="#cb1-3102" aria-hidden="true"></a>    local.set <span class="dv">185</span></span>
 <span id="cb1-3103"><a href="#cb1-3103" aria-hidden="true"></a>    local.get <span class="dv">185</span></span>
 <span id="cb1-3104"><a href="#cb1-3104" aria-hidden="true"></a>    local.get <span class="dv">180</span></span>
@@ -3277,7 +3280,7 @@
 <span id="cb1-3198"><a href="#cb1-3198" aria-hidden="true"></a>            global.get <span class="dv">1</span></span>
 <span id="cb1-3199"><a href="#cb1-3199" aria-hidden="true"></a>            i32.const <span class="dv">4</span></span>
 <span id="cb1-3200"><a href="#cb1-3200" aria-hidden="true"></a>            i32.add</span>
-<span id="cb1-3201"><a href="#cb1-3201" aria-hidden="true"></a>            local.get <span class="dv">3</span></span>
+</span><span class="chunk"><span id="cb1-3201"><a href="#cb1-3201" aria-hidden="true"></a>            local.get <span class="dv">3</span></span>
 <span id="cb1-3202"><a href="#cb1-3202" aria-hidden="true"></a>            i32.store</span>
 <span id="cb1-3203"><a href="#cb1-3203" aria-hidden="true"></a>            global.get <span class="dv">0</span></span>
 <span id="cb1-3204"><a href="#cb1-3204" aria-hidden="true"></a>            i32.const <span class="dv">4</span></span>
@@ -3377,7 +3380,7 @@
 <span id="cb1-3298"><a href="#cb1-3298" aria-hidden="true"></a>        i32.add</span>
 <span id="cb1-3299"><a href="#cb1-3299" aria-hidden="true"></a>        i32.const <span class="dv">65536</span></span>
 <span id="cb1-3300"><a href="#cb1-3300" aria-hidden="true"></a>        i32.div_s</span>
-<span id="cb1-3301"><a href="#cb1-3301" aria-hidden="true"></a>        memory.size</span>
+</span><span class="chunk"><span id="cb1-3301"><a href="#cb1-3301" aria-hidden="true"></a>        memory.size</span>
 <span id="cb1-3302"><a href="#cb1-3302" aria-hidden="true"></a>        i32.ge_s</span>
 <span id="cb1-3303"><a href="#cb1-3303" aria-hidden="true"></a>        <span class="kw">if</span>  <span class="co">;; label = @3</span></span>
 <span id="cb1-3304"><a href="#cb1-3304" aria-hidden="true"></a>          i32.const <span class="dv">1</span></span>
@@ -3477,7 +3480,7 @@
 <span id="cb1-3398"><a href="#cb1-3398" aria-hidden="true"></a>            i32.div_s</span>
 <span id="cb1-3399"><a href="#cb1-3399" aria-hidden="true"></a>            memory.size</span>
 <span id="cb1-3400"><a href="#cb1-3400" aria-hidden="true"></a>            i32.ge_s</span>
-<span id="cb1-3401"><a href="#cb1-3401" aria-hidden="true"></a>            <span class="kw">if</span>  <span class="co">;; label = @5</span></span>
+</span><span class="chunk"><span id="cb1-3401"><a href="#cb1-3401" aria-hidden="true"></a>            <span class="kw">if</span>  <span class="co">;; label = @5</span></span>
 <span id="cb1-3402"><a href="#cb1-3402" aria-hidden="true"></a>              i32.const <span class="dv">1</span></span>
 <span id="cb1-3403"><a href="#cb1-3403" aria-hidden="true"></a>              memory.grow</span>
 <span id="cb1-3404"><a href="#cb1-3404" aria-hidden="true"></a>              i32.const <span class="dv">-1</span></span>
@@ -3577,7 +3580,7 @@
 <span id="cb1-3498"><a href="#cb1-3498" aria-hidden="true"></a>        i32.const <span class="dv">1</span></span>
 <span id="cb1-3499"><a href="#cb1-3499" aria-hidden="true"></a>        i32.eq</span>
 <span id="cb1-3500"><a href="#cb1-3500" aria-hidden="true"></a>        <span class="kw">if</span>  <span class="co">;; label = @3</span></span>
-<span id="cb1-3501"><a href="#cb1-3501" aria-hidden="true"></a>          local.get <span class="dv">1</span></span>
+</span><span class="chunk"><span id="cb1-3501"><a href="#cb1-3501" aria-hidden="true"></a>          local.get <span class="dv">1</span></span>
 <span id="cb1-3502"><a href="#cb1-3502" aria-hidden="true"></a>          i32.const <span class="dv">4</span></span>
 <span id="cb1-3503"><a href="#cb1-3503" aria-hidden="true"></a>          i32.add</span>
 <span id="cb1-3504"><a href="#cb1-3504" aria-hidden="true"></a>          i32.<span class="kw">load</span></span>
@@ -3677,7 +3680,7 @@
 <span id="cb1-3598"><a href="#cb1-3598" aria-hidden="true"></a>                    global.set <span class="dv">3</span></span>
 <span id="cb1-3599"><a href="#cb1-3599" aria-hidden="true"></a>                    return</span>
 <span id="cb1-3600"><a href="#cb1-3600" aria-hidden="true"></a>                  end</span>
-<span id="cb1-3601"><a href="#cb1-3601" aria-hidden="true"></a>                end</span>
+</span><span class="chunk"><span id="cb1-3601"><a href="#cb1-3601" aria-hidden="true"></a>                end</span>
 <span id="cb1-3602"><a href="#cb1-3602" aria-hidden="true"></a>                global.get <span class="dv">0</span></span>
 <span id="cb1-3603"><a href="#cb1-3603" aria-hidden="true"></a>                global.set <span class="dv">1</span></span>
 <span id="cb1-3604"><a href="#cb1-3604" aria-hidden="true"></a>                global.get <span class="dv">1</span></span>
@@ -3777,7 +3780,7 @@
 <span id="cb1-3698"><a href="#cb1-3698" aria-hidden="true"></a>        i32.store</span>
 <span id="cb1-3699"><a href="#cb1-3699" aria-hidden="true"></a>        global.get <span class="dv">0</span></span>
 <span id="cb1-3700"><a href="#cb1-3700" aria-hidden="true"></a>        i32.const <span class="dv">4</span></span>
-<span id="cb1-3701"><a href="#cb1-3701" aria-hidden="true"></a>        i32.add</span>
+</span><span class="chunk"><span id="cb1-3701"><a href="#cb1-3701" aria-hidden="true"></a>        i32.add</span>
 <span id="cb1-3702"><a href="#cb1-3702" aria-hidden="true"></a>        global.set <span class="dv">0</span></span>
 <span id="cb1-3703"><a href="#cb1-3703" aria-hidden="true"></a>        global.get <span class="dv">1</span></span>
 <span id="cb1-3704"><a href="#cb1-3704" aria-hidden="true"></a>        i32.const <span class="dv">4</span></span>
@@ -3877,7 +3880,7 @@
 <span id="cb1-3798"><a href="#cb1-3798" aria-hidden="true"></a>        local.set <span class="dv">4</span></span>
 <span id="cb1-3799"><a href="#cb1-3799" aria-hidden="true"></a>        local.get <span class="dv">4</span></span>
 <span id="cb1-3800"><a href="#cb1-3800" aria-hidden="true"></a>        local.get <span class="dv">0</span></span>
-<span id="cb1-3801"><a href="#cb1-3801" aria-hidden="true"></a>        i32.const <span class="dv">2</span></span>
+</span><span class="chunk"><span id="cb1-3801"><a href="#cb1-3801" aria-hidden="true"></a>        i32.const <span class="dv">2</span></span>
 <span id="cb1-3802"><a href="#cb1-3802" aria-hidden="true"></a>        return_call_indirect (type <span class="dv">2</span>)</span>
 <span id="cb1-3803"><a href="#cb1-3803" aria-hidden="true"></a>      <span class="kw">else</span></span>
 <span id="cb1-3804"><a href="#cb1-3804" aria-hidden="true"></a>        unreachable</span>
@@ -3977,7 +3980,7 @@
 <span id="cb1-3898"><a href="#cb1-3898" aria-hidden="true"></a>            global.get <span class="dv">1</span></span>
 <span id="cb1-3899"><a href="#cb1-3899" aria-hidden="true"></a>            local.set <span class="dv">5</span></span>
 <span id="cb1-3900"><a href="#cb1-3900" aria-hidden="true"></a>            local.get <span class="dv">5</span></span>
-<span id="cb1-3901"><a href="#cb1-3901" aria-hidden="true"></a>            global.set <span class="dv">2</span></span>
+</span><span class="chunk"><span id="cb1-3901"><a href="#cb1-3901" aria-hidden="true"></a>            global.set <span class="dv">2</span></span>
 <span id="cb1-3902"><a href="#cb1-3902" aria-hidden="true"></a>            return</span>
 <span id="cb1-3903"><a href="#cb1-3903" aria-hidden="true"></a>          <span class="kw">else</span></span>
 <span id="cb1-3904"><a href="#cb1-3904" aria-hidden="true"></a>            local.get <span class="dv">0</span></span>
@@ -4077,7 +4080,7 @@
 <span id="cb1-3998"><a href="#cb1-3998" aria-hidden="true"></a>              global.get <span class="dv">0</span></span>
 <span id="cb1-3999"><a href="#cb1-3999" aria-hidden="true"></a>              i32.const <span class="dv">65536</span></span>
 <span id="cb1-4000"><a href="#cb1-4000" aria-hidden="true"></a>              i32.add</span>
-<span id="cb1-4001"><a href="#cb1-4001" aria-hidden="true"></a>              i32.const <span class="dv">65536</span></span>
+</span><span class="chunk"><span id="cb1-4001"><a href="#cb1-4001" aria-hidden="true"></a>              i32.const <span class="dv">65536</span></span>
 <span id="cb1-4002"><a href="#cb1-4002" aria-hidden="true"></a>              i32.div_s</span>
 <span id="cb1-4003"><a href="#cb1-4003" aria-hidden="true"></a>              memory.size</span>
 <span id="cb1-4004"><a href="#cb1-4004" aria-hidden="true"></a>              i32.ge_s</span>
@@ -4177,7 +4180,7 @@
 <span id="cb1-4098"><a href="#cb1-4098" aria-hidden="true"></a>                global.get <span class="dv">0</span></span>
 <span id="cb1-4099"><a href="#cb1-4099" aria-hidden="true"></a>                global.set <span class="dv">1</span></span>
 <span id="cb1-4100"><a href="#cb1-4100" aria-hidden="true"></a>                global.get <span class="dv">1</span></span>
-<span id="cb1-4101"><a href="#cb1-4101" aria-hidden="true"></a>                i32.const <span class="dv">0</span></span>
+</span><span class="chunk"><span id="cb1-4101"><a href="#cb1-4101" aria-hidden="true"></a>                i32.const <span class="dv">0</span></span>
 <span id="cb1-4102"><a href="#cb1-4102" aria-hidden="true"></a>                i32.store</span>
 <span id="cb1-4103"><a href="#cb1-4103" aria-hidden="true"></a>                global.get <span class="dv">0</span></span>
 <span id="cb1-4104"><a href="#cb1-4104" aria-hidden="true"></a>                i32.const <span class="dv">4</span></span>
@@ -4277,7 +4280,7 @@
 <span id="cb1-4198"><a href="#cb1-4198" aria-hidden="true"></a>        i32.<span class="kw">load</span></span>
 <span id="cb1-4199"><a href="#cb1-4199" aria-hidden="true"></a>        local.set <span class="dv">2</span></span>
 <span id="cb1-4200"><a href="#cb1-4200" aria-hidden="true"></a>        local.get <span class="dv">1</span></span>
-<span id="cb1-4201"><a href="#cb1-4201" aria-hidden="true"></a>        i32.const <span class="dv">4</span></span>
+</span><span class="chunk"><span id="cb1-4201"><a href="#cb1-4201" aria-hidden="true"></a>        i32.const <span class="dv">4</span></span>
 <span id="cb1-4202"><a href="#cb1-4202" aria-hidden="true"></a>        i32.add</span>
 <span id="cb1-4203"><a href="#cb1-4203" aria-hidden="true"></a>        i32.<span class="kw">load</span></span>
 <span id="cb1-4204"><a href="#cb1-4204" aria-hidden="true"></a>        local.set <span class="dv">3</span></span>
@@ -4377,7 +4380,7 @@
 <span id="cb1-4298"><a href="#cb1-4298" aria-hidden="true"></a>        global.set <span class="dv">3</span></span>
 <span id="cb1-4299"><a href="#cb1-4299" aria-hidden="true"></a>        return</span>
 <span id="cb1-4300"><a href="#cb1-4300" aria-hidden="true"></a>      end</span>
-<span id="cb1-4301"><a href="#cb1-4301" aria-hidden="true"></a>    end</span>
+</span><span class="chunk"><span id="cb1-4301"><a href="#cb1-4301" aria-hidden="true"></a>    end</span>
 <span id="cb1-4302"><a href="#cb1-4302" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-4303"><a href="#cb1-4303" aria-hidden="true"></a>    global.set <span class="dv">1</span></span>
 <span id="cb1-4304"><a href="#cb1-4304" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
@@ -4477,7 +4480,7 @@
 <span id="cb1-4398"><a href="#cb1-4398" aria-hidden="true"></a>        global.get <span class="dv">0</span></span>
 <span id="cb1-4399"><a href="#cb1-4399" aria-hidden="true"></a>        i32.const <span class="dv">4</span></span>
 <span id="cb1-4400"><a href="#cb1-4400" aria-hidden="true"></a>        i32.add</span>
-<span id="cb1-4401"><a href="#cb1-4401" aria-hidden="true"></a>        global.set <span class="dv">0</span></span>
+</span><span class="chunk"><span id="cb1-4401"><a href="#cb1-4401" aria-hidden="true"></a>        global.set <span class="dv">0</span></span>
 <span id="cb1-4402"><a href="#cb1-4402" aria-hidden="true"></a>        global.get <span class="dv">1</span></span>
 <span id="cb1-4403"><a href="#cb1-4403" aria-hidden="true"></a>        i32.const <span class="dv">4</span></span>
 <span id="cb1-4404"><a href="#cb1-4404" aria-hidden="true"></a>        i32.add</span>
@@ -4577,7 +4580,7 @@
 <span id="cb1-4498"><a href="#cb1-4498" aria-hidden="true"></a>      i32.eq</span>
 <span id="cb1-4499"><a href="#cb1-4499" aria-hidden="true"></a>      <span class="kw">if</span>  <span class="co">;; label = @2</span></span>
 <span id="cb1-4500"><a href="#cb1-4500" aria-hidden="true"></a>        i32.const <span class="dv">3</span></span>
-<span id="cb1-4501"><a href="#cb1-4501" aria-hidden="true"></a>        local.set <span class="dv">1</span></span>
+</span><span class="chunk"><span id="cb1-4501"><a href="#cb1-4501" aria-hidden="true"></a>        local.set <span class="dv">1</span></span>
 <span id="cb1-4502"><a href="#cb1-4502" aria-hidden="true"></a>        local.get <span class="dv">1</span></span>
 <span id="cb1-4503"><a href="#cb1-4503" aria-hidden="true"></a>        global.set <span class="dv">2</span></span>
 <span id="cb1-4504"><a href="#cb1-4504" aria-hidden="true"></a>        return</span>
@@ -4677,7 +4680,7 @@
 <span id="cb1-4598"><a href="#cb1-4598" aria-hidden="true"></a>      end</span>
 <span id="cb1-4599"><a href="#cb1-4599" aria-hidden="true"></a>    <span class="kw">else</span></span>
 <span id="cb1-4600"><a href="#cb1-4600" aria-hidden="true"></a>      local.get <span class="dv">0</span></span>
-<span id="cb1-4601"><a href="#cb1-4601" aria-hidden="true"></a>      i32.const <span class="dv">1</span></span>
+</span><span class="chunk"><span id="cb1-4601"><a href="#cb1-4601" aria-hidden="true"></a>      i32.const <span class="dv">1</span></span>
 <span id="cb1-4602"><a href="#cb1-4602" aria-hidden="true"></a>      i32.eq</span>
 <span id="cb1-4603"><a href="#cb1-4603" aria-hidden="true"></a>      <span class="kw">if</span>  <span class="co">;; label = @2</span></span>
 <span id="cb1-4604"><a href="#cb1-4604" aria-hidden="true"></a>        local.get <span class="dv">2</span></span>
@@ -4777,7 +4780,7 @@
 <span id="cb1-4698"><a href="#cb1-4698" aria-hidden="true"></a>    memory.size</span>
 <span id="cb1-4699"><a href="#cb1-4699" aria-hidden="true"></a>    i32.ge_s</span>
 <span id="cb1-4700"><a href="#cb1-4700" aria-hidden="true"></a>    <span class="kw">if</span>  <span class="co">;; label = @1</span></span>
-<span id="cb1-4701"><a href="#cb1-4701" aria-hidden="true"></a>      i32.const <span class="dv">1</span></span>
+</span><span class="chunk"><span id="cb1-4701"><a href="#cb1-4701" aria-hidden="true"></a>      i32.const <span class="dv">1</span></span>
 <span id="cb1-4702"><a href="#cb1-4702" aria-hidden="true"></a>      memory.grow</span>
 <span id="cb1-4703"><a href="#cb1-4703" aria-hidden="true"></a>      i32.const <span class="dv">-1</span></span>
 <span id="cb1-4704"><a href="#cb1-4704" aria-hidden="true"></a>      i32.eq</span>
@@ -4877,7 +4880,7 @@
 <span id="cb1-4798"><a href="#cb1-4798" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-4799"><a href="#cb1-4799" aria-hidden="true"></a>    global.set <span class="dv">1</span></span>
 <span id="cb1-4800"><a href="#cb1-4800" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
-<span id="cb1-4801"><a href="#cb1-4801" aria-hidden="true"></a>    i32.const <span class="dv">0</span></span>
+</span><span class="chunk"><span id="cb1-4801"><a href="#cb1-4801" aria-hidden="true"></a>    i32.const <span class="dv">0</span></span>
 <span id="cb1-4802"><a href="#cb1-4802" aria-hidden="true"></a>    i32.store</span>
 <span id="cb1-4803"><a href="#cb1-4803" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-4804"><a href="#cb1-4804" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
@@ -4977,7 +4980,7 @@
 <span id="cb1-4898"><a href="#cb1-4898" aria-hidden="true"></a>    local.get <span class="dv">8</span></span>
 <span id="cb1-4899"><a href="#cb1-4899" aria-hidden="true"></a>    local.get <span class="dv">3</span></span>
 <span id="cb1-4900"><a href="#cb1-4900" aria-hidden="true"></a>    local.get <span class="dv">7</span></span>
-<span id="cb1-4901"><a href="#cb1-4901" aria-hidden="true"></a>    return_call_indirect (type <span class="dv">2</span>))</span>
+</span><span class="chunk"><span id="cb1-4901"><a href="#cb1-4901" aria-hidden="true"></a>    return_call_indirect (type <span class="dv">2</span>))</span>
 <span id="cb1-4902"><a href="#cb1-4902" aria-hidden="true"></a>  (func (<span class="co">;20;) (type 2) (param i32 i32)</span></span>
 <span id="cb1-4903"><a href="#cb1-4903" aria-hidden="true"></a>    (local i32 i32 i32)</span>
 <span id="cb1-4904"><a href="#cb1-4904" aria-hidden="true"></a>    local.get <span class="dv">0</span></span>
@@ -5077,7 +5080,7 @@
 <span id="cb1-4998"><a href="#cb1-4998" aria-hidden="true"></a>      i32.eq</span>
 <span id="cb1-4999"><a href="#cb1-4999" aria-hidden="true"></a>      <span class="kw">if</span>  <span class="co">;; label = @2</span></span>
 <span id="cb1-5000"><a href="#cb1-5000" aria-hidden="true"></a>        local.get <span class="dv">0</span></span>
-<span id="cb1-5001"><a href="#cb1-5001" aria-hidden="true"></a>        i32.const <span class="dv">8</span></span>
+</span><span class="chunk"><span id="cb1-5001"><a href="#cb1-5001" aria-hidden="true"></a>        i32.const <span class="dv">8</span></span>
 <span id="cb1-5002"><a href="#cb1-5002" aria-hidden="true"></a>        i32.add</span>
 <span id="cb1-5003"><a href="#cb1-5003" aria-hidden="true"></a>        i32.<span class="kw">load</span></span>
 <span id="cb1-5004"><a href="#cb1-5004" aria-hidden="true"></a>        local.set <span class="dv">1</span></span>
@@ -5177,7 +5180,7 @@
 <span id="cb1-5098"><a href="#cb1-5098" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-5099"><a href="#cb1-5099" aria-hidden="true"></a>    i32.const <span class="dv">65536</span></span>
 <span id="cb1-5100"><a href="#cb1-5100" aria-hidden="true"></a>    i32.div_s</span>
-<span id="cb1-5101"><a href="#cb1-5101" aria-hidden="true"></a>    memory.size</span>
+</span><span class="chunk"><span id="cb1-5101"><a href="#cb1-5101" aria-hidden="true"></a>    memory.size</span>
 <span id="cb1-5102"><a href="#cb1-5102" aria-hidden="true"></a>    i32.ge_s</span>
 <span id="cb1-5103"><a href="#cb1-5103" aria-hidden="true"></a>    <span class="kw">if</span>  <span class="co">;; label = @1</span></span>
 <span id="cb1-5104"><a href="#cb1-5104" aria-hidden="true"></a>      i32.const <span class="dv">1</span></span>
@@ -5277,7 +5280,7 @@
 <span id="cb1-5198"><a href="#cb1-5198" aria-hidden="true"></a>        i32.<span class="kw">load</span></span>
 <span id="cb1-5199"><a href="#cb1-5199" aria-hidden="true"></a>        local.set <span class="dv">1</span></span>
 <span id="cb1-5200"><a href="#cb1-5200" aria-hidden="true"></a>        local.get <span class="dv">1</span></span>
-<span id="cb1-5201"><a href="#cb1-5201" aria-hidden="true"></a>        global.set <span class="dv">2</span></span>
+</span><span class="chunk"><span id="cb1-5201"><a href="#cb1-5201" aria-hidden="true"></a>        global.set <span class="dv">2</span></span>
 <span id="cb1-5202"><a href="#cb1-5202" aria-hidden="true"></a>        return</span>
 <span id="cb1-5203"><a href="#cb1-5203" aria-hidden="true"></a>      <span class="kw">else</span></span>
 <span id="cb1-5204"><a href="#cb1-5204" aria-hidden="true"></a>        unreachable</span>
@@ -5377,7 +5380,7 @@
 <span id="cb1-5298"><a href="#cb1-5298" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
 <span id="cb1-5299"><a href="#cb1-5299" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-5300"><a href="#cb1-5300" aria-hidden="true"></a>    i32.const <span class="dv">25</span></span>
-<span id="cb1-5301"><a href="#cb1-5301" aria-hidden="true"></a>    i32.store</span>
+</span><span class="chunk"><span id="cb1-5301"><a href="#cb1-5301" aria-hidden="true"></a>    i32.store</span>
 <span id="cb1-5302"><a href="#cb1-5302" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-5303"><a href="#cb1-5303" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
 <span id="cb1-5304"><a href="#cb1-5304" aria-hidden="true"></a>    i32.add</span>
@@ -5477,7 +5480,7 @@
 <span id="cb1-5398"><a href="#cb1-5398" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
 <span id="cb1-5399"><a href="#cb1-5399" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-5400"><a href="#cb1-5400" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
-<span id="cb1-5401"><a href="#cb1-5401" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
+</span><span class="chunk"><span id="cb1-5401"><a href="#cb1-5401" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-5402"><a href="#cb1-5402" aria-hidden="true"></a>    local.set <span class="dv">4</span></span>
 <span id="cb1-5403"><a href="#cb1-5403" aria-hidden="true"></a>    local.get <span class="dv">4</span></span>
 <span id="cb1-5404"><a href="#cb1-5404" aria-hidden="true"></a>    global.set <span class="dv">2</span></span>
@@ -5577,7 +5580,7 @@
 <span id="cb1-5498"><a href="#cb1-5498" aria-hidden="true"></a>        unreachable</span>
 <span id="cb1-5499"><a href="#cb1-5499" aria-hidden="true"></a>      end</span>
 <span id="cb1-5500"><a href="#cb1-5500" aria-hidden="true"></a>    end)</span>
-<span id="cb1-5501"><a href="#cb1-5501" aria-hidden="true"></a>  (func (<span class="co">;29;) (type 2) (param i32 i32)</span></span>
+</span><span class="chunk"><span id="cb1-5501"><a href="#cb1-5501" aria-hidden="true"></a>  (func (<span class="co">;29;) (type 2) (param i32 i32)</span></span>
 <span id="cb1-5502"><a href="#cb1-5502" aria-hidden="true"></a>    (local i32 i32)</span>
 <span id="cb1-5503"><a href="#cb1-5503" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-5504"><a href="#cb1-5504" aria-hidden="true"></a>    i32.const <span class="dv">65536</span></span>
@@ -5677,7 +5680,7 @@
 <span id="cb1-5598"><a href="#cb1-5598" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-5599"><a href="#cb1-5599" aria-hidden="true"></a>    i32.const <span class="dv">65536</span></span>
 <span id="cb1-5600"><a href="#cb1-5600" aria-hidden="true"></a>    i32.div_s</span>
-<span id="cb1-5601"><a href="#cb1-5601" aria-hidden="true"></a>    memory.size</span>
+</span><span class="chunk"><span id="cb1-5601"><a href="#cb1-5601" aria-hidden="true"></a>    memory.size</span>
 <span id="cb1-5602"><a href="#cb1-5602" aria-hidden="true"></a>    i32.ge_s</span>
 <span id="cb1-5603"><a href="#cb1-5603" aria-hidden="true"></a>    <span class="kw">if</span>  <span class="co">;; label = @1</span></span>
 <span id="cb1-5604"><a href="#cb1-5604" aria-hidden="true"></a>      i32.const <span class="dv">1</span></span>
@@ -5777,7 +5780,7 @@
 <span id="cb1-5698"><a href="#cb1-5698" aria-hidden="true"></a>    <span class="kw">if</span>  <span class="co">;; label = @1</span></span>
 <span id="cb1-5699"><a href="#cb1-5699" aria-hidden="true"></a>      i32.const <span class="dv">1</span></span>
 <span id="cb1-5700"><a href="#cb1-5700" aria-hidden="true"></a>      memory.grow</span>
-<span id="cb1-5701"><a href="#cb1-5701" aria-hidden="true"></a>      i32.const <span class="dv">-1</span></span>
+</span><span class="chunk"><span id="cb1-5701"><a href="#cb1-5701" aria-hidden="true"></a>      i32.const <span class="dv">-1</span></span>
 <span id="cb1-5702"><a href="#cb1-5702" aria-hidden="true"></a>      i32.eq</span>
 <span id="cb1-5703"><a href="#cb1-5703" aria-hidden="true"></a>      <span class="kw">if</span>  <span class="co">;; label = @2</span></span>
 <span id="cb1-5704"><a href="#cb1-5704" aria-hidden="true"></a>        i32.const <span class="dv">1</span></span>
@@ -5877,7 +5880,7 @@
 <span id="cb1-5798"><a href="#cb1-5798" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
 <span id="cb1-5799"><a href="#cb1-5799" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-5800"><a href="#cb1-5800" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
-<span id="cb1-5801"><a href="#cb1-5801" aria-hidden="true"></a>    i32.add</span>
+</span><span class="chunk"><span id="cb1-5801"><a href="#cb1-5801" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-5802"><a href="#cb1-5802" aria-hidden="true"></a>    local.get <span class="dv">1</span></span>
 <span id="cb1-5803"><a href="#cb1-5803" aria-hidden="true"></a>    i32.store</span>
 <span id="cb1-5804"><a href="#cb1-5804" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
@@ -5977,7 +5980,7 @@
 <span id="cb1-5898"><a href="#cb1-5898" aria-hidden="true"></a>    i32.store</span>
 <span id="cb1-5899"><a href="#cb1-5899" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-5900"><a href="#cb1-5900" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
-<span id="cb1-5901"><a href="#cb1-5901" aria-hidden="true"></a>    i32.add</span>
+</span><span class="chunk"><span id="cb1-5901"><a href="#cb1-5901" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-5902"><a href="#cb1-5902" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
 <span id="cb1-5903"><a href="#cb1-5903" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-5904"><a href="#cb1-5904" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
@@ -6077,7 +6080,7 @@
 <span id="cb1-5998"><a href="#cb1-5998" aria-hidden="true"></a>        i32.const <span class="dv">1</span></span>
 <span id="cb1-5999"><a href="#cb1-5999" aria-hidden="true"></a>        global.set <span class="dv">3</span></span>
 <span id="cb1-6000"><a href="#cb1-6000" aria-hidden="true"></a>        return</span>
-<span id="cb1-6001"><a href="#cb1-6001" aria-hidden="true"></a>      end</span>
+</span><span class="chunk"><span id="cb1-6001"><a href="#cb1-6001" aria-hidden="true"></a>      end</span>
 <span id="cb1-6002"><a href="#cb1-6002" aria-hidden="true"></a>    end</span>
 <span id="cb1-6003"><a href="#cb1-6003" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-6004"><a href="#cb1-6004" aria-hidden="true"></a>    global.set <span class="dv">1</span></span>
@@ -6177,7 +6180,7 @@
 <span id="cb1-6098"><a href="#cb1-6098" aria-hidden="true"></a>      <span class="kw">if</span>  <span class="co">;; label = @2</span></span>
 <span id="cb1-6099"><a href="#cb1-6099" aria-hidden="true"></a>        i32.const <span class="dv">1</span></span>
 <span id="cb1-6100"><a href="#cb1-6100" aria-hidden="true"></a>        global.set <span class="dv">3</span></span>
-<span id="cb1-6101"><a href="#cb1-6101" aria-hidden="true"></a>        return</span>
+</span><span class="chunk"><span id="cb1-6101"><a href="#cb1-6101" aria-hidden="true"></a>        return</span>
 <span id="cb1-6102"><a href="#cb1-6102" aria-hidden="true"></a>      end</span>
 <span id="cb1-6103"><a href="#cb1-6103" aria-hidden="true"></a>    end</span>
 <span id="cb1-6104"><a href="#cb1-6104" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
@@ -6277,7 +6280,7 @@
 <span id="cb1-6198"><a href="#cb1-6198" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-6199"><a href="#cb1-6199" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
 <span id="cb1-6200"><a href="#cb1-6200" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
-<span id="cb1-6201"><a href="#cb1-6201" aria-hidden="true"></a>    local.set <span class="dv">10</span></span>
+</span><span class="chunk"><span id="cb1-6201"><a href="#cb1-6201" aria-hidden="true"></a>    local.set <span class="dv">10</span></span>
 <span id="cb1-6202"><a href="#cb1-6202" aria-hidden="true"></a>    local.get <span class="dv">8</span></span>
 <span id="cb1-6203"><a href="#cb1-6203" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
 <span id="cb1-6204"><a href="#cb1-6204" aria-hidden="true"></a>    i32.add</span>
@@ -6377,7 +6380,7 @@
 <span id="cb1-6298"><a href="#cb1-6298" aria-hidden="true"></a>    local.set <span class="dv">17</span></span>
 <span id="cb1-6299"><a href="#cb1-6299" aria-hidden="true"></a>    local.get <span class="dv">17</span></span>
 <span id="cb1-6300"><a href="#cb1-6300" aria-hidden="true"></a>    local.get <span class="dv">15</span></span>
-<span id="cb1-6301"><a href="#cb1-6301" aria-hidden="true"></a>    local.get <span class="dv">16</span></span>
+</span><span class="chunk"><span id="cb1-6301"><a href="#cb1-6301" aria-hidden="true"></a>    local.get <span class="dv">16</span></span>
 <span id="cb1-6302"><a href="#cb1-6302" aria-hidden="true"></a>    call_indirect (type <span class="dv">2</span>)</span>
 <span id="cb1-6303"><a href="#cb1-6303" aria-hidden="true"></a>    global.get <span class="dv">3</span></span>
 <span id="cb1-6304"><a href="#cb1-6304" aria-hidden="true"></a>    <span class="kw">if</span>  <span class="co">;; label = @1</span></span>
@@ -6477,7 +6480,7 @@
 <span id="cb1-6398"><a href="#cb1-6398" aria-hidden="true"></a>    i32.store</span>
 <span id="cb1-6399"><a href="#cb1-6399" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-6400"><a href="#cb1-6400" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
-<span id="cb1-6401"><a href="#cb1-6401" aria-hidden="true"></a>    i32.add</span>
+</span><span class="chunk"><span id="cb1-6401"><a href="#cb1-6401" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-6402"><a href="#cb1-6402" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
 <span id="cb1-6403"><a href="#cb1-6403" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-6404"><a href="#cb1-6404" aria-hidden="true"></a>    local.set <span class="dv">4</span></span>
@@ -6577,7 +6580,7 @@
 <span id="cb1-6498"><a href="#cb1-6498" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-6499"><a href="#cb1-6499" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
 <span id="cb1-6500"><a href="#cb1-6500" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
-<span id="cb1-6501"><a href="#cb1-6501" aria-hidden="true"></a>    local.set <span class="dv">4</span></span>
+</span><span class="chunk"><span id="cb1-6501"><a href="#cb1-6501" aria-hidden="true"></a>    local.set <span class="dv">4</span></span>
 <span id="cb1-6502"><a href="#cb1-6502" aria-hidden="true"></a>    local.get <span class="dv">4</span></span>
 <span id="cb1-6503"><a href="#cb1-6503" aria-hidden="true"></a>    global.set <span class="dv">2</span></span>
 <span id="cb1-6504"><a href="#cb1-6504" aria-hidden="true"></a>    return)</span>
@@ -6677,7 +6680,7 @@
 <span id="cb1-6598"><a href="#cb1-6598" aria-hidden="true"></a>    local.set <span class="dv">3</span></span>
 <span id="cb1-6599"><a href="#cb1-6599" aria-hidden="true"></a>    local.get <span class="dv">3</span></span>
 <span id="cb1-6600"><a href="#cb1-6600" aria-hidden="true"></a>    global.set <span class="dv">2</span></span>
-<span id="cb1-6601"><a href="#cb1-6601" aria-hidden="true"></a>    return)</span>
+</span><span class="chunk"><span id="cb1-6601"><a href="#cb1-6601" aria-hidden="true"></a>    return)</span>
 <span id="cb1-6602"><a href="#cb1-6602" aria-hidden="true"></a>  (func (<span class="co">;43;) (type 2) (param i32 i32)</span></span>
 <span id="cb1-6603"><a href="#cb1-6603" aria-hidden="true"></a>    local.get <span class="dv">1</span></span>
 <span id="cb1-6604"><a href="#cb1-6604" aria-hidden="true"></a>    i32.const <span class="dv">45</span></span>
@@ -6777,7 +6780,7 @@
 <span id="cb1-6698"><a href="#cb1-6698" aria-hidden="true"></a>    <span class="kw">if</span>  <span class="co">;; label = @1</span></span>
 <span id="cb1-6699"><a href="#cb1-6699" aria-hidden="true"></a>      local.get <span class="dv">0</span></span>
 <span id="cb1-6700"><a href="#cb1-6700" aria-hidden="true"></a>      i32.<span class="kw">load</span></span>
-<span id="cb1-6701"><a href="#cb1-6701" aria-hidden="true"></a>      i32.const <span class="dv">0</span></span>
+</span><span class="chunk"><span id="cb1-6701"><a href="#cb1-6701" aria-hidden="true"></a>      i32.const <span class="dv">0</span></span>
 <span id="cb1-6702"><a href="#cb1-6702" aria-hidden="true"></a>      i32.eq</span>
 <span id="cb1-6703"><a href="#cb1-6703" aria-hidden="true"></a>      <span class="kw">if</span>  <span class="co">;; label = @2</span></span>
 <span id="cb1-6704"><a href="#cb1-6704" aria-hidden="true"></a>        local.get <span class="dv">0</span></span>
@@ -6877,7 +6880,7 @@
 <span id="cb1-6798"><a href="#cb1-6798" aria-hidden="true"></a>          memory.grow</span>
 <span id="cb1-6799"><a href="#cb1-6799" aria-hidden="true"></a>          i32.const <span class="dv">-1</span></span>
 <span id="cb1-6800"><a href="#cb1-6800" aria-hidden="true"></a>          i32.eq</span>
-<span id="cb1-6801"><a href="#cb1-6801" aria-hidden="true"></a>          <span class="kw">if</span>  <span class="co">;; label = @4</span></span>
+</span><span class="chunk"><span id="cb1-6801"><a href="#cb1-6801" aria-hidden="true"></a>          <span class="kw">if</span>  <span class="co">;; label = @4</span></span>
 <span id="cb1-6802"><a href="#cb1-6802" aria-hidden="true"></a>            i32.const <span class="dv">1</span></span>
 <span id="cb1-6803"><a href="#cb1-6803" aria-hidden="true"></a>            global.set <span class="dv">3</span></span>
 <span id="cb1-6804"><a href="#cb1-6804" aria-hidden="true"></a>            return</span>
@@ -6977,7 +6980,7 @@
 <span id="cb1-6898"><a href="#cb1-6898" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
 <span id="cb1-6899"><a href="#cb1-6899" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-6900"><a href="#cb1-6900" aria-hidden="true"></a>    local.set <span class="dv">2</span></span>
-<span id="cb1-6901"><a href="#cb1-6901" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
+</span><span class="chunk"><span id="cb1-6901"><a href="#cb1-6901" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-6902"><a href="#cb1-6902" aria-hidden="true"></a>    global.set <span class="dv">1</span></span>
 <span id="cb1-6903"><a href="#cb1-6903" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-6904"><a href="#cb1-6904" aria-hidden="true"></a>    i32.const <span class="dv">0</span></span>
@@ -7077,7 +7080,7 @@
 <span id="cb1-6998"><a href="#cb1-6998" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-6999"><a href="#cb1-6999" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
 <span id="cb1-7000"><a href="#cb1-7000" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
-<span id="cb1-7001"><a href="#cb1-7001" aria-hidden="true"></a>    i32.const <span class="dv">8</span></span>
+</span><span class="chunk"><span id="cb1-7001"><a href="#cb1-7001" aria-hidden="true"></a>    i32.const <span class="dv">8</span></span>
 <span id="cb1-7002"><a href="#cb1-7002" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-7003"><a href="#cb1-7003" aria-hidden="true"></a>    local.get <span class="dv">1</span></span>
 <span id="cb1-7004"><a href="#cb1-7004" aria-hidden="true"></a>    i32.store</span>
@@ -7177,7 +7180,7 @@
 <span id="cb1-7098"><a href="#cb1-7098" aria-hidden="true"></a>    local.set <span class="dv">4</span></span>
 <span id="cb1-7099"><a href="#cb1-7099" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-7100"><a href="#cb1-7100" aria-hidden="true"></a>    i32.const <span class="dv">65536</span></span>
-<span id="cb1-7101"><a href="#cb1-7101" aria-hidden="true"></a>    i32.add</span>
+</span><span class="chunk"><span id="cb1-7101"><a href="#cb1-7101" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-7102"><a href="#cb1-7102" aria-hidden="true"></a>    i32.const <span class="dv">65536</span></span>
 <span id="cb1-7103"><a href="#cb1-7103" aria-hidden="true"></a>    i32.div_s</span>
 <span id="cb1-7104"><a href="#cb1-7104" aria-hidden="true"></a>    memory.size</span>
@@ -7277,7 +7280,7 @@
 <span id="cb1-7198"><a href="#cb1-7198" aria-hidden="true"></a>    local.get <span class="dv">0</span></span>
 <span id="cb1-7199"><a href="#cb1-7199" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
 <span id="cb1-7200"><a href="#cb1-7200" aria-hidden="true"></a>    i32.add</span>
-<span id="cb1-7201"><a href="#cb1-7201" aria-hidden="true"></a>    i32.<span class="kw">load</span></span>
+</span><span class="chunk"><span id="cb1-7201"><a href="#cb1-7201" aria-hidden="true"></a>    i32.<span class="kw">load</span></span>
 <span id="cb1-7202"><a href="#cb1-7202" aria-hidden="true"></a>    local.set <span class="dv">2</span></span>
 <span id="cb1-7203"><a href="#cb1-7203" aria-hidden="true"></a>    local.get <span class="dv">0</span></span>
 <span id="cb1-7204"><a href="#cb1-7204" aria-hidden="true"></a>    i32.const <span class="dv">8</span></span>
@@ -7377,7 +7380,7 @@
 <span id="cb1-7298"><a href="#cb1-7298" aria-hidden="true"></a>    local.get <span class="dv">0</span></span>
 <span id="cb1-7299"><a href="#cb1-7299" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
 <span id="cb1-7300"><a href="#cb1-7300" aria-hidden="true"></a>    i32.add</span>
-<span id="cb1-7301"><a href="#cb1-7301" aria-hidden="true"></a>    i32.<span class="kw">load</span></span>
+</span><span class="chunk"><span id="cb1-7301"><a href="#cb1-7301" aria-hidden="true"></a>    i32.<span class="kw">load</span></span>
 <span id="cb1-7302"><a href="#cb1-7302" aria-hidden="true"></a>    local.set <span class="dv">5</span></span>
 <span id="cb1-7303"><a href="#cb1-7303" aria-hidden="true"></a>    local.get <span class="dv">5</span></span>
 <span id="cb1-7304"><a href="#cb1-7304" aria-hidden="true"></a>    i32.const <span class="dv">21</span></span>
@@ -7477,7 +7480,7 @@
 <span id="cb1-7398"><a href="#cb1-7398" aria-hidden="true"></a>        return</span>
 <span id="cb1-7399"><a href="#cb1-7399" aria-hidden="true"></a>      end</span>
 <span id="cb1-7400"><a href="#cb1-7400" aria-hidden="true"></a>    end</span>
-<span id="cb1-7401"><a href="#cb1-7401" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
+</span><span class="chunk"><span id="cb1-7401"><a href="#cb1-7401" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-7402"><a href="#cb1-7402" aria-hidden="true"></a>    global.set <span class="dv">1</span></span>
 <span id="cb1-7403"><a href="#cb1-7403" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-7404"><a href="#cb1-7404" aria-hidden="true"></a>    i32.const <span class="dv">0</span></span>
@@ -7577,7 +7580,7 @@
 <span id="cb1-7498"><a href="#cb1-7498" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-7499"><a href="#cb1-7499" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
 <span id="cb1-7500"><a href="#cb1-7500" aria-hidden="true"></a>    i32.add</span>
-<span id="cb1-7501"><a href="#cb1-7501" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
+</span><span class="chunk"><span id="cb1-7501"><a href="#cb1-7501" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
 <span id="cb1-7502"><a href="#cb1-7502" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-7503"><a href="#cb1-7503" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
 <span id="cb1-7504"><a href="#cb1-7504" aria-hidden="true"></a>    i32.add</span>
@@ -7677,7 +7680,7 @@
 <span id="cb1-7598"><a href="#cb1-7598" aria-hidden="true"></a>    local.get <span class="dv">0</span></span>
 <span id="cb1-7599"><a href="#cb1-7599" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
 <span id="cb1-7600"><a href="#cb1-7600" aria-hidden="true"></a>    i32.add</span>
-<span id="cb1-7601"><a href="#cb1-7601" aria-hidden="true"></a>    i32.<span class="kw">load</span></span>
+</span><span class="chunk"><span id="cb1-7601"><a href="#cb1-7601" aria-hidden="true"></a>    i32.<span class="kw">load</span></span>
 <span id="cb1-7602"><a href="#cb1-7602" aria-hidden="true"></a>    local.set <span class="dv">2</span></span>
 <span id="cb1-7603"><a href="#cb1-7603" aria-hidden="true"></a>    local.get <span class="dv">2</span></span>
 <span id="cb1-7604"><a href="#cb1-7604" aria-hidden="true"></a>    global.set <span class="dv">2</span></span>
@@ -7777,7 +7780,7 @@
 <span id="cb1-7698"><a href="#cb1-7698" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-7699"><a href="#cb1-7699" aria-hidden="true"></a>    global.set <span class="dv">1</span></span>
 <span id="cb1-7700"><a href="#cb1-7700" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
-<span id="cb1-7701"><a href="#cb1-7701" aria-hidden="true"></a>    i32.const <span class="dv">0</span></span>
+</span><span class="chunk"><span id="cb1-7701"><a href="#cb1-7701" aria-hidden="true"></a>    i32.const <span class="dv">0</span></span>
 <span id="cb1-7702"><a href="#cb1-7702" aria-hidden="true"></a>    i32.store</span>
 <span id="cb1-7703"><a href="#cb1-7703" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-7704"><a href="#cb1-7704" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
@@ -7877,7 +7880,7 @@
 <span id="cb1-7798"><a href="#cb1-7798" aria-hidden="true"></a>    i32.<span class="kw">load</span></span>
 <span id="cb1-7799"><a href="#cb1-7799" aria-hidden="true"></a>    local.set <span class="dv">3</span></span>
 <span id="cb1-7800"><a href="#cb1-7800" aria-hidden="true"></a>    local.get <span class="dv">0</span></span>
-<span id="cb1-7801"><a href="#cb1-7801" aria-hidden="true"></a>    i32.const <span class="dv">8</span></span>
+</span><span class="chunk"><span id="cb1-7801"><a href="#cb1-7801" aria-hidden="true"></a>    i32.const <span class="dv">8</span></span>
 <span id="cb1-7802"><a href="#cb1-7802" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-7803"><a href="#cb1-7803" aria-hidden="true"></a>    i32.<span class="kw">load</span></span>
 <span id="cb1-7804"><a href="#cb1-7804" aria-hidden="true"></a>    local.set <span class="dv">4</span></span>
@@ -7977,7 +7980,7 @@
 <span id="cb1-7898"><a href="#cb1-7898" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-7899"><a href="#cb1-7899" aria-hidden="true"></a>    i32.const <span class="dv">16</span></span>
 <span id="cb1-7900"><a href="#cb1-7900" aria-hidden="true"></a>    i32.add</span>
-<span id="cb1-7901"><a href="#cb1-7901" aria-hidden="true"></a>    local.get <span class="dv">2</span></span>
+</span><span class="chunk"><span id="cb1-7901"><a href="#cb1-7901" aria-hidden="true"></a>    local.get <span class="dv">2</span></span>
 <span id="cb1-7902"><a href="#cb1-7902" aria-hidden="true"></a>    i32.store</span>
 <span id="cb1-7903"><a href="#cb1-7903" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-7904"><a href="#cb1-7904" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
@@ -8077,7 +8080,7 @@
 <span id="cb1-7998"><a href="#cb1-7998" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-7999"><a href="#cb1-7999" aria-hidden="true"></a>    i32.const <span class="dv">12</span></span>
 <span id="cb1-8000"><a href="#cb1-8000" aria-hidden="true"></a>    i32.add</span>
-<span id="cb1-8001"><a href="#cb1-8001" aria-hidden="true"></a>    local.get <span class="dv">2</span></span>
+</span><span class="chunk"><span id="cb1-8001"><a href="#cb1-8001" aria-hidden="true"></a>    local.get <span class="dv">2</span></span>
 <span id="cb1-8002"><a href="#cb1-8002" aria-hidden="true"></a>    i32.store</span>
 <span id="cb1-8003"><a href="#cb1-8003" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-8004"><a href="#cb1-8004" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
@@ -8177,7 +8180,7 @@
 <span id="cb1-8098"><a href="#cb1-8098" aria-hidden="true"></a>    local.get <span class="dv">7</span></span>
 <span id="cb1-8099"><a href="#cb1-8099" aria-hidden="true"></a>    i32.store</span>
 <span id="cb1-8100"><a href="#cb1-8100" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
-<span id="cb1-8101"><a href="#cb1-8101" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
+</span><span class="chunk"><span id="cb1-8101"><a href="#cb1-8101" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
 <span id="cb1-8102"><a href="#cb1-8102" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-8103"><a href="#cb1-8103" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
 <span id="cb1-8104"><a href="#cb1-8104" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
@@ -8277,7 +8280,7 @@
 <span id="cb1-8198"><a href="#cb1-8198" aria-hidden="true"></a>    i32.<span class="kw">load</span></span>
 <span id="cb1-8199"><a href="#cb1-8199" aria-hidden="true"></a>    local.set <span class="dv">17</span></span>
 <span id="cb1-8200"><a href="#cb1-8200" aria-hidden="true"></a>    local.get <span class="dv">17</span></span>
-<span id="cb1-8201"><a href="#cb1-8201" aria-hidden="true"></a>    i32.const <span class="dv">24</span></span>
+</span><span class="chunk"><span id="cb1-8201"><a href="#cb1-8201" aria-hidden="true"></a>    i32.const <span class="dv">24</span></span>
 <span id="cb1-8202"><a href="#cb1-8202" aria-hidden="true"></a>    call_indirect (type <span class="dv">1</span>)</span>
 <span id="cb1-8203"><a href="#cb1-8203" aria-hidden="true"></a>    global.get <span class="dv">3</span></span>
 <span id="cb1-8204"><a href="#cb1-8204" aria-hidden="true"></a>    <span class="kw">if</span>  <span class="co">;; label = @1</span></span>
@@ -8377,7 +8380,7 @@
 <span id="cb1-8298"><a href="#cb1-8298" aria-hidden="true"></a>    local.get <span class="dv">2</span></span>
 <span id="cb1-8299"><a href="#cb1-8299" aria-hidden="true"></a>    local.get <span class="dv">25</span></span>
 <span id="cb1-8300"><a href="#cb1-8300" aria-hidden="true"></a>    call_indirect (type <span class="dv">2</span>)</span>
-<span id="cb1-8301"><a href="#cb1-8301" aria-hidden="true"></a>    global.get <span class="dv">3</span></span>
+</span><span class="chunk"><span id="cb1-8301"><a href="#cb1-8301" aria-hidden="true"></a>    global.get <span class="dv">3</span></span>
 <span id="cb1-8302"><a href="#cb1-8302" aria-hidden="true"></a>    <span class="kw">if</span>  <span class="co">;; label = @1</span></span>
 <span id="cb1-8303"><a href="#cb1-8303" aria-hidden="true"></a>      return</span>
 <span id="cb1-8304"><a href="#cb1-8304" aria-hidden="true"></a>    end</span>
@@ -8477,7 +8480,7 @@
 <span id="cb1-8398"><a href="#cb1-8398" aria-hidden="true"></a>    return)</span>
 <span id="cb1-8399"><a href="#cb1-8399" aria-hidden="true"></a>  (func (<span class="co">;63;) (type 2) (param i32 i32)</span></span>
 <span id="cb1-8400"><a href="#cb1-8400" aria-hidden="true"></a>    (local i32 i32 i32)</span>
-<span id="cb1-8401"><a href="#cb1-8401" aria-hidden="true"></a>    i32.const <span class="dv">1</span></span>
+</span><span class="chunk"><span id="cb1-8401"><a href="#cb1-8401" aria-hidden="true"></a>    i32.const <span class="dv">1</span></span>
 <span id="cb1-8402"><a href="#cb1-8402" aria-hidden="true"></a>    local.set <span class="dv">2</span></span>
 <span id="cb1-8403"><a href="#cb1-8403" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-8404"><a href="#cb1-8404" aria-hidden="true"></a>    i32.const <span class="dv">65536</span></span>
@@ -8577,7 +8580,7 @@
 <span id="cb1-8498"><a href="#cb1-8498" aria-hidden="true"></a>    local.get <span class="dv">0</span></span>
 <span id="cb1-8499"><a href="#cb1-8499" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
 <span id="cb1-8500"><a href="#cb1-8500" aria-hidden="true"></a>    i32.add</span>
-<span id="cb1-8501"><a href="#cb1-8501" aria-hidden="true"></a>    i32.<span class="kw">load</span></span>
+</span><span class="chunk"><span id="cb1-8501"><a href="#cb1-8501" aria-hidden="true"></a>    i32.<span class="kw">load</span></span>
 <span id="cb1-8502"><a href="#cb1-8502" aria-hidden="true"></a>    local.set <span class="dv">2</span></span>
 <span id="cb1-8503"><a href="#cb1-8503" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-8504"><a href="#cb1-8504" aria-hidden="true"></a>    i32.const <span class="dv">65536</span></span>
@@ -8677,7 +8680,7 @@
 <span id="cb1-8598"><a href="#cb1-8598" aria-hidden="true"></a>        global.set <span class="dv">3</span></span>
 <span id="cb1-8599"><a href="#cb1-8599" aria-hidden="true"></a>        return</span>
 <span id="cb1-8600"><a href="#cb1-8600" aria-hidden="true"></a>      end</span>
-<span id="cb1-8601"><a href="#cb1-8601" aria-hidden="true"></a>    end</span>
+</span><span class="chunk"><span id="cb1-8601"><a href="#cb1-8601" aria-hidden="true"></a>    end</span>
 <span id="cb1-8602"><a href="#cb1-8602" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-8603"><a href="#cb1-8603" aria-hidden="true"></a>    global.set <span class="dv">1</span></span>
 <span id="cb1-8604"><a href="#cb1-8604" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
@@ -8777,7 +8780,7 @@
 <span id="cb1-8698"><a href="#cb1-8698" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-8699"><a href="#cb1-8699" aria-hidden="true"></a>    i32.const <span class="dv">0</span></span>
 <span id="cb1-8700"><a href="#cb1-8700" aria-hidden="true"></a>    i32.store</span>
-<span id="cb1-8701"><a href="#cb1-8701" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
+</span><span class="chunk"><span id="cb1-8701"><a href="#cb1-8701" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-8702"><a href="#cb1-8702" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
 <span id="cb1-8703"><a href="#cb1-8703" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-8704"><a href="#cb1-8704" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
@@ -8877,7 +8880,7 @@
 <span id="cb1-8798"><a href="#cb1-8798" aria-hidden="true"></a>    local.set <span class="dv">3</span></span>
 <span id="cb1-8799"><a href="#cb1-8799" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-8800"><a href="#cb1-8800" aria-hidden="true"></a>    global.set <span class="dv">1</span></span>
-<span id="cb1-8801"><a href="#cb1-8801" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
+</span><span class="chunk"><span id="cb1-8801"><a href="#cb1-8801" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-8802"><a href="#cb1-8802" aria-hidden="true"></a>    i32.const <span class="dv">0</span></span>
 <span id="cb1-8803"><a href="#cb1-8803" aria-hidden="true"></a>    i32.store</span>
 <span id="cb1-8804"><a href="#cb1-8804" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
@@ -8977,7 +8980,7 @@
 <span id="cb1-8898"><a href="#cb1-8898" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-8899"><a href="#cb1-8899" aria-hidden="true"></a>    local.set <span class="dv">3</span></span>
 <span id="cb1-8900"><a href="#cb1-8900" aria-hidden="true"></a>    local.get <span class="dv">3</span></span>
-<span id="cb1-8901"><a href="#cb1-8901" aria-hidden="true"></a>    global.set <span class="dv">2</span></span>
+</span><span class="chunk"><span id="cb1-8901"><a href="#cb1-8901" aria-hidden="true"></a>    global.set <span class="dv">2</span></span>
 <span id="cb1-8902"><a href="#cb1-8902" aria-hidden="true"></a>    return)</span>
 <span id="cb1-8903"><a href="#cb1-8903" aria-hidden="true"></a>  (func (<span class="co">;72;) (type 1) (param i32)</span></span>
 <span id="cb1-8904"><a href="#cb1-8904" aria-hidden="true"></a>    (local i32)</span>
@@ -9077,7 +9080,7 @@
 <span id="cb1-8998"><a href="#cb1-8998" aria-hidden="true"></a>      end</span>
 <span id="cb1-8999"><a href="#cb1-8999" aria-hidden="true"></a>    end</span>
 <span id="cb1-9000"><a href="#cb1-9000" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
-<span id="cb1-9001"><a href="#cb1-9001" aria-hidden="true"></a>    global.set <span class="dv">1</span></span>
+</span><span class="chunk"><span id="cb1-9001"><a href="#cb1-9001" aria-hidden="true"></a>    global.set <span class="dv">1</span></span>
 <span id="cb1-9002"><a href="#cb1-9002" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-9003"><a href="#cb1-9003" aria-hidden="true"></a>    i32.const <span class="dv">0</span></span>
 <span id="cb1-9004"><a href="#cb1-9004" aria-hidden="true"></a>    i32.store</span>
@@ -9177,7 +9180,7 @@
 <span id="cb1-9098"><a href="#cb1-9098" aria-hidden="true"></a>    i32.const <span class="dv">0</span></span>
 <span id="cb1-9099"><a href="#cb1-9099" aria-hidden="true"></a>    i32.store</span>
 <span id="cb1-9100"><a href="#cb1-9100" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
-<span id="cb1-9101"><a href="#cb1-9101" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
+</span><span class="chunk"><span id="cb1-9101"><a href="#cb1-9101" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
 <span id="cb1-9102"><a href="#cb1-9102" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-9103"><a href="#cb1-9103" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
 <span id="cb1-9104"><a href="#cb1-9104" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
@@ -9277,7 +9280,7 @@
 <span id="cb1-9198"><a href="#cb1-9198" aria-hidden="true"></a>      <span class="kw">if</span>  <span class="co">;; label = @2</span></span>
 <span id="cb1-9199"><a href="#cb1-9199" aria-hidden="true"></a>        i32.const <span class="dv">1</span></span>
 <span id="cb1-9200"><a href="#cb1-9200" aria-hidden="true"></a>        global.set <span class="dv">3</span></span>
-<span id="cb1-9201"><a href="#cb1-9201" aria-hidden="true"></a>        return</span>
+</span><span class="chunk"><span id="cb1-9201"><a href="#cb1-9201" aria-hidden="true"></a>        return</span>
 <span id="cb1-9202"><a href="#cb1-9202" aria-hidden="true"></a>      end</span>
 <span id="cb1-9203"><a href="#cb1-9203" aria-hidden="true"></a>    end</span>
 <span id="cb1-9204"><a href="#cb1-9204" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
@@ -9377,7 +9380,7 @@
 <span id="cb1-9298"><a href="#cb1-9298" aria-hidden="true"></a>      i32.eq</span>
 <span id="cb1-9299"><a href="#cb1-9299" aria-hidden="true"></a>      <span class="kw">if</span>  <span class="co">;; label = @2</span></span>
 <span id="cb1-9300"><a href="#cb1-9300" aria-hidden="true"></a>        i32.const <span class="dv">1</span></span>
-<span id="cb1-9301"><a href="#cb1-9301" aria-hidden="true"></a>        global.set <span class="dv">3</span></span>
+</span><span class="chunk"><span id="cb1-9301"><a href="#cb1-9301" aria-hidden="true"></a>        global.set <span class="dv">3</span></span>
 <span id="cb1-9302"><a href="#cb1-9302" aria-hidden="true"></a>        return</span>
 <span id="cb1-9303"><a href="#cb1-9303" aria-hidden="true"></a>      end</span>
 <span id="cb1-9304"><a href="#cb1-9304" aria-hidden="true"></a>    end</span>
@@ -9477,7 +9480,7 @@
 <span id="cb1-9398"><a href="#cb1-9398" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
 <span id="cb1-9399"><a href="#cb1-9399" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-9400"><a href="#cb1-9400" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
-<span id="cb1-9401"><a href="#cb1-9401" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
+</span><span class="chunk"><span id="cb1-9401"><a href="#cb1-9401" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-9402"><a href="#cb1-9402" aria-hidden="true"></a>    local.set <span class="dv">10</span></span>
 <span id="cb1-9403"><a href="#cb1-9403" aria-hidden="true"></a>    local.get <span class="dv">8</span></span>
 <span id="cb1-9404"><a href="#cb1-9404" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
@@ -9577,7 +9580,7 @@
 <span id="cb1-9498"><a href="#cb1-9498" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
 <span id="cb1-9499"><a href="#cb1-9499" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-9500"><a href="#cb1-9500" aria-hidden="true"></a>    i32.const <span class="dv">8</span></span>
-<span id="cb1-9501"><a href="#cb1-9501" aria-hidden="true"></a>    i32.add</span>
+</span><span class="chunk"><span id="cb1-9501"><a href="#cb1-9501" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-9502"><a href="#cb1-9502" aria-hidden="true"></a>    local.get <span class="dv">17</span></span>
 <span id="cb1-9503"><a href="#cb1-9503" aria-hidden="true"></a>    i32.store</span>
 <span id="cb1-9504"><a href="#cb1-9504" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
@@ -9677,7 +9680,7 @@
 <span id="cb1-9598"><a href="#cb1-9598" aria-hidden="true"></a>    local.get <span class="dv">3</span></span>
 <span id="cb1-9599"><a href="#cb1-9599" aria-hidden="true"></a>    i32.store</span>
 <span id="cb1-9600"><a href="#cb1-9600" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
-<span id="cb1-9601"><a href="#cb1-9601" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
+</span><span class="chunk"><span id="cb1-9601"><a href="#cb1-9601" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
 <span id="cb1-9602"><a href="#cb1-9602" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-9603"><a href="#cb1-9603" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
 <span id="cb1-9604"><a href="#cb1-9604" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
@@ -9777,7 +9780,7 @@
 <span id="cb1-9698"><a href="#cb1-9698" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
 <span id="cb1-9699"><a href="#cb1-9699" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-9700"><a href="#cb1-9700" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
-<span id="cb1-9701"><a href="#cb1-9701" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
+</span><span class="chunk"><span id="cb1-9701"><a href="#cb1-9701" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-9702"><a href="#cb1-9702" aria-hidden="true"></a>    local.set <span class="dv">4</span></span>
 <span id="cb1-9703"><a href="#cb1-9703" aria-hidden="true"></a>    local.get <span class="dv">4</span></span>
 <span id="cb1-9704"><a href="#cb1-9704" aria-hidden="true"></a>    global.set <span class="dv">2</span></span>
@@ -9877,7 +9880,7 @@
 <span id="cb1-9798"><a href="#cb1-9798" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-9799"><a href="#cb1-9799" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
 <span id="cb1-9800"><a href="#cb1-9800" aria-hidden="true"></a>    i32.add</span>
-<span id="cb1-9801"><a href="#cb1-9801" aria-hidden="true"></a>    i32.const <span class="dv">8</span></span>
+</span><span class="chunk"><span id="cb1-9801"><a href="#cb1-9801" aria-hidden="true"></a>    i32.const <span class="dv">8</span></span>
 <span id="cb1-9802"><a href="#cb1-9802" aria-hidden="true"></a>    i32.store</span>
 <span id="cb1-9803"><a href="#cb1-9803" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-9804"><a href="#cb1-9804" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
@@ -9977,7 +9980,7 @@
 <span id="cb1-9898"><a href="#cb1-9898" aria-hidden="true"></a>    local.get <span class="dv">11</span></span>
 <span id="cb1-9899"><a href="#cb1-9899" aria-hidden="true"></a>    local.get <span class="dv">12</span></span>
 <span id="cb1-9900"><a href="#cb1-9900" aria-hidden="true"></a>    call_indirect (type <span class="dv">2</span>)</span>
-<span id="cb1-9901"><a href="#cb1-9901" aria-hidden="true"></a>    global.get <span class="dv">3</span></span>
+</span><span class="chunk"><span id="cb1-9901"><a href="#cb1-9901" aria-hidden="true"></a>    global.get <span class="dv">3</span></span>
 <span id="cb1-9902"><a href="#cb1-9902" aria-hidden="true"></a>    <span class="kw">if</span>  <span class="co">;; label = @1</span></span>
 <span id="cb1-9903"><a href="#cb1-9903" aria-hidden="true"></a>      return</span>
 <span id="cb1-9904"><a href="#cb1-9904" aria-hidden="true"></a>    end</span>
@@ -10077,7 +10080,7 @@
 <span id="cb1-9998"><a href="#cb1-9998" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-9999"><a href="#cb1-9999" aria-hidden="true"></a>    i32.const <span class="dv">8</span></span>
 <span id="cb1-10000"><a href="#cb1-10000" aria-hidden="true"></a>    i32.add</span>
-<span id="cb1-10001"><a href="#cb1-10001" aria-hidden="true"></a>    local.get <span class="dv">16</span></span>
+</span><span class="chunk"><span id="cb1-10001"><a href="#cb1-10001" aria-hidden="true"></a>    local.get <span class="dv">16</span></span>
 <span id="cb1-10002"><a href="#cb1-10002" aria-hidden="true"></a>    i32.store</span>
 <span id="cb1-10003"><a href="#cb1-10003" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-10004"><a href="#cb1-10004" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
@@ -10177,7 +10180,7 @@
 <span id="cb1-10098"><a href="#cb1-10098" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-10099"><a href="#cb1-10099" aria-hidden="true"></a>    global.set <span class="dv">1</span></span>
 <span id="cb1-10100"><a href="#cb1-10100" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
-<span id="cb1-10101"><a href="#cb1-10101" aria-hidden="true"></a>    i32.const <span class="dv">0</span></span>
+</span><span class="chunk"><span id="cb1-10101"><a href="#cb1-10101" aria-hidden="true"></a>    i32.const <span class="dv">0</span></span>
 <span id="cb1-10102"><a href="#cb1-10102" aria-hidden="true"></a>    i32.store</span>
 <span id="cb1-10103"><a href="#cb1-10103" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-10104"><a href="#cb1-10104" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
@@ -10277,7 +10280,7 @@
 <span id="cb1-10198"><a href="#cb1-10198" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-10199"><a href="#cb1-10199" aria-hidden="true"></a>    i32.const <span class="dv">65536</span></span>
 <span id="cb1-10200"><a href="#cb1-10200" aria-hidden="true"></a>    i32.add</span>
-<span id="cb1-10201"><a href="#cb1-10201" aria-hidden="true"></a>    i32.const <span class="dv">65536</span></span>
+</span><span class="chunk"><span id="cb1-10201"><a href="#cb1-10201" aria-hidden="true"></a>    i32.const <span class="dv">65536</span></span>
 <span id="cb1-10202"><a href="#cb1-10202" aria-hidden="true"></a>    i32.div_s</span>
 <span id="cb1-10203"><a href="#cb1-10203" aria-hidden="true"></a>    memory.size</span>
 <span id="cb1-10204"><a href="#cb1-10204" aria-hidden="true"></a>    i32.ge_s</span>
@@ -10377,7 +10380,7 @@
 <span id="cb1-10298"><a href="#cb1-10298" aria-hidden="true"></a>    i32.store</span>
 <span id="cb1-10299"><a href="#cb1-10299" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-10300"><a href="#cb1-10300" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
-<span id="cb1-10301"><a href="#cb1-10301" aria-hidden="true"></a>    i32.add</span>
+</span><span class="chunk"><span id="cb1-10301"><a href="#cb1-10301" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-10302"><a href="#cb1-10302" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
 <span id="cb1-10303"><a href="#cb1-10303" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-10304"><a href="#cb1-10304" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
@@ -10477,7 +10480,7 @@
 <span id="cb1-10398"><a href="#cb1-10398" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
 <span id="cb1-10399"><a href="#cb1-10399" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-10400"><a href="#cb1-10400" aria-hidden="true"></a>    local.set <span class="dv">39</span></span>
-<span id="cb1-10401"><a href="#cb1-10401" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
+</span><span class="chunk"><span id="cb1-10401"><a href="#cb1-10401" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-10402"><a href="#cb1-10402" aria-hidden="true"></a>    global.set <span class="dv">1</span></span>
 <span id="cb1-10403"><a href="#cb1-10403" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-10404"><a href="#cb1-10404" aria-hidden="true"></a>    i32.const <span class="dv">0</span></span>
@@ -10577,7 +10580,7 @@
 <span id="cb1-10498"><a href="#cb1-10498" aria-hidden="true"></a>    local.get <span class="dv">48</span></span>
 <span id="cb1-10499"><a href="#cb1-10499" aria-hidden="true"></a>    local.get <span class="dv">0</span></span>
 <span id="cb1-10500"><a href="#cb1-10500" aria-hidden="true"></a>    local.get <span class="dv">47</span></span>
-<span id="cb1-10501"><a href="#cb1-10501" aria-hidden="true"></a>    call_indirect (type <span class="dv">2</span>)</span>
+</span><span class="chunk"><span id="cb1-10501"><a href="#cb1-10501" aria-hidden="true"></a>    call_indirect (type <span class="dv">2</span>)</span>
 <span id="cb1-10502"><a href="#cb1-10502" aria-hidden="true"></a>    global.get <span class="dv">3</span></span>
 <span id="cb1-10503"><a href="#cb1-10503" aria-hidden="true"></a>    <span class="kw">if</span>  <span class="co">;; label = @1</span></span>
 <span id="cb1-10504"><a href="#cb1-10504" aria-hidden="true"></a>      return</span>
@@ -10677,7 +10680,7 @@
 <span id="cb1-10598"><a href="#cb1-10598" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-10599"><a href="#cb1-10599" aria-hidden="true"></a>    i32.<span class="kw">load</span></span>
 <span id="cb1-10600"><a href="#cb1-10600" aria-hidden="true"></a>    local.set <span class="dv">2</span></span>
-<span id="cb1-10601"><a href="#cb1-10601" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
+</span><span class="chunk"><span id="cb1-10601"><a href="#cb1-10601" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-10602"><a href="#cb1-10602" aria-hidden="true"></a>    i32.const <span class="dv">65536</span></span>
 <span id="cb1-10603"><a href="#cb1-10603" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-10604"><a href="#cb1-10604" aria-hidden="true"></a>    i32.const <span class="dv">65536</span></span>
@@ -10777,7 +10780,7 @@
 <span id="cb1-10698"><a href="#cb1-10698" aria-hidden="true"></a>      end</span>
 <span id="cb1-10699"><a href="#cb1-10699" aria-hidden="true"></a>    end</span>
 <span id="cb1-10700"><a href="#cb1-10700" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
-<span id="cb1-10701"><a href="#cb1-10701" aria-hidden="true"></a>    global.set <span class="dv">1</span></span>
+</span><span class="chunk"><span id="cb1-10701"><a href="#cb1-10701" aria-hidden="true"></a>    global.set <span class="dv">1</span></span>
 <span id="cb1-10702"><a href="#cb1-10702" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-10703"><a href="#cb1-10703" aria-hidden="true"></a>    i32.const <span class="dv">0</span></span>
 <span id="cb1-10704"><a href="#cb1-10704" aria-hidden="true"></a>    i32.store</span>
@@ -10877,7 +10880,7 @@
 <span id="cb1-10798"><a href="#cb1-10798" aria-hidden="true"></a>  (func (<span class="co">;90;) (type 2) (param i32 i32)</span></span>
 <span id="cb1-10799"><a href="#cb1-10799" aria-hidden="true"></a>    (local i32 i32 i32)</span>
 <span id="cb1-10800"><a href="#cb1-10800" aria-hidden="true"></a>    local.get <span class="dv">0</span></span>
-<span id="cb1-10801"><a href="#cb1-10801" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
+</span><span class="chunk"><span id="cb1-10801"><a href="#cb1-10801" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
 <span id="cb1-10802"><a href="#cb1-10802" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-10803"><a href="#cb1-10803" aria-hidden="true"></a>    i32.<span class="kw">load</span></span>
 <span id="cb1-10804"><a href="#cb1-10804" aria-hidden="true"></a>    local.set <span class="dv">2</span></span>
@@ -10977,7 +10980,7 @@
 <span id="cb1-10898"><a href="#cb1-10898" aria-hidden="true"></a>      <span class="kw">if</span>  <span class="co">;; label = @2</span></span>
 <span id="cb1-10899"><a href="#cb1-10899" aria-hidden="true"></a>        i32.const <span class="dv">1</span></span>
 <span id="cb1-10900"><a href="#cb1-10900" aria-hidden="true"></a>        global.set <span class="dv">3</span></span>
-<span id="cb1-10901"><a href="#cb1-10901" aria-hidden="true"></a>        return</span>
+</span><span class="chunk"><span id="cb1-10901"><a href="#cb1-10901" aria-hidden="true"></a>        return</span>
 <span id="cb1-10902"><a href="#cb1-10902" aria-hidden="true"></a>      end</span>
 <span id="cb1-10903"><a href="#cb1-10903" aria-hidden="true"></a>    end</span>
 <span id="cb1-10904"><a href="#cb1-10904" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
@@ -11077,7 +11080,7 @@
 <span id="cb1-10998"><a href="#cb1-10998" aria-hidden="true"></a>        i32.add</span>
 <span id="cb1-10999"><a href="#cb1-10999" aria-hidden="true"></a>        i32.<span class="kw">load</span></span>
 <span id="cb1-11000"><a href="#cb1-11000" aria-hidden="true"></a>        local.set <span class="dv">7</span></span>
-<span id="cb1-11001"><a href="#cb1-11001" aria-hidden="true"></a>        local.get <span class="dv">6</span></span>
+</span><span class="chunk"><span id="cb1-11001"><a href="#cb1-11001" aria-hidden="true"></a>        local.get <span class="dv">6</span></span>
 <span id="cb1-11002"><a href="#cb1-11002" aria-hidden="true"></a>        i32.const <span class="dv">8</span></span>
 <span id="cb1-11003"><a href="#cb1-11003" aria-hidden="true"></a>        i32.add</span>
 <span id="cb1-11004"><a href="#cb1-11004" aria-hidden="true"></a>        i32.<span class="kw">load</span></span>
@@ -11177,7 +11180,7 @@
 <span id="cb1-11098"><a href="#cb1-11098" aria-hidden="true"></a>    local.get <span class="dv">5</span></span>
 <span id="cb1-11099"><a href="#cb1-11099" aria-hidden="true"></a>    local.get <span class="dv">1</span></span>
 <span id="cb1-11100"><a href="#cb1-11100" aria-hidden="true"></a>    local.get <span class="dv">4</span></span>
-<span id="cb1-11101"><a href="#cb1-11101" aria-hidden="true"></a>    call_indirect (type <span class="dv">2</span>)</span>
+</span><span class="chunk"><span id="cb1-11101"><a href="#cb1-11101" aria-hidden="true"></a>    call_indirect (type <span class="dv">2</span>)</span>
 <span id="cb1-11102"><a href="#cb1-11102" aria-hidden="true"></a>    global.get <span class="dv">3</span></span>
 <span id="cb1-11103"><a href="#cb1-11103" aria-hidden="true"></a>    <span class="kw">if</span>  <span class="co">;; label = @1</span></span>
 <span id="cb1-11104"><a href="#cb1-11104" aria-hidden="true"></a>      return</span>
@@ -11277,7 +11280,7 @@
 <span id="cb1-11198"><a href="#cb1-11198" aria-hidden="true"></a>    i32.store</span>
 <span id="cb1-11199"><a href="#cb1-11199" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-11200"><a href="#cb1-11200" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
-<span id="cb1-11201"><a href="#cb1-11201" aria-hidden="true"></a>    i32.add</span>
+</span><span class="chunk"><span id="cb1-11201"><a href="#cb1-11201" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-11202"><a href="#cb1-11202" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
 <span id="cb1-11203"><a href="#cb1-11203" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-11204"><a href="#cb1-11204" aria-hidden="true"></a>    local.set <span class="dv">4</span></span>
@@ -11377,7 +11380,7 @@
 <span id="cb1-11298"><a href="#cb1-11298" aria-hidden="true"></a>    memory.size</span>
 <span id="cb1-11299"><a href="#cb1-11299" aria-hidden="true"></a>    i32.ge_s</span>
 <span id="cb1-11300"><a href="#cb1-11300" aria-hidden="true"></a>    <span class="kw">if</span>  <span class="co">;; label = @1</span></span>
-<span id="cb1-11301"><a href="#cb1-11301" aria-hidden="true"></a>      i32.const <span class="dv">1</span></span>
+</span><span class="chunk"><span id="cb1-11301"><a href="#cb1-11301" aria-hidden="true"></a>      i32.const <span class="dv">1</span></span>
 <span id="cb1-11302"><a href="#cb1-11302" aria-hidden="true"></a>      memory.grow</span>
 <span id="cb1-11303"><a href="#cb1-11303" aria-hidden="true"></a>      i32.const <span class="dv">-1</span></span>
 <span id="cb1-11304"><a href="#cb1-11304" aria-hidden="true"></a>      i32.eq</span>
@@ -11477,7 +11480,7 @@
 <span id="cb1-11398"><a href="#cb1-11398" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
 <span id="cb1-11399"><a href="#cb1-11399" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-11400"><a href="#cb1-11400" aria-hidden="true"></a>    local.get <span class="dv">1</span></span>
-<span id="cb1-11401"><a href="#cb1-11401" aria-hidden="true"></a>    i32.store</span>
+</span><span class="chunk"><span id="cb1-11401"><a href="#cb1-11401" aria-hidden="true"></a>    i32.store</span>
 <span id="cb1-11402"><a href="#cb1-11402" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-11403"><a href="#cb1-11403" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
 <span id="cb1-11404"><a href="#cb1-11404" aria-hidden="true"></a>    i32.add</span>
@@ -11577,7 +11580,7 @@
 <span id="cb1-11498"><a href="#cb1-11498" aria-hidden="true"></a>        local.set <span class="dv">9</span></span>
 <span id="cb1-11499"><a href="#cb1-11499" aria-hidden="true"></a>        local.get <span class="dv">9</span></span>
 <span id="cb1-11500"><a href="#cb1-11500" aria-hidden="true"></a>        local.get <span class="dv">5</span></span>
-<span id="cb1-11501"><a href="#cb1-11501" aria-hidden="true"></a>        local.get <span class="dv">8</span></span>
+</span><span class="chunk"><span id="cb1-11501"><a href="#cb1-11501" aria-hidden="true"></a>        local.get <span class="dv">8</span></span>
 <span id="cb1-11502"><a href="#cb1-11502" aria-hidden="true"></a>        call_indirect (type <span class="dv">2</span>)</span>
 <span id="cb1-11503"><a href="#cb1-11503" aria-hidden="true"></a>        global.get <span class="dv">3</span></span>
 <span id="cb1-11504"><a href="#cb1-11504" aria-hidden="true"></a>        <span class="kw">if</span>  <span class="co">;; label = @3</span></span>
@@ -11677,7 +11680,7 @@
 <span id="cb1-11598"><a href="#cb1-11598" aria-hidden="true"></a>      i32.<span class="kw">load</span></span>
 <span id="cb1-11599"><a href="#cb1-11599" aria-hidden="true"></a>      i32.const <span class="dv">0</span></span>
 <span id="cb1-11600"><a href="#cb1-11600" aria-hidden="true"></a>      i32.eq</span>
-<span id="cb1-11601"><a href="#cb1-11601" aria-hidden="true"></a>      <span class="kw">if</span>  <span class="co">;; label = @2</span></span>
+</span><span class="chunk"><span id="cb1-11601"><a href="#cb1-11601" aria-hidden="true"></a>      <span class="kw">if</span>  <span class="co">;; label = @2</span></span>
 <span id="cb1-11602"><a href="#cb1-11602" aria-hidden="true"></a>        local.get <span class="dv">0</span></span>
 <span id="cb1-11603"><a href="#cb1-11603" aria-hidden="true"></a>        i32.const <span class="dv">8</span></span>
 <span id="cb1-11604"><a href="#cb1-11604" aria-hidden="true"></a>        i32.add</span>
@@ -11777,7 +11780,7 @@
 <span id="cb1-11698"><a href="#cb1-11698" aria-hidden="true"></a>    global.get <span class="dv">0</span></span>
 <span id="cb1-11699"><a href="#cb1-11699" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
 <span id="cb1-11700"><a href="#cb1-11700" aria-hidden="true"></a>    i32.add</span>
-<span id="cb1-11701"><a href="#cb1-11701" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
+</span><span class="chunk"><span id="cb1-11701"><a href="#cb1-11701" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
 <span id="cb1-11702"><a href="#cb1-11702" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
 <span id="cb1-11703"><a href="#cb1-11703" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
 <span id="cb1-11704"><a href="#cb1-11704" aria-hidden="true"></a>    i32.add</span>
@@ -11877,7 +11880,7 @@
 <span id="cb1-11798"><a href="#cb1-11798" aria-hidden="true"></a>    (local i32)</span>
 <span id="cb1-11799"><a href="#cb1-11799" aria-hidden="true"></a>    local.get <span class="dv">0</span></span>
 <span id="cb1-11800"><a href="#cb1-11800" aria-hidden="true"></a>    i32.const <span class="dv">4</span></span>
-<span id="cb1-11801"><a href="#cb1-11801" aria-hidden="true"></a>    i32.add</span>
+</span><span class="chunk"><span id="cb1-11801"><a href="#cb1-11801" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-11802"><a href="#cb1-11802" aria-hidden="true"></a>    i32.<span class="kw">load</span></span>
 <span id="cb1-11803"><a href="#cb1-11803" aria-hidden="true"></a>    local.set <span class="dv">2</span></span>
 <span id="cb1-11804"><a href="#cb1-11804" aria-hidden="true"></a>    local.get <span class="dv">1</span></span>
@@ -11977,7 +11980,7 @@
 <span id="cb1-11898"><a href="#cb1-11898" aria-hidden="true"></a>    memory.size</span>
 <span id="cb1-11899"><a href="#cb1-11899" aria-hidden="true"></a>    i32.ge_s</span>
 <span id="cb1-11900"><a href="#cb1-11900" aria-hidden="true"></a>    <span class="kw">if</span>  <span class="co">;; label = @1</span></span>
-<span id="cb1-11901"><a href="#cb1-11901" aria-hidden="true"></a>      i32.const <span class="dv">1</span></span>
+</span><span class="chunk"><span id="cb1-11901"><a href="#cb1-11901" aria-hidden="true"></a>      i32.const <span class="dv">1</span></span>
 <span id="cb1-11902"><a href="#cb1-11902" aria-hidden="true"></a>      memory.grow</span>
 <span id="cb1-11903"><a href="#cb1-11903" aria-hidden="true"></a>      i32.const <span class="dv">-1</span></span>
 <span id="cb1-11904"><a href="#cb1-11904" aria-hidden="true"></a>      i32.eq</span>
@@ -12077,7 +12080,7 @@
 <span id="cb1-11998"><a href="#cb1-11998" aria-hidden="true"></a>        global.get <span class="dv">1</span></span>
 <span id="cb1-11999"><a href="#cb1-11999" aria-hidden="true"></a>        i32.const <span class="dv">0</span></span>
 <span id="cb1-12000"><a href="#cb1-12000" aria-hidden="true"></a>        i32.store</span>
-<span id="cb1-12001"><a href="#cb1-12001" aria-hidden="true"></a>        global.get <span class="dv">0</span></span>
+</span><span class="chunk"><span id="cb1-12001"><a href="#cb1-12001" aria-hidden="true"></a>        global.get <span class="dv">0</span></span>
 <span id="cb1-12002"><a href="#cb1-12002" aria-hidden="true"></a>        i32.const <span class="dv">4</span></span>
 <span id="cb1-12003"><a href="#cb1-12003" aria-hidden="true"></a>        i32.add</span>
 <span id="cb1-12004"><a href="#cb1-12004" aria-hidden="true"></a>        global.set <span class="dv">0</span></span>
@@ -12177,7 +12180,7 @@
 <span id="cb1-12098"><a href="#cb1-12098" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-12099"><a href="#cb1-12099" aria-hidden="true"></a>    i32.const <span class="dv">65536</span></span>
 <span id="cb1-12100"><a href="#cb1-12100" aria-hidden="true"></a>    i32.div_s</span>
-<span id="cb1-12101"><a href="#cb1-12101" aria-hidden="true"></a>    memory.size</span>
+</span><span class="chunk"><span id="cb1-12101"><a href="#cb1-12101" aria-hidden="true"></a>    memory.size</span>
 <span id="cb1-12102"><a href="#cb1-12102" aria-hidden="true"></a>    i32.ge_s</span>
 <span id="cb1-12103"><a href="#cb1-12103" aria-hidden="true"></a>    <span class="kw">if</span>  <span class="co">;; label = @1</span></span>
 <span id="cb1-12104"><a href="#cb1-12104" aria-hidden="true"></a>      i32.const <span class="dv">1</span></span>
@@ -12277,7 +12280,7 @@
 <span id="cb1-12198"><a href="#cb1-12198" aria-hidden="true"></a>    i32.add</span>
 <span id="cb1-12199"><a href="#cb1-12199" aria-hidden="true"></a>    global.set <span class="dv">0</span></span>
 <span id="cb1-12200"><a href="#cb1-12200" aria-hidden="true"></a>    global.get <span class="dv">1</span></span>
-<span id="cb1-12201"><a href="#cb1-12201" aria-hidden="true"></a>    local.set <span class="dv">6</span></span>
+</span><span class="chunk"><span id="cb1-12201"><a href="#cb1-12201" aria-hidden="true"></a>    local.set <span class="dv">6</span></span>
 <span id="cb1-12202"><a href="#cb1-12202" aria-hidden="true"></a>    local.get <span class="dv">6</span></span>
 <span id="cb1-12203"><a href="#cb1-12203" aria-hidden="true"></a>    global.set <span class="dv">2</span></span>
 <span id="cb1-12204"><a href="#cb1-12204" aria-hidden="true"></a>    return)</span>
@@ -12377,7 +12380,7 @@
 <span id="cb1-12298"><a href="#cb1-12298" aria-hidden="true"></a>              i32.const <span class="dv">-1</span></span>
 <span id="cb1-12299"><a href="#cb1-12299" aria-hidden="true"></a>              i32.eq</span>
 <span id="cb1-12300"><a href="#cb1-12300" aria-hidden="true"></a>              <span class="kw">if</span>  <span class="co">;; label = @6</span></span>
-<span id="cb1-12301"><a href="#cb1-12301" aria-hidden="true"></a>                i32.const <span class="dv">1</span></span>
+</span><span class="chunk"><span id="cb1-12301"><a href="#cb1-12301" aria-hidden="true"></a>                i32.const <span class="dv">1</span></span>
 <span id="cb1-12302"><a href="#cb1-12302" aria-hidden="true"></a>                global.set <span class="dv">3</span></span>
 <span id="cb1-12303"><a href="#cb1-12303" aria-hidden="true"></a>                return</span>
 <span id="cb1-12304"><a href="#cb1-12304" aria-hidden="true"></a>              end</span>
@@ -12477,7 +12480,7 @@
 <span id="cb1-12398"><a href="#cb1-12398" aria-hidden="true"></a>          i32.add</span>
 <span id="cb1-12399"><a href="#cb1-12399" aria-hidden="true"></a>          global.set <span class="dv">0</span></span>
 <span id="cb1-12400"><a href="#cb1-12400" aria-hidden="true"></a>          global.get <span class="dv">1</span></span>
-<span id="cb1-12401"><a href="#cb1-12401" aria-hidden="true"></a>          local.set <span class="dv">8</span></span>
+</span><span class="chunk"><span id="cb1-12401"><a href="#cb1-12401" aria-hidden="true"></a>          local.set <span class="dv">8</span></span>
 <span id="cb1-12402"><a href="#cb1-12402" aria-hidden="true"></a>          local.get <span class="dv">8</span></span>
 <span id="cb1-12403"><a href="#cb1-12403" aria-hidden="true"></a>          global.set <span class="dv">2</span></span>
 <span id="cb1-12404"><a href="#cb1-12404" aria-hidden="true"></a>          return</span>
@@ -12577,7 +12580,7 @@
 <span id="cb1-12498"><a href="#cb1-12498" aria-hidden="true"></a>  (export <span class="st">&quot;_75__y_wrapper_250&quot;</span> (func <span class="dv">76</span>))</span>
 <span id="cb1-12499"><a href="#cb1-12499" aria-hidden="true"></a>  (export <span class="st">&quot;_76__y_wrapper_251&quot;</span> (func <span class="dv">77</span>))</span>
 <span id="cb1-12500"><a href="#cb1-12500" aria-hidden="true"></a>  (export <span class="st">&quot;_77__y_uncurried_uncurried_uncurried_known_252&quot;</span> (func <span class="dv">78</span>))</span>
-<span id="cb1-12501"><a href="#cb1-12501" aria-hidden="true"></a>  (export <span class="st">&quot;_78__f_case_known_253&quot;</span> (func <span class="dv">79</span>))</span>
+</span><span class="chunk"><span id="cb1-12501"><a href="#cb1-12501" aria-hidden="true"></a>  (export <span class="st">&quot;_78__f_case_known_253&quot;</span> (func <span class="dv">79</span>))</span>
 <span id="cb1-12502"><a href="#cb1-12502" aria-hidden="true"></a>  (export <span class="st">&quot;_79__y_wrapper_260&quot;</span> (func <span class="dv">80</span>))</span>
 <span id="cb1-12503"><a href="#cb1-12503" aria-hidden="true"></a>  (export <span class="st">&quot;_80__y_wrapper_261&quot;</span> (func <span class="dv">81</span>))</span>
 <span id="cb1-12504"><a href="#cb1-12504" aria-hidden="true"></a>  (export <span class="st">&quot;_81__Haskell_Prim_Monoid_DefaultMonoid_super_known_262&quot;</span> (func <span class="dv">82</span>))</span>
@@ -12677,7 +12680,7 @@
 <span id="cb1-12598"><a href="#cb1-12598" aria-hidden="true"></a>  (elem (<span class="co">;60;) (i32.const 60) func 60)</span></span>
 <span id="cb1-12599"><a href="#cb1-12599" aria-hidden="true"></a>  (elem (<span class="co">;61;) (i32.const 61) func 61)</span></span>
 <span id="cb1-12600"><a href="#cb1-12600" aria-hidden="true"></a>  (elem (<span class="co">;62;) (i32.const 62) func 62)</span></span>
-<span id="cb1-12601"><a href="#cb1-12601" aria-hidden="true"></a>  (elem (<span class="co">;63;) (i32.const 63) func 63)</span></span>
+</span><span class="chunk"><span id="cb1-12601"><a href="#cb1-12601" aria-hidden="true"></a>  (elem (<span class="co">;63;) (i32.const 63) func 63)</span></span>
 <span id="cb1-12602"><a href="#cb1-12602" aria-hidden="true"></a>  (elem (<span class="co">;64;) (i32.const 64) func 64)</span></span>
 <span id="cb1-12603"><a href="#cb1-12603" aria-hidden="true"></a>  (elem (<span class="co">;65;) (i32.const 65) func 65)</span></span>
 <span id="cb1-12604"><a href="#cb1-12604" aria-hidden="true"></a>  (elem (<span class="co">;66;) (i32.const 66) func 66)</span></span>
@@ -12725,6 +12728,6 @@
 <span id="cb1-12646"><a href="#cb1-12646" aria-hidden="true"></a>  (elem (<span class="co">;108;) (i32.const 108) func 108)</span></span>
 <span id="cb1-12647"><a href="#cb1-12647" aria-hidden="true"></a>  (elem (<span class="co">;109;) (i32.const 109) func 109)</span></span>
 <span id="cb1-12648"><a href="#cb1-12648" aria-hidden="true"></a>  (elem (<span class="co">;110;) (i32.const 110) func 110)</span></span>
-<span id="cb1-12649"><a href="#cb1-12649" aria-hidden="true"></a>  (elem (<span class="co">;111;) (i32.const 111) func 111))</span></span></code></pre></div>
+<span id="cb1-12649"><a href="#cb1-12649" aria-hidden="true"></a>  (elem (<span class="co">;111;) (i32.const 111) func 111))</span></span></span></code></pre></div>
 </body>
 </html>

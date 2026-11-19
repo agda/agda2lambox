@@ -74,12 +74,15 @@
     code span.vs { color: #4e9a06; } /* VerbatimString */
     code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
   </style>
-  <style>pre > code.sourceCode { white-space: pre-wrap }</style>
+  <style>pre > code.sourceCode { white-space: pre-wrap }
+  pre > code.sourceCode > span.chunk { display: block; line-height: inherit;
+    content-visibility: auto; contain-intrinsic-size: auto 125em }
+  .chunk > span { display: inline-block; line-height: 1.25 }</style>
 </head>
 <body>
 <pre><code>ERROR mrecords.kk(18,65): kind error: Type t_Agda_Builtin_Char_uChar is not defined</code></pre>
 <hr />
-<div class="sourceCode" id="cb2"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>mrecords.kk(<span class="dv">18</span>,<span class="dv">65</span>): kind error: Type t_Agda_Builtin_Char_uChar is <span class="kw">not</span> defined</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>mrecords.kk(<span class="dv">18</span>,<span class="dv">65</span>): kind error: Type t_Agda_Builtin_Char_uChar is <span class="kw">not</span> defined</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span class="chunk"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>mrecords.kk(<span class="dv">18</span>,<span class="dv">65</span>): kind error: Type t_Agda_Builtin_Char_uChar is <span class="kw">not</span> defined</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>mrecords.kk(<span class="dv">18</span>,<span class="dv">65</span>): kind error: Type t_Agda_Builtin_Char_uChar is <span class="kw">not</span> defined</span></span></code></pre></div>
 </body>
 </html>

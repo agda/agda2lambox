@@ -74,10 +74,13 @@
     code span.vs { color: #4e9a06; } /* VerbatimString */
     code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
   </style>
-  <style>pre > code.sourceCode { white-space: pre-wrap }</style>
+  <style>pre > code.sourceCode { white-space: pre-wrap }
+  pre > code.sourceCode > span.chunk { display: block; line-height: inherit;
+    content-visibility: auto; contain-intrinsic-size: auto 125em }
+  .chunk > span { display: inline-block; line-height: 1.25 }</style>
 </head>
 <body>
-<div class="sourceCode" id="cb1"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a>From Stdlib           Require Import <span class="dt">List</span>.</span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="chunk"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a>From Stdlib           Require Import <span class="dt">List</span>.</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>From Stdlib           Require PrimString.</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>Import PrimString.PStringNotations.</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>From MetaRocq.Common  Require Import BasicAst Kernames Universes.</span>
@@ -163,6 +166,6 @@
 <span id="cb1-84"><a href="#cb1-84" aria-hidden="true"></a>Definition prog1 : program :=</span>
 <span id="cb1-85"><a href="#cb1-85" aria-hidden="true"></a>  (env, tConst (MPfile [<span class="st">&quot;FamilyArg&quot;</span>%bs], <span class="st">&quot;test&quot;</span>%bs)).</span>
 <span id="cb1-86"><a href="#cb1-86" aria-hidden="true"></a></span>
-<span id="cb1-87"><a href="#cb1-87" aria-hidden="true"></a>Compute show_program prog1.</span></code></pre></div>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true"></a>Compute show_program prog1.</span></span></code></pre></div>
 </body>
 </html>

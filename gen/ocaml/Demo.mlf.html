@@ -74,13 +74,16 @@
     code span.vs { color: #4e9a06; } /* VerbatimString */
     code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
   </style>
-  <style>pre > code.sourceCode { white-space: pre-wrap }</style>
+  <style>pre > code.sourceCode { white-space: pre-wrap }
+  pre > code.sourceCode > span.chunk { display: block; line-height: inherit;
+    content-visibility: auto; contain-intrinsic-size: auto 125em }
+  .chunk > span { display: inline-block; line-height: 1.25 }</style>
 </head>
 <body>
-<div class="sourceCode" id="cb1"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a>(module</span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span class="chunk"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a>(module</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>  ($def_Demo_test</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>    (block (tag <span class="dv">0</span>) <span class="dv">1</span> (block (tag <span class="dv">0</span>) <span class="dv">0</span> (block (tag <span class="dv">0</span>) <span class="dv">1</span> (block (tag <span class="dv">0</span>) <span class="dv">0</span> <span class="dv">0</span>)))))</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>  ($def_main $def_Demo_test) ($test $def_Demo_test) ($main $def_main)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>  (export $test $main))</span></code></pre></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>  (export $test $main))</span></span></code></pre></div>
 </body>
 </html>

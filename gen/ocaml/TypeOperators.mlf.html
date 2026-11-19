@@ -74,10 +74,13 @@
     code span.vs { color: #4e9a06; } /* VerbatimString */
     code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
   </style>
-  <style>pre > code.sourceCode { white-space: pre-wrap }</style>
+  <style>pre > code.sourceCode { white-space: pre-wrap }
+  pre > code.sourceCode > span.chunk { display: block; line-height: inherit;
+    content-visibility: auto; contain-intrinsic-size: auto 125em }
+  .chunk > span { display: inline-block; line-height: 1.25 }</style>
 </head>
 <body>
-<div class="sourceCode" id="cb1"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a>(module ($def_TypeOperators_mx (block (tag <span class="dv">0</span>) <span class="dv">1</span>))</span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span class="chunk"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a>(module ($def_TypeOperators_mx (block (tag <span class="dv">0</span>) <span class="dv">1</span>))</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>  ($def_TypeOperators_mx_ (block (tag <span class="dv">0</span>) <span class="dv">1</span>))</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>  ($def_Agda_Builtin_Nat___UU2b_</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>    (<span class="kw">lambda</span> ($wildcard)</span>
@@ -147,6 +150,6 @@
 <span id="cb1-68"><a href="#cb1-68" aria-hidden="true"></a>        (apply $def_TypeOperators__<span class="dv">28</span>_fromE $def_TypeOperators_mx_))</span>
 <span id="cb1-69"><a href="#cb1-69" aria-hidden="true"></a>      (apply $def_TypeOperators__<span class="dv">28</span>_both $def_TypeOperators_cross)))</span>
 <span id="cb1-70"><a href="#cb1-70" aria-hidden="true"></a>  ($def_main $def_TypeOperators_test) ($test $def_TypeOperators_test)</span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true"></a>  ($main $def_main) (export $test $main))</span></code></pre></div>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true"></a>  ($main $def_main) (export $test $main))</span></span></code></pre></div>
 </body>
 </html>

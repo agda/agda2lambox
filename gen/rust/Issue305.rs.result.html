@@ -74,150 +74,151 @@
     code span.vs { color: #4e9a06; } /* VerbatimString */
     code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
   </style>
-  <style>pre > code.sourceCode { white-space: pre-wrap }</style>
+  <style>pre > code.sourceCode { white-space: pre-wrap }
+  pre > code.sourceCode > span.chunk { display: block; line-height: inherit;
+    content-visibility: auto; contain-intrinsic-size: auto 125em }
+  .chunk > span { display: inline-block; line-height: 1.25 }</style>
 </head>
 <body>
 <pre><code>ERROR [0m[1m[38;5;9merror[E0283][0m[0m[1m: type annotations needed[0m</code></pre>
 <hr />
-<div class="sourceCode" id="cb2"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>[1m[33mwarning[0m[1m:[0m no edition set: defaulting to the <span class="dv">2015</span> edition <span class="kw">while</span> the latest is <span class="dv">2024</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>[1m[32m   Compiling[0m main v0.<span class="fl">0.0</span> (/home/runner/work/agda2lambox/agda2lambox/test/gen/rust)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;9merror[E0283][0m[0m[1m: type annotations needed[0m</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mIssue305.rs:343:10[0m</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m343[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m    self.Issue305_testՖՖ002080([0m</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m          [0m[0m[1m[38;5;9m^^^^^^^^^^^^^^^^^^^^^[0m[0m [0m[0m[1m[38;5;9mcannot infer type of the type parameter `X` declared on the method `Issue305_testՖՖ002080`[0m</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m= [0m[0m[1mnote[0m[0m: cannot satisfy `_: Copy`[0m</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;10mnote[0m[0m: required by a bound in `Program::Issue305_testՖՖ002080`[0m</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mIssue305.rs:200:29[0m</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m200[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mfn Issue305_testՖՖ002080&lt;X: Copy&gt;(&amp;&#39;a self, x: ()) -&gt; &amp;&#39;a Agda_Builtin_Int_Int&lt;&#39;a&gt; {[0m</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                             [0m[0m[1m[38;5;10m^^^^[0m[0m [0m[0m[1m[38;5;10mrequired by this bound in `Program::Issue305_testՖՖ002080`[0m</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;14mhelp[0m[0m: consider specifying the generic argument[0m</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m343[0m[0m [0m[0m[1m[38;5;12m| [0m[0m    self.Issue305_testՖՖ002080[0m[0m[38;5;10m::&lt;X&gt;[0m[0m([0m</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                               [0m[0m[38;5;10m+++++[0m</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true"></a></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;9merror[E0283][0m[0m[1m: type annotations needed[0m</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mIssue305.rs:349:8[0m</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m349[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m  self.Issue305_testՖՖ002080([0m</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m        [0m[0m[1m[38;5;9m^^^^^^^^^^^^^^^^^^^^^[0m[0m [0m[0m[1m[38;5;9mcannot infer type of the type parameter `X` declared on the method `Issue305_testՖՖ002080`[0m</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m= [0m[0m[1mnote[0m[0m: cannot satisfy `_: Copy`[0m</span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;10mnote[0m[0m: required by a bound in `Program::Issue305_testՖՖ002080`[0m</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mIssue305.rs:200:29[0m</span></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m200[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mfn Issue305_testՖՖ002080&lt;X: Copy&gt;(&amp;&#39;a self, x: ()) -&gt; &amp;&#39;a Agda_Builtin_Int_Int&lt;&#39;a&gt; {[0m</span></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                             [0m[0m[1m[38;5;10m^^^^[0m[0m [0m[0m[1m[38;5;10mrequired by this bound in `Program::Issue305_testՖՖ002080`[0m</span></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;14mhelp[0m[0m: consider specifying the generic argument[0m</span></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m349[0m[0m [0m[0m[1m[38;5;12m| [0m[0m  self.Issue305_testՖՖ002080[0m[0m[38;5;10m::&lt;X&gt;[0m[0m([0m</span></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                             [0m[0m[38;5;10m+++++[0m</span></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true"></a></span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;9merror[E0283][0m[0m[1m: type annotations needed[0m</span></span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mIssue305.rs:354:10[0m</span></span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m354[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m    self.Issue305_anotherTest([0m</span></span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m          [0m[0m[1m[38;5;9m^^^^^^^^^^^^^^^^^^^^[0m[0m [0m[0m[1m[38;5;9mcannot infer type of the type parameter `X` declared on the method `Issue305_anotherTest`[0m</span></span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m= [0m[0m[1mnote[0m[0m: cannot satisfy `_: Copy`[0m</span></span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;10mnote[0m[0m: required by a bound in `Program::Issue305_anotherTest`[0m</span></span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mIssue305.rs:348:28[0m</span></span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m348[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mfn Issue305_anotherTest&lt;X: Copy&gt;(&amp;&#39;a self, x: ()) -&gt; &amp;&#39;a Agda_Builtin_Int_Int&lt;&#39;a&gt; {[0m</span></span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                            [0m[0m[1m[38;5;10m^^^^[0m[0m [0m[0m[1m[38;5;10mrequired by this bound in `Program::Issue305_anotherTest`[0m</span></span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;14mhelp[0m[0m: consider specifying the generic argument[0m</span></span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m354[0m[0m [0m[0m[1m[38;5;12m| [0m[0m    self.Issue305_anotherTest[0m[0m[38;5;10m::&lt;X&gt;[0m[0m([0m</span></span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                              [0m[0m[38;5;10m+++++[0m</span></span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true"></a></span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;9merror[E0283][0m[0m[1m: type annotations needed[0m</span></span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mIssue305.rs:436:10[0m</span></span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m436[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m    self.Issue305_yetAnotherTest([0m</span></span>
-<span id="cb2-58"><a href="#cb2-58" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m          [0m[0m[1m[38;5;9m^^^^^^^^^^^^^^^^^^^^^^^[0m[0m [0m[0m[1m[38;5;9mcannot infer type of the type parameter `X` declared on the method `Issue305_yetAnotherTest`[0m</span></span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-60"><a href="#cb2-60" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m= [0m[0m[1mnote[0m[0m: cannot satisfy `_: Copy`[0m</span></span>
-<span id="cb2-61"><a href="#cb2-61" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;10mnote[0m[0m: required by a bound in `Program::Issue305_yetAnotherTest`[0m</span></span>
-<span id="cb2-62"><a href="#cb2-62" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mIssue305.rs:382:31[0m</span></span>
-<span id="cb2-63"><a href="#cb2-63" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-64"><a href="#cb2-64" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m382[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mfn Issue305_yetAnotherTest&lt;X: Copy&gt;(&amp;&#39;a self, x: ()) -&gt; &amp;&#39;a Agda_Builtin_Int_Int&lt;&#39;a&gt; {[0m</span></span>
-<span id="cb2-65"><a href="#cb2-65" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                               [0m[0m[1m[38;5;10m^^^^[0m[0m [0m[0m[1m[38;5;10mrequired by this bound in `Program::Issue305_yetAnotherTest`[0m</span></span>
-<span id="cb2-66"><a href="#cb2-66" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;14mhelp[0m[0m: consider specifying the generic argument[0m</span></span>
-<span id="cb2-67"><a href="#cb2-67" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-68"><a href="#cb2-68" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m436[0m[0m [0m[0m[1m[38;5;12m| [0m[0m    self.Issue305_yetAnotherTest[0m[0m[38;5;10m::&lt;X&gt;[0m[0m([0m</span></span>
-<span id="cb2-69"><a href="#cb2-69" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                                 [0m[0m[38;5;10m+++++[0m</span></span>
-<span id="cb2-70"><a href="#cb2-70" aria-hidden="true"></a></span>
-<span id="cb2-71"><a href="#cb2-71" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;9merror[E0283][0m[0m[1m: type annotations needed[0m</span></span>
-<span id="cb2-72"><a href="#cb2-72" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mIssue305.rs:476:10[0m</span></span>
-<span id="cb2-73"><a href="#cb2-73" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-74"><a href="#cb2-74" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m476[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m    self.Issue305_andOneMoreTest([0m</span></span>
-<span id="cb2-75"><a href="#cb2-75" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m          [0m[0m[1m[38;5;9m^^^^^^^^^^^^^^^^^^^^^^^[0m[0m [0m[0m[1m[38;5;9mcannot infer type of the type parameter `X` declared on the method `Issue305_andOneMoreTest`[0m</span></span>
-<span id="cb2-76"><a href="#cb2-76" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-77"><a href="#cb2-77" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m= [0m[0m[1mnote[0m[0m: cannot satisfy `_: Copy`[0m</span></span>
-<span id="cb2-78"><a href="#cb2-78" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;10mnote[0m[0m: required by a bound in `Program::Issue305_andOneMoreTest`[0m</span></span>
-<span id="cb2-79"><a href="#cb2-79" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mIssue305.rs:441:31[0m</span></span>
-<span id="cb2-80"><a href="#cb2-80" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-81"><a href="#cb2-81" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m441[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mfn Issue305_andOneMoreTest&lt;X: Copy&gt;(&amp;&#39;a self, x: ()) -&gt; &amp;&#39;a Agda_Builtin_Int_Int&lt;&#39;a&gt; {[0m</span></span>
-<span id="cb2-82"><a href="#cb2-82" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                               [0m[0m[1m[38;5;10m^^^^[0m[0m [0m[0m[1m[38;5;10mrequired by this bound in `Program::Issue305_andOneMoreTest`[0m</span></span>
-<span id="cb2-83"><a href="#cb2-83" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;14mhelp[0m[0m: consider specifying the generic argument[0m</span></span>
-<span id="cb2-84"><a href="#cb2-84" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-85"><a href="#cb2-85" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m476[0m[0m [0m[0m[1m[38;5;12m| [0m[0m    self.Issue305_andOneMoreTest[0m[0m[38;5;10m::&lt;X&gt;[0m[0m([0m</span></span>
-<span id="cb2-86"><a href="#cb2-86" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                                 [0m[0m[38;5;10m+++++[0m</span></span>
-<span id="cb2-87"><a href="#cb2-87" aria-hidden="true"></a></span>
-<span id="cb2-88"><a href="#cb2-88" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;9merror[E0283][0m[0m[1m: type annotations needed[0m</span></span>
-<span id="cb2-89"><a href="#cb2-89" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mIssue305.rs:508:14[0m</span></span>
-<span id="cb2-90"><a href="#cb2-90" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-91"><a href="#cb2-91" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m508[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        self.Issue305_anotherTest([0m</span></span>
-<span id="cb2-92"><a href="#cb2-92" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m              [0m[0m[1m[38;5;9m^^^^^^^^^^^^^^^^^^^^[0m[0m [0m[0m[1m[38;5;9mcannot infer type of the type parameter `X` declared on the method `Issue305_anotherTest`[0m</span></span>
-<span id="cb2-93"><a href="#cb2-93" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-94"><a href="#cb2-94" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m= [0m[0m[1mnote[0m[0m: cannot satisfy `_: Copy`[0m</span></span>
-<span id="cb2-95"><a href="#cb2-95" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;10mnote[0m[0m: required by a bound in `Program::Issue305_anotherTest`[0m</span></span>
-<span id="cb2-96"><a href="#cb2-96" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mIssue305.rs:348:28[0m</span></span>
-<span id="cb2-97"><a href="#cb2-97" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-98"><a href="#cb2-98" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m348[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mfn Issue305_anotherTest&lt;X: Copy&gt;(&amp;&#39;a self, x: ()) -&gt; &amp;&#39;a Agda_Builtin_Int_Int&lt;&#39;a&gt; {[0m</span></span>
-<span id="cb2-99"><a href="#cb2-99" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                            [0m[0m[1m[38;5;10m^^^^[0m[0m [0m[0m[1m[38;5;10mrequired by this bound in `Program::Issue305_anotherTest`[0m</span></span>
-<span id="cb2-100"><a href="#cb2-100" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;14mhelp[0m[0m: consider specifying the generic argument[0m</span></span>
-<span id="cb2-101"><a href="#cb2-101" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-102"><a href="#cb2-102" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m508[0m[0m [0m[0m[1m[38;5;12m| [0m[0m        self.Issue305_anotherTest[0m[0m[38;5;10m::&lt;X&gt;[0m[0m([0m</span></span>
-<span id="cb2-103"><a href="#cb2-103" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                                  [0m[0m[38;5;10m+++++[0m</span></span>
-<span id="cb2-104"><a href="#cb2-104" aria-hidden="true"></a></span>
-<span id="cb2-105"><a href="#cb2-105" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;9merror[E0283][0m[0m[1m: type annotations needed[0m</span></span>
-<span id="cb2-106"><a href="#cb2-106" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mIssue305.rs:541:10[0m</span></span>
-<span id="cb2-107"><a href="#cb2-107" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-108"><a href="#cb2-108" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m541[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m    self.Issue305_test([0m</span></span>
-<span id="cb2-109"><a href="#cb2-109" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m          [0m[0m[1m[38;5;9m^^^^^^^^^^^^^[0m[0m [0m[0m[1m[38;5;9mcannot infer type of the type parameter `X` declared on the method `Issue305_test`[0m</span></span>
-<span id="cb2-110"><a href="#cb2-110" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-111"><a href="#cb2-111" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m= [0m[0m[1mnote[0m[0m: cannot satisfy `_: Copy`[0m</span></span>
-<span id="cb2-112"><a href="#cb2-112" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;10mnote[0m[0m: required by a bound in `Program::Issue305_test`[0m</span></span>
-<span id="cb2-113"><a href="#cb2-113" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mIssue305.rs:504:21[0m</span></span>
-<span id="cb2-114"><a href="#cb2-114" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-115"><a href="#cb2-115" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m504[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mfn Issue305_test&lt;X: Copy&gt;(&amp;&#39;a self, x: ()) -&gt; &amp;&#39;a Agda_Builtin_Int_Int&lt;&#39;a&gt; {[0m</span></span>
-<span id="cb2-116"><a href="#cb2-116" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                     [0m[0m[1m[38;5;10m^^^^[0m[0m [0m[0m[1m[38;5;10mrequired by this bound in `Program::Issue305_test`[0m</span></span>
-<span id="cb2-117"><a href="#cb2-117" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;14mhelp[0m[0m: consider specifying the generic argument[0m</span></span>
-<span id="cb2-118"><a href="#cb2-118" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-119"><a href="#cb2-119" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m541[0m[0m [0m[0m[1m[38;5;12m| [0m[0m    self.Issue305_test[0m[0m[38;5;10m::&lt;X&gt;[0m[0m([0m</span></span>
-<span id="cb2-120"><a href="#cb2-120" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                       [0m[0m[38;5;10m+++++[0m</span></span>
-<span id="cb2-121"><a href="#cb2-121" aria-hidden="true"></a></span>
-<span id="cb2-122"><a href="#cb2-122" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;9merror[E0061][0m[0m[1m: this method takes 1 argument but 0 arguments were supplied[0m</span></span>
-<span id="cb2-123"><a href="#cb2-123" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mIssue305.rs:547:35[0m</span></span>
-<span id="cb2-124"><a href="#cb2-124" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-125"><a href="#cb2-125" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m547[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m  println!(&quot;{:?}&quot;, Program::new().Issue305_test::&lt;()&gt;());[0m</span></span>
-<span id="cb2-126"><a href="#cb2-126" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                                   [0m[0m[1m[38;5;9m^^^^^^^^^^^^^^^^^^^[0m[0m[1m[38;5;12m--[0m[0m [0m[0m[1m[38;5;12margument #1 of type `()` is missing[0m</span></span>
-<span id="cb2-127"><a href="#cb2-127" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-128"><a href="#cb2-128" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;10mnote[0m[0m: method defined here[0m</span></span>
-<span id="cb2-129"><a href="#cb2-129" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mIssue305.rs:504:4[0m</span></span>
-<span id="cb2-130"><a href="#cb2-130" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-131"><a href="#cb2-131" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m504[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mfn Issue305_test&lt;X: Copy&gt;(&amp;&#39;a self, x: ()) -&gt; &amp;&#39;a Agda_Builtin_Int_Int&lt;&#39;a&gt; {[0m</span></span>
-<span id="cb2-132"><a href="#cb2-132" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m    [0m[0m[1m[38;5;10m^^^^^^^^^^^^^[0m[0m                    [0m[0m[1m[38;5;12m-----[0m</span></span>
-<span id="cb2-133"><a href="#cb2-133" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;14mhelp[0m[0m: provide the argument[0m</span></span>
-<span id="cb2-134"><a href="#cb2-134" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-135"><a href="#cb2-135" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m547[0m[0m [0m[0m[1m[38;5;12m| [0m[0m  println!(&quot;{:?}&quot;, Program::new().Issue305_test::&lt;()&gt;[0m[0m[38;5;10m(())[0m[0m);[0m</span></span>
-<span id="cb2-136"><a href="#cb2-136" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                                                      [0m[0m[38;5;10m~~~~[0m</span></span>
-<span id="cb2-137"><a href="#cb2-137" aria-hidden="true"></a></span>
-<span id="cb2-138"><a href="#cb2-138" aria-hidden="true"></a>[0m[1mSome errors have detailed explanations: E0061, E0283.[0m</span>
-<span id="cb2-139"><a href="#cb2-139" aria-hidden="true"></a>[0m[1mFor more information about an error, try `rustc --explain E0061`.[0m</span>
-<span id="cb2-140"><a href="#cb2-140" aria-hidden="true"></a>[1m[31merror[0m[1m:[0m could <span class="kw">not</span> compile `main` (bin <span class="st">&quot;Issue305&quot;</span>) due to <span class="dv">8</span> previous errors</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span class="chunk"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;9merror[E0283][0m[0m[1m: type annotations needed[0m</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mIssue305.rs:343:10[0m</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m343[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m    self.Issue305_testՖՖ002080([0m</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m          [0m[0m[1m[38;5;9m^^^^^^^^^^^^^^^^^^^^^[0m[0m [0m[0m[1m[38;5;9mcannot infer type of the type parameter `X` declared on the method `Issue305_testՖՖ002080`[0m</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m= [0m[0m[1mnote[0m[0m: cannot satisfy `_: Copy`[0m</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;10mnote[0m[0m: required by a bound in `Program::Issue305_testՖՖ002080`[0m</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mIssue305.rs:200:29[0m</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m200[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mfn Issue305_testՖՖ002080&lt;X: Copy&gt;(&amp;&#39;a self, x: ()) -&gt; &amp;&#39;a Agda_Builtin_Int_Int&lt;&#39;a&gt; {[0m</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                             [0m[0m[1m[38;5;10m^^^^[0m[0m [0m[0m[1m[38;5;10mrequired by this bound in `Program::Issue305_testՖՖ002080`[0m</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;14mhelp[0m[0m: consider specifying the generic argument[0m</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m343[0m[0m [0m[0m[1m[38;5;12m| [0m[0m    self.Issue305_testՖՖ002080[0m[0m[38;5;10m::&lt;X&gt;[0m[0m([0m</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                               [0m[0m[38;5;10m+++++[0m</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;9merror[E0283][0m[0m[1m: type annotations needed[0m</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mIssue305.rs:349:8[0m</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m349[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m  self.Issue305_testՖՖ002080([0m</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m        [0m[0m[1m[38;5;9m^^^^^^^^^^^^^^^^^^^^^[0m[0m [0m[0m[1m[38;5;9mcannot infer type of the type parameter `X` declared on the method `Issue305_testՖՖ002080`[0m</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m= [0m[0m[1mnote[0m[0m: cannot satisfy `_: Copy`[0m</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;10mnote[0m[0m: required by a bound in `Program::Issue305_testՖՖ002080`[0m</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mIssue305.rs:200:29[0m</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m200[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mfn Issue305_testՖՖ002080&lt;X: Copy&gt;(&amp;&#39;a self, x: ()) -&gt; &amp;&#39;a Agda_Builtin_Int_Int&lt;&#39;a&gt; {[0m</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                             [0m[0m[1m[38;5;10m^^^^[0m[0m [0m[0m[1m[38;5;10mrequired by this bound in `Program::Issue305_testՖՖ002080`[0m</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;14mhelp[0m[0m: consider specifying the generic argument[0m</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m349[0m[0m [0m[0m[1m[38;5;12m| [0m[0m  self.Issue305_testՖՖ002080[0m[0m[38;5;10m::&lt;X&gt;[0m[0m([0m</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                             [0m[0m[38;5;10m+++++[0m</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true"></a></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;9merror[E0283][0m[0m[1m: type annotations needed[0m</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mIssue305.rs:354:10[0m</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m354[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m    self.Issue305_anotherTest([0m</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m          [0m[0m[1m[38;5;9m^^^^^^^^^^^^^^^^^^^^[0m[0m [0m[0m[1m[38;5;9mcannot infer type of the type parameter `X` declared on the method `Issue305_anotherTest`[0m</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m= [0m[0m[1mnote[0m[0m: cannot satisfy `_: Copy`[0m</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;10mnote[0m[0m: required by a bound in `Program::Issue305_anotherTest`[0m</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mIssue305.rs:348:28[0m</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m348[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mfn Issue305_anotherTest&lt;X: Copy&gt;(&amp;&#39;a self, x: ()) -&gt; &amp;&#39;a Agda_Builtin_Int_Int&lt;&#39;a&gt; {[0m</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                            [0m[0m[1m[38;5;10m^^^^[0m[0m [0m[0m[1m[38;5;10mrequired by this bound in `Program::Issue305_anotherTest`[0m</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;14mhelp[0m[0m: consider specifying the generic argument[0m</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m354[0m[0m [0m[0m[1m[38;5;12m| [0m[0m    self.Issue305_anotherTest[0m[0m[38;5;10m::&lt;X&gt;[0m[0m([0m</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                              [0m[0m[38;5;10m+++++[0m</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true"></a></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;9merror[E0283][0m[0m[1m: type annotations needed[0m</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mIssue305.rs:436:10[0m</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m436[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m    self.Issue305_yetAnotherTest([0m</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m          [0m[0m[1m[38;5;9m^^^^^^^^^^^^^^^^^^^^^^^[0m[0m [0m[0m[1m[38;5;9mcannot infer type of the type parameter `X` declared on the method `Issue305_yetAnotherTest`[0m</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m= [0m[0m[1mnote[0m[0m: cannot satisfy `_: Copy`[0m</span></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;10mnote[0m[0m: required by a bound in `Program::Issue305_yetAnotherTest`[0m</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mIssue305.rs:382:31[0m</span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m382[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mfn Issue305_yetAnotherTest&lt;X: Copy&gt;(&amp;&#39;a self, x: ()) -&gt; &amp;&#39;a Agda_Builtin_Int_Int&lt;&#39;a&gt; {[0m</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                               [0m[0m[1m[38;5;10m^^^^[0m[0m [0m[0m[1m[38;5;10mrequired by this bound in `Program::Issue305_yetAnotherTest`[0m</span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;14mhelp[0m[0m: consider specifying the generic argument[0m</span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m436[0m[0m [0m[0m[1m[38;5;12m| [0m[0m    self.Issue305_yetAnotherTest[0m[0m[38;5;10m::&lt;X&gt;[0m[0m([0m</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                                 [0m[0m[38;5;10m+++++[0m</span></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true"></a></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;9merror[E0283][0m[0m[1m: type annotations needed[0m</span></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mIssue305.rs:476:10[0m</span></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m476[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m    self.Issue305_andOneMoreTest([0m</span></span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m          [0m[0m[1m[38;5;9m^^^^^^^^^^^^^^^^^^^^^^^[0m[0m [0m[0m[1m[38;5;9mcannot infer type of the type parameter `X` declared on the method `Issue305_andOneMoreTest`[0m</span></span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m= [0m[0m[1mnote[0m[0m: cannot satisfy `_: Copy`[0m</span></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;10mnote[0m[0m: required by a bound in `Program::Issue305_andOneMoreTest`[0m</span></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mIssue305.rs:441:31[0m</span></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m441[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mfn Issue305_andOneMoreTest&lt;X: Copy&gt;(&amp;&#39;a self, x: ()) -&gt; &amp;&#39;a Agda_Builtin_Int_Int&lt;&#39;a&gt; {[0m</span></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                               [0m[0m[1m[38;5;10m^^^^[0m[0m [0m[0m[1m[38;5;10mrequired by this bound in `Program::Issue305_andOneMoreTest`[0m</span></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;14mhelp[0m[0m: consider specifying the generic argument[0m</span></span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m476[0m[0m [0m[0m[1m[38;5;12m| [0m[0m    self.Issue305_andOneMoreTest[0m[0m[38;5;10m::&lt;X&gt;[0m[0m([0m</span></span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                                 [0m[0m[38;5;10m+++++[0m</span></span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true"></a></span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;9merror[E0283][0m[0m[1m: type annotations needed[0m</span></span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mIssue305.rs:508:14[0m</span></span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m508[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m        self.Issue305_anotherTest([0m</span></span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m              [0m[0m[1m[38;5;9m^^^^^^^^^^^^^^^^^^^^[0m[0m [0m[0m[1m[38;5;9mcannot infer type of the type parameter `X` declared on the method `Issue305_anotherTest`[0m</span></span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m= [0m[0m[1mnote[0m[0m: cannot satisfy `_: Copy`[0m</span></span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;10mnote[0m[0m: required by a bound in `Program::Issue305_anotherTest`[0m</span></span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mIssue305.rs:348:28[0m</span></span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m348[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mfn Issue305_anotherTest&lt;X: Copy&gt;(&amp;&#39;a self, x: ()) -&gt; &amp;&#39;a Agda_Builtin_Int_Int&lt;&#39;a&gt; {[0m</span></span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                            [0m[0m[1m[38;5;10m^^^^[0m[0m [0m[0m[1m[38;5;10mrequired by this bound in `Program::Issue305_anotherTest`[0m</span></span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;14mhelp[0m[0m: consider specifying the generic argument[0m</span></span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m508[0m[0m [0m[0m[1m[38;5;12m| [0m[0m        self.Issue305_anotherTest[0m[0m[38;5;10m::&lt;X&gt;[0m[0m([0m</span></span>
+</span><span class="chunk"><span id="cb2-101"><a href="#cb2-101" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                                  [0m[0m[38;5;10m+++++[0m</span></span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true"></a></span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;9merror[E0283][0m[0m[1m: type annotations needed[0m</span></span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mIssue305.rs:541:10[0m</span></span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m541[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m    self.Issue305_test([0m</span></span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m          [0m[0m[1m[38;5;9m^^^^^^^^^^^^^[0m[0m [0m[0m[1m[38;5;9mcannot infer type of the type parameter `X` declared on the method `Issue305_test`[0m</span></span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m= [0m[0m[1mnote[0m[0m: cannot satisfy `_: Copy`[0m</span></span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;10mnote[0m[0m: required by a bound in `Program::Issue305_test`[0m</span></span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mIssue305.rs:504:21[0m</span></span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m504[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mfn Issue305_test&lt;X: Copy&gt;(&amp;&#39;a self, x: ()) -&gt; &amp;&#39;a Agda_Builtin_Int_Int&lt;&#39;a&gt; {[0m</span></span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                     [0m[0m[1m[38;5;10m^^^^[0m[0m [0m[0m[1m[38;5;10mrequired by this bound in `Program::Issue305_test`[0m</span></span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;14mhelp[0m[0m: consider specifying the generic argument[0m</span></span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m541[0m[0m [0m[0m[1m[38;5;12m| [0m[0m    self.Issue305_test[0m[0m[38;5;10m::&lt;X&gt;[0m[0m([0m</span></span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                       [0m[0m[38;5;10m+++++[0m</span></span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true"></a></span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;9merror[E0061][0m[0m[1m: this method takes 1 argument but 0 arguments were supplied[0m</span></span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mIssue305.rs:547:35[0m</span></span>
+<span id="cb2-122"><a href="#cb2-122" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-123"><a href="#cb2-123" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m547[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m  println!(&quot;{:?}&quot;, Program::new().Issue305_test::&lt;()&gt;());[0m</span></span>
+<span id="cb2-124"><a href="#cb2-124" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                                   [0m[0m[1m[38;5;9m^^^^^^^^^^^^^^^^^^^[0m[0m[1m[38;5;12m--[0m[0m [0m[0m[1m[38;5;12margument #1 of type `()` is missing[0m</span></span>
+<span id="cb2-125"><a href="#cb2-125" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-126"><a href="#cb2-126" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;10mnote[0m[0m: method defined here[0m</span></span>
+<span id="cb2-127"><a href="#cb2-127" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mIssue305.rs:504:4[0m</span></span>
+<span id="cb2-128"><a href="#cb2-128" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-129"><a href="#cb2-129" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m504[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mfn Issue305_test&lt;X: Copy&gt;(&amp;&#39;a self, x: ()) -&gt; &amp;&#39;a Agda_Builtin_Int_Int&lt;&#39;a&gt; {[0m</span></span>
+<span id="cb2-130"><a href="#cb2-130" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m    [0m[0m[1m[38;5;10m^^^^^^^^^^^^^[0m[0m                    [0m[0m[1m[38;5;12m-----[0m</span></span>
+<span id="cb2-131"><a href="#cb2-131" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;14mhelp[0m[0m: provide the argument[0m</span></span>
+<span id="cb2-132"><a href="#cb2-132" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-133"><a href="#cb2-133" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m547[0m[0m [0m[0m[1m[38;5;12m| [0m[0m  println!(&quot;{:?}&quot;, Program::new().Issue305_test::&lt;()&gt;[0m[0m[38;5;10m(())[0m[0m);[0m</span></span>
+<span id="cb2-134"><a href="#cb2-134" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                                                      [0m[0m[38;5;10m~~~~[0m</span></span>
+<span id="cb2-135"><a href="#cb2-135" aria-hidden="true"></a></span>
+<span id="cb2-136"><a href="#cb2-136" aria-hidden="true"></a>[0m[1mSome errors have detailed explanations: E0061, E0283.[0m</span>
+<span id="cb2-137"><a href="#cb2-137" aria-hidden="true"></a>[0m[1mFor more information about an error, try `rustc --explain E0061`.[0m</span>
+<span id="cb2-138"><a href="#cb2-138" aria-hidden="true"></a>[1m[31merror[0m[1m:[0m could <span class="kw">not</span> compile `main` (bin <span class="st">&quot;Issue305&quot;</span>) due to <span class="dv">8</span> previous errors</span></span></code></pre></div>
 </body>
 </html>

@@ -74,23 +74,24 @@
     code span.vs { color: #4e9a06; } /* VerbatimString */
     code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
   </style>
-  <style>pre > code.sourceCode { white-space: pre-wrap }</style>
+  <style>pre > code.sourceCode { white-space: pre-wrap }
+  pre > code.sourceCode > span.chunk { display: block; line-height: inherit;
+    content-visibility: auto; contain-intrinsic-size: auto 125em }
+  .chunk > span { display: inline-block; line-height: 1.25 }</style>
 </head>
 <body>
 <pre><code>ERROR [0m[1m[38;5;9merror[E0091][0m[0m[1m: type parameter `a` is never used[0m</code></pre>
 <hr />
-<div class="sourceCode" id="cb2"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>[1m[33mwarning[0m[1m:[0m no edition set: defaulting to the <span class="dv">2015</span> edition <span class="kw">while</span> the latest is <span class="dv">2024</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>[1m[32m   Compiling[0m main v0.<span class="fl">0.0</span> (/home/runner/work/agda2lambox/agda2lambox/test/gen/rust)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;9merror[E0091][0m[0m[1m: type parameter `a` is never used[0m</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>[0m  [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mTuples.rs:54:32[0m</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m54[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mtype Haskell_Extra_Dec_Dec&lt;&#39;a, a&gt; = &amp;&#39;a Haskell_Extra_Refinement_ՖՖ002203&lt;&#39;a, &amp;&#39;a Agda_Builtin_Bool_Bool&lt;&#39;a&gt;, ()&gt;;[0m</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                                [0m[0m[1m[38;5;9m^[0m[0m [0m[0m[1m[38;5;9munused type parameter[0m</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m= [0m[0m[1mhelp[0m[0m: consider removing `a` or referring to it in the body of the type alias[0m</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m= [0m[0m[1mhelp[0m[0m: if you intended `a` to be a const parameter, use `const a: /* Type */` instead[0m</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a>[0m[1mFor more information about this error, try `rustc --explain E0091`.[0m</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a>[1m[31merror[0m[1m:[0m could <span class="kw">not</span> compile `main` (bin <span class="st">&quot;Tuples&quot;</span>) due to <span class="dv">1</span> previous error</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span class="chunk"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;9merror[E0091][0m[0m[1m: type parameter `a` is never used[0m</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>[0m  [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mTuples.rs:54:32[0m</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m54[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mtype Haskell_Extra_Dec_Dec&lt;&#39;a, a&gt; = &amp;&#39;a Haskell_Extra_Refinement_ՖՖ002203&lt;&#39;a, &amp;&#39;a Agda_Builtin_Bool_Bool&lt;&#39;a&gt;, ()&gt;;[0m</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                                [0m[0m[1m[38;5;9m^[0m[0m [0m[0m[1m[38;5;9munused type parameter[0m</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m= [0m[0m[1mhelp[0m[0m: consider removing `a` or referring to it in the body of the type alias[0m</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m= [0m[0m[1mhelp[0m[0m: if you intended `a` to be a const parameter, use `const a: /* Type */` instead[0m</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a>[0m[1mFor more information about this error, try `rustc --explain E0091`.[0m</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a>[1m[31merror[0m[1m:[0m could <span class="kw">not</span> compile `main` (bin <span class="st">&quot;Tuples&quot;</span>) due to <span class="dv">1</span> previous error</span></span></code></pre></div>
 </body>
 </html>

@@ -74,65 +74,66 @@
     code span.vs { color: #4e9a06; } /* VerbatimString */
     code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
   </style>
-  <style>pre > code.sourceCode { white-space: pre-wrap }</style>
+  <style>pre > code.sourceCode { white-space: pre-wrap }
+  pre > code.sourceCode > span.chunk { display: block; line-height: inherit;
+    content-visibility: auto; contain-intrinsic-size: auto 125em }
+  .chunk > span { display: inline-block; line-height: 1.25 }</style>
 </head>
 <body>
 <pre><code>ERROR [0m[1m[38;5;9merror[0m[0m[1m: missing parameters for function definition[0m</code></pre>
 <hr />
-<div class="sourceCode" id="cb2"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>[1m[33mwarning[0m[1m:[0m no edition set: defaulting to the <span class="dv">2015</span> edition <span class="kw">while</span> the latest is <span class="dv">2024</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>[1m[32m   Compiling[0m main v0.<span class="fl">0.0</span> (/home/runner/work/agda2lambox/agda2lambox/test/gen/rust)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;9merror[0m[0m[1m: missing parameters for function definition[0m</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mDoNotation.rs:597:40[0m</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m597[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mfn Haskell_Prim_Monad_Do_DefaultMonad_r#return&lt;m: Copy, a: Copy&gt;(&amp;&#39;a self, x: &amp;&#39;a Haskell_Prim_Monad_Do_DefaultMonad&lt;&#39;a, m&gt;) -&gt; &amp;&#39;a dyn F[0m[0m[1m[38;5;12m...[0m</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                                        [0m[0m[1m[38;5;9m^[0m</span></span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span class="chunk"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;9merror[0m[0m[1m: missing parameters for function definition[0m</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mDoNotation.rs:597:40[0m</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m597[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mfn Haskell_Prim_Monad_Do_DefaultMonad_r#return&lt;m: Copy, a: Copy&gt;(&amp;&#39;a self, x: &amp;&#39;a Haskell_Prim_Monad_Do_DefaultMonad&lt;&#39;a, m&gt;) -&gt; &amp;&#39;a dyn F[0m[0m[1m[38;5;12m...[0m</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                                        [0m[0m[1m[38;5;9m^[0m</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;14mhelp[0m[0m: add a parameter list[0m</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;14mhelp[0m[0m: add a parameter list[0m</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m597[0m[0m [0m[0m[1m[38;5;12m| [0m[0mfn Haskell_Prim_Monad_Do_DefaultMonad_r[0m[0m[38;5;10m()[0m[0m#return&lt;m: Copy, a: Copy&gt;(&amp;&#39;a self, x: &amp;&#39;a Haskell_Prim_Monad_Do_DefaultMonad&lt;&#39;a, m&gt;) -&gt; &amp;&#39;a dyn Fn(a) -&gt; m {[0m</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                                        [0m[0m[38;5;10m++[0m</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;9merror[0m[0m[1m: expected one of `-&gt;`, `&lt;`, `where`, or `{`, found `#`[0m</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mDoNotation.rs:597:40[0m</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true"></a>[0m     [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m81[0m[0m   [0m[0m[1m[38;5;12m|[0m[0m [0m[0mimpl&lt;&#39;a&gt; Program {[0m</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true"></a>[0m     [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                  [0m[0m[1m[38;5;12m-[0m[0m [0m[0m[1m[38;5;12mwhile parsing this item list starting here[0m</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m...[0m</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m597[0m[0m  [0m[0m[1m[38;5;12m|[0m[0m [0m[0mfn Haskell_Prim_Monad_Do_DefaultMonad_r#return&lt;m: Copy, a: Copy&gt;(&amp;&#39;a self, x: &amp;&#39;a Haskell_Prim_Monad_Do_DefaultMonad&lt;&#39;a, m&gt;) -&gt; &amp;&#39;a dyn F[0m[0m[1m[38;5;12m...[0m</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true"></a>[0m     [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                                        [0m[0m[1m[38;5;9m^[0m[0m [0m[0m[1m[38;5;9mexpected one of `-&gt;`, `&lt;`, `where`, or `{`[0m</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m...[0m</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m1333[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m}[0m</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true"></a>[0m     [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m [0m[0m[1m[38;5;12m-[0m[0m [0m[0m[1m[38;5;12mthe item list ends here[0m</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true"></a></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;9merror[E0308][0m[0m[1m: mismatched types[0m</span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mDoNotation.rs:572:7[0m</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m569[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mfn Haskell_Prim_Applicative_Applicative_pure&lt;f: Copy, a: Copy&gt;(&amp;&#39;a self, x: &amp;&#39;a Haskell_Prim_Applicative_Applicative&lt;&#39;a, f&gt;) -&gt; &amp;&#39;a dyn Fn(()) -&gt; &amp;&#39;a dyn Fn(a) -&gt; [0m[0m[1m[38;5;12m...[0m</span></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                                                       [0m[0m[1m[38;5;12m-[0m[0m [0m[0m[1m[38;5;12mexpected this type parameter[0m[0m                                            [0m[0m[1m[38;5;12m------------------------------------[0m[0m [0m[0m[1m[38;5;12mexpected `&amp;&#39;a (dyn Fn(()) -&gt; &amp;&#39;a (dyn Fn(a) -&gt; f + &#39;a) + &#39;a)` because of return type[0m</span></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m...[0m</span></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m572[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m      x2[0m</span></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m       [0m[0m[1m[38;5;9m^^[0m[0m [0m[0m[1m[38;5;9mexpected `&amp;dyn Fn(()) -&gt; &amp;dyn Fn(a) -&gt; f`, found `&amp;dyn Fn(()) -&gt; &amp;dyn Fn(()) -&gt; f`[0m</span></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m= [0m[0m[1mnote[0m[0m: expected reference `[0m[0m[1m[35m&amp;&#39;a (dyn Fn(()) -&gt; &amp;&#39;a (dyn Fn(a) -&gt; f + &#39;a) + &#39;a)[0m[0m`[0m</span></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true"></a>[0m               found reference `[0m[0m[1m[35m&amp;dyn Fn(()) -&gt; &amp;dyn Fn(()) -&gt; f[0m[0m`[0m</span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true"></a></span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;9merror[E0599][0m[0m[1m: no method named `DoNotation_test` found for struct `Program` in the current scope[0m</span></span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mDoNotation.rs:1335:35[0m</span></span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true"></a>[0m     [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m77[0m[0m   [0m[0m[1m[38;5;12m|[0m[0m [0m[0mstruct Program {[0m</span></span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true"></a>[0m     [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m [0m[0m[1m[38;5;12m--------------[0m[0m [0m[0m[1m[38;5;12mmethod `DoNotation_test` not found for this struct[0m</span></span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m...[0m</span></span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m1335[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m  println!(&quot;{:?}&quot;, Program::new().DoNotation_test());[0m</span></span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true"></a>[0m     [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                                   [0m[0m[1m[38;5;9m^^^^^^^^^^^^^^^[0m</span></span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true"></a>[0m     [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;14mhelp[0m[0m: there is a method `DoNotation_landLeft` with a similar name, but with different arguments[0m</span></span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mDoNotation.rs:398:1[0m</span></span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true"></a>[0m     [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m398[0m[0m  [0m[0m[1m[38;5;12m|[0m[0m [0m[0mfn DoNotation_landLeft(&amp;&#39;a self, x: DoNotation_Birds&lt;&#39;a&gt;, x2: DoNotation_Pole&lt;&#39;a&gt;) -&gt; &amp;&#39;a Haskell_Prim_Maybe_Maybe&lt;&#39;a, DoNotation_Pole&lt;&#39;a&gt;[0m[0m[1m[38;5;12m...[0m</span></span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true"></a>[0m     [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m [0m[0m[1m[38;5;14m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m</span></span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true"></a></span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true"></a>[0m[1mSome errors have detailed explanations: E0308, E0599.[0m</span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true"></a>[0m[1mFor more information about an error, try `rustc --explain E0308`.[0m</span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true"></a>[1m[31merror[0m[1m:[0m could <span class="kw">not</span> compile `main` (bin <span class="st">&quot;DoNotation&quot;</span>) due to <span class="dv">4</span> previous errors</span></code></pre></div>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m597[0m[0m [0m[0m[1m[38;5;12m| [0m[0mfn Haskell_Prim_Monad_Do_DefaultMonad_r[0m[0m[38;5;10m()[0m[0m#return&lt;m: Copy, a: Copy&gt;(&amp;&#39;a self, x: &amp;&#39;a Haskell_Prim_Monad_Do_DefaultMonad&lt;&#39;a, m&gt;) -&gt; &amp;&#39;a dyn Fn(a) -&gt; m {[0m</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                                        [0m[0m[38;5;10m++[0m</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;9merror[0m[0m[1m: expected one of `-&gt;`, `&lt;`, `where`, or `{`, found `#`[0m</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mDoNotation.rs:597:40[0m</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true"></a>[0m     [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m81[0m[0m   [0m[0m[1m[38;5;12m|[0m[0m [0m[0mimpl&lt;&#39;a&gt; Program {[0m</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true"></a>[0m     [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                  [0m[0m[1m[38;5;12m-[0m[0m [0m[0m[1m[38;5;12mwhile parsing this item list starting here[0m</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m...[0m</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m597[0m[0m  [0m[0m[1m[38;5;12m|[0m[0m [0m[0mfn Haskell_Prim_Monad_Do_DefaultMonad_r#return&lt;m: Copy, a: Copy&gt;(&amp;&#39;a self, x: &amp;&#39;a Haskell_Prim_Monad_Do_DefaultMonad&lt;&#39;a, m&gt;) -&gt; &amp;&#39;a dyn F[0m[0m[1m[38;5;12m...[0m</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true"></a>[0m     [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                                        [0m[0m[1m[38;5;9m^[0m[0m [0m[0m[1m[38;5;9mexpected one of `-&gt;`, `&lt;`, `where`, or `{`[0m</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m...[0m</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m1333[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m}[0m</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true"></a>[0m     [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m [0m[0m[1m[38;5;12m-[0m[0m [0m[0m[1m[38;5;12mthe item list ends here[0m</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;9merror[E0308][0m[0m[1m: mismatched types[0m</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mDoNotation.rs:572:7[0m</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m569[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mfn Haskell_Prim_Applicative_Applicative_pure&lt;f: Copy, a: Copy&gt;(&amp;&#39;a self, x: &amp;&#39;a Haskell_Prim_Applicative_Applicative&lt;&#39;a, f&gt;) -&gt; &amp;&#39;a dyn Fn(()) -&gt; &amp;&#39;a dyn Fn(a) -&gt; [0m[0m[1m[38;5;12m...[0m</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                                                       [0m[0m[1m[38;5;12m-[0m[0m [0m[0m[1m[38;5;12mexpected this type parameter[0m[0m                                            [0m[0m[1m[38;5;12m------------------------------------[0m[0m [0m[0m[1m[38;5;12mexpected `&amp;&#39;a (dyn Fn(()) -&gt; &amp;&#39;a (dyn Fn(a) -&gt; f + &#39;a) + &#39;a)` because of return type[0m</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m...[0m</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m572[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m      x2[0m</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m       [0m[0m[1m[38;5;9m^^[0m[0m [0m[0m[1m[38;5;9mexpected `&amp;dyn Fn(()) -&gt; &amp;dyn Fn(a) -&gt; f`, found `&amp;dyn Fn(()) -&gt; &amp;dyn Fn(()) -&gt; f`[0m</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m= [0m[0m[1mnote[0m[0m: expected reference `[0m[0m[1m[35m&amp;&#39;a (dyn Fn(()) -&gt; &amp;&#39;a (dyn Fn(a) -&gt; f + &#39;a) + &#39;a)[0m[0m`[0m</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true"></a>[0m               found reference `[0m[0m[1m[35m&amp;dyn Fn(()) -&gt; &amp;dyn Fn(()) -&gt; f[0m[0m`[0m</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true"></a></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;9merror[E0599][0m[0m[1m: no method named `DoNotation_test` found for struct `Program` in the current scope[0m</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mDoNotation.rs:1335:35[0m</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true"></a>[0m     [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m77[0m[0m   [0m[0m[1m[38;5;12m|[0m[0m [0m[0mstruct Program {[0m</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true"></a>[0m     [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m [0m[0m[1m[38;5;12m--------------[0m[0m [0m[0m[1m[38;5;12mmethod `DoNotation_test` not found for this struct[0m</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m...[0m</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m1335[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m  println!(&quot;{:?}&quot;, Program::new().DoNotation_test());[0m</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true"></a>[0m     [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                                   [0m[0m[1m[38;5;9m^^^^^^^^^^^^^^^[0m</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true"></a>[0m     [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;14mhelp[0m[0m: there is a method `DoNotation_landLeft` with a similar name, but with different arguments[0m</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true"></a>[0m    [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mDoNotation.rs:398:1[0m</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true"></a>[0m     [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m398[0m[0m  [0m[0m[1m[38;5;12m|[0m[0m [0m[0mfn DoNotation_landLeft(&amp;&#39;a self, x: DoNotation_Birds&lt;&#39;a&gt;, x2: DoNotation_Pole&lt;&#39;a&gt;) -&gt; &amp;&#39;a Haskell_Prim_Maybe_Maybe&lt;&#39;a, DoNotation_Pole&lt;&#39;a&gt;[0m[0m[1m[38;5;12m...[0m</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true"></a>[0m     [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m [0m[0m[1m[38;5;14m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true"></a></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true"></a>[0m[1mSome errors have detailed explanations: E0308, E0599.[0m</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true"></a>[0m[1mFor more information about an error, try `rustc --explain E0308`.[0m</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true"></a>[1m[31merror[0m[1m:[0m could <span class="kw">not</span> compile `main` (bin <span class="st">&quot;DoNotation&quot;</span>) due to <span class="dv">4</span> previous errors</span></span></code></pre></div>
 </body>
 </html>

@@ -74,10 +74,13 @@
     code span.vs { color: #4e9a06; } /* VerbatimString */
     code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
   </style>
-  <style>pre > code.sourceCode { white-space: pre-wrap }</style>
+  <style>pre > code.sourceCode { white-space: pre-wrap }
+  pre > code.sourceCode > span.chunk { display: block; line-height: inherit;
+    content-visibility: auto; contain-intrinsic-size: auto 125em }
+  .chunk > span { display: inline-block; line-height: 1.25 }</style>
 </head>
 <body>
-<div class="sourceCode" id="cb1"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a>(module ($def_Issue93__<span class="dv">8</span>_y (<span class="kw">lambda</span> ($wildcard) <span class="dv">1</span>))</span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span class="chunk"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a>(module ($def_Issue93__<span class="dv">8</span>_y (<span class="kw">lambda</span> ($wildcard) <span class="dv">1</span>))</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>  ($def_Haskell_Prim_case_of_</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>    (<span class="kw">lambda</span> ($wildcard $wildcard0 $wildcard1 $wildcard2)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>      (apply $wildcard2 $wildcard1</span>
@@ -177,7 +180,7 @@
 <span id="cb1-98"><a href="#cb1-98" aria-hidden="true"></a>    (apply $def_Agda_Builtin_Nat___UU2b_</span>
 <span id="cb1-99"><a href="#cb1-99" aria-hidden="true"></a>      (apply $def_Agda_Builtin_Nat___UU2b_</span>
 <span id="cb1-100"><a href="#cb1-100" aria-hidden="true"></a>        (apply $def_Agda_Builtin_Nat___UU2b_</span>
-<span id="cb1-101"><a href="#cb1-101" aria-hidden="true"></a>          (apply $def_Agda_Builtin_Nat___UU2b_</span>
+</span><span class="chunk"><span id="cb1-101"><a href="#cb1-101" aria-hidden="true"></a>          (apply $def_Agda_Builtin_Nat___UU2b_</span>
 <span id="cb1-102"><a href="#cb1-102" aria-hidden="true"></a>            (apply $def_Haskell_Prim_if_then_else_</span>
 <span id="cb1-103"><a href="#cb1-103" aria-hidden="true"></a>              (<span class="kw">let</span> (rec ($reccall (<span class="kw">lambda</span> ($wildcard0) $reccall))) $reccall)</span>
 <span id="cb1-104"><a href="#cb1-104" aria-hidden="true"></a>              (<span class="kw">let</span> (rec ($reccall (<span class="kw">lambda</span> ($wildcard0) $reccall))) $reccall)</span>
@@ -242,6 +245,6 @@
 <span id="cb1-163"><a href="#cb1-163" aria-hidden="true"></a>        (<span class="kw">lambda</span> ($wildcard) (block (tag <span class="dv">0</span>) (block (tag <span class="dv">0</span>) <span class="dv">0</span>)))</span>
 <span id="cb1-164"><a href="#cb1-164" aria-hidden="true"></a>        (<span class="kw">lambda</span> ($wildcard) <span class="dv">0</span>))))</span>
 <span id="cb1-165"><a href="#cb1-165" aria-hidden="true"></a>  ($def_main $def_Issue93_test) ($test $def_Issue93_test) ($main $def_main)</span>
-<span id="cb1-166"><a href="#cb1-166" aria-hidden="true"></a>  (export $test $main))</span></code></pre></div>
+<span id="cb1-166"><a href="#cb1-166" aria-hidden="true"></a>  (export $test $main))</span></span></code></pre></div>
 </body>
 </html>

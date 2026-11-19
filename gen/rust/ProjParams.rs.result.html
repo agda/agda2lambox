@@ -74,57 +74,58 @@
     code span.vs { color: #4e9a06; } /* VerbatimString */
     code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
   </style>
-  <style>pre > code.sourceCode { white-space: pre-wrap }</style>
+  <style>pre > code.sourceCode { white-space: pre-wrap }
+  pre > code.sourceCode > span.chunk { display: block; line-height: inherit;
+    content-visibility: auto; contain-intrinsic-size: auto 125em }
+  .chunk > span { display: inline-block; line-height: 1.25 }</style>
 </head>
 <body>
 <pre><code>ERROR [0m[1m[38;5;9merror[E0091][0m[0m[1m: type parameter `A` is never used[0m</code></pre>
 <hr />
-<div class="sourceCode" id="cb2"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>[1m[33mwarning[0m[1m:[0m no edition set: defaulting to the <span class="dv">2015</span> edition <span class="kw">while</span> the latest is <span class="dv">2024</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>[1m[32m   Compiling[0m main v0.<span class="fl">0.0</span> (/home/runner/work/agda2lambox/agda2lambox/test/gen/rust)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;9merror[E0091][0m[0m[1m: type parameter `A` is never used[0m</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>[0m  [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mProjParams.rs:25:39[0m</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m25[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mtype ProjParams_Number_Constraint&lt;&#39;a, A&gt; = ();[0m</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                                       [0m[0m[1m[38;5;9m^[0m[0m [0m[0m[1m[38;5;9munused type parameter[0m</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m= [0m[0m[1mhelp[0m[0m: consider removing `A` or referring to it in the body of the type alias[0m</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m= [0m[0m[1mhelp[0m[0m: if you intended `A` to be a const parameter, use `const A: /* Type */` instead[0m</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;9merror[E0308][0m[0m[1m: mismatched types[0m</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a>[0m  [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mProjParams.rs:83:7[0m</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m81[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m    ProjParams_Number::constructor([0m</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m     [0m[0m[1m[38;5;12m------------------------------[0m[0m [0m[0m[1m[38;5;12marguments to this enum variant are incorrect[0m</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m82[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m      PhantomData,[0m</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m83[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m      self.Agda_Builtin_Nat_Ֆ_Ֆplus___curried()))[0m</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m       [0m[0m[1m[38;5;9m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[0m [0m[0m[1m[38;5;9mexpected `()`, found `&amp;Agda_Builtin_Nat_Nat&lt;&#39;_&gt;`[0m</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m= [0m[0m[1mnote[0m[0m: expected reference `&amp;[0m[0m[1m[35mdyn Fn(&amp;Agda_Builtin_Nat_Nat&lt;&#39;_&gt;) -&gt; &amp;dyn Fn(()) -&gt; &amp;&#39;a Agda_Builtin_Nat_Nat&lt;&#39;a&gt;[0m[0m`[0m</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true"></a>[0m              found reference `&amp;[0m[0m[1m[35mdyn Fn(&amp;Agda_Builtin_Nat_Nat&lt;&#39;_&gt;) -&gt; &amp;dyn Fn(&amp;Agda_Builtin_Nat_Nat&lt;&#39;_&gt;) -&gt; &amp;Agda_Builtin_Nat_Nat&lt;&#39;_&gt;[0m[0m`[0m</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;10mnote[0m[0m: tuple variant defined here[0m</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true"></a>[0m  [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mProjParams.rs:22:3[0m</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m22[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m  constructor(PhantomData&lt;&amp;&#39;a A&gt;, &amp;&#39;a dyn Fn(&amp;&#39;a Agda_Builtin_Nat_Nat&lt;&#39;a&gt;) -&gt; &amp;&#39;a dyn Fn(()) -&gt; A)[0m</span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m   [0m[0m[1m[38;5;10m^^^^^^^^^^^[0m</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true"></a></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;9merror[E0308][0m[0m[1m: mismatched types[0m</span></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true"></a>[0m  [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mProjParams.rs:87:3[0m</span></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m86[0m[0m [0m[0m[1m[38;5;12m|[0m[0m   [0m[0mfn ProjParams_two(&amp;&#39;a self) -&gt; ProjParams_Number_Constraint&lt;&#39;a, &amp;&#39;a Agda_Builtin_Nat_Nat&lt;&#39;a&gt;&gt; {[0m</span></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                                  [0m[0m[1m[38;5;12m--------------------------------------------------------------[0m[0m [0m[0m[1m[38;5;12mexpected `()` because of return type[0m</span></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m87[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;9m/[0m[0m [0m[0m  self.alloc([0m</span></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m88[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;9m|[0m[0m [0m[0m    Agda_Builtin_Nat_Nat::suc([0m</span></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m89[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;9m|[0m[0m [0m[0m      PhantomData,[0m</span></span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m90[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;9m|[0m[0m [0m[0m      self.alloc([0m</span></span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m...[0m[0m  [0m[0m[1m[38;5;9m|[0m</span></span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m94[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;9m|[0m[0m [0m[0m            Agda_Builtin_Nat_Nat::zero([0m</span></span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m95[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;9m|[0m[0m [0m[0m              PhantomData))))))[0m</span></span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m [0m[0m[1m[38;5;9m|[0m[0m                               [0m[0m[1m[38;5;9m^[0m[0m[1m[38;5;12m-[0m[0m [0m[0m[1m[38;5;12mhelp: consider using a semicolon here: `;`[0m</span></span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m [0m[0m[1m[38;5;9m|_______________________________|[0m</span></span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                                 [0m[0m[1m[38;5;9mexpected `()`, found `&amp;Agda_Builtin_Nat_Nat&lt;&#39;_&gt;`[0m</span></span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true"></a></span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true"></a>[0m[1mSome errors have detailed explanations: E0091, E0308.[0m</span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true"></a>[0m[1mFor more information about an error, try `rustc --explain E0091`.[0m</span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true"></a>[1m[31merror[0m[1m:[0m could <span class="kw">not</span> compile `main` (bin <span class="st">&quot;ProjParams&quot;</span>) due to <span class="dv">3</span> previous errors</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span class="chunk"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;9merror[E0091][0m[0m[1m: type parameter `A` is never used[0m</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>[0m  [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mProjParams.rs:25:39[0m</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m25[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mtype ProjParams_Number_Constraint&lt;&#39;a, A&gt; = ();[0m</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                                       [0m[0m[1m[38;5;9m^[0m[0m [0m[0m[1m[38;5;9munused type parameter[0m</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m= [0m[0m[1mhelp[0m[0m: consider removing `A` or referring to it in the body of the type alias[0m</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m= [0m[0m[1mhelp[0m[0m: if you intended `A` to be a const parameter, use `const A: /* Type */` instead[0m</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;9merror[E0308][0m[0m[1m: mismatched types[0m</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a>[0m  [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mProjParams.rs:83:7[0m</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m81[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m    ProjParams_Number::constructor([0m</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m     [0m[0m[1m[38;5;12m------------------------------[0m[0m [0m[0m[1m[38;5;12marguments to this enum variant are incorrect[0m</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m82[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m      PhantomData,[0m</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m83[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m      self.Agda_Builtin_Nat_Ֆ_Ֆplus___curried()))[0m</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m       [0m[0m[1m[38;5;9m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[0m [0m[0m[1m[38;5;9mexpected `()`, found `&amp;Agda_Builtin_Nat_Nat&lt;&#39;_&gt;`[0m</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m= [0m[0m[1mnote[0m[0m: expected reference `&amp;[0m[0m[1m[35mdyn Fn(&amp;Agda_Builtin_Nat_Nat&lt;&#39;_&gt;) -&gt; &amp;dyn Fn(()) -&gt; &amp;&#39;a Agda_Builtin_Nat_Nat&lt;&#39;a&gt;[0m[0m`[0m</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true"></a>[0m              found reference `&amp;[0m[0m[1m[35mdyn Fn(&amp;Agda_Builtin_Nat_Nat&lt;&#39;_&gt;) -&gt; &amp;dyn Fn(&amp;Agda_Builtin_Nat_Nat&lt;&#39;_&gt;) -&gt; &amp;Agda_Builtin_Nat_Nat&lt;&#39;_&gt;[0m[0m`[0m</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;10mnote[0m[0m: tuple variant defined here[0m</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true"></a>[0m  [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mProjParams.rs:22:3[0m</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m22[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m  constructor(PhantomData&lt;&amp;&#39;a A&gt;, &amp;&#39;a dyn Fn(&amp;&#39;a Agda_Builtin_Nat_Nat&lt;&#39;a&gt;) -&gt; &amp;&#39;a dyn Fn(()) -&gt; A)[0m</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m   [0m[0m[1m[38;5;10m^^^^^^^^^^^[0m</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;9merror[E0308][0m[0m[1m: mismatched types[0m</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true"></a>[0m  [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m--&gt; [0m[0mProjParams.rs:87:3[0m</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m86[0m[0m [0m[0m[1m[38;5;12m|[0m[0m   [0m[0mfn ProjParams_two(&amp;&#39;a self) -&gt; ProjParams_Number_Constraint&lt;&#39;a, &amp;&#39;a Agda_Builtin_Nat_Nat&lt;&#39;a&gt;&gt; {[0m</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                                  [0m[0m[1m[38;5;12m--------------------------------------------------------------[0m[0m [0m[0m[1m[38;5;12mexpected `()` because of return type[0m</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m87[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;9m/[0m[0m [0m[0m  self.alloc([0m</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m88[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;9m|[0m[0m [0m[0m    Agda_Builtin_Nat_Nat::suc([0m</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m89[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;9m|[0m[0m [0m[0m      PhantomData,[0m</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m90[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;9m|[0m[0m [0m[0m      self.alloc([0m</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m...[0m[0m  [0m[0m[1m[38;5;9m|[0m</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m94[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;9m|[0m[0m [0m[0m            Agda_Builtin_Nat_Nat::zero([0m</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true"></a>[0m[1m[<span class="dv">38</span><span class="co">;5;12m95[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;9m|[0m[0m [0m[0m              PhantomData))))))[0m</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m [0m[0m[1m[38;5;9m|[0m[0m                               [0m[0m[1m[38;5;9m^[0m[0m[1m[38;5;12m-[0m[0m [0m[0m[1m[38;5;12mhelp: consider using a semicolon here: `;`[0m</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m [0m[0m[1m[38;5;9m|_______________________________|[0m</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true"></a>[0m   [0m[0m[1m[<span class="dv">38</span><span class="co">;5;12m|[0m[0m                                 [0m[0m[1m[38;5;9mexpected `()`, found `&amp;Agda_Builtin_Nat_Nat&lt;&#39;_&gt;`[0m</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true"></a></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true"></a>[0m[1mSome errors have detailed explanations: E0091, E0308.[0m</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true"></a>[0m[1mFor more information about an error, try `rustc --explain E0091`.[0m</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true"></a>[1m[31merror[0m[1m:[0m could <span class="kw">not</span> compile `main` (bin <span class="st">&quot;ProjParams&quot;</span>) due to <span class="dv">3</span> previous errors</span></span></code></pre></div>
 </body>
 </html>

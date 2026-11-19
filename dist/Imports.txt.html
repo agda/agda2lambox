@@ -74,10 +74,13 @@
     code span.vs { color: #4e9a06; } /* VerbatimString */
     code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
   </style>
-  <style>pre > code.sourceCode { white-space: pre-wrap }</style>
+  <style>pre > code.sourceCode { white-space: pre-wrap }
+  pre > code.sourceCode > span.chunk { display: block; line-height: inherit;
+    content-visibility: auto; contain-intrinsic-size: auto 125em }
+  .chunk > span { display: inline-block; line-height: 1.25 }</style>
 </head>
 <body>
-<div class="sourceCode" id="cb1"><pre class="sourceCode agda"><code class="sourceCode agda"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a>LamBox<span class="ot">.</span>Empty:</span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode agda"><code class="sourceCode agda"><span class="chunk"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a>LamBox<span class="ot">.</span>Empty:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>  <span class="kw">mutual</span> <span class="kw">inductive</span><span class="ot">(</span>s<span class="ot">):</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>    Empty</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>      constructors:</span>
@@ -120,14 +123,10 @@
 <span id="cb1-41"><a href="#cb1-41" aria-hidden="true"></a>  constant declaration:</span>
 <span id="cb1-42"><a href="#cb1-42" aria-hidden="true"></a>    body: Imports<span class="ot">.</span>map □ □</span>
 <span id="cb1-43"><a href="#cb1-43" aria-hidden="true"></a>            <span class="ot">(</span>Agda<span class="ot">.</span>Builtin<span class="ot">.</span>Nat<span class="ot">._</span>+<span class="ot">_</span></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true"></a>               <span class="ot">(</span>Agda<span class="ot">.</span>Builtin<span class="ot">.</span>Nat<span class="ot">.</span>Nat<span class="ot">{</span><span class="dv">0</span><span class="ot">}{</span><span class="dv">1</span><span class="ot">}</span></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true"></a>                  <span class="ot">(</span>Agda<span class="ot">.</span>Builtin<span class="ot">.</span>Nat<span class="ot">.</span>Nat<span class="ot">{</span><span class="dv">0</span><span class="ot">}{</span><span class="dv">1</span><span class="ot">}</span></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true"></a>                     <span class="ot">(</span>Agda<span class="ot">.</span>Builtin<span class="ot">.</span>Nat<span class="ot">.</span>Nat<span class="ot">{</span><span class="dv">0</span><span class="ot">}{</span><span class="dv">1</span><span class="ot">}</span></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true"></a>                        <span class="ot">(</span>Agda<span class="ot">.</span>Builtin<span class="ot">.</span>Nat<span class="ot">.</span>Nat<span class="ot">{</span><span class="dv">0</span><span class="ot">}{</span><span class="dv">1</span><span class="ot">}</span></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true"></a>                           <span class="ot">(</span>Agda<span class="ot">.</span>Builtin<span class="ot">.</span>Nat<span class="ot">.</span>Nat<span class="ot">{</span><span class="dv">0</span><span class="ot">}{</span><span class="dv">1</span><span class="ot">}</span> Agda<span class="ot">.</span>Builtin<span class="ot">.</span>Nat<span class="ot">.</span>Nat<span class="ot">{</span><span class="dv">0</span><span class="ot">}{</span><span class="dv">0</span><span class="ot">}))))))</span></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true"></a>            <span class="ot">(</span>Agda<span class="ot">.</span>Builtin<span class="ot">.</span>List<span class="ot">.</span>List<span class="ot">{</span><span class="dv">0</span><span class="ot">}{</span><span class="dv">1</span><span class="ot">}</span> □</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true"></a>               <span class="ot">(</span>Agda<span class="ot">.</span>Builtin<span class="ot">.</span>Nat<span class="ot">.</span>Nat<span class="ot">{</span><span class="dv">0</span><span class="ot">}{</span><span class="dv">1</span><span class="ot">}</span> Agda<span class="ot">.</span>Builtin<span class="ot">.</span>Nat<span class="ot">.</span>Nat<span class="ot">{</span><span class="dv">0</span><span class="ot">}{</span><span class="dv">0</span><span class="ot">})</span></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true"></a>               <span class="ot">(</span>Agda<span class="ot">.</span>Builtin<span class="ot">.</span>List<span class="ot">.</span>List<span class="ot">{</span><span class="dv">0</span><span class="ot">}{</span><span class="dv">0</span><span class="ot">}</span> □<span class="ot">))</span></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true"></a>main program: [Imports<span class="ot">.</span>test]</span></code></pre></div>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true"></a>               <span class="ot">(</span>Agda<span class="ot">.</span>Builtin<span class="ot">.</span>Nat<span class="ot">.</span>Nat<span class="ot">{</span><span class="dv">0</span><span class="ot">}{</span><span class="dv">1</span><span class="ot">}</span>^5 Agda<span class="ot">.</span>Builtin<span class="ot">.</span>Nat<span class="ot">.</span>Nat<span class="ot">{</span><span class="dv">0</span><span class="ot">}{</span><span class="dv">0</span><span class="ot">}))</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true"></a>            <span class="ot">(</span>Agda<span class="ot">.</span>Builtin<span class="ot">.</span>List<span class="ot">.</span>List<span class="ot">{</span><span class="dv">0</span><span class="ot">}{</span><span class="dv">1</span><span class="ot">}</span> □</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true"></a>               <span class="ot">(</span>Agda<span class="ot">.</span>Builtin<span class="ot">.</span>Nat<span class="ot">.</span>Nat<span class="ot">{</span><span class="dv">0</span><span class="ot">}{</span><span class="dv">1</span><span class="ot">}</span> Agda<span class="ot">.</span>Builtin<span class="ot">.</span>Nat<span class="ot">.</span>Nat<span class="ot">{</span><span class="dv">0</span><span class="ot">}{</span><span class="dv">0</span><span class="ot">})</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true"></a>               <span class="ot">(</span>Agda<span class="ot">.</span>Builtin<span class="ot">.</span>List<span class="ot">.</span>List<span class="ot">{</span><span class="dv">0</span><span class="ot">}{</span><span class="dv">0</span><span class="ot">}</span> □<span class="ot">))</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true"></a>main program: [Imports<span class="ot">.</span>test]</span></span></code></pre></div>
 </body>
 </html>

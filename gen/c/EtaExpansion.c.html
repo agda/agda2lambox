@@ -74,10 +74,13 @@
     code span.vs { color: #4e9a06; } /* VerbatimString */
     code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
   </style>
-  <style>pre > code.sourceCode { white-space: pre-wrap }</style>
+  <style>pre > code.sourceCode { white-space: pre-wrap }
+  pre > code.sourceCode > span.chunk { display: block; line-height: inherit;
+    content-visibility: auto; contain-intrinsic-size: auto 125em }
+  .chunk > span { display: inline-block; line-height: 1.25 }</style>
 </head>
 <body>
-<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="pp">#ifndef ETAEXPANSION_C</span></span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span class="chunk"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="pp">#ifndef ETAEXPANSION_C</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="pp">#define ETAEXPANSION_C</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&lt;gc_stack.h&gt;</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="pp">#include </span><span class="im">&quot;EtaExpansion.h&quot;</span></span>
@@ -177,7 +180,7 @@
 <span id="cb1-98"><a href="#cb1-98" aria-hidden="true"></a></span>
 <span id="cb1-99"><a href="#cb1-99" aria-hidden="true"></a><span class="dt">unsigned</span> <span class="dt">long</span> <span class="dt">long</span> <span class="dt">const</span> y_known_info_1149[<span class="dv">3</span>] = { <span class="dv">20</span><span class="bu">LL</span>, <span class="dv">1</span><span class="bu">LL</span>, <span class="dv">0</span><span class="bu">LL</span>, };</span>
 <span id="cb1-100"><a href="#cb1-100" aria-hidden="true"></a></span>
-<span id="cb1-101"><a href="#cb1-101" aria-hidden="true"></a><span class="dt">unsigned</span> <span class="dt">long</span> <span class="dt">long</span> <span class="dt">const</span> y_wrapper_info_1148[<span class="dv">4</span>] = { <span class="dv">0</span><span class="bu">LL</span>, <span class="dv">2</span><span class="bu">LL</span>, <span class="dv">0</span><span class="bu">LL</span>, <span class="dv">1</span><span class="bu">LL</span>, };</span>
+</span><span class="chunk"><span id="cb1-101"><a href="#cb1-101" aria-hidden="true"></a><span class="dt">unsigned</span> <span class="dt">long</span> <span class="dt">long</span> <span class="dt">const</span> y_wrapper_info_1148[<span class="dv">4</span>] = { <span class="dv">0</span><span class="bu">LL</span>, <span class="dv">2</span><span class="bu">LL</span>, <span class="dv">0</span><span class="bu">LL</span>, <span class="dv">1</span><span class="bu">LL</span>, };</span>
 <span id="cb1-102"><a href="#cb1-102" aria-hidden="true"></a></span>
 <span id="cb1-103"><a href="#cb1-103" aria-hidden="true"></a><span class="dt">unsigned</span> <span class="dt">long</span> <span class="dt">long</span> <span class="dt">const</span> y_known_info_1147[<span class="dv">3</span>] = { <span class="dv">80</span><span class="bu">LL</span>, <span class="dv">1</span><span class="bu">LL</span>, <span class="dv">0</span><span class="bu">LL</span>, };</span>
 <span id="cb1-104"><a href="#cb1-104" aria-hidden="true"></a></span>
@@ -277,7 +280,7 @@
 <span id="cb1-198"><a href="#cb1-198" aria-hidden="true"></a>                $limit = (*$tinfo).limit;</span>
 <span id="cb1-199"><a href="#cb1-199" aria-hidden="true"></a>              }</span>
 <span id="cb1-200"><a href="#cb1-200" aria-hidden="true"></a>              <span class="co">/*skip*/</span>;</span>
-<span id="cb1-201"><a href="#cb1-201" aria-hidden="true"></a>              $y_585 = <span class="dv">1</span><span class="bu">LL</span>;</span>
+</span><span class="chunk"><span id="cb1-201"><a href="#cb1-201" aria-hidden="true"></a>              $y_585 = <span class="dv">1</span><span class="bu">LL</span>;</span>
 <span id="cb1-202"><a href="#cb1-202" aria-hidden="true"></a>              $y_586 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-203"><a href="#cb1-203" aria-hidden="true"></a>              $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-204"><a href="#cb1-204" aria-hidden="true"></a>              *((value *) $y_586 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
@@ -377,7 +380,7 @@
 <span id="cb1-298"><a href="#cb1-298" aria-hidden="true"></a>                ((value (*)(<span class="kw">struct</span> thread_info *, value, value)) __UU2b__uncurried_known_101)</span>
 <span id="cb1-299"><a href="#cb1-299" aria-hidden="true"></a>                ($tinfo, $y_573, $y_570);</span>
 <span id="cb1-300"><a href="#cb1-300" aria-hidden="true"></a>              <span class="cf">return</span> $result;</span>
-<span id="cb1-301"><a href="#cb1-301" aria-hidden="true"></a>              <span class="cf">break</span>;</span>
+</span><span class="chunk"><span id="cb1-301"><a href="#cb1-301" aria-hidden="true"></a>              <span class="cf">break</span>;</span>
 <span id="cb1-302"><a href="#cb1-302" aria-hidden="true"></a>            </span>
 <span id="cb1-303"><a href="#cb1-303" aria-hidden="true"></a>          }</span>
 <span id="cb1-304"><a href="#cb1-304" aria-hidden="true"></a>        }</span>
@@ -477,7 +480,7 @@
 <span id="cb1-398"><a href="#cb1-398" aria-hidden="true"></a>      <span class="cf">default</span>:</span>
 <span id="cb1-399"><a href="#cb1-399" aria-hidden="true"></a>        $anon_557 = *((value *) $s_555 + <span class="dv">0</span><span class="bu">LL</span>);</span>
 <span id="cb1-400"><a href="#cb1-400" aria-hidden="true"></a>        $args = (*$tinfo).args;</span>
-<span id="cb1-401"><a href="#cb1-401" aria-hidden="true"></a>        (*$tinfo).alloc = $alloc;</span>
+</span><span class="chunk"><span id="cb1-401"><a href="#cb1-401" aria-hidden="true"></a>        (*$tinfo).alloc = $alloc;</span>
 <span id="cb1-402"><a href="#cb1-402" aria-hidden="true"></a>        (*$tinfo).limit = $limit;</span>
 <span id="cb1-403"><a href="#cb1-403" aria-hidden="true"></a>        $result =</span>
 <span id="cb1-404"><a href="#cb1-404" aria-hidden="true"></a>          ((value (*)(<span class="kw">struct</span> thread_info *, value, value)) __UU2b__uncurried_known_101)</span>
@@ -577,7 +580,7 @@
 <span id="cb1-498"><a href="#cb1-498" aria-hidden="true"></a>    frame.next = root + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-499"><a href="#cb1-499" aria-hidden="true"></a>    (*$tinfo).fp = &amp;frame;</span>
 <span id="cb1-500"><a href="#cb1-500" aria-hidden="true"></a>    (*$tinfo).nalloc = <span class="dv">80</span><span class="bu">LL</span>;</span>
-<span id="cb1-501"><a href="#cb1-501" aria-hidden="true"></a>    garbage_collect($tinfo);</span>
+</span><span class="chunk"><span id="cb1-501"><a href="#cb1-501" aria-hidden="true"></a>    garbage_collect($tinfo);</span>
 <span id="cb1-502"><a href="#cb1-502" aria-hidden="true"></a>    $s_491 = *(root + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-503"><a href="#cb1-503" aria-hidden="true"></a>    $env_490 = *(root + <span class="dv">0</span><span class="bu">LL</span>);</span>
 <span id="cb1-504"><a href="#cb1-504" aria-hidden="true"></a>    (*$tinfo).fp = frame.prev;</span>
@@ -677,7 +680,7 @@
 <span id="cb1-598"><a href="#cb1-598" aria-hidden="true"></a>        $y_514 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-599"><a href="#cb1-599" aria-hidden="true"></a>        $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-600"><a href="#cb1-600" aria-hidden="true"></a>        *((value *) $y_514 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
-<span id="cb1-601"><a href="#cb1-601" aria-hidden="true"></a>        *((value *) $y_514 + <span class="dv">0</span><span class="bu">LL</span>) = $y_513;</span>
+</span><span class="chunk"><span id="cb1-601"><a href="#cb1-601" aria-hidden="true"></a>        *((value *) $y_514 + <span class="dv">0</span><span class="bu">LL</span>) = $y_513;</span>
 <span id="cb1-602"><a href="#cb1-602" aria-hidden="true"></a>        $y_515 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-603"><a href="#cb1-603" aria-hidden="true"></a>        $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-604"><a href="#cb1-604" aria-hidden="true"></a>        *((value *) $y_515 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
@@ -777,7 +780,7 @@
 <span id="cb1-698"><a href="#cb1-698" aria-hidden="true"></a>        $y_539 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-699"><a href="#cb1-699" aria-hidden="true"></a>        $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-700"><a href="#cb1-700" aria-hidden="true"></a>        *((value *) $y_539 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
-<span id="cb1-701"><a href="#cb1-701" aria-hidden="true"></a>        *((value *) $y_539 + <span class="dv">0</span><span class="bu">LL</span>) = $y_538;</span>
+</span><span class="chunk"><span id="cb1-701"><a href="#cb1-701" aria-hidden="true"></a>        *((value *) $y_539 + <span class="dv">0</span><span class="bu">LL</span>) = $y_538;</span>
 <span id="cb1-702"><a href="#cb1-702" aria-hidden="true"></a>        $y_540 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-703"><a href="#cb1-703" aria-hidden="true"></a>        $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-704"><a href="#cb1-704" aria-hidden="true"></a>        *((value *) $y_540 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
@@ -877,7 +880,7 @@
 <span id="cb1-798"><a href="#cb1-798" aria-hidden="true"></a>  <span class="dt">register</span> value $y_470;</span>
 <span id="cb1-799"><a href="#cb1-799" aria-hidden="true"></a>  <span class="dt">register</span> value $y_471;</span>
 <span id="cb1-800"><a href="#cb1-800" aria-hidden="true"></a>  <span class="dt">register</span> value $y_472;</span>
-<span id="cb1-801"><a href="#cb1-801" aria-hidden="true"></a>  <span class="dt">register</span> value $y_473;</span>
+</span><span class="chunk"><span id="cb1-801"><a href="#cb1-801" aria-hidden="true"></a>  <span class="dt">register</span> value $y_473;</span>
 <span id="cb1-802"><a href="#cb1-802" aria-hidden="true"></a>  <span class="dt">register</span> value $y_474;</span>
 <span id="cb1-803"><a href="#cb1-803" aria-hidden="true"></a>  <span class="dt">register</span> value $y_475;</span>
 <span id="cb1-804"><a href="#cb1-804" aria-hidden="true"></a>  <span class="dt">register</span> value $y_476;</span>
@@ -977,7 +980,7 @@
 <span id="cb1-898"><a href="#cb1-898" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-899"><a href="#cb1-899" aria-hidden="true"></a>  *((value *) $y_460 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-900"><a href="#cb1-900" aria-hidden="true"></a>  *((value *) $y_460 + <span class="dv">0</span><span class="bu">LL</span>) = $y_459;</span>
-<span id="cb1-901"><a href="#cb1-901" aria-hidden="true"></a>  $y_461 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
+</span><span class="chunk"><span id="cb1-901"><a href="#cb1-901" aria-hidden="true"></a>  $y_461 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-902"><a href="#cb1-902" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-903"><a href="#cb1-903" aria-hidden="true"></a>  *((value *) $y_461 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-904"><a href="#cb1-904" aria-hidden="true"></a>  *((value *) $y_461 + <span class="dv">0</span><span class="bu">LL</span>) = $y_460;</span>
@@ -1077,7 +1080,7 @@
 <span id="cb1-998"><a href="#cb1-998" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-999"><a href="#cb1-999" aria-hidden="true"></a>  *((value *) $y_485 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-1000"><a href="#cb1-1000" aria-hidden="true"></a>  *((value *) $y_485 + <span class="dv">0</span><span class="bu">LL</span>) = $y_484;</span>
-<span id="cb1-1001"><a href="#cb1-1001" aria-hidden="true"></a>  $y_proj_486 = *((value *) $env_443 + <span class="dv">0</span><span class="bu">LL</span>);</span>
+</span><span class="chunk"><span id="cb1-1001"><a href="#cb1-1001" aria-hidden="true"></a>  $y_proj_486 = *((value *) $env_443 + <span class="dv">0</span><span class="bu">LL</span>);</span>
 <span id="cb1-1002"><a href="#cb1-1002" aria-hidden="true"></a>  $args = (*$tinfo).args;</span>
 <span id="cb1-1003"><a href="#cb1-1003" aria-hidden="true"></a>  (*$tinfo).alloc = $alloc;</span>
 <span id="cb1-1004"><a href="#cb1-1004" aria-hidden="true"></a>  (*$tinfo).limit = $limit;</span>
@@ -1177,7 +1180,7 @@
 <span id="cb1-1098"><a href="#cb1-1098" aria-hidden="true"></a>  $y_437 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-1099"><a href="#cb1-1099" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-1100"><a href="#cb1-1100" aria-hidden="true"></a>  *((value *) $y_437 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
-<span id="cb1-1101"><a href="#cb1-1101" aria-hidden="true"></a>  *((value *) $y_437 + <span class="dv">0</span><span class="bu">LL</span>) = $y_436;</span>
+</span><span class="chunk"><span id="cb1-1101"><a href="#cb1-1101" aria-hidden="true"></a>  *((value *) $y_437 + <span class="dv">0</span><span class="bu">LL</span>) = $y_436;</span>
 <span id="cb1-1102"><a href="#cb1-1102" aria-hidden="true"></a>  $y_438 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-1103"><a href="#cb1-1103" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-1104"><a href="#cb1-1104" aria-hidden="true"></a>  *((value *) $y_438 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
@@ -1277,7 +1280,7 @@
 <span id="cb1-1198"><a href="#cb1-1198" aria-hidden="true"></a>}</span>
 <span id="cb1-1199"><a href="#cb1-1199" aria-hidden="true"></a></span>
 <span id="cb1-1200"><a href="#cb1-1200" aria-hidden="true"></a>value y_wrapper_119(<span class="kw">struct</span> thread_info *$tinfo, value $env_416, value $anon_417)</span>
-<span id="cb1-1201"><a href="#cb1-1201" aria-hidden="true"></a>{</span>
+</span><span class="chunk"><span id="cb1-1201"><a href="#cb1-1201" aria-hidden="true"></a>{</span>
 <span id="cb1-1202"><a href="#cb1-1202" aria-hidden="true"></a>  <span class="kw">struct</span> stack_frame frame;</span>
 <span id="cb1-1203"><a href="#cb1-1203" aria-hidden="true"></a>  value root[<span class="dv">1</span>];</span>
 <span id="cb1-1204"><a href="#cb1-1204" aria-hidden="true"></a>  <span class="dt">register</span> value *$alloc;</span>
@@ -1377,7 +1380,7 @@
 <span id="cb1-1298"><a href="#cb1-1298" aria-hidden="true"></a>  *((value *) $y_376 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-1299"><a href="#cb1-1299" aria-hidden="true"></a>  *((value *) $y_376 + <span class="dv">0</span><span class="bu">LL</span>) = $y_375;</span>
 <span id="cb1-1300"><a href="#cb1-1300" aria-hidden="true"></a>  $y_377 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
-<span id="cb1-1301"><a href="#cb1-1301" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
+</span><span class="chunk"><span id="cb1-1301"><a href="#cb1-1301" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-1302"><a href="#cb1-1302" aria-hidden="true"></a>  *((value *) $y_377 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-1303"><a href="#cb1-1303" aria-hidden="true"></a>  *((value *) $y_377 + <span class="dv">0</span><span class="bu">LL</span>) = $y_376;</span>
 <span id="cb1-1304"><a href="#cb1-1304" aria-hidden="true"></a>  $y_378 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
@@ -1477,7 +1480,7 @@
 <span id="cb1-1398"><a href="#cb1-1398" aria-hidden="true"></a>  *((value *) $y_401 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-1399"><a href="#cb1-1399" aria-hidden="true"></a>  *((value *) $y_401 + <span class="dv">0</span><span class="bu">LL</span>) = $y_400;</span>
 <span id="cb1-1400"><a href="#cb1-1400" aria-hidden="true"></a>  $y_402 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
-<span id="cb1-1401"><a href="#cb1-1401" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
+</span><span class="chunk"><span id="cb1-1401"><a href="#cb1-1401" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-1402"><a href="#cb1-1402" aria-hidden="true"></a>  *((value *) $y_402 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-1403"><a href="#cb1-1403" aria-hidden="true"></a>  *((value *) $y_402 + <span class="dv">0</span><span class="bu">LL</span>) = $y_401;</span>
 <span id="cb1-1404"><a href="#cb1-1404" aria-hidden="true"></a>  $y_403 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
@@ -1577,7 +1580,7 @@
 <span id="cb1-1498"><a href="#cb1-1498" aria-hidden="true"></a>  <span class="dt">register</span> value $y_366;</span>
 <span id="cb1-1499"><a href="#cb1-1499" aria-hidden="true"></a>  <span class="dt">register</span> value $y_367;</span>
 <span id="cb1-1500"><a href="#cb1-1500" aria-hidden="true"></a>  <span class="dt">register</span> value *$alloc;</span>
-<span id="cb1-1501"><a href="#cb1-1501" aria-hidden="true"></a>  <span class="dt">register</span> value *$limit;</span>
+</span><span class="chunk"><span id="cb1-1501"><a href="#cb1-1501" aria-hidden="true"></a>  <span class="dt">register</span> value *$limit;</span>
 <span id="cb1-1502"><a href="#cb1-1502" aria-hidden="true"></a>  <span class="dt">register</span> value *$args;</span>
 <span id="cb1-1503"><a href="#cb1-1503" aria-hidden="true"></a>  <span class="dt">register</span> <span class="dt">_Bool</span> $arg;</span>
 <span id="cb1-1504"><a href="#cb1-1504" aria-hidden="true"></a>  <span class="dt">register</span> value $result;</span>
@@ -1677,7 +1680,7 @@
 <span id="cb1-1598"><a href="#cb1-1598" aria-hidden="true"></a>    (*$tinfo).fp = frame.prev;</span>
 <span id="cb1-1599"><a href="#cb1-1599" aria-hidden="true"></a>    $alloc = (*$tinfo).alloc;</span>
 <span id="cb1-1600"><a href="#cb1-1600" aria-hidden="true"></a>    $limit = (*$tinfo).limit;</span>
-<span id="cb1-1601"><a href="#cb1-1601" aria-hidden="true"></a>  }</span>
+</span><span class="chunk"><span id="cb1-1601"><a href="#cb1-1601" aria-hidden="true"></a>  }</span>
 <span id="cb1-1602"><a href="#cb1-1602" aria-hidden="true"></a>  <span class="cf">if</span> (($s_350 &amp; <span class="dv">1</span>) == <span class="dv">0</span>) {</span>
 <span id="cb1-1603"><a href="#cb1-1603" aria-hidden="true"></a>    <span class="cf">switch</span> (*((value *) $s_350 + -<span class="dv">1</span><span class="bu">LL</span>) &amp; <span class="dv">255</span><span class="bu">LL</span>) {</span>
 <span id="cb1-1604"><a href="#cb1-1604" aria-hidden="true"></a>      </span>
@@ -1777,7 +1780,7 @@
 <span id="cb1-1698"><a href="#cb1-1698" aria-hidden="true"></a>  <span class="dt">register</span> value $y_339;</span>
 <span id="cb1-1699"><a href="#cb1-1699" aria-hidden="true"></a>  <span class="dt">register</span> value $y_340;</span>
 <span id="cb1-1700"><a href="#cb1-1700" aria-hidden="true"></a>  <span class="dt">register</span> value $y_341;</span>
-<span id="cb1-1701"><a href="#cb1-1701" aria-hidden="true"></a>  <span class="dt">register</span> value $y_342;</span>
+</span><span class="chunk"><span id="cb1-1701"><a href="#cb1-1701" aria-hidden="true"></a>  <span class="dt">register</span> value $y_342;</span>
 <span id="cb1-1702"><a href="#cb1-1702" aria-hidden="true"></a>  <span class="dt">register</span> value $y_343;</span>
 <span id="cb1-1703"><a href="#cb1-1703" aria-hidden="true"></a>  <span class="dt">register</span> value $y_344;</span>
 <span id="cb1-1704"><a href="#cb1-1704" aria-hidden="true"></a>  <span class="dt">register</span> value *$alloc;</span>
@@ -1877,7 +1880,7 @@
 <span id="cb1-1798"><a href="#cb1-1798" aria-hidden="true"></a>  *((value *) $y_322 + <span class="dv">0</span><span class="bu">LL</span>) = $y_321;</span>
 <span id="cb1-1799"><a href="#cb1-1799" aria-hidden="true"></a>  $y_323 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-1800"><a href="#cb1-1800" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
-<span id="cb1-1801"><a href="#cb1-1801" aria-hidden="true"></a>  *((value *) $y_323 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
+</span><span class="chunk"><span id="cb1-1801"><a href="#cb1-1801" aria-hidden="true"></a>  *((value *) $y_323 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-1802"><a href="#cb1-1802" aria-hidden="true"></a>  *((value *) $y_323 + <span class="dv">0</span><span class="bu">LL</span>) = $y_322;</span>
 <span id="cb1-1803"><a href="#cb1-1803" aria-hidden="true"></a>  $y_324 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-1804"><a href="#cb1-1804" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
@@ -1977,7 +1980,7 @@
 <span id="cb1-1898"><a href="#cb1-1898" aria-hidden="true"></a>  <span class="kw">struct</span> stack_frame frame;</span>
 <span id="cb1-1899"><a href="#cb1-1899" aria-hidden="true"></a>  value root[<span class="dv">1</span>];</span>
 <span id="cb1-1900"><a href="#cb1-1900" aria-hidden="true"></a>  <span class="dt">register</span> value *$alloc;</span>
-<span id="cb1-1901"><a href="#cb1-1901" aria-hidden="true"></a>  <span class="dt">register</span> value *$limit;</span>
+</span><span class="chunk"><span id="cb1-1901"><a href="#cb1-1901" aria-hidden="true"></a>  <span class="dt">register</span> value *$limit;</span>
 <span id="cb1-1902"><a href="#cb1-1902" aria-hidden="true"></a>  <span class="dt">register</span> value *$args;</span>
 <span id="cb1-1903"><a href="#cb1-1903" aria-hidden="true"></a>  <span class="dt">register</span> <span class="dt">_Bool</span> $arg;</span>
 <span id="cb1-1904"><a href="#cb1-1904" aria-hidden="true"></a>  <span class="dt">register</span> value $result;</span>
@@ -2077,7 +2080,7 @@
 <span id="cb1-1998"><a href="#cb1-1998" aria-hidden="true"></a>  $args = (*$tinfo).args;</span>
 <span id="cb1-1999"><a href="#cb1-1999" aria-hidden="true"></a>  (*$tinfo).alloc = $alloc;</span>
 <span id="cb1-2000"><a href="#cb1-2000" aria-hidden="true"></a>  (*$tinfo).limit = $limit;</span>
-<span id="cb1-2001"><a href="#cb1-2001" aria-hidden="true"></a>  $result =</span>
+</span><span class="chunk"><span id="cb1-2001"><a href="#cb1-2001" aria-hidden="true"></a>  $result =</span>
 <span id="cb1-2002"><a href="#cb1-2002" aria-hidden="true"></a>    ((value (*)(<span class="kw">struct</span> thread_info *, value, value)) __UU2b__uncurried_known_101)</span>
 <span id="cb1-2003"><a href="#cb1-2003" aria-hidden="true"></a>    ($tinfo, $y_297, $anon_286);</span>
 <span id="cb1-2004"><a href="#cb1-2004" aria-hidden="true"></a>  <span class="cf">return</span> $result;</span>
@@ -2177,7 +2180,7 @@
 <span id="cb1-2098"><a href="#cb1-2098" aria-hidden="true"></a>  <span class="dt">register</span> value $y_247;</span>
 <span id="cb1-2099"><a href="#cb1-2099" aria-hidden="true"></a>  <span class="dt">register</span> value $y_248;</span>
 <span id="cb1-2100"><a href="#cb1-2100" aria-hidden="true"></a>  <span class="dt">register</span> value $y_249;</span>
-<span id="cb1-2101"><a href="#cb1-2101" aria-hidden="true"></a>  <span class="dt">register</span> value $y_250;</span>
+</span><span class="chunk"><span id="cb1-2101"><a href="#cb1-2101" aria-hidden="true"></a>  <span class="dt">register</span> value $y_250;</span>
 <span id="cb1-2102"><a href="#cb1-2102" aria-hidden="true"></a>  <span class="dt">register</span> value $y_251;</span>
 <span id="cb1-2103"><a href="#cb1-2103" aria-hidden="true"></a>  <span class="dt">register</span> value $y_252;</span>
 <span id="cb1-2104"><a href="#cb1-2104" aria-hidden="true"></a>  <span class="dt">register</span> value $y_253;</span>
@@ -2277,7 +2280,7 @@
 <span id="cb1-2198"><a href="#cb1-2198" aria-hidden="true"></a>        *((value *) $y_233 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-2199"><a href="#cb1-2199" aria-hidden="true"></a>        *((value *) $y_233 + <span class="dv">0</span><span class="bu">LL</span>) = $y_232;</span>
 <span id="cb1-2200"><a href="#cb1-2200" aria-hidden="true"></a>        $env_234 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
-<span id="cb1-2201"><a href="#cb1-2201" aria-hidden="true"></a>        $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
+</span><span class="chunk"><span id="cb1-2201"><a href="#cb1-2201" aria-hidden="true"></a>        $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-2202"><a href="#cb1-2202" aria-hidden="true"></a>        *((value *) $env_234 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-2203"><a href="#cb1-2203" aria-hidden="true"></a>        *((value *) $env_234 + <span class="dv">0</span><span class="bu">LL</span>) = $y_233;</span>
 <span id="cb1-2204"><a href="#cb1-2204" aria-hidden="true"></a>        $y_wrapper_clo_235 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
@@ -2377,7 +2380,7 @@
 <span id="cb1-2298"><a href="#cb1-2298" aria-hidden="true"></a>        *((value *) $y_257 + <span class="dv">0</span><span class="bu">LL</span>) = $y_256;</span>
 <span id="cb1-2299"><a href="#cb1-2299" aria-hidden="true"></a>        $y_258 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-2300"><a href="#cb1-2300" aria-hidden="true"></a>        $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
-<span id="cb1-2301"><a href="#cb1-2301" aria-hidden="true"></a>        *((value *) $y_258 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
+</span><span class="chunk"><span id="cb1-2301"><a href="#cb1-2301" aria-hidden="true"></a>        *((value *) $y_258 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-2302"><a href="#cb1-2302" aria-hidden="true"></a>        *((value *) $y_258 + <span class="dv">0</span><span class="bu">LL</span>) = $y_257;</span>
 <span id="cb1-2303"><a href="#cb1-2303" aria-hidden="true"></a>        $y_259 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-2304"><a href="#cb1-2304" aria-hidden="true"></a>        $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
@@ -2477,7 +2480,7 @@
 <span id="cb1-2398"><a href="#cb1-2398" aria-hidden="true"></a>  <span class="dt">register</span> value $y_166;</span>
 <span id="cb1-2399"><a href="#cb1-2399" aria-hidden="true"></a>  <span class="dt">register</span> value $y_167;</span>
 <span id="cb1-2400"><a href="#cb1-2400" aria-hidden="true"></a>  <span class="dt">register</span> value $y_168;</span>
-<span id="cb1-2401"><a href="#cb1-2401" aria-hidden="true"></a>  <span class="dt">register</span> value $y_169;</span>
+</span><span class="chunk"><span id="cb1-2401"><a href="#cb1-2401" aria-hidden="true"></a>  <span class="dt">register</span> value $y_169;</span>
 <span id="cb1-2402"><a href="#cb1-2402" aria-hidden="true"></a>  <span class="dt">register</span> value $y_170;</span>
 <span id="cb1-2403"><a href="#cb1-2403" aria-hidden="true"></a>  <span class="dt">register</span> value $y_171;</span>
 <span id="cb1-2404"><a href="#cb1-2404" aria-hidden="true"></a>  <span class="dt">register</span> value $y_172;</span>
@@ -2577,7 +2580,7 @@
 <span id="cb1-2498"><a href="#cb1-2498" aria-hidden="true"></a>        *((value *) $y_169 + <span class="dv">0</span><span class="bu">LL</span>) = $y_168;</span>
 <span id="cb1-2499"><a href="#cb1-2499" aria-hidden="true"></a>        $y_170 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-2500"><a href="#cb1-2500" aria-hidden="true"></a>        $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
-<span id="cb1-2501"><a href="#cb1-2501" aria-hidden="true"></a>        *((value *) $y_170 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
+</span><span class="chunk"><span id="cb1-2501"><a href="#cb1-2501" aria-hidden="true"></a>        *((value *) $y_170 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-2502"><a href="#cb1-2502" aria-hidden="true"></a>        *((value *) $y_170 + <span class="dv">0</span><span class="bu">LL</span>) = $y_169;</span>
 <span id="cb1-2503"><a href="#cb1-2503" aria-hidden="true"></a>        $y_171 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-2504"><a href="#cb1-2504" aria-hidden="true"></a>        $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
@@ -2677,7 +2680,7 @@
 <span id="cb1-2598"><a href="#cb1-2598" aria-hidden="true"></a>        $y_194 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-2599"><a href="#cb1-2599" aria-hidden="true"></a>        $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-2600"><a href="#cb1-2600" aria-hidden="true"></a>        *((value *) $y_194 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
-<span id="cb1-2601"><a href="#cb1-2601" aria-hidden="true"></a>        *((value *) $y_194 + <span class="dv">0</span><span class="bu">LL</span>) = $y_193;</span>
+</span><span class="chunk"><span id="cb1-2601"><a href="#cb1-2601" aria-hidden="true"></a>        *((value *) $y_194 + <span class="dv">0</span><span class="bu">LL</span>) = $y_193;</span>
 <span id="cb1-2602"><a href="#cb1-2602" aria-hidden="true"></a>        $y_195 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-2603"><a href="#cb1-2603" aria-hidden="true"></a>        $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-2604"><a href="#cb1-2604" aria-hidden="true"></a>        *((value *) $y_195 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
@@ -2777,7 +2780,7 @@
 <span id="cb1-2698"><a href="#cb1-2698" aria-hidden="true"></a>        $env_219 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-2699"><a href="#cb1-2699" aria-hidden="true"></a>        $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-2700"><a href="#cb1-2700" aria-hidden="true"></a>        *((value *) $env_219 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
-<span id="cb1-2701"><a href="#cb1-2701" aria-hidden="true"></a>        *((value *) $env_219 + <span class="dv">0</span><span class="bu">LL</span>) = $y_218;</span>
+</span><span class="chunk"><span id="cb1-2701"><a href="#cb1-2701" aria-hidden="true"></a>        *((value *) $env_219 + <span class="dv">0</span><span class="bu">LL</span>) = $y_218;</span>
 <span id="cb1-2702"><a href="#cb1-2702" aria-hidden="true"></a>        $y_wrapper_clo_220 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-2703"><a href="#cb1-2703" aria-hidden="true"></a>        $alloc = $alloc + <span class="dv">3</span><span class="bu">LL</span>;</span>
 <span id="cb1-2704"><a href="#cb1-2704" aria-hidden="true"></a>        *((value *) $y_wrapper_clo_220 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">2048</span><span class="bu">LL</span>;</span>
@@ -2877,7 +2880,7 @@
 <span id="cb1-2798"><a href="#cb1-2798" aria-hidden="true"></a>  frame.next = root;</span>
 <span id="cb1-2799"><a href="#cb1-2799" aria-hidden="true"></a>  frame.root = root;</span>
 <span id="cb1-2800"><a href="#cb1-2800" aria-hidden="true"></a>  frame.prev = (*$tinfo).fp;</span>
-<span id="cb1-2801"><a href="#cb1-2801" aria-hidden="true"></a>  <span class="cf">if</span> (!(<span class="dv">5</span><span class="bu">LL</span> &lt;= $limit - $alloc)) {</span>
+</span><span class="chunk"><span id="cb1-2801"><a href="#cb1-2801" aria-hidden="true"></a>  <span class="cf">if</span> (!(<span class="dv">5</span><span class="bu">LL</span> &lt;= $limit - $alloc)) {</span>
 <span id="cb1-2802"><a href="#cb1-2802" aria-hidden="true"></a>    *(root + <span class="dv">0</span><span class="bu">LL</span>) = $anon_154;</span>
 <span id="cb1-2803"><a href="#cb1-2803" aria-hidden="true"></a>    frame.next = root + <span class="dv">1</span><span class="bu">LL</span>;</span>
 <span id="cb1-2804"><a href="#cb1-2804" aria-hidden="true"></a>    (*$tinfo).fp = &amp;frame;</span>
@@ -2977,7 +2980,7 @@
 <span id="cb1-2898"><a href="#cb1-2898" aria-hidden="true"></a>    <span class="cf">switch</span> ($anon_144 &gt;&gt; <span class="dv">1</span><span class="bu">LL</span>) {</span>
 <span id="cb1-2899"><a href="#cb1-2899" aria-hidden="true"></a>      <span class="cf">default</span>:</span>
 <span id="cb1-2900"><a href="#cb1-2900" aria-hidden="true"></a>        $y_145 = <span class="dv">1</span><span class="bu">LL</span>;</span>
-<span id="cb1-2901"><a href="#cb1-2901" aria-hidden="true"></a>        (*$tinfo).alloc = $alloc;</span>
+</span><span class="chunk"><span id="cb1-2901"><a href="#cb1-2901" aria-hidden="true"></a>        (*$tinfo).alloc = $alloc;</span>
 <span id="cb1-2902"><a href="#cb1-2902" aria-hidden="true"></a>        (*$tinfo).limit = $limit;</span>
 <span id="cb1-2903"><a href="#cb1-2903" aria-hidden="true"></a>        <span class="cf">return</span> $y_145;</span>
 <span id="cb1-2904"><a href="#cb1-2904" aria-hidden="true"></a>        <span class="cf">break</span>;</span>
@@ -3077,7 +3080,7 @@
 <span id="cb1-2998"><a href="#cb1-2998" aria-hidden="true"></a>      <span class="cf">default</span>:</span>
 <span id="cb1-2999"><a href="#cb1-2999" aria-hidden="true"></a>        $anon_131 = *((value *) $anon_130 + <span class="dv">0</span><span class="bu">LL</span>);</span>
 <span id="cb1-3000"><a href="#cb1-3000" aria-hidden="true"></a>        $args = (*$tinfo).args;</span>
-<span id="cb1-3001"><a href="#cb1-3001" aria-hidden="true"></a>        (*$tinfo).alloc = $alloc;</span>
+</span><span class="chunk"><span id="cb1-3001"><a href="#cb1-3001" aria-hidden="true"></a>        (*$tinfo).alloc = $alloc;</span>
 <span id="cb1-3002"><a href="#cb1-3002" aria-hidden="true"></a>        (*$tinfo).limit = $limit;</span>
 <span id="cb1-3003"><a href="#cb1-3003" aria-hidden="true"></a>        <span class="co">/*skip*/</span>;</span>
 <span id="cb1-3004"><a href="#cb1-3004" aria-hidden="true"></a>        $y_132 =</span>
@@ -3177,7 +3180,7 @@
 <span id="cb1-3098"><a href="#cb1-3098" aria-hidden="true"></a>  <span class="dt">register</span> value $y_645;</span>
 <span id="cb1-3099"><a href="#cb1-3099" aria-hidden="true"></a>  <span class="dt">register</span> value $y_646;</span>
 <span id="cb1-3100"><a href="#cb1-3100" aria-hidden="true"></a>  <span class="dt">register</span> value $y_647;</span>
-<span id="cb1-3101"><a href="#cb1-3101" aria-hidden="true"></a>  <span class="dt">register</span> value $y_648;</span>
+</span><span class="chunk"><span id="cb1-3101"><a href="#cb1-3101" aria-hidden="true"></a>  <span class="dt">register</span> value $y_648;</span>
 <span id="cb1-3102"><a href="#cb1-3102" aria-hidden="true"></a>  <span class="dt">register</span> value $y_649;</span>
 <span id="cb1-3103"><a href="#cb1-3103" aria-hidden="true"></a>  <span class="dt">register</span> value $y_650;</span>
 <span id="cb1-3104"><a href="#cb1-3104" aria-hidden="true"></a>  <span class="dt">register</span> value $y_651;</span>
@@ -3277,7 +3280,7 @@
 <span id="cb1-3198"><a href="#cb1-3198" aria-hidden="true"></a>  <span class="dt">register</span> value $y_749;</span>
 <span id="cb1-3199"><a href="#cb1-3199" aria-hidden="true"></a>  <span class="dt">register</span> value $y_750;</span>
 <span id="cb1-3200"><a href="#cb1-3200" aria-hidden="true"></a>  <span class="dt">register</span> value $y_751;</span>
-<span id="cb1-3201"><a href="#cb1-3201" aria-hidden="true"></a>  <span class="dt">register</span> value $y_752;</span>
+</span><span class="chunk"><span id="cb1-3201"><a href="#cb1-3201" aria-hidden="true"></a>  <span class="dt">register</span> value $y_752;</span>
 <span id="cb1-3202"><a href="#cb1-3202" aria-hidden="true"></a>  <span class="dt">register</span> value $y_753;</span>
 <span id="cb1-3203"><a href="#cb1-3203" aria-hidden="true"></a>  <span class="dt">register</span> value $y_754;</span>
 <span id="cb1-3204"><a href="#cb1-3204" aria-hidden="true"></a>  <span class="dt">register</span> value $y_755;</span>
@@ -3377,7 +3380,7 @@
 <span id="cb1-3298"><a href="#cb1-3298" aria-hidden="true"></a>  <span class="dt">register</span> value $y_860;</span>
 <span id="cb1-3299"><a href="#cb1-3299" aria-hidden="true"></a>  <span class="dt">register</span> value $y_861;</span>
 <span id="cb1-3300"><a href="#cb1-3300" aria-hidden="true"></a>  <span class="dt">register</span> value $y_862;</span>
-<span id="cb1-3301"><a href="#cb1-3301" aria-hidden="true"></a>  <span class="dt">register</span> value $y_863;</span>
+</span><span class="chunk"><span id="cb1-3301"><a href="#cb1-3301" aria-hidden="true"></a>  <span class="dt">register</span> value $y_863;</span>
 <span id="cb1-3302"><a href="#cb1-3302" aria-hidden="true"></a>  <span class="dt">register</span> value $y_864;</span>
 <span id="cb1-3303"><a href="#cb1-3303" aria-hidden="true"></a>  <span class="dt">register</span> value $y_865;</span>
 <span id="cb1-3304"><a href="#cb1-3304" aria-hidden="true"></a>  <span class="dt">register</span> value $y_866;</span>
@@ -3477,7 +3480,7 @@
 <span id="cb1-3398"><a href="#cb1-3398" aria-hidden="true"></a>  <span class="dt">register</span> value $y_965;</span>
 <span id="cb1-3399"><a href="#cb1-3399" aria-hidden="true"></a>  <span class="dt">register</span> value $y_966;</span>
 <span id="cb1-3400"><a href="#cb1-3400" aria-hidden="true"></a>  <span class="dt">register</span> value $y_967;</span>
-<span id="cb1-3401"><a href="#cb1-3401" aria-hidden="true"></a>  <span class="dt">register</span> value $y_968;</span>
+</span><span class="chunk"><span id="cb1-3401"><a href="#cb1-3401" aria-hidden="true"></a>  <span class="dt">register</span> value $y_968;</span>
 <span id="cb1-3402"><a href="#cb1-3402" aria-hidden="true"></a>  <span class="dt">register</span> value $y_969;</span>
 <span id="cb1-3403"><a href="#cb1-3403" aria-hidden="true"></a>  <span class="dt">register</span> value $y_970;</span>
 <span id="cb1-3404"><a href="#cb1-3404" aria-hidden="true"></a>  <span class="dt">register</span> value $y_971;</span>
@@ -3577,7 +3580,7 @@
 <span id="cb1-3498"><a href="#cb1-3498" aria-hidden="true"></a>  <span class="dt">register</span> value $y_1069;</span>
 <span id="cb1-3499"><a href="#cb1-3499" aria-hidden="true"></a>  <span class="dt">register</span> value $y_1070;</span>
 <span id="cb1-3500"><a href="#cb1-3500" aria-hidden="true"></a>  <span class="dt">register</span> value $y_1071;</span>
-<span id="cb1-3501"><a href="#cb1-3501" aria-hidden="true"></a>  <span class="dt">register</span> value $y_1072;</span>
+</span><span class="chunk"><span id="cb1-3501"><a href="#cb1-3501" aria-hidden="true"></a>  <span class="dt">register</span> value $y_1072;</span>
 <span id="cb1-3502"><a href="#cb1-3502" aria-hidden="true"></a>  <span class="dt">register</span> value $y_1073;</span>
 <span id="cb1-3503"><a href="#cb1-3503" aria-hidden="true"></a>  <span class="dt">register</span> value $y_1074;</span>
 <span id="cb1-3504"><a href="#cb1-3504" aria-hidden="true"></a>  <span class="dt">register</span> value $y_1075;</span>
@@ -3677,7 +3680,7 @@
 <span id="cb1-3598"><a href="#cb1-3598" aria-hidden="true"></a>  *((value *) $y_598 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-3599"><a href="#cb1-3599" aria-hidden="true"></a>  *((value *) $y_598 + <span class="dv">0</span><span class="bu">LL</span>) = $y_597;</span>
 <span id="cb1-3600"><a href="#cb1-3600" aria-hidden="true"></a>  $y_599 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
-<span id="cb1-3601"><a href="#cb1-3601" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
+</span><span class="chunk"><span id="cb1-3601"><a href="#cb1-3601" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-3602"><a href="#cb1-3602" aria-hidden="true"></a>  *((value *) $y_599 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-3603"><a href="#cb1-3603" aria-hidden="true"></a>  *((value *) $y_599 + <span class="dv">0</span><span class="bu">LL</span>) = $y_598;</span>
 <span id="cb1-3604"><a href="#cb1-3604" aria-hidden="true"></a>  $y_600 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
@@ -3777,7 +3780,7 @@
 <span id="cb1-3698"><a href="#cb1-3698" aria-hidden="true"></a>  *((value *) $y_623 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-3699"><a href="#cb1-3699" aria-hidden="true"></a>  *((value *) $y_623 + <span class="dv">0</span><span class="bu">LL</span>) = $y_622;</span>
 <span id="cb1-3700"><a href="#cb1-3700" aria-hidden="true"></a>  $y_624 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
-<span id="cb1-3701"><a href="#cb1-3701" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
+</span><span class="chunk"><span id="cb1-3701"><a href="#cb1-3701" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-3702"><a href="#cb1-3702" aria-hidden="true"></a>  *((value *) $y_624 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-3703"><a href="#cb1-3703" aria-hidden="true"></a>  *((value *) $y_624 + <span class="dv">0</span><span class="bu">LL</span>) = $y_623;</span>
 <span id="cb1-3704"><a href="#cb1-3704" aria-hidden="true"></a>  $y_625 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
@@ -3877,7 +3880,7 @@
 <span id="cb1-3798"><a href="#cb1-3798" aria-hidden="true"></a>  *((value *) $y_646 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-3799"><a href="#cb1-3799" aria-hidden="true"></a>  *((value *) $y_646 + <span class="dv">0</span><span class="bu">LL</span>) = $y_645;</span>
 <span id="cb1-3800"><a href="#cb1-3800" aria-hidden="true"></a>  $y_647 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
-<span id="cb1-3801"><a href="#cb1-3801" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
+</span><span class="chunk"><span id="cb1-3801"><a href="#cb1-3801" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-3802"><a href="#cb1-3802" aria-hidden="true"></a>  *((value *) $y_647 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-3803"><a href="#cb1-3803" aria-hidden="true"></a>  *((value *) $y_647 + <span class="dv">0</span><span class="bu">LL</span>) = $y_646;</span>
 <span id="cb1-3804"><a href="#cb1-3804" aria-hidden="true"></a>  $y_648 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
@@ -3977,7 +3980,7 @@
 <span id="cb1-3898"><a href="#cb1-3898" aria-hidden="true"></a>  *((value *) $y_671 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-3899"><a href="#cb1-3899" aria-hidden="true"></a>  *((value *) $y_671 + <span class="dv">0</span><span class="bu">LL</span>) = $y_670;</span>
 <span id="cb1-3900"><a href="#cb1-3900" aria-hidden="true"></a>  $y_672 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
-<span id="cb1-3901"><a href="#cb1-3901" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
+</span><span class="chunk"><span id="cb1-3901"><a href="#cb1-3901" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-3902"><a href="#cb1-3902" aria-hidden="true"></a>  *((value *) $y_672 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-3903"><a href="#cb1-3903" aria-hidden="true"></a>  *((value *) $y_672 + <span class="dv">0</span><span class="bu">LL</span>) = $y_671;</span>
 <span id="cb1-3904"><a href="#cb1-3904" aria-hidden="true"></a>  $y_673 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
@@ -4077,7 +4080,7 @@
 <span id="cb1-3998"><a href="#cb1-3998" aria-hidden="true"></a>  *((value *) $y_692 + <span class="dv">0</span><span class="bu">LL</span>) = $y_691;</span>
 <span id="cb1-3999"><a href="#cb1-3999" aria-hidden="true"></a>  $y_693 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-4000"><a href="#cb1-4000" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
-<span id="cb1-4001"><a href="#cb1-4001" aria-hidden="true"></a>  *((value *) $y_693 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
+</span><span class="chunk"><span id="cb1-4001"><a href="#cb1-4001" aria-hidden="true"></a>  *((value *) $y_693 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-4002"><a href="#cb1-4002" aria-hidden="true"></a>  *((value *) $y_693 + <span class="dv">0</span><span class="bu">LL</span>) = $y_692;</span>
 <span id="cb1-4003"><a href="#cb1-4003" aria-hidden="true"></a>  $y_694 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-4004"><a href="#cb1-4004" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
@@ -4177,7 +4180,7 @@
 <span id="cb1-4098"><a href="#cb1-4098" aria-hidden="true"></a>  *((value *) $y_717 + <span class="dv">0</span><span class="bu">LL</span>) = $y_716;</span>
 <span id="cb1-4099"><a href="#cb1-4099" aria-hidden="true"></a>  $y_718 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-4100"><a href="#cb1-4100" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
-<span id="cb1-4101"><a href="#cb1-4101" aria-hidden="true"></a>  *((value *) $y_718 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
+</span><span class="chunk"><span id="cb1-4101"><a href="#cb1-4101" aria-hidden="true"></a>  *((value *) $y_718 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-4102"><a href="#cb1-4102" aria-hidden="true"></a>  *((value *) $y_718 + <span class="dv">0</span><span class="bu">LL</span>) = $y_717;</span>
 <span id="cb1-4103"><a href="#cb1-4103" aria-hidden="true"></a>  $y_719 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-4104"><a href="#cb1-4104" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
@@ -4277,7 +4280,7 @@
 <span id="cb1-4198"><a href="#cb1-4198" aria-hidden="true"></a>  *((value *) $y_739 + <span class="dv">0</span><span class="bu">LL</span>) = $y_738;</span>
 <span id="cb1-4199"><a href="#cb1-4199" aria-hidden="true"></a>  $y_740 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-4200"><a href="#cb1-4200" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
-<span id="cb1-4201"><a href="#cb1-4201" aria-hidden="true"></a>  *((value *) $y_740 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
+</span><span class="chunk"><span id="cb1-4201"><a href="#cb1-4201" aria-hidden="true"></a>  *((value *) $y_740 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-4202"><a href="#cb1-4202" aria-hidden="true"></a>  *((value *) $y_740 + <span class="dv">0</span><span class="bu">LL</span>) = $y_739;</span>
 <span id="cb1-4203"><a href="#cb1-4203" aria-hidden="true"></a>  $y_741 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-4204"><a href="#cb1-4204" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
@@ -4377,7 +4380,7 @@
 <span id="cb1-4298"><a href="#cb1-4298" aria-hidden="true"></a>  *((value *) $y_764 + <span class="dv">0</span><span class="bu">LL</span>) = $y_763;</span>
 <span id="cb1-4299"><a href="#cb1-4299" aria-hidden="true"></a>  $y_765 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-4300"><a href="#cb1-4300" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
-<span id="cb1-4301"><a href="#cb1-4301" aria-hidden="true"></a>  *((value *) $y_765 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
+</span><span class="chunk"><span id="cb1-4301"><a href="#cb1-4301" aria-hidden="true"></a>  *((value *) $y_765 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-4302"><a href="#cb1-4302" aria-hidden="true"></a>  *((value *) $y_765 + <span class="dv">0</span><span class="bu">LL</span>) = $y_764;</span>
 <span id="cb1-4303"><a href="#cb1-4303" aria-hidden="true"></a>  $y_766 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-4304"><a href="#cb1-4304" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
@@ -4477,7 +4480,7 @@
 <span id="cb1-4398"><a href="#cb1-4398" aria-hidden="true"></a>  $y_786 = <span class="dv">3</span><span class="bu">LL</span>;</span>
 <span id="cb1-4399"><a href="#cb1-4399" aria-hidden="true"></a>  $args = (*$tinfo).args;</span>
 <span id="cb1-4400"><a href="#cb1-4400" aria-hidden="true"></a>  (*$tinfo).alloc = $alloc;</span>
-<span id="cb1-4401"><a href="#cb1-4401" aria-hidden="true"></a>  (*$tinfo).limit = $limit;</span>
+</span><span class="chunk"><span id="cb1-4401"><a href="#cb1-4401" aria-hidden="true"></a>  (*$tinfo).limit = $limit;</span>
 <span id="cb1-4402"><a href="#cb1-4402" aria-hidden="true"></a>  *(root + <span class="dv">0</span><span class="bu">LL</span>) = $y_785;</span>
 <span id="cb1-4403"><a href="#cb1-4403" aria-hidden="true"></a>  frame.next = root + <span class="dv">1</span><span class="bu">LL</span>;</span>
 <span id="cb1-4404"><a href="#cb1-4404" aria-hidden="true"></a>  (*$tinfo).fp = &amp;frame;</span>
@@ -4577,7 +4580,7 @@
 <span id="cb1-4498"><a href="#cb1-4498" aria-hidden="true"></a>  $alloc = (*$tinfo).alloc;</span>
 <span id="cb1-4499"><a href="#cb1-4499" aria-hidden="true"></a>  $limit = (*$tinfo).limit;</span>
 <span id="cb1-4500"><a href="#cb1-4500" aria-hidden="true"></a>  $y_796 = *(root + <span class="dv">0</span><span class="bu">LL</span>);</span>
-<span id="cb1-4501"><a href="#cb1-4501" aria-hidden="true"></a>  (*$tinfo).fp = frame.prev;</span>
+</span><span class="chunk"><span id="cb1-4501"><a href="#cb1-4501" aria-hidden="true"></a>  (*$tinfo).fp = frame.prev;</span>
 <span id="cb1-4502"><a href="#cb1-4502" aria-hidden="true"></a>  $args = (*$tinfo).args;</span>
 <span id="cb1-4503"><a href="#cb1-4503" aria-hidden="true"></a>  (*$tinfo).alloc = $alloc;</span>
 <span id="cb1-4504"><a href="#cb1-4504" aria-hidden="true"></a>  (*$tinfo).limit = $limit;</span>
@@ -4677,7 +4680,7 @@
 <span id="cb1-4598"><a href="#cb1-4598" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-4599"><a href="#cb1-4599" aria-hidden="true"></a>  *((value *) $y_824 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-4600"><a href="#cb1-4600" aria-hidden="true"></a>  *((value *) $y_824 + <span class="dv">0</span><span class="bu">LL</span>) = $y_823;</span>
-<span id="cb1-4601"><a href="#cb1-4601" aria-hidden="true"></a>  $y_code_825 = *((value *) $y_821 + <span class="dv">0</span><span class="bu">LL</span>);</span>
+</span><span class="chunk"><span id="cb1-4601"><a href="#cb1-4601" aria-hidden="true"></a>  $y_code_825 = *((value *) $y_821 + <span class="dv">0</span><span class="bu">LL</span>);</span>
 <span id="cb1-4602"><a href="#cb1-4602" aria-hidden="true"></a>  $y_env_826 = *((value *) $y_821 + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-4603"><a href="#cb1-4603" aria-hidden="true"></a>  $args = (*$tinfo).args;</span>
 <span id="cb1-4604"><a href="#cb1-4604" aria-hidden="true"></a>  (*$tinfo).alloc = $alloc;</span>
@@ -4777,7 +4780,7 @@
 <span id="cb1-4698"><a href="#cb1-4698" aria-hidden="true"></a>  $y_845 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-4699"><a href="#cb1-4699" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-4700"><a href="#cb1-4700" aria-hidden="true"></a>  *((value *) $y_845 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
-<span id="cb1-4701"><a href="#cb1-4701" aria-hidden="true"></a>  *((value *) $y_845 + <span class="dv">0</span><span class="bu">LL</span>) = $y_844;</span>
+</span><span class="chunk"><span id="cb1-4701"><a href="#cb1-4701" aria-hidden="true"></a>  *((value *) $y_845 + <span class="dv">0</span><span class="bu">LL</span>) = $y_844;</span>
 <span id="cb1-4702"><a href="#cb1-4702" aria-hidden="true"></a>  $y_846 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-4703"><a href="#cb1-4703" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-4704"><a href="#cb1-4704" aria-hidden="true"></a>  *((value *) $y_846 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
@@ -4877,7 +4880,7 @@
 <span id="cb1-4798"><a href="#cb1-4798" aria-hidden="true"></a>  $y_870 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-4799"><a href="#cb1-4799" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-4800"><a href="#cb1-4800" aria-hidden="true"></a>  *((value *) $y_870 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
-<span id="cb1-4801"><a href="#cb1-4801" aria-hidden="true"></a>  *((value *) $y_870 + <span class="dv">0</span><span class="bu">LL</span>) = $y_869;</span>
+</span><span class="chunk"><span id="cb1-4801"><a href="#cb1-4801" aria-hidden="true"></a>  *((value *) $y_870 + <span class="dv">0</span><span class="bu">LL</span>) = $y_869;</span>
 <span id="cb1-4802"><a href="#cb1-4802" aria-hidden="true"></a>  $y_871 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-4803"><a href="#cb1-4803" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-4804"><a href="#cb1-4804" aria-hidden="true"></a>  *((value *) $y_871 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
@@ -4977,7 +4980,7 @@
 <span id="cb1-4898"><a href="#cb1-4898" aria-hidden="true"></a>  *((value *) $y_888 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-4899"><a href="#cb1-4899" aria-hidden="true"></a>  *((value *) $y_888 + <span class="dv">0</span><span class="bu">LL</span>) = $y_887;</span>
 <span id="cb1-4900"><a href="#cb1-4900" aria-hidden="true"></a>  $y_code_889 = *((value *) $y_885 + <span class="dv">0</span><span class="bu">LL</span>);</span>
-<span id="cb1-4901"><a href="#cb1-4901" aria-hidden="true"></a>  $y_env_890 = *((value *) $y_885 + <span class="dv">1</span><span class="bu">LL</span>);</span>
+</span><span class="chunk"><span id="cb1-4901"><a href="#cb1-4901" aria-hidden="true"></a>  $y_env_890 = *((value *) $y_885 + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-4902"><a href="#cb1-4902" aria-hidden="true"></a>  $args = (*$tinfo).args;</span>
 <span id="cb1-4903"><a href="#cb1-4903" aria-hidden="true"></a>  (*$tinfo).alloc = $alloc;</span>
 <span id="cb1-4904"><a href="#cb1-4904" aria-hidden="true"></a>  (*$tinfo).limit = $limit;</span>
@@ -5077,7 +5080,7 @@
 <span id="cb1-4998"><a href="#cb1-4998" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-4999"><a href="#cb1-4999" aria-hidden="true"></a>  *((value *) $y_911 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-5000"><a href="#cb1-5000" aria-hidden="true"></a>  *((value *) $y_911 + <span class="dv">0</span><span class="bu">LL</span>) = $y_910;</span>
-<span id="cb1-5001"><a href="#cb1-5001" aria-hidden="true"></a>  $y_912 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
+</span><span class="chunk"><span id="cb1-5001"><a href="#cb1-5001" aria-hidden="true"></a>  $y_912 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-5002"><a href="#cb1-5002" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-5003"><a href="#cb1-5003" aria-hidden="true"></a>  *((value *) $y_912 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-5004"><a href="#cb1-5004" aria-hidden="true"></a>  *((value *) $y_912 + <span class="dv">0</span><span class="bu">LL</span>) = $y_911;</span>
@@ -5177,7 +5180,7 @@
 <span id="cb1-5098"><a href="#cb1-5098" aria-hidden="true"></a>    ((value (*)(<span class="kw">struct</span> thread_info *, value, value)) __UU2b__uncurried_known_101)</span>
 <span id="cb1-5099"><a href="#cb1-5099" aria-hidden="true"></a>    ($tinfo, $y_928, $y_918);</span>
 <span id="cb1-5100"><a href="#cb1-5100" aria-hidden="true"></a>  $alloc = (*$tinfo).alloc;</span>
-<span id="cb1-5101"><a href="#cb1-5101" aria-hidden="true"></a>  $limit = (*$tinfo).limit;</span>
+</span><span class="chunk"><span id="cb1-5101"><a href="#cb1-5101" aria-hidden="true"></a>  $limit = (*$tinfo).limit;</span>
 <span id="cb1-5102"><a href="#cb1-5102" aria-hidden="true"></a>  <span class="cf">if</span> (!(<span class="dv">7</span><span class="bu">LL</span> &lt;= $limit - $alloc)) {</span>
 <span id="cb1-5103"><a href="#cb1-5103" aria-hidden="true"></a>    *(root + <span class="dv">0</span><span class="bu">LL</span>) = $y_930;</span>
 <span id="cb1-5104"><a href="#cb1-5104" aria-hidden="true"></a>    frame.next = root + <span class="dv">1</span><span class="bu">LL</span>;</span>
@@ -5277,7 +5280,7 @@
 <span id="cb1-5198"><a href="#cb1-5198" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-5199"><a href="#cb1-5199" aria-hidden="true"></a>  *((value *) $y_949 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-5200"><a href="#cb1-5200" aria-hidden="true"></a>  *((value *) $y_949 + <span class="dv">0</span><span class="bu">LL</span>) = $y_948;</span>
-<span id="cb1-5201"><a href="#cb1-5201" aria-hidden="true"></a>  $y_950 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
+</span><span class="chunk"><span id="cb1-5201"><a href="#cb1-5201" aria-hidden="true"></a>  $y_950 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-5202"><a href="#cb1-5202" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-5203"><a href="#cb1-5203" aria-hidden="true"></a>  *((value *) $y_950 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-5204"><a href="#cb1-5204" aria-hidden="true"></a>  *((value *) $y_950 + <span class="dv">0</span><span class="bu">LL</span>) = $y_949;</span>
@@ -5377,7 +5380,7 @@
 <span id="cb1-5298"><a href="#cb1-5298" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-5299"><a href="#cb1-5299" aria-hidden="true"></a>  *((value *) $y_974 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-5300"><a href="#cb1-5300" aria-hidden="true"></a>  *((value *) $y_974 + <span class="dv">0</span><span class="bu">LL</span>) = $y_973;</span>
-<span id="cb1-5301"><a href="#cb1-5301" aria-hidden="true"></a>  $y_975 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
+</span><span class="chunk"><span id="cb1-5301"><a href="#cb1-5301" aria-hidden="true"></a>  $y_975 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-5302"><a href="#cb1-5302" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-5303"><a href="#cb1-5303" aria-hidden="true"></a>  *((value *) $y_975 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-5304"><a href="#cb1-5304" aria-hidden="true"></a>  *((value *) $y_975 + <span class="dv">0</span><span class="bu">LL</span>) = $y_974;</span>
@@ -5477,7 +5480,7 @@
 <span id="cb1-5398"><a href="#cb1-5398" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-5399"><a href="#cb1-5399" aria-hidden="true"></a>  *((value *) $y_996 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-5400"><a href="#cb1-5400" aria-hidden="true"></a>  *((value *) $y_996 + <span class="dv">0</span><span class="bu">LL</span>) = $y_995;</span>
-<span id="cb1-5401"><a href="#cb1-5401" aria-hidden="true"></a>  $y_997 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
+</span><span class="chunk"><span id="cb1-5401"><a href="#cb1-5401" aria-hidden="true"></a>  $y_997 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-5402"><a href="#cb1-5402" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-5403"><a href="#cb1-5403" aria-hidden="true"></a>  *((value *) $y_997 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-5404"><a href="#cb1-5404" aria-hidden="true"></a>  *((value *) $y_997 + <span class="dv">0</span><span class="bu">LL</span>) = $y_996;</span>
@@ -5577,7 +5580,7 @@
 <span id="cb1-5498"><a href="#cb1-5498" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-5499"><a href="#cb1-5499" aria-hidden="true"></a>  *((value *) $y_1021 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-5500"><a href="#cb1-5500" aria-hidden="true"></a>  *((value *) $y_1021 + <span class="dv">0</span><span class="bu">LL</span>) = $y_1020;</span>
-<span id="cb1-5501"><a href="#cb1-5501" aria-hidden="true"></a>  $y_1022 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
+</span><span class="chunk"><span id="cb1-5501"><a href="#cb1-5501" aria-hidden="true"></a>  $y_1022 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-5502"><a href="#cb1-5502" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-5503"><a href="#cb1-5503" aria-hidden="true"></a>  *((value *) $y_1022 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
 <span id="cb1-5504"><a href="#cb1-5504" aria-hidden="true"></a>  *((value *) $y_1022 + <span class="dv">0</span><span class="bu">LL</span>) = $y_1021;</span>
@@ -5677,7 +5680,7 @@
 <span id="cb1-5598"><a href="#cb1-5598" aria-hidden="true"></a>  $y_1044 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-5599"><a href="#cb1-5599" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-5600"><a href="#cb1-5600" aria-hidden="true"></a>  *((value *) $y_1044 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
-<span id="cb1-5601"><a href="#cb1-5601" aria-hidden="true"></a>  *((value *) $y_1044 + <span class="dv">0</span><span class="bu">LL</span>) = $y_1043;</span>
+</span><span class="chunk"><span id="cb1-5601"><a href="#cb1-5601" aria-hidden="true"></a>  *((value *) $y_1044 + <span class="dv">0</span><span class="bu">LL</span>) = $y_1043;</span>
 <span id="cb1-5602"><a href="#cb1-5602" aria-hidden="true"></a>  $y_1045 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-5603"><a href="#cb1-5603" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-5604"><a href="#cb1-5604" aria-hidden="true"></a>  *((value *) $y_1045 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
@@ -5777,7 +5780,7 @@
 <span id="cb1-5698"><a href="#cb1-5698" aria-hidden="true"></a>  $y_1069 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-5699"><a href="#cb1-5699" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-5700"><a href="#cb1-5700" aria-hidden="true"></a>  *((value *) $y_1069 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
-<span id="cb1-5701"><a href="#cb1-5701" aria-hidden="true"></a>  *((value *) $y_1069 + <span class="dv">0</span><span class="bu">LL</span>) = $y_1068;</span>
+</span><span class="chunk"><span id="cb1-5701"><a href="#cb1-5701" aria-hidden="true"></a>  *((value *) $y_1069 + <span class="dv">0</span><span class="bu">LL</span>) = $y_1068;</span>
 <span id="cb1-5702"><a href="#cb1-5702" aria-hidden="true"></a>  $y_1070 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-5703"><a href="#cb1-5703" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-5704"><a href="#cb1-5704" aria-hidden="true"></a>  *((value *) $y_1070 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
@@ -5877,7 +5880,7 @@
 <span id="cb1-5798"><a href="#cb1-5798" aria-hidden="true"></a>  $y_1091 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-5799"><a href="#cb1-5799" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-5800"><a href="#cb1-5800" aria-hidden="true"></a>  *((value *) $y_1091 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
-<span id="cb1-5801"><a href="#cb1-5801" aria-hidden="true"></a>  *((value *) $y_1091 + <span class="dv">0</span><span class="bu">LL</span>) = $y_1090;</span>
+</span><span class="chunk"><span id="cb1-5801"><a href="#cb1-5801" aria-hidden="true"></a>  *((value *) $y_1091 + <span class="dv">0</span><span class="bu">LL</span>) = $y_1090;</span>
 <span id="cb1-5802"><a href="#cb1-5802" aria-hidden="true"></a>  $y_1092 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-5803"><a href="#cb1-5803" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-5804"><a href="#cb1-5804" aria-hidden="true"></a>  *((value *) $y_1092 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
@@ -5977,7 +5980,7 @@
 <span id="cb1-5898"><a href="#cb1-5898" aria-hidden="true"></a>  $y_1116 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-5899"><a href="#cb1-5899" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-5900"><a href="#cb1-5900" aria-hidden="true"></a>  *((value *) $y_1116 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
-<span id="cb1-5901"><a href="#cb1-5901" aria-hidden="true"></a>  *((value *) $y_1116 + <span class="dv">0</span><span class="bu">LL</span>) = $y_1115;</span>
+</span><span class="chunk"><span id="cb1-5901"><a href="#cb1-5901" aria-hidden="true"></a>  *((value *) $y_1116 + <span class="dv">0</span><span class="bu">LL</span>) = $y_1115;</span>
 <span id="cb1-5902"><a href="#cb1-5902" aria-hidden="true"></a>  $y_1117 = (value) ($alloc + <span class="dv">1</span><span class="bu">LL</span>);</span>
 <span id="cb1-5903"><a href="#cb1-5903" aria-hidden="true"></a>  $alloc = $alloc + <span class="dv">2</span><span class="bu">LL</span>;</span>
 <span id="cb1-5904"><a href="#cb1-5904" aria-hidden="true"></a>  *((value *) $y_1117 + -<span class="dv">1</span><span class="bu">LL</span>) = <span class="dv">1024</span><span class="bu">LL</span>;</span>
@@ -6071,6 +6074,6 @@
 <span id="cb1-5992"><a href="#cb1-5992" aria-hidden="true"></a>}</span>
 <span id="cb1-5993"><a href="#cb1-5993" aria-hidden="true"></a></span>
 <span id="cb1-5994"><a href="#cb1-5994" aria-hidden="true"></a></span>
-<span id="cb1-5995"><a href="#cb1-5995" aria-hidden="true"></a><span class="pp">#endif </span><span class="co">/* ETAEXPANSION_C */</span></span></code></pre></div>
+<span id="cb1-5995"><a href="#cb1-5995" aria-hidden="true"></a><span class="pp">#endif </span><span class="co">/* ETAEXPANSION_C */</span></span></span></code></pre></div>
 </body>
 </html>
