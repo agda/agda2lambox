@@ -2,7 +2,6 @@
 -- | Generating Rocq code from our LambdaBox AST
 module CodeGen.Rocq (prettyRocq) where
 
-import Data.Bifunctor (first)
 import Agda.Syntax.Common.Pretty
 import LambdaBox
 import Agda.Utils.Function (applyWhen)
@@ -92,11 +91,6 @@ instance ToRocq t Term where
     LCase ind n u bs    -> ctorP p "tCase"      [procqP 10 t (ind, n), procqP 10 t u, procqP 10 t bs]
     LFix mf i           -> ctorP p "tFix"       [procqP 10 t mf, procqP 10 t i]
     LPrim v             -> ctorP p "tPrim"      [procqP 10 t v]
-    where
-    ctorChain :: Inductive -> Int -> Term -> (Int, Term)
-    ctorChain ind i = \case
-      LApp (LConstruct ind' i' []) u | ind' == ind, i' == i -> first succ $ ctorChain ind i u
-      u -> (0, u)
 
 instance ToRocq t Type where
   procqP p t v = case v of

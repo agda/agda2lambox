@@ -40,14 +40,17 @@ data Term
   | LPrim PrimValue
                 -- ^ Primitive literal value
 
+-- | How many times a constructor is iteratively applied, and the term below.
+ctorChain :: Inductive -> Int -> Term -> (Int, Term)
+ctorChain ind i = \case
+  LApp (LConstruct ind' i' []) u | ind' == ind, i' == i -> first succ $ ctorChain ind i u
+  u -> (0, u)
 
 instance Pretty t => Pretty (Def t) where
   prettyPrec _ (Def _ t _) = pretty t
 
-
 instance Pretty PrimValue where
   pretty (PString f) = text $ show f
-
 
 instance Pretty Term where
   prettyPrec p v =
@@ -71,6 +74,10 @@ instance Pretty Term where
         [ hang ("let" <+> pretty n <+> "=") 2 $ pretty e
         , "in" <+> pretty t
         ]
+
+      LApp c@(LConstruct ind i []) _ | (k, u) <- ctorChain ind i v, k > 1 ->
+        mparens (p > 9) $
+        hang (pretty c <> "^" <> pretty k) 2 (prettyPrec 10 u)
 
       LApp u v ->
         mparens (p > 9) $

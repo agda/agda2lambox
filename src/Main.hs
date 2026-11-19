@@ -7,10 +7,11 @@ import Control.Monad.IO.Class ( liftIO )
 import Control.DeepSeq ( NFData(rnf) )
 import Data.Maybe ( fromMaybe )
 import Data.Version ( showVersion )
-import Data.Text ( pack )
+import Data.Foldable ( toList )
+import Data.Text ( pack, unpack )
 import Agda.Utils.GetOpt ( OptDescr(Option), ArgDescr(..) )
 import System.Directory ( createDirectoryIfMissing )
-import System.FilePath ( (</>), (-<.>) )
+import System.FilePath ( (</>), (<.>), joinPath, takeDirectory )
 import Data.Text.Lazy.IO qualified as LText
 
 import Paths_agda2lambox ( version )
@@ -19,6 +20,7 @@ import Agda.Compiler.Common
 import Agda.Compiler.Backend
 import Agda.Main ( runAgda )
 import Agda.Syntax.Common.Pretty ( prettyShow )
+import Agda.Syntax.TopLevelModuleName ( moduleNameParts )
 
 import Agda.Utils ( hasPragma )
 import Agda.Utils.Treeless ( unfoldSelfProjections )
@@ -99,14 +101,15 @@ writeModule Options{..} _ IsMain m defs = do
   mains <- mapM mainProgram programs
 
   let lboxMod = expandModule $ LBoxModule env mains
+      -- @A.B@ in @A.B.ast@, but in @A/B.v@ for Rocq, whose file names are identifiers
       out :: String -> (FilePath -> s -> IO ()) -> s -> IO ()
       out ext w s = do
-        let f = (outDir </> prettyShow m) -<.> ext
+        let f = outDir </> (if ext == ".v" then joinPath (map unpack (toList (moduleNameParts m))) else prettyShow m) <.> ext
+        createDirectoryIfMissing True (takeDirectory f)
         putStrLn $ "Writing " <> f
         w f s
 
   liftIO do
-    createDirectoryIfMissing True outDir
     out ".txt" writeFile $ prettyShow lboxMod <> "\n"
     out ".ast" LText.writeFile $ prettySexp optTarget lboxMod <> "\n"
     when optRocq $ out ".v" writeFile $ prettyRocq optTarget lboxMod <> "\n"

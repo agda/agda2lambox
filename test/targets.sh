@@ -14,6 +14,10 @@ setopt extendedglob
 cd ${0:h}
 SHOW=$PWD/show THEORIES=${PWD:h}/theories
 
+# `par` runs commands in parallel (up to JOBS concurrent jobs, 1.5 GB each)
+JOBS=${JOBS:-$(awk -v n=$(nproc) '/MemAvailable/ { m = int($2 / 1572864); print m < 1 ? 1 : m < n ? m : n }' /proc/meminfo)}
+par() { while (( $#jobstates >= JOBS )) sleep 0.1; "$@" & }
+
 #        target     directory      extension label
 TARGETS=(rocq       dist           v         Rocq
          rocq-typed dist/typed     v         'Rocq (typed)'
@@ -29,24 +33,30 @@ TARGETS=(rocq       dist           v         Rocq
          fsharp     gen/fsharp     fs        'F#')
 
 gen() {
-  local t d e l m src res msg mods=(dist/*.ast(N:t:r) dist/typed/*.ast(N:t:r))
+  local t d e l m mods=(dist/*.ast(N:t:r) dist/typed/*.ast(N:t:r))
   rm -f gen/*/^Cargo.lock(.N)
-  for t d e l in $TARGETS; [[ $d == gen/* ]] && mkdir -p $d && : > $d/peregrine.log
-  for m in ${(uo)mods}; do
-    echo " * $m"
-    for t d e l in $TARGETS; do
-      [[ $d == gen/* ]] || continue
-      src=dist/$m.ast
-      [[ $t == (rust|koka-typed) ]] && src=dist/typed/$m.ast
-      if [[ ! -f $src ]]; then res="ERROR no $src"
-      elif msg=$(peregrine $t $src -o $d/$m.$e 2>&1); then res=OK
-      else res="ERROR $(grep -v -e '^Compiling:$' -e '^Could not compile:$' <<< $msg | paste -sd ' ' | tr -s ' ')"
-      fi
-      [[ $res == OK ]] || echo "   $t: $res"
-      print -r -- $m$'\t'$res >> $d/peregrine.log
-    done
-    [[ -f gen/wasm/$m.wasm ]] && wasm2wat --enable-all gen/wasm/$m.wasm > gen/wasm/$m.wat
+  for t d e l in $TARGETS; [[ $d == gen/* ]] && mkdir -p $d
+  for m in ${(uo)mods}; par gen1 $m
+  wait
+  for t d e l in $TARGETS; [[ $d == gen/* ]] && cat $d/${^${(uo)mods}}.peregrine > $d/peregrine.log
+  rm -f gen/*/*.peregrine
+}
+
+gen1() {
+  local t d e l src res msg out=" * $1"
+  for t d e l in $TARGETS; do
+    [[ $d == gen/* ]] || continue
+    src=dist/$1.ast
+    [[ $t == (rust|koka-typed) ]] && src=dist/typed/$1.ast
+    if [[ ! -f $src ]]; then res="ERROR no $src"
+    elif msg=$(peregrine $t $src -o $d/$1.$e 2>&1); then res=OK
+    else res="ERROR $(grep -v -e '^Compiling:$' -e '^Could not compile:$' <<< $msg | paste -sd ' ' | tr -s ' ')"
+    fi
+    [[ $res == OK ]] || out+=$'\n'"   $t: $res"
+    print -r -- $1$'\t'$res > $d/$1.peregrine
   done
+  [[ -f gen/wasm/$1.wasm ]] && wasm2wat --enable-all gen/wasm/$1.wasm > gen/wasm/$1.wat
+  print -r -- $out
 }
 
 # Each target X (and X-typed) has `run_X m`, which prints the value of the entry
@@ -120,7 +130,7 @@ build_rust() {
     print "fn main() {\n  println!(\"{:?}\", Program::new().${m}_test${call:-()});\n}" >> $m.rs
   done
 }
-run_rust() { cargo run --bin $1 }
+run_rust() { cargo run -q --bin $1 }
 
 build_koka() {
   local mods=($(ok)) force=pg_force box=pg_boxv m e n args
@@ -139,9 +149,11 @@ build_koka() {
     { cat $m.kk; sed "s/ENTRY/$e/" $SHOW/koka.kk } > _build/m${(L)m}.kk
   done
   ( cd _build
-    print -l m${(L)^mods} | head -1 | xargs -I{} sh -c 'koka -O2 -o {} {}.kk > {}.log 2>&1'
-    print -l m${(L)^mods} | tail -n +2 | xargs -P $(nproc) -I{} sh -c 'koka -O2 -o {} {}.kk > {}.log 2>&1'
-    for m in m${(L)^mods}; [[ -x $m ]] || koka -O2 -o $m $m.kk &> $m.log )
+    local ks=(${$(ls -Sr m${(L)^mods}.kk):r}) k
+    koka -O2 -o $ks[1] $ks[1].kk &> $ks[1].log
+    for k in $ks[2,-1]; par koka -O2 -o $k $k.kk &> $k.log
+    wait
+    for k in $ks; [[ -x $k ]] || koka -O2 -o $k $k.kk &> $k.log )
 }
 run_koka() {
   local m=_build/m${(L)1}
@@ -218,37 +230,44 @@ run_fsharp() {
 
 run() {
   local RT=$(coqc -where)/user-contrib/CertiRocq/Plugin/runtime CLANG=${CLANG:-$(lean --print-prefix)/bin/clang}
-  local t d e l b m res out code
+  local t d e l b m res ms rs
   for t d e l in $TARGETS; do
     echo "Running $l..."
-    b=${t%-typed}
+    b=${t%-typed} ms=() rs=()
     pushd -q $d
     [[ $d == gen/* ]] && mkdir -p _build
     (( $+functions[build_$b] )) && build_$b
-    : > $t.log
     while IFS=$'\t' read -r -u 3 m res; do
-      if [[ ${res:-OK} != OK ]]; then
-        out="ERROR peregrine: ${res#ERROR }"
-      else
-        run_$b $m &> $m.$e.result
-        code=$?
-        if (( code )); then
-          out="ERROR ${$(grep -m1 -i -e error -e exception -e timeout $m.$e.result):-exit $code}"
-        elif [[ $b == rocq ]]; then
-          out=$(sed -n 's/^ *= "\(.*\)"%bs$/\1/p' $m.$e.result | paste -sd ';')
-          grep -q '^ *= false$' $m.$e.result && out="ILL-FORMED $out"
-        else
-          out=$(tail -1 $m.$e.result | k=${SUC[$b]:-0} perl -pe 's/PhantomData<[^>]*>, |\(PhantomData<[^>]*>\)//g;
-            s/\bzero\b/0/g; 1 while s{\((?:$ENV{k}|suc) (\d+)\)|\bsuc\((\d+)\)}{($1 // $2) + 1}e')
-        fi
-        print -r -- $out > $m.$e.value
-      fi
-      echo " * $m: $out"
-      print -r -- $m$'\t'$out >> $t.log
+      ms+=($m) rs+=("${res:-OK}")
+      [[ ${res:-OK} == OK ]] && par value $m
     done 3< <(if [[ $b == rocq ]]; then print -l *.v(N:r); else cat peregrine.log; fi)
+    wait
+    : > $t.log
+    for m res in ${ms:^rs}; do
+      [[ $res == OK ]] && res=$(<$m.$e.value) || res="ERROR peregrine: ${res#ERROR }"
+      echo " * $m: $res"
+      print -r -- $m$'\t'$res >> $t.log
+    done
     popd -q
   done
   stats | tee gen/stats.log
+}
+
+# runs module $1 of target $b, writing what it prints to $1.$e.result and its value to $1.$e.value
+value() {
+  local code out
+  run_$b $1 &> $1.$e.result
+  code=$?
+  if (( code )); then
+    out="ERROR ${$(grep -m1 -i -e error -e exception -e timeout $1.$e.result):-exit $code}"
+  elif [[ $b == rocq ]]; then
+    out=$(sed -n 's/^ *= "\(.*\)"%bs$/\1/p' $1.$e.result | paste -sd ';')
+    grep -q '^ *= false$' $1.$e.result && out="ILL-FORMED $out"
+  else
+    out=$(tail -1 $1.$e.result | k=${SUC[$b]:-0} perl -pe 's/PhantomData<[^>]*>, |\(PhantomData<[^>]*>\)//g;
+      s/\bzero\b/0/g; 1 while s{\((?:$ENV{k}|suc) (\d+)\)|\bsuc\((\d+)\)}{($1 // $2) + 1}e')
+  fi
+  print -r -- $out > $1.$e.value
 }
 
 # for each target, how many modules pass, and why the others fail:
@@ -277,24 +296,29 @@ stats() {
 }
 
 html() {
-  local f m t d e l g grp src opts panes ARROW='<div style="font-size:50px;">&nbsp; ↪ &nbsp;</div>'
+  local f m ARROW='<div style="font-size:50px;">&nbsp; ↪ &nbsp;</div>'
   typeset -A HL=(txt agda ast scheme wat scheme sml scheme mlf scheme result scheme
                  v ocaml rs rust ll llvm fs fsharp kk kotlin lean haskell)
+  local STYLE='<style>pre > code.sourceCode { white-space: pre-wrap }
+pre > code.sourceCode > span.chunk { display: block; line-height: inherit;
+  content-visibility: auto; contain-intrinsic-size: auto 125em }
+.chunk > span { display: inline-block; line-height: 1.25 }</style>'
   render() {
     [[ -f $1 ]] || return
     local code
     mkdir -p html/$1:h
     { [[ $1 == *.result && -f ${1%.result}.value ]] && printf '```\n%s\n```\n\n---\n\n' "$(<${1%.result}.value)"
       print '```'${HL[${1:e}]:-${1:e}}
-      # Peregrine prints its CakeML and OCaml output on one line, without a final newline
       if [[ $1 == *.(sml|mlf) ]] && code=$(malfunction fmt < $1 2> /dev/null); then
         print -r -- $code
       else
         sed '$a\' $1
       fi
       print '```'
-    } | pandoc --quiet -f markdown -o html/$1.html -s --highlight-style=tango \
-          -V header-includes='<style>pre > code.sourceCode { white-space: pre-wrap }</style>'
+    } | pandoc --quiet -f markdown -s --highlight-style=tango -V header-includes=$STYLE \
+      | perl -pe 's{<code class="sourceCode[^>]*>\K}{<span class="chunk">};
+          s{^(?=<span id="cb\d+-\d*01">)}{</span><span class="chunk">};
+          s{</span></code>}{</span></span></code>}' > html/$1.html
   }
   pane() {
     [[ $1 == $g ]] || { opts+="${g:+</optgroup>}<optgroup label=\"$1\">"; g=$1 }
@@ -308,13 +332,9 @@ html() {
     NEW="<div class=\"split right\">$2</div>" perl -0pi -e 's{</body>}{$ENV{NEW}</body>}' $1
   }
 
-  mkdir -p html && cp Agda.css favicon.ico html/
-  cabal run -v0 -- agda2lambox --html --css=Agda.css Tests.agda
-  for f in dist/*.txt; do
-    m=${f:t:r}
-    [[ -f html/$m.html ]] || { echo " No HTML for $f (should be at html/$m.html)"; exit 1 }
+  page() {
+    local m=$1 g t d e l src grp opts=() panes=()
     echo " * html/$m.html"
-    g= opts=() panes=()
     pane agda2lambox debug Debug dist/$m.txt
     pane agda2lambox debug-typed 'Debug (typed)' dist/typed/$m.txt
     pane agda2lambox ast 'λ&#9744;' dist/$m.ast
@@ -331,7 +351,16 @@ html() {
 document.querySelectorAll('[data-tab-info]').forEach(t => t.classList.toggle('active', t.id == this.value)\
  && t.querySelectorAll('embed:not([src])').forEach(e => e.src = e.dataset.src))\
 \">${(j::)opts}</optgroup></select><div class=\"tab-content\">${(j::)panes}</div>"
+  }
+
+  mkdir -p html && cp Agda.css favicon.ico html/
+  cabal run -v0 -- agda2lambox --html --css=Agda.css Tests.agda
+  for f in dist/*.txt; do
+    m=${f:t:r}
+    [[ -f html/$m.html ]] || { echo " No HTML for $f (should be at html/$m.html)"; exit 1 }
+    par page $m
   done
+  wait
   cp html/Tests.html html/index.html
   [[ -f gen/stats.log ]] && split html/index.html "<pre class=\"code\">$(<gen/stats.log)</pre>"
 }
