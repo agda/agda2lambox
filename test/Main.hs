@@ -22,6 +22,8 @@ main = do
     (d,) . sort . filter ((== ".agda") . takeExtension) <$> listDirectory d
   writeFile "Tests.agda" $ unlines
     [ l | (d, fs) <- tests, l <- ("-- " ++ d) : map (("open import " ++) . dropExtension) fs ]
+  -- typecheck every module once, so that the tests, which run in parallel, only read interfaces
+  _ <- readCreateProcessWithExitCode (proc "agda2lambox" ["Tests.agda"]) ""
   defaultMain $ testGroup "agda2lambox"
     [ testGroup d
       [ testCase (unwords $ (d </> f) : flags) do
